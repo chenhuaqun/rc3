@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "rc3", "rc3.vbproj", "{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B51ACF24-CF4F-43EC-B7F3-B7D57721004C}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E88B944-A283-4EA9-9969-FEB50007A996}
+	EndGlobalSection
+EndGlobal

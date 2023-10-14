@@ -33,6 +33,7 @@ Partial Class FrmPoCkdSrz
         Me.Mnui11 = New System.Windows.Forms.ToolStripSeparator()
         Me.MnuiIns = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCopy_Row = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiImpXls = New System.Windows.Forms.ToolStripMenuItem()
         Me.Mnui12 = New System.Windows.Forms.ToolStripSeparator()
         Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,6 +67,7 @@ Partial Class FrmPoCkdSrz
         Me.LblBdelete = New System.Windows.Forms.Label()
         Me.LblCkd = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.BtnCopy_Row = New System.Windows.Forms.Button()
         Me.BtnImpLlsq = New System.Windows.Forms.Button()
         Me.BtnImpRkd = New System.Windows.Forms.Button()
         Me.BtnIns = New System.Windows.Forms.Button()
@@ -105,8 +107,6 @@ Partial Class FrmPoCkdSrz
         Me.ColLlsqXh = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rcBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.BtnCopy_Row = New System.Windows.Forms.Button()
-        Me.MnuiCopy_Row = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuMain.SuspendLayout()
         Me.ToolStripPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -185,6 +185,13 @@ Partial Class FrmPoCkdSrz
         Me.MnuiDelete.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
         Me.MnuiDelete.Size = New System.Drawing.Size(189, 22)
         Me.MnuiDelete.Text = "删除行(&D)"
+        '
+        'MnuiCopy_Row
+        '
+        Me.MnuiCopy_Row.Name = "MnuiCopy_Row"
+        Me.MnuiCopy_Row.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+        Me.MnuiCopy_Row.Size = New System.Drawing.Size(189, 22)
+        Me.MnuiCopy_Row.Text = "复制行(&C)"
         '
         'MnuiImpXls
         '
@@ -478,6 +485,16 @@ Partial Class FrmPoCkdSrz
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(984, 99)
         Me.Panel2.TabIndex = 2
+        '
+        'BtnCopy_Row
+        '
+        Me.BtnCopy_Row.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCopy_Row.Image = Global.rc3.My.Resources.Resources.copy_row
+        Me.BtnCopy_Row.Location = New System.Drawing.Point(685, 58)
+        Me.BtnCopy_Row.Name = "BtnCopy_Row"
+        Me.BtnCopy_Row.Size = New System.Drawing.Size(28, 23)
+        Me.BtnCopy_Row.TabIndex = 8
+        Me.ToolTip1.SetToolTip(Me.BtnCopy_Row, "复制行Alt+C")
         '
         'BtnImpLlsq
         '
@@ -858,23 +875,6 @@ Partial Class FrmPoCkdSrz
         Me.ColLlsqXh.ReadOnly = True
         Me.ColLlsqXh.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ColLlsqXh.Width = 60
-        '
-        'BtnCopy_Row
-        '
-        Me.BtnCopy_Row.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCopy_Row.Image = Global.rc3.My.Resources.Resources.copy_row
-        Me.BtnCopy_Row.Location = New System.Drawing.Point(685, 58)
-        Me.BtnCopy_Row.Name = "BtnCopy_Row"
-        Me.BtnCopy_Row.Size = New System.Drawing.Size(28, 23)
-        Me.BtnCopy_Row.TabIndex = 8
-        Me.ToolTip1.SetToolTip(Me.BtnCopy_Row, "复制行Alt+C")
-        '
-        'MnuiCopy_Row
-        '
-        Me.MnuiCopy_Row.Name = "MnuiCopy_Row"
-        Me.MnuiCopy_Row.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.MnuiCopy_Row.Size = New System.Drawing.Size(189, 22)
-        Me.MnuiCopy_Row.Text = "复制行(&C)"
         '
         'FrmPoCkdSrz
         '

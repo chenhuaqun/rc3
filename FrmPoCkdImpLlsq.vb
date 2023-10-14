@@ -345,7 +345,7 @@ Public Class FrmPoCkdImpLlsq
             dblCkje = 0.0
             If rcDataSet.Tables("rc_ckdnr").Rows(i).Item("sl") > 0 Then
                 If rcDataSet.Tables("rc_ckdnr").Rows(i).Item("csdm").GetType.ToString <> "System.DBNull" Then
-                    dblCksl = ReadCsKcsl(rcDataSet.Tables("rc_ckdnr").Rows(i).Item("cpdm"), rcDataSet.Tables("rc_ckdnr").Rows(i).Item("csdm"), strCkdm)
+                    dblCksl = ReadCsKcsl(rcDataset.Tables("rc_ckdnr").Rows(i).Item("cpdm"), rcDataset.Tables("rc_ckdnr").Rows(i).Item("csdm"), strCkdm, "")
                 Else
                     dblCksl = ReadKcsl(Mid(g_Kjqj, 1, 4), rcDataSet.Tables("rc_ckdnr").Rows(i).Item("cpdm"), strCkdm, "")
                 End If

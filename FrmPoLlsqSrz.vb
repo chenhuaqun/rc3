@@ -626,7 +626,7 @@ Public Class FrmPoLlsqSrz
                                     Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value = rcDataset.Tables("po_rkd").Rows(0).Item("csdm")
                                     Me.rcDataGridView.CurrentRow.Cells("ColCsmc").Value = rcDataset.Tables("po_rkd").Rows(0).Item("csmc")
                                     '保存当前供应商库存
-                                    dblCsKcsl = ReadCsKcsl(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").Value, rcDataset.Tables("rc_cpxx").Rows(0).Item("ckdm"))
+                                    dblCsKcsl = ReadCsKcsl(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").Value, rcDataset.Tables("rc_cpxx").Rows(0).Item("ckdm"), "")
                                     Me.LblMsg.Text = "仓库库存数量：" & Format(dblCkKcsl, g_FormatSl) & " 该供应商库存数量：" & Format(dblCsKcsl, g_FormatSl)
                                 Else
                                     Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value = ""
@@ -667,7 +667,7 @@ Public Class FrmPoLlsqSrz
                         Me.rcDataGridView.CurrentRow.Cells("ColCsmc").Value = rcDataset.Tables("rc_csxx").Rows(0).Item("csmc")
                         ''读取仓库库存数量
                         'Me.LblMsg.Text = "仓库库存数量：" & Format(ReadKcsl(strYear, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue, ""), g_FormatSl)
-                        dblCsKcsl = ReadCsKcsl(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").EditedFormattedValue, rcDataset.Tables("rc_cpxx").Rows(0).Item("ckdm"))
+                        dblCsKcsl = ReadCsKcsl(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").EditedFormattedValue, rcDataset.Tables("rc_cpxx").Rows(0).Item("ckdm"), "")
                         Me.LblMsg.Text = "仓库库存数量：" & Format(dblCkKcsl, g_FormatSl) & " 该供应商库存数量：" & Format(dblCsKcsl, g_FormatSl)
                     Else
                         Me.LblMsg.Text = "供应商编码不存在。"
@@ -1000,7 +1000,7 @@ Public Class FrmPoLlsqSrz
                 If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value.GetType.ToString <> "System.DBNull" Then
                     If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value <> "" Then
                         '读取当前供应商库存
-                        dblCsKcsl = ReadCsKcsl(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").EditedFormattedValue, rcDataset.Tables("rc_cpxx").Rows(0).Item("ckdm"))
+                        dblCsKcsl = ReadCsKcsl(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").EditedFormattedValue, rcDataset.Tables("rc_cpxx").Rows(0).Item("ckdm"), "")
                     End If
                 End If
             End If

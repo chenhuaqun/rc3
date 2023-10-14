@@ -1870,7 +1870,7 @@ Partial Class FrmMain
         '
         Me.MnuiCheckData.Name = "MnuiCheckData"
         Me.MnuiCheckData.Size = New System.Drawing.Size(196, 22)
-        Me.MnuiCheckData.Text = "检测系统数据库"
+        Me.MnuiCheckData.Text = "检测与升级数据库"
         '
         'MnuiUpgrateData
         '

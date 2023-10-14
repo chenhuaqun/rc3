@@ -3865,7 +3865,7 @@ Public Class FrmCheckData
             rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
             If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
-                rcOleDbCommand.CommandText = "CREATE TABLE oe_xsd (djh VARCHAR2(15) NOT NULL,xh number(4,0),xsmemo VARCHAR2(200),cbill_bid VARCHAR2(20))" '待完善
+                rcOleDbCommand.CommandText = "CREATE TABLE oe_xsd (djh VARCHAR2(15) NOT NULL,xh number(4,0),xsmemo VARCHAR2(200),csdm VARCHAR2(12),csmc VARCHAR2(100),cbill_bid VARCHAR2(20))" '待完善
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD CONSTRAINT PK_OE_XSD primary key (djh,xh)"
@@ -3921,7 +3921,7 @@ Public Class FrmCheckData
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
-                'table存在，则检测字段
+                'xsmemo
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSMEMO' AND table_name ='OE_XSD'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -3935,6 +3935,40 @@ Public Class FrmCheckData
                     rcOleDbCommand.ExecuteNonQuery()
                 Else
                     rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY xsmemo VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'csdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CSDM' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD csdm VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY csdm VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'csmc
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CSMC' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD csmc VARCHAR2(100)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY csmc VARCHAR2(100)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If

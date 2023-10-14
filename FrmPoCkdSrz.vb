@@ -979,6 +979,11 @@ Public Class FrmPoCkdSrz
         End If
     End Sub
 
+    'Private Sub rcDataGridView_SelectionChanged(sender As Object, e As EventArgs) Handles rcDataGridView.SelectionChanged
+    '    '显示库存
+    '    showKucun(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColPihao").Value)
+    'End Sub
+
     Private Sub RcDataGridView_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles rcDataGridView.KeyDown
         Select Case e.KeyCode
             Case Keys.C And e.Control
@@ -2160,7 +2165,7 @@ Public Class FrmPoCkdSrz
                 If strCsdm.GetType.ToString <> "System.DBNull" Then
                     If Not String.IsNullOrEmpty(strCsdm) Then
                         '计算当前供应商库存
-                        dblCskcsl = ReadCsKcsl(rcDataset.Tables("rc_cpxx").Rows(0).Item("cpdm"), rcDataset.Tables("po_rkd").Rows(0).Item("csdm"), Me.TxtCkdm.Text)
+                        dblCskcsl = ReadCsKcsl(rcDataset.Tables("rc_cpxx").Rows(0).Item("cpdm"), rcDataset.Tables("po_rkd").Rows(0).Item("csdm"), Me.TxtCkdm.Text, Me.TxtDjh.Text)
                         Me.LblMsg.Text += " 供应商库存数量：" & Format(dblCskcsl, g_FormatSl)
                     End If
                 End If

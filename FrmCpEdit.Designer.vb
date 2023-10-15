@@ -351,7 +351,7 @@ Partial Class FrmCpEdit
         Me.TabPage1.Controls.Add(Me.TxtDw)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(630, 360)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "基本信息"
@@ -585,7 +585,7 @@ Partial Class FrmCpEdit
         Me.TabPage2.Controls.Add(Me.TxtClcb)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(630, 360)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "价格信息"
@@ -737,8 +737,8 @@ Partial Class FrmCpEdit
         Me.TabPage3.Controls.Add(Me.TxtZdcb)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.TabPage3.Size = New System.Drawing.Size(631, 383)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(630, 360)
         Me.TabPage3.TabIndex = 5
         Me.TabPage3.Text = "库存储备"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -814,8 +814,8 @@ Partial Class FrmCpEdit
         Me.TabPage4.Controls.Add(Me.LblCkmc)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.TabPage4.Size = New System.Drawing.Size(631, 383)
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(630, 360)
         Me.TabPage4.TabIndex = 2
         Me.TabPage4.Text = "其他信息"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -965,8 +965,8 @@ Partial Class FrmCpEdit
         '
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.TabPage5.Size = New System.Drawing.Size(631, 383)
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(630, 360)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "图片信息"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -982,12 +982,12 @@ Partial Class FrmCpEdit
         'ToolStripContainer1.ContentPanel
         '
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.Panel1)
-        Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(2)
         Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(642, 390)
         Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStripContainer1.LeftToolStripPanelVisible = False
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(2)
         Me.ToolStripContainer1.Name = "ToolStripContainer1"
         Me.ToolStripContainer1.RightToolStripPanelVisible = False
         Me.ToolStripContainer1.Size = New System.Drawing.Size(642, 454)

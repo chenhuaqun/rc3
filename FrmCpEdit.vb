@@ -862,4 +862,8 @@ Public Class FrmCpEdit
     End Sub
 
 #End Region
+
+    Private Sub ChbBBatch_CheckedChanged(sender As Object, e As EventArgs) Handles ChbBBatch.CheckedChanged
+
+    End Sub
 End Class

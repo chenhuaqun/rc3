@@ -97,6 +97,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form3.Designer.vb">
+      <DependentUpon>Form3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sys\ClsGetChineseSpell.vb" />
     <Compile Include="Employee.vb" />
     <Compile Include="Form1.Designer.vb">
@@ -1014,28 +1020,28 @@
     <Compile Include="sys\FrmKhdmGg.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhEdit.Designer.vb">
+    <Compile Include="bd\FrmKhEdit.Designer.vb">
       <DependentUpon>FrmKhEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhEdit.vb">
+    <Compile Include="bd\FrmKhEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhFilter.Designer.vb">
+    <Compile Include="bd\FrmKhFilter.Designer.vb">
       <DependentUpon>FrmKhFilter.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhFilter.vb">
+    <Compile Include="bd\FrmKhFilter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhlbEdit.Designer.vb">
+    <Compile Include="bd\FrmKhlbEdit.Designer.vb">
       <DependentUpon>FrmKhlbEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhlbEdit.vb">
+    <Compile Include="bd\FrmKhlbEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhlbxx.Designer.vb">
+    <Compile Include="bd\FrmKhlbxx.Designer.vb">
       <DependentUpon>FrmKhlbxx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhlbxx.vb">
+    <Compile Include="bd\FrmKhlbxx.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmKhLbYszkHz.Designer.vb">
@@ -1050,28 +1056,28 @@
     <Compile Include="FrmKhLbYszkHzz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhshdzEdit.Designer.vb">
+    <Compile Include="bd\FrmKhshdzEdit.Designer.vb">
       <DependentUpon>FrmKhshdzEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhshdzEdit.vb">
+    <Compile Include="bd\FrmKhshdzEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhshdzFilter.Designer.vb">
+    <Compile Include="bd\FrmKhshdzFilter.Designer.vb">
       <DependentUpon>FrmKhshdzFilter.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhshdzFilter.vb">
+    <Compile Include="bd\FrmKhshdzFilter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhshdzxx.Designer.vb">
+    <Compile Include="bd\FrmKhshdzxx.Designer.vb">
       <DependentUpon>FrmKhshdzxx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhshdzxx.vb">
+    <Compile Include="bd\FrmKhshdzxx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhxx.Designer.vb">
+    <Compile Include="bd\FrmKhxx.Designer.vb">
       <DependentUpon>FrmKhxx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhxx.vb">
+    <Compile Include="bd\FrmKhxx.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmKhYszkHxMx.Designer.vb">
@@ -2122,46 +2128,46 @@
     <Compile Include="FrmPoCgjhCxz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqCx.Designer.vb">
+    <Compile Include="po\FrmPoLlsqCx.Designer.vb">
       <DependentUpon>FrmPoLlsqCx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqCx.vb">
+    <Compile Include="po\FrmPoLlsqCx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqCxLb.Designer.vb">
+    <Compile Include="po\FrmPoLlsqCxLb.Designer.vb">
       <DependentUpon>FrmPoLlsqCxLb.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqCxLb.vb">
+    <Compile Include="po\FrmPoLlsqCxLb.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqCxz.Designer.vb">
+    <Compile Include="po\FrmPoLlsqCxz.Designer.vb">
       <DependentUpon>FrmPoLlsqCxz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqCxz.vb">
+    <Compile Include="po\FrmPoLlsqCxz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqSh.Designer.vb">
+    <Compile Include="po\FrmPoLlsqSh.Designer.vb">
       <DependentUpon>FrmPoLlsqSh.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqSh.vb">
+    <Compile Include="po\FrmPoLlsqSh.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqShz.Designer.vb">
+    <Compile Include="po\FrmPoLlsqShz.Designer.vb">
       <DependentUpon>FrmPoLlsqShz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqShz.vb">
+    <Compile Include="po\FrmPoLlsqShz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqSr.Designer.vb">
+    <Compile Include="po\FrmPoLlsqSr.Designer.vb">
       <DependentUpon>FrmPoLlsqSr.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqSr.vb">
+    <Compile Include="po\FrmPoLlsqSr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqSrz.Designer.vb">
+    <Compile Include="po\FrmPoLlsqSrz.Designer.vb">
       <DependentUpon>FrmPoLlsqSrz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqSrz.vb">
+    <Compile Include="po\FrmPoLlsqSrz.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmPoCkdImpLlsq.Designer.vb">
@@ -2200,10 +2206,10 @@
     <Compile Include="FrmPoCgdClose.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPoLlsqClose.Designer.vb">
+    <Compile Include="po\FrmPoLlsqClose.Designer.vb">
       <DependentUpon>FrmPoLlsqClose.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPoLlsqClose.vb">
+    <Compile Include="po\FrmPoLlsqClose.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MdlReadCskcsl.vb" />
@@ -2250,10 +2256,10 @@
     <Compile Include="bd\FrmCpImpXls.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhImpXls.designer.vb">
+    <Compile Include="bd\FrmKhImpXls.designer.vb">
       <DependentUpon>FrmKhImpXls.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhImpXls.vb">
+    <Compile Include="bd\FrmKhImpXls.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="bd\FrmCsImpXls.designer.vb">
@@ -2828,16 +2834,16 @@
     <Compile Include="FrmYwfJsz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhXslbEdit.Designer.vb">
+    <Compile Include="bd\FrmKhXslbEdit.Designer.vb">
       <DependentUpon>FrmKhXslbEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhXslbEdit.vb">
+    <Compile Include="bd\FrmKhXslbEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmKhXslbxx.Designer.vb">
+    <Compile Include="bd\FrmKhXslbxx.Designer.vb">
       <DependentUpon>FrmKhXslbxx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmKhXslbxx.vb">
+    <Compile Include="bd\FrmKhXslbxx.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmYwfDklxx.Designer.vb">
@@ -2918,6 +2924,12 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sys\FrmAbout.resx">
       <DependentUpon>FrmAbout.vb</DependentUpon>
@@ -3509,19 +3521,19 @@
       <DependentUpon>FrmKhdmGg.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhEdit.resx">
+    <EmbeddedResource Include="bd\FrmKhEdit.resx">
       <DependentUpon>FrmKhEdit.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhFilter.resx">
+    <EmbeddedResource Include="bd\FrmKhFilter.resx">
       <DependentUpon>FrmKhFilter.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhlbEdit.resx">
+    <EmbeddedResource Include="bd\FrmKhlbEdit.resx">
       <DependentUpon>FrmKhlbEdit.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhlbxx.resx">
+    <EmbeddedResource Include="bd\FrmKhlbxx.resx">
       <DependentUpon>FrmKhlbxx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3533,19 +3545,19 @@
       <DependentUpon>FrmKhLbYszkHzz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhshdzEdit.resx">
+    <EmbeddedResource Include="bd\FrmKhshdzEdit.resx">
       <DependentUpon>FrmKhshdzEdit.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhshdzFilter.resx">
+    <EmbeddedResource Include="bd\FrmKhshdzFilter.resx">
       <DependentUpon>FrmKhshdzFilter.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhshdzxx.resx">
+    <EmbeddedResource Include="bd\FrmKhshdzxx.resx">
       <DependentUpon>FrmKhshdzxx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhxx.resx">
+    <EmbeddedResource Include="bd\FrmKhxx.resx">
       <DependentUpon>FrmKhxx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4239,31 +4251,31 @@
       <DependentUpon>FrmPoCgjhCxz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqCx.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqCx.resx">
       <DependentUpon>FrmPoLlsqCx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqCxLb.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqCxLb.resx">
       <DependentUpon>FrmPoLlsqCxLb.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqCxz.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqCxz.resx">
       <DependentUpon>FrmPoLlsqCxz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqSh.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqSh.resx">
       <DependentUpon>FrmPoLlsqSh.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqShz.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqShz.resx">
       <DependentUpon>FrmPoLlsqShz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqSr.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqSr.resx">
       <DependentUpon>FrmPoLlsqSr.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqSrz.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqSrz.resx">
       <DependentUpon>FrmPoLlsqSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4291,7 +4303,7 @@
       <DependentUpon>FrmPoCgdClose.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPoLlsqClose.resx">
+    <EmbeddedResource Include="po\FrmPoLlsqClose.resx">
       <DependentUpon>FrmPoLlsqClose.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4323,7 +4335,7 @@
       <DependentUpon>FrmCpImpXls.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhImpXls.resx">
+    <EmbeddedResource Include="bd\FrmKhImpXls.resx">
       <DependentUpon>FrmKhImpXls.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4707,11 +4719,11 @@
       <DependentUpon>FrmYwfJsz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhXslbEdit.resx">
+    <EmbeddedResource Include="bd\FrmKhXslbEdit.resx">
       <DependentUpon>FrmKhXslbEdit.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmKhXslbxx.resx">
+    <EmbeddedResource Include="bd\FrmKhXslbxx.resx">
       <DependentUpon>FrmKhXslbxx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

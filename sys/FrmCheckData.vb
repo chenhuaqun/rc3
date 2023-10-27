@@ -4021,7 +4021,7 @@ Public Class FrmCheckData
                 rcOleDbCommand.CommandText = "CREATE TABLE po_cgd (djh VARCHAR2(15) NOT NULL,rkrq DATE)" '待完善
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "ALTER TABLE po_cgd ADD CONSTRAINT PK_PO_CGD primary key (djh)"
+                rcOleDbCommand.CommandText = "ALTER TABLE po_cgd ADD CONSTRAINT PK_PO_CGD primary key (djh,xh)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
             Else
@@ -4035,6 +4035,55 @@ Public Class FrmCheckData
                 rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
                 If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
                     rcOleDbCommand.CommandText = "ALTER TABLE po_cgd ADD rkrq DATE"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '********************'
+        '*****rcdata_001*****'
+        ''****po_cgjh*********'
+        '********************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT table_name FROM user_tables WHERE table_name = 'PO_CGJH'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("user_tables") IsNot Nothing Then
+                rcDataset.Tables("user_tables").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
+            If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
+                'table不存在,则新建
+                rcOleDbCommand.CommandText = "CREATE TABLE po_cgjh (djh VARCHAR2(15) NOT NULL,rkrq DATE)" '待完善
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "ALTER TABLE po_cgjh ADD CONSTRAINT PK_PO_CGJH primary key (djh,xh)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+            Else
+                'table存在，则检测字段
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BSENDDINGTALK' AND table_name ='PO_CGJH'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_cgjh ADD bsenddingtalk number(1,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_cgjh MODIFY bsenddingtalk number(1,0) DEFAULT 0"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If

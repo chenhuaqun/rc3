@@ -1233,6 +1233,8 @@ Public Class FrmPoCkdSrz
             Dim rcFrm As New FrmPoCkdImpLlsq
             With rcFrm
                 .ParaCkdm = Me.TxtCkdm.Text
+                .ParaBmdm = Me.TxtBmdm.Text
+                .ParaZydm = Me.TxtZydm.Text
                 .ParaDataSet = rcDataset
                 .ShowDialog()
                 Me.TxtCkdm.Enabled = False

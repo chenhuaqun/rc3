@@ -2500,7 +2500,7 @@ Public Class FrmMain
     End Function
 
     Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
-        Dim rcFrm As New Form2
+        Dim rcFrm As New Form3
         With rcFrm
             .MdiParent = Me
             .Show()

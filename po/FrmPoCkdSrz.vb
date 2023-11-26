@@ -2167,13 +2167,13 @@ Public Class FrmPoCkdSrz
                 If strCsdm.GetType.ToString <> "System.DBNull" Then
                     If Not String.IsNullOrEmpty(strCsdm) Then
                         '计算当前供应商库存
-                        dblCskcsl = ReadCsKcsl(rcDataset.Tables("rc_cpxx").Rows(0).Item("cpdm"), rcDataset.Tables("po_rkd").Rows(0).Item("csdm"), Me.TxtCkdm.Text, Me.TxtDjh.Text)
+                        dblCskcsl = ReadCsKcsl(strCpdm, strCsdm, Me.TxtCkdm.Text, Me.TxtDjh.Text)
                         Me.LblMsg.Text += " 供应商库存数量：" & Format(dblCskcsl, g_FormatSl)
                     End If
                 End If
                 If strPiHao.GetType.ToString <> "System.DBNull" Then
                     If Not String.IsNullOrEmpty(strPiHao) Then
-                        dblPhkcsl = ReadPhKcsl(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue, Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value, Me.TxtCkdm.Text, Me.TxtDjh.Text)
+                        dblPhkcsl = ReadPhKcsl(strCpdm, strPiHao, Me.TxtCkdm.Text, Me.TxtDjh.Text)
                         Me.LblMsg.Text += " 批次号库存数量：" & Format(dblPhkcsl, g_FormatSl)
                     End If
                 End If

@@ -120,7 +120,7 @@ Public Class FrmPoCkdCxz
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             'rcOleDbCommand.CommandText = "SELECT inv_ckd.cpdm,inv_ckd.cpmc,inv_ckd.csdm,inv_ckd.csmc,inv_ckd.brecycling,inv_ckd.bfadm,inv_ckd.fadm,inv_ckd.famc,inv_ckd.kuwei,inv_ckd.sl,inv_ckd.dw,inv_ckd.mjsl,inv_ckd.fzsl,inv_ckd.fzdw,inv_ckd.dj,inv_ckd.je,inv_ckd.ckmemo,inv_ckd.llsqdjh,inv_ckd.llsqxh FROM inv_ckd WHERE (inv_ckd.djh = ?) ORDER BY inv_ckd.xh"
-            rcOleDbCommand.CommandText = "SELECT inv_ckd.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,inv_ckd.csdm,inv_ckd.csmc,rc_cpxx.kuwei,rc_cpxx.brecycling,rc_cpxx.bfadm,inv_ckd.fadm,inv_ckd.famc,inv_ckd.sl,inv_ckd.dw,inv_ckd.mjsl,inv_ckd.fzsl,inv_ckd.fzdw,inv_ckd.dj,inv_ckd.je,inv_ckd.ckmemo,inv_ckd.llsqdjh,inv_ckd.llsqxh FROM inv_ckd,rc_cpxx WHERE inv_ckd.cpdm = rc_cpxx.cpdm AND (inv_ckd.djh = ?) ORDER BY inv_ckd.xh"
+            rcOleDbCommand.CommandText = "SELECT inv_ckd.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,inv_ckd.csdm,inv_ckd.csmc,rc_cpxx.kuwei,rc_cpxx.brecycling,rc_cpxx.bfadm,inv_ckd.fadm,inv_ckd.famc,inv_ckd.pihao,inv_ckd.sl,inv_ckd.dw,inv_ckd.mjsl,inv_ckd.fzsl,inv_ckd.fzdw,inv_ckd.dj,inv_ckd.je,inv_ckd.ckmemo,inv_ckd.llsqdjh,inv_ckd.llsqxh FROM inv_ckd,rc_cpxx WHERE inv_ckd.cpdm = rc_cpxx.cpdm AND (inv_ckd.djh = ?) ORDER BY inv_ckd.xh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = ckDjh
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand

@@ -487,7 +487,7 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtJxzh.Text).ToUpper), "~", (Me.TxtJxzh.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtYhzh.Text).ToUpper), "~", (Me.TxtYhzh.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtCsdm.Text).ToUpper), "~", (Me.TxtCsdm.Text).ToUpper£©
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper£©
@@ -556,7 +556,7 @@ Public Class FrmQckmyeSr
             rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtJxzh.Text).ToUpper), "~", (Me.TxtJxzh.Text).ToUpper£©
             rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtYhzh.Text).ToUpper), "~", (Me.TxtYhzh.Text).ToUpper£©
             rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtCsdm.Text).ToUpper), "~", (Me.TxtCsdm.Text).ToUpper£©
-            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
+            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
             rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper£©
             rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper£©
             rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper£©
@@ -588,7 +588,7 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper£©
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtCsdm.Text).ToUpper), "~", (Me.TxtCsdm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtYhzh.Text).ToUpper), "~", (Me.TxtYhzh.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtJxzh.Text).ToUpper), "~", (Me.TxtJxzh.Text).ToUpper£©
@@ -628,7 +628,7 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtJxzh.Text).ToUpper), "~", (Me.TxtJxzh.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtYhzh.Text).ToUpper), "~", (Me.TxtYhzh.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtCsdm.Text).ToUpper), "~", (Me.TxtCsdm.Text).ToUpper£©
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(String.IsNullOrEmpty((Me.TxtKhdm.Text).ToUpper), "~", (Me.TxtKhdm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper£©
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper£©

@@ -216,7 +216,7 @@ Public Class FrmCbjz_Xscb
                     rcOleDbCommand.ExecuteNonQuery()
                     If Me.CheckBox1.Checked Then
                         ''按标准成本进行更新当月的退货成本或退货销售
-                        rcOleDbCommand.CommandText = "UPDATE oe_xsd SET oe_xsd.cbje = oe_xsd.sl * (SELECT bzcb FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm),oe_xsd.cbdj = (SELECT bzcb FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm) WHERE oe_xsd.cpdm = ? AND ckdm = ? AND SUBSTR(oe_xsd.djh,5,6) >= ?  AND SUBSTR(oe_xsd.djh,5,6) <= ? AND oe_xsd.cbdj = 0.0"
+                        rcOleDbCommand.CommandText = "UPDATE oe_xsd SET oe_xsd.cbje = oe_xsd.sl * (SELECT CASE WHEN beishu <> 0 THEN bzcb/beishu ELSE bzcb END FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm),oe_xsd.cbdj = (SELECT CASE WHEN beishu <> 0 THEN bzcb/beishu ELSE bzcb END FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm) WHERE oe_xsd.cpdm = ? AND ckdm = ? AND SUBSTR(oe_xsd.djh,5,6) >= ?  AND SUBSTR(oe_xsd.djh,5,6) <= ? AND oe_xsd.cbdj = 0.0"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("clqcye").Rows(i).Item("cpdm")
                         rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("clqcye").Rows(i).Item("ckdm")
@@ -625,7 +625,7 @@ Public Class FrmCbjz_Xscb
                         rcOleDbCommand.ExecuteNonQuery()
                         If Me.CheckBox1.Checked Then
                             ''按标准成本进行更新当月的退货成本或退货销售
-                            rcOleDbCommand.CommandText = "UPDATE oe_xsd SET oe_xsd.cbje = oe_xsd.sl * (SELECT bzcb FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm),oe_xsd.cbdj = (SELECT bzcb FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm) WHERE oe_xsd.cpdm = ? AND ckdm = ? AND SUBSTR(oe_xsd.djh,5,6) >= ?  AND SUBSTR(oe_xsd.djh,5,6) <= ? AND oe_xsd.cbdj = 0.0"
+                            rcOleDbCommand.CommandText = "UPDATE oe_xsd SET oe_xsd.cbje = oe_xsd.sl * (SELECT CASE WHEN beishu <> 0 THEN bzcb/beishu ELSE bzcb END FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm),oe_xsd.cbdj = (SELECT CASE WHEN beishu <> 0 THEN bzcb/beishu ELSE bzcb END FROM rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm) WHERE oe_xsd.cpdm = ? AND ckdm = ? AND SUBSTR(oe_xsd.djh,5,6) >= ?  AND SUBSTR(oe_xsd.djh,5,6) <= ? AND oe_xsd.cbdj = 0.0"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("cpxx").Rows(i).Item("cpdm")
                             rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("clqcye").Rows(j).Item("ckdm")

@@ -23,10 +23,12 @@ Partial Class FrmGlZlfxHz2z
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle()
-        Me.DgtbcKhdm = New System.Windows.Forms.DataGridTextBoxColumn()
-        Me.DgtbcKhmc = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcDwdm = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcDwmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKhdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKhmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtncZydm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtncZymc = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcSkqx = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcQmye = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcJe01 = New System.Windows.Forms.DataGridTextBoxColumn()
@@ -42,51 +44,45 @@ Partial Class FrmGlZlfxHz2z
         Me.DgtbcBydf = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcLjjf = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcLjdf = New System.Windows.Forms.DataGridTextBoxColumn()
-        Me.DgtncZydm = New System.Windows.Forms.DataGridTextBoxColumn()
-        Me.DgtncZymc = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rcDataGrid
+        'RcDataGrid
         '
-        Me.rcDataGrid.Location = New System.Drawing.Point(0, 183)
-        Me.rcDataGrid.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rcDataGrid.Size = New System.Drawing.Size(1476, 659)
-        Me.rcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
-        '
-        'Panel1
-        '
-        Me.Panel1.Location = New System.Drawing.Point(0, 77)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.Panel1.Size = New System.Drawing.Size(1476, 106)
-        '
-        'Panel4
-        '
-        Me.Panel4.Location = New System.Drawing.Point(436, 60)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.Panel4.Size = New System.Drawing.Size(599, 2)
-        '
-        'Label2
-        '
-        Me.Label2.Location = New System.Drawing.Point(36, 72)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.RcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(613, 12)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Size = New System.Drawing.Size(239, 33)
+        Me.Label1.Size = New System.Drawing.Size(166, 26)
         Me.Label1.Text = "汇总账龄分析表"
         '
         'DataGridTableStyle1
         '
-        Me.DataGridTableStyle1.DataGrid = Me.rcDataGrid
+        Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
         Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDwdm, Me.DgtbcDwmc, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtncZydm, Me.DgtncZymc, Me.DgtbcSkqx, Me.DgtbcQmye, Me.DgtbcJe01, Me.DgtbcJe02, Me.DgtbcJe03, Me.DgtbcJe04, Me.DgtbcJe05, Me.DgtbcJe06, Me.DgtbcJe07, Me.DgtbcDqje, Me.DgtbcYqje, Me.DgtbcByjf, Me.DgtbcBydf, Me.DgtbcLjjf, Me.DgtbcLjdf})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "glzlfx"
+        '
+        'DgtbcDwdm
+        '
+        Me.DgtbcDwdm.Format = ""
+        Me.DgtbcDwdm.FormatInfo = Nothing
+        Me.DgtbcDwdm.HeaderText = "单位编码"
+        Me.DgtbcDwdm.MappingName = "dwdm"
+        Me.DgtbcDwdm.NullText = ""
+        Me.DgtbcDwdm.Width = 75
+        '
+        'DgtbcDwmc
+        '
+        Me.DgtbcDwmc.Format = ""
+        Me.DgtbcDwmc.FormatInfo = Nothing
+        Me.DgtbcDwmc.HeaderText = "单位名称"
+        Me.DgtbcDwmc.MappingName = "dwmc"
+        Me.DgtbcDwmc.NullText = ""
+        Me.DgtbcDwmc.Width = 75
         '
         'DgtbcKhdm
         '
@@ -106,23 +102,23 @@ Partial Class FrmGlZlfxHz2z
         Me.DgtbcKhmc.NullText = ""
         Me.DgtbcKhmc.Width = 250
         '
-        'DgtbcDwdm
+        'DgtncZydm
         '
-        Me.DgtbcDwdm.Format = ""
-        Me.DgtbcDwdm.FormatInfo = Nothing
-        Me.DgtbcDwdm.HeaderText = "单位编码"
-        Me.DgtbcDwdm.MappingName = "dwdm"
-        Me.DgtbcDwdm.NullText = ""
-        Me.DgtbcDwdm.Width = 75
+        Me.DgtncZydm.Format = ""
+        Me.DgtncZydm.FormatInfo = Nothing
+        Me.DgtncZydm.HeaderText = "职员编码"
+        Me.DgtncZydm.MappingName = "zydm"
+        Me.DgtncZydm.NullText = ""
+        Me.DgtncZydm.Width = 75
         '
-        'DgtbcDwmc
+        'DgtncZymc
         '
-        Me.DgtbcDwmc.Format = ""
-        Me.DgtbcDwmc.FormatInfo = Nothing
-        Me.DgtbcDwmc.HeaderText = "单位名称"
-        Me.DgtbcDwmc.MappingName = "dwmc"
-        Me.DgtbcDwmc.NullText = ""
-        Me.DgtbcDwmc.Width = 75
+        Me.DgtncZymc.Format = ""
+        Me.DgtncZymc.FormatInfo = Nothing
+        Me.DgtncZymc.HeaderText = "职员姓名"
+        Me.DgtncZymc.MappingName = "zymc"
+        Me.DgtncZymc.NullText = ""
+        Me.DgtncZymc.Width = 75
         '
         'DgtbcSkqx
         '
@@ -274,35 +270,16 @@ Partial Class FrmGlZlfxHz2z
         Me.DgtbcLjdf.NullText = ""
         Me.DgtbcLjdf.Width = 75
         '
-        'DgtncZydm
-        '
-        Me.DgtncZydm.Format = ""
-        Me.DgtncZydm.FormatInfo = Nothing
-        Me.DgtncZydm.HeaderText = "职员编码"
-        Me.DgtncZydm.MappingName = "zydm"
-        Me.DgtncZydm.NullText = ""
-        Me.DgtncZydm.Width = 75
-        '
-        'DgtncZymc
-        '
-        Me.DgtncZymc.Format = ""
-        Me.DgtncZymc.FormatInfo = Nothing
-        Me.DgtncZymc.HeaderText = "职员姓名"
-        Me.DgtncZymc.MappingName = "zymc"
-        Me.DgtncZymc.NullText = ""
-        Me.DgtncZymc.Width = 75
-        '
         'FrmGlZlfxHz2z
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1476, 842)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ClientSize = New System.Drawing.Size(984, 561)
         Me.Name = "FrmGlZlfxHz2z"
         Me.Text = "汇总账龄分析表"
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)

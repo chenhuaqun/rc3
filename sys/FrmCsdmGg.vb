@@ -169,7 +169,7 @@ Public Class FrmCsdmGg
             rcOleDbDataAdpt.Fill(rcDataset, "sumcsyeb")
             'rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,bmdm,zydm,xmdm,khdm,yhzh,jxzh,Sum(CASE WHEN jd = '処' THEN Nvl(ncsl,0.0) ELSE 0 - Nvl(ncsl,0.0) END) as ncsl,Sum(CASE WHEN jd = '処' THEN Nvl(ncwb,0.0) ELSE 0 - Nvl(ncwb,0.0) END) as ncwb,Sum(CASE WHEN jd = '処' THEN Nvl(ncje,0.0) ELSE 0 - Nvl(ncje,0.0) END) as ncje FROM gl_kmyeb WHERE (csdm = ? or csdm = ?) GROUP BY kjnd"
             '親朕噫駆燕
-            rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,bmdm,zydm,xmdm,khdm,yhzh,jxzh,'処' AS jd,SUM(CASE WHEN jd ='処' THEN ncsl ELSE 0 - ncsl END) AS ncsl,SUM(CASE WHEN jd ='処' THEN ncwb ELSE 0 - ncwb END) AS ncwb,SUM(CASE WHEN jd ='処' THEN ncje ELSE 0 - ncje END) AS ncje" &
+            rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,yhzh,jxzh,'処' AS jd,SUM(CASE WHEN jd ='処' THEN ncsl ELSE 0 - ncsl END) AS ncsl,SUM(CASE WHEN jd ='処' THEN ncwb ELSE 0 - ncwb END) AS ncwb,SUM(CASE WHEN jd ='処' THEN ncje ELSE 0 - ncje END) AS ncje" &
                     ",SUM(CASE WHEN jd ='処' THEN jfsl01 ELSE 0 - jfsl01 END) AS jfsl01,SUM(CASE WHEN jd ='処' THEN jfwb01 ELSE 0 - jfwb01 END) AS jfwb01,SUM(CASE WHEN jd ='処' THEN jfje01 ELSE 0 - jfje01 END) AS jfje01" &
                     ",SUM(CASE WHEN jd ='処' THEN dfsl01 ELSE 0 - dfsl01 END) AS dfsl01,SUM(CASE WHEN jd ='処' THEN dfwb01 ELSE 0 - dfwb01 END) AS dfwb01,SUM(CASE WHEN jd ='処' THEN dfje01 ELSE 0 - dfje01 END) AS dfje01" &
                     ",SUM(CASE WHEN jd ='処' THEN jfsl02 ELSE 0 - jfsl02 END) AS jfsl02,SUM(CASE WHEN jd ='処' THEN jfwb02 ELSE 0 - jfwb02 END) AS jfwb02,SUM(CASE WHEN jd ='処' THEN jfje02 ELSE 0 - jfje02 END) AS jfje02" &
@@ -196,7 +196,7 @@ Public Class FrmCsdmGg
                     ",SUM(CASE WHEN jd ='処' THEN dfsl12 ELSE 0 - dfsl12 END) AS dfsl12,SUM(CASE WHEN jd ='処' THEN dfwb12 ELSE 0 - dfwb12 END) AS dfwb12,SUM(CASE WHEN jd ='処' THEN dfje12 ELSE 0 - dfje12 END) AS dfje12" &
                     ",SUM(CASE WHEN jd ='処' THEN jfsl13 ELSE 0 - jfsl13 END) AS jfsl13,SUM(CASE WHEN jd ='処' THEN jfwb13 ELSE 0 - jfwb13 END) AS jfwb13,SUM(CASE WHEN jd ='処' THEN jfje13 ELSE 0 - jfje13 END) AS jfje13" &
                     ",SUM(CASE WHEN jd ='処' THEN dfsl13 ELSE 0 - dfsl13 END) AS dfsl13,SUM(CASE WHEN jd ='処' THEN dfwb13 ELSE 0 - dfwb13 END) AS dfwb13,SUM(CASE WHEN jd ='処' THEN dfje13 ELSE 0 - dfje13 END) AS dfje13" &
-                    " FROM gl_kmyeb WHERE (csdm = ? or csdm = ?) GROUP BY kjnd,kmdm,bmdm,zydm,xmdm,khdm,yhzh,jxzh"
+                    " FROM gl_kmyeb WHERE (csdm = ? or csdm = ?) GROUP BY kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,yhzh,jxzh"
 
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtNewCsdm.Text)
@@ -253,7 +253,7 @@ Public Class FrmCsdmGg
             rcOleDbCommand.ExecuteNonQuery()
             '耶紗方象
             For i = 0 To rcDataset.Tables("sumkmyeb").Rows.Count - 1
-                rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje" &
+                rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje" &
                     ",jfsl01,jfwb01,jfje01,dfsl01,dfwb01,dfje01" &
                     ",jfsl02,jfwb02,jfje02,dfsl02,dfwb02,dfje02" &
                     ",jfsl03,jfwb03,jfje03,dfsl03,dfwb03,dfje03" &
@@ -267,14 +267,15 @@ Public Class FrmCsdmGg
                     ",jfsl11,jfwb11,jfje11,dfsl11,dfwb11,dfje11" &
                     ",jfsl12,jfwb12,jfje12,dfsl12,dfwb12,dfje12" &
                     ",jfsl13,jfwb13,jfje13,dfsl13,dfwb13,dfje13)" &
-                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("kjnd")
                 rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("kmdm")
+                rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("wbdm")
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("bmdm")
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("zydm")
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("xmdm")
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("khdm")
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("khdm")
                 rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = Me.TxtNewCsdm.Text
                 rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("yhzh")
                 rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumkmyeb").Rows(i).Item("jxzh")

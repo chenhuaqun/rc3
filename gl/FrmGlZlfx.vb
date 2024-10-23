@@ -130,7 +130,7 @@ Public Class FrmGlZlfx
             Me.LblMsg.Text = "正在生成账龄分析表......"
             '插入库存数据
             Me.LblMsg.Text = "正在生成gl_kmyeb数据......"
-            rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh) SELECT SUBSTR(djh,5,4) AS kjnd,NVL(kmdm,'~'),NVL(bmdm,'~'),NVL(zydm,'~'),NVL(xmdm,'~'),NVL(khdm,'~'),NVL(csdm,'~'),NVL(yhzh,'~'),NVL(jxzh,'~') FROM gl_pz WHERE gl_pz.cperiod = ? AND NOT EXISTS (SELECT 1 FROM gl_kmyeb WHERE gl_kmyeb.kjnd = ? AND gl_kmyeb.jxzh = NVL(gl_pz.jxzh,'~') AND gl_kmyeb.yhzh = NVL(gl_pz.yhzh,'~') AND gl_kmyeb.csdm = NVL(gl_pz.csdm,'~') AND gl_kmyeb.khdm = NVL(gl_pz.khdm,'~') AND gl_kmyeb.xmdm = NVL(gl_pz.xmdm,'~') AND gl_kmyeb.zydm = NVL(gl_pz.zydm,'~') AND gl_kmyeb.bmdm = NVL(gl_pz.bmdm,'~') AND gl_kmyeb.kmdm = NVL(gl_pz.kmdm,'~')) GROUP BY SUBSTR(djh,5,4),kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh"
+            rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh) SELECT SUBSTR(djh,5,4) AS kjnd,NVL(kmdm,'~'),NVL(bz,'~') AS wbdm,NVL(bmdm,'~'),NVL(zydm,'~'),NVL(xmdm,'~'),NVL(khdm,'~'),NVL(csdm,'~'),NVL(yhzh,'~'),NVL(jxzh,'~') FROM gl_pz WHERE gl_pz.cperiod = ? AND NOT EXISTS (SELECT 1 FROM gl_kmyeb WHERE gl_kmyeb.kjnd = ? AND gl_kmyeb.jxzh = NVL(gl_pz.jxzh,'~') AND gl_kmyeb.yhzh = NVL(gl_pz.yhzh,'~') AND gl_kmyeb.csdm = NVL(gl_pz.csdm,'~') AND gl_kmyeb.khdm = NVL(gl_pz.khdm,'~') AND gl_kmyeb.xmdm = NVL(gl_pz.xmdm,'~') AND gl_kmyeb.zydm = NVL(gl_pz.zydm,'~') AND gl_kmyeb.bmdm = NVL(gl_pz.bmdm,'~') AND gl_kmyeb.wbdm = NVL(gl_pz.bz,'~') AND gl_kmyeb.kmdm = NVL(gl_pz.kmdm,'~')) GROUP BY SUBSTR(djh,5,4),kmdm,bz,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
@@ -305,6 +305,10 @@ Public Class FrmGlZlfx
                     rcOleDbCommand.ExecuteNonQuery()
                     '根据余额进行分解
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je01 = qmye,je02 = 0,je03 = 0,je04 = 0,je05 = 0,je06 = 0,je07 = 0 WHERE qmye <= 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '调整当月收款金额小于0的为0，并相应的调整发生额
+                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je01 = CASE WHEN je01 < 0 THEN 0 ELSE je01 END,je02 = CASE WHEN je02 < 0 THEN 0 ELSE je02 END,je03 = CASE WHEN je03 < 0 THEN 0 ELSE je03 END,je04 = CASE WHEN je04 < 0 THEN 0 ELSE je04 END,je05 = CASE WHEN je05 < 0 THEN 0 ELSE je05 END,je06 = CASE WHEN je06 < 0 THEN 0 ELSE je06 END,je07 = CASE WHEN je07 < 0 THEN 0 ELSE je07 END WHERE qmye > 0"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je07 = CASE WHEN qmye > je01 + je02 + je03 + je04 + je05 + je06 THEN qmye -je01 -je02 -je03 -je04 -je05 - je06 ELSE 0.0 END WHERE qmye > 0"
@@ -504,6 +508,21 @@ Public Class FrmGlZlfx
         End Try
         If Me.CheckBox1.Checked Then
             For i = 0 To rcDataset.Tables("glzlfx").Rows.Count - 1
+                If rcDataset.Tables("glzlfx").Rows(i).Item("byjf").GetType.ToString = "System.DBNull" Then
+                    rcDataset.Tables("glzlfx").Rows(i).Item("byjf") = 0.0
+                End If
+                If rcDataset.Tables("glzlfx").Rows(i).Item("bydf").GetType.ToString = "System.DBNull" Then
+                    rcDataset.Tables("glzlfx").Rows(i).Item("bydf") = 0.0
+                End If
+                If rcDataset.Tables("glzlfx").Rows(i).Item("ljjf").GetType.ToString = "System.DBNull" Then
+                    rcDataset.Tables("glzlfx").Rows(i).Item("ljjf") = 0.0
+                End If
+                If rcDataset.Tables("glzlfx").Rows(i).Item("ljdf").GetType.ToString = "System.DBNull" Then
+                    rcDataset.Tables("glzlfx").Rows(i).Item("ljdf") = 0.0
+                End If
+                If rcDataset.Tables("glzlfx").Rows(i).Item("qmye").GetType.ToString = "System.DBNull" Then
+                    rcDataset.Tables("glzlfx").Rows(i).Item("qmye") = 0.0
+                End If
                 If rcDataset.Tables("glzlfx").Rows(i).Item("byjf") = 0 And rcDataset.Tables("glzlfx").Rows(i).Item("bydf") = 0 And rcDataset.Tables("glzlfx").Rows(i).Item("ljjf") = 0 And rcDataset.Tables("glzlfx").Rows(i).Item("ljdf") = 0 And rcDataset.Tables("glzlfx").Rows(i).Item("qmye") = 0 Then
                     rcDataset.Tables("glzlfx").Rows(i).Delete()
                 End If

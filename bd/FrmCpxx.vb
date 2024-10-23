@@ -42,6 +42,10 @@ Public Class FrmCpxx
         Me.rcDataGridView.Columns("ColClcb").DefaultCellStyle.Format = g_FormatJe0
         Me.rcDataGridView.Columns("ColRgcb").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.rcDataGridView.Columns("ColRgcb").DefaultCellStyle.Format = g_FormatJe0
+        Me.rcDataGridView.Columns("ColNycb").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        Me.rcDataGridView.Columns("ColNycb").DefaultCellStyle.Format = g_FormatJe0
+        Me.rcDataGridView.Columns("ColZjcb").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        Me.rcDataGridView.Columns("ColZjcb").DefaultCellStyle.Format = g_FormatJe0
         Me.rcDataGridView.Columns("ColGlcb").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.rcDataGridView.Columns("ColGlcb").DefaultCellStyle.Format = g_FormatJe0
         Me.rcDataGridView.Columns("ColXstcbl").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -83,6 +87,8 @@ Public Class FrmCpxx
         dtCp.Columns.Add("bzcb", Type.GetType("System.Double"))
         dtCp.Columns.Add("clcb", Type.GetType("System.Double"))
         dtCp.Columns.Add("rgcb", Type.GetType("System.Double"))
+        dtCp.Columns.Add("nycb", Type.GetType("System.Double"))
+        dtCp.Columns.Add("zjcb", Type.GetType("System.Double"))
         dtCp.Columns.Add("glcb", Type.GetType("System.Double"))
         dtCp.Columns.Add("xstcbl", Type.GetType("System.Double"))
         dtCp.Columns.Add("zdcb", Type.GetType("System.Double"))
@@ -120,6 +126,8 @@ Public Class FrmCpxx
             .Columns("bzcb").DefaultValue = 0.0
             .Columns("clcb").DefaultValue = 0.0
             .Columns("rgcb").DefaultValue = 0.0
+            .Columns("nycb").DefaultValue = 0.0
+            .Columns("zjcb").DefaultValue = 0.0
             .Columns("glcb").DefaultValue = 0.0
             .Columns("xstcbl").DefaultValue = 0.0
             .Columns("zdcb").DefaultValue = 0.0
@@ -141,7 +149,7 @@ Public Class FrmCpxx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
+            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.nycb,rc_cpxx.zjcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
@@ -234,12 +242,14 @@ Public Class FrmCpxx
             rcRps.Text(i + 1, 15) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("bzcb"))
             rcRps.Text(i + 1, 16) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("clcb"))
             rcRps.Text(i + 1, 17) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("rgcb"))
-            rcRps.Text(i + 1, 18) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("glcb"))
-            rcRps.Text(i + 1, 19) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("xstcbl"))
-            rcRps.Text(i + 1, 20) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("cpweight"))
-            rcRps.Text(i + 1, 21) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("length"))
-            rcRps.Text(i + 1, 22) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("width"))
-            rcRps.Text(i + 1, 23) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("height"))
+            rcRps.Text(i + 1, 18) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("nycb"))
+            rcRps.Text(i + 1, 19) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("zjcb"))
+            rcRps.Text(i + 1, 20) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("glcb"))
+            rcRps.Text(i + 1, 21) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("xstcbl"))
+            rcRps.Text(i + 1, 22) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("cpweight"))
+            rcRps.Text(i + 1, 23) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("length"))
+            rcRps.Text(i + 1, 24) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("width"))
+            rcRps.Text(i + 1, 25) = Trim(rcDataset.Tables("rc_cpxx").Rows(i).Item("height"))
         Next
         'È¡RPSÊý¾Ý
         Try
@@ -553,7 +563,7 @@ Public Class FrmCpxx
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = BindingContext(rcDataView, "").Current("cpdm")
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
+                rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.nycb,rc_cpxx.zjcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
@@ -603,7 +613,7 @@ Public Class FrmCpxx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
+            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.nycb,rc_cpxx.zjcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_cpxx") IsNot Nothing Then

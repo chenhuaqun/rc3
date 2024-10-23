@@ -23,45 +23,50 @@ Partial Class FrmGxxx
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmGxxx))
-        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel
-        Me.ToolStripMain = New System.Windows.Forms.ToolStrip
-        Me.BtnPageSetup = New System.Windows.Forms.ToolStripButton
-        Me.BtnPrint = New System.Windows.Forms.ToolStripButton
-        Me.BtnPreview = New System.Windows.Forms.ToolStripButton
-        Me.BtnExport = New System.Windows.Forms.ToolStripButton
-        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnNew = New System.Windows.Forms.ToolStripButton
-        Me.BtnEdit = New System.Windows.Forms.ToolStripButton
-        Me.BtnDelete = New System.Windows.Forms.ToolStripButton
-        Me.BtnRefresh = New System.Windows.Forms.ToolStripButton
-        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnExit = New System.Windows.Forms.ToolStripButton
-        Me.MnuMain = New System.Windows.Forms.MenuStrip
-        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPreview = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiExport = New System.Windows.Forms.ToolStripMenuItem
-        Me.Tss3 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiDelete = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiRefresh = New System.Windows.Forms.ToolStripMenuItem
-        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.rcDataGridView = New System.Windows.Forms.DataGridView
-        Me.ColGxdm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColGxmc = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColGxsm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColBmdm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColBmmc = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColYdcl = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel()
+        Me.ToolStripMain = New System.Windows.Forms.ToolStrip()
+        Me.BtnPageSetup = New System.Windows.Forms.ToolStripButton()
+        Me.BtnPrint = New System.Windows.Forms.ToolStripButton()
+        Me.BtnPreview = New System.Windows.Forms.ToolStripButton()
+        Me.BtnExport = New System.Windows.Forms.ToolStripButton()
+        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnNew = New System.Windows.Forms.ToolStripButton()
+        Me.BtnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.BtnDelete = New System.Windows.Forms.ToolStripButton()
+        Me.BtnRefresh = New System.Windows.Forms.ToolStripButton()
+        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnExit = New System.Windows.Forms.ToolStripButton()
+        Me.MnuMain = New System.Windows.Forms.MenuStrip()
+        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPreview = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Tss3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiRefresh = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.rcDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ColGxdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColGxmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColGxsm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColBmdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColBmmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColYdcl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColYdbl_clcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColYdbl_rgcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColYdbl_nycb = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColYdbl_zjcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColYdbl_glcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStripPanel1.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
         Me.MnuMain.SuspendLayout()
@@ -320,7 +325,7 @@ Partial Class FrmGxxx
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.AllowUserToDeleteRows = False
         Me.rcDataGridView.ColumnHeadersHeight = 30
-        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColGxdm, Me.ColGxmc, Me.ColGxsm, Me.ColBmdm, Me.ColBmmc, Me.ColYdcl})
+        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColGxdm, Me.ColGxmc, Me.ColGxsm, Me.ColBmdm, Me.ColBmmc, Me.ColYdcl, Me.ColYdbl_clcb, Me.ColYdbl_rgcb, Me.ColYdbl_nycb, Me.ColYdbl_zjcb, Me.ColYdbl_glcb})
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rcDataGridView.Location = New System.Drawing.Point(0, 112)
         Me.rcDataGridView.Name = "rcDataGridView"
@@ -376,6 +381,41 @@ Partial Class FrmGxxx
         Me.ColYdcl.Name = "ColYdcl"
         Me.ColYdcl.ReadOnly = True
         Me.ColYdcl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ColYdbl_clcb
+        '
+        Me.ColYdbl_clcb.DataPropertyName = "ydbl_clcb"
+        Me.ColYdbl_clcb.HeaderText = "材料约当比例(%)"
+        Me.ColYdbl_clcb.Name = "ColYdbl_clcb"
+        Me.ColYdbl_clcb.ReadOnly = True
+        '
+        'ColYdbl_rgcb
+        '
+        Me.ColYdbl_rgcb.DataPropertyName = "ydbl_rgcb"
+        Me.ColYdbl_rgcb.HeaderText = "人工约当比例(%)"
+        Me.ColYdbl_rgcb.Name = "ColYdbl_rgcb"
+        Me.ColYdbl_rgcb.ReadOnly = True
+        '
+        'ColYdbl_nycb
+        '
+        Me.ColYdbl_nycb.DataPropertyName = "ydbl_nycb"
+        Me.ColYdbl_nycb.HeaderText = "能源约当比例(%)"
+        Me.ColYdbl_nycb.Name = "ColYdbl_nycb"
+        Me.ColYdbl_nycb.ReadOnly = True
+        '
+        'ColYdbl_zjcb
+        '
+        Me.ColYdbl_zjcb.DataPropertyName = "ydbl_zjcb"
+        Me.ColYdbl_zjcb.HeaderText = "折旧约当比例(%)"
+        Me.ColYdbl_zjcb.Name = "ColYdbl_zjcb"
+        Me.ColYdbl_zjcb.ReadOnly = True
+        '
+        'ColYdbl_glcb
+        '
+        Me.ColYdbl_glcb.DataPropertyName = "ydbl_glcb"
+        Me.ColYdbl_glcb.HeaderText = "管理约当比例(%)"
+        Me.ColYdbl_glcb.Name = "ColYdbl_glcb"
+        Me.ColYdbl_glcb.ReadOnly = True
         '
         'FrmGxxx
         '
@@ -439,10 +479,15 @@ Partial Class FrmGxxx
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents rcDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents BtnPageSetup As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ColGxdm As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColGxmc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColGxsm As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColBmdm As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColBmmc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColYdcl As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColGxdm As DataGridViewTextBoxColumn
+    Friend WithEvents ColGxmc As DataGridViewTextBoxColumn
+    Friend WithEvents ColGxsm As DataGridViewTextBoxColumn
+    Friend WithEvents ColBmdm As DataGridViewTextBoxColumn
+    Friend WithEvents ColBmmc As DataGridViewTextBoxColumn
+    Friend WithEvents ColYdcl As DataGridViewTextBoxColumn
+    Friend WithEvents ColYdbl_clcb As DataGridViewTextBoxColumn
+    Friend WithEvents ColYdbl_rgcb As DataGridViewTextBoxColumn
+    Friend WithEvents ColYdbl_nycb As DataGridViewTextBoxColumn
+    Friend WithEvents ColYdbl_zjcb As DataGridViewTextBoxColumn
+    Friend WithEvents ColYdbl_glcb As DataGridViewTextBoxColumn
 End Class

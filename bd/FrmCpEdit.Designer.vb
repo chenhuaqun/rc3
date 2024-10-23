@@ -72,6 +72,11 @@ Partial Class FrmCpEdit
         Me.LblDw = New System.Windows.Forms.Label()
         Me.TxtDw = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.LblZjcb = New System.Windows.Forms.Label()
+        Me.TxtZjcb = New System.Windows.Forms.TextBox()
+        Me.LblNycb = New System.Windows.Forms.Label()
+        Me.TxtNycb = New System.Windows.Forms.TextBox()
         Me.TxtBeiShu = New System.Windows.Forms.TextBox()
         Me.LblBeiShu = New System.Windows.Forms.Label()
         Me.TxtCgdj = New System.Windows.Forms.TextBox()
@@ -567,6 +572,11 @@ Partial Class FrmCpEdit
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Label4)
+        Me.TabPage2.Controls.Add(Me.LblZjcb)
+        Me.TabPage2.Controls.Add(Me.TxtZjcb)
+        Me.TabPage2.Controls.Add(Me.LblNycb)
+        Me.TabPage2.Controls.Add(Me.TxtNycb)
         Me.TabPage2.Controls.Add(Me.TxtBeiShu)
         Me.TabPage2.Controls.Add(Me.LblBeiShu)
         Me.TabPage2.Controls.Add(Me.TxtCgdj)
@@ -591,9 +601,52 @@ Partial Class FrmCpEdit
         Me.TabPage2.Text = "价格信息"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(286, 176)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(191, 12)
+        Me.Label4.TabIndex = 20
+        Me.Label4.Text = "*各项成本金额请按乘以倍数后填列"
+        '
+        'LblZjcb
+        '
+        Me.LblZjcb.AutoSize = True
+        Me.LblZjcb.Location = New System.Drawing.Point(56, 229)
+        Me.LblZjcb.Name = "LblZjcb"
+        Me.LblZjcb.Size = New System.Drawing.Size(53, 12)
+        Me.LblZjcb.TabIndex = 14
+        Me.LblZjcb.Text = "折旧成本"
+        '
+        'TxtZjcb
+        '
+        Me.TxtZjcb.Location = New System.Drawing.Point(114, 225)
+        Me.TxtZjcb.MaxLength = 8
+        Me.TxtZjcb.Name = "TxtZjcb"
+        Me.TxtZjcb.Size = New System.Drawing.Size(96, 21)
+        Me.TxtZjcb.TabIndex = 15
+        '
+        'LblNycb
+        '
+        Me.LblNycb.AutoSize = True
+        Me.LblNycb.Location = New System.Drawing.Point(56, 200)
+        Me.LblNycb.Name = "LblNycb"
+        Me.LblNycb.Size = New System.Drawing.Size(53, 12)
+        Me.LblNycb.TabIndex = 12
+        Me.LblNycb.Text = "能源成本"
+        '
+        'TxtNycb
+        '
+        Me.TxtNycb.Location = New System.Drawing.Point(114, 196)
+        Me.TxtNycb.MaxLength = 8
+        Me.TxtNycb.Name = "TxtNycb"
+        Me.TxtNycb.Size = New System.Drawing.Size(96, 21)
+        Me.TxtNycb.TabIndex = 13
+        '
         'TxtBeiShu
         '
-        Me.TxtBeiShu.Location = New System.Drawing.Point(114, 81)
+        Me.TxtBeiShu.Location = New System.Drawing.Point(114, 80)
         Me.TxtBeiShu.MaxLength = 12
         Me.TxtBeiShu.Name = "TxtBeiShu"
         Me.TxtBeiShu.Size = New System.Drawing.Size(96, 21)
@@ -628,36 +681,36 @@ Partial Class FrmCpEdit
         'LblXstcbl
         '
         Me.LblXstcbl.AutoSize = True
-        Me.LblXstcbl.Location = New System.Drawing.Point(20, 231)
+        Me.LblXstcbl.Location = New System.Drawing.Point(20, 287)
         Me.LblXstcbl.Name = "LblXstcbl"
         Me.LblXstcbl.Size = New System.Drawing.Size(89, 12)
-        Me.LblXstcbl.TabIndex = 14
+        Me.LblXstcbl.TabIndex = 18
         Me.LblXstcbl.Text = "销售提成比例："
         '
         'TxtXstcbl
         '
-        Me.TxtXstcbl.Location = New System.Drawing.Point(114, 227)
+        Me.TxtXstcbl.Location = New System.Drawing.Point(114, 283)
         Me.TxtXstcbl.MaxLength = 8
         Me.TxtXstcbl.Name = "TxtXstcbl"
         Me.TxtXstcbl.Size = New System.Drawing.Size(96, 21)
-        Me.TxtXstcbl.TabIndex = 15
+        Me.TxtXstcbl.TabIndex = 19
         '
         'LblGlcb
         '
         Me.LblGlcb.AutoSize = True
-        Me.LblGlcb.Location = New System.Drawing.Point(20, 201)
+        Me.LblGlcb.Location = New System.Drawing.Point(56, 258)
         Me.LblGlcb.Name = "LblGlcb"
-        Me.LblGlcb.Size = New System.Drawing.Size(89, 12)
-        Me.LblGlcb.TabIndex = 12
-        Me.LblGlcb.Text = "单位管理成本："
+        Me.LblGlcb.Size = New System.Drawing.Size(53, 12)
+        Me.LblGlcb.TabIndex = 16
+        Me.LblGlcb.Text = "管理成本"
         '
         'TxtGlcb
         '
-        Me.TxtGlcb.Location = New System.Drawing.Point(114, 198)
+        Me.TxtGlcb.Location = New System.Drawing.Point(114, 254)
         Me.TxtGlcb.MaxLength = 8
         Me.TxtGlcb.Name = "TxtGlcb"
         Me.TxtGlcb.Size = New System.Drawing.Size(96, 21)
-        Me.TxtGlcb.TabIndex = 13
+        Me.TxtGlcb.TabIndex = 17
         '
         'TxtXsdj
         '
@@ -670,11 +723,11 @@ Partial Class FrmCpEdit
         'LblRgcb
         '
         Me.LblRgcb.AutoSize = True
-        Me.LblRgcb.Location = New System.Drawing.Point(20, 172)
+        Me.LblRgcb.Location = New System.Drawing.Point(56, 171)
         Me.LblRgcb.Name = "LblRgcb"
-        Me.LblRgcb.Size = New System.Drawing.Size(89, 12)
+        Me.LblRgcb.Size = New System.Drawing.Size(53, 12)
         Me.LblRgcb.TabIndex = 10
-        Me.LblRgcb.Text = "单位人工成本："
+        Me.LblRgcb.Text = "人工成本"
         '
         'LblXsdj
         '
@@ -687,7 +740,7 @@ Partial Class FrmCpEdit
         '
         'TxtRgcb
         '
-        Me.TxtRgcb.Location = New System.Drawing.Point(114, 169)
+        Me.TxtRgcb.Location = New System.Drawing.Point(114, 167)
         Me.TxtRgcb.MaxLength = 8
         Me.TxtRgcb.Name = "TxtRgcb"
         Me.TxtRgcb.Size = New System.Drawing.Size(96, 21)
@@ -695,7 +748,7 @@ Partial Class FrmCpEdit
         '
         'TxtBzcb
         '
-        Me.TxtBzcb.Location = New System.Drawing.Point(114, 110)
+        Me.TxtBzcb.Location = New System.Drawing.Point(114, 109)
         Me.TxtBzcb.MaxLength = 12
         Me.TxtBzcb.Name = "TxtBzcb"
         Me.TxtBzcb.Size = New System.Drawing.Size(96, 21)
@@ -704,24 +757,24 @@ Partial Class FrmCpEdit
         'LblClcb
         '
         Me.LblClcb.AutoSize = True
-        Me.LblClcb.Location = New System.Drawing.Point(20, 143)
+        Me.LblClcb.Location = New System.Drawing.Point(20, 142)
         Me.LblClcb.Name = "LblClcb"
         Me.LblClcb.Size = New System.Drawing.Size(89, 12)
         Me.LblClcb.TabIndex = 8
-        Me.LblClcb.Text = "单位材料成本："
+        Me.LblClcb.Text = "其中：材料成本"
         '
         'LblBzcb
         '
         Me.LblBzcb.AutoSize = True
         Me.LblBzcb.Location = New System.Drawing.Point(20, 113)
         Me.LblBzcb.Name = "LblBzcb"
-        Me.LblBzcb.Size = New System.Drawing.Size(89, 12)
+        Me.LblBzcb.Size = New System.Drawing.Size(65, 12)
         Me.LblBzcb.TabIndex = 6
-        Me.LblBzcb.Text = "单位标准成本："
+        Me.LblBzcb.Text = "标准成本："
         '
         'TxtClcb
         '
-        Me.TxtClcb.Location = New System.Drawing.Point(114, 139)
+        Me.TxtClcb.Location = New System.Drawing.Point(114, 138)
         Me.TxtClcb.MaxLength = 8
         Me.TxtClcb.Name = "TxtClcb"
         Me.TxtClcb.Size = New System.Drawing.Size(96, 21)
@@ -1122,4 +1175,9 @@ Partial Class FrmCpEdit
     Public WithEvents TxtBeiShu As TextBox
     Public WithEvents LblBeiShu As Label
     Friend WithEvents ToolStripContainer1 As ToolStripContainer
+    Friend WithEvents Label4 As Label
+    Friend WithEvents LblZjcb As Label
+    Friend WithEvents TxtZjcb As TextBox
+    Friend WithEvents LblNycb As Label
+    Friend WithEvents TxtNycb As TextBox
 End Class

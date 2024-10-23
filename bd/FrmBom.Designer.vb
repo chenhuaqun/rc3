@@ -130,7 +130,7 @@ Partial Class FrmBom
         Me.ToolStripPanel1.Name = "ToolStripPanel1"
         Me.ToolStripPanel1.Orientation = System.Windows.Forms.Orientation.Horizontal
         Me.ToolStripPanel1.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.ToolStripPanel1.Size = New System.Drawing.Size(856, 39)
+        Me.ToolStripPanel1.Size = New System.Drawing.Size(915, 39)
         '
         'ToolStripMain
         '
@@ -251,7 +251,7 @@ Partial Class FrmBom
         Me.MnuMain.Location = New System.Drawing.Point(0, 0)
         Me.MnuMain.Name = "MnuMain"
         Me.MnuMain.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
-        Me.MnuMain.Size = New System.Drawing.Size(856, 24)
+        Me.MnuMain.Size = New System.Drawing.Size(915, 24)
         Me.MnuMain.TabIndex = 0
         '
         'MnuiFile
@@ -388,7 +388,7 @@ Partial Class FrmBom
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 63)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(856, 118)
+        Me.Panel1.Size = New System.Drawing.Size(915, 118)
         Me.Panel1.TabIndex = 1
         '
         'NudZjcb
@@ -612,7 +612,7 @@ Partial Class FrmBom
         Me.rcDataGridView1.Name = "rcDataGridView1"
         Me.rcDataGridView1.RowHeadersWidth = 62
         Me.rcDataGridView1.RowTemplate.Height = 23
-        Me.rcDataGridView1.Size = New System.Drawing.Size(842, 254)
+        Me.rcDataGridView1.Size = New System.Drawing.Size(901, 254)
         Me.rcDataGridView1.TabIndex = 0
         '
         'ColChildCpdm
@@ -689,7 +689,7 @@ Partial Class FrmBom
         Me.rcDataGridView2.Name = "rcDataGridView2"
         Me.rcDataGridView2.RowHeadersWidth = 62
         Me.rcDataGridView2.RowTemplate.Height = 23
-        Me.rcDataGridView2.Size = New System.Drawing.Size(970, 355)
+        Me.rcDataGridView2.Size = New System.Drawing.Size(842, 254)
         Me.rcDataGridView2.TabIndex = 0
         '
         'ColXh
@@ -780,7 +780,7 @@ Partial Class FrmBom
         Me.TabControl1.Location = New System.Drawing.Point(0, 181)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(856, 286)
+        Me.TabControl1.Size = New System.Drawing.Size(915, 286)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
@@ -788,8 +788,8 @@ Partial Class FrmBom
         Me.TabPage1.Controls.Add(Me.rcDataGridView1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.TabPage1.Size = New System.Drawing.Size(848, 260)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(907, 260)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "子项物料"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -799,8 +799,8 @@ Partial Class FrmBom
         Me.TabPage2.Controls.Add(Me.rcDataGridView2)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.TabPage2.Size = New System.Drawing.Size(976, 361)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(848, 260)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "生产工艺路线"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -809,7 +809,7 @@ Partial Class FrmBom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(856, 467)
+        Me.ClientSize = New System.Drawing.Size(915, 467)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStripPanel1)

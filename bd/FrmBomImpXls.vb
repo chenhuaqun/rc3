@@ -65,6 +65,30 @@ Public Class FrmBomImpXls
             If rcDataset.Tables("result").Rows(i).Item("父项计量单位").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("result").Rows(i).Item("父项计量单位") = ""
             End If
+            If rcDataset.Tables("result").Rows(i).Item("标准成本").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("标准成本") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("倍数").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("倍数") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("成品率").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("成品率") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("材料成本").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("材料成本") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("人工成本").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("人工成本") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("能源成本").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("能源成本") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("折旧成本").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("折旧成本") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("管理成本").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("管理成本") = 0.0
+            End If
             If rcDataset.Tables("result").Rows(i).Item("子项物料编码").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("result").Rows(i).Item("子项物料编码") = ""
             End If
@@ -77,7 +101,15 @@ Public Class FrmBomImpXls
             If rcDataset.Tables("result").Rows(i).Item("数量").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("result").Rows(i).Item("数量") = 0.0
             End If
-
+            If rcDataset.Tables("result").Rows(i).Item("单价").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("单价") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("金额").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("金额") = 0.0
+            End If
+            If rcDataset.Tables("result").Rows(i).Item("备注").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("result").Rows(i).Item("备注") = ""
+            End If
         Next
         '(二)存储ml
         rcOleDbConn.Open()
@@ -94,12 +126,28 @@ Public Class FrmBomImpXls
                     rcOleDbCommand.Parameters.Add("@paraStrParentCpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("父项物料编码")).ToUpper
                     rcOleDbCommand.ExecuteNonQuery()
                     strParentCpdm = Trim(rcDataset.Tables("result").Rows(i).Item("父项物料编码")).ToUpper
+                    rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET bzcb = ?,clcb = ?,rgcb = ?,nycb = ?,zjcb = ?,glcb= ?,chengpinlv = ?,beishu = ? WHERE cpdm = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@bzcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("标准成本")
+                    rcOleDbCommand.Parameters.Add("@clcb", OleDbType.Numeric, 16).Value = rcDataset.Tables("result").Rows(i).Item("材料成本")
+                    rcOleDbCommand.Parameters.Add("@rgcb", OleDbType.Numeric, 16).Value = rcDataset.Tables("result").Rows(i).Item("人工成本")
+                    rcOleDbCommand.Parameters.Add("@nycb", OleDbType.Numeric, 16).Value = rcDataset.Tables("result").Rows(i).Item("能源成本")
+                    rcOleDbCommand.Parameters.Add("@zjcb", OleDbType.Numeric, 16).Value = rcDataset.Tables("result").Rows(i).Item("折旧成本")
+                    rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 16).Value = rcDataset.Tables("result").Rows(i).Item("管理成本")
+                    rcOleDbCommand.Parameters.Add("@chengpinlv", OleDbType.Numeric, 6).Value = rcDataset.Tables("result").Rows(i).Item("成品率")
+                    rcOleDbCommand.Parameters.Add("@beishu", OleDbType.Numeric, 4).Value = rcDataset.Tables("result").Rows(i).Item("倍数")
+                    rcOleDbCommand.Parameters.Add("@parentcpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("父项物料编码")
+                    rcOleDbCommand.ExecuteNonQuery()
                 End If
-                rcOleDbCommand.CommandText = "INSERT INTO pm_bom (parentcpdm,childcpdm,sl,dj,je) VALUES (?,?,?,0.0,0.0)"
+                'rcOleDbCommand.CommandText = "INSERT INTO pm_bom (parentcpdm,childcpdm,sl,dj,je) VALUES (?,?,?,0.0,0.0)"
+                rcOleDbCommand.CommandText = "INSERT INTO pm_bom (parentcpdm,childcpdm,sl,dj,je,bommemo) VALUES (?,?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@paraStrParentCpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("父项物料编码")).ToUpper
                 rcOleDbCommand.Parameters.Add("@paraStrChildCpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("子项物料编码")).ToUpper
                 rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("数量")
+                rcOleDbCommand.Parameters.Add("@dj", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("单价")
+                rcOleDbCommand.Parameters.Add("@je", OleDbType.Numeric, 16).Value = rcDataset.Tables("result").Rows(i).Item("金额")
+                rcOleDbCommand.Parameters.Add("@bommemo", OleDbType.VarChar, 50).Value = rcDataset.Tables("result").Rows(i).Item("备注")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
             rcOleDbTrans.Commit()

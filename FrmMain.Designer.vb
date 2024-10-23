@@ -198,6 +198,7 @@ Partial Class FrmMain
         Me.MnuiCbjz_Sccb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiCbjz_Xscb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiZcclMx = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiZcpMx = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiZcpBmGxHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiCcpZcpHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiCcpZcpBmHz = New System.Windows.Forms.ToolStripMenuItem()
@@ -328,7 +329,7 @@ Partial Class FrmMain
         '
         Me.MnuiKhlbxx.Name = "MnuiKhlbxx"
         Me.MnuiKhlbxx.Size = New System.Drawing.Size(208, 22)
-        Me.MnuiKhlbxx.Text = "客户基本分类信息设置"
+        Me.MnuiKhlbxx.Text = "客户分类信息设置"
         Me.MnuiKhlbxx.Visible = False
         '
         'MnuiKhxx
@@ -704,14 +705,14 @@ Partial Class FrmMain
         '
         Me.MnuiOeFpSr.Name = "MnuiOeFpSr"
         Me.MnuiOeFpSr.Size = New System.Drawing.Size(220, 22)
-        Me.MnuiOeFpSr.Text = "产品销售单输入与修改"
+        Me.MnuiOeFpSr.Text = "产品销售发票输入与修改"
         Me.MnuiOeFpSr.Visible = False
         '
         'MnuiOeFpSh
         '
         Me.MnuiOeFpSh.Name = "MnuiOeFpSh"
         Me.MnuiOeFpSh.Size = New System.Drawing.Size(220, 22)
-        Me.MnuiOeFpSh.Text = "产品销售单审核"
+        Me.MnuiOeFpSh.Text = "产品销售发票审核"
         Me.MnuiOeFpSh.Visible = False
         '
         'MnuiOeDdCx
@@ -746,7 +747,7 @@ Partial Class FrmMain
         '
         Me.MnuiOeFpCx.Name = "MnuiOeFpCx"
         Me.MnuiOeFpCx.Size = New System.Drawing.Size(220, 22)
-        Me.MnuiOeFpCx.Text = "产品销售单查询"
+        Me.MnuiOeFpCx.Text = "产品销售发票查询"
         Me.MnuiOeFpCx.Visible = False
         '
         'MnuiOeRkCpHzb
@@ -1444,7 +1445,7 @@ Partial Class FrmMain
         '
         'MnuiCosts
         '
-        Me.MnuiCosts.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiZcclslSr, Me.MnuiZcpslSr, Me.MnuiZcbJeSr, Me.MnuiCbjz_Cl, Me.MnuiCbjz_Sccb, Me.MnuiCbjz_Xscb, Me.MnuiZcclMx, Me.MnuiZcpBmGxHz, Me.MnuiCcpZcpHz, Me.MnuiCcpZcpBmHz, Me.MnuiBomCx})
+        Me.MnuiCosts.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiZcclslSr, Me.MnuiZcpslSr, Me.MnuiZcbJeSr, Me.MnuiCbjz_Cl, Me.MnuiCbjz_Sccb, Me.MnuiCbjz_Xscb, Me.MnuiZcclMx, Me.MnuiZcpMx, Me.MnuiZcpBmGxHz, Me.MnuiCcpZcpHz, Me.MnuiCcpZcpBmHz, Me.MnuiBomCx})
         Me.MnuiCosts.Name = "MnuiCosts"
         Me.MnuiCosts.Size = New System.Drawing.Size(72, 21)
         Me.MnuiCosts.Text = "成本(&CM)"
@@ -1497,6 +1498,12 @@ Partial Class FrmMain
         Me.MnuiZcclMx.Size = New System.Drawing.Size(244, 22)
         Me.MnuiZcclMx.Text = "在产材料成本明细表"
         Me.MnuiZcclMx.Visible = False
+        '
+        'MnuiZcpMx
+        '
+        Me.MnuiZcpMx.Name = "MnuiZcpMx"
+        Me.MnuiZcpMx.Size = New System.Drawing.Size(244, 22)
+        Me.MnuiZcpMx.Text = "在产品成本明细表"
         '
         'MnuiZcpBmGxHz
         '
@@ -2170,7 +2177,6 @@ Partial Class FrmMain
     Friend WithEvents MnuiPmCkdSr As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiPmRkdSh As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiPmRkdCx As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiPmCkdSh As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiPmCkdCx As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiCbjz_Cl As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiCbjz_Sccb As System.Windows.Forms.ToolStripMenuItem
@@ -2224,7 +2230,6 @@ Partial Class FrmMain
     Friend WithEvents MnuiOeBjdSr As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiOeBjdSh As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiOeBjdCx As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiWbxx As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiOeYpdd As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiOeYpddSr As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiOeYpddBmSr As System.Windows.Forms.ToolStripMenuItem
@@ -2275,4 +2280,7 @@ Partial Class FrmMain
     Friend WithEvents MnuiYwfZyMx As ToolStripMenuItem
     Friend WithEvents MnuiImpU8 As ToolStripMenuItem
     Friend WithEvents MnuiUpgrateData As ToolStripMenuItem
+    Friend WithEvents MnuiZcpMx As ToolStripMenuItem
+    Friend WithEvents MnuiWbxx As ToolStripMenuItem
+    Friend WithEvents MnuiPmCkdSh As ToolStripMenuItem
 End Class

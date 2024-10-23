@@ -81,6 +81,8 @@ Public Class FrmCpEdit
         Me.TxtBzcb.DataBindings.Add("Text", rcDataView, "bzcb")
         Me.TxtClcb.DataBindings.Add("Text", rcDataView, "clcb")
         Me.TxtRgcb.DataBindings.Add("Text", rcDataView, "rgcb")
+        Me.TxtNycb.DataBindings.Add("Text", rcDataView, "nycb")
+        Me.TxtZjcb.DataBindings.Add("Text", rcDataView, "zjcb")
         Me.TxtGlcb.DataBindings.Add("Text", rcDataView, "glcb")
         Me.TxtXstcbl.DataBindings.Add("Text", rcDataView, "xstcbl")
         Me.TxtZdcb.DataBindings.Add("Text", rcDataView, "zdcb")
@@ -111,7 +113,7 @@ Public Class FrmCpEdit
 
 #Region "控键回车键的处理"
 
-    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtLbdm.KeyPress, TxtCpdm.KeyPress, TxtCpmc.KeyPress, TxtDw.KeyPress, TxtCkdm.KeyPress, CmbHsfl.KeyPress, TxtFzdw.KeyPress, TxtCpsm.KeyPress, TxtKuwei.KeyPress, TxtOldCpdm.KeyPress, TxtKhdm.KeyPress, TxtXsdj.KeyPress, TxtCgdj.KeyPress, TxtBeiShu.KeyPress, TxtBzcb.KeyPress, TxtClcb.KeyPress, TxtRgcb.KeyPress, TxtGlcb.KeyPress, TxtXstcbl.KeyPress, TxtZdcb.KeyPress, TxtZgcb.KeyPress, TxtCgts.KeyPress, TxtCpWeight.KeyPress, TxtLength.KeyPress, TxtWidth.KeyPress, TxtHeight.KeyPress, TxtMjsl.KeyPress
+    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtLbdm.KeyPress, TxtCpdm.KeyPress, TxtCpmc.KeyPress, TxtDw.KeyPress, TxtCkdm.KeyPress, CmbHsfl.KeyPress, TxtFzdw.KeyPress, TxtCpsm.KeyPress, TxtKuwei.KeyPress, TxtOldCpdm.KeyPress, TxtKhdm.KeyPress, TxtXsdj.KeyPress, TxtCgdj.KeyPress, TxtBeiShu.KeyPress, TxtBzcb.KeyPress, TxtClcb.KeyPress, TxtRgcb.KeyPress, TxtNycb.KeyPress, TxtZjcb.KeyPress, TxtGlcb.KeyPress, TxtXstcbl.KeyPress, TxtZdcb.KeyPress, TxtZgcb.KeyPress, TxtCgts.KeyPress, TxtCpWeight.KeyPress, TxtLength.KeyPress, TxtWidth.KeyPress, TxtHeight.KeyPress, TxtMjsl.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
@@ -144,6 +146,8 @@ Public Class FrmCpEdit
             Me.TxtBzcb.Enabled = False
             Me.TxtClcb.Enabled = False
             Me.TxtRgcb.Enabled = False
+            Me.TxtNycb.Enabled = False
+            Me.TxtZjcb.Enabled = False
             Me.TxtGlcb.Enabled = False
             Me.TxtXstcbl.Enabled = False
             Me.TxtZdcb.Enabled = False
@@ -189,6 +193,8 @@ Public Class FrmCpEdit
             Me.TxtBzcb.Enabled = True
             Me.TxtClcb.Enabled = True
             Me.TxtRgcb.Enabled = True
+            Me.TxtNycb.Enabled = True
+            Me.TxtZjcb.Enabled = True
             Me.TxtGlcb.Enabled = True
             Me.TxtXstcbl.Enabled = True
             Me.TxtZdcb.Enabled = True
@@ -676,7 +682,7 @@ Public Class FrmCpEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "Insert Into rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,hsfl,mjsl,fzdw,cpsm,kuwei,oldcpdm,khdm,xsdj,cgdj,beishu,bzcb,clcb,rgcb,glcb,xstcbl,zdcb,zgcb,cgts,cpweight,length,width,height,brecycling,bfadm,bbatch,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
+                rcOleDbCommand.CommandText = "Insert Into rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,hsfl,mjsl,fzdw,cpsm,kuwei,oldcpdm,khdm,xsdj,cgdj,beishu,bzcb,clcb,rgcb,nycb,zjcb,glcb,xstcbl,zdcb,zgcb,cgts,cpweight,length,width,height,brecycling,bfadm,bbatch,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(TxtLbdm.Text)
                 rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(TxtCpdm.Text)
@@ -696,6 +702,8 @@ Public Class FrmCpEdit
                 rcOleDbCommand.Parameters.Add("@bzcb", OleDbType.Numeric, 18).Value = Val(Me.TxtBzcb.Text)
                 rcOleDbCommand.Parameters.Add("@clcb", OleDbType.Numeric, 14).Value = Val(Me.TxtClcb.Text)
                 rcOleDbCommand.Parameters.Add("@rgcb", OleDbType.Numeric, 14).Value = Val(Me.TxtRgcb.Text)
+                rcOleDbCommand.Parameters.Add("@nycb", OleDbType.Numeric, 14).Value = Val(Me.TxtNycb.Text)
+                rcOleDbCommand.Parameters.Add("@zjcb", OleDbType.Numeric, 14).Value = Val(Me.TxtZjcb.Text)
                 rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 14).Value = Val(Me.TxtGlcb.Text)
                 rcOleDbCommand.Parameters.Add("@xstcbl", OleDbType.Numeric, 14).Value = Val(Me.TxtXstcbl.Text)
                 rcOleDbCommand.Parameters.Add("@zdcb", OleDbType.Numeric, 14).Value = Val(Me.TxtZdcb.Text)
@@ -732,7 +740,7 @@ Public Class FrmCpEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET lbdm = ?,cpmc = ?,dw = ?,ckdm = ?,hsfl = ?,mjsl = ?,fzdw= ?,cpsm = ?,kuwei = ?,oldcpdm = ?,khdm = ?,xsdj = ?,cgdj = ?,beishu = ?,bzcb = ?,clcb = ?,rgcb = ?,glcb = ?,xstcbl = ?,zdcb = ?,zgcb = ?,cgts = ?,cpweight = ?,length = ?,width = ?,height = ?,brecycling = ?,bfadm = ?,bbatch = ?,srr = ?,srrq = SYSDATE WHERE  cpdm = ?"
+                rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET lbdm = ?,cpmc = ?,dw = ?,ckdm = ?,hsfl = ?,mjsl = ?,fzdw= ?,cpsm = ?,kuwei = ?,oldcpdm = ?,khdm = ?,xsdj = ?,cgdj = ?,beishu = ?,bzcb = ?,clcb = ?,rgcb = ?,nycb = ?,zjcb = ?,glcb = ?,xstcbl = ?,zdcb = ?,zgcb = ?,cgts = ?,cpweight = ?,length = ?,width = ?,height = ?,brecycling = ?,bfadm = ?,bbatch = ?,srr = ?,srrq = SYSDATE WHERE  cpdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(TxtLbdm.Text)
                 rcOleDbCommand.Parameters.Add("@cpmc", OleDbType.VarChar, 100).Value = Trim(TxtCpmc.Text)
@@ -751,6 +759,8 @@ Public Class FrmCpEdit
                 rcOleDbCommand.Parameters.Add("@bzcb", OleDbType.Numeric, 18).Value = Val(Me.TxtBzcb.Text)
                 rcOleDbCommand.Parameters.Add("@clcb", OleDbType.Numeric, 14).Value = Val(Me.TxtClcb.Text)
                 rcOleDbCommand.Parameters.Add("@rgcb", OleDbType.Numeric, 14).Value = Val(Me.TxtRgcb.Text)
+                rcOleDbCommand.Parameters.Add("@nycb", OleDbType.Numeric, 14).Value = Val(Me.TxtNycb.Text)
+                rcOleDbCommand.Parameters.Add("@zjcb", OleDbType.Numeric, 14).Value = Val(Me.TxtZjcb.Text)
                 rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 14).Value = Val(Me.TxtGlcb.Text)
                 rcOleDbCommand.Parameters.Add("@xstcbl", OleDbType.Numeric, 14).Value = Val(Me.TxtXstcbl.Text)
                 rcOleDbCommand.Parameters.Add("@zdcb", OleDbType.Numeric, 14).Value = Val(Me.TxtZdcb.Text)
@@ -785,7 +795,7 @@ Public Class FrmCpEdit
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
+            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.nycb,rc_cpxx.zjcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
@@ -818,7 +828,7 @@ Public Class FrmCpEdit
         rcOleDbCommand.CommandTimeout = 300
         rcOleDbCommand.CommandType = CommandType.Text
         Try
-            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
+            rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.nycb,rc_cpxx.zjcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_cpxx") IsNot Nothing Then

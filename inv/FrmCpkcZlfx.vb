@@ -247,6 +247,7 @@ Public Class FrmCpkcZlfx
         Dim datePcrq As Date = getInvEnd(Me.NudYear.Value, Me.NudMonth.Value)
         Dim dInvBegin1 As Date = getInvBegin(Me.NudYear.Value, 1)
         Dim i As Integer = 1
+        Dim j As Integer = 0
         If String.IsNullOrEmpty(Me.TxtFadm.Text) Then
             MsgBox("请选择库存账龄方案。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
             Return
@@ -289,134 +290,134 @@ Public Class FrmCpkcZlfx
             End If
             Me.LblMsg.Text = "正在生成库存账龄分析表......"
             '插入库存数据
-            For i = 0 To rcDataset.Tables("rc_kczlfd").Rows.Count - 1
-                If i = 0 Then
-                    Me.LblMsg.Text = "正在生成" & Me.NudMonth.Value.ToString & "月库存数据......"
-                    rcOleDbCommand.CommandText = "INSERT INTO t_cpkczlfx (cpdm,ckdm,kcsl_tot,kcje_tot)" & _
-                        " SELECT bsfchz.cpdm,bsfchz.ckdm,COALESCE(bsfchz.qcsl,0.0)+COALESCE(bsfchz.qcscrksl,0.0)+COALESCE(bsfchz.qccgrksl,0.0)+COALESCE(bsfchz.qcdbrksl,0.0)-COALESCE(bsfchz.qcxscksl,0.0)-COALESCE(bsfchz.qcckcksl,0.0)-COALESCE(bsfchz.qcdbcksl,0.0) AS kcsl_tot,COALESCE(bsfchz.qcje,0.0)+COALESCE(bsfchz.qcscrkje,0.0)+COALESCE(bsfchz.qccgrkje,0.0)+COALESCE(bsfchz.qcdbrkje,0.0)-COALESCE(bsfchz.qcxsckje,0.0)-COALESCE(bsfchz.qcckckje,0.0)-COALESCE(bsfchz.qcdbckje,0.0) AS kcje_tot FROM" & _
-                        " (SELECT asfchz.*,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.lbdm,rc_ckxx.ckmc FROM" & _
-                        " (SELECT cpnc.cpdm,cpnc.ckdm,cpnc.qcsl,cpnc.qcje,qcscrk.qcscrksl,qcscrk.qcscrkje,qccgrk.qccgrksl,qccgrk.qccgrkje,qcdbrk.qcdbrksl,qcdbrk.qcdbrkje,qcxsck.qcxscksl,qcxsck.qcxsckje,qcckck.qcckcksl,qcckck.qcckckje,qcdbck.qcdbcksl,qcdbck.qcdbckje FROM" & _
-                        " (SELECT inv_cpyeb.cpdm,inv_cpyeb.ckdm,sum(qcsl) as qcsl,sum(qcje) as qcje FROM inv_cpyeb WHERE kjnd = ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_cpyeb.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_cpyeb.cpdm,inv_cpyeb.ckdm) cpnc" & _
-                        " Left join (SELECT inv_rkd.cpdm,inv_rkd.ckdm,sum(inv_rkd.sl) as qcscrksl,sum(inv_rkd.je) as qcscrkje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.rkrq >= ? and inv_rkd.rkrq >= ? and inv_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_rkd.cpdm,inv_rkd.ckdm) qcscrk ON cpnc.cpdm = qcscrk.cpdm AND cpnc.ckdm = qcscrk.ckdm" & _
-                        " Left join (SELECT po_rkd.cpdm,po_rkd.ckdm,sum(po_rkd.sl) as qccgrksl,sum(po_rkd.je) as qccgrkje FROM po_rkd WHERE po_rkd.bdelete = 0 AND po_rkd.rkrq >= ? and po_rkd.rkrq >= ? and po_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND po_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY po_rkd.cpdm,po_rkd.ckdm) qccgrk ON cpnc.cpdm = qccgrk.cpdm AND cpnc.ckdm = qccgrk.ckdm" & _
-                        " Left join (SELECT inv_dbd.cpdm,inv_dbd.rckdm AS ckdm,sum(inv_dbd.sl) as qcdbrksl,sum(inv_dbd.je) as qcdbrkje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.rckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_dbd.cpdm,inv_dbd.rckdm) qcdbrk ON cpnc.cpdm = qcdbrk.cpdm AND cpnc.ckdm = qcdbrk.ckdm" & _
-                        " Left join (SELECT oe_xsd.cpdm,oe_xsd.ckdm,sum(oe_xsd.sl) as qcxscksl,sum(oe_xsd.cbje) as qcxsckje FROM oe_xsd WHERE oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? and oe_xsd.xsrq >= ? and oe_xsd.xsrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND oe_xsd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY oe_xsd.cpdm,oe_xsd.ckdm) qcxsck ON cpnc.cpdm = qcxsck.cpdm AND cpnc.ckdm = qcxsck.ckdm" & _
-                        " Left join (SELECT inv_ckd.cpdm,inv_ckd.ckdm,sum(inv_ckd.sl) as qcckcksl,sum(inv_ckd.je) as qcckckje FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND inv_ckd.ckrq >= ? and inv_ckd.ckrq >= ? and inv_ckd.ckrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_ckd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_ckd.cpdm,inv_ckd.ckdm) qcckck ON cpnc.cpdm = qcckck.cpdm AND cpnc.ckdm = qcckck.ckdm" & _
+            Me.LblMsg.Text = "正在生成" & Me.NudMonth.Value.ToString & "月库存数据......"
+            rcOleDbCommand.CommandText = "INSERT INTO t_cpkczlfx (cpdm,ckdm,kcsl_tot,kcje_tot)" &
+                        " SELECT bsfchz.cpdm,bsfchz.ckdm,COALESCE(bsfchz.qcsl,0.0)+COALESCE(bsfchz.qcscrksl,0.0)+COALESCE(bsfchz.qccgrksl,0.0)+COALESCE(bsfchz.qcdbrksl,0.0)-COALESCE(bsfchz.qcxscksl,0.0)-COALESCE(bsfchz.qcckcksl,0.0)-COALESCE(bsfchz.qcdbcksl,0.0) AS kcsl_tot,COALESCE(bsfchz.qcje,0.0)+COALESCE(bsfchz.qcscrkje,0.0)+COALESCE(bsfchz.qccgrkje,0.0)+COALESCE(bsfchz.qcdbrkje,0.0)-COALESCE(bsfchz.qcxsckje,0.0)-COALESCE(bsfchz.qcckckje,0.0)-COALESCE(bsfchz.qcdbckje,0.0) AS kcje_tot FROM" &
+                        " (SELECT asfchz.*,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.lbdm,rc_ckxx.ckmc FROM" &
+                        " (SELECT cpnc.cpdm,cpnc.ckdm,cpnc.qcsl,cpnc.qcje,qcscrk.qcscrksl,qcscrk.qcscrkje,qccgrk.qccgrksl,qccgrk.qccgrkje,qcdbrk.qcdbrksl,qcdbrk.qcdbrkje,qcxsck.qcxscksl,qcxsck.qcxsckje,qcckck.qcckcksl,qcckck.qcckckje,qcdbck.qcdbcksl,qcdbck.qcdbckje FROM" &
+                        " (SELECT inv_cpyeb.cpdm,inv_cpyeb.ckdm,sum(qcsl) as qcsl,sum(qcje) as qcje FROM inv_cpyeb WHERE kjnd = ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_cpyeb.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_cpyeb.cpdm,inv_cpyeb.ckdm) cpnc" &
+                        " Left join (SELECT inv_rkd.cpdm,inv_rkd.ckdm,sum(inv_rkd.sl) as qcscrksl,sum(inv_rkd.je) as qcscrkje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.rkrq >= ? and inv_rkd.rkrq >= ? and inv_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_rkd.cpdm,inv_rkd.ckdm) qcscrk ON cpnc.cpdm = qcscrk.cpdm AND cpnc.ckdm = qcscrk.ckdm" &
+                        " Left join (SELECT po_rkd.cpdm,po_rkd.ckdm,sum(po_rkd.sl) as qccgrksl,sum(po_rkd.je) as qccgrkje FROM po_rkd WHERE po_rkd.bdelete = 0 AND po_rkd.rkrq >= ? and po_rkd.rkrq >= ? and po_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND po_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY po_rkd.cpdm,po_rkd.ckdm) qccgrk ON cpnc.cpdm = qccgrk.cpdm AND cpnc.ckdm = qccgrk.ckdm" &
+                        " Left join (SELECT inv_dbd.cpdm,inv_dbd.rckdm AS ckdm,sum(inv_dbd.sl) as qcdbrksl,sum(inv_dbd.je) as qcdbrkje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.rckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_dbd.cpdm,inv_dbd.rckdm) qcdbrk ON cpnc.cpdm = qcdbrk.cpdm AND cpnc.ckdm = qcdbrk.ckdm" &
+                        " Left join (SELECT oe_xsd.cpdm,oe_xsd.ckdm,sum(oe_xsd.sl) as qcxscksl,sum(oe_xsd.cbje) as qcxsckje FROM oe_xsd WHERE oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? and oe_xsd.xsrq >= ? and oe_xsd.xsrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND oe_xsd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY oe_xsd.cpdm,oe_xsd.ckdm) qcxsck ON cpnc.cpdm = qcxsck.cpdm AND cpnc.ckdm = qcxsck.ckdm" &
+                        " Left join (SELECT inv_ckd.cpdm,inv_ckd.ckdm,sum(inv_ckd.sl) as qcckcksl,sum(inv_ckd.je) as qcckckje FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND inv_ckd.ckrq >= ? and inv_ckd.ckrq >= ? and inv_ckd.ckrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_ckd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_ckd.cpdm,inv_ckd.ckdm) qcckck ON cpnc.cpdm = qcckck.cpdm AND cpnc.ckdm = qcckck.ckdm" &
                         " Left join (SELECT inv_dbd.cpdm,inv_dbd.cckdm AS ckdm,sum(inv_dbd.sl) as qcdbcksl,sum(inv_dbd.je) as qcdbckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.cckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_dbd.cpdm,inv_dbd.cckdm) qcdbck ON cpnc.cpdm = qcdbck.cpdm AND cpnc.ckdm = qcdbck.ckdm) asfchz LEFT JOIN rc_cpxx ON asfchz.cpdm = rc_cpxx.cpdm LEFT JOIN rc_ckxx ON asfchz.ckdm = rc_ckxx.ckdm) bsfchz WHERE (0=0)" & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " AND lbdm LIKE '" & Me.TxtLbdm.Text & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " AND cpmc LIKE '%" & TxtCpmc.Text & "%'", "")
-                    rcOleDbCommand.Parameters.Clear()
-                    rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.ExecuteNonQuery()
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dInvBegin1.Date
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dInvBegin1.Date
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dInvBegin1.Date
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq
+            rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+            rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dInvBegin1.Date
+            rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = datePcrq
+            rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+            rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dInvBegin1.Date
+            rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = datePcrq
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dInvBegin1.Date
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq
+            rcOleDbCommand.ExecuteNonQuery()
+            For i = 1 To rcDataset.Tables("rc_kczlfd").Rows.Count - 1
+                Me.LblMsg.Text = "正在生成" & (Me.NudMonth.Value - rcDataset.Tables("rc_kczlfd").Rows(i).Item("zhangling")).ToString & "月入库（不含月生产入库红字）数据......"
+                rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET (kcsl_" & i.ToString.PadLeft(2, "0") & ",kcje_" & i.ToString.PadLeft(2, "0") & ") =" &
+                        " (SELECT CASE WHEN SUM(rk.rksl)>0.0 THEN SUM(rk.rksl) ELSE 0.0 END AS rksl,CASE WHEN SUM(rk.rksl)>0.0 THEN SUM(rk.rkje) ELSE 0.0 END as rkje FROM" &
+                        " ((SELECT inv_rkd.cpdm,inv_rkd.ckdm,SUM(inv_rkd.sl) AS rksl,SUM(inv_rkd.je) AS rkje FROM inv_rkd WHERE inv_rkd.bdelete = 0 and inv_rkd.rkrq >= ? and inv_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_rkd.cpdm,inv_rkd.ckdm,substr(djh,1,10) HAVING SUM(inv_rkd.sl)>0) " &
+                        " UNION ALL (SELECT po_rkd.cpdm,po_rkd.ckdm,po_rkd.sl AS rksl,po_rkd.je AS rkje FROM po_rkd WHERE po_rkd.bdelete = 0 AND po_rkd.rkrq >= ? and po_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND po_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & ")" &
+                        " UNION ALL (SELECT inv_dbd.cpdm,inv_dbd.rckdm AS ckdm,inv_dbd.sl as rksl,inv_dbd.je as rkje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.rckdm ='" & Me.TxtCkdm.Text & "'", "") & ")) rk  WHERE rk.ckdm = t_cpkczlfx.ckdm AND rk.cpdm = t_cpkczlfx.cpdm" & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " AND lbdm LIKE '" & Me.TxtLbdm.Text & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " AND cpmc LIKE '%" & TxtCpmc.Text & "%'", "") & " GROUP BY rk.cpdm,rk.ckdm)"
+                'rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET (kcsl_" & i.ToString.PadLeft(2, "0") & ",kcje_" & i.ToString.PadLeft(2, "0") & ") = " &
+                '    " (SELECT CASE WHEN COALESCE(bsfchz.qcsl,0.0)+COALESCE(bsfchz.qcscrksl,0.0)+COALESCE(bsfchz.qccgrksl,0.0)+COALESCE(bsfchz.qcdbrksl,0.0)-COALESCE(bsfchz.qcxscksl,0.0)-COALESCE(bsfchz.qcckcksl,0.0)-COALESCE(bsfchz.qcdbcksl,0.0) > 0 THEN COALESCE(bsfchz.qcsl,0.0)+COALESCE(bsfchz.qcscrksl,0.0)+COALESCE(bsfchz.qccgrksl,0.0)+COALESCE(bsfchz.qcdbrksl,0.0)-COALESCE(bsfchz.qcxscksl,0.0)-COALESCE(bsfchz.qcckcksl,0.0)-COALESCE(bsfchz.qcdbcksl,0.0) ELSE 0 END AS kcsl_tot,CASE WHEN COALESCE(bsfchz.qcje,0.0)+COALESCE(bsfchz.qcscrkje,0.0)+COALESCE(bsfchz.qccgrkje,0.0)+COALESCE(bsfchz.qcdbrkje,0.0)-COALESCE(bsfchz.qcxsckje,0.0)-COALESCE(bsfchz.qcckckje,0.0)-COALESCE(bsfchz.qcdbckje,0.0) > 0 THEN COALESCE(bsfchz.qcje,0.0)+COALESCE(bsfchz.qcscrkje,0.0)+COALESCE(bsfchz.qccgrkje,0.0)+COALESCE(bsfchz.qcdbrkje,0.0)-COALESCE(bsfchz.qcxsckje,0.0)-COALESCE(bsfchz.qcckckje,0.0)-COALESCE(bsfchz.qcdbckje,0.0) ELSE 0 END AS kcje_tot FROM" &
+                '    " (SELECT asfchz.*,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.lbdm,rc_ckxx.ckmc FROM" &
+                '    " (SELECT cpnc.cpdm,cpnc.ckdm,cpnc.qcsl,cpnc.qcje,qcscrk.qcscrksl,qcscrk.qcscrkje,qccgrk.qccgrksl,qccgrk.qccgrkje,qcdbrk.qcdbrksl,qcdbrk.qcdbrkje,qcxsck.qcxscksl,qcxsck.qcxsckje,qcckck.qcckcksl,qcckck.qcckckje,qcdbck.qcdbcksl,qcdbck.qcdbckje FROM" &
+                '    " (SELECT inv_cpyeb.cpdm,inv_cpyeb.ckdm,sum(qcsl) as qcsl,sum(qcje) as qcje FROM inv_cpyeb WHERE kjnd = ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_cpyeb.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_cpyeb.cpdm,inv_cpyeb.ckdm) cpnc" &
+                '    " Left join (SELECT inv_rkd.cpdm,inv_rkd.ckdm,sum(inv_rkd.sl) as qcscrksl,sum(inv_rkd.je) as qcscrkje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.sl >0 AND inv_rkd.rkrq >= ? and inv_rkd.rkrq >= ? and inv_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_rkd.cpdm,inv_rkd.ckdm) qcscrk ON cpnc.cpdm = qcscrk.cpdm AND cpnc.ckdm = qcscrk.ckdm" &
+                '    " Left join (SELECT po_rkd.cpdm,po_rkd.ckdm,sum(po_rkd.sl) as qccgrksl,sum(po_rkd.je) as qccgrkje FROM po_rkd WHERE po_rkd.bdelete = 0 AND po_rkd.rkrq >= ? and po_rkd.rkrq >= ? and po_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND po_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY po_rkd.cpdm,po_rkd.ckdm) qccgrk ON cpnc.cpdm = qccgrk.cpdm AND cpnc.ckdm = qccgrk.ckdm" &
+                '    " Left join (SELECT inv_dbd.cpdm,inv_dbd.rckdm AS ckdm,sum(inv_dbd.sl) as qcdbrksl,sum(inv_dbd.je) as qcdbrkje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.rckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_dbd.cpdm,inv_dbd.rckdm) qcdbrk ON cpnc.cpdm = qcdbrk.cpdm AND cpnc.ckdm = qcdbrk.ckdm" &
+                '    " Left join (SELECT oe_xsd.cpdm,oe_xsd.ckdm,sum(oe_xsd.sl) as qcxscksl,sum(oe_xsd.cbje) as qcxsckje FROM oe_xsd WHERE oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? and oe_xsd.xsrq >= ? and oe_xsd.xsrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND oe_xsd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY oe_xsd.cpdm,oe_xsd.ckdm) qcxsck ON cpnc.cpdm = qcxsck.cpdm AND cpnc.ckdm = qcxsck.ckdm" &
+                '    " Left join (SELECT inv_ckd.cpdm,inv_ckd.ckdm,sum(inv_ckd.sl) as qcckcksl,sum(inv_ckd.je) as qcckckje FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND inv_ckd.ckrq >= ? and inv_ckd.ckrq >= ? and inv_ckd.ckrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_ckd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_ckd.cpdm,inv_ckd.ckdm) qcckck ON cpnc.cpdm = qcckck.cpdm AND cpnc.ckdm = qcckck.ckdm" &
+                '    " Left join (SELECT inv_dbd.cpdm,inv_dbd.cckdm AS ckdm,sum(inv_dbd.sl) as qcdbcksl,sum(inv_dbd.je) as qcdbckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.cckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_dbd.cpdm,inv_dbd.cckdm) qcdbck ON cpnc.cpdm = qcdbck.cpdm AND cpnc.ckdm = qcdbck.ckdm) asfchz LEFT JOIN rc_cpxx ON asfchz.cpdm = rc_cpxx.cpdm LEFT JOIN rc_ckxx ON asfchz.ckdm = rc_ckxx.ckdm) bsfchz WHERE bsfchz.ckdm = t_cpkczlfx.ckdm AND bsfchz.cpdm = t_cpkczlfx.cpdm" & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " AND lbdm LIKE '" & Me.TxtLbdm.Text & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " AND cpmc LIKE '%" & TxtCpmc.Text & "%'", "") & ")"
+
+                rcOleDbCommand.Parameters.Clear()
+                '账期小的
+                rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1)
+                '期期大的
+                If i > 1 Then
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1)
                 Else
-                    Me.LblMsg.Text = "正在生成" & (Me.NudMonth.Value - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).ToString & "月库存数据......"
-                    rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET (kcsl_" & i.ToString.PadLeft(2, "0") & ",kcje_" & i.ToString.PadLeft(2, "0") & ") = " & _
-                        " (SELECT CASE WHEN COALESCE(bsfchz.qcsl,0.0)+COALESCE(bsfchz.qcscrksl,0.0)+COALESCE(bsfchz.qccgrksl,0.0)+COALESCE(bsfchz.qcdbrksl,0.0)-COALESCE(bsfchz.qcxscksl,0.0)-COALESCE(bsfchz.qcckcksl,0.0)-COALESCE(bsfchz.qcdbcksl,0.0) > 0 THEN COALESCE(bsfchz.qcsl,0.0)+COALESCE(bsfchz.qcscrksl,0.0)+COALESCE(bsfchz.qccgrksl,0.0)+COALESCE(bsfchz.qcdbrksl,0.0)-COALESCE(bsfchz.qcxscksl,0.0)-COALESCE(bsfchz.qcckcksl,0.0)-COALESCE(bsfchz.qcdbcksl,0.0) ELSE 0 END AS kcsl_tot,CASE WHEN COALESCE(bsfchz.qcje,0.0)+COALESCE(bsfchz.qcscrkje,0.0)+COALESCE(bsfchz.qccgrkje,0.0)+COALESCE(bsfchz.qcdbrkje,0.0)-COALESCE(bsfchz.qcxsckje,0.0)-COALESCE(bsfchz.qcckckje,0.0)-COALESCE(bsfchz.qcdbckje,0.0) > 0 THEN COALESCE(bsfchz.qcje,0.0)+COALESCE(bsfchz.qcscrkje,0.0)+COALESCE(bsfchz.qccgrkje,0.0)+COALESCE(bsfchz.qcdbrkje,0.0)-COALESCE(bsfchz.qcxsckje,0.0)-COALESCE(bsfchz.qcckckje,0.0)-COALESCE(bsfchz.qcdbckje,0.0) ELSE 0 END AS kcje_tot FROM" & _
-                        " (SELECT asfchz.*,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.lbdm,rc_ckxx.ckmc FROM" & _
-                        " (SELECT cpnc.cpdm,cpnc.ckdm,cpnc.qcsl,cpnc.qcje,qcscrk.qcscrksl,qcscrk.qcscrkje,qccgrk.qccgrksl,qccgrk.qccgrkje,qcdbrk.qcdbrksl,qcdbrk.qcdbrkje,qcxsck.qcxscksl,qcxsck.qcxsckje,qcckck.qcckcksl,qcckck.qcckckje,qcdbck.qcdbcksl,qcdbck.qcdbckje FROM" & _
-                        " (SELECT inv_cpyeb.cpdm,inv_cpyeb.ckdm,sum(qcsl) as qcsl,sum(qcje) as qcje FROM inv_cpyeb WHERE kjnd = ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_cpyeb.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_cpyeb.cpdm,inv_cpyeb.ckdm) cpnc" & _
-                        " Left join (SELECT inv_rkd.cpdm,inv_rkd.ckdm,sum(inv_rkd.sl) as qcscrksl,sum(inv_rkd.je) as qcscrkje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.rkrq >= ? and inv_rkd.rkrq >= ? and inv_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_rkd.cpdm,inv_rkd.ckdm) qcscrk ON cpnc.cpdm = qcscrk.cpdm AND cpnc.ckdm = qcscrk.ckdm" & _
-                        " Left join (SELECT po_rkd.cpdm,po_rkd.ckdm,sum(po_rkd.sl) as qccgrksl,sum(po_rkd.je) as qccgrkje FROM po_rkd WHERE po_rkd.bdelete = 0 AND po_rkd.rkrq >= ? and po_rkd.rkrq >= ? and po_rkd.rkrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND po_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY po_rkd.cpdm,po_rkd.ckdm) qccgrk ON cpnc.cpdm = qccgrk.cpdm AND cpnc.ckdm = qccgrk.ckdm" & _
-                        " Left join (SELECT inv_dbd.cpdm,inv_dbd.rckdm AS ckdm,sum(inv_dbd.sl) as qcdbrksl,sum(inv_dbd.je) as qcdbrkje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.rckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_dbd.cpdm,inv_dbd.rckdm) qcdbrk ON cpnc.cpdm = qcdbrk.cpdm AND cpnc.ckdm = qcdbrk.ckdm" & _
-                        " Left join (SELECT oe_xsd.cpdm,oe_xsd.ckdm,sum(oe_xsd.sl) as qcxscksl,sum(oe_xsd.cbje) as qcxsckje FROM oe_xsd WHERE oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? and oe_xsd.xsrq >= ? and oe_xsd.xsrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND oe_xsd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY oe_xsd.cpdm,oe_xsd.ckdm) qcxsck ON cpnc.cpdm = qcxsck.cpdm AND cpnc.ckdm = qcxsck.ckdm" & _
-                        " Left join (SELECT inv_ckd.cpdm,inv_ckd.ckdm,sum(inv_ckd.sl) as qcckcksl,sum(inv_ckd.je) as qcckckje FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND inv_ckd.ckrq >= ? and inv_ckd.ckrq >= ? and inv_ckd.ckrq < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_ckd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_ckd.cpdm,inv_ckd.ckdm) qcckck ON cpnc.cpdm = qcckck.cpdm AND cpnc.ckdm = qcckck.ckdm" & _
-                        " Left join (SELECT inv_dbd.cpdm,inv_dbd.cckdm AS ckdm,sum(inv_dbd.sl) as qcdbcksl,sum(inv_dbd.je) as qcdbckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.cckdm ='" & Me.TxtCkdm.Text & "'", "") & " GROUP BY inv_dbd.cpdm,inv_dbd.cckdm) qcdbck ON cpnc.cpdm = qcdbck.cpdm AND cpnc.ckdm = qcdbck.ckdm) asfchz LEFT JOIN rc_cpxx ON asfchz.cpdm = rc_cpxx.cpdm LEFT JOIN rc_ckxx ON asfchz.ckdm = rc_ckxx.ckdm) bsfchz WHERE bsfchz.ckdm = t_cpkczlfx.ckdm AND bsfchz.cpdm = t_cpkczlfx.cpdm" & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " AND lbdm LIKE '" & Me.TxtLbdm.Text & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " AND cpmc LIKE '%" & TxtCpmc.Text & "%'", "") & ")"
-                    rcOleDbCommand.Parameters.Clear()
-                    'rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1).Year
-                    Else
-                        rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1).Year
-                    End If
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    'rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    Else
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    End If
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1)
-                    Else
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1)
-                    End If
-                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    'rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    Else
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    End If
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1)
-                    Else
-                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1)
-                    End If
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    'rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    Else
-                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    End If
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1)
-                    Else
-                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1)
-                    End If
-                    rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    'rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    Else
-                        rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    End If
-                    rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    'rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    Else
-                        rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    End If
-                    rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
-                    'rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dInvBegin1.Date
-                    If i = rcDataset.Tables("rc_kczlfd").Rows.Count And i > 1 Then
-                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(-1 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    Else
-                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = Convert.ToDateTime(datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1).Year.ToString + "-01-01")
-                    End If
-                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq
-                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq
                 End If
+
+                '账期小的
+                rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1)
+                '期期大的
+                If i > 1 Then
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1)
+                Else
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePcrq
+                End If
+
+                '账期小的
+                rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 1).Item("zhangling")).AddDays(-1)
+                '期期大的
+                If i > 1 Then
+                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq.AddDays(1).AddMonths(0 - rcDataset.Tables("rc_kczlfd").Rows(i - 2).Item("zhangling")).AddDays(-1)
+                Else
+                    rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePcrq
+                End If
+
+                rcOleDbCommand.ExecuteNonQuery()
             Next
             '更新成期间库存
-            For i = rcDataset.Tables("rc_kczlfd").Rows.Count To 1 Step -1
-                If i = 1 Then
-                    rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcsl_tot" & ",0.0) - COALESCE(t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & ",0.0), t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcje_tot,0.0)" & " - COALESCE(t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & ",0.0)"
-                Else
-                    rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcsl_" & (i - 1).ToString.PadLeft(2, "0") & ",0.0) - COALESCE(t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & ",0.0),t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcje_" & (i - 1).ToString.PadLeft(2, "0") & ",0.0) - COALESCE(t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & ",0.0)"
-                End If
+            'For i = rcDataset.Tables("rc_kczlfd").Rows.Count To 1 Step -1
+            '    If i = 1 Then
+            '        rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcsl_tot" & ",0.0) - COALESCE(t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & ",0.0), t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcje_tot,0.0)" & " - COALESCE(t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & ",0.0)"
+            '    Else
+            '        rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcsl_" & (i - 1).ToString.PadLeft(2, "0") & ",0.0) - COALESCE(t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & ",0.0),t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcje_" & (i - 1).ToString.PadLeft(2, "0") & ",0.0) - COALESCE(t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & ",0.0)"
+            '    End If
+            '    rcOleDbCommand.Parameters.Clear()
+            '    rcOleDbCommand.ExecuteNonQuery()
+            'Next
+            For i = 1 To rcDataset.Tables("rc_kczlfd").Rows.Count - 1
+                rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & " = CASE WHEN COALESCE(t_cpkczlfx.kcsl_tot,0.0)"
+                For j = 1 To i
+                    rcOleDbCommand.CommandText += " - COALESCE(t_cpkczlfx.kcsl_" & j.ToString.PadLeft(2, "0") & ", 0.0)"
+                Next
+                rcOleDbCommand.CommandText += " <= 0 THEN COALESCE(t_cpkczlfx.kcsl_tot,0.0)"
+                For j = 1 To i - 1
+                    rcOleDbCommand.CommandText += " - COALESCE(t_cpkczlfx.kcsl_" & j.ToString.PadLeft(2, "0") & ", 0.0)"
+                Next
+                rcOleDbCommand.CommandText += " ELSE COALESCE(t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & ",0.0) END , t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & " =  CASE WHEN COALESCE(t_cpkczlfx.kcje_tot,0.0)"
+                For j = 1 To i
+                    rcOleDbCommand.CommandText += " - COALESCE(t_cpkczlfx.kcje_" & j.ToString.PadLeft(2, "0") & ", 0.0)"
+                Next
+                rcOleDbCommand.CommandText += " <= 0 THEN COALESCE(t_cpkczlfx.kcje_tot,0.0)"
+                For j = 1 To i - 1
+                    rcOleDbCommand.CommandText += " - COALESCE(t_cpkczlfx.kcje_" & j.ToString.PadLeft(2, "0") & ", 0.0)"
+                Next
+                rcOleDbCommand.CommandText += " ELSE COALESCE(t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & ",0.0) END"
+
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
             Next
+            '超出库存期限以上
+            i = rcDataset.Tables("rc_kczlfd").Rows.Count
+            rcOleDbCommand.CommandText = "UPDATE t_cpkczlfx SET t_cpkczlfx.kcsl_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcsl_tot,0.0)"
+            For j = 1 To i
+                rcOleDbCommand.CommandText += " - COALESCE(t_cpkczlfx.kcsl_" & j.ToString.PadLeft(2, "0") & ", 0.0)"
+            Next
+            rcOleDbCommand.CommandText += ", t_cpkczlfx.kcje_" & i.ToString.PadLeft(2, "0") & " = COALESCE(t_cpkczlfx.kcje_tot,0.0)"
+            For j = 1 To i
+                rcOleDbCommand.CommandText += " - COALESCE(t_cpkczlfx.kcje_" & j.ToString.PadLeft(2, "0") & ", 0.0)"
+            Next
+
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.ExecuteNonQuery()
+
             rcOleDbCommand.CommandText = "SELECT t_cpkczlfx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,t_cpkczlfx.ckdm,rc_ckxx.ckmc,t_cpkczlfx.kcsl_tot,t_cpkczlfx.kcje_tot,t_cpkczlfx.kcsl_01,t_cpkczlfx.kcje_01,t_cpkczlfx.kcsl_02,t_cpkczlfx.kcje_02,t_cpkczlfx.kcsl_03,t_cpkczlfx.kcje_03,t_cpkczlfx.kcsl_04,t_cpkczlfx.kcje_04,t_cpkczlfx.kcsl_05,t_cpkczlfx.kcje_05,t_cpkczlfx.kcsl_06,t_cpkczlfx.kcje_06,t_cpkczlfx.kcsl_07,t_cpkczlfx.kcje_07 FROM t_cpkczlfx left join RC_CPXX on RC_CPXX.CPDM = T_CPKCZLFX.CPDM LEFT JOIN rc_ckxx ON rc_ckxx.ckdm = t_cpkczlfx.ckdm ORDER BY cpdm,ckdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand

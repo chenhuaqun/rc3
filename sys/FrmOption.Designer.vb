@@ -75,8 +75,11 @@ Partial Class FrmOption
         Me.TxtU8Pwd = New System.Windows.Forms.TextBox()
         Me.LblU8Host = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.ChbCostElements = New System.Windows.Forms.CheckBox()
         Me.BtnCostRegion = New System.Windows.Forms.Button()
         Me.ChbCostRegion = New System.Windows.Forms.CheckBox()
+        Me.TxtWbdm = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox4.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -89,7 +92,7 @@ Partial Class FrmOption
         '
         'BtnSave
         '
-        Me.BtnSave.Location = New System.Drawing.Point(462, 317)
+        Me.BtnSave.Location = New System.Drawing.Point(462, 376)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(80, 23)
         Me.BtnSave.TabIndex = 2
@@ -229,9 +232,9 @@ Partial Class FrmOption
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(15, 264)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(149, 12)
+        Me.Label9.Size = New System.Drawing.Size(173, 12)
         Me.Label9.TabIndex = 17
-        Me.Label9.Text = "凭证生成中使用的凭证类型"
+        Me.Label9.Text = "凭证生成中使用的记账凭证类型"
         '
         'CmbPzlxjc
         '
@@ -308,11 +311,13 @@ Partial Class FrmOption
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(579, 385)
+        Me.TabControl1.Size = New System.Drawing.Size(579, 443)
         Me.TabControl1.TabIndex = 24
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.TxtWbdm)
+        Me.TabPage1.Controls.Add(Me.Label10)
         Me.TabPage1.Controls.Add(Me.ChbXsdDy)
         Me.TabPage1.Controls.Add(Me.BtnSave)
         Me.TabPage1.Controls.Add(Me.TxtDefaultShlv)
@@ -339,7 +344,7 @@ Partial Class FrmOption
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(571, 359)
+        Me.TabPage1.Size = New System.Drawing.Size(571, 417)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "会计科目设置"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -353,7 +358,7 @@ Partial Class FrmOption
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(571, 359)
+        Me.TabPage2.Size = New System.Drawing.Size(571, 407)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "用友NC6.X数据源及参数设置"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -478,7 +483,7 @@ Partial Class FrmOption
         Me.TabPage4.Controls.Add(Me.GroupBox1)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(571, 359)
+        Me.TabPage4.Size = New System.Drawing.Size(571, 407)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "用友U8数据源及参数设置"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -578,14 +583,25 @@ Partial Class FrmOption
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.ChbCostElements)
         Me.TabPage3.Controls.Add(Me.BtnCostRegion)
         Me.TabPage3.Controls.Add(Me.ChbCostRegion)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(571, 359)
+        Me.TabPage3.Size = New System.Drawing.Size(571, 407)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "成本参数"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'ChbCostElements
+        '
+        Me.ChbCostElements.AutoSize = True
+        Me.ChbCostElements.Location = New System.Drawing.Point(54, 43)
+        Me.ChbCostElements.Name = "ChbCostElements"
+        Me.ChbCostElements.Size = New System.Drawing.Size(156, 16)
+        Me.ChbCostElements.TabIndex = 23
+        Me.ChbCostElements.Text = "按成本要素独立分配成本"
+        Me.ChbCostElements.UseVisualStyleBackColor = True
         '
         'BtnCostRegion
         '
@@ -605,11 +621,27 @@ Partial Class FrmOption
         Me.ChbCostRegion.Text = "是否按成本域计算成本"
         Me.ChbCostRegion.UseVisualStyleBackColor = True
         '
+        'TxtWbdm
+        '
+        Me.TxtWbdm.Location = New System.Drawing.Point(234, 365)
+        Me.TxtWbdm.Name = "TxtWbdm"
+        Me.TxtWbdm.Size = New System.Drawing.Size(100, 21)
+        Me.TxtWbdm.TabIndex = 25
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(15, 369)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(65, 12)
+        Me.Label10.TabIndex = 24
+        Me.Label10.Text = "本位币币种"
+        '
         'FrmOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(579, 385)
+        Me.ClientSize = New System.Drawing.Size(579, 443)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "FrmOption"
         Me.Text = "选项"
@@ -686,4 +718,7 @@ Partial Class FrmOption
     Friend WithEvents TxtU8Pwd As TextBox
     Friend WithEvents LblU8Host As Label
     Friend WithEvents BtnU8Save As Button
+    Friend WithEvents ChbCostElements As CheckBox
+    Friend WithEvents TxtWbdm As TextBox
+    Friend WithEvents Label10 As Label
 End Class

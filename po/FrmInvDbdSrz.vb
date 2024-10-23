@@ -30,6 +30,8 @@ Public Class FrmInvDbdSrz
     Dim EditingControl As DataGridViewTextBoxEditingControl
     '库存数量
     Dim dblKcsl As Double = 0.0
+    Dim dblCskcsl As Double = 0.0
+    Dim dblPhkcsl As Double = 0.0
     '合计变量
     Dim dblTotSl As Double = 0.0
     Dim dblTotFzsl As Double = 0.0
@@ -717,17 +719,96 @@ Public Class FrmInvDbdSrz
                     End If
                 End If
             End If
+            If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColPiHao" Then
+                If Not String.IsNullOrEmpty(e.FormattedValue) Then
+                    '取物料信息
+                    Try
+                        rcOleDbConn.Open()
+                        rcOleDbCommand.Connection = rcOleDbConn
+                        rcOleDbCommand.CommandTimeout = 300
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT COALESCE(COUNT(*),0) AS gs FROM po_rkd WHERE pihao = ? AND cpdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.AddWithValue("@fadm", Me.rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColPiHao").EditedFormattedValue)
+                        rcOleDbCommand.Parameters.AddWithValue("@cpdm", Me.rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value)
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("t_pihao") IsNot Nothing Then
+                            rcDataset.Tables("t_pihao").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "t_pihao")
+                    Catch ex As Exception
+                        MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                        Return
+                    Finally
+                        rcOleDbConn.Close()
+                    End Try
+                    If rcDataset.Tables("t_pihao").Rows(0).Item("gs") <= 0 Then
+                        Me.LblMsg.Text = "物料的该批次号不存在。"
+                        e.Cancel = True
+                    End If
+                    'dblPhkcsl = ReadPhKcsl(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColPiHao").EditedFormattedValue, Me.TxtCkdm.Text, Me.TxtDjh.Text)
+                    'Me.LblMsg.Text += " 该批号库存数量：" & Format(dblPhkcsl, g_FormatSl)
+                End If
+                showKucun(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColPiHao").EditedFormattedValue)
+                '读取库存单价
+                If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value.GetType.ToString = "System.DBNull" Then
+                    Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value = ""
+                End If
+                If Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value.GetType.ToString = "System.DBNull" Then
+                        Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value = ""
+                    End If
+                    If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value) Then
+                        If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value) Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsPhKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value, Me.TxtCckdm.Text, IIf(Me.rcDataGridView.CurrentRow.Cells("ColSl").Value < 0, True, False))
+                        Else
+                            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.TxtCckdm.Text, IIf(Me.rcDataGridView.CurrentRow.Cells("ColSl").Value < 0, True, False))
+                        End If
+                    Else
+                        Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadKcdj(strYear, Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.TxtCckdm.Text, Me.TxtDjh.Text)
+                    End If
+                    Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * Me.rcDataGridView.CurrentRow.Cells("ColSl").Value
+                If Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value <> 0 Then
+                    If Me.rcDataGridView.CurrentRow.Cells("ColSl").Value <> 0 Then
+                        If Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = 0 Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = Me.rcDataGridView.CurrentRow.Cells("ColSl").Value * Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value
+                        End If
+                    End If
+                End If
+                If Me.rcDataGridView.CurrentRow.Cells("ColDj").Value <> 0 Then
+                    Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = System.Math.Round(Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * Me.rcDataGridView.CurrentRow.Cells("ColSl").Value, 2, MidpointRounding.AwayFromZero)
+                End If
+            End If
+
             If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColSl" Then
                 If e.FormattedValue.GetType.ToString <> "System.DBNull" Then
                     '读取库存单价
-                    Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadKcdj(strYear, Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.TxtCckdm.Text, Me.TxtDjh.Text)
-                    Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * e.FormattedValue
-                    If Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value <> 0 Then
-                        If e.FormattedValue <> 0 Then
-                            If Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = 0 Then
-                                Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = e.FormattedValue * Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value
+                    If Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = 0 Then
+                        If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value.GetType.ToString = "System.DBNull" Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value = ""
+                        End If
+                        If Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value.GetType.ToString = "System.DBNull" Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value = ""
+                        End If
+                        If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value) Then
+                            If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value) Then
+                                Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsPhKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value, Me.TxtCckdm.Text, IIf(e.FormattedValue < 0, True, False))
+                            Else
+                                Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.TxtCckdm.Text, IIf(e.FormattedValue < 0, True, False))
+                            End If
+                        Else
+                            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadKcdj(strYear, Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.TxtCckdm.Text, Me.TxtDjh.Text)
+                        End If
+                        Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * e.FormattedValue
+                        If Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value <> 0 Then
+                            If e.FormattedValue <> 0 Then
+                                If Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = 0 Then
+                                    Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = e.FormattedValue * Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value
+                                End If
                             End If
                         End If
+                    End If
+                    If Me.rcDataGridView.CurrentRow.Cells("ColDj").Value <> 0 Then
+                        Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = System.Math.Round(Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * e.FormattedValue, 2, MidpointRounding.AwayFromZero)
                     End If
                 Else
                     Me.rcDataGridView.CurrentRow.Cells("ColSl").Value = 0.0
@@ -806,6 +887,30 @@ Public Class FrmInvDbdSrz
                     End With
             End Select
         End If
+        If Me.rcDataGridView.Columns(Me.rcDataGridView.CurrentCell.ColumnIndex).Name = "ColPiHao" Then
+            Select Case e.KeyCode
+                Case Keys.F3
+                    Dim rcFrm As New models.FrmF3KeyPress
+                    With rcFrm
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "v_cppihao"
+                        .ParaField1 = "pihao"
+                        .ParaField2 = "rkrq"
+                        .ParaField3 = "sl"
+                        .ParaCondition = "cpdm = '" & Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value & "'" & IIf(Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value), " and csdm = '" & Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value & "'", "")
+                        .ParaOrderField = "rkrq"
+                        .ParaTitle = "批次"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        If .ShowDialog = DialogResult.OK Then
+                            '将用户在rcfrmselectfadm所选择的fadm带入rcdatarid'
+                            Me.rcDataGridView.CurrentRow.Cells("ColPihao").Value = .ParaField1
+                            Me.rcDataGridView.EndEdit()
+                            Me.rcBindingSource.EndEdit()
+                        End If
+                    End With
+            End Select
+        End If
     End Sub
 
     Private Sub RcDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles rcDataGridView.EditingControlShowing
@@ -864,6 +969,31 @@ Public Class FrmInvDbdSrz
                         If .ShowDialog = DialogResult.OK Then
                             '将用户在rcfrmselectcsdm所选择的csdm带入rcdatarid'
                             Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value = .paraField1
+                            Me.rcDataGridView.EndEdit()
+                            Me.rcBindingSource.EndEdit()
+                        End If
+                    End With
+                    e.Handled = True
+            End Select
+        End If
+        If Me.rcDataGridView.Columns(Me.rcDataGridView.CurrentCell.ColumnIndex).Name = "ColPiHao" Then
+            Select Case e.KeyCode
+                Case Keys.F3
+                    Dim rcFrm As New models.FrmF3KeyPress
+                    With rcFrm
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "v_cppihao"
+                        .ParaField1 = "pihao"
+                        .ParaField2 = "rkrq"
+                        .ParaField3 = "sl"
+                        .ParaCondition = "cpdm = '" & Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value & "'" & IIf(Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value), " and csdm = '" & Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value & "'", "")
+                        .ParaOrderField = "rkrq"
+                        .ParaTitle = "批次"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        If .ShowDialog = DialogResult.OK Then
+                            '将用户在rcfrmselectfadm所选择的fadm带入rcdatarid'
+                            Me.rcDataGridView.CurrentRow.Cells("ColPihao").Value = .ParaField1
                             Me.rcDataGridView.EndEdit()
                             Me.rcBindingSource.EndEdit()
                         End If
@@ -1616,5 +1746,28 @@ Public Class FrmInvDbdSrz
     End Sub
 
 #End Region
+
+    Private Sub showKucun(ByVal strCpdm, ByVal strCsdm, ByVal strPiHao)
+        If strCpdm.GetType.ToString <> "System.DBNull" Then
+            If Not String.IsNullOrEmpty(strCpdm) Then
+                '仓库库存数量
+                dblKcsl = ReadKcsl(strYear, strCpdm, Me.TxtCckdm.Text, Me.TxtDjh.Text)
+                Me.LblMsg.Text = "仓库库存数量：" & Format(dblKcsl, g_FormatSl)
+                If strCsdm.GetType.ToString <> "System.DBNull" Then
+                    If Not String.IsNullOrEmpty(strCsdm) Then
+                        '计算当前供应商库存
+                        dblCskcsl = ReadCsKcsl(strCpdm, strCsdm, Me.TxtCckdm.Text, Me.TxtDjh.Text)
+                        Me.LblMsg.Text += " 供应商库存数量：" & Format(dblCskcsl, g_FormatSl)
+                    End If
+                End If
+                If strPiHao.GetType.ToString <> "System.DBNull" Then
+                    If Not String.IsNullOrEmpty(strPiHao) Then
+                        dblPhkcsl = ReadPhKcsl(strCpdm, strPiHao, Me.TxtCckdm.Text, Me.TxtDjh.Text)
+                        Me.LblMsg.Text += " 批次号库存数量：" & Format(dblPhkcsl, g_FormatSl)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
 
 End Class

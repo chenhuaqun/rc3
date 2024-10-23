@@ -66,6 +66,11 @@ Public Class FrmGxEdit
         Me.TxtBmdm.DataBindings.Add("Text", rcDataView, "bmdm")
         Me.LblBmmc.DataBindings.Add("Text", rcDataView, "bmmc")
         Me.TxtYdcl.DataBindings.Add("Text", rcDataView, "ydcl")
+        Me.TxtYdbl_clcb.DataBindings.Add("Text", rcDataView, "ydbl_clcb")
+        Me.TxtYdbl_rgcb.DataBindings.Add("Text", rcDataView, "ydbl_rgcb")
+        Me.TxtYdbl_nycb.DataBindings.Add("Text", rcDataView, "ydbl_nycb")
+        Me.TxtYdbl_zjcb.DataBindings.Add("Text", rcDataView, "ydbl_zjcb")
+        Me.TxtYdbl_glcb.DataBindings.Add("Text", rcDataView, "ydbl_glcb")
         BindingContext(rcDataView, "").Position = currentPos
         SetAll(True)
         If isAdding Then
@@ -82,7 +87,7 @@ Public Class FrmGxEdit
 
 #Region "控键回车键的处理"
 
-    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtGxdm.KeyPress, TxtGxsm.KeyPress, TxtGxmc.KeyPress, TxtBmdm.KeyPress, TxtYdcl.KeyPress
+    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtGxdm.KeyPress, TxtGxsm.KeyPress, TxtGxmc.KeyPress, TxtBmdm.KeyPress, TxtYdcl.KeyPress, TxtYdbl_clcb.KeyPress, TxtYdbl_rgcb.KeyPress, TxtYdbl_nycb.KeyPress, TxtYdbl_zjcb.KeyPress, TxtYdbl_glcb.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
@@ -102,6 +107,11 @@ Public Class FrmGxEdit
             Me.TxtGxsm.Enabled = False
             Me.TxtBmdm.Enabled = False
             Me.TxtYdcl.Enabled = False
+            Me.TxtYdbl_clcb.Enabled = False
+            Me.TxtYdbl_rgcb.Enabled = False
+            Me.TxtYdbl_nycb.Enabled = False
+            Me.TxtYdbl_zjcb.Enabled = False
+            Me.TxtYdbl_glcb.Enabled = False
             Me.BtnTop.Enabled = True
             Me.BtnPrevious.Enabled = True
             Me.BtnNext.Enabled = True
@@ -122,6 +132,11 @@ Public Class FrmGxEdit
             Me.TxtGxsm.Enabled = True
             Me.TxtBmdm.Enabled = True
             Me.TxtYdcl.Enabled = True
+            Me.TxtYdbl_clcb.Enabled = True
+            Me.TxtYdbl_rgcb.Enabled = True
+            Me.TxtYdbl_nycb.Enabled = True
+            Me.TxtYdbl_zjcb.Enabled = True
+            Me.TxtYdbl_glcb.Enabled = True
             Me.BtnTop.Enabled = False
             Me.BtnPrevious.Enabled = False
             Me.BtnNext.Enabled = False
@@ -365,7 +380,7 @@ Public Class FrmGxEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "Insert Into rc_gxxx (gxdm,gxmc,gxsm,bmdm,bmmc,ydcl) VALUES (?,?,?,?,?,?)"
+                rcOleDbCommand.CommandText = "Insert Into rc_gxxx (gxdm,gxmc,gxsm,bmdm,bmmc,ydcl,ydbl_clcb,ydbl_rgcb,ydbl_nycb,ydbl_zjcb,ydbl_glcb) VALUES (?,?,?,?,?,?,?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@gxdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtGxdm.Text)
                 rcOleDbCommand.Parameters.Add("@gxmc", OleDbType.VarChar, 30).Value = Trim(Me.TxtGxmc.Text)
@@ -373,8 +388,13 @@ Public Class FrmGxEdit
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtBmdm.Text)
                 rcOleDbCommand.Parameters.Add("@bmmc", OleDbType.VarChar, 30).Value = Trim(Me.LblBmmc.Text)
                 rcOleDbCommand.Parameters.Add("@ydcl", OleDbType.Numeric, 6).Value = Me.TxtYdcl.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_clcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_clcb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_rgcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_rgcb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_nycb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_nycb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_zjcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_zjcb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_glcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_glcb.Text / 100
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl FROM rc_gxxx ORDER BY gxdm"
+                rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl,ydbl_clcb * 100 AS ydbl_clcb,ydbl_rgcb*100 AS ydbl_rgcb,ydbl_nycb * 100 AS ydbl_nycb,ydbl_zjcb* 100 AS ydbl_zjcb,ydbl_glcb*100 AS ydbl_glcb FROM rc_gxxx ORDER BY gxdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_gxxx") IsNot Nothing Then
@@ -404,17 +424,22 @@ Public Class FrmGxEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "UPDATE rc_gxxx SET gxmc = ? , gxsm = ? ,bmdm = ? ,bmmc = ?,ydcl = ?  WHERE  gxdm = ?"
+                rcOleDbCommand.CommandText = "UPDATE rc_gxxx SET gxmc = ? , gxsm = ? ,bmdm = ? ,bmmc = ?,ydcl = ?,ydbl_clcb = ?,ydbl_rgcb = ?,ydbl_nycb = ?,ydbl_zjcb = ?,ydbl_glcb = ?  WHERE  gxdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@gxmc", OleDbType.VarChar, 30).Value = Trim(TxtGxmc.Text)
                 rcOleDbCommand.Parameters.Add("@gxsm", OleDbType.VarChar, 12).Value = Trim(TxtGxsm.Text)
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = Trim(TxtBmdm.Text)
                 rcOleDbCommand.Parameters.Add("@bmmc", OleDbType.VarChar, 30).Value = Trim(Me.LblBmmc.Text)
                 rcOleDbCommand.Parameters.Add("@ydcl", OleDbType.Numeric, 6).Value = Me.TxtYdcl.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_clcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_clcb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_rgcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_rgcb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_nycb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_nycb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_zjcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_zjcb.Text / 100
+                rcOleDbCommand.Parameters.Add("@ydbl_glcb", OleDbType.Numeric, 6).Value = Me.TxtYdbl_glcb.Text / 100
                 rcOleDbCommand.Parameters.Add("@gxdm", OleDbType.VarChar, 12).Value = Trim(TxtGxdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
                 '填充数据
-                rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl FROM rc_gxxx ORDER BY gxdm"
+                rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl,ydbl_clcb * 100 AS ydbl_clcb,ydbl_rgcb*100 AS ydbl_rgcb,ydbl_nycb * 100 AS ydbl_nycb,ydbl_zjcb* 100 AS ydbl_zjcb,ydbl_glcb*100 AS ydbl_glcb FROM rc_gxxx ORDER BY gxdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_gxxx") IsNot Nothing Then
@@ -455,7 +480,7 @@ Public Class FrmGxEdit
         rcOleDbCommand.CommandTimeout = 300
         rcOleDbCommand.CommandType = CommandType.Text
         Try
-            rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl FROM rc_gxxx ORDER BY gxdm"
+            rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl,ydbl_clcb * 100 AS ydbl_clcb,ydbl_rgcb*100 AS ydbl_rgcb,ydbl_nycb * 100 AS ydbl_nycb,ydbl_zjcb* 100 AS ydbl_zjcb,ydbl_glcb*100 AS ydbl_glcb FROM rc_gxxx ORDER BY gxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_gxxx") IsNot Nothing Then

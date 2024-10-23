@@ -1900,6 +1900,15 @@ Public Class FrmMain
         End With
     End Sub
 
+    Private Sub MnuiZcpMx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiZcpMx.Click
+        AddLog(Me.MnuiZcpMx.Text)
+        Dim rcFrm As New FrmZcpMx
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
     '在产品部门工序汇总表
     Private Sub MnuiZcpBmGxHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiZcpBmGxHz.Click
         AddLog(Me.MnuiZcpBmGxHz.Text)

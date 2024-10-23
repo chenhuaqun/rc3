@@ -22,45 +22,46 @@ Partial Class FrmBomCxz
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle
-        Me.DgtbcCperiod = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcParentCpdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcParentCpmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcParentDw = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcChildCpdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcChildCpmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcChildDw = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSl = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcDj = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcJe = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBommemo = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBzcb = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBeishu = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcClcb = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcRgcb = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcZjcb = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcGlcb = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcNycb = New System.Windows.Forms.DataGridTextBoxColumn
+        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle()
+        Me.DgtbcCperiod = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcParentCpdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcParentCpmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcParentDw = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBzcb = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBeishu = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcClcb = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcRgcb = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcNycb = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcZjcb = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcGlcb = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcChildCpdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcChildCpmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcChildDw = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSl = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcDj = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcJe = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBommemo = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcChengPinLv = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rcDataGrid
+        'RcDataGrid
         '
-        Me.rcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
+        Me.RcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
         '
         'Label1
         '
         Me.Label1.Location = New System.Drawing.Point(408, 8)
-        Me.Label1.Size = New System.Drawing.Size(142, 23)
+        Me.Label1.Size = New System.Drawing.Size(144, 26)
         Me.Label1.Text = "物料清单列表"
         '
         'DataGridTableStyle1
         '
-        Me.DataGridTableStyle1.DataGrid = Me.rcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcCperiod, Me.DgtbcParentCpdm, Me.DgtbcParentCpmc, Me.DgtbcParentDw, Me.DgtbcBzcb, Me.DgtbcBeishu, Me.DgtbcClcb, Me.DgtbcRgcb, Me.DgtbcNycb, Me.DgtbcZjcb, Me.DgtbcGlcb, Me.DgtbcChildCpdm, Me.DgtbcChildCpmc, Me.DgtbcChildDw, Me.DgtbcSl, Me.DgtbcDj, Me.DgtbcJe, Me.DgtbcBommemo})
+        Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcCperiod, Me.DgtbcParentCpdm, Me.DgtbcParentCpmc, Me.DgtbcParentDw, Me.DgtbcBzcb, Me.DgtbcBeishu, Me.DgtbcChengPinLv, Me.DgtbcClcb, Me.DgtbcRgcb, Me.DgtbcNycb, Me.DgtbcZjcb, Me.DgtbcGlcb, Me.DgtbcChildCpdm, Me.DgtbcChildCpmc, Me.DgtbcChildDw, Me.DgtbcSl, Me.DgtbcDj, Me.DgtbcJe, Me.DgtbcBommemo})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "bomlb"
         '
@@ -99,6 +100,76 @@ Partial Class FrmBomCxz
         Me.DgtbcParentDw.MappingName = "parentdw"
         Me.DgtbcParentDw.NullText = ""
         Me.DgtbcParentDw.Width = 45
+        '
+        'DgtbcBzcb
+        '
+        Me.DgtbcBzcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcBzcb.Format = ""
+        Me.DgtbcBzcb.FormatInfo = Nothing
+        Me.DgtbcBzcb.HeaderText = "标准成本"
+        Me.DgtbcBzcb.MappingName = "bzcb"
+        Me.DgtbcBzcb.NullText = ""
+        Me.DgtbcBzcb.Width = 75
+        '
+        'DgtbcBeishu
+        '
+        Me.DgtbcBeishu.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcBeishu.Format = ""
+        Me.DgtbcBeishu.FormatInfo = Nothing
+        Me.DgtbcBeishu.HeaderText = "倍数"
+        Me.DgtbcBeishu.MappingName = "beishu"
+        Me.DgtbcBeishu.NullText = ""
+        Me.DgtbcBeishu.Width = 75
+        '
+        'DgtbcClcb
+        '
+        Me.DgtbcClcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcClcb.Format = ""
+        Me.DgtbcClcb.FormatInfo = Nothing
+        Me.DgtbcClcb.HeaderText = "材料"
+        Me.DgtbcClcb.MappingName = "clcb"
+        Me.DgtbcClcb.NullText = ""
+        Me.DgtbcClcb.Width = 75
+        '
+        'DgtbcRgcb
+        '
+        Me.DgtbcRgcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcRgcb.Format = ""
+        Me.DgtbcRgcb.FormatInfo = Nothing
+        Me.DgtbcRgcb.HeaderText = "人工"
+        Me.DgtbcRgcb.MappingName = "rgcb"
+        Me.DgtbcRgcb.NullText = ""
+        Me.DgtbcRgcb.Width = 75
+        '
+        'DgtbcNycb
+        '
+        Me.DgtbcNycb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcNycb.Format = ""
+        Me.DgtbcNycb.FormatInfo = Nothing
+        Me.DgtbcNycb.HeaderText = "能源"
+        Me.DgtbcNycb.MappingName = "nycb"
+        Me.DgtbcNycb.NullText = ""
+        Me.DgtbcNycb.Width = 75
+        '
+        'DgtbcZjcb
+        '
+        Me.DgtbcZjcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcZjcb.Format = ""
+        Me.DgtbcZjcb.FormatInfo = Nothing
+        Me.DgtbcZjcb.HeaderText = "折旧"
+        Me.DgtbcZjcb.MappingName = "zjcb"
+        Me.DgtbcZjcb.NullText = ""
+        Me.DgtbcZjcb.Width = 75
+        '
+        'DgtbcGlcb
+        '
+        Me.DgtbcGlcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcGlcb.Format = ""
+        Me.DgtbcGlcb.FormatInfo = Nothing
+        Me.DgtbcGlcb.HeaderText = "管理"
+        Me.DgtbcGlcb.MappingName = "glcb"
+        Me.DgtbcGlcb.NullText = ""
+        Me.DgtbcGlcb.Width = 75
         '
         'DgtbcChildCpdm
         '
@@ -166,75 +237,15 @@ Partial Class FrmBomCxz
         Me.DgtbcBommemo.NullText = ""
         Me.DgtbcBommemo.Width = 135
         '
-        'DgtbcBzcb
+        'DgtbcChengPinLv
         '
-        Me.DgtbcBzcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcBzcb.Format = ""
-        Me.DgtbcBzcb.FormatInfo = Nothing
-        Me.DgtbcBzcb.HeaderText = "标准成本"
-        Me.DgtbcBzcb.MappingName = "bzcb"
-        Me.DgtbcBzcb.NullText = ""
-        Me.DgtbcBzcb.Width = 75
-        '
-        'DgtbcBeishu
-        '
-        Me.DgtbcBeishu.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcBeishu.Format = ""
-        Me.DgtbcBeishu.FormatInfo = Nothing
-        Me.DgtbcBeishu.HeaderText = "倍数"
-        Me.DgtbcBeishu.MappingName = "beishu"
-        Me.DgtbcBeishu.NullText = ""
-        Me.DgtbcBeishu.Width = 75
-        '
-        'DgtbcClcb
-        '
-        Me.DgtbcClcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcClcb.Format = ""
-        Me.DgtbcClcb.FormatInfo = Nothing
-        Me.DgtbcClcb.HeaderText = "材料"
-        Me.DgtbcClcb.MappingName = "clcb"
-        Me.DgtbcClcb.NullText = ""
-        Me.DgtbcClcb.Width = 75
-        '
-        'DgtbcRgcb
-        '
-        Me.DgtbcRgcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcRgcb.Format = ""
-        Me.DgtbcRgcb.FormatInfo = Nothing
-        Me.DgtbcRgcb.HeaderText = "人工"
-        Me.DgtbcRgcb.MappingName = "rgcb"
-        Me.DgtbcRgcb.NullText = ""
-        Me.DgtbcRgcb.Width = 75
-        '
-        'DgtbcZjcb
-        '
-        Me.DgtbcZjcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcZjcb.Format = ""
-        Me.DgtbcZjcb.FormatInfo = Nothing
-        Me.DgtbcZjcb.HeaderText = "折旧"
-        Me.DgtbcZjcb.MappingName = "zjcb"
-        Me.DgtbcZjcb.NullText = ""
-        Me.DgtbcZjcb.Width = 75
-        '
-        'DgtbcGlcb
-        '
-        Me.DgtbcGlcb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcGlcb.Format = ""
-        Me.DgtbcGlcb.FormatInfo = Nothing
-        Me.DgtbcGlcb.HeaderText = "管理"
-        Me.DgtbcGlcb.MappingName = "glcb"
-        Me.DgtbcGlcb.NullText = ""
-        Me.DgtbcGlcb.Width = 75
-        '
-        'DgtbcNycb
-        '
-        Me.DgtbcNycb.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcNycb.Format = ""
-        Me.DgtbcNycb.FormatInfo = Nothing
-        Me.DgtbcNycb.HeaderText = "能源"
-        Me.DgtbcNycb.MappingName = "nycb"
-        Me.DgtbcNycb.NullText = ""
-        Me.DgtbcNycb.Width = 75
+        Me.DgtbcChengPinLv.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcChengPinLv.Format = ""
+        Me.DgtbcChengPinLv.FormatInfo = Nothing
+        Me.DgtbcChengPinLv.HeaderText = "成品率"
+        Me.DgtbcChengPinLv.MappingName = "chengpinlv"
+        Me.DgtbcChengPinLv.NullText = ""
+        Me.DgtbcChengPinLv.Width = 75
         '
         'FrmBomCxz
         '
@@ -245,7 +256,7 @@ Partial Class FrmBomCxz
         Me.Text = "物料清单列表"
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -271,4 +282,5 @@ Partial Class FrmBomCxz
     Friend WithEvents DgtbcZjcb As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcGlcb As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcNycb As System.Windows.Forms.DataGridTextBoxColumn
+    Friend WithEvents DgtbcChengPinLv As DataGridTextBoxColumn
 End Class

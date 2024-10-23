@@ -399,7 +399,7 @@ Public Class FrmKhzyxx
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "SELECT * FROM rc_khxx WHERE (khdm = ?)"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtKhdm.Text)
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_khxx") IsNot Nothing Then
                     Me.rcDataset.Tables("rc_khxx").Clear()
@@ -466,7 +466,7 @@ Public Class FrmKhzyxx
                 rcOleDbCommand.CommandText = "INSERT INTO rc_khzyxx (zydm,khdm,ksperiod,jsperiod,xslbdm) VALUES (?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = Trim(Me.TxtZydm.Text)
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtKhdm.Text)
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
                 rcOleDbCommand.Parameters.Add("@ksperiod", OleDbType.VarChar, 6).Value = Me.CmbKsPeriod.SelectedValue
                 rcOleDbCommand.Parameters.Add("@jsperiod", OleDbType.VarChar, 6).Value = Me.CmbJsPeriod.SelectedValue
                 rcOleDbCommand.Parameters.Add("@xslbdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtXslbdm.Text)
@@ -507,7 +507,7 @@ Public Class FrmKhzyxx
                 rcOleDbCommand.Parameters.Add("@ksperiod", OleDbType.VarChar, 6).Value = Me.CmbKsPeriod.SelectedValue
                 rcOleDbCommand.Parameters.Add("@jsperiod", OleDbType.VarChar, 6).Value = Me.CmbJsPeriod.SelectedValue
                 rcOleDbCommand.Parameters.Add("@xslbdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtXslbdm.Text)
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtKhdm.Text)
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = Trim(Me.TxtZydm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
                 '填充数据
@@ -588,7 +588,7 @@ Public Class FrmKhzyxx
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "Delete FROM rc_khzyxx WHERE khdm = ? AND zydm = ?"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = BindingContext(rcDataView, "").Current("khdm")
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = BindingContext(rcDataView, "").Current("khdm")
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = BindingContext(rcDataView, "").Current("zydm")
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY zydm,khdm"

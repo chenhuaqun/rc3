@@ -213,7 +213,7 @@ Public Class FrmImpNC
                     ",CASE WHEN gl_freevalue.typevalue7 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue7,1,20) ELSE '~' END AS type7,CASE WHEN gl_freevalue.typevalue7 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue7,21,20) ELSE '~' END AS value7" &
                     ",CASE WHEN gl_freevalue.typevalue8 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue8,1,20) ELSE '~' END AS type8,CASE WHEN gl_freevalue.typevalue8 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue8,21,20) ELSE '~' END AS value8" &
                     ",CASE WHEN gl_freevalue.typevalue9 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue9,1,20) ELSE '~' END AS type9,CASE WHEN gl_freevalue.typevalue9 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue9,21,20) ELSE '~' END AS value9 FROM" &
-                    " (SELECT gl_voucher.year,gl_voucher.period,gl_voucher.prepareddate AS pzrq,bd_vouchertype.code AS pzlxdm,bd_vouchertype.name AS pzlxjc,gl_voucher.num AS pzh,gl_voucher.attachment AS fjzs,gl_detail.detailindex AS xh,gl_detail.explanation AS zy,bd_account.code AS kmdm,bd_accasoa.name AS kmmc,gl_detail.oppositesubj AS dfkm,gl_detail.assid,bd_currtype.code AS wbdm,bd_currtype.name AS wbmc,gl_detail.debitamount jfwb,gl_detail.debitquantity jfsl,gl_detail.localdebitamount AS jfje,gl_detail.creditamount AS dfwb,gl_detail.creditquantity AS dfsl,gl_detail.localcreditamount AS dfje FROM gl_detail,gl_voucher,bd_accasoa,bd_account,bd_currtype,bd_vouchertype,org_accountingbook WHERE gl_detail.pk_voucher = gl_voucher.pk_voucher AND gl_detail.dr = 0 AND bd_accasoa.pk_accasoa = gl_detail.pk_accasoa AND bd_accasoa.pk_account = bd_account.pk_account AND bd_currtype.pk_currtype = gl_detail.pk_currtype AND bd_vouchertype.pk_vouchertype = gl_voucher.pk_vouchertype AND gl_voucher.pk_accountingbook = org_accountingbook.pk_accountingbook AND gl_voucher.period = ? AND gl_voucher.year = ? AND org_accountingbook.code = ?) gl_pza LEFT JOIN gl_freevalue ON gl_freevalue.freevalueid = gl_pza.assid"
+                    " (SELECT gl_voucher.year,gl_voucher.period,gl_voucher.prepareddate AS pzrq,bd_vouchertype.code AS pzlxdm,bd_vouchertype.name AS pzlxjc,gl_voucher.num AS pzh,gl_voucher.attachment AS fjzs,gl_detail.detailindex AS xh,gl_detail.explanation AS zy,bd_account.code AS kmdm,bd_accasoa.name AS kmmc,gl_detail.oppositesubj AS dfkm,gl_detail.assid,bd_currtype.code AS wbdm,bd_currtype.name AS wbmc,gl_detail.debitamount jfwb,gl_detail.debitquantity jfsl,gl_detail.localdebitamount AS jfje,gl_detail.creditamount AS dfwb,gl_detail.creditquantity AS dfsl,gl_detail.localcreditamount AS dfje FROM gl_detail,gl_voucher,bd_accasoa,bd_account,bd_currtype,bd_vouchertype,org_accountingbook WHERE gl_detail.pk_voucher = gl_voucher.pk_voucher AND gl_detail.dr = 0 AND bd_accasoa.pk_accasoa = gl_detail.pk_accasoa AND bd_accasoa.pk_account = bd_account.pk_account AND bd_currtype.pk_currtype = gl_detail.pk_currtype AND bd_vouchertype.pk_vouchertype = gl_voucher.pk_vouchertype AND gl_voucher.pk_accountingbook = org_accountingbook.pk_accountingbook AND gl_voucher.period = ? AND gl_voucher.year = ? AND org_accountingbook.code = ?) gl_pza LEFT JOIN gl_freevalue ON gl_freevalue.freevalueid = gl_pza.assid order by gl_pza.pzlxdm,gl_pza.pzh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@period", OleDbType.VarChar, 2).Value = Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@year", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
@@ -276,7 +276,7 @@ Public Class FrmImpNC
                                         End If
                                         rcOleDbDataAdpt.Fill(rcDataset, "bd_cust_supplier")
                                         If rcDataset.Tables("bd_cust_supplier").Rows.Count > 0 Then
-                                            If Mid(rcDataset.Tables("gl_pz").Rows(i).Item("kmdm"), 1, 4) = "2202" Then
+                                            If Mid(rcDataset.Tables("gl_pz").Rows(i).Item("kmdm"), 1, 4) = "2202" Or rcDataset.Tables("gl_pz").Rows(i).Item("kmdm") = "2241" Or rcDataset.Tables("gl_pz").Rows(i).Item("kmdm") = "22510114" Then
                                                 '科目编码是2开头，设为供应商
                                                 rcDataset.Tables("gl_pz").Rows(i).Item("csdm") = rcDataset.Tables("bd_cust_supplier").Rows(0).Item("code")
                                                 rcDataset.Tables("gl_pz").Rows(i).Item("csmc") = rcDataset.Tables("bd_cust_supplier").Rows(0).Item("name")
@@ -2184,7 +2184,7 @@ Public Class FrmImpNC
                     ",CASE WHEN gl_freevalue.typevalue7 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue7,1,20) ELSE '~' END AS type7,CASE WHEN gl_freevalue.typevalue7 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue7,21,20) ELSE '~' END AS value7" &
                     ",CASE WHEN gl_freevalue.typevalue8 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue8,1,20) ELSE '~' END AS type8,CASE WHEN gl_freevalue.typevalue8 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue8,21,20) ELSE '~' END AS value8" &
                     ",CASE WHEN gl_freevalue.typevalue9 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue9,1,20) ELSE '~' END AS type9,CASE WHEN gl_freevalue.typevalue9 <> 'NN/A' THEN SUBSTR(gl_freevalue.typevalue9,21,20) ELSE '~' END AS value9 FROM" &
-                    "(SELECT gl_balance.year,gl_balance.period,bd_account.code AS kmdm,bd_accasoa.name AS kmmc,gl_balance.assid,bd_currtype.code AS wbdm,gl_balance.debitamount jfwb,gl_balance.debitquantity jfsl,gl_balance.localdebitamount AS jfje,gl_balance.creditamount AS dfwb,gl_balance.creditquantity AS dfsl,gl_balance.localcreditamount AS dfje FROM gl_balance,bd_account,bd_accasoa,bd_currtype,org_accountingbook WHERE bd_accasoa.pk_accasoa = gl_balance.pk_accasoa AND bd_account.pk_account = bd_accasoa.pk_account AND bd_currtype.pk_currtype = gl_balance.pk_currtype AND gl_balance.pk_accountingbook = org_accountingbook.pk_accountingbook AND gl_balance.period = '00' AND gl_balance.year = ? AND org_accountingbook.code = ?) gl_kmyeba LEFT JOIN gl_freevalue ON gl_freevalue.freevalueid = gl_kmyeba.assid"
+                    "(SELECT gl_balance.year,gl_balance.period,bd_account.code AS kmdm,bd_accasoa.name AS kmmc,gl_balance.assid,bd_currtype.code AS wbdm,bd_currtype.name AS wbmc,gl_balance.debitamount jfwb,gl_balance.debitquantity jfsl,gl_balance.localdebitamount AS jfje,gl_balance.creditamount AS dfwb,gl_balance.creditquantity AS dfsl,gl_balance.localcreditamount AS dfje FROM gl_balance,bd_account,bd_accasoa,bd_currtype,org_accountingbook WHERE bd_accasoa.pk_accasoa = gl_balance.pk_accasoa AND bd_account.pk_account = bd_accasoa.pk_account AND bd_currtype.pk_currtype = gl_balance.pk_currtype AND gl_balance.pk_accountingbook = org_accountingbook.pk_accountingbook AND gl_balance.period = '00' AND gl_balance.year = ? AND org_accountingbook.code = ?) gl_kmyeba LEFT JOIN gl_freevalue ON gl_freevalue.freevalueid = gl_kmyeba.assid"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@year", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
@@ -2246,7 +2246,7 @@ Public Class FrmImpNC
                                         End If
                                         rcOleDbDataAdpt.Fill(rcDataset, "bd_cust_supplier")
                                         If rcDataset.Tables("bd_cust_supplier").Rows.Count > 0 Then
-                                            If Mid(rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm"), 1, 4) = "2202" Then
+                                            If Mid(rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm"), 1, 4) = "2202" Or Mid(rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm"), 1, 4) = "2241" Or rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm") = "22510114" Then
                                                 '科目编码是2开头，设为供应商
                                                 rcDataset.Tables("gl_kmyeb").Rows(i).Item("csdm") = rcDataset.Tables("bd_cust_supplier").Rows(0).Item("code")
                                                 rcDataset.Tables("gl_kmyeb").Rows(i).Item("csmc") = rcDataset.Tables("bd_cust_supplier").Rows(0).Item("name")
@@ -2329,7 +2329,7 @@ Public Class FrmImpNC
                 Me.ProgressBar1.Maximum = rcDataset.Tables("gl_kmyeb").Rows.Count
                 For i = 0 To rcDataset.Tables("gl_kmyeb").Rows.Count - 1
                     Me.ProgressBar1.Value = i + 1
-                    rcOleDbCommand.CommandText = "SELECT * FROM gl_kmyeb WHERE jxzh = ? AND yhzh = ? AND csdm = ? AND khdm =? AND xmdm = ? AND zydm = ? AND bmdm = ? AND kmdm = ? AND kjnd = ?"
+                    rcOleDbCommand.CommandText = "SELECT * FROM gl_kmyeb WHERE jxzh = ? AND yhzh = ? AND csdm = ? AND khdm =? AND xmdm = ? AND zydm = ? AND bmdm = ? AND wbdm = ? AND kmdm = ? AND kjnd = ?"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("jxzh")
                     rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("yhzh")
@@ -2343,6 +2343,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("xmdm")
                     rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("zydm")
                     rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("bmdm")
+                    rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("wbdm")
                     rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm")
                     rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.Char, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("year")
                     rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -2351,7 +2352,7 @@ Public Class FrmImpNC
                     End If
                     rcOleDbDataAdpt.Fill(rcDataset, "t_kmyeb")
                     If rcDataset.Tables("t_kmyeb").Rows.Count > 0 Then
-                        rcOleDbCommand.CommandText = "UPDATE gl_kmyeb SET jd = ? ,ncsl = ?,ncwb =  ?,ncje = ? WHERE jxzh = ? AND yhzh = ? AND csdm = ? AND khdm =? AND xmdm = ? AND zydm = ? AND bmdm = ? AND kmdm = ? AND kjnd = ?"
+                        rcOleDbCommand.CommandText = "UPDATE gl_kmyeb SET jd = ? ,ncsl = ?,ncwb =  ?,ncje = ? WHERE jxzh = ? AND yhzh = ? AND csdm = ? AND khdm =? AND xmdm = ? AND zydm = ? AND bmdm = ? AND wbdm = ? AND kmdm = ? AND kjnd = ?"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@jd", OleDbType.Char, 2).Value = IIf(IIf(rcDataset.Tables("t_kmyeb").Rows(0).Item("jd") = "借", rcDataset.Tables("t_kmyeb").Rows(0).Item("ncje"), 0 - rcDataset.Tables("t_kmyeb").Rows(0).Item("ncje")) + rcDataset.Tables("gl_kmyeb").Rows(i).Item("jfje") - rcDataset.Tables("gl_kmyeb").Rows(i).Item("dfje") > 0, "借", "贷")
                         rcOleDbCommand.Parameters.Add("@ncsl", OleDbType.Numeric, 18).Value = IIf(IIf(rcDataset.Tables("t_kmyeb").Rows(0).Item("jd") = "借", rcDataset.Tables("t_kmyeb").Rows(0).Item("ncje"), 0 - rcDataset.Tables("t_kmyeb").Rows(0).Item("ncje")) + rcDataset.Tables("gl_kmyeb").Rows(i).Item("jfje") - rcDataset.Tables("gl_kmyeb").Rows(i).Item("dfje") > 0, IIf(rcDataset.Tables("t_kmyeb").Rows(0).Item("jd") = "借", rcDataset.Tables("t_kmyeb").Rows(0).Item("ncsl"), 0 - rcDataset.Tables("t_kmyeb").Rows(0).Item("ncsl")) + rcDataset.Tables("gl_kmyeb").Rows(i).Item("jfsl") - rcDataset.Tables("gl_kmyeb").Rows(i).Item("dfsl"), IIf(rcDataset.Tables("t_kmyeb").Rows(0).Item("jd") = "借", 0 - rcDataset.Tables("t_kmyeb").Rows(0).Item("ncsl"), rcDataset.Tables("t_kmyeb").Rows(0).Item("ncsl")) - rcDataset.Tables("gl_kmyeb").Rows(i).Item("jfsl") + rcDataset.Tables("gl_kmyeb").Rows(i).Item("dfsl"))
@@ -2369,14 +2370,16 @@ Public Class FrmImpNC
                         rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("xmdm")
                         rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("zydm")
                         rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("bmdm")
+                        rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("wbdm")
                         rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm")
                         rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.Char, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("year")
                         rcOleDbCommand.ExecuteNonQuery()
                     Else
-                        rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                        rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.Char, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("year")
                         rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm")
+                        rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("wbdm")
                         rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("bmdm")
                         rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("zydm")
                         rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("xmdm")
@@ -2409,6 +2412,25 @@ Public Class FrmImpNC
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmdm")
                             rcOleDbCommand.Parameters.Add("@kmmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("kmmc")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                    '检测币种编码
+                    If rcDataset.Tables("gl_kmyeb").Rows(i).Item("wbdm") <> "~" Then
+                        rcOleDbCommand.CommandText = "SELECT wbdm FROM rc_wbxx WHERE kjnd = ? AND wbdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.Char, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("year")
+                        rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("wbdm")
+                        If rcDataset.Tables("rc_wbxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_wbxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_wbxx")
+                        If rcDataset.Tables("rc_wbxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_wbxx (kjnd,wbdm,wbmc) VALUES (?,?,?)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.Char, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("year")
+                            rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("wbdm")
+                            rcOleDbCommand.Parameters.Add("@wbmc", OleDbType.VarChar, 20).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("wbmc")
                             rcOleDbCommand.ExecuteNonQuery()
                         End If
                     End If
@@ -2511,7 +2533,7 @@ Public Class FrmImpNC
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
                 'rcOleDbCommand.CommandText = "SELECT bd_customer.code AS khdm,bd_psndoc.code AS zydm,bd_psndoc.name AS zymc,bd_defdoc.name AS skqx FROM bd_custfinance,bd_psndoc,bd_defdoc,bd_customer,org_orgs where bd_defdoc.pk_defdoc = bd_custfinance.def" & Trim(Me.ComboBox2.SelectedItem.ToString) & " and bd_customer.pk_customer =bd_custfinance.pk_customer and bd_custfinance.pk_resppsn1 = bd_psndoc.pk_psndoc and org_orgs.pk_org = bd_custfinance.pk_org and org_orgs.code = ?"
-                rcOleDbCommand.CommandText = "SELECT aa.*,bd_defdoc.name AS skqx FROM (SELECT bd_customer.code AS khdm,bd_psndoc.code AS zydm,bd_psndoc.name AS zymc,bd_custfinance.def" & Trim(Me.ComboBox2.SelectedItem.ToString) & " FROM bd_custfinance,bd_psndoc,bd_customer,org_orgs WHERE bd_customer.pk_customer =bd_custfinance.pk_customer and bd_custfinance.pk_resppsn1 = bd_psndoc.pk_psndoc and org_orgs.pk_org = bd_custfinance.pk_org and org_orgs.code = ?) aa LEFT JOIN bd_defdoc ON bd_defdoc.pk_defdoc = aa.def" & Trim(Me.ComboBox2.SelectedItem.ToString)
+                rcOleDbCommand.CommandText = "SELECT aa.*,bd_defdoc.name AS skqx FROM (SELECT bd_customer.code AS khdm,bd_psndoc.code AS zydm,bd_psndoc.name AS zymc,bd_custfinance.def" & Trim(Me.ComboBox2.SelectedItem.ToString) & " FROM bd_custfinance,bd_psndoc,bd_customer,org_orgs WHERE bd_custfinance.dr = 0 AND bd_customer.dr = 0 AND bd_psndoc.dr = 0 and org_orgs.dr =0 AND bd_customer.pk_customer =bd_custfinance.pk_customer and bd_custfinance.pk_resppsn1 = bd_psndoc.pk_psndoc and org_orgs.pk_org = bd_custfinance.pk_org and org_orgs.code = ?) aa LEFT JOIN bd_defdoc ON bd_defdoc.dr = 0 AND bd_defdoc.pk_defdoc = aa.def" & Trim(Me.ComboBox2.SelectedItem.ToString)
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -2552,6 +2574,7 @@ Public Class FrmImpNC
                 Try
                     rcOleDbTrans.Rollback()
                     MsgBox("程序错误。" & Chr(13) & ex.Message)
+
                 Catch ey As OleDbException
                     MsgBox("程序错误。" & Chr(13) & ey.Message)
                 End Try

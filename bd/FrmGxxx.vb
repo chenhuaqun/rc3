@@ -36,6 +36,11 @@ Public Class FrmGxxx
         dtGx.Columns.Add("bmdm", Type.GetType("System.String"))
         dtGx.Columns.Add("bmmc", Type.GetType("System.String"))
         dtGx.Columns.Add("ydcl", Type.GetType("System.Double"))
+        dtGx.Columns.Add("ydbl_clcb", Type.GetType("System.Double"))
+        dtGx.Columns.Add("ydbl_rgcb", Type.GetType("System.Double"))
+        dtGx.Columns.Add("ydbl_nycb", Type.GetType("System.Double"))
+        dtGx.Columns.Add("ydbl_zjcb", Type.GetType("System.Double"))
+        dtGx.Columns.Add("ydbl_glcb", Type.GetType("System.Double"))
         rcDataset.Tables.Add(dtGx)
         With dtGx
             .Columns("gxdm").DefaultValue = ""
@@ -44,6 +49,11 @@ Public Class FrmGxxx
             .Columns("bmdm").DefaultValue = ""
             .Columns("bmmc").DefaultValue = ""
             .Columns("ydcl").DefaultValue = 0.0
+            .Columns("ydbl_clcb").DefaultValue = 0.0
+            .Columns("ydbl_rgcb").DefaultValue = 0.0
+            .Columns("ydbl_nycb").DefaultValue = 0.0
+            .Columns("ydbl_zjcb").DefaultValue = 0.0
+            .Columns("ydbl_glcb").DefaultValue = 0.0
         End With
         '显示等待样式鼠标
         Cursor.Current = New Cursor(Application.StartupPath & "\" & "Wait.cur")
@@ -52,7 +62,7 @@ Public Class FrmGxxx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl FROM rc_gxxx ORDER BY gxdm"
+            rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl,ydbl_clcb * 100 AS ydbl_clcb,ydbl_rgcb*100 AS ydbl_rgcb,ydbl_nycb * 100 AS ydbl_nycb,ydbl_zjcb* 100 AS ydbl_zjcb,ydbl_glcb*100 AS ydbl_glcb FROM rc_gxxx ORDER BY gxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_gxxx") IsNot Nothing Then
@@ -267,7 +277,7 @@ Public Class FrmGxxx
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.AddWithValue("@gxdm", BindingContext(rcDataView, "").Current("gxdm"))
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl FROM rc_gxxx ORDER BY gxdm"
+                rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl,ydbl_clcb * 100 AS ydbl_clcb,ydbl_rgcb*100 AS ydbl_rgcb,ydbl_nycb * 100 AS ydbl_nycb,ydbl_zjcb* 100 AS ydbl_zjcb,ydbl_glcb*100 AS ydbl_glcb FROM rc_gxxx ORDER BY gxdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_gxxx") IsNot Nothing Then
@@ -301,7 +311,7 @@ Public Class FrmGxxx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl FROM rc_gxxx ORDER BY gxdm"
+            rcOleDbCommand.CommandText = "SELECT gxdm,gxmc,gxsm,bmdm,bmmc,ydcl*100 AS ydcl,ydbl_clcb * 100 AS ydbl_clcb,ydbl_rgcb*100 AS ydbl_rgcb,ydbl_nycb * 100 AS ydbl_nycb,ydbl_zjcb* 100 AS ydbl_zjcb,ydbl_glcb*100 AS ydbl_glcb FROM rc_gxxx ORDER BY gxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_gxxx") IsNot Nothing Then

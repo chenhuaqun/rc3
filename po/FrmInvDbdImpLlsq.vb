@@ -323,7 +323,7 @@ Public Class FrmInvDbdImpLlsq
                 strZymc = rcDataSet.Tables("inv_llsqml").Rows(0).Item("zymc")
             End If
             '取物料信息
-            rcOleDbCommand.CommandText = "SELECT inv_llsq.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,inv_llsq.csdm,inv_llsq.csmc,rc_cpxx.brecycling,rc_cpxx.bfadm,inv_llsq.fadm,inv_llsq.famc,rc_cpxx.kuwei,(inv_llsq.sl - inv_llsq.cksl) As sl,rc_cpxx.dw,0.0 AS dj,0.0 AS je,inv_llsq.sqmemo AS ckmemo,inv_llsq.djh AS llsqdjh,inv_llsq.xh AS llsqxh FROM inv_llsq,rc_cpxx WHERE inv_llsq.cpdm = rc_cpxx.cpdm AND ((inv_llsq.sl > inv_llsq.cksl AND inv_llsq.sl > 0) OR (inv_llsq.sl < inv_llsq.cksl AND inv_llsq.sl < 0)) AND inv_llsq.bclosed  = 0" & IIf(Me.ChbSh.Checked, " AND NOT inv_llsq.shr IS NULL", "") & IIf(Not String.IsNullOrEmpty(Me.TxtDjh.Text), " and inv_llsq.djh = '" & Trim(Me.TxtDjh.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and inv_llsq.cpdm = '" & Trim(Me.TxtCpdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " and inv_llsq.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " and inv_llsq.bmdm LIKE '" & Trim(Me.TxtBmdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtZydm.Text), " and inv_llsq.zydm = '" & Trim(Me.TxtZydm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtFadm.Text), " and inv_llsq.fadm = '" & Trim(Me.TxtFadm.Text) & "'", "") & " ORDER BY inv_llsq.xh"
+            rcOleDbCommand.CommandText = "SELECT inv_llsq.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,inv_llsq.csdm,inv_llsq.csmc,rc_cpxx.brecycling,rc_cpxx.bfadm,inv_llsq.fadm,inv_llsq.famc,rc_cpxx.kuwei,'' AS pihao,(inv_llsq.sl - inv_llsq.cksl) As sl,rc_cpxx.dw,0.0 AS dj,0.0 AS je,inv_llsq.sqmemo AS ckmemo,inv_llsq.djh AS llsqdjh,inv_llsq.xh AS llsqxh FROM inv_llsq,rc_cpxx WHERE inv_llsq.cpdm = rc_cpxx.cpdm AND ((inv_llsq.sl > inv_llsq.cksl AND inv_llsq.sl > 0) OR (inv_llsq.sl < inv_llsq.cksl AND inv_llsq.sl < 0)) AND inv_llsq.bclosed  = 0" & IIf(Me.ChbSh.Checked, " AND NOT inv_llsq.shr IS NULL", "") & IIf(Not String.IsNullOrEmpty(Me.TxtDjh.Text), " and inv_llsq.djh = '" & Trim(Me.TxtDjh.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and inv_llsq.cpdm = '" & Trim(Me.TxtCpdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " and inv_llsq.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " and inv_llsq.bmdm LIKE '" & Trim(Me.TxtBmdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtZydm.Text), " and inv_llsq.zydm = '" & Trim(Me.TxtZydm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtFadm.Text), " and inv_llsq.fadm = '" & Trim(Me.TxtFadm.Text) & "'", "") & " ORDER BY inv_llsq.xh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataSet.Tables("rc_dbdnr") IsNot Nothing Then
@@ -344,57 +344,79 @@ Public Class FrmInvDbdImpLlsq
         For i = 0 To rcDataSet.Tables("rc_dbdnr").Rows.Count - 1
             dblCksl = 0.0
             dblCkje = 0.0
-            If rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") > 0 Then
-                '正常出库
-                Try
-                    rcOleDbConn.Open()
-                    rcOleDbCommand.Connection = rcOleDbConn
-                    rcOleDbCommand.CommandTimeout = 300
-                    rcOleDbCommand.CommandType = CommandType.Text
-                    If rcDataSet.Tables("rc_dbdnr").Rows(i).Item("csdm").GetType.ToString <> "System.DBNull" Then
-                        rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(po_rkd.sl),0.0) AS sl,COALESCE(SUM(po_rkd.cksl),0.0) AS cksl,COALESCE(SUM(po_rkd.je),0.0) AS je,COALESCE(SUM(po_rkd.ckje),0.0) AS ckje FROM po_rkd WHERE po_rkd.bdelete = 0 AND po_rkd.sl <> po_rkd.cksl AND po_rkd.ckdm = ? AND po_rkd.cpdm = ? AND po_rkd.csdm = ?"
-                        rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = strCkdm
-                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("cpdm")
-                        rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("csdm")
+            If rcDataset.Tables("rc_dbdnr").Rows(i).Item("sl") > 0 Then
+                '取库存单价
+                If rcDataset.Tables("rc_dbdnr").Rows(i).Item("csdm").GetType.ToString = "System.DBNull" Then
+                    rcDataset.Tables("rc_dbdnr").Rows(i).Item("csdm") = ""
+                End If
+                If rcDataset.Tables("rc_dbdnr").Rows(i).Item("pihao").GetType.ToString = "System.DBNull" Then
+                    rcDataset.Tables("rc_dbdnr").Rows(i).Item("pihao") = ""
+                End If
+                If Not String.IsNullOrEmpty(rcDataset.Tables("rc_dbdnr").Rows(i).Item("csdm")) Then
+                    '有供应商
+                    If Not String.IsNullOrEmpty(rcDataset.Tables("rc_dbdnr").Rows(i).Item("pihao")) Then
+                        '有批号
+                        rcDataset.Tables("rc_dbdnr").Rows(i).Item("dj") = ReadCsPhKcdj(rcDataset.Tables("rc_dbdnr").Rows(i).Item("cpdm"), rcDataset.Tables("rc_dbdnr").Rows(i).Item("csdm"), rcDataset.Tables("rc_dbdnr").Rows(i).Item("pihao"), strCkdm, False)
                     Else
-                        rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(inv_rkd.sl),0.0) AS sl,COALESCE(SUM(inv_rkd.cksl),0.0) AS cksl,COALESCE(SUM(inv_rkd.je),0.0) AS je,COALESCE(SUM(inv_rkd.ckje),0.0) AS ckje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.sl <> inv_rkd.cksl AND inv_rkd.ckdm = ? AND inv_rkd.cpdm = ?"
-                        rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = strCkdm
-                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("cpdm")
-                    End If
-                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                    If rcDataSet.Tables("po_rkd") IsNot Nothing Then
-                        rcDataSet.Tables("po_rkd").Clear()
-                    End If
-                    rcOleDbDataAdpt.Fill(rcDataSet, "po_rkd")
-                Catch ex As Exception
-                    MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-                    Return
-                Finally
-                    rcOleDbConn.Close()
-                End Try
-                If rcDataSet.Tables("po_rkd").Rows.Count > 0 Then
-                    For j = 0 To rcDataSet.Tables("po_rkd").Rows.Count - 1
-                        If rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") - dblCksl >= rcDataSet.Tables("po_rkd").Rows(j).Item("sl") - rcDataSet.Tables("po_rkd").Rows(j).Item("cksl") Then
-                            dblCksl = dblCksl + rcDataSet.Tables("po_rkd").Rows(j).Item("sl") - rcDataSet.Tables("po_rkd").Rows(j).Item("cksl")
-                            dblCkje = dblCkje + rcDataSet.Tables("po_rkd").Rows(j).Item("je") - rcDataSet.Tables("po_rkd").Rows(j).Item("ckje")
-                        Else
-                            dblCksl = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl")
-                            dblCkje = (rcDataSet.Tables("po_rkd").Rows(j).Item("je") - rcDataSet.Tables("po_rkd").Rows(j).Item("ckje")) / (rcDataSet.Tables("po_rkd").Rows(j).Item("sl") - rcDataSet.Tables("po_rkd").Rows(j).Item("cksl")) * rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl")
-                            Exit For
-                        End If
-                    Next
-                    '限制出库数量
-                    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") = dblCksl
-                    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("je") = dblCkje
-                    If rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") <> 0 Then
-                        rcDataSet.Tables("rc_dbdnr").Rows(i).Item("dj") = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("je") / rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl")
+                        '无批号
+                        rcDataset.Tables("rc_dbdnr").Rows(i).Item("dj") = ReadCsKcdj(rcDataset.Tables("rc_dbdnr").Rows(i).Item("cpdm"), rcDataset.Tables("rc_dbdnr").Rows(i).Item("csdm"), strCkdm, False)
                     End If
                 Else
-                    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") = 0
-                    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("je") = 0
+                    '无供应商
+                    rcDataset.Tables("rc_dbdnr").Rows(i).Item("dj") = ReadKcdj(Mid(g_Kjqj, 1, 4), rcDataset.Tables("rc_dbdnr").Rows(i).Item("cpdm"), strCkdm, "")
                 End If
+                rcDataset.Tables("rc_dbdnr").Rows(i).Item("je") = System.Math.Round(rcDataset.Tables("rc_dbdnr").Rows(i).Item("sl") * rcDataset.Tables("rc_dbdnr").Rows(i).Item("dj"), 2, MidpointRounding.AwayFromZero)
+
+                ''正常出库
+                'Try
+                '    rcOleDbConn.Open()
+                '    rcOleDbCommand.Connection = rcOleDbConn
+                '    rcOleDbCommand.CommandTimeout = 300
+                '    rcOleDbCommand.CommandType = CommandType.Text
+                '    If rcDataSet.Tables("rc_dbdnr").Rows(i).Item("csdm").GetType.ToString <> "System.DBNull" Then
+                '        rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(po_rkd.sl),0.0) AS sl,COALESCE(SUM(po_rkd.cksl),0.0) AS cksl,COALESCE(SUM(po_rkd.je),0.0) AS je,COALESCE(SUM(po_rkd.ckje),0.0) AS ckje FROM po_rkd WHERE po_rkd.bdelete = 0 AND po_rkd.sl <> po_rkd.cksl AND po_rkd.ckdm = ? AND po_rkd.cpdm = ? AND po_rkd.csdm = ?"
+                '        rcOleDbCommand.Parameters.Clear()
+                '        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = strCkdm
+                '        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("cpdm")
+                '        rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("csdm")
+                '    Else
+                '        rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(inv_rkd.sl),0.0) AS sl,COALESCE(SUM(inv_rkd.cksl),0.0) AS cksl,COALESCE(SUM(inv_rkd.je),0.0) AS je,COALESCE(SUM(inv_rkd.ckje),0.0) AS ckje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.sl <> inv_rkd.cksl AND inv_rkd.ckdm = ? AND inv_rkd.cpdm = ?"
+                '        rcOleDbCommand.Parameters.Clear()
+                '        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = strCkdm
+                '        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("cpdm")
+                '    End If
+                '    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                '    If rcDataSet.Tables("po_rkd") IsNot Nothing Then
+                '        rcDataSet.Tables("po_rkd").Clear()
+                '    End If
+                '    rcOleDbDataAdpt.Fill(rcDataSet, "po_rkd")
+                'Catch ex As Exception
+                '    MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                '    Return
+                'Finally
+                '    rcOleDbConn.Close()
+                'End Try
+                'If rcDataSet.Tables("po_rkd").Rows.Count > 0 Then
+                '    For j = 0 To rcDataSet.Tables("po_rkd").Rows.Count - 1
+                '        If rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") - dblCksl >= rcDataSet.Tables("po_rkd").Rows(j).Item("sl") - rcDataSet.Tables("po_rkd").Rows(j).Item("cksl") Then
+                '            dblCksl = dblCksl + rcDataSet.Tables("po_rkd").Rows(j).Item("sl") - rcDataSet.Tables("po_rkd").Rows(j).Item("cksl")
+                '            dblCkje = dblCkje + rcDataSet.Tables("po_rkd").Rows(j).Item("je") - rcDataSet.Tables("po_rkd").Rows(j).Item("ckje")
+                '        Else
+                '            dblCksl = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl")
+                '            dblCkje = (rcDataSet.Tables("po_rkd").Rows(j).Item("je") - rcDataSet.Tables("po_rkd").Rows(j).Item("ckje")) / (rcDataSet.Tables("po_rkd").Rows(j).Item("sl") - rcDataSet.Tables("po_rkd").Rows(j).Item("cksl")) * rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl")
+                '            Exit For
+                '        End If
+                '    Next
+                '    '限制出库数量
+                '    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") = dblCksl
+                '    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("je") = dblCkje
+                '    If rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") <> 0 Then
+                '        rcDataSet.Tables("rc_dbdnr").Rows(i).Item("dj") = rcDataSet.Tables("rc_dbdnr").Rows(i).Item("je") / rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl")
+                '    End If
+                'Else
+                '    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("sl") = 0
+                '    rcDataSet.Tables("rc_dbdnr").Rows(i).Item("je") = 0
+                'End If
             Else
                 '取最后一笔出库的单价
                 Try

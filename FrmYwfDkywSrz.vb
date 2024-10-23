@@ -321,7 +321,7 @@ Public Class FrmYwfDkywSrz
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "SELECT rc_khxx.khdm,rc_khxx.khmc FROM rc_khxx WHERE (rc_khxx.khdm = ?)"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtKhdm.Text)
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_khxx") IsNot Nothing Then
                     Me.rcDataset.Tables("rc_khxx").Clear()
@@ -623,6 +623,21 @@ Public Class FrmYwfDkywSrz
             SetControlEnableEvent()
             Me.TxtDjh.Focus()
         End If
+    End Sub
+
+#End Region
+
+#Region "读入excel"
+
+    Private Sub BtnImpXls_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiImpXls.Click
+        '调用表单
+        Dim rcFrm As New FrmYwfDkywImpXls
+        With rcFrm
+            .ParaStrKjqj = strKjqj
+            .WindowState = FormWindowState.Maximized
+            .MdiParent = Me.MdiParent
+            .Show()
+        End With
     End Sub
 
 #End Region

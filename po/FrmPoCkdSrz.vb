@@ -928,6 +928,33 @@ Public Class FrmPoCkdSrz
                     'Me.LblMsg.Text += " 该批号库存数量：" & Format(dblPhkcsl, g_FormatSl)
                 End If
                 showKucun(rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCsdm").Value, rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColPiHao").EditedFormattedValue)
+                '读取库存单价
+                If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value.GetType.ToString = "System.DBNull" Then
+                    Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value = ""
+                End If
+                If Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value.GetType.ToString = "System.DBNull" Then
+                        Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value = ""
+                    End If
+                    If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value) Then
+                        If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value) Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsPhKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value, Me.TxtCkdm.Text, IIf(Me.rcDataGridView.CurrentRow.Cells("ColSl").Value < 0, True, False))
+                        Else
+                            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.TxtCkdm.Text, IIf(Me.rcDataGridView.CurrentRow.Cells("ColSl").Value < 0, True, False))
+                        End If
+                    Else
+                        Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadKcdj(strYear, Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.TxtCkdm.Text, Me.TxtDjh.Text)
+                    End If
+                    Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * Me.rcDataGridView.CurrentRow.Cells("ColSl").Value
+                    If Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value <> 0 Then
+                        If Me.rcDataGridView.CurrentRow.Cells("ColSl").Value <> 0 Then
+                            If Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = 0 Then
+                                Me.rcDataGridView.CurrentRow.Cells("ColFzsl").Value = Me.rcDataGridView.CurrentRow.Cells("ColSl").Value * Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value
+                            End If
+                        End If
+                    End If
+                If Me.rcDataGridView.CurrentRow.Cells("ColDj").Value <> 0 Then
+                    Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = System.Math.Round(Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * Me.rcDataGridView.CurrentRow.Cells("ColSl").Value, 2, MidpointRounding.AwayFromZero)
+                End If
             End If
             If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColSl" Then
                 '判断库存数量与出库数量的关系
@@ -942,11 +969,20 @@ Public Class FrmPoCkdSrz
                     End If
                     '读取库存单价
                     If Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = 0 Then
-                        If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value.GetType.ToString <> "System.DBNull" Then
-                            If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value <> "" Then
-                                Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.TxtCkdm.Text, IIf(e.FormattedValue < 0, True, False))
+                        If Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value.GetType.ToString = "System.DBNull" Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value = ""
+                        End If
+                        If Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value.GetType.ToString = "System.DBNull" Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value = ""
+                        End If
+                        If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value) Then
+                            If Not String.IsNullOrEmpty(Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value) Then
+                                Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsPhKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColPiHao").Value, Me.TxtCkdm.Text, IIf(e.FormattedValue < 0, True, False))
                             Else
-                                Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadKcdj(strYear, Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.TxtCkdm.Text, Me.TxtDjh.Text)
+                                Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadCsKcdj(Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.rcDataGridView.CurrentRow.Cells("ColCsdm").Value, Me.TxtCkdm.Text, IIf(e.FormattedValue < 0, True, False))
+                            End If
+                        Else
+                            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = ReadKcdj(strYear, Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value, Me.TxtCkdm.Text, Me.TxtDjh.Text)
                             End If
                             Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * e.FormattedValue
                             If Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value <> 0 Then
@@ -957,8 +993,7 @@ Public Class FrmPoCkdSrz
                                 End If
                             End If
                         End If
-                    End If
-                    If Me.rcDataGridView.CurrentRow.Cells("ColDj").Value <> 0 Then
+                        If Me.rcDataGridView.CurrentRow.Cells("ColDj").Value <> 0 Then
                         Me.rcDataGridView.CurrentRow.Cells("ColJe").Value = System.Math.Round(Me.rcDataGridView.CurrentRow.Cells("ColDj").Value * e.FormattedValue, 2, MidpointRounding.AwayFromZero)
                     End If
                 Else

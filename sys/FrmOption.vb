@@ -17,7 +17,7 @@ Public Class FrmOption
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc From rc_lx Where lxgs = '记账凭证' AND kjnd = ? ORDER BY pzlxdm"
+            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx Where lxgs = '记账凭证' AND kjnd = ? ORDER BY pzlxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@year", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -32,7 +32,7 @@ Public Class FrmOption
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_lx").Rows.Count = 0 Then
-            MsgBox("请定义单据类型。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            MsgBox("请在单据类型定义中的设置记账凭证的单据类型。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Return
         End If
         '绑定凭证类型简称
@@ -198,6 +198,19 @@ Public Class FrmOption
                     Me.TxtGlPath.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '本位币币种编码' ORDER BY paraid"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+            If rcDataset.Tables("rc_para").Rows.Count = 1 Then
+                If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                    Me.TxtWbdm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+                End If
+            End If
             rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? And (paraid = 'NCACCOUNTINGBOOK' or paraid = 'NCHOST' or paraid = 'NCSERVICE_NAME' or paraid = 'NCUser_ID' or paraid = 'NCPASSWORD') ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
@@ -258,6 +271,19 @@ Public Class FrmOption
                     Me.ChbCostRegion.Checked = rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue")
                 End If
             End If
+            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = '按成本要素独立分配成本' ORDER BY paraid"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+            If rcDataset.Tables("rc_para").Rows.Count = 1 Then
+                If rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue").GetType.ToString <> "System.DBNull" Then
+                    Me.ChbCostElements.Checked = rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue")
+                End If
+            End If
         Catch ex As Exception
             MsgBox("程序错误。" & Chr(13) & ex.Message)
             Return
@@ -265,7 +291,6 @@ Public Class FrmOption
             rcOleDbConn.Close()
         End Try
     End Sub
-
 
 #Region "应收账款科目编码的事件"
 
@@ -672,6 +697,63 @@ Public Class FrmOption
         End If
     End Sub
 
+#Region "本位币币种的事件"
+
+    Private Sub TxtWbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtWbdm.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F3
+                Dim rcFrm As New models.FrmF3KeyPress
+                With rcFrm
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_wbxx"
+                    .ParaField1 = "wbdm"
+                    .ParaField2 = "wbmc"
+                    .ParaField3 = "wbsm"
+                    .ParaCondition = "0=0"
+                    .ParaOrderField = "wbdm"
+                    .ParaTitle = "币种"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
+                    If .ShowDialog = DialogResult.OK Then
+                        TxtWbdm.Text = Trim(.ParaField1)
+                    End If
+                End With
+        End Select
+    End Sub
+
+    Private Sub TxtWbdm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtWbdm.Validating
+        If Not String.IsNullOrEmpty(Me.TxtWbdm.Text) Then
+            Try
+                rcOleDbConn.Open()
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT * FROM rc_wbxx WHERE (wbdm = ?)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtWbdm.Text)
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("rc_wbxx") IsNot Nothing Then
+                    Me.rcDataset.Tables("rc_wbxx").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "rc_wbxx")
+            Catch ex As Exception
+                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+            If rcDataset.Tables("rc_wbxx").Rows.Count > 0 Then
+                TxtWbdm.Text = Trim(rcDataset.Tables("rc_wbxx").Rows(0).Item("wbdm"))
+            Else
+                MsgBox("币种编码不存在。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                e.Cancel = True
+                Return
+            End If
+        End If
+    End Sub
+
+#End Region
+
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSave.Click
         '写系统参数
         Try
@@ -968,10 +1050,21 @@ Public Class FrmOption
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
+            '删除数据
+            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And paraid = '按成本要素独立分配成本'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbCommand.ExecuteNonQuery()
             '插入数据
             rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('是否按成本域计算成本','',?,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.Numeric, 1).Value = IIf(Me.ChbCostRegion.Checked, 1, 0)
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbCommand.ExecuteNonQuery()
+            '插入数据
+            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('按成本要素独立分配成本','',?,?)"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.Numeric, 1).Value = IIf(Me.ChbCostElements.Checked, 1, 0)
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
             rcOleDbTrans.Commit()

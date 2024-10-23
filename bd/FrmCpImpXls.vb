@@ -137,14 +137,30 @@ Public Class FrmCpImpXls
                             If rcDataset.Tables("result").Rows(i).Item("材料成本").GetType.ToString = "System.DBNull" Then
                                 rcDataset.Tables("result").Rows(i).Item("材料成本") = 0.0
                             End If
+                            If rcDataset.Tables("result").Rows(i).Item("人工成本").GetType.ToString = "System.DBNull" Then
+                                rcDataset.Tables("result").Rows(i).Item("人工成本") = 0.0
+                            End If
+                            If rcDataset.Tables("result").Rows(i).Item("能源成本").GetType.ToString = "System.DBNull" Then
+                                rcDataset.Tables("result").Rows(i).Item("能源成本") = 0.0
+                            End If
+                            If rcDataset.Tables("result").Rows(i).Item("折旧成本").GetType.ToString = "System.DBNull" Then
+                                rcDataset.Tables("result").Rows(i).Item("折旧成本") = 0.0
+                            End If
+                            If rcDataset.Tables("result").Rows(i).Item("管理成本").GetType.ToString = "System.DBNull" Then
+                                rcDataset.Tables("result").Rows(i).Item("管理成本") = 0.0
+                            End If
                             If rcDataset.Tables("result").Rows(i).Item("倍数").GetType.ToString = "System.DBNull" Then
                                 rcDataset.Tables("result").Rows(i).Item("倍数") = 1
                             End If
                             If rcDataset.Tables("result").Rows(i).Item("标准成本") <> 0 Then
-                                rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET bzcb = ?,clcb = ?,beishu = ? WHERE cpdm = ?"
+                                rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET bzcb = ?,clcb = ?,rgcb= ?,nycb = ?,zjcb = ?,glcb = ?,beishu = ? WHERE cpdm = ?"
                                 rcOleDbCommand.Parameters.Clear()
                                 rcOleDbCommand.Parameters.Add("@bzcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("标准成本")
                                 rcOleDbCommand.Parameters.Add("@clcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("材料成本")
+                                rcOleDbCommand.Parameters.Add("@rgcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("人工成本")
+                                rcOleDbCommand.Parameters.Add("@nycb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("能源成本")
+                                rcOleDbCommand.Parameters.Add("@zjcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("折旧成本")
+                                rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("管理成本")
                                 rcOleDbCommand.Parameters.Add("@beishu", OleDbType.Numeric, 12).Value = rcDataset.Tables("result").Rows(i).Item("倍数")
                                 rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料编码")).ToUpper
                                 rcOleDbCommand.ExecuteNonQuery()
@@ -205,7 +221,7 @@ Public Class FrmCpImpXls
                         Next
                         If blnExists Then
                             '添加物料属性信息
-                            rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,mjsl,fzdw,bzcb,clcb,beishu,cpweight,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,mjsl,fzdw,bzcb,clcb,rgcb,nycb,zjcb,glcb,beishu,cpweight,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料类别编码")).ToUpper
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料编码")).ToUpper
@@ -216,6 +232,10 @@ Public Class FrmCpImpXls
                             rcOleDbCommand.Parameters.Add("@fzdw", OleDbType.VarChar, 8).Value = rcDataset.Tables("result").Rows(i).Item("辅单位")
                             rcOleDbCommand.Parameters.Add("@bzcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("标准成本")
                             rcOleDbCommand.Parameters.Add("@clcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("材料成本")
+                            rcOleDbCommand.Parameters.Add("@rgcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("人工成本")
+                            rcOleDbCommand.Parameters.Add("@nycb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("能源成本")
+                            rcOleDbCommand.Parameters.Add("@zjcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("折旧成本")
+                            rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("管理成本")
                             rcOleDbCommand.Parameters.Add("@beishu", OleDbType.Numeric, 12).Value = rcDataset.Tables("result").Rows(i).Item("倍数")
                             rcOleDbCommand.Parameters.Add("@cpweight", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("克重")
                             rcOleDbCommand.Parameters.Add("@srr", OleDbType.VarChar, 30).Value = g_User_DspName
@@ -249,10 +269,32 @@ Public Class FrmCpImpXls
                             'rcOleDbCommand.ExecuteNonQuery()
                             If rcDataset.Tables("result").Rows(i).Item("标准成本").GetType.ToString <> "System.DBNull" Then
                                 If rcDataset.Tables("result").Rows(i).Item("标准成本") <> 0 Then
-                                    rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET bzcb = ?,clcb = ?,beishu = ? WHERE cpdm = ?"
+                                    If rcDataset.Tables("result").Rows(i).Item("材料成本").GetType.ToString = "System.DBNull" Then
+                                        rcDataset.Tables("result").Rows(i).Item("材料成本") = 0.0
+                                    End If
+                                    If rcDataset.Tables("result").Rows(i).Item("人工成本").GetType.ToString = "System.DBNull" Then
+                                        rcDataset.Tables("result").Rows(i).Item("人工成本") = 0.0
+                                    End If
+                                    If rcDataset.Tables("result").Rows(i).Item("能源成本").GetType.ToString = "System.DBNull" Then
+                                        rcDataset.Tables("result").Rows(i).Item("能源成本") = 0.0
+                                    End If
+                                    If rcDataset.Tables("result").Rows(i).Item("折旧成本").GetType.ToString = "System.DBNull" Then
+                                        rcDataset.Tables("result").Rows(i).Item("折旧成本") = 0.0
+                                    End If
+                                    If rcDataset.Tables("result").Rows(i).Item("管理成本").GetType.ToString = "System.DBNull" Then
+                                        rcDataset.Tables("result").Rows(i).Item("管理成本") = 0.0
+                                    End If
+                                    If rcDataset.Tables("result").Rows(i).Item("倍数").GetType.ToString = "System.DBNull" Then
+                                        rcDataset.Tables("result").Rows(i).Item("倍数") = 1
+                                    End If
+                                    rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET bzcb = ?,clcb = ?,rgcb = ?,nycb = ?,zjcb = ?,glcb = ?,beishu = ? WHERE cpdm = ?"
                                     rcOleDbCommand.Parameters.Clear()
                                     rcOleDbCommand.Parameters.Add("@bzcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("标准成本")
                                     rcOleDbCommand.Parameters.Add("@clcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("材料成本")
+                                    rcOleDbCommand.Parameters.Add("@rgcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("人工成本")
+                                    rcOleDbCommand.Parameters.Add("@nycb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("能源成本")
+                                    rcOleDbCommand.Parameters.Add("@zjcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("折旧成本")
+                                    rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("管理成本")
                                     rcOleDbCommand.Parameters.Add("@beishu", OleDbType.Numeric, 12).Value = rcDataset.Tables("result").Rows(i).Item("倍数")
                                     rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料编码")).ToUpper
                                     rcOleDbCommand.ExecuteNonQuery()
@@ -270,7 +312,7 @@ Public Class FrmCpImpXls
                         End If
                     Else
                         '不存在,则追加
-                        rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,mjsl,fzdw,bzcb,clcb,beishu,cpweight,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
+                        rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,mjsl,fzdw,bzcb,clcb,rgcb,nycb,zjcb,glcb,beishu,cpweight,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料类别编码")).ToUpper
                         rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料编码")).ToUpper
@@ -281,6 +323,10 @@ Public Class FrmCpImpXls
                         rcOleDbCommand.Parameters.Add("@fzdw", OleDbType.VarChar, 8).Value = rcDataset.Tables("result").Rows(i).Item("辅单位")
                         rcOleDbCommand.Parameters.Add("@bzcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("标准成本")
                         rcOleDbCommand.Parameters.Add("@clcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("材料成本")
+                        rcOleDbCommand.Parameters.Add("@rgcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("人工成本")
+                        rcOleDbCommand.Parameters.Add("@nycb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("能源成本")
+                        rcOleDbCommand.Parameters.Add("@zjcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("折旧成本")
+                        rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("管理成本")
                         rcOleDbCommand.Parameters.Add("@beishu", OleDbType.Numeric, 12).Value = rcDataset.Tables("result").Rows(i).Item("倍数")
                         rcOleDbCommand.Parameters.Add("@cpweight", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("克重")
                         rcOleDbCommand.Parameters.Add("@srr", OleDbType.VarChar, 30).Value = g_User_DspName

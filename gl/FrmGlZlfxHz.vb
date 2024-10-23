@@ -316,7 +316,7 @@ Public Class FrmGlZlfxHz
             Me.LblMsg.Text = "正在生成账龄分析表......"
             '插入库存数据
             Me.LblMsg.Text = "正在生成gl_kmyeb数据......"
-            rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh) SELECT SUBSTR(djh,5,4) AS kjnd,NVL(kmdm,'~'),NVL(bmdm,'~'),NVL(zydm,'~'),NVL(xmdm,'~'),NVL(khdm,'~'),NVL(csdm,'~'),NVL(yhzh,'~'),NVL(jxzh,'~') FROM gl_pz WHERE gl_pz.cperiod = ? AND NOT EXISTS (SELECT 1 FROM gl_kmyeb WHERE gl_kmyeb.kjnd = ? AND gl_kmyeb.jxzh = NVL(gl_pz.jxzh,'~') AND gl_kmyeb.yhzh = NVL(gl_pz.yhzh,'~') AND gl_kmyeb.csdm = NVL(gl_pz.csdm,'~') AND gl_kmyeb.khdm = NVL(gl_pz.khdm,'~') AND gl_kmyeb.xmdm = NVL(gl_pz.xmdm,'~') AND gl_kmyeb.zydm = NVL(gl_pz.zydm,'~') AND gl_kmyeb.bmdm = NVL(gl_pz.bmdm,'~') AND gl_kmyeb.kmdm = NVL(gl_pz.kmdm,'~')) GROUP BY SUBSTR(djh,5,4),kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh"
+            rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh) SELECT SUBSTR(djh,5,4) AS kjnd,NVL(kmdm,'~'),NVL(bz,'~') AS wbdm,NVL(bmdm,'~'),NVL(zydm,'~'),NVL(xmdm,'~'),NVL(khdm,'~'),NVL(csdm,'~'),NVL(yhzh,'~'),NVL(jxzh,'~') FROM gl_pz WHERE gl_pz.cperiod = ? AND NOT EXISTS (SELECT 1 FROM gl_kmyeb WHERE gl_kmyeb.kjnd = ? AND gl_kmyeb.jxzh = NVL(gl_pz.jxzh,'~') AND gl_kmyeb.yhzh = NVL(gl_pz.yhzh,'~') AND gl_kmyeb.csdm = NVL(gl_pz.csdm,'~') AND gl_kmyeb.khdm = NVL(gl_pz.khdm,'~') AND gl_kmyeb.xmdm = NVL(gl_pz.xmdm,'~') AND gl_kmyeb.zydm = NVL(gl_pz.zydm,'~') AND gl_kmyeb.bmdm = NVL(gl_pz.bmdm,'~') AND gl_kmyeb.wbdm = NVL(gl_pz.bz,'~') AND gl_kmyeb.kmdm = NVL(gl_pz.kmdm,'~')) GROUP BY SUBSTR(djh,5,4),kmdm,bz,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
@@ -339,19 +339,19 @@ Public Class FrmGlZlfxHz
                     rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
                     rcOleDbCommand.ExecuteNonQuery()
                     '更新客户名称
-                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET khmc = (SELECT khmc FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
+                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET khmc = (SELECT NVL(khmc,'~') FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                     '更新职员编码
-                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET zydm = (SELECT zydm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
+                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET zydm = (SELECT NVL(zydm,'~') FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                     '更新职员姓名
-                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET zymc = (SELECT zymc FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
+                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET zymc = (SELECT NVL(zymc,'~') FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                     '更新收款期限
-                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET skqx = (SELECT skqx FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
+                    rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET skqx = (SELECT NVL(skqx,0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                     '更新1至6个月借方金额'
@@ -602,7 +602,8 @@ Public Class FrmGlZlfxHz
                 Else
                     For i = 0 To Me.ListBoxYixuanDwdm.Items.Count - 1
                         '插入客户与年初余额
-                        rcOleDbCommand.CommandText = "INSERT INTO t_glzlfx (khdm,qmye) SELECT csdm,0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_kmyeb WHERE gl_kmyeb.kjnd = ? AND csdm <> '~' AND (" & strKmdm & ") AND NOT EXISTS (SELECT 1 FROM t_glzlfx WHERE t_glzlfx.khdm = rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_kmyeb.csdm) GROUP BY csdm"
+                        'rcOleDbCommand.CommandText = "INSERT INTO t_glzlfx (khdm,zydm,qmye) SELECT NVL(gl_kmyeb.csdm,'~'),NVL(rc_csxx.zydm,'~'),0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_kmyeb WHERE gl_kmyeb.kjnd = ? AND csdm <> '~' AND (" & strKmdm & ") AND NOT EXISTS (SELECT 1 FROM t_glzlfx WHERE t_glzlfx.khdm = rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_kmyeb.csdm) GROUP BY csdm,zydm"
+                        rcOleDbCommand.CommandText = "INSERT INTO t_glzlfx (khdm,zydm,qmye) SELECT NVL(gl_kmyeb.csdm,'~'),NVL(rc_csxx.zydm,'~'),0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_kmyeb,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_csxx WHERE gl_kmyeb.csdm = rc_csxx.csdm AND gl_kmyeb.kjnd = ? AND gl_kmyeb.csdm <> '~' AND (" & strKmdm & ") AND NOT EXISTS (SELECT 1 FROM t_glzlfx WHERE t_glzlfx.khdm = gl_kmyeb.csdm) GROUP BY gl_kmyeb.csdm,rc_csxx.zydm"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
                         rcOleDbCommand.ExecuteNonQuery()
@@ -621,9 +622,9 @@ Public Class FrmGlZlfxHz
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.ExecuteNonQuery()
                         '更新职员编码
-                        rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET zydm = (SELECT zydm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_csxx WHERE rc_csxx.csdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_csxx WHERE t_glzlfx.khdm = rc_csxx.csdm)"
-                        rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.ExecuteNonQuery()
+                        'rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET zydm = (SELECT zydm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_csxx WHERE rc_csxx.csdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_csxx WHERE t_glzlfx.khdm = rc_csxx.csdm)"
+                        'rcOleDbCommand.Parameters.Clear()
+                        'rcOleDbCommand.ExecuteNonQuery()
                         '更新职员姓名
                         rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET zymc = (SELECT zymc FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_csxx WHERE rc_csxx.csdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_csxx WHERE t_glzlfx.khdm = rc_csxx.csdm)"
                         rcOleDbCommand.Parameters.Clear()

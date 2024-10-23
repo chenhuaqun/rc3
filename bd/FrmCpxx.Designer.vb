@@ -80,6 +80,8 @@ Partial Class FrmCpxx
         Me.ColBzcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColClcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColRgcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColNycb = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColZjcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColGlcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColXstcbl = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColZdcb = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -111,7 +113,7 @@ Partial Class FrmCpxx
         Me.ToolStripPanel1.Name = "ToolStripPanel1"
         Me.ToolStripPanel1.Orientation = System.Windows.Forms.Orientation.Horizontal
         Me.ToolStripPanel1.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.ToolStripPanel1.Size = New System.Drawing.Size(856, 39)
+        Me.ToolStripPanel1.Size = New System.Drawing.Size(1008, 39)
         '
         'ToolStripMain
         '
@@ -225,7 +227,7 @@ Partial Class FrmCpxx
         Me.MnuMain.Location = New System.Drawing.Point(0, 0)
         Me.MnuMain.Name = "MnuMain"
         Me.MnuMain.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
-        Me.MnuMain.Size = New System.Drawing.Size(856, 24)
+        Me.MnuMain.Size = New System.Drawing.Size(1008, 24)
         Me.MnuMain.TabIndex = 6
         '
         'MnuiFile
@@ -338,7 +340,7 @@ Partial Class FrmCpxx
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 63)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(856, 48)
+        Me.Panel1.Size = New System.Drawing.Size(1008, 48)
         Me.Panel1.TabIndex = 7
         '
         'Label1
@@ -347,7 +349,7 @@ Partial Class FrmCpxx
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("楷体", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label1.Location = New System.Drawing.Point(382, 11)
+        Me.Label1.Location = New System.Drawing.Point(458, 11)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(93, 20)
         Me.Label1.TabIndex = 0
@@ -359,7 +361,7 @@ Partial Class FrmCpxx
         Me.Panel3.BackColor = System.Drawing.Color.FloralWhite
         Me.Panel3.Controls.Add(Me.PictureBox1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel3.Location = New System.Drawing.Point(752, 111)
+        Me.Panel3.Location = New System.Drawing.Point(904, 111)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(104, 356)
         Me.Panel3.TabIndex = 8
@@ -379,14 +381,14 @@ Partial Class FrmCpxx
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.AllowUserToDeleteRows = False
         Me.rcDataGridView.ColumnHeadersHeight = 30
-        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColLbdm, Me.ColLbmc, Me.ColCpdm, Me.ColCpmc, Me.ColDw, Me.ColFzdw, Me.ColMjsl, Me.ColCkdm, Me.ColCkmc, Me.ColKuwei, Me.ColOldCpdm, Me.ColKhdm, Me.ColKhmc, Me.ColCpsm, Me.ColHsfl, Me.ColXsdj, Me.ColCgdj, Me.ColBeiShu, Me.ColBzcb, Me.ColClcb, Me.ColRgcb, Me.ColGlcb, Me.ColXstcbl, Me.ColZdcb, Me.ColZgcb, Me.ColCgts, Me.ColCpWeight, Me.ColLength, Me.ColWidth, Me.ColHeight, Me.ColBRecycling, Me.ColBFadm, Me.ColBBatch, Me.ColSrr, Me.ColSrrq})
+        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColLbdm, Me.ColLbmc, Me.ColCpdm, Me.ColCpmc, Me.ColDw, Me.ColFzdw, Me.ColMjsl, Me.ColCkdm, Me.ColCkmc, Me.ColKuwei, Me.ColOldCpdm, Me.ColKhdm, Me.ColKhmc, Me.ColCpsm, Me.ColHsfl, Me.ColXsdj, Me.ColCgdj, Me.ColBeiShu, Me.ColBzcb, Me.ColClcb, Me.ColRgcb, Me.ColNycb, Me.ColZjcb, Me.ColGlcb, Me.ColXstcbl, Me.ColZdcb, Me.ColZgcb, Me.ColCgts, Me.ColCpWeight, Me.ColLength, Me.ColWidth, Me.ColHeight, Me.ColBRecycling, Me.ColBFadm, Me.ColBBatch, Me.ColSrr, Me.ColSrrq})
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rcDataGridView.Location = New System.Drawing.Point(0, 111)
         Me.rcDataGridView.Name = "rcDataGridView"
         Me.rcDataGridView.ReadOnly = True
         Me.rcDataGridView.RowHeadersWidth = 62
         Me.rcDataGridView.RowTemplate.Height = 23
-        Me.rcDataGridView.Size = New System.Drawing.Size(752, 356)
+        Me.rcDataGridView.Size = New System.Drawing.Size(904, 356)
         Me.rcDataGridView.TabIndex = 9
         '
         'ColLbdm
@@ -539,7 +541,6 @@ Partial Class FrmCpxx
         Me.ColXsdj.MinimumWidth = 8
         Me.ColXsdj.Name = "ColXsdj"
         Me.ColXsdj.ReadOnly = True
-        Me.ColXsdj.Width = 150
         '
         'ColCgdj
         '
@@ -548,7 +549,6 @@ Partial Class FrmCpxx
         Me.ColCgdj.MinimumWidth = 8
         Me.ColCgdj.Name = "ColCgdj"
         Me.ColCgdj.ReadOnly = True
-        Me.ColCgdj.Width = 150
         '
         'ColBeiShu
         '
@@ -557,7 +557,6 @@ Partial Class FrmCpxx
         Me.ColBeiShu.MinimumWidth = 8
         Me.ColBeiShu.Name = "ColBeiShu"
         Me.ColBeiShu.ReadOnly = True
-        Me.ColBeiShu.Width = 150
         '
         'ColBzcb
         '
@@ -566,7 +565,6 @@ Partial Class FrmCpxx
         Me.ColBzcb.MinimumWidth = 8
         Me.ColBzcb.Name = "ColBzcb"
         Me.ColBzcb.ReadOnly = True
-        Me.ColBzcb.Width = 150
         '
         'ColClcb
         '
@@ -575,7 +573,6 @@ Partial Class FrmCpxx
         Me.ColClcb.MinimumWidth = 8
         Me.ColClcb.Name = "ColClcb"
         Me.ColClcb.ReadOnly = True
-        Me.ColClcb.Width = 150
         '
         'ColRgcb
         '
@@ -584,7 +581,20 @@ Partial Class FrmCpxx
         Me.ColRgcb.MinimumWidth = 8
         Me.ColRgcb.Name = "ColRgcb"
         Me.ColRgcb.ReadOnly = True
-        Me.ColRgcb.Width = 150
+        '
+        'ColNycb
+        '
+        Me.ColNycb.DataPropertyName = "nycb"
+        Me.ColNycb.HeaderText = "能源成本"
+        Me.ColNycb.Name = "ColNycb"
+        Me.ColNycb.ReadOnly = True
+        '
+        'ColZjcb
+        '
+        Me.ColZjcb.DataPropertyName = "zjcb"
+        Me.ColZjcb.HeaderText = "折旧成本"
+        Me.ColZjcb.Name = "ColZjcb"
+        Me.ColZjcb.ReadOnly = True
         '
         'ColGlcb
         '
@@ -593,7 +603,6 @@ Partial Class FrmCpxx
         Me.ColGlcb.MinimumWidth = 8
         Me.ColGlcb.Name = "ColGlcb"
         Me.ColGlcb.ReadOnly = True
-        Me.ColGlcb.Width = 150
         '
         'ColXstcbl
         '
@@ -602,7 +611,6 @@ Partial Class FrmCpxx
         Me.ColXstcbl.MinimumWidth = 8
         Me.ColXstcbl.Name = "ColXstcbl"
         Me.ColXstcbl.ReadOnly = True
-        Me.ColXstcbl.Width = 150
         '
         'ColZdcb
         '
@@ -612,7 +620,6 @@ Partial Class FrmCpxx
         Me.ColZdcb.Name = "ColZdcb"
         Me.ColZdcb.ReadOnly = True
         Me.ColZdcb.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColZdcb.Width = 90
         '
         'ColZgcb
         '
@@ -622,7 +629,6 @@ Partial Class FrmCpxx
         Me.ColZgcb.Name = "ColZgcb"
         Me.ColZgcb.ReadOnly = True
         Me.ColZgcb.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColZgcb.Width = 90
         '
         'ColCgts
         '
@@ -632,7 +638,6 @@ Partial Class FrmCpxx
         Me.ColCgts.Name = "ColCgts"
         Me.ColCgts.ReadOnly = True
         Me.ColCgts.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColCgts.Width = 150
         '
         'ColCpWeight
         '
@@ -641,7 +646,6 @@ Partial Class FrmCpxx
         Me.ColCpWeight.MinimumWidth = 8
         Me.ColCpWeight.Name = "ColCpWeight"
         Me.ColCpWeight.ReadOnly = True
-        Me.ColCpWeight.Width = 150
         '
         'ColLength
         '
@@ -650,7 +654,6 @@ Partial Class FrmCpxx
         Me.ColLength.MinimumWidth = 8
         Me.ColLength.Name = "ColLength"
         Me.ColLength.ReadOnly = True
-        Me.ColLength.Width = 150
         '
         'ColWidth
         '
@@ -659,7 +662,6 @@ Partial Class FrmCpxx
         Me.ColWidth.MinimumWidth = 8
         Me.ColWidth.Name = "ColWidth"
         Me.ColWidth.ReadOnly = True
-        Me.ColWidth.Width = 150
         '
         'ColHeight
         '
@@ -668,7 +670,6 @@ Partial Class FrmCpxx
         Me.ColHeight.MinimumWidth = 8
         Me.ColHeight.Name = "ColHeight"
         Me.ColHeight.ReadOnly = True
-        Me.ColHeight.Width = 150
         '
         'ColBRecycling
         '
@@ -721,7 +722,7 @@ Partial Class FrmCpxx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(856, 467)
+        Me.ClientSize = New System.Drawing.Size(1008, 467)
         Me.Controls.Add(Me.rcDataGridView)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
@@ -802,6 +803,8 @@ Partial Class FrmCpxx
     Friend WithEvents ColBzcb As DataGridViewTextBoxColumn
     Friend WithEvents ColClcb As DataGridViewTextBoxColumn
     Friend WithEvents ColRgcb As DataGridViewTextBoxColumn
+    Friend WithEvents ColNycb As DataGridViewTextBoxColumn
+    Friend WithEvents ColZjcb As DataGridViewTextBoxColumn
     Friend WithEvents ColGlcb As DataGridViewTextBoxColumn
     Friend WithEvents ColXstcbl As DataGridViewTextBoxColumn
     Friend WithEvents ColZdcb As DataGridViewTextBoxColumn

@@ -378,7 +378,7 @@ Public Class FrmSkdSrz
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "SELECT 0 AS xz,oe_fp.fprq,'(' ||cpdm || ')' || cpmc || dw || fpmemo AS xszy,sl AS xssl,oe_fp.dj AS xsdj,oe_fp.hsdj AS xshsdj,oe_fp.je AS xsje,oe_fp.shlv AS xsshlv,oe_fp.se AS xsse,oe_fp.je + oe_fp.se AS xsjese,oe_fp.skje As yisje,oe_fp.djh,oe_fp.xh FROM oe_fp WHERE oe_fp.bdelete = 0 AND oe_fp.je + oe_fp.se <> skje AND khdm = ? ORDER BY fprq,djh,xh"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtKhdm.Text)
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataSet.Tables("rc_fpnr") IsNot Nothing Then
                     Me.rcDataSet.Tables("rc_fpnr").Clear()
@@ -399,7 +399,7 @@ Public Class FrmSkdSrz
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "SELECT 0 AS xz,skrq,yspz || skmemo skzy,je AS skje,je - xsje AS yusje,djh FROM ar_skd WHERE je <> xsje AND khdm = ? ORDER BY skrq,djh"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtKhdm.Text)
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataSet.Tables("rc_skdnr") IsNot Nothing Then
                     Me.rcDataSet.Tables("rc_skdnr").Clear()

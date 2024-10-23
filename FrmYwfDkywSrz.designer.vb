@@ -22,57 +22,58 @@ Partial Class FrmYwfDkywSrz
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.LblMsg = New System.Windows.Forms.Label
-        Me.BtnCancel = New System.Windows.Forms.Button
-        Me.BtnExit = New System.Windows.Forms.Button
-        Me.BtnNew = New System.Windows.Forms.Button
-        Me.BtnHelp = New System.Windows.Forms.Button
-        Me.BtnSave = New System.Windows.Forms.Button
-        Me.MnuMain = New System.Windows.Forms.MenuStrip
-        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCancel = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPrintView = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem
-        Me.Mnui12 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCut = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCopy = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPaste = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem
+        Me.components = New System.ComponentModel.Container()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.LblMsg = New System.Windows.Forms.Label()
+        Me.BtnCancel = New System.Windows.Forms.Button()
+        Me.BtnExit = New System.Windows.Forms.Button()
+        Me.BtnNew = New System.Windows.Forms.Button()
+        Me.BtnHelp = New System.Windows.Forms.Button()
+        Me.BtnSave = New System.Windows.Forms.Button()
+        Me.MnuMain = New System.Windows.Forms.MenuStrip()
+        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCancel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPrintView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Mnui12 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TxtFyje = New System.Windows.Forms.TextBox()
+        Me.DtpDkrq = New System.Windows.Forms.DateTimePicker()
+        Me.LblFyje = New System.Windows.Forms.Label()
+        Me.LblDkrq = New System.Windows.Forms.Label()
+        Me.LblDjh = New System.Windows.Forms.Label()
+        Me.TxtDjh = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.LblDkgsmc = New System.Windows.Forms.Label()
+        Me.TxtDkmemo = New System.Windows.Forms.TextBox()
+        Me.LblScmemo = New System.Windows.Forms.Label()
+        Me.LblKhdm = New System.Windows.Forms.Label()
+        Me.TxtKhdm = New System.Windows.Forms.TextBox()
+        Me.LblKhmc = New System.Windows.Forms.Label()
+        Me.LblSkje = New System.Windows.Forms.Label()
+        Me.TxtSkje = New System.Windows.Forms.TextBox()
+        Me.LblZydm = New System.Windows.Forms.Label()
+        Me.TxtDkgsdm = New System.Windows.Forms.TextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.rcPrintDocument = New System.Drawing.Printing.PrintDocument()
         Me.rcBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TxtFyje = New System.Windows.Forms.TextBox
-        Me.DtpDkrq = New System.Windows.Forms.DateTimePicker
-        Me.LblFyje = New System.Windows.Forms.Label
-        Me.LblDkrq = New System.Windows.Forms.Label
-        Me.LblDjh = New System.Windows.Forms.Label
-        Me.TxtDjh = New System.Windows.Forms.TextBox
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.LblDkgsmc = New System.Windows.Forms.Label
-        Me.TxtDkmemo = New System.Windows.Forms.TextBox
-        Me.LblScmemo = New System.Windows.Forms.Label
-        Me.LblKhdm = New System.Windows.Forms.Label
-        Me.TxtKhdm = New System.Windows.Forms.TextBox
-        Me.LblKhmc = New System.Windows.Forms.Label
-        Me.LblSkje = New System.Windows.Forms.Label
-        Me.TxtSkje = New System.Windows.Forms.TextBox
-        Me.LblZydm = New System.Windows.Forms.Label
-        Me.TxtDkgsdm = New System.Windows.Forms.TextBox
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.rcPrintDocument = New System.Drawing.Printing.PrintDocument
+        Me.MnuiImpXls = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel3.SuspendLayout()
         Me.MnuMain.SuspendLayout()
-        CType(Me.rcBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.rcBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel3
@@ -157,7 +158,7 @@ Partial Class FrmYwfDkywSrz
         '
         'MnuiFile
         '
-        Me.MnuiFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiNew, Me.MnuiSave, Me.MnuiCancel, Me.ToolStripMenuItem1, Me.MnuiPageSetup, Me.MnuiPrintView, Me.MnuiPrint, Me.Mnui12, Me.MnuiExit})
+        Me.MnuiFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiNew, Me.MnuiSave, Me.MnuiCancel, Me.MnuiImpXls, Me.ToolStripMenuItem1, Me.MnuiPageSetup, Me.MnuiPrintView, Me.MnuiPrint, Me.Mnui12, Me.MnuiExit})
         Me.MnuiFile.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiFile.Name = "MnuiFile"
         Me.MnuiFile.Size = New System.Drawing.Size(58, 21)
@@ -166,57 +167,57 @@ Partial Class FrmYwfDkywSrz
         'MnuiNew
         '
         Me.MnuiNew.Name = "MnuiNew"
-        Me.MnuiNew.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiNew.Size = New System.Drawing.Size(189, 22)
         Me.MnuiNew.Text = "新单(&A)"
         '
         'MnuiSave
         '
         Me.MnuiSave.Enabled = False
         Me.MnuiSave.Name = "MnuiSave"
-        Me.MnuiSave.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiSave.Size = New System.Drawing.Size(189, 22)
         Me.MnuiSave.Text = "保存(&S)"
         '
         'MnuiCancel
         '
         Me.MnuiCancel.Enabled = False
         Me.MnuiCancel.Name = "MnuiCancel"
-        Me.MnuiCancel.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiCancel.Size = New System.Drawing.Size(189, 22)
         Me.MnuiCancel.Text = "取消(&C)"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(163, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(186, 6)
         '
         'MnuiPageSetup
         '
         Me.MnuiPageSetup.Name = "MnuiPageSetup"
-        Me.MnuiPageSetup.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiPageSetup.Size = New System.Drawing.Size(189, 22)
         Me.MnuiPageSetup.Text = "页面设置(&U)"
         '
         'MnuiPrintView
         '
         Me.MnuiPrintView.Name = "MnuiPrintView"
-        Me.MnuiPrintView.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiPrintView.Size = New System.Drawing.Size(189, 22)
         Me.MnuiPrintView.Text = "打印预览(&V)"
         '
         'MnuiPrint
         '
         Me.MnuiPrint.Name = "MnuiPrint"
         Me.MnuiPrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.MnuiPrint.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiPrint.Size = New System.Drawing.Size(189, 22)
         Me.MnuiPrint.Text = "打印(&P)"
         '
         'Mnui12
         '
         Me.Mnui12.Name = "Mnui12"
-        Me.Mnui12.Size = New System.Drawing.Size(163, 6)
+        Me.Mnui12.Size = New System.Drawing.Size(186, 6)
         '
         'MnuiExit
         '
         Me.MnuiExit.Name = "MnuiExit"
         Me.MnuiExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.MnuiExit.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiExit.Size = New System.Drawing.Size(189, 22)
         Me.MnuiExit.Text = "退出(&X)"
         '
         'MnuiEdit
@@ -477,6 +478,12 @@ Partial Class FrmYwfDkywSrz
         '
         Me.rcPrintDocument.DocumentName = "Richen Print System"
         '
+        'MnuiImpXls
+        '
+        Me.MnuiImpXls.Name = "MnuiImpXls"
+        Me.MnuiImpXls.Size = New System.Drawing.Size(189, 22)
+        Me.MnuiImpXls.Text = "导入Excel模板数据(&I)"
+        '
         'FrmYwfDkywSrz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -491,11 +498,11 @@ Partial Class FrmYwfDkywSrz
         Me.Panel3.PerformLayout()
         Me.MnuMain.ResumeLayout(False)
         Me.MnuMain.PerformLayout()
-        CType(Me.rcBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.rcBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -545,4 +552,5 @@ Partial Class FrmYwfDkywSrz
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents rcPrintDocument As System.Drawing.Printing.PrintDocument
     Public WithEvents LblMsg As System.Windows.Forms.Label
+    Friend WithEvents MnuiImpXls As ToolStripMenuItem
 End Class

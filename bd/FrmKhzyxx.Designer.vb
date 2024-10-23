@@ -22,9 +22,9 @@ Partial Class FrmKhzyxx
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.rcDataGridView = New System.Windows.Forms.DataGridView()
         Me.ColZydm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColZymc = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,39 +81,40 @@ Partial Class FrmKhzyxx
         '
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.rcDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.rcDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.rcDataGridView.ColumnHeadersHeight = 30
         Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColZydm, Me.ColZymc, Me.ColKhdm, Me.ColKhmc, Me.ColKsPeriod, Me.ColJsPeriod, Me.ColXslbdm, Me.ColXslbmc})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.rcDataGridView.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.rcDataGridView.DefaultCellStyle = DataGridViewCellStyle5
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rcDataGridView.Location = New System.Drawing.Point(0, 0)
+        Me.rcDataGridView.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rcDataGridView.Name = "rcDataGridView"
         Me.rcDataGridView.ReadOnly = True
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.rcDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.rcDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.rcDataGridView.RowHeadersWidth = 62
         Me.rcDataGridView.RowTemplate.Height = 30
-        Me.rcDataGridView.Size = New System.Drawing.Size(420, 369)
+        Me.rcDataGridView.Size = New System.Drawing.Size(280, 232)
         Me.rcDataGridView.TabIndex = 0
         '
         'ColZydm
@@ -212,27 +213,26 @@ Partial Class FrmKhzyxx
         Me.Panel1.Controls.Add(Me.TxtZydm)
         Me.Panel1.Controls.Add(Me.LblZydm)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel1.Location = New System.Drawing.Point(420, 0)
+        Me.Panel1.Location = New System.Drawing.Point(280, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(380, 369)
+        Me.Panel1.Size = New System.Drawing.Size(253, 232)
         Me.Panel1.TabIndex = 1
         '
         'LblXslbmc
         '
         Me.LblXslbmc.AutoSize = True
-        Me.LblXslbmc.Location = New System.Drawing.Point(141, 308)
-        Me.LblXslbmc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblXslbmc.Location = New System.Drawing.Point(94, 205)
         Me.LblXslbmc.Name = "LblXslbmc"
-        Me.LblXslbmc.Size = New System.Drawing.Size(0, 18)
+        Me.LblXslbmc.Size = New System.Drawing.Size(0, 12)
         Me.LblXslbmc.TabIndex = 58
         '
         'LblXslbdm
         '
         Me.LblXslbdm.AutoSize = True
-        Me.LblXslbdm.Location = New System.Drawing.Point(35, 269)
-        Me.LblXslbdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblXslbdm.Location = New System.Drawing.Point(23, 179)
         Me.LblXslbdm.Name = "LblXslbdm"
-        Me.LblXslbdm.Size = New System.Drawing.Size(134, 18)
+        Me.LblXslbdm.Size = New System.Drawing.Size(89, 12)
         Me.LblXslbdm.TabIndex = 56
         Me.LblXslbdm.Text = "客户销售类别："
         '
@@ -240,28 +240,29 @@ Partial Class FrmKhzyxx
         '
         Me.TxtXslbdm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtXslbdm.Enabled = False
-        Me.TxtXslbdm.Location = New System.Drawing.Point(177, 264)
-        Me.TxtXslbdm.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtXslbdm.Location = New System.Drawing.Point(118, 176)
         Me.TxtXslbdm.MaxLength = 12
         Me.TxtXslbdm.Name = "TxtXslbdm"
-        Me.TxtXslbdm.Size = New System.Drawing.Size(128, 28)
+        Me.TxtXslbdm.Size = New System.Drawing.Size(87, 21)
         Me.TxtXslbdm.TabIndex = 57
         '
         'CmbJsPeriod
         '
         Me.CmbJsPeriod.Enabled = False
         Me.CmbJsPeriod.FormattingEnabled = True
-        Me.CmbJsPeriod.Location = New System.Drawing.Point(177, 222)
+        Me.CmbJsPeriod.Location = New System.Drawing.Point(118, 148)
+        Me.CmbJsPeriod.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CmbJsPeriod.Name = "CmbJsPeriod"
-        Me.CmbJsPeriod.Size = New System.Drawing.Size(121, 26)
+        Me.CmbJsPeriod.Size = New System.Drawing.Size(82, 20)
         Me.CmbJsPeriod.TabIndex = 55
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(35, 226)
+        Me.Label2.Location = New System.Drawing.Point(23, 151)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(134, 18)
+        Me.Label2.Size = New System.Drawing.Size(89, 12)
         Me.Label2.TabIndex = 54
         Me.Label2.Text = "结束会计期间："
         '
@@ -269,76 +270,72 @@ Partial Class FrmKhzyxx
         '
         Me.CmbKsPeriod.Enabled = False
         Me.CmbKsPeriod.FormattingEnabled = True
-        Me.CmbKsPeriod.Location = New System.Drawing.Point(177, 180)
+        Me.CmbKsPeriod.Location = New System.Drawing.Point(118, 120)
+        Me.CmbKsPeriod.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CmbKsPeriod.Name = "CmbKsPeriod"
-        Me.CmbKsPeriod.Size = New System.Drawing.Size(121, 26)
+        Me.CmbKsPeriod.Size = New System.Drawing.Size(82, 20)
         Me.CmbKsPeriod.TabIndex = 53
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(35, 184)
+        Me.Label1.Location = New System.Drawing.Point(23, 123)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(134, 18)
+        Me.Label1.Size = New System.Drawing.Size(89, 12)
         Me.Label1.TabIndex = 52
         Me.Label1.Text = "开始会计期间："
         '
         'TxtKhdm
         '
         Me.TxtKhdm.Enabled = False
-        Me.TxtKhdm.Location = New System.Drawing.Point(141, 102)
-        Me.TxtKhdm.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtKhdm.MaxLength = 12
+        Me.TxtKhdm.Location = New System.Drawing.Point(94, 68)
+        Me.TxtKhdm.MaxLength = 15
         Me.TxtKhdm.Name = "TxtKhdm"
-        Me.TxtKhdm.Size = New System.Drawing.Size(128, 28)
+        Me.TxtKhdm.Size = New System.Drawing.Size(87, 21)
         Me.TxtKhdm.TabIndex = 50
         '
         'LblKhdm
         '
         Me.LblKhdm.AutoSize = True
-        Me.LblKhdm.Location = New System.Drawing.Point(35, 107)
-        Me.LblKhdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblKhdm.Location = New System.Drawing.Point(23, 71)
         Me.LblKhdm.Name = "LblKhdm"
-        Me.LblKhdm.Size = New System.Drawing.Size(98, 18)
+        Me.LblKhdm.Size = New System.Drawing.Size(65, 12)
         Me.LblKhdm.TabIndex = 49
         Me.LblKhdm.Text = "客户编码："
         '
         'LblKhmc
         '
         Me.LblKhmc.AutoSize = True
-        Me.LblKhmc.Location = New System.Drawing.Point(141, 146)
-        Me.LblKhmc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblKhmc.Location = New System.Drawing.Point(94, 97)
         Me.LblKhmc.Name = "LblKhmc"
-        Me.LblKhmc.Size = New System.Drawing.Size(0, 18)
+        Me.LblKhmc.Size = New System.Drawing.Size(0, 12)
         Me.LblKhmc.TabIndex = 51
         '
         'LblZymc
         '
         Me.LblZymc.AutoSize = True
-        Me.LblZymc.Location = New System.Drawing.Point(141, 68)
-        Me.LblZymc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblZymc.Location = New System.Drawing.Point(94, 45)
         Me.LblZymc.Name = "LblZymc"
-        Me.LblZymc.Size = New System.Drawing.Size(0, 18)
+        Me.LblZymc.Size = New System.Drawing.Size(0, 12)
         Me.LblZymc.TabIndex = 48
         '
         'TxtZydm
         '
         Me.TxtZydm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtZydm.Enabled = False
-        Me.TxtZydm.Location = New System.Drawing.Point(141, 24)
-        Me.TxtZydm.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtZydm.Location = New System.Drawing.Point(94, 16)
         Me.TxtZydm.MaxLength = 12
         Me.TxtZydm.Name = "TxtZydm"
-        Me.TxtZydm.Size = New System.Drawing.Size(128, 28)
+        Me.TxtZydm.Size = New System.Drawing.Size(87, 21)
         Me.TxtZydm.TabIndex = 46
         '
         'LblZydm
         '
         Me.LblZydm.AutoSize = True
-        Me.LblZydm.Location = New System.Drawing.Point(35, 29)
-        Me.LblZydm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblZydm.Location = New System.Drawing.Point(23, 19)
         Me.LblZydm.Name = "LblZydm"
-        Me.LblZydm.Size = New System.Drawing.Size(98, 18)
+        Me.LblZydm.Size = New System.Drawing.Size(65, 12)
         Me.LblZydm.TabIndex = 45
         Me.LblZydm.Text = "职员编码："
         '
@@ -351,13 +348,15 @@ Partial Class FrmKhzyxx
         Me.ToolStripContainer1.ContentPanel.AutoScroll = True
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.rcDataGridView)
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.Panel1)
-        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(800, 369)
+        Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(533, 232)
         Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStripContainer1.LeftToolStripPanelVisible = False
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ToolStripContainer1.Name = "ToolStripContainer1"
         Me.ToolStripContainer1.RightToolStripPanelVisible = False
-        Me.ToolStripContainer1.Size = New System.Drawing.Size(800, 450)
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(533, 300)
         Me.ToolStripContainer1.TabIndex = 56
         Me.ToolStripContainer1.Text = "ToolStripContainer1"
         '
@@ -369,12 +368,11 @@ Partial Class FrmKhzyxx
         'MenuStripMain
         '
         Me.MenuStripMain.Dock = System.Windows.Forms.DockStyle.None
-        Me.MenuStripMain.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.MenuStripMain.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MenuStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiFile, Me.MnuiHelp})
         Me.MenuStripMain.Location = New System.Drawing.Point(0, 0)
         Me.MenuStripMain.Name = "MenuStripMain"
-        Me.MenuStripMain.Size = New System.Drawing.Size(800, 36)
+        Me.MenuStripMain.Size = New System.Drawing.Size(533, 25)
         Me.MenuStripMain.TabIndex = 0
         Me.MenuStripMain.Text = "MenuStrip1"
         '
@@ -383,20 +381,20 @@ Partial Class FrmKhzyxx
         Me.MnuiFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiNew, Me.MnuiEdit, Me.MnuiSave, Me.MnuiCancel, Me.MnuiDelete, Me.ToolStripMenuItem1, Me.MnuiExit})
         Me.MnuiFile.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiFile.Name = "MnuiFile"
-        Me.MnuiFile.Size = New System.Drawing.Size(84, 30)
+        Me.MnuiFile.Size = New System.Drawing.Size(58, 21)
         Me.MnuiFile.Text = "文件(&F)"
         '
         'MnuiNew
         '
         Me.MnuiNew.Name = "MnuiNew"
         Me.MnuiNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.MnuiNew.Size = New System.Drawing.Size(245, 34)
+        Me.MnuiNew.Size = New System.Drawing.Size(166, 22)
         Me.MnuiNew.Text = "新增(&N)"
         '
         'MnuiEdit
         '
         Me.MnuiEdit.Name = "MnuiEdit"
-        Me.MnuiEdit.Size = New System.Drawing.Size(245, 34)
+        Me.MnuiEdit.Size = New System.Drawing.Size(166, 22)
         Me.MnuiEdit.Text = "修改(&E)"
         '
         'MnuiSave
@@ -404,33 +402,33 @@ Partial Class FrmKhzyxx
         Me.MnuiSave.Enabled = False
         Me.MnuiSave.Name = "MnuiSave"
         Me.MnuiSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.MnuiSave.Size = New System.Drawing.Size(245, 34)
+        Me.MnuiSave.Size = New System.Drawing.Size(166, 22)
         Me.MnuiSave.Text = "保存(&S)"
         '
         'MnuiCancel
         '
         Me.MnuiCancel.Enabled = False
         Me.MnuiCancel.Name = "MnuiCancel"
-        Me.MnuiCancel.Size = New System.Drawing.Size(245, 34)
+        Me.MnuiCancel.Size = New System.Drawing.Size(166, 22)
         Me.MnuiCancel.Text = "取消(&C)"
         '
         'MnuiDelete
         '
         Me.MnuiDelete.Name = "MnuiDelete"
         Me.MnuiDelete.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-        Me.MnuiDelete.Size = New System.Drawing.Size(245, 34)
+        Me.MnuiDelete.Size = New System.Drawing.Size(166, 22)
         Me.MnuiDelete.Text = "删除(&D)"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(242, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(163, 6)
         '
         'MnuiExit
         '
         Me.MnuiExit.Name = "MnuiExit"
         Me.MnuiExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.MnuiExit.Size = New System.Drawing.Size(245, 34)
+        Me.MnuiExit.Size = New System.Drawing.Size(166, 22)
         Me.MnuiExit.Text = "退出(&X)"
         '
         'MnuiHelp
@@ -438,13 +436,13 @@ Partial Class FrmKhzyxx
         Me.MnuiHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiAbout})
         Me.MnuiHelp.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiHelp.Name = "MnuiHelp"
-        Me.MnuiHelp.Size = New System.Drawing.Size(88, 30)
+        Me.MnuiHelp.Size = New System.Drawing.Size(61, 21)
         Me.MnuiHelp.Text = "帮助(&H)"
         '
         'MnuiAbout
         '
         Me.MnuiAbout.Name = "MnuiAbout"
-        Me.MnuiAbout.Size = New System.Drawing.Size(171, 34)
+        Me.MnuiAbout.Size = New System.Drawing.Size(116, 22)
         Me.MnuiAbout.Text = "关于(&A)"
         '
         'ToolStripMain
@@ -452,9 +450,9 @@ Partial Class FrmKhzyxx
         Me.ToolStripMain.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStripMain.ImageScalingSize = New System.Drawing.Size(36, 36)
         Me.ToolStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BtnNew, Me.BtnEdit, Me.BtnSave, Me.BtnCancel, Me.BtnDelete, Me.ToolStripSeparator1, Me.BtnExit})
-        Me.ToolStripMain.Location = New System.Drawing.Point(4, 36)
+        Me.ToolStripMain.Location = New System.Drawing.Point(3, 25)
         Me.ToolStripMain.Name = "ToolStripMain"
-        Me.ToolStripMain.Size = New System.Drawing.Size(402, 45)
+        Me.ToolStripMain.Size = New System.Drawing.Size(354, 43)
         Me.ToolStripMain.TabIndex = 1
         '
         'BtnNew
@@ -462,7 +460,7 @@ Partial Class FrmKhzyxx
         Me.BtnNew.Image = Global.rc3.My.Resources.Resources.ImgNew
         Me.BtnNew.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.BtnNew.Name = "BtnNew"
-        Me.BtnNew.Size = New System.Drawing.Size(86, 40)
+        Me.BtnNew.Size = New System.Drawing.Size(72, 40)
         Me.BtnNew.Text = "新增"
         '
         'BtnEdit
@@ -499,29 +497,30 @@ Partial Class FrmKhzyxx
         Me.BtnDelete.Image = Global.rc3.My.Resources.Resources.ImgDelete
         Me.BtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.Size = New System.Drawing.Size(86, 40)
+        Me.BtnDelete.Size = New System.Drawing.Size(72, 40)
         Me.BtnDelete.Text = "删除"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 45)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 43)
         '
         'BtnExit
         '
         Me.BtnExit.Image = Global.rc3.My.Resources.Resources.ImgExit
         Me.BtnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.BtnExit.Name = "BtnExit"
-        Me.BtnExit.Size = New System.Drawing.Size(86, 40)
+        Me.BtnExit.Size = New System.Drawing.Size(72, 40)
         Me.BtnExit.Text = "退出"
         '
         'FrmKhzyxx
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(533, 300)
         Me.Controls.Add(Me.ToolStripContainer1)
         Me.MainMenuStrip = Me.MenuStripMain
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "FrmKhzyxx"
         Me.Text = "客户专管理业务员设置"
         CType(Me.rcDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

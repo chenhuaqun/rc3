@@ -22,23 +22,24 @@ Partial Class FrmOeBmHzbz
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle
-        Me.DgtbcBmdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBmmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSl = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcJe = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSe = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCbje = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcJese = New System.Windows.Forms.DataGridTextBoxColumn
+        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle()
+        Me.DgtbcBmdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBmmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSl = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcJe = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSe = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcJese = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCbje = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcZl = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rcDataGrid
+        'RcDataGrid
         '
-        Me.rcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
+        Me.RcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
         '
         'Label1
         '
@@ -48,8 +49,8 @@ Partial Class FrmOeBmHzbz
         '
         'DataGridTableStyle1
         '
-        Me.DataGridTableStyle1.DataGrid = Me.rcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcBmdm, Me.DgtbcBmmc, Me.DgtbcSl, Me.DgtbcJe, Me.DgtbcSe, Me.DgtbcJese, Me.DgtbcCbje})
+        Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcBmdm, Me.DgtbcBmmc, Me.DgtbcSl, Me.DgtbcZl, Me.DgtbcJe, Me.DgtbcSe, Me.DgtbcJese, Me.DgtbcCbje})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "oebmhzb"
         '
@@ -101,16 +102,6 @@ Partial Class FrmOeBmHzbz
         Me.DgtbcSe.NullText = ""
         Me.DgtbcSe.Width = 90
         '
-        'DgtbcCbje
-        '
-        Me.DgtbcCbje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcCbje.Format = ""
-        Me.DgtbcCbje.FormatInfo = Nothing
-        Me.DgtbcCbje.HeaderText = "成本金额"
-        Me.DgtbcCbje.MappingName = "cbje"
-        Me.DgtbcCbje.NullText = ""
-        Me.DgtbcCbje.Width = 90
-        '
         'DgtbcJese
         '
         Me.DgtbcJese.Alignment = System.Windows.Forms.HorizontalAlignment.Right
@@ -121,6 +112,26 @@ Partial Class FrmOeBmHzbz
         Me.DgtbcJese.NullText = ""
         Me.DgtbcJese.Width = 90
         '
+        'DgtbcCbje
+        '
+        Me.DgtbcCbje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcCbje.Format = ""
+        Me.DgtbcCbje.FormatInfo = Nothing
+        Me.DgtbcCbje.HeaderText = "成本金额"
+        Me.DgtbcCbje.MappingName = "cbje"
+        Me.DgtbcCbje.NullText = ""
+        Me.DgtbcCbje.Width = 90
+        '
+        'DgtbcZl
+        '
+        Me.DgtbcZl.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcZl.Format = ""
+        Me.DgtbcZl.FormatInfo = Nothing
+        Me.DgtbcZl.HeaderText = "重量"
+        Me.DgtbcZl.MappingName = "zl"
+        Me.DgtbcZl.NullText = ""
+        Me.DgtbcZl.Width = 75
+        '
         'FrmOeBmHzbz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -130,7 +141,7 @@ Partial Class FrmOeBmHzbz
         Me.Text = "部门送货汇总表"
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -145,4 +156,5 @@ Partial Class FrmOeBmHzbz
     Friend WithEvents DgtbcCbje As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcSe As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcJese As System.Windows.Forms.DataGridTextBoxColumn
+    Friend WithEvents DgtbcZl As DataGridTextBoxColumn
 End Class

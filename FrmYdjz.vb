@@ -70,6 +70,8 @@ Public Class FrmYdjz
         '变量赋值
         Dim dInvBegin As Date = getInvBegin(NudYear.Value, Me.NudMonth.Value)
         Dim dInvEnd As Date ' = getInvEnd(NudYear.Value, Me.NudMonth.Value)
+        Dim strFcspKjqj As String = GetParaValue("发出商品启用会计期间", True)
+        Dim dFcspBegin As Date = GetInvBegin(Mid(strFcspKjqj, 1, 4), Mid(strFcspKjqj, 5, 2))
         '(1)本月是否结账
         LblMsg.Text = "正在检查本月是否结账，请稍候……"
         Try
@@ -279,8 +281,8 @@ Public Class FrmYdjz
                 MsgBox("存在没有记账的产品送货单，请检查。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             End If
-            '(j)销售发票
-            LblMsg.Text = "正在检查销售发票是否已经记账，请稍候……"
+            '(j)产品销售发票
+            LblMsg.Text = "正在检查产品销售发票是否已经记账，请稍候……"
             rcOleDbCommand.CommandText = "SELECT 1 FROM oe_fp WHERE oe_fp.bdelete = 0 AND (jzr IS NULL) AND TRUNC(fprq,'dd') >= ? AND TRUNC(fprq,'dd') <= ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateKsrq.Date
@@ -381,7 +383,28 @@ Public Class FrmYdjz
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
                 rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = g_Dwrq
+                rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                        MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                        Return
+                    End If
+                End If
+                Application.DoEvents()
+                rcOleDbCommand.CommandType = CommandType.StoredProcedure
+                rcOleDbCommand.CommandText = "USP3_REDO_FCSPYEHZ"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
+                rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = dFcspBegin
+                rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
+                rcOleDbCommand.ExecuteNonQuery()
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                        MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                        Return
+                    End If
+                End If
                 Application.DoEvents()
                 rcOleDbCommand.CommandType = CommandType.StoredProcedure
                 rcOleDbCommand.CommandText = "USP3_REDO_CSYEHZ"
@@ -475,6 +498,21 @@ Public Class FrmYdjz
                 rcOleDbCommand.Parameters.Add("@kjnd2", OleDbType.VarChar, 4).Value = NudYear.Value
                 rcOleDbCommand.ExecuteNonQuery()
                 Application.DoEvents()
+                '(C)删除下一年度的inv_fcspyeb中的数据物料编码、客户编码、仓库编码
+                LblMsg.Text = "正在删除下一年度的inv_fcspyeb中的数据，请稍候……"
+                rcOleDbCommand.CommandText = "DELETE FROM inv_fcspyeb WHERE kjnd = ?"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = NudYear.Value + 1
+                rcOleDbCommand.ExecuteNonQuery()
+                Application.DoEvents()
+                LblMsg.Text = "正在写入下一年度的inv_fcspyeb中的数据，请稍候……"
+                '(D)插入inv_fcspyeb的数据
+                rcOleDbCommand.CommandText = "INSERT INTO inv_fcspyeb (kjnd,cpdm,khdm,bmdm,qcsl,qcfzsl,qcje,idsl,idje) SELECT ? AS kjnd,cpdm,khdm,bmdm,COALESCE(qcsl,0.0)+COALESCE(idsl,0.0) AS qcsl,COALESCE(qcfzsl,0.0)+COALESCE(idfzsl,0.0) AS qcfzsl,COALESCE(qcje,0.0)+COALESCE(idje,0.0) AS qcje,0 AS idsl,0 AS idje FROM inv_fcspyeb WHERE kjnd = ?"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kjnd1", OleDbType.VarChar, 4).Value = NudYear.Value + 1
+                rcOleDbCommand.Parameters.Add("@kjnd2", OleDbType.VarChar, 4).Value = NudYear.Value
+                rcOleDbCommand.ExecuteNonQuery()
+                Application.DoEvents()
                 '(E)删除下一年度的ap_csyeb中的数据物料编码、客户编码、仓库编码
                 LblMsg.Text = "正在删除下一年度的ap_csyeb中的数据，请稍候……"
                 rcOleDbCommand.CommandText = "DELETE FROM ap_csyeb WHERE kjnd = ?"
@@ -548,7 +586,14 @@ Public Class FrmYdjz
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value + 1
                 rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = g_Dwrq
+                rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                        MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                        Return
+                    End If
+                End If
                 Application.DoEvents()
                 rcOleDbCommand.CommandType = CommandType.StoredProcedure
                 rcOleDbCommand.CommandText = "USP3_REDO_CSYEHZ"

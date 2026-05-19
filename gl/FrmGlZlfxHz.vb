@@ -328,6 +328,20 @@ Public Class FrmGlZlfxHz
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
                     rcOleDbCommand.ExecuteNonQuery()
+                    '包含发出商品按开票客户
+                    If Me.CheckBox2.Checked Then
+                        rcOleDbCommand.CommandText = "INSERT INTO t_glzlfx (khdm,zydm,qmye) SELECT NVL(oe_xsd_fcsp.fpkhdm,'~'),NVL(rc_khxx.zydm,'~'),0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.fpkhdm = rc_khxx.khdm AND oe_xsd_fcsp.cperiod = ? AND oe_xsd_fcsp.fpkhdm <> '~'" & IIf(Not String.IsNullOrEmpty(Me.TxtZydm.Text), " AND rc_khxx.zydm = '" & Me.TxtZydm.Text & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtKhdm.Text), " AND rc_khxx.khdm = '" & Me.TxtKhdm.Text & "'", "") & " AND NOT EXISTS (SELECT 1 FROM t_glzlfx WHERE t_glzlfx.zydm = NVL(rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx.zydm,'~') AND t_glzlfx.khdm = NVL(rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp.fpkhdm,'~')) GROUP BY oe_xsd_fcsp.fpkhdm,rc_khxx.zydm"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
+                    '包含发出商品按收货客户
+                    If Me.CheckBox3.Checked Then
+                        rcOleDbCommand.CommandText = "INSERT INTO t_glzlfx (khdm,zydm,qmye) SELECT NVL(oe_xsd_fcsp.shkhdm,'~'),NVL(rc_khxx.zydm,'~'),0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.shkhdm = rc_khxx.khdm AND oe_xsd_fcsp.cperiod = ? AND oe_xsd_fcsp.shkhdm <> '~'" & IIf(Not String.IsNullOrEmpty(Me.TxtZydm.Text), " AND rc_khxx.zydm = '" & Me.TxtZydm.Text & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtKhdm.Text), " AND rc_khxx.khdm = '" & Me.TxtKhdm.Text & "'", "") & " AND NOT EXISTS (SELECT 1 FROM t_glzlfx WHERE t_glzlfx.zydm = NVL(rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx.zydm,'~') AND t_glzlfx.khdm = NVL(rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp.shkhdm,'~')) GROUP BY oe_xsd_fcsp.shkhdm,rc_khxx.zydm"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET qmye = NVL(qmye,0.0) + (SELECT COALESCE(SUM(CASE WHEN jd = '借' THEN ncje ELSE 0 - ncje END),0.0) AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_kmyeb,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE gl_kmyeb.kjnd = ? AND gl_kmyeb.khdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND gl_kmyeb.khdm = t_glzlfx.khdm  AND (" & strKmdm & "))"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
@@ -338,6 +352,20 @@ Public Class FrmGlZlfxHz
                     rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                     rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
                     rcOleDbCommand.ExecuteNonQuery()
+                    '包含发出商品按开票客户
+                    If Me.CheckBox2.Checked Then
+                        rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET qmye = NVL(qmye,0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.kpkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.kpkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.cperiod = ?)"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
+                    '包含发出商品按收货客户
+                    If Me.CheckBox3.Checked Then
+                        rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET qmye = NVL(qmye,0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.shkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.shkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.cperiod = ?)"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
                     '更新客户名称
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET khmc = (SELECT NVL(khmc,'~') FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE t_glzlfx.zydm = NVL(rc_khxx.zydm,'~') AND t_glzlfx.khdm = rc_khxx.khdm)"
                     rcOleDbCommand.Parameters.Clear()
@@ -360,12 +388,44 @@ Public Class FrmGlZlfxHz
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = IIf(Me.NudMonth.Value - j + 1 <= 0, (Me.NudYear.Value - 1).ToString & (Me.NudMonth.Value - j + 13).ToString.PadLeft(2, "0"), Me.NudYear.Value.ToString & (Me.NudMonth.Value - j + 1).ToString.PadLeft(2, "0"))
                         rcOleDbCommand.ExecuteNonQuery()
+                        '包含发出商品按开票客户
+                        If Me.CheckBox2.Checked Then
+                            rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je" & j.ToString.PadLeft(2, "0") & " = NVL(je" & j.ToString.PadLeft(2, "0") & ",0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.kpkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.kpkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.ckkjqj = ? AND oe_xsd_fcsp.cperiod= ?)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = IIf(Me.NudMonth.Value - j + 1 <= 0, (Me.NudYear.Value - 1).ToString & (Me.NudMonth.Value - j + 13).ToString.PadLeft(2, "0"), Me.NudYear.Value.ToString & (Me.NudMonth.Value - j + 1).ToString.PadLeft(2, "0"))
+                            rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                        '包含发出商品按收货客户
+                        If Me.CheckBox3.Checked Then
+                            rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je" & j.ToString.PadLeft(2, "0") & " = NVL(je" & j.ToString.PadLeft(2, "0") & ",0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.shkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.shkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.ckkjqj = ? AND oe_xsd_fcsp.cperiod= ?)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = IIf(Me.NudMonth.Value - j + 1 <= 0, (Me.NudYear.Value - 1).ToString & (Me.NudMonth.Value - j + 13).ToString.PadLeft(2, "0"), Me.NudYear.Value.ToString & (Me.NudMonth.Value - j + 1).ToString.PadLeft(2, "0"))
+                            rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
                     Next
                     '本月发出
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET byjf = NVL(byjf,0.0) + (SELECT COALESCE(SUM(je),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_pz,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE gl_pz.khdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.jd = '借' AND gl_pz.cperiod= ?)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                     rcOleDbCommand.ExecuteNonQuery()
+                    '包含发出商品按开票客户
+                    If Me.CheckBox2.Checked Then
+                        rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET byjf = NVL(byjf,0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.kpkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.kpkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.ckkjqj = ? AND oe_xsd_fcsp.cperiod = ?)"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
+                    '包含发出商品按收货客户
+                    If Me.CheckBox3.Checked Then
+                        rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET byjf = NVL(byjf,0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.shkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.shkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.ckkjqj = ? AND oe_xsd_fcsp.cperiod = ?)"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
                     '本月收款
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET bydf = NVL(bydf,0.0) + (SELECT COALESCE(SUM(je),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_pz,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE gl_pz.khdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.jd = '贷' AND gl_pz.cperiod= ?)"
                     rcOleDbCommand.Parameters.Clear()
@@ -377,6 +437,24 @@ Public Class FrmGlZlfxHz
                     rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                     rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
                     rcOleDbCommand.ExecuteNonQuery()
+                    '包含发出商品按开票客户
+                    If Me.CheckBox2.Checked Then
+                        rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET ljjf = NVL(ljjf,0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.kpkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.kpkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.ckkjqj <= ? AND oe_xsd_fcsp.ckkjqj >= ? AND oe_xsd_fcsp.cperiod = ?)"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
+                    '包含发出商品按收货客户
+                    If Me.CheckBox3.Checked Then
+                        rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET ljjf = NVL(ljjf,0.0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".oe_xsd_fcsp,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE oe_xsd_fcsp.shkhdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND oe_xsd_fcsp.shkhdm = t_glzlfx.khdm AND oe_xsd_fcsp.ckkjqj <= ? AND oe_xsd_fcsp.ckkjqj >= ? AND oe_xsd_fcsp.cperiod = ?)"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    End If
                     '累计收款
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET ljdf = NVL(ljdf,0.0) + (SELECT COALESCE(SUM(je),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".gl_pz,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(i), 1, InStr(Me.ListBoxYixuanDwdm.Items(i), " ") - 1) & ".rc_khxx WHERE gl_pz.khdm = rc_khxx.khdm AND NVL(rc_khxx.zydm,'~') = t_glzlfx.zydm AND gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.jd = '贷' AND gl_pz.cperiod<= ? AND gl_pz.cperiod>= ?)"
                     rcOleDbCommand.Parameters.Clear()
@@ -777,5 +855,26 @@ Public Class FrmGlZlfxHz
             .MdiParent = Me.MdiParent
             .Show()
         End With
+    End Sub
+
+    Private Sub CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged, CheckBox2.CheckedChanged
+        If Me.CheckBox2.Checked Then
+            Me.CheckBox3.Checked = False
+        End If
+        If Me.CheckBox3.Checked Then
+            Me.CheckBox2.Checked = False
+        End If
+    End Sub
+
+    Private Sub RadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged, RadioButton2.CheckedChanged, RadioButton3.CheckedChanged
+        If Me.RadioButton2.Checked Or Me.RadioButton3.Checked Then
+            Me.CheckBox2.Checked = False
+            Me.CheckBox3.Checked = False
+            Me.CheckBox2.Enabled = False
+            Me.CheckBox3.Enabled = False
+        Else
+            Me.CheckBox2.Enabled = True
+            Me.CheckBox3.Enabled = True
+        End If
     End Sub
 End Class

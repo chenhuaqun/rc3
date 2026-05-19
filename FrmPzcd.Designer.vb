@@ -22,23 +22,27 @@ Partial Class FrmPzcd
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.NudMonth = New System.Windows.Forms.NumericUpDown
-        Me.NudYear = New System.Windows.Forms.NumericUpDown
-        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown
-        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown
-        Me.Label6 = New System.Windows.Forms.Label
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.NudMonth = New System.Windows.Forms.NumericUpDown()
+        Me.NudYear = New System.Windows.Forms.NumericUpDown()
+        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown()
+        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudDjhEnd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudDjhBegin, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'BtnOk
@@ -46,22 +50,22 @@ Partial Class FrmPzcd
         '
         'DlgPanel
         '
-        Me.DlgPanel.Location = New System.Drawing.Point(213, 194)
+        Me.DlgPanel.Location = New System.Drawing.Point(213, 281)
         Me.DlgPanel.TabIndex = 12
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label1.Location = New System.Drawing.Point(114, 32)
+        Me.Label1.Location = New System.Drawing.Point(114, 110)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(88, 16)
+        Me.Label1.Size = New System.Drawing.Size(87, 16)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "会计期间："
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(31, 154)
+        Me.ProgressBar1.Location = New System.Drawing.Point(31, 232)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(405, 23)
         Me.ProgressBar1.TabIndex = 11
@@ -70,9 +74,9 @@ Partial Class FrmPzcd
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label3.Location = New System.Drawing.Point(330, 32)
+        Me.Label3.Location = New System.Drawing.Point(330, 110)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(24, 16)
+        Me.Label3.Size = New System.Drawing.Size(23, 16)
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "月"
         '
@@ -80,16 +84,16 @@ Partial Class FrmPzcd
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label2.Location = New System.Drawing.Point(266, 32)
+        Me.Label2.Location = New System.Drawing.Point(266, 110)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(24, 16)
+        Me.Label2.Size = New System.Drawing.Size(23, 16)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "年"
         '
         'NudMonth
         '
         Me.NudMonth.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.NudMonth.Location = New System.Drawing.Point(290, 27)
+        Me.NudMonth.Location = New System.Drawing.Point(290, 105)
         Me.NudMonth.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
         Me.NudMonth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudMonth.Name = "NudMonth"
@@ -101,7 +105,7 @@ Partial Class FrmPzcd
         'NudYear
         '
         Me.NudYear.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.NudYear.Location = New System.Drawing.Point(202, 27)
+        Me.NudYear.Location = New System.Drawing.Point(202, 105)
         Me.NudYear.Maximum = New Decimal(New Integer() {2050, 0, 0, 0})
         Me.NudYear.Minimum = New Decimal(New Integer() {1990, 0, 0, 0})
         Me.NudYear.Name = "NudYear"
@@ -113,7 +117,7 @@ Partial Class FrmPzcd
         'CmbPzlxjc
         '
         Me.CmbPzlxjc.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.CmbPzlxjc.Location = New System.Drawing.Point(202, 68)
+        Me.CmbPzlxjc.Location = New System.Drawing.Point(202, 146)
         Me.CmbPzlxjc.Name = "CmbPzlxjc"
         Me.CmbPzlxjc.Size = New System.Drawing.Size(97, 24)
         Me.CmbPzlxjc.TabIndex = 6
@@ -122,9 +126,9 @@ Partial Class FrmPzcd
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label4.Location = New System.Drawing.Point(114, 71)
+        Me.Label4.Location = New System.Drawing.Point(114, 149)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(88, 16)
+        Me.Label4.Size = New System.Drawing.Size(87, 16)
         Me.Label4.TabIndex = 5
         Me.Label4.Text = "凭证类型："
         '
@@ -132,16 +136,16 @@ Partial Class FrmPzcd
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label5.Location = New System.Drawing.Point(264, 107)
+        Me.Label5.Location = New System.Drawing.Point(264, 185)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(24, 16)
+        Me.Label5.Size = New System.Drawing.Size(23, 16)
         Me.Label5.TabIndex = 9
         Me.Label5.Text = "至"
         '
         'NudDjhEnd
         '
         Me.NudDjhEnd.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.NudDjhEnd.Location = New System.Drawing.Point(288, 107)
+        Me.NudDjhEnd.Location = New System.Drawing.Point(288, 185)
         Me.NudDjhEnd.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudDjhEnd.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudDjhEnd.Name = "NudDjhEnd"
@@ -153,7 +157,7 @@ Partial Class FrmPzcd
         'NudDjhBegin
         '
         Me.NudDjhBegin.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.NudDjhBegin.Location = New System.Drawing.Point(201, 107)
+        Me.NudDjhBegin.Location = New System.Drawing.Point(201, 185)
         Me.NudDjhBegin.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         Me.NudDjhBegin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudDjhBegin.Name = "NudDjhBegin"
@@ -166,17 +170,53 @@ Partial Class FrmPzcd
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label6.Location = New System.Drawing.Point(113, 109)
+        Me.Label6.Location = New System.Drawing.Point(113, 187)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(88, 16)
+        Me.Label6.Size = New System.Drawing.Size(87, 16)
         Me.Label6.TabIndex = 7
         Me.Label6.Text = "凭证号码："
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Checked = True
+        Me.RadioButton1.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.RadioButton1.Location = New System.Drawing.Point(71, 30)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(73, 20)
+        Me.RadioButton1.TabIndex = 13
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "用友NC"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.RadioButton2.Location = New System.Drawing.Point(222, 30)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(97, 20)
+        Me.RadioButton2.TabIndex = 14
+        Me.RadioButton2.Text = "安易V3.11"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.RadioButton2)
+        Me.GroupBox1.Controls.Add(Me.RadioButton1)
+        Me.GroupBox1.Location = New System.Drawing.Point(45, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(392, 69)
+        Me.GroupBox1.TabIndex = 15
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "凭证传递系统选择"
         '
         'FrmPzcd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(466, 237)
+        Me.ClientSize = New System.Drawing.Size(466, 324)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.CmbPzlxjc)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label5)
@@ -204,11 +244,14 @@ Partial Class FrmPzcd
         Me.Controls.SetChildIndex(Me.Label5, 0)
         Me.Controls.SetChildIndex(Me.Label4, 0)
         Me.Controls.SetChildIndex(Me.CmbPzlxjc, 0)
+        Me.Controls.SetChildIndex(Me.GroupBox1, 0)
         Me.DlgPanel.ResumeLayout(False)
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudDjhEnd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudDjhBegin, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -225,4 +268,7 @@ Partial Class FrmPzcd
     Friend WithEvents NudDjhEnd As System.Windows.Forms.NumericUpDown
     Friend WithEvents NudDjhBegin As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

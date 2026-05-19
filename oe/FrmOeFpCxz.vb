@@ -151,7 +151,7 @@ Public Class FrmOeFpCxz
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT oe_fp.cpdm,rc_cpxx.oldcpdm,COALESCE(oe_fp.cpmc,'') as cpmc,COALESCE(oe_fp.hth,'') AS hth,oe_fp.mjsl,oe_fp.sl,COALESCE(oe_fp.dw,'') as dw,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse FROM oe_fp,rc_cpxx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND (oe_fp.djh = ?) ORDER BY oe_fp.xh"
+            rcOleDbCommand.CommandText = "SELECT oe_fp.cpdm,rc_cpxx.oldcpdm,COALESCE(oe_fp.cpmc,'') as cpmc,COALESCE(oe_fp.hth,'') AS hth,oe_fp.bmdm,oe_fp.bmmc,oe_fp.mjsl,oe_fp.sl,COALESCE(oe_fp.dw,'') as dw,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse FROM oe_fp,rc_cpxx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND (oe_fp.djh = ?) ORDER BY oe_fp.xh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = xsdDjh
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand

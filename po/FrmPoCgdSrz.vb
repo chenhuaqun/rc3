@@ -596,7 +596,7 @@ Public Class FrmPoCgdSrz
                             rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(sl),0.0) AS jhsl FROM po_cgjh WHERE djh = ? AND xh = ?"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgjhDjh").Value
-                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgjhXh").Value
+                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgjhXh").Value
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                             If rcDataset.Tables("t_cgjh") IsNot Nothing Then
                                 rcDataset.Tables("t_cgjh").Clear()
@@ -1095,7 +1095,7 @@ Public Class FrmPoCgdSrz
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = TxtDjh.Text
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraDateCgrq", OleDbType.Date, 8).Value = Me.DtpCgrq.Value
                 rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 20).Value = Me.TxtSgddh.Text
                 rcOleDbCommand.Parameters.Add("@paraStrCsdm", OleDbType.VarChar, 12).Value = Me.TxtCsdm.Text

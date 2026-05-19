@@ -137,21 +137,25 @@ Public Class FrmGlZlfx
             rcOleDbCommand.ExecuteNonQuery()
             If Me.RadioButton1.Checked Then
                 '插入客户与年初余额
+                Me.LblMsg.Text = "正在插入客户与年初余额"
                 rcOleDbCommand.CommandText = "INSERT INTO t_glzlfx (khdm,qmye) SELECT khdm,COALESCE(SUM(CASE WHEN gl_kmyeb.jd = '借' THEN ncje ELSE 0 - ncje END),0.0) AS qmye FROM gl_kmyeb WHERE gl_kmyeb.kjnd = ? AND khdm <> '~' AND (" & strKmdm & ") GROUP BY khdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
                 rcOleDbCommand.ExecuteNonQuery()
                 '计算期末余额
+                Me.LblMsg.Text = "正在计算期末余额"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET qmye = qmye + (SELECT COALESCE(SUM(CASE WHEN gl_pz.jd = '借' THEN je ELSE 0 - je END),0.0) FROM gl_pz WHERE gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.cperiod<= ? AND gl_pz.cperiod>= ?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
                 rcOleDbCommand.ExecuteNonQuery()
                 '更新收款期限
+                Me.LblMsg.Text = "正在更新收款期限"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET skqx = (SELECT skqx FROM rc_khxx WHERE rc_khxx.khdm = t_glzlfx.khdm)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '更新1至6个月借方金额'
+                Me.LblMsg.Text = "正在更新1至6个月借方金额"
                 For i = 1 To 6
                     rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je" & i.ToString.PadLeft(2, "0") & " = (SELECT COALESCE(SUM(je),0.0) FROM gl_pz WHERE gl_pz.khdm = t_glzlfx.khdm AND (" & strKmdm & ") AND gl_pz.jd = '借' AND gl_pz.cperiod= ?)"
                     rcOleDbCommand.Parameters.Clear()
@@ -159,32 +163,38 @@ Public Class FrmGlZlfx
                     rcOleDbCommand.ExecuteNonQuery()
                 Next
                 '本月发出
+                Me.LblMsg.Text = "正在读取本月发出金额"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET byjf = (SELECT COALESCE(SUM(je),0.0) FROM gl_pz WHERE gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.jd = '借' AND gl_pz.cperiod= ?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
                 '本月收款
+                Me.LblMsg.Text = "正在读取本月收款金额"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET bydf = (SELECT COALESCE(SUM(je),0.0) FROM gl_pz WHERE gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.jd = '贷' AND gl_pz.cperiod= ?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
                 '累计发出
+                Me.LblMsg.Text = "正在读取累计发出金额"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET ljjf = (SELECT COALESCE(SUM(je),0.0) FROM gl_pz WHERE gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.jd = '借' AND gl_pz.cperiod<= ? AND gl_pz.cperiod>= ?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
                 rcOleDbCommand.ExecuteNonQuery()
                 '累计收款
+                Me.LblMsg.Text = "正在读取累计收款金额"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET ljdf = (SELECT COALESCE(SUM(je),0.0) FROM gl_pz WHERE gl_pz.khdm = t_glzlfx.khdm  AND (" & strKmdm & ") AND gl_pz.jd = '贷' AND gl_pz.cperiod<= ? AND gl_pz.cperiod>= ?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
                 rcOleDbCommand.ExecuteNonQuery()
                 '根据余额进行分解
+                Me.LblMsg.Text = "正在根据余额进行分解"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je01 = qmye,je02 = 0,je03 = 0,je04 = 0,je05 = 0,je06 = 0,je07 = 0 WHERE qmye <= 0"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '调整当月收款金额小于0的为0，并相应的调整发生额
+                Me.LblMsg.Text = "正在调整当月收款金额小于0的为0，并相应的调整发生额"
                 rcOleDbCommand.CommandText = "UPDATE t_glzlfx SET je01 = CASE WHEN je01 < 0 THEN 0 ELSE je01 END,je02 = CASE WHEN je02 < 0 THEN 0 ELSE je02 END,je03 = CASE WHEN je03 < 0 THEN 0 ELSE je03 END,je04 = CASE WHEN je04 < 0 THEN 0 ELSE je04 END,je05 = CASE WHEN je05 < 0 THEN 0 ELSE je05 END,je06 = CASE WHEN je06 < 0 THEN 0 ELSE je06 END,je07 = CASE WHEN je07 < 0 THEN 0 ELSE je07 END WHERE qmye > 0"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()

@@ -50,32 +50,28 @@ Partial Class FrmYwfKhHzz
         Me.DgtbcYwf_Ss = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcYwf_Hlc = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcYwf_Hj = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcGylpjje = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcYwf_gylpj = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rcDataGrid
+        'RcDataGrid
         '
-        Me.rcDataGrid.Location = New System.Drawing.Point(0, 135)
-        Me.rcDataGrid.Size = New System.Drawing.Size(984, 426)
-        Me.rcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
-        '
-        'Panel1
-        '
-        Me.Panel1.Location = New System.Drawing.Point(0, 63)
+        Me.RcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
         '
         'Label1
         '
         Me.Label1.Location = New System.Drawing.Point(397, 8)
-        Me.Label1.Size = New System.Drawing.Size(186, 23)
+        Me.Label1.Size = New System.Drawing.Size(188, 26)
         Me.Label1.Text = "业务费客户汇总表"
         '
         'DataGridTableStyle1
         '
-        Me.DataGridTableStyle1.DataGrid = Me.rcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcXslbdm, Me.DgtbcYwfbl, Me.DgtbcNewkhBl, Me.DgtbcSkqx, Me.DgtbcByjf, Me.DgtbcBydf, Me.DgtbcQmye, Me.DgtbcYwf_Bz, Me.DgtbcYwf_Newkh, Me.DgtbcYwf_Zl, Me.DgtbcCdhpje, Me.DgtbcYwf_cdhp, Me.DgtbcTieXiJe, Me.DgtbcYwf_Tx, Me.DgtbcSkje_yj, Me.DgtbcYongJinJe, Me.DgtbcYwf_Yj, Me.DgtbcDaiZhang, Me.DgtbcYwf_Dz, Me.DgtbcSuSong, Me.DgtbcYwf_Ss, Me.DgtbcYwf_Hlc, Me.DgtbcYwf_Hj})
+        Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcXslbdm, Me.DgtbcYwfbl, Me.DgtbcNewkhBl, Me.DgtbcSkqx, Me.DgtbcByjf, Me.DgtbcBydf, Me.DgtbcQmye, Me.DgtbcYwf_Bz, Me.DgtbcYwf_Newkh, Me.DgtbcYwf_Zl, Me.DgtbcCdhpje, Me.DgtbcYwf_cdhp, Me.DgtbcGylpjje, Me.DgtbcYwf_gylpj, Me.DgtbcTieXiJe, Me.DgtbcYwf_Tx, Me.DgtbcSkje_yj, Me.DgtbcYongJinJe, Me.DgtbcYwf_Yj, Me.DgtbcDaiZhang, Me.DgtbcYwf_Dz, Me.DgtbcSuSong, Me.DgtbcYwf_Ss, Me.DgtbcYwf_Hlc, Me.DgtbcYwf_Hj})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "gl_ywfjsb"
         '
@@ -344,6 +340,26 @@ Partial Class FrmYwfKhHzz
         Me.DgtbcYwf_Hj.NullText = ""
         Me.DgtbcYwf_Hj.Width = 75
         '
+        'DgtbcGylpjje
+        '
+        Me.DgtbcGylpjje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcGylpjje.Format = ""
+        Me.DgtbcGylpjje.FormatInfo = Nothing
+        Me.DgtbcGylpjje.HeaderText = "供应链票据金额"
+        Me.DgtbcGylpjje.MappingName = "gylpjje"
+        Me.DgtbcGylpjje.NullText = ""
+        Me.DgtbcGylpjje.Width = 75
+        '
+        'DgtbcYwf_gylpj
+        '
+        Me.DgtbcYwf_gylpj.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcYwf_gylpj.Format = ""
+        Me.DgtbcYwf_gylpj.FormatInfo = Nothing
+        Me.DgtbcYwf_gylpj.HeaderText = "供应链票据下降金额"
+        Me.DgtbcYwf_gylpj.MappingName = "ywf_gylpj"
+        Me.DgtbcYwf_gylpj.NullText = ""
+        Me.DgtbcYwf_gylpj.Width = 75
+        '
         'FrmYwfKhHzz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -353,7 +369,7 @@ Partial Class FrmYwfKhHzz
         Me.Text = "业务费客户汇总表"
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -388,4 +404,6 @@ Partial Class FrmYwfKhHzz
     Friend WithEvents DgtbcSkje_yj As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcYwf_Hlc As DataGridTextBoxColumn
     Friend WithEvents DgtbcQmye As DataGridTextBoxColumn
+    Friend WithEvents DgtbcGylpjje As DataGridTextBoxColumn
+    Friend WithEvents DgtbcYwf_gylpj As DataGridTextBoxColumn
 End Class

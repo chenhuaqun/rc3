@@ -290,7 +290,7 @@ Public Class FrmKhshdzEdit
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
                 rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 12).Value = Me.LblKhmc.Text
-                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = Int(Me.TxtXh.Text)
+                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = Int(Me.TxtXh.Text)
                 rcOleDbCommand.Parameters.Add("@address", OleDbType.VarChar, 200).Value = Trim(Me.TxtAddress.Text)
                 rcOleDbCommand.Parameters.Add("@postcode", OleDbType.VarChar, 6).Value = Trim(Me.TxtPostCode.Text)
                 rcOleDbCommand.Parameters.Add("@tel", OleDbType.VarChar, 40).Value = Trim(Me.TxtTel.Text)
@@ -336,7 +336,7 @@ Public Class FrmKhshdzEdit
                 rcOleDbCommand.Parameters.Add("@lxr", OleDbType.VarChar, 20).Value = Trim(Me.TxtLxr.Text)
                 rcOleDbCommand.Parameters.Add("@lasttimebz", OleDbType.Numeric, 1).Value = IIf(Me.ChbLastTimeBz.Checked, 1, 0)
                 rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKhdm.Text)
-                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = Int(Me.TxtXh.Text)
+                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = Int(Me.TxtXh.Text)
                 rcOleDbCommand.ExecuteNonQuery()
                 'Ìî³äÊý¾Ý
                 rcOleDbCommand.CommandText = "SELECT * FROM oe_khshdz ORDER BY oe_khshdz.khdm,oe_khshdz.xh"

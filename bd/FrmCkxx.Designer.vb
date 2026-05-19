@@ -60,6 +60,7 @@ Partial Class FrmCkxx
         Me.ColCkmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColCksm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColBscrkcb = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ColHsfl = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStripPanel1.SuspendLayout()
         Me.MnuMain.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
@@ -320,7 +321,7 @@ Partial Class FrmCkxx
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.AllowUserToDeleteRows = False
         Me.rcDataGridView.ColumnHeadersHeight = 30
-        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColCkdm, Me.ColCkmc, Me.ColCksm, Me.ColBscrkcb})
+        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColCkdm, Me.ColCkmc, Me.ColCksm, Me.ColBscrkcb, Me.ColHsfl})
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rcDataGridView.Location = New System.Drawing.Point(0, 112)
         Me.rcDataGridView.Name = "rcDataGridView"
@@ -362,6 +363,15 @@ Partial Class FrmCkxx
         Me.ColBscrkcb.HeaderText = "生产入库按标准成本计算"
         Me.ColBscrkcb.Name = "ColBscrkcb"
         Me.ColBscrkcb.ReadOnly = True
+        '
+        'ColHsfl
+        '
+        Me.ColHsfl.DataPropertyName = "hsfl"
+        Me.ColHsfl.HeaderText = "核算分类"
+        Me.ColHsfl.Name = "ColHsfl"
+        Me.ColHsfl.ReadOnly = True
+        Me.ColHsfl.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ColHsfl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'FrmCkxx
         '
@@ -428,4 +438,5 @@ Partial Class FrmCkxx
     Friend WithEvents ColCkmc As DataGridViewTextBoxColumn
     Friend WithEvents ColCksm As DataGridViewTextBoxColumn
     Friend WithEvents ColBscrkcb As DataGridViewCheckBoxColumn
+    Friend WithEvents ColHsfl As DataGridViewTextBoxColumn
 End Class

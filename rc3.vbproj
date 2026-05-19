@@ -19,7 +19,7 @@
     </UpgradeBackupLocation>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -97,16 +97,131 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmZcpMx.Designer.vb">
-      <DependentUpon>FrmZcpMx.vb</DependentUpon>
+    <Compile Include="FrmFcspJz.Designer.vb">
+      <DependentUpon>FrmFcspJz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcpMx.vb">
+    <Compile Include="FrmFcspJz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcpMxz.Designer.vb">
+    <Compile Include="gl\FrmGlPzImpXls.designer.vb">
+      <DependentUpon>FrmGlPzImpXls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gl\FrmGlPzImpXls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gl\FrmQckmyeImpXls.designer.vb">
+      <DependentUpon>FrmQckmyeImpXls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="gl\FrmQckmyeImpXls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspCx.Designer.vb">
+      <DependentUpon>FrmFcspCx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspCx.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspCxz.Designer.vb">
+      <DependentUpon>FrmFcspCxz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspCxz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspBmSfcHz.Designer.vb">
+      <DependentUpon>FrmFcspBmSfcHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspBmSfcHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspBmSfcHzz.Designer.vb">
+      <DependentUpon>FrmFcspBmSfcHzz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspBmSfcHzz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspSr.Designer.vb">
+      <DependentUpon>FrmFcspSr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspSr.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspSrz.Designer.vb">
+      <DependentUpon>FrmFcspSrz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspSrz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspImpXls.designer.vb">
+      <DependentUpon>FrmFcspImpXls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspImpXls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspKhSfcHz.Designer.vb">
+      <DependentUpon>FrmFcspKhSfcHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspKhSfcHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspKhSfcHzz.Designer.vb">
+      <DependentUpon>FrmFcspKhSfcHzz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspKhSfcHzz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NcServiceClient.vb" />
+    <Compile Include="oe\FrmOeBmFpHzb.Designer.vb">
+      <DependentUpon>FrmOeBmFpHzb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeBmFpHzb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="oe\FrmOeBmFpHzbz.Designer.vb">
+      <DependentUpon>FrmOeBmFpHzbz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeBmFpHzbz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="oe\FrmOeCpFpHzb.Designer.vb">
+      <DependentUpon>FrmOeCpFpHzb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeCpFpHzb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="oe\FrmOeCpFpHzbz.Designer.vb">
+      <DependentUpon>FrmOeCpFpHzbz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeCpFpHzbz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpFxb.Designer.vb">
+      <DependentUpon>FrmOeKhFpFxb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpFxb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpFxbz.Designer.vb">
+      <DependentUpon>FrmOeKhFpFxbz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpFxbz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sys\FrmRedoFcspyeHz.Designer.vb">
+      <DependentUpon>FrmRedoFcspyeHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sys\FrmRedoFcspyeHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cm\FrmZcpMx.Designer.vb">
+      <DependentUpon>FrmZcpMx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="cm\FrmZcpMx.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cm\FrmZcpMxz.Designer.vb">
       <DependentUpon>FrmZcpMxz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcpMxz.vb">
+    <Compile Include="cm\FrmZcpMxz.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmYwfDkywImpXls.designer.vb">
@@ -115,7 +230,91 @@
     <Compile Include="FrmYwfDkywImpXls.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ia\FrmCbjz_Fcsp.Designer.vb">
+      <DependentUpon>FrmCbjz_Fcsp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ia\FrmCbjz_Fcsp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspPcb.Designer.vb">
+      <DependentUpon>FrmFcspPcb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspPcb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspPcbz.Designer.vb">
+      <DependentUpon>FrmFcspPcbz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspPcbz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcHz.Designer.vb">
+      <DependentUpon>FrmFcspSfcHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcHzz1.Designer.vb">
+      <DependentUpon>FrmFcspSfcHzz1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcHzz1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcHzz2.Designer.vb">
+      <DependentUpon>FrmFcspSfcHzz2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcHzz2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcMx.Designer.vb">
+      <DependentUpon>FrmFcspSfcMx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcMx.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcMxz.Designer.vb">
+      <DependentUpon>FrmFcspSfcMxz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmFcspSfcMxz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmQcfcspyeImpXls.designer.vb">
+      <DependentUpon>FrmQcfcspyeImpXls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmQcfcspyeImpXls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inv\FrmQcfcspyeSr.Designer.vb">
+      <DependentUpon>FrmQcfcspyeSr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="inv\FrmQcfcspyeSr.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MdlReadCsPhkcdj.vb" />
+    <Compile Include="oe\FrmOeFpImpXls.designer.vb">
+      <DependentUpon>FrmOeFpImpXls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeFpImpXls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpHzb.Designer.vb">
+      <DependentUpon>FrmOeKhFpHzb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpHzb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpHzbz.Designer.vb">
+      <DependentUpon>FrmOeKhFpHzbz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="oe\FrmOeKhFpHzbz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="po\FrmPoFpDy.Designer.vb">
+      <DependentUpon>FrmPoFpDy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="po\FrmPoFpDy.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sys\Form3.Designer.vb">
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
@@ -241,10 +440,10 @@
     <Compile Include="po\FrmInvRecycleSr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmUpgrateData.Designer.vb">
+    <Compile Include="sys\FrmUpgrateData.Designer.vb">
       <DependentUpon>FrmUpgrateData.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmUpgrateData.vb">
+    <Compile Include="sys\FrmUpgrateData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmYwfZyrw.Designer.vb">
@@ -541,40 +740,40 @@
     <Compile Include="oe\FrmOeYpFhrqSrz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmUpdateDB.Designer.vb">
+    <Compile Include="sys\FrmUpdateDB.Designer.vb">
       <DependentUpon>FrmUpdateDB.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmUpdateDB.vb">
+    <Compile Include="sys\FrmUpdateDB.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcbjeSr.Designer.vb">
+    <Compile Include="cm\FrmZcbjeSr.Designer.vb">
       <DependentUpon>FrmZcbjeSr.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcbjeSr.vb">
+    <Compile Include="cm\FrmZcbjeSr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcbjeSrz.Designer.vb">
+    <Compile Include="cm\FrmZcbjeSrz.Designer.vb">
       <DependentUpon>FrmZcbjeSrz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcbjeSrz.vb">
+    <Compile Include="cm\FrmZcbjeSrz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcclMx.Designer.vb">
+    <Compile Include="cm\FrmZcclMx.Designer.vb">
       <DependentUpon>FrmZcclMx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcclMx.vb">
+    <Compile Include="cm\FrmZcclMx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcclMxz.Designer.vb">
+    <Compile Include="cm\FrmZcclMxz.Designer.vb">
       <DependentUpon>FrmZcclMxz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcclMxz.vb">
+    <Compile Include="cm\FrmZcclMxz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcpslImpXls.designer.vb">
+    <Compile Include="cm\FrmZcpslImpXls.designer.vb">
       <DependentUpon>FrmZcpslImpXls.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcpslImpXls.vb">
+    <Compile Include="cm\FrmZcpslImpXls.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="bd\FrmBmEdit.Designer.vb">
@@ -1759,28 +1958,28 @@
     <Compile Include="ar\FrmQtysSrz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmRedoCpyeHz.Designer.vb">
+    <Compile Include="sys\FrmRedoCpyeHz.Designer.vb">
       <DependentUpon>FrmRedoCpyeHz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmRedoCpyeHz.vb">
+    <Compile Include="sys\FrmRedoCpyeHz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmRoleEdit.Designer.vb">
+    <Compile Include="sys\FrmRoleEdit.Designer.vb">
       <DependentUpon>FrmRoleEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmRoleEdit.vb">
+    <Compile Include="sys\FrmRoleEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmRoleQx.Designer.vb">
+    <Compile Include="sys\FrmRoleQx.Designer.vb">
       <DependentUpon>FrmRoleQx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmRoleQx.vb">
+    <Compile Include="sys\FrmRoleQx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmRoles.Designer.vb">
+    <Compile Include="sys\FrmRoles.Designer.vb">
       <DependentUpon>FrmRoles.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmRoles.vb">
+    <Compile Include="sys\FrmRoles.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ar\FrmSkdCx.Designer.vb">
@@ -1825,40 +2024,40 @@
     <Compile Include="ar\FrmSkdSrz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSlSfcHz.Designer.vb">
+    <Compile Include="inv\FrmSlSfcHz.Designer.vb">
       <DependentUpon>FrmSlSfcHz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSlSfcHz.vb">
+    <Compile Include="inv\FrmSlSfcHz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSlSfcHzz2.Designer.vb">
+    <Compile Include="inv\FrmSlSfcHzz2.Designer.vb">
       <DependentUpon>FrmSlSfcHzz2.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSlSfcHzz2.vb">
+    <Compile Include="inv\FrmSlSfcHzz2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSlSfcMx.Designer.vb">
+    <Compile Include="inv\FrmSlSfcMx.Designer.vb">
       <DependentUpon>FrmSlSfcMx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSlSfcMx.vb">
+    <Compile Include="inv\FrmSlSfcMx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSlSfcMxz.Designer.vb">
+    <Compile Include="inv\FrmSlSfcMxz.Designer.vb">
       <DependentUpon>FrmSlSfcMxz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSlSfcMxz.vb">
+    <Compile Include="inv\FrmSlSfcMxz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmUpdate.Designer.vb">
+    <Compile Include="sys\FrmUpdate.Designer.vb">
       <DependentUpon>FrmUpdate.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmUpdate.vb">
+    <Compile Include="sys\FrmUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmUploadFile.Designer.vb">
+    <Compile Include="sys\FrmUploadFile.Designer.vb">
       <DependentUpon>FrmUploadFile.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmUploadFile.vb">
+    <Compile Include="sys\FrmUploadFile.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmUserAdd.Designer.vb">
@@ -1897,16 +2096,16 @@
     <Compile Include="FrmYdjz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcpslSr.Designer.vb">
+    <Compile Include="cm\FrmZcpslSr.Designer.vb">
       <DependentUpon>FrmZcpslSr.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcpslSr.vb">
+    <Compile Include="cm\FrmZcpslSr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcpslSrz.Designer.vb">
+    <Compile Include="cm\FrmZcpslSrz.Designer.vb">
       <DependentUpon>FrmZcpslSrz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcpslSrz.vb">
+    <Compile Include="cm\FrmZcpslSrz.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="gl\FrmGlZlfx.Designer.vb">
@@ -1927,16 +2126,16 @@
     <Compile Include="FrmYwfDkywSrz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZyEdit.Designer.vb">
+    <Compile Include="bd\FrmZyEdit.Designer.vb">
       <DependentUpon>FrmZyEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZyEdit.vb">
+    <Compile Include="bd\FrmZyEdit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZyxx.Designer.vb">
+    <Compile Include="bd\FrmZyxx.Designer.vb">
       <DependentUpon>FrmZyxx.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZyxx.vb">
+    <Compile Include="bd\FrmZyxx.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MdlBindDropDownList.vb" />
@@ -1967,10 +2166,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="FrmSlSfcHzz1.Designer.vb">
+    <Compile Include="inv\FrmSlSfcHzz1.Designer.vb">
       <DependentUpon>FrmSlSfcHzz1.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSlSfcHzz1.vb">
+    <Compile Include="inv\FrmSlSfcHzz1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="inv\FrmCpSfcHzz1.Designer.vb">
@@ -2099,10 +2298,10 @@
     <Compile Include="pm\FrmPmRkCpHzbz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZydmGg.Designer.vb">
+    <Compile Include="sys\FrmZydmGg.Designer.vb">
       <DependentUpon>FrmZydmGg.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZydmGg.vb">
+    <Compile Include="sys\FrmZydmGg.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="inv\FrmCpPcb.Designer.vb">
@@ -2213,10 +2412,10 @@
     <Compile Include="po\FrmCsCpCgdjCxz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZyFilter.Designer.vb">
+    <Compile Include="bd\FrmZyFilter.Designer.vb">
       <DependentUpon>FrmZyFilter.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZyFilter.vb">
+    <Compile Include="bd\FrmZyFilter.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="po\FrmPoCgdClose.Designer.vb">
@@ -2239,22 +2438,22 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MdlReadCskcdj.vb" />
-    <Compile Include="FrmZcclslSr.Designer.vb">
+    <Compile Include="cm\FrmZcclslSr.Designer.vb">
       <DependentUpon>FrmZcclslSr.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcclslSr.vb">
+    <Compile Include="cm\FrmZcclslSr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcclslSrz.Designer.vb">
+    <Compile Include="cm\FrmZcclslSrz.Designer.vb">
       <DependentUpon>FrmZcclslSrz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcclslSrz.vb">
+    <Compile Include="cm\FrmZcclslSrz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcclslImpXls.designer.vb">
+    <Compile Include="cm\FrmZcclslImpXls.designer.vb">
       <DependentUpon>FrmZcclslImpXls.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcclslImpXls.vb">
+    <Compile Include="cm\FrmZcclslImpXls.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="oe\FrmOeRkdImpXls.designer.vb">
@@ -2751,16 +2950,16 @@
     <Compile Include="oe\FrmOeRkBmHzbz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcpBmGxHz.Designer.vb">
+    <Compile Include="cm\FrmZcpBmGxHz.Designer.vb">
       <DependentUpon>FrmZcpBmGxHz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcpBmGxHz.vb">
+    <Compile Include="cm\FrmZcpBmGxHz.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmZcpBmGxHzz.Designer.vb">
+    <Compile Include="cm\FrmZcpBmGxHzz.Designer.vb">
       <DependentUpon>FrmZcpBmGxHzz.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmZcpBmGxHzz.vb">
+    <Compile Include="cm\FrmZcpBmGxHzz.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="po\FrmPoCgdPrint.Designer.vb">
@@ -2938,19 +3137,147 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Task.vb" />
+    <Compile Include="VoucherGenerator.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrmZcpMx.resx">
+    <EmbeddedResource Include="FrmFcspJz.resx">
+      <DependentUpon>FrmFcspJz.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gl\FrmGlPzImpXls.resx">
+      <DependentUpon>FrmGlPzImpXls.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gl\FrmQckmyeImpXls.resx">
+      <DependentUpon>FrmQckmyeImpXls.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspCx.resx">
+      <DependentUpon>FrmFcspCx.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspCxz.resx">
+      <DependentUpon>FrmFcspCxz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspBmSfcHz.resx">
+      <DependentUpon>FrmFcspBmSfcHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspBmSfcHzz.resx">
+      <DependentUpon>FrmFcspBmSfcHzz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspSr.resx">
+      <DependentUpon>FrmFcspSr.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspSrz.resx">
+      <DependentUpon>FrmFcspSrz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspImpXls.resx">
+      <DependentUpon>FrmFcspImpXls.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspKhSfcHz.resx">
+      <DependentUpon>FrmFcspKhSfcHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspKhSfcHzz.resx">
+      <DependentUpon>FrmFcspKhSfcHzz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeBmFpHzb.resx">
+      <DependentUpon>FrmOeBmFpHzb.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeBmFpHzbz.resx">
+      <DependentUpon>FrmOeBmFpHzbz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeCpFpHzb.resx">
+      <DependentUpon>FrmOeCpFpHzb.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeCpFpHzbz.resx">
+      <DependentUpon>FrmOeCpFpHzbz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeKhFpFxb.resx">
+      <DependentUpon>FrmOeKhFpFxb.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeKhFpFxbz.resx">
+      <DependentUpon>FrmOeKhFpFxbz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sys\FrmRedoFcspyeHz.resx">
+      <DependentUpon>FrmRedoFcspyeHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cm\FrmZcpMx.resx">
       <DependentUpon>FrmZcpMx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcpMxz.resx">
+    <EmbeddedResource Include="cm\FrmZcpMxz.resx">
       <DependentUpon>FrmZcpMxz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmYwfDkywImpXls.resx">
       <DependentUpon>FrmYwfDkywImpXls.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ia\FrmCbjz_Fcsp.resx">
+      <DependentUpon>FrmCbjz_Fcsp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspPcb.resx">
+      <DependentUpon>FrmFcspPcb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspPcbz.resx">
+      <DependentUpon>FrmFcspPcbz.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspSfcHz.resx">
+      <DependentUpon>FrmFcspSfcHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspSfcHzz1.resx">
+      <DependentUpon>FrmFcspSfcHzz1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspSfcHzz2.resx">
+      <DependentUpon>FrmFcspSfcHzz2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspSfcMx.resx">
+      <DependentUpon>FrmFcspSfcMx.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmFcspSfcMxz.resx">
+      <DependentUpon>FrmFcspSfcMxz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmQcfcspyeImpXls.resx">
+      <DependentUpon>FrmQcfcspyeImpXls.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inv\FrmQcfcspyeSr.resx">
+      <DependentUpon>FrmQcfcspyeSr.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeFpImpXls.resx">
+      <DependentUpon>FrmOeFpImpXls.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeKhFpHzb.resx">
+      <DependentUpon>FrmOeKhFpHzb.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="oe\FrmOeKhFpHzbz.resx">
+      <DependentUpon>FrmOeKhFpHzbz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="po\FrmPoFpDy.resx">
+      <DependentUpon>FrmPoFpDy.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sys\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -3031,7 +3358,7 @@
     <EmbeddedResource Include="po\FrmInvRecycleSr.resx">
       <DependentUpon>FrmInvRecycleSr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmUpgrateData.resx">
+    <EmbeddedResource Include="sys\FrmUpgrateData.resx">
       <DependentUpon>FrmUpgrateData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmYwfZyrw.resx">
@@ -3224,27 +3551,27 @@
       <DependentUpon>FrmOeYpFhdhSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmUpdateDB.resx">
+    <EmbeddedResource Include="sys\FrmUpdateDB.resx">
       <DependentUpon>FrmUpdateDB.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcbjeSr.resx">
+    <EmbeddedResource Include="cm\FrmZcbjeSr.resx">
       <DependentUpon>FrmZcbjeSr.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcbjeSrz.resx">
+    <EmbeddedResource Include="cm\FrmZcbjeSrz.resx">
       <DependentUpon>FrmZcbjeSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcclMx.resx">
+    <EmbeddedResource Include="cm\FrmZcclMx.resx">
       <DependentUpon>FrmZcclMx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcclMxz.resx">
+    <EmbeddedResource Include="cm\FrmZcclMxz.resx">
       <DependentUpon>FrmZcclMxz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcpslImpXls.resx">
+    <EmbeddedResource Include="cm\FrmZcpslImpXls.resx">
       <DependentUpon>FrmZcpslImpXls.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4036,19 +4363,19 @@
       <DependentUpon>FrmQtysSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmRedoCpyeHz.resx">
+    <EmbeddedResource Include="sys\FrmRedoCpyeHz.resx">
       <DependentUpon>FrmRedoCpyeHz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmRoleEdit.resx">
+    <EmbeddedResource Include="sys\FrmRoleEdit.resx">
       <DependentUpon>FrmRoleEdit.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmRoleQx.resx">
+    <EmbeddedResource Include="sys\FrmRoleQx.resx">
       <DependentUpon>FrmRoleQx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmRoles.resx">
+    <EmbeddedResource Include="sys\FrmRoles.resx">
       <DependentUpon>FrmRoles.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4080,27 +4407,27 @@
       <DependentUpon>FrmSkdSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSlSfcHz.resx">
+    <EmbeddedResource Include="inv\FrmSlSfcHz.resx">
       <DependentUpon>FrmSlSfcHz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSlSfcHzz2.resx">
+    <EmbeddedResource Include="inv\FrmSlSfcHzz2.resx">
       <DependentUpon>FrmSlSfcHzz2.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSlSfcMx.resx">
+    <EmbeddedResource Include="inv\FrmSlSfcMx.resx">
       <DependentUpon>FrmSlSfcMx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSlSfcMxz.resx">
+    <EmbeddedResource Include="inv\FrmSlSfcMxz.resx">
       <DependentUpon>FrmSlSfcMxz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmUpdate.resx">
+    <EmbeddedResource Include="sys\FrmUpdate.resx">
       <DependentUpon>FrmUpdate.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmUploadFile.resx">
+    <EmbeddedResource Include="sys\FrmUploadFile.resx">
       <DependentUpon>FrmUploadFile.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4128,11 +4455,11 @@
       <DependentUpon>FrmYdjz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcpslSr.resx">
+    <EmbeddedResource Include="cm\FrmZcpslSr.resx">
       <DependentUpon>FrmZcpslSr.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcpslSrz.resx">
+    <EmbeddedResource Include="cm\FrmZcpslSrz.resx">
       <DependentUpon>FrmZcpslSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4148,11 +4475,11 @@
       <DependentUpon>FrmYwfDkywSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZyEdit.resx">
+    <EmbeddedResource Include="bd\FrmZyEdit.resx">
       <DependentUpon>FrmZyEdit.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZyxx.resx">
+    <EmbeddedResource Include="bd\FrmZyxx.resx">
       <DependentUpon>FrmZyxx.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4162,7 +4489,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSlSfcHzz1.resx">
+    <EmbeddedResource Include="inv\FrmSlSfcHzz1.resx">
       <DependentUpon>FrmSlSfcHzz1.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4250,7 +4577,7 @@
       <DependentUpon>FrmPmRkCpHzbz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZydmGg.resx">
+    <EmbeddedResource Include="sys\FrmZydmGg.resx">
       <DependentUpon>FrmZydmGg.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4326,7 +4653,7 @@
       <DependentUpon>FrmCsCpCgdjCxz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZyFilter.resx">
+    <EmbeddedResource Include="bd\FrmZyFilter.resx">
       <DependentUpon>FrmZyFilter.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4342,15 +4669,15 @@
       <DependentUpon>FrmInvDbdImpLlsq.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcclslSr.resx">
+    <EmbeddedResource Include="cm\FrmZcclslSr.resx">
       <DependentUpon>FrmZcclslSr.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcclslSrz.resx">
+    <EmbeddedResource Include="cm\FrmZcclslSrz.resx">
       <DependentUpon>FrmZcclslSrz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcclslImpXls.resx">
+    <EmbeddedResource Include="cm\FrmZcclslImpXls.resx">
       <DependentUpon>FrmZcclslImpXls.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4682,11 +5009,11 @@
       <DependentUpon>FrmOeRkBmHzbz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcpBmGxHz.resx">
+    <EmbeddedResource Include="cm\FrmZcpBmGxHz.resx">
       <DependentUpon>FrmZcpBmGxHz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmZcpBmGxHzz.resx">
+    <EmbeddedResource Include="cm\FrmZcpBmGxHzz.resx">
       <DependentUpon>FrmZcpBmGxHzz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

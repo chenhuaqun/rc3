@@ -23,34 +23,35 @@ Partial Class FrmKhImpXls
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmKhImpXls))
-        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel
-        Me.ToolStripMain = New System.Windows.Forms.ToolStrip
-        Me.TsbImp = New System.Windows.Forms.ToolStripButton
-        Me.TsbSave = New System.Windows.Forms.ToolStripButton
-        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator
-        Me.TsbExit = New System.Windows.Forms.ToolStripButton
-        Me.MnuMain = New System.Windows.Forms.MenuStrip
-        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiImp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem
-        Me.Mnui13 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCut = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCopy = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPaste = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.TxtSheetName = New System.Windows.Forms.TextBox
-        Me.BtnXzwj = New System.Windows.Forms.Button
-        Me.TxtSourceExcelFileName = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.OfdSourceExcelFileName = New System.Windows.Forms.OpenFileDialog
+        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel()
+        Me.ToolStripMain = New System.Windows.Forms.ToolStrip()
+        Me.TsbImp = New System.Windows.Forms.ToolStripButton()
+        Me.TsbSave = New System.Windows.Forms.ToolStripButton()
+        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TsbExit = New System.Windows.Forms.ToolStripButton()
+        Me.MnuMain = New System.Windows.Forms.MenuStrip()
+        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiImp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Mnui13 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TxtSheetName = New System.Windows.Forms.TextBox()
+        Me.BtnXzwj = New System.Windows.Forms.Button()
+        Me.TxtSourceExcelFileName = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.OfdSourceExcelFileName = New System.Windows.Forms.OpenFileDialog()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.ToolStripPanel1.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
         Me.MnuMain.SuspendLayout()
@@ -188,6 +189,7 @@ Partial Class FrmKhImpXls
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.RadioButton3)
         Me.Panel1.Controls.Add(Me.RadioButton2)
         Me.Panel1.Controls.Add(Me.RadioButton1)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -205,7 +207,7 @@ Partial Class FrmKhImpXls
         '
         Me.RadioButton2.AutoSize = True
         Me.RadioButton2.Checked = True
-        Me.RadioButton2.Location = New System.Drawing.Point(546, 48)
+        Me.RadioButton2.Location = New System.Drawing.Point(496, 48)
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(47, 16)
         Me.RadioButton2.TabIndex = 16
@@ -288,6 +290,16 @@ Partial Class FrmKhImpXls
         Me.OfdSourceExcelFileName.Filter = "Excel 2003 文件|*.xls|Excel 2007 文件|*.xlsx"
         Me.OfdSourceExcelFileName.Title = "选择文件"
         '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(549, 48)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(107, 16)
+        Me.RadioButton3.TabIndex = 17
+        Me.RadioButton3.Text = "只更新销售类别"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
         'FrmKhImpXls
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -340,4 +352,5 @@ Partial Class FrmKhImpXls
     Friend WithEvents OfdSourceExcelFileName As System.Windows.Forms.OpenFileDialog
     Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton3 As RadioButton
 End Class

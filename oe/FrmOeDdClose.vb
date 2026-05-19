@@ -165,7 +165,7 @@ Public Class FrmOeDdClose
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("bclosed", OleDbType.Numeric, 1).Value = IIf(rcDataset.Tables("ddlb").Rows(e.RowIndex).Item("bclosed"), 0, 1)
                 rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ddlb").Rows(e.RowIndex).Item("djh")
-                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = rcDataset.Tables("ddlb").Rows(e.RowIndex).Item("xh")
+                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = rcDataset.Tables("ddlb").Rows(e.RowIndex).Item("xh")
                 intRows = rcOleDbCommand.ExecuteNonQuery()
                 If intRows <> 1 Then
                     Try

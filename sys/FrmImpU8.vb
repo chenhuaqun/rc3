@@ -181,7 +181,7 @@ Public Class FrmImpU8
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = IIf(blnNew, "CGRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001", ParaStrDjh)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = IIf(blnNew, 1, rcDataset.Tables("rdrecord01").Rows(i).Item("iRowNo"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = IIf(blnNew, 1, rcDataset.Tables("rdrecord01").Rows(i).Item("iRowNo"))
                     rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = rcDataset.Tables("rdrecord01").Rows(i).Item("rkrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
@@ -360,7 +360,7 @@ Public Class FrmImpU8
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = IIf(blnNew, "SCRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001", ParaStrDjh)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = IIf(blnNew, 1, rcDataset.Tables("rdrecord10").Rows(i).Item("iRowNo"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = IIf(blnNew, 1, rcDataset.Tables("rdrecord10").Rows(i).Item("iRowNo"))
                     rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = rcDataset.Tables("rdrecord10").Rows(i).Item("rkrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
@@ -533,7 +533,7 @@ Public Class FrmImpU8
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = IIf(blnNew, "LLCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001", ParaStrDjh)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = IIf(blnNew, 1, rcDataset.Tables("rdrecord11").Rows(i).Item("iRowNo"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = IIf(blnNew, 1, rcDataset.Tables("rdrecord11").Rows(i).Item("iRowNo"))
                     rcOleDbCommand.Parameters.Add("@paraDateCkrq", OleDbType.Date, 8).Value = rcDataset.Tables("rdrecord11").Rows(i).Item("ckrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rdrecord11").Rows(i).Item("ckdm")
@@ -712,13 +712,16 @@ Public Class FrmImpU8
                     rcOleDbCommand.CommandText = "USP3_SAVE_OE_XSD"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
+                    rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = IIf(i = 0, 1, 0)
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = IIf(blnNew, "XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001", ParaStrDjh)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = IIf(blnNew, 1, rcDataset.Tables("DispatchList").Rows(i).Item("iRowNo"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = IIf(blnNew, 1, rcDataset.Tables("DispatchList").Rows(i).Item("iRowNo"))
                     rcOleDbCommand.Parameters.Add("@paraDateXsrq", OleDbType.Date, 8).Value = rcDataset.Tables("DispatchList").Rows(i).Item("xsrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("DispatchList").Rows(i).Item("khdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("DispatchList").Rows(i).Item("khmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("DispatchList").Rows(i).Item("khdm")
                     rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("DispatchList").Rows(i).Item("khmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("DispatchList").Rows(i).Item("bmdm")
@@ -730,6 +733,7 @@ Public Class FrmImpU8
                     rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraStrKhddh", OleDbType.VarChar, 30).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraStrKhlh", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@paraStrPiHao", OleDbType.VarChar, 40).Value = "~" 'rcDataset.Tables("ic_saleout").Rows(i).Item("vbatchcode")
                     rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = rcDataset.Tables("DispatchList").Rows(i).Item("sl")
                     rcOleDbCommand.Parameters.Add("@paraStrDw", OleDbType.VarChar, 8).Value = rcDataset.Tables("DispatchList").Rows(i).Item("dw")
                     rcOleDbCommand.Parameters.Add("@paraDblMjsl", OleDbType.Numeric, 18).Value = 0.0
@@ -916,7 +920,7 @@ Public Class FrmImpU8
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = IIf(blnNew, "DBDJ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001", ParaStrDjh)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = IIf(blnNew, 1, rcDataset.Tables("TransVouch").Rows(i).Item("iRowNo"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = IIf(blnNew, 1, rcDataset.Tables("TransVouch").Rows(i).Item("iRowNo"))
                     rcOleDbCommand.Parameters.Add("@paraDateCkrq", OleDbType.Date, 8).Value = rcDataset.Tables("TransVouch").Rows(i).Item("dbrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrCckdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("TransVouch").Rows(i).Item("cckdm")

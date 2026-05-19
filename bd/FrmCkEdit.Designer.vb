@@ -46,13 +46,15 @@ Partial Class FrmCkEdit
         Me.Tss2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BtnExit = New System.Windows.Forms.ToolStripButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CmbHsfl = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ChbBScrkcb = New System.Windows.Forms.CheckBox()
         Me.LblCkmc = New System.Windows.Forms.Label()
         Me.TxtCkmc = New System.Windows.Forms.TextBox()
         Me.LblCkdm = New System.Windows.Forms.Label()
         Me.LblCksm = New System.Windows.Forms.Label()
         Me.TxtCkdm = New System.Windows.Forms.TextBox()
         Me.TxtCksm = New System.Windows.Forms.TextBox()
-        Me.ChbBScrkcb = New System.Windows.Forms.CheckBox()
         Me.ToolStripPanel1.SuspendLayout()
         Me.MnuMain.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
@@ -243,6 +245,8 @@ Partial Class FrmCkEdit
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.CmbHsfl)
+        Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.ChbBScrkcb)
         Me.Panel1.Controls.Add(Me.LblCkmc)
         Me.Panel1.Controls.Add(Me.TxtCkmc)
@@ -253,8 +257,36 @@ Partial Class FrmCkEdit
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 64)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(376, 162)
+        Me.Panel1.Size = New System.Drawing.Size(376, 205)
         Me.Panel1.TabIndex = 0
+        '
+        'CmbHsfl
+        '
+        Me.CmbHsfl.FormattingEnabled = True
+        Me.CmbHsfl.Items.AddRange(New Object() {"原料仓", "半成品仓", "成品仓"})
+        Me.CmbHsfl.Location = New System.Drawing.Point(130, 145)
+        Me.CmbHsfl.Name = "CmbHsfl"
+        Me.CmbHsfl.Size = New System.Drawing.Size(121, 20)
+        Me.CmbHsfl.TabIndex = 19
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(59, 148)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(65, 12)
+        Me.Label1.TabIndex = 18
+        Me.Label1.Text = "核算分类："
+        '
+        'ChbBScrkcb
+        '
+        Me.ChbBScrkcb.AutoSize = True
+        Me.ChbBScrkcb.Location = New System.Drawing.Point(130, 114)
+        Me.ChbBScrkcb.Name = "ChbBScrkcb"
+        Me.ChbBScrkcb.Size = New System.Drawing.Size(180, 16)
+        Me.ChbBScrkcb.TabIndex = 17
+        Me.ChbBScrkcb.Text = "生产入库成本按标准成本计算"
+        Me.ChbBScrkcb.UseVisualStyleBackColor = True
         '
         'LblCkmc
         '
@@ -308,21 +340,11 @@ Partial Class FrmCkEdit
         Me.TxtCksm.Size = New System.Drawing.Size(96, 21)
         Me.TxtCksm.TabIndex = 5
         '
-        'ChbBScrkcb
-        '
-        Me.ChbBScrkcb.AutoSize = True
-        Me.ChbBScrkcb.Location = New System.Drawing.Point(130, 114)
-        Me.ChbBScrkcb.Name = "ChbBScrkcb"
-        Me.ChbBScrkcb.Size = New System.Drawing.Size(180, 16)
-        Me.ChbBScrkcb.TabIndex = 17
-        Me.ChbBScrkcb.Text = "生产入库成本按标准成本计算"
-        Me.ChbBScrkcb.UseVisualStyleBackColor = True
-        '
         'FrmCkEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(376, 226)
+        Me.ClientSize = New System.Drawing.Size(376, 269)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStripPanel1)
         Me.Name = "FrmCkEdit"
@@ -370,4 +392,6 @@ Partial Class FrmCkEdit
     Friend WithEvents TxtCkdm As System.Windows.Forms.TextBox
     Friend WithEvents TxtCksm As System.Windows.Forms.TextBox
     Friend WithEvents ChbBScrkcb As CheckBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents CmbHsfl As ComboBox
 End Class

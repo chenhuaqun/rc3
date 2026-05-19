@@ -54,7 +54,7 @@ Public Class FrmGlPzCx
                 rcOleDbCommand.Connection = rcOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT gl_pz.djh,gl_pz.xh,gl_pz.bdelete,gl_pz.pzrq,gl_pz.fjzs,gl_pz.jd,gl_pz.zy,gl_pz.kmdm,gl_pz.kmmc,gl_pz.bmdm,gl_pz.bmmc,gl_pz.xmdm,gl_pz.xmmc,gl_pz.khdm,gl_pz.khmc,gl_pz.csdm,gl_pz.csmc,gl_pz.jxzh,gl_pz.dfkm,gl_pz.dw,gl_pz.sl,gl_pz.dj,gl_pz.bz,gl_pz.wb,gl_pz.hl,gl_pz.je,gl_pz.yspz,gl_pz.jsr,gl_pz.wldqr,gl_pz.srr,gl_pz.shr,gl_pz.jzr FROM gl_pz WHERE pzrq >= ? AND pzrq <= ?" & IIf(Me.ChbSh.Checked, "", " AND NOT gl_pz.jzr IS NULL") & " AND SUBSTR(gl_pz.djh,11, 5) >= ?  AND SUBSTR(gl_pz.djh,11,5) <= ?" & IIf(Trim(Me.TxtKmdm.Text).Length > 0, " and gl_pz.kmdm = '" & Trim(Me.TxtKmdm.Text) & "'", "") & IIf(Trim(Me.TxtKmmc.Text).Length > 0, " and gl_pz.kmmc LIKE '" & Trim(Me.TxtKmmc.Text) & "%'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and gl_pz.bmdm LIKE '" & Trim(Me.TxtBmdm.Text) & "%'", "") & IIf(Trim(Me.TxtXmdm.Text).Length > 0, " and gl_pz.xmdm LIKE '" & Trim(Me.TxtXmdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtKhdm.Text), " and gl_pz.khdm = '" & Trim(TxtKhdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsdm.Text), " and gl_pz.csdm = '" & Trim(Me.TxtCsdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtJxzh.Text), " and gl_pz.rckdm = '" & Trim(Me.TxtJxzh.Text) & "'", "") & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(gl_pz.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & " ORDER BY gl_pz.djh"
+                rcOleDbCommand.CommandText = "SELECT gl_pz.djh,gl_pz.xh,gl_pz.bdelete,gl_pz.pzrq,gl_pz.fjzs,gl_pz.jd,gl_pz.zy,gl_pz.kmdm,gl_pz.kmmc,gl_pz.bmdm,gl_pz.bmmc,gl_pz.xmdm,gl_pz.xmmc,gl_pz.khdm,gl_pz.khmc,gl_pz.csdm,gl_pz.csmc,gl_pz.jxzh,gl_pz.dfkm,gl_pz.dw,gl_pz.sl,gl_pz.dj,gl_pz.bz,gl_pz.wb,gl_pz.hl,gl_pz.je,gl_pz.yspz,gl_pz.jsr,gl_pz.wldqr,gl_pz.srr,gl_pz.shr,gl_pz.jzr FROM gl_pz WHERE pzrq >= ? AND pzrq <= ?" & IIf(Me.ChbSh.Checked, "", " AND NOT gl_pz.jzr IS NULL") & " AND SUBSTR(gl_pz.djh,11, 5) >= ?  AND SUBSTR(gl_pz.djh,11,5) <= ?" & IIf(Trim(Me.TxtKmdm.Text).Length > 0, " and gl_pz.kmdm = '" & Trim(Me.TxtKmdm.Text) & "'", "") & IIf(Trim(Me.TxtKmmc.Text).Length > 0, " and gl_pz.kmmc LIKE '" & Trim(Me.TxtKmmc.Text) & "%'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and gl_pz.bmdm LIKE '" & Trim(Me.TxtBmdm.Text) & "%'", "") & IIf(Trim(Me.TxtXmdm.Text).Length > 0, " and gl_pz.xmdm LIKE '" & Trim(Me.TxtXmdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtKhdm.Text), " and gl_pz.khdm = '" & Trim(TxtKhdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsdm.Text), " and gl_pz.csdm = '" & Trim(Me.TxtCsdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtJxzh.Text), " and gl_pz.rckdm = '" & Trim(Me.TxtJxzh.Text) & "'", "") & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(gl_pz.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & " ORDER BY gl_pz.djh,gl_pz.xh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@pzrq1", OleDbType.Date, 8).Value = DtpBegin.Value
                 rcOleDbCommand.Parameters.Add("@pzrq2", OleDbType.Date, 8).Value = Me.DtpEnd.Value
@@ -64,7 +64,20 @@ Public Class FrmGlPzCx
                 If rcDataSet.Tables("pzlb") IsNot Nothing Then
                     rcDataSet.Tables("pzlb").Clear()
                 End If
-                rcOleDbDataAdpt.Fill(rcDataSet, "pzlb")
+                rcOleDbDataAdpt.Fill(rcDataset, "pzlb")
+                If Me.ChbLspz.Checked Then
+                    rcOleDbCommand.CommandText = "SELECT sys_pz.djh,sys_pz.xh,sys_pz.bdelete,sys_pz.pzrq,sys_pz.fjzs,sys_pz.jd,sys_pz.zy,sys_pz.kmdm,sys_pz.kmmc,sys_pz.bmdm,sys_pz.bmmc,sys_pz.xmdm,sys_pz.xmmc,sys_pz.khdm,sys_pz.khmc,sys_pz.csdm,sys_pz.csmc,sys_pz.jxzh,sys_pz.dfkm,sys_pz.dw,sys_pz.sl,sys_pz.dj,sys_pz.bz,sys_pz.wb,sys_pz.hl,sys_pz.je,sys_pz.yspz,sys_pz.jsr,sys_pz.wldqr,sys_pz.srr,sys_pz.shr,sys_pz.jzr FROM sys_pz WHERE pzrq >= ? AND pzrq <= ?" & " AND SUBSTR(sys_pz.djh,11, 5) >= ?  AND SUBSTR(sys_pz.djh,11,5) <= ?" & IIf(Trim(Me.TxtKmdm.Text).Length > 0, " and sys_pz.kmdm = '" & Trim(Me.TxtKmdm.Text) & "'", "") & IIf(Trim(Me.TxtKmmc.Text).Length > 0, " and sys_pz.kmmc LIKE '" & Trim(Me.TxtKmmc.Text) & "%'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and sys_pz.bmdm LIKE '" & Trim(Me.TxtBmdm.Text) & "%'", "") & IIf(Trim(Me.TxtXmdm.Text).Length > 0, " and sys_pz.xmdm LIKE '" & Trim(Me.TxtXmdm.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtKhdm.Text), " and sys_pz.khdm = '" & Trim(TxtKhdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsdm.Text), " and sys_pz.csdm = '" & Trim(Me.TxtCsdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtJxzh.Text), " and sys_pz.rckdm = '" & Trim(Me.TxtJxzh.Text) & "'", "") & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(sys_pz.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & " ORDER BY sys_pz.djh,sys_pz.xh"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@pzrq1", OleDbType.Date, 8).Value = DtpBegin.Value
+                    rcOleDbCommand.Parameters.Add("@pzrq2", OleDbType.Date, 8).Value = Me.DtpEnd.Value
+                    rcOleDbCommand.Parameters.Add("@djh1", OleDbType.VarChar, 5).Value = NudDjhBegin.Value.ToString.PadLeft(5, "0")
+                    rcOleDbCommand.Parameters.Add("@djh2", OleDbType.VarChar, 5).Value = NudDjhEnd.Value.ToString.PadLeft(5, "0")
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    If rcDataset.Tables("pzlb") IsNot Nothing Then
+                        rcDataset.Tables("pzlb").Clear()
+                    End If
+                    rcOleDbDataAdpt.Fill(rcDataset, "pzlb")
+                End If
             Catch ex As Exception
                 MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
@@ -132,6 +145,14 @@ Public Class FrmGlPzCx
             Me.TxtKmdm.Enabled = False
             Me.TxtBmdm.Enabled = False
             Me.TxtXmdm.Enabled = False
+            Me.ChbLspz.Checked = False
+        End If
+    End Sub
+
+    Private Sub ChbLspz_CheckedChanged(sender As Object, e As EventArgs) Handles ChbLspz.CheckedChanged
+        If Me.ChbLspz.Checked Then
+            Me.ChbSh.Checked = False
+            Me.ChbLbfs.Checked = True
         End If
     End Sub
 End Class

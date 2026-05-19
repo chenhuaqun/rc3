@@ -28,7 +28,7 @@ Public Class FrmKhzyxx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY zydm,khdm"
+            rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY khdm,zydm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_khzyxx") IsNot Nothing Then
@@ -471,7 +471,7 @@ Public Class FrmKhzyxx
                 rcOleDbCommand.Parameters.Add("@jsperiod", OleDbType.VarChar, 6).Value = Me.CmbJsPeriod.SelectedValue
                 rcOleDbCommand.Parameters.Add("@xslbdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtXslbdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY zydm,khdm"
+                rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY khdm,zydm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_khzyxx") IsNot Nothing Then
@@ -511,7 +511,7 @@ Public Class FrmKhzyxx
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = Trim(Me.TxtZydm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
                 '填充数据
-                rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY zydm,khdm"
+                rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY khdm,zydm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_khzyxx") IsNot Nothing Then
@@ -547,7 +547,7 @@ Public Class FrmKhzyxx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm ORDER BY zydm,khdm"
+            rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm ORDER BY khdm,zydm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_khzyxx") IsNot Nothing Then
@@ -591,7 +591,7 @@ Public Class FrmKhzyxx
                 rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = BindingContext(rcDataView, "").Current("khdm")
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = BindingContext(rcDataView, "").Current("zydm")
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY zydm,khdm"
+                rcOleDbCommand.CommandText = "SELECT rc_khzyxx.zydm,rc_zyxx.zymc,rc_khzyxx.khdm,rc_khxx.khmc,rc_khzyxx.ksperiod,rc_khzyxx.jsperiod,rc_khzyxx.xslbdm,rc_khxslb.xslbmc FROM rc_khzyxx Left Join rc_zyxx On rc_khzyxx.zydm = rc_zyxx.zydm Left Join rc_khxx On rc_khzyxx.khdm = rc_khxx.khdm LEFT JOIN rc_khxslb on rc_khxslb.xslbdm = rc_khzyxx.xslbdm ORDER BY khdm,zydm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_khzyxx") IsNot Nothing Then

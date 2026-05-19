@@ -744,7 +744,7 @@ Public Class FrmSkdSrz
                         rcOleDbCommand.CommandText = "UPDATE oe_fp SET skje = je + se WHERE djh = ? AND xh = ?"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("djh")
-                        rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
+                        rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
                         rcOleDbCommand.ExecuteNonQuery()
                     End If
                 Next
@@ -802,7 +802,7 @@ Public Class FrmSkdSrz
                                     rcOleDbCommand.CommandText = "INSERT INTO ar_xsdskd (xsddjh,xsdxh,skddjh,je) VALUES (?,?,?,?)"
                                     rcOleDbCommand.Parameters.Clear()
                                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("djh")
-                                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
+                                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
                                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_skdnr").Rows(i).Item("djh")
                                     rcOleDbCommand.Parameters.Add("@paraDblXsje", OleDbType.Numeric, 14).Value = dblHxje
                                     rcOleDbCommand.ExecuteNonQuery()
@@ -819,7 +819,7 @@ Public Class FrmSkdSrz
                             rcOleDbCommand.CommandText = "INSERT INTO ar_xsdskd (xsddjh,xsdxh,skddjh,je) VALUES (?,?,?,?)"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("djh")
-                            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
+                            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
                             rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Me.TxtDjh.Text
                             rcOleDbCommand.Parameters.Add("@paraDblXsje", OleDbType.Numeric, 14).Value = dblHxje
                             rcOleDbCommand.ExecuteNonQuery()
@@ -850,7 +850,7 @@ Public Class FrmSkdSrz
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@paraDblSkje", OleDbType.Numeric, 14).Value = IIf(dblSkje >= rcDataset.Tables("rc_fpnr").Rows(i).Item("xsjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yisje"), rcDataset.Tables("rc_fpnr").Rows(i).Item("xsjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yisje"), dblSkje)
                             rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("djh")
-                            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
+                            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
                             rcOleDbCommand.ExecuteNonQuery()
                             dblHxje += IIf(dblSkje >= rcDataset.Tables("rc_fpnr").Rows(i).Item("xsjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yisje"), rcDataset.Tables("rc_fpnr").Rows(i).Item("xsjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yisje"), dblSkje)
                             dblSkje -= IIf(dblSkje >= rcDataset.Tables("rc_fpnr").Rows(i).Item("xsjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yisje"), rcDataset.Tables("rc_fpnr").Rows(i).Item("xsjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yisje"), dblSkje)
@@ -921,7 +921,7 @@ Public Class FrmSkdSrz
                                 rcOleDbCommand.CommandText = "INSERT INTO ar_xsdskd (xsddjh,xsdxh,skddjh,je) VALUES (?,?,?,?)"
                                 rcOleDbCommand.Parameters.Clear()
                                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("djh")
-                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
+                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
                                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_skdnr").Rows(i).Item("djh")
                                 rcOleDbCommand.Parameters.Add("@paraDblXsje", OleDbType.Numeric, 14).Value = dblHxje
                                 rcOleDbCommand.ExecuteNonQuery()
@@ -938,7 +938,7 @@ Public Class FrmSkdSrz
                         rcOleDbCommand.CommandText = "INSERT INTO ar_xsdskd (xsddjh,xsdxh,skddjh,je) VALUES (?,?,?,?)"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("djh")
-                        rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
+                        rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(j).Item("xh")
                         rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Me.TxtDjh.Text
                         rcOleDbCommand.Parameters.Add("@paraDblXsje", OleDbType.Numeric, 14).Value = dblHxje
                         rcOleDbCommand.ExecuteNonQuery()

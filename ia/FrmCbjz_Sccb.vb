@@ -151,7 +151,8 @@ Public Class FrmCbjz_Sccb
             rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
-            rcOleDbCommand.CommandText = "UPDATE inv_rkd SET je = sl * (SELECT COALESCE(bzcb,0.0) FROM rc_cpxx WHERE rc_cpxx.cpdm = inv_rkd.cpdm) WHERE inv_rkd.bdelete = 0 And EXISTS (Select 1 FROM rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm And SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd And lxgs = '产品入库单') AND EXISTS (SELECT 1 FROM rc_ckxx WHERE rc_ckxx.ckdm = inv_rkd.ckdm AND rc_ckxx.bscrkcb = 1) AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?"
+            '根据标准成本更新产品入库单的金额（根据仓库来判断是否按标准成本来计算）
+            rcOleDbCommand.CommandText = "UPDATE inv_rkd SET je = sl * (SELECT COALESCE(bzcb,0.0) FROM rc_cpxx WHERE rc_cpxx.cpdm = inv_rkd.cpdm),clcb=0.0,rgcb=0.0,nycb=0.0,zjcb=0.0,glcb=0.0 WHERE inv_rkd.bdelete = 0 And EXISTS (Select 1 FROM rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm And SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd And lxgs = '产品入库单') AND EXISTS (SELECT 1 FROM rc_ckxx WHERE rc_ckxx.ckdm = inv_rkd.ckdm AND rc_ckxx.bscrkcb = 1) AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
@@ -786,7 +787,7 @@ Public Class FrmCbjz_Sccb
                             If dblZcbje <> 0 Then
                                 If bCostRegion Then
                                     '更新本月入库产成品的入库成本
-                                    rcOleDbCommand.CommandText = "UPDATE inv_rkd SET " & strCbys(k) & " = (ydsl * " & dblZcbje & "/" & dblYdsl & ") WHERE inv_rkd.bdelete = 0 AND inv_rkd.je = 0 AND EXISTS (SELECT 1 FROM rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND lxgs = '产品入库单') AND EXISTS (SELECT 1 FROM rc_cr_ck WHERE rc_cr_ck.ckdm = inv_rkd.ckdm AND rc_cr_ck.crdm = ?) AND inv_rkd.ydsl <> 0 AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?"
+                                    rcOleDbCommand.CommandText = "UPDATE inv_rkd SET " & strCbys(k) & " = (ydsl * " & dblZcbje & "/" & dblYdsl & ") WHERE inv_rkd.bdelete = 0 AND inv_rkd." & strCbys(k) & " = 0 AND EXISTS (SELECT 1 FROM rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND lxgs = '产品入库单') AND EXISTS (SELECT 1 FROM rc_cr_ck WHERE rc_cr_ck.ckdm = inv_rkd.ckdm AND rc_cr_ck.crdm = ?) AND inv_rkd.ydsl <> 0 AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?"
                                     rcOleDbCommand.Parameters.Clear()
                                     rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumydsl").Rows(i).Item("bmdm")
                                     rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
@@ -801,7 +802,7 @@ Public Class FrmCbjz_Sccb
                                     'rcOleDbCommand.ExecuteNonQuery()
                                 Else
                                     '更新本月入库产成品的入库成本
-                                    rcOleDbCommand.CommandText = "UPDATE inv_rkd SET " & strCbys(k) & " = (ydsl * " & dblZcbje & "/" & dblYdsl & ") WHERE inv_rkd.bdelete = 0 AND inv_rkd.je = 0 AND EXISTS (SELECT 1 FROM rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND lxgs = '产品入库单') AND inv_rkd.ydsl <> 0 AND inv_rkd.bmdm = ? AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?"
+                                    rcOleDbCommand.CommandText = "UPDATE inv_rkd SET " & strCbys(k) & " = (ydsl * " & dblZcbje & "/" & dblYdsl & ") WHERE inv_rkd.bdelete = 0 AND inv_rkd." & strCbys(k) & " = 0 AND EXISTS (SELECT 1 FROM rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND lxgs = '产品入库单') AND inv_rkd.ydsl <> 0 AND inv_rkd.bmdm = ? AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?"
                                     rcOleDbCommand.Parameters.Clear()
                                     rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumydsl").Rows(i).Item("bmdm")
                                     rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
@@ -923,7 +924,263 @@ Public Class FrmCbjz_Sccb
             End Try
 
         End If
-        MsgBox("生产成本分配完成。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+        '分配尾差调整
+        If Not Me.CheckBox3.Checked Then
+            '按标准成本进行分配，不按成本要素分配
+            '读取本期已分配的生产入库分部门或分成本域的成本总金额
+            '读取本期已分配的在产品分部六或分成本域的成本总金额
+            Try
+                rcOleDbConn.Open()
+                rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.Transaction = rcOleDbTrans
+                rcOleDbCommand.CommandTimeout = 300
+                '1）计算本期分部门或分成本域的 生产入库+在产品+在产材料入库总成本 本期总投入成本
+                If bCostRegion Then
+                    rcOleDbCommand.CommandText = "SELECT sumcbjec.bmdm,sumcbjec.cbje,COALESCE(sumcbjeb.zcbje,0.0) AS zcbje FROM (SELECT sumcbjea.bmdm,COALESCE(SUM(sumcbjea.cbje),0.0) AS cbje FROM ((SELECT rc_cr_ck.crdm AS bmdm,COALESCE(SUM(inv_rkd.je),0.0) AS cbje FROM inv_rkd,rc_lx,rc_cr_ck WHERE inv_rkd.ckdm = rc_cr_ck.ckdm AND inv_rkd.bdelete = 0 AND SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '产品入库单' AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? GROUP BY rc_cr_ck.crdm) UNION (SELECT bmdm,COALESCE(SUM(pm_zcp.zcpje),0.0) AS cbje FROM pm_zcp WHERE cperiod = ? GROUP BY pm_zcp.bmdm) UNION (SELECT bmdm,COALESCE(SUM(pm_zccl.zcclje),0.0) AS cbje FROM pm_zccl WHERE cperiod = ? GROUP BY pm_zccl.bmdm)) sumcbjea GROUP BY bmdm) sumcbjec LEFT JOIN (SELECT cperiod,bmdm,qczcpje+zcbje AS zcbje FROM pm_zcbje WHERE cperiod = ?) sumcbjeb ON sumcbjec.bmdm = sumcbjeb.bmdm WHERE sumcbjec.cbje <> COALESCE(sumcbjeb.zcbje,0.0)"
+                Else
+                    rcOleDbCommand.CommandText = "SELECT sumcbjec.bmdm,sumcbjec.cbje,COALESCE(sumcbjeb.zcbje,0.0) AS zcbje FROM (SELECT sumcbjea.bmdm,COALESCE(SUM(sumcbjea.cbje),0.0) AS cbje FROM ((SELECT bmdm,COALESCE(SUM(inv_rkd.je),0.0) AS cbje FROM inv_rkd,rc_lx WHERE inv_rkd.bdelete = 0 AND SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '产品入库单' AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? GROUP BY inv_rkd.bmdm) UNION (SELECT bmdm,COALESCE(SUM(pm_zcp.zcpje),0.0) AS cbje FROM pm_zcp WHERE cperiod = ? GROUP BY pm_zcp.bmdm) UNION (SELECT bmdm,COALESCE(SUM(pm_zccl.zcclje),0.0) AS cbje FROM pm_zccl WHERE cperiod = ? GROUP BY pm_zccl.bmdm)) sumcbjea GROUP BY bmdm) sumcbjec LEFT JOIN (SELECT cperiod,bmdm,qczcpje+zcbje AS zcbje FROM pm_zcbje WHERE cperiod = ?) sumcbjeb ON sumcbjec.bmdm = sumcbjeb.bmdm WHERE sumcbjec.cbje<>COALESCE(sumcbjeb.zcbje,0.0)"
+                End If
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("sumcbje") IsNot Nothing Then
+                    rcDataset.Tables("sumcbje").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "sumcbje")
+                For i = 0 To rcDataset.Tables("sumcbje").Rows.Count - 1
+                    '读取本部门或本成本域金额最大的一行入库单
+                    If bCostRegion Then
+                        rcOleDbCommand.CommandText = "SELECT djh,xh FROM (SELECT djh,xh FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND EXISTS (SELECT 1 FROM rc_cr_ck WHERE rc_cr_ck.ckdm = inv_rkd.ckdm AND rc_cr_ck.crdm = ?) AND NOT EXISTS (SELECT 1 FROM rc_ckxx WHERE rc_ckxx.ckdm = inv_rkd.ckdm AND rc_ckxx.bscrkcb = 1) AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? ORDER BY inv_rkd.je DESC) WHERE rownum = 1"
+                    Else
+                        rcOleDbCommand.CommandText = "SELECT djh,xh FROM (SELECT djh,xh FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND NOT EXISTS (SELECT 1 FROM rc_ckxx WHERE rc_ckxx.ckdm = inv_rkd.ckdm AND rc_ckxx.bscrkcb = 1) AND inv_rkd.bmdm = ? AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? ORDER BY inv_rkd.je DESC) WHERE rownum = 1"
+                    End If
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumcbje").Rows(i).Item("bmdm")
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    If rcDataset.Tables("inv_rkd") IsNot Nothing Then
+                        rcDataset.Tables("inv_rkd").Clear()
+                    End If
+                    rcOleDbDataAdpt.Fill(rcDataset, "inv_rkd")
+                    If rcDataset.Tables("inv_rkd").Rows.Count = 1 Then
+                        '更新入库单的成本金额差额
+                        If bCostRegion Then
+                            rcOleDbCommand.CommandText = "UPDATE inv_rkd SET je = je + ? WHERE inv_rkd.bdelete = 0 AND inv_rkd.xh = ? AND inv_rkd.djh = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Integer, 4).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("xh")
+                            rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 20).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("djh")
+                        Else
+                            rcOleDbCommand.CommandText = "UPDATE inv_rkd SET je = je + ? WHERE inv_rkd.bdelete = 0 AND inv_rkd.xh = ? AND inv_rkd.djh = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Integer, 4).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("xh")
+                            rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 20).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("djh")
+                        End If
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Else
+                        '没有入库单则读取在产品进行调整
+                        '读取本部门或本成本域金额最大的一行在产品
+                        rcOleDbCommand.CommandText = "SELECT cpdm,bmdm,gxdm FROM (SELECT cpdm,bmdm,gxdm FROM pm_zcp WHERE pm_zcp.bmdm = ? AND pm_zcp.cperiod = ? ORDER BY pm_zcp.zcpje DESC) WHERE rownum = 1"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumcbje").Rows(i).Item("bmdm")
+                        rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("pm_zcp") IsNot Nothing Then
+                            rcDataset.Tables("pm_zcp").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "pm_zcp")
+                        If rcDataset.Tables("pm_zcp").Rows.Count = 1 Then
+                            '更新入库单的成本金额差额
+                            rcOleDbCommand.CommandText = "UPDATE pm_zcp SET zcpje = zcpje + ? WHERE pm_zcp.gxdm = ? AND pm_zcp.bmdm = ? AND pm_zcp.cpdm = ? AND pm_zcp.cperiod = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                            rcOleDbCommand.Parameters.Add("@gxdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("pm_zcp").Rows(0).Item("gxdm")
+                            rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("pm_zcp").Rows(0).Item("bmdm")
+                            rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("pm_zcp").Rows(0).Item("cpdm")
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+
+                    End If
+                Next
+                If bCostRegion Then
+                    '成本域--更新pm_zcbje的数据
+                    rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET ccpje = (SELECT COALESCE(SUM(je),0.0) FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND EXISTS (SELECT 1 FROM rc_cr_ck WHERE rc_cr_ck.ckdm = inv_rkd.ckdm AND rc_cr_ck.crdm = pm_zcbje.bmdm) AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?) WHERE cperiod = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                    rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET qmzcpje = (SELECT COALESCE(SUM(zcpje),0.0) FROM pm_zcp WHERE pm_zcp.bmdm = pm_zcbje.bmdm AND pm_zcp.cperiod = ?) WHERE cperiod = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    '更新pm_zcbje的数据
+                    rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET ccpje = (SELECT COALESCE(SUM(je),0.0) FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.bmdm = pm_zcbje.bmdm AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?) WHERE cperiod = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                    rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET qmzcpje = (SELECT COALESCE(SUM(zcpje),0.0) FROM pm_zcp WHERE pm_zcp.bmdm = pm_zcbje.bmdm AND pm_zcp.cperiod = ?) WHERE cperiod = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+
+                rcOleDbTrans.Commit()
+            Catch ex As Exception
+                If rcOleDbCommand.GetType.ToString <> "System.DBNull" Then
+                    MsgBox("程序错误。" + rcOleDbCommand.CommandText + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                Else
+                    MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                End If
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+        Else
+            '按标准成本进行分配，按成本要素分配
+            '读取本期已分配的生产入库分部门或分成本域的成本总金额
+            '读取本期已分配的在产品分部六或分成本域的成本总金额
+            '按成本要素分项计算
+            For k = 0 To strCbys.Length - 1
+                Try
+                    rcOleDbConn.Open()
+                    rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
+                    rcOleDbCommand.Connection = rcOleDbConn
+                    rcOleDbCommand.Transaction = rcOleDbTrans
+                    rcOleDbCommand.CommandTimeout = 300
+                    '1）计算本期分部门或分成本域的 生产入库+在产品+在产材料入库总成本 本期总投入成本
+                    If bCostRegion Then
+                        rcOleDbCommand.CommandText = "SELECT sumcbjec.bmdm,sumcbjec.cbje,COALESCE(sumcbjeb.zcbje,0.0) AS zcbje FROM (SELECT sumcbjea.bmdm,COALESCE(SUM(sumcbjea.cbje),0.0) AS cbje FROM ((SELECT rc_cr_ck.crdm AS bmdm,COALESCE(SUM(" & strCbys(k) & "),0.0) AS cbje FROM inv_rkd,rc_lx,rc_cr_ck WHERE inv_rkd.ckdm = rc_cr_ck.ckdm AND inv_rkd.bdelete = 0 AND SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '产品入库单' AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? GROUP BY rc_cr_ck.crdm) UNION (SELECT bmdm,COALESCE(SUM(pm_zcp." & strCbys(k) & "),0.0) AS cbje FROM pm_zcp WHERE cperiod = ? GROUP BY pm_zcp.bmdm) UNION (SELECT bmdm,COALESCE(SUM(" & IIf(strCbys(k) = "clcb", "pm_zccl.zcclje", "0") & "),0.0) AS cbje FROM pm_zccl WHERE cperiod = ? GROUP BY pm_zccl.bmdm)) sumcbjea GROUP BY bmdm) sumcbjec LEFT JOIN (SELECT cperiod,bmdm,qczcpje_" & strCbys(k) & "+zcbje_" & strCbys(k) & " AS zcbje FROM pm_zcbje WHERE cperiod = ?) sumcbjeb ON sumcbjec.bmdm = sumcbjeb.bmdm WHERE sumcbjec.cbje <> COALESCE(sumcbjeb.zcbje,0.0)"
+                    Else
+                        rcOleDbCommand.CommandText = "SELECT sumcbjec.bmdm,sumcbjec.cbje,COALESCE(sumcbjeb.zcbje,0.0) AS zcbje FROM (SELECT sumcbjea.bmdm,COALESCE(SUM(sumcbjea.cbje),0.0) AS cbje FROM ((SELECT bmdm,COALESCE(SUM(" & strCbys(k) & "),0.0) AS cbje FROM inv_rkd,rc_lx WHERE inv_rkd.bdelete = 0 AND SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '产品入库单' AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? GROUP BY inv_rkd.bmdm) UNION (SELECT bmdm,COALESCE(SUM(pm_zcp." & strCbys(k) & "),0.0) AS cbje FROM pm_zcp WHERE cperiod = ? GROUP BY pm_zcp.bmdm) UNION (SELECT bmdm,COALESCE(SUM(" & IIf(strCbys(k) = "clcb", "pm_zccl.zcclje", "0") & "),0.0) AS cbje FROM pm_zccl WHERE cperiod = ? GROUP BY pm_zccl.bmdm)) sumcbjea GROUP BY bmdm) sumcbjec LEFT JOIN (SELECT cperiod,bmdm,qczcpje_" & strCbys(k) & "+zcbje_" & strCbys(k) & " AS zcbje FROM pm_zcbje WHERE cperiod = ?) sumcbjeb ON sumcbjec.bmdm = sumcbjeb.bmdm WHERE sumcbjec.cbje<>COALESCE(sumcbjeb.zcbje,0.0)"
+                    End If
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                    rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    If rcDataset.Tables("sumcbje") IsNot Nothing Then
+                        rcDataset.Tables("sumcbje").Clear()
+                    End If
+                    rcOleDbDataAdpt.Fill(rcDataset, "sumcbje")
+                    For i = 0 To rcDataset.Tables("sumcbje").Rows.Count - 1
+                        '读取本部门或本成本域金额最大的一行入库单
+                        If bCostRegion Then
+                            rcOleDbCommand.CommandText = "SELECT djh,xh FROM (SELECT djh,xh FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND EXISTS (SELECT 1 FROM rc_cr_ck WHERE rc_cr_ck.ckdm = inv_rkd.ckdm AND rc_cr_ck.crdm = ?) AND NOT EXISTS (SELECT 1 FROM rc_ckxx WHERE rc_ckxx.ckdm = inv_rkd.ckdm AND rc_ckxx.bscrkcb = 1) AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? ORDER BY inv_rkd." & strCbys(k) & " DESC) WHERE rownum = 1"
+                        Else
+                            rcOleDbCommand.CommandText = "SELECT djh,xh FROM (SELECT djh,xh FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.bmdm = ? AND NOT EXISTS (SELECT 1 FROM rc_ckxx WHERE rc_ckxx.ckdm = inv_rkd.ckdm AND rc_ckxx.bscrkcb = 1) AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ? ORDER BY inv_rkd." & strCbys(k) & " DESC) WHERE rownum = 1"
+                        End If
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumcbje").Rows(i).Item("bmdm")
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("inv_rkd") IsNot Nothing Then
+                            rcDataset.Tables("inv_rkd").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "inv_rkd")
+                        If rcDataset.Tables("inv_rkd").Rows.Count = 1 Then
+                            '更新入库单的成本金额差额
+                            If bCostRegion Then
+                                rcOleDbCommand.CommandText = "UPDATE inv_rkd SET je = je + ?," & strCbys(k) & "= " & strCbys(k) & " + ? WHERE inv_rkd.bdelete = 0 AND inv_rkd.xh = ? AND inv_rkd.djh = ?"
+                                rcOleDbCommand.Parameters.Clear()
+                                rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                                rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Integer, 4).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("xh")
+                                rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 20).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("djh")
+                            Else
+                                rcOleDbCommand.CommandText = "UPDATE inv_rkd SET je = je + ?," & strCbys(k) & "=" & strCbys(k) & " + ? WHERE inv_rkd.bdelete = 0 AND inv_rkd.xh = ? AND inv_rkd.djh = ?"
+                                rcOleDbCommand.Parameters.Clear()
+                                rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                                rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Integer, 4).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("xh")
+                                rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 20).Value = rcDataset.Tables("inv_rkd").Rows(0).Item("djh")
+                            End If
+                            rcOleDbCommand.ExecuteNonQuery()
+                        Else
+                            '没有入库单则读取在产品进行调整
+                            '读取本部门或本成本域金额最大的一行在产品
+                            rcOleDbCommand.CommandText = "SELECT cpdm,bmdm,gxdm FROM (SELECT cpdm,bmdm,gxdm FROM pm_zcp WHERE pm_zcp.bmdm = ? AND pm_zcp.cperiod = ? ORDER BY pm_zcp." & strCbys(k) & " DESC) WHERE rownum = 1"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("sumcbje").Rows(i).Item("bmdm")
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                            If rcDataset.Tables("pm_zcp") IsNot Nothing Then
+                                rcDataset.Tables("pm_zcp").Clear()
+                            End If
+                            rcOleDbDataAdpt.Fill(rcDataset, "pm_zcp")
+                            If rcDataset.Tables("pm_zcp").Rows.Count = 1 Then
+                                '更新入库单的成本金额差额
+                                rcOleDbCommand.CommandText = "UPDATE pm_zcp SET zcpje = zcpje + ?," & strCbys(k) & "=" & strCbys(k) & "+? WHERE pm_zcp.gxdm = ? AND pm_zcp.bmdm = ? AND pm_zcp.cpdm = ? AND pm_zcp.cperiod = ?"
+                                rcOleDbCommand.Parameters.Clear()
+                                rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                                rcOleDbCommand.Parameters.Add("@je", OleDbType.Double, 8).Value = rcDataset.Tables("sumcbje").Rows(i).Item("zcbje") - rcDataset.Tables("sumcbje").Rows(i).Item("cbje")
+                                rcOleDbCommand.Parameters.Add("@gxdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("pm_zcp").Rows(0).Item("gxdm")
+                                rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("pm_zcp").Rows(0).Item("bmdm")
+                                rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("pm_zcp").Rows(0).Item("cpdm")
+                                rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                                rcOleDbCommand.ExecuteNonQuery()
+                            End If
+                        End If
+                        If bCostRegion Then
+                            '成本域--更新pm_zcbje的数据
+                            rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET ccpje_" & strCbys(k) & " = (SELECT COALESCE(SUM(" & strCbys(k) & "),0.0) FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND EXISTS (SELECT 1 FROM rc_cr_ck WHERE rc_cr_ck.ckdm = inv_rkd.ckdm AND rc_cr_ck.crdm = pm_zcbje.bmdm) AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?) WHERE cperiod = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.ExecuteNonQuery()
+                            rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET qmzcpje_" & strCbys(k) & " = (SELECT COALESCE(SUM(" & strCbys(k) & "),0.0) FROM pm_zcp WHERE pm_zcp.bmdm = pm_zcbje.bmdm AND pm_zcp.cperiod = ?) WHERE cperiod = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        Else
+                            '更新pm_zcbje的数据
+                            rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET ccpje_" & strCbys(k) & " = (SELECT COALESCE(SUM(" & strCbys(k) & "),0.0) FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND inv_rkd.bmdm = pm_zcbje.bmdm AND inv_rkd.rkrq <= ? AND inv_rkd.rkrq >= ?) WHERE cperiod = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.ExecuteNonQuery()
+                            rcOleDbCommand.CommandText = "UPDATE pm_zcbje SET qmzcpje_" & strCbys(k) & " = (SELECT COALESCE(SUM(" & strCbys(k) & "),0.0) FROM pm_zcp WHERE pm_zcp.bmdm = pm_zcbje.bmdm AND pm_zcp.cperiod = ?) WHERE cperiod = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                        rcOleDbCommand.CommandText = "UPDATE pm_zcbje set qczcpje = qczcpje_clcb + qczcpje_rgcb + qczcpje_nycb + qczcpje_zjcb + qczcpje_glcb,zcbje = zcbje_clcb + zcbje_rgcb + zcbje_nycb + zcbje_zjcb + zcbje_glcb,ccpje = ccpje_clcb + ccpje_rgcb + ccpje_nycb + ccpje_zjcb + ccpje_glcb,qmzcpje = qmzcpje_clcb + qmzcpje_rgcb + qmzcpje_nycb + qmzcpje_zjcb + qmzcpje_glcb,qmzcclje = qmzcclje_clcb + qmzcclje_rgcb + qmzcclje_nycb + qmzcclje_zjcb + qmzcclje_glcb WHERE cperiod = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                    rcOleDbTrans.Commit()
+                Catch ex As Exception
+                    MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                    Return
+                Finally
+                    rcOleDbConn.Close()
+                End Try
+            Next
+        End If
+        '汇总数据
+
+        MsgBox("生产成本分配完成。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
         Me.Close()
     End Sub
 End Class

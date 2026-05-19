@@ -18,7 +18,7 @@ Public Class FrmOeRkdSh
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx WHERE kjnd = ? AND lxgs = '产品入库单' ORDER BY pzlxdm"
+            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx WHERE kjnd = ? AND (lxgs = '产品入库单' OR lxgs = '工序完工单') ORDER BY pzlxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -238,7 +238,7 @@ Public Class FrmOeRkdSh
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT inv_rkd.djh FROM inv_rkd,rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND lxgs = '产品入库单' AND inv_rkd.bdelete = 0 AND inv_rkd.rkrq >= ? AND inv_rkd.rkrq <= ? AND SUBSTR(inv_rkd.djh,11, 5) >= ?  AND SUBSTR(inv_rkd.djh,11, 5) <= ?" & IIf(ChbSh.Checked, " and inv_rkd.shr IS NULL", "") & IIf(Trim(Me.TxtZydm.Text).Length > 0, " and inv_rkd.zydm = '" & Trim(Me.TxtZydm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " and inv_rkd.ckdm = '" & Trim(Me.TxtCkdm.Text) & "'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and inv_rkd.bmdm LIKE '" & Trim(Me.TxtBmdm.Text) & "%'", "") & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(inv_rkd.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & " GROUP BY inv_rkd.djh ORDER BY inv_rkd.djh"
+            rcOleDbCommand.CommandText = "SELECT inv_rkd.djh FROM inv_rkd,rc_lx WHERE SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND (lxgs = '产品入库单' OR lxgs = '工序完工单') AND inv_rkd.bdelete = 0 AND inv_rkd.rkrq >= ? AND inv_rkd.rkrq <= ? AND SUBSTR(inv_rkd.djh,11, 5) >= ?  AND SUBSTR(inv_rkd.djh,11, 5) <= ?" & IIf(ChbSh.Checked, " and inv_rkd.shr IS NULL", "") & IIf(Trim(Me.TxtZydm.Text).Length > 0, " and inv_rkd.zydm = '" & Trim(Me.TxtZydm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " and inv_rkd.ckdm = '" & Trim(Me.TxtCkdm.Text) & "'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and inv_rkd.bmdm LIKE '" & Trim(Me.TxtBmdm.Text) & "%'", "") & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(inv_rkd.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & " GROUP BY inv_rkd.djh ORDER BY inv_rkd.djh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = DtpBegin.Value
             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = Me.DtpEnd.Value

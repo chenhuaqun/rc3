@@ -13,18 +13,18 @@ Public Class FrmBomCx
             Case Keys.F3
                 Dim rcFrm As New models.FrmF34
                 With rcFrm
-                    .paraOleDbConn = rcOleDbConn
-                    .paraTableName = "rc_cpxx"
-                    .paraField1 = "cpdm"
-                    .paraField2 = "cpmc"
-                    .paraField3 = "dw"
-                    .paraField4 = "cpsm"
-                    .paraOrderField = "cpdm"
-                    .paraTitle = "物料"
-                    .paraOldValue = Me.TxtParentCpdm.Text
-                    .paraAddName = ""
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_cpxx"
+                    .ParaField1 = "cpdm"
+                    .ParaField2 = "cpmc"
+                    .ParaField3 = "dw"
+                    .ParaField4 = "cpsm"
+                    .ParaOrderField = "cpdm"
+                    .ParaTitle = "物料"
+                    .ParaOldValue = Me.TxtParentCpdm.Text
+                    .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
-                        TxtParentCpdm.Text = Trim(.paraField1)
+                        TxtParentCpdm.Text = Trim(.ParaField1)
                     End If
                 End With
         End Select
@@ -35,18 +35,18 @@ Public Class FrmBomCx
             Case Keys.F3
                 Dim rcFrm As New models.FrmF34
                 With rcFrm
-                    .paraOleDbConn = rcOleDbConn
-                    .paraTableName = "rc_cpxx"
-                    .paraField1 = "cpdm"
-                    .paraField2 = "cpmc"
-                    .paraField3 = "dw"
-                    .paraField4 = "cpsm"
-                    .paraOrderField = "cpdm"
-                    .paraTitle = "物料"
-                    .paraOldValue = Me.TxtParentCpdm.Text
-                    .paraAddName = ""
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_cpxx"
+                    .ParaField1 = "cpdm"
+                    .ParaField2 = "cpmc"
+                    .ParaField3 = "dw"
+                    .ParaField4 = "cpsm"
+                    .ParaOrderField = "cpdm"
+                    .ParaTitle = "物料"
+                    .ParaOldValue = Me.TxtParentCpdm.Text
+                    .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
-                        TxtChildCpdm.Text = Trim(.paraField1)
+                        TxtChildCpdm.Text = Trim(.ParaField1)
                     End If
                 End With
         End Select
@@ -63,25 +63,25 @@ Public Class FrmBomCx
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataSet.Tables("bomlb") IsNot Nothing Then
-                rcDataSet.Tables("bomlb").Clear()
+            If rcDataset.Tables("bomlb") IsNot Nothing Then
+                rcDataset.Tables("bomlb").Clear()
             End If
-            rcOleDbDataAdpt.Fill(rcDataSet, "bomlb")
+            rcOleDbDataAdpt.Fill(rcDataset, "bomlb")
         Catch ex As Exception
             MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        If rcDataSet.Tables("bomlb").Rows.Count <= 0 Then
+        If rcDataset.Tables("bomlb").Rows.Count <= 0 Then
             MsgBox("没有满足条件的数据。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Return
         End If
         '调用表单
         Dim rcFrm As New FrmBomCxz
         With rcFrm
-            .ParaDataSet = rcDataSet
-            .ParaDataView = New DataView(rcDataSet.Tables("bomlb"), "TRUE", "parentcpdm,childcpdm", DataViewRowState.CurrentRows)
+            .ParaDataSet = rcDataset
+            .ParaDataView = New DataView(rcDataset.Tables("bomlb"), "TRUE", "parentcpdm,childcpdm", DataViewRowState.CurrentRows)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()

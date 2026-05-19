@@ -18,13 +18,20 @@ Public Class FrmRedoCpyeHz
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@ParaStrYear", OleDbType.VarChar, 4).Value = Me.NudYear.Value
             rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = g_Dwrq
+            rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
             rcOleDbCommand.ExecuteNonQuery()
+            If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                    MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                    Return
+                End If
+            End If
         Catch ex As Exception
             MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
         Finally
             rcOleDbConn.Close()
         End Try
-        MsgBox("重新汇总总账已经完成。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
+        MsgBox("重新汇总库存总账已经完成。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
         Me.Close()
 
     End Sub

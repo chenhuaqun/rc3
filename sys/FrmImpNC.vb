@@ -9,6 +9,7 @@ Public Class FrmImpNC
     Dim rcOleDbTrans As OleDbTransaction
     '建立命令
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
+    'Dim strCkdm As String '仓库代码
 
     Private Sub FrmImpNC_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If g_User_Account = "ADMIN" Then
@@ -25,9 +26,7 @@ Public Class FrmImpNC
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@ny", OleDbType.VarChar, 6).Value = strDwKjqj
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataset.Tables("rc_yj") IsNot Nothing Then
-                rcDataset.Tables("rc_yj").Clear()
-            End If
+            rcDataset.Tables("rc_yj")?.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "rc_yj")
         Catch ex As Exception
             MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
@@ -51,9 +50,7 @@ Public Class FrmImpNC
             rcOleDbCommand.CommandText = "SELECT paraid,parastrvalue,paradblvalue FROM rc_para WHERE paraId = '收款单据表体售达方属性序号'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataset.Tables("rc_para") IsNot Nothing Then
-                rcDataset.Tables("rc_para").Clear()
-            End If
+            rcDataset.Tables("rc_para")?.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
         Catch ex As Exception
             MsgBox("程序错误。" & Chr(13) & ex.Message)
@@ -61,7 +58,7 @@ Public Class FrmImpNC
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_para").Rows.Count > 0 Then
-            If rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue").GetType.ToString <> "System.DBNull" Then
+            If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
                 Me.ComboBox1.SelectedItem = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
             Else
                 Me.ComboBox1.SelectedItem = 1
@@ -78,9 +75,7 @@ Public Class FrmImpNC
             rcOleDbCommand.CommandText = "SELECT paraid,parastrvalue,paradblvalue FROM rc_para WHERE paraId = '收款期属性序号'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataset.Tables("rc_para") IsNot Nothing Then
-                rcDataset.Tables("rc_para").Clear()
-            End If
+            rcDataset.Tables("rc_para")?.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
         Catch ex As Exception
             MsgBox("程序错误。" & Chr(13) & ex.Message)
@@ -88,13 +83,63 @@ Public Class FrmImpNC
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_para").Rows.Count > 0 Then
-            If rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue").GetType.ToString <> "System.DBNull" Then
+            If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
                 Me.ComboBox2.SelectedItem = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
             Else
                 Me.ComboBox2.SelectedItem = 1
             End If
         Else
             Me.ComboBox2.SelectedItem = 1
+        End If
+        '销售订单表体折扣原物料编码属性序号
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT paraid,parastrvalue,paradblvalue FROM rc_para WHERE paraId = '销售订单表体折扣原物料编码属性序号'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcDataset.Tables("rc_para")?.Clear()
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+        Catch ex As Exception
+            MsgBox("程序错误。" & Chr(13) & ex.Message)
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        If rcDataset.Tables("rc_para").Rows.Count > 0 Then
+            If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                Me.CmbZkCpdm.SelectedItem = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+            Else
+                Me.CmbZkCpdm.SelectedItem = 1
+            End If
+        Else
+            Me.CmbZkCpdm.SelectedItem = 1
+        End If
+        '销售发票表头发票号属性序号
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT paraid,parastrvalue,paradblvalue FROM rc_para WHERE paraId = '销售发票表头发票号属性序号'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcDataset.Tables("rc_para")?.Clear()
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+        Catch ex As Exception
+            MsgBox("程序错误。" & Chr(13) & ex.Message)
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        If rcDataset.Tables("rc_para").Rows.Count > 0 Then
+            If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                Me.CmbFph.SelectedItem = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+            Else
+                Me.CmbFph.SelectedItem = 1
+            End If
+        Else
+            Me.CmbFph.SelectedItem = 1
         End If
 
     End Sub
@@ -104,55 +149,101 @@ Public Class FrmImpNC
     Private Sub TxtCkdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCkdm.KeyDown
         Select Case e.KeyCode
             Case Keys.F3
-                Dim rcFrm As New models.FrmF3KeyPress
-                With rcFrm
-                    .paraOleDbConn = rcOleDbConn
-                    .paraTableName = "rc_ckxx"
-                    .paraField1 = "ckdm"
-                    .paraField2 = "ckmc"
-                    .paraField3 = "cksm"
-                    .paraTitle = "仓库"
-                    .paraOldValue = ""
-                    .paraAddName = ""
-                    If .ShowDialog = DialogResult.OK Then
-                        TxtCkdm.Text = Trim(.paraField1)
-                    End If
-                End With
-            Case Keys.Down
-                SendKeys.Send("{TAB}")
-            Case Keys.Up
-                SendKeys.Send("+{TAB}")
+                '取仓库信息
+                Try
+                    rcOleDbConn.Open()
+                    rcOleDbCommand.Connection = rcOleDbConn
+                    rcOleDbCommand.CommandTimeout = 300
+                    rcOleDbCommand.CommandType = CommandType.Text
+                    rcOleDbCommand.CommandText = "SELECT ckdm,ckmc,cksm FROM rc_ckxx ORDER BY ckdm"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    rcDataset.Tables("rc_ckxx")?.Clear()
+                    rcOleDbDataAdpt.Fill(rcDataset, "rc_ckxx")
+                Catch ex As Exception
+                    MsgBox("程序错误。" & Chr(13) & ex.Message)
+                Finally
+                    rcOleDbConn.Close()
+                End Try
+
+                Dim NCAccountingBook As String = GetParaValue("NCACCOUNTINGBOOK", True)
+
+                ' 假设你已经从数据库/适配器得到 DataTable dt，并知道列名
+                Dim f As New models.FrmMultiSelect()
+                f.PopulateFromDataTable(rcDataset.Tables("rc_ckxx"), "ckdm", "ckmc", "cksm")
+                If f.ShowDialog() = DialogResult.OK Then
+                    Dim selectedCodes As List(Of String) = f.SelectedField1Values
+                    Me.TxtNCCkdm.Text = ""
+                    Me.TxtCkdm.Text = ""
+                    For i As Integer = 0 To selectedCodes.Count - 1
+                        Me.TxtNCCkdm.Text = Me.TxtNCCkdm.Text & IIf(i = 0, "", ",") & "'" & NCAccountingBook & selectedCodes(i) & "'"
+                        Me.TxtCkdm.Text = Me.TxtCkdm.Text & IIf(i = 0, "", ",") & selectedCodes(i)
+                    Next
+                End If
         End Select
+        'Select Case e.KeyCode
+        '    Case Keys.F3
+        '        Dim rcFrm As New models.FrmF3KeyPress
+        '        With rcFrm
+        '            .ParaOleDbConn = rcOleDbConn
+        '            .ParaTableName = "rc_ckxx"
+        '            .ParaField1 = "ckdm"
+        '            .ParaField2 = "ckmc"
+        '            .ParaField3 = "cksm"
+        '            .ParaTitle = "仓库"
+        '            .ParaOldValue = ""
+        '            .ParaAddName = ""
+        '            If .ShowDialog = DialogResult.OK Then
+        '                TxtCkdm.Text = Trim(.ParaField1)
+        '            End If
+        '        End With
+        '    Case Keys.Down
+        '        SendKeys.Send("{TAB}")
+        '    Case Keys.Up
+        '        SendKeys.Send("+{TAB}")
+        'End Select
     End Sub
 
-    Private Sub TxtCkdm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtCkdm.Validating
-        If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
-            Try
-                rcOleDbConn.Open()
-                rcOleDbCommand.Connection = rcOleDbConn
-                rcOleDbCommand.CommandTimeout = 300
-                rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT * FROM rc_ckxx WHERE (ckdm = ?)"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(TxtCkdm.Text)
-                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataset.Tables("rc_ckxx") IsNot Nothing Then
-                    Me.rcDataset.Tables("rc_ckxx").Clear()
-                End If
-                rcOleDbDataAdpt.Fill(rcDataset, "rc_ckxx")
-            Catch ex As Exception
-                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-                Return
-            Finally
-                rcOleDbConn.Close()
-            End Try
-            If rcDataset.Tables("rc_ckxx").Rows.Count > 0 Then
-                Me.TxtCkdm.Text = Trim(rcDataset.Tables("rc_ckxx").Rows(0).Item("ckdm"))
-            Else
-                e.Cancel = True
-            End If
-        End If
-    End Sub
+    'Private Sub TxtCkdm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtCkdm.Validating
+    '    If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+    '        Dim NCAccountingBook As String = GetParaValue("NCACCOUNTINGBOOK", True)
+
+    '        '仓库编码处理
+    '        strCkdm = Me.TxtCkdm.Text
+    '        If Me.TxtCkdm.Text.Length > NCAccountingBook.Length Then
+    '            '判断仓库编码是否以账套编码开头
+    '            If Mid(Me.TxtCkdm.Text, 1, NCAccountingBook.Length) = NCAccountingBook Then
+    '                '仓库编码去掉账套前缀
+    '                strCkdm = Mid(Me.TxtCkdm.Text, NCAccountingBook.Length + 1, Me.TxtCkdm.Text.Length - NCAccountingBook.Length)
+    '            End If
+    '        End If
+
+    '        Try
+    '            rcOleDbConn.Open()
+    '            rcOleDbCommand.Connection = rcOleDbConn
+    '            rcOleDbCommand.CommandTimeout = 300
+    '            rcOleDbCommand.CommandType = CommandType.Text
+    '            rcOleDbCommand.CommandText = "SELECT * FROM rc_ckxx WHERE (ckdm = ?)"
+    '            rcOleDbCommand.Parameters.Clear()
+    '            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = strCkdm
+    '            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+    '            If rcDataset.Tables("rc_ckxx") IsNot Nothing Then
+    '                Me.rcDataset.Tables("rc_ckxx").Clear()
+    '            End If
+    '            rcOleDbDataAdpt.Fill(rcDataset, "rc_ckxx")
+    '        Catch ex As Exception
+    '            MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+    '            Return
+    '        Finally
+    '            rcOleDbConn.Close()
+    '        End Try
+    '        If rcDataset.Tables("rc_ckxx").Rows.Count > 0 Then
+    '            'Me.TxtCkdm.Text = Trim(rcDataset.Tables("rc_ckxx").Rows(0).Item("ckdm"))
+    '        Else
+    '            e.Cancel = True
+    '        End If
+    '    End If
+    'End Sub
 
 #End Region
 
@@ -245,9 +336,7 @@ Public Class FrmImpNC
                                         rcOleDbCommand.Parameters.Clear()
                                         rcOleDbCommand.Parameters.Add("@pk_org", OleDbType.VarChar, 20).Value = rcDataset.Tables("gl_pz").Rows(i).Item("value" & j.ToString)
                                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                                        If rcDataset.Tables("org_orgs") IsNot Nothing Then
-                                            rcDataset.Tables("org_orgs").Clear()
-                                        End If
+                                        rcDataset.Tables("org_orgs")?.Clear()
                                         rcOleDbDataAdpt.Fill(rcDataset, "org_orgs")
                                         If rcDataset.Tables("org_orgs").Rows.Count > 0 Then
                                             rcDataset.Tables("gl_pz").Rows(i).Item("bmdm") = rcDataset.Tables("org_orgs").Rows(0).Item("code")
@@ -407,7 +496,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.Char, 6).Value = rcDataset.Tables("gl_pz").Rows(i).Item("year") & rcDataset.Tables("gl_pz").Rows(i).Item("period")
                     rcOleDbCommand.Parameters.Add("@pzlxdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("gl_pz").Rows(i).Item("pzlxdm").ToString.PadRight(4, "0")
                     rcOleDbCommand.Parameters.Add("@pzh", OleDbType.Numeric, 5).Value = rcDataset.Tables("gl_pz").Rows(i).Item("pzh")
-                    rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = rcDataset.Tables("gl_pz").Rows(i).Item("xh")
+                    rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = rcDataset.Tables("gl_pz").Rows(i).Item("xh")
                     rcOleDbCommand.Parameters.Add("@bdelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@pzrq", OleDbType.Date, 8).Value = rcDataset.Tables("gl_pz").Rows(i).Item("pzrq")
                     rcOleDbCommand.Parameters.Add("@fjzs", OleDbType.Numeric, 4).Value = rcDataset.Tables("gl_pz").Rows(i).Item("fjzs")
@@ -586,7 +675,7 @@ Public Class FrmImpNC
                 rcOleDbCommand.Connection = NCOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ic_material.pk_org,ic_material.djh,ic_material.xh,ic_material.ckrq,ic_material.cwarehouseid,ic_material.ckdm,ic_material.ckmc,ic_material.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_material.pk_marbasclass,ic_material.lbdm,ic_material.cmaterialvid,ic_material.cpdm,ic_material.cpmc,ic_material.pk_measdoc,ic_material.dw,ic_material.vbatchcode,ic_material.nassistnum,ic_material.nnum AS sl,ic_material.nweight AS zl,ic_material.ncostprice AS dj,ic_material.ncostmny AS je,ic_material.ckmemo,ic_material.cgeneralbid FROM (select ic_material_h.pk_org,ic_material_h.vbillcode AS djh,ic_material_b.crowno AS xh,ic_material_b.dbizdate AS ckrq,ic_material_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_material_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_material_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_material_b.vbatchcode,ic_material_b.nassistnum,ic_material_b.nnum,ic_material_b.nweight,ic_material_b.ncostprice,ic_material_b.ncostmny,ic_material_b.vnotebody AS ckmemo,ic_material_b.cgeneralbid from ic_material_h,ic_material_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_material_h.cgeneralhid = ic_material_b.cgeneralhid AND ic_material_h.cwarehouseid = bd_stordoc.pk_stordoc" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_material_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code = '" & Me.TxtCkdm.Text & "')", "") & " AND ic_material_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_material_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_material_h.dr=0 and ic_material_b.dr=0 AND to_date(ic_material_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_material_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?) ic_material left join org_dept on org_dept.pk_dept = ic_material.cdptid ORDER BY ic_material.djh,ic_material.xh"
+                rcOleDbCommand.CommandText = "SELECT ic_material.pk_org,ic_material.djh,ic_material.xh,ic_material.ckrq,ic_material.cwarehouseid,ic_material.ckdm,ic_material.ckmc,ic_material.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_material.pk_marbasclass,ic_material.lbdm,ic_material.cmaterialvid,ic_material.cpdm,ic_material.cpmc,ic_material.pk_measdoc,ic_material.dw,ic_material.vbatchcode,ic_material.nassistnum,ic_material.nnum AS sl,ic_material.nweight AS zl,ic_material.ncostprice AS dj,ic_material.ncostmny AS je,ic_material.ckmemo,ic_material.cgeneralbid FROM (select ic_material_h.pk_org,ic_material_h.vbillcode AS djh,ic_material_b.crowno AS xh,ic_material_b.dbizdate AS ckrq,ic_material_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_material_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_material_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_material_b.vbatchcode,ic_material_b.nassistnum,ic_material_b.nnum,ic_material_b.nweight,ic_material_b.ncostprice,ic_material_b.ncostmny,ic_material_b.vnotebody AS ckmemo,ic_material_b.cgeneralbid from ic_material_h,ic_material_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_material_h.cgeneralhid = ic_material_b.cgeneralhid AND ic_material_h.cwarehouseid = bd_stordoc.pk_stordoc" & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_material_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & "))", "") & " AND ic_material_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_material_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_material_h.dr=0 and ic_material_b.dr=0 AND to_date(ic_material_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_material_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?) ic_material left join org_dept on org_dept.pk_dept = ic_material.cdptid ORDER BY ic_material.djh,ic_material.xh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
@@ -625,10 +714,22 @@ Public Class FrmImpNC
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
                 '删除历史单据
-                rcOleDbCommand.CommandText = "DELETE FROM inv_ckd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'LLCK'" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND ckdm ='" & Me.TxtCkdm.Text & "'", "")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM inv_ckd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'LLCK'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM inv_ckd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'LLCK'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_material").Rows.Count
                 'Dim oldStrDjh As String = ""
                 'Dim blnNew As Boolean = False
@@ -639,6 +740,22 @@ Public Class FrmImpNC
                     'Else
                     '    blnNew = False
                     'End If
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_material").Rows(i).Item("ckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_material").Rows(i).Item("ckdm")) Then
+                            rcDataset.Tables("ic_material").Rows(i).Item("ckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_material").Rows(i).Item("ckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_material").Rows(i).Item("ckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_material").Rows(i).Item("ckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_material").Rows(i).Item("ckdm") = Mid(rcDataset.Tables("ic_material").Rows(i).Item("ckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_material").Rows(i).Item("ckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_INV_CKD"
@@ -646,7 +763,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "LLCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_material").Rows(i).Item("djh"), rcDataset.Tables("ic_material").Rows(i).Item("djh").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraDateCkrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_material").Rows(i).Item("ckrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_material").Rows(i).Item("ckdm")
@@ -717,7 +834,7 @@ Public Class FrmImpNC
                         End If
                         rcOleDbDataAdpt.Fill(rcDataset, "rc_ckxx")
                         If rcDataset.Tables("rc_ckxx").Rows.Count = 0 Then
-                            rcOleDbCommand.CommandText = "INSERT INTO rc_ckxx (ckdm,ckmc) VALUES (?,?)"
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_ckxx (ckdm,ckmc)Then VALUES (?,?)"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_material").Rows(i).Item("ckdm")
                             rcOleDbCommand.Parameters.Add("@ckmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_material").Rows(i).Item("ckmc")
@@ -746,7 +863,7 @@ Public Class FrmImpNC
                 rcOleDbCommand.Connection = NCOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ic_generalout.pk_org,ic_generalout.djh,ic_generalout.xh,ic_generalout.ckrq,ic_generalout.cwarehouseid,ic_generalout.ckdm,ic_generalout.ckmc,ic_generalout.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_generalout.pk_marbasclass,ic_generalout.lbdm,ic_generalout.cmaterialvid,ic_generalout.cpdm,ic_generalout.cpmc,ic_generalout.pk_measdoc,ic_generalout.dw,ic_generalout.vbatchcode,ic_generalout.nassistnum,ic_generalout.nnum AS sl,ic_generalout.nweight AS zl,ic_generalout.ncostprice AS dj,ic_generalout.ncostmny AS je,ic_generalout.ckmemo,ic_generalout.cgeneralbid FROM (select ic_generalout_h.pk_org,ic_generalout_h.vbillcode AS djh,ic_generalout_b.crowno AS xh,ic_generalout_b.dbizdate AS ckrq,ic_generalout_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_generalout_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_generalout_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_generalout_b.vbatchcode,ic_generalout_b.nassistnum,ic_generalout_b.nnum,ic_generalout_b.nweight,ic_generalout_b.ncostprice,ic_generalout_b.ncostmny,ic_generalout_b.vnotebody AS ckmemo,ic_generalout_b.cgeneralbid from ic_generalout_h,ic_generalout_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_generalout_h.cgeneralhid = ic_generalout_b.cgeneralhid AND ic_generalout_h.cwarehouseid = bd_stordoc.pk_stordoc" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_generalout_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code = '" & Me.TxtCkdm.Text & "')", "") & " AND ic_generalout_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_generalout_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_generalout_h.dr=0 and ic_generalout_b.dr=0 AND to_date(ic_generalout_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_generalout_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?) ic_generalout left join org_dept on org_dept.pk_dept = ic_generalout.cdptid ORDER BY ic_generalout.djh,ic_generalout.xh"
+                rcOleDbCommand.CommandText = "SELECT ic_generalout.pk_org,ic_generalout.djh,ic_generalout.xh,ic_generalout.ckrq,ic_generalout.cwarehouseid,ic_generalout.ckdm,ic_generalout.ckmc,ic_generalout.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_generalout.pk_marbasclass,ic_generalout.lbdm,ic_generalout.cmaterialvid,ic_generalout.cpdm,ic_generalout.cpmc,ic_generalout.pk_measdoc,ic_generalout.dw,ic_generalout.vbatchcode,ic_generalout.nassistnum,ic_generalout.nnum AS sl,ic_generalout.nweight AS zl,ic_generalout.ncostprice AS dj,ic_generalout.ncostmny AS je,ic_generalout.ckmemo,ic_generalout.cgeneralbid FROM (select ic_generalout_h.pk_org,ic_generalout_h.vbillcode AS djh,ic_generalout_b.crowno AS xh,ic_generalout_b.dbizdate AS ckrq,ic_generalout_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_generalout_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_generalout_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_generalout_b.vbatchcode,ic_generalout_b.nassistnum,ic_generalout_b.nnum,ic_generalout_b.nweight,ic_generalout_b.ncostprice,ic_generalout_b.ncostmny,ic_generalout_b.vnotebody AS ckmemo,ic_generalout_b.cgeneralbid from ic_generalout_h,ic_generalout_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_generalout_h.cgeneralhid = ic_generalout_b.cgeneralhid AND ic_generalout_h.cwarehouseid = bd_stordoc.pk_stordoc" & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_generalout_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & "))", "") & " AND ic_generalout_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_generalout_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_generalout_h.dr=0 and ic_generalout_b.dr=0 AND to_date(ic_generalout_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_generalout_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?) ic_generalout left join org_dept on org_dept.pk_dept = ic_generalout.cdptid ORDER BY ic_generalout.djh,ic_generalout.xh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
@@ -785,10 +902,21 @@ Public Class FrmImpNC
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
                 '删除历史单据
-                rcOleDbCommand.CommandText = "DELETE FROM inv_ckd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'CKTZ'" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND ckdm ='" & Me.TxtCkdm.Text & "'", "")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM inv_ckd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'CKTZ'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM inv_ckd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'CKTZ'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_generalout").Rows.Count
                 'Dim oldStrDjh As String = ""
                 'Dim blnNew As Boolean = False
@@ -799,6 +927,23 @@ Public Class FrmImpNC
                     'Else
                     '    blnNew = False
                     'End If
+
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm")) Then
+                            rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm") = Mid(rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_INV_CKD"
@@ -806,7 +951,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "CKTZ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_generalout").Rows(i).Item("djh"), rcDataset.Tables("ic_generalout").Rows(i).Item("djh").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraDateCkrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_generalout").Rows(i).Item("ckrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_generalout").Rows(i).Item("ckdm")
@@ -904,7 +1049,7 @@ Public Class FrmImpNC
                 rcOleDbCommand.Connection = NCOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ic_openbal.ckdm,ic_openbal.lbdm,ic_openbal.cpdm,ic_openbal.cpmc,ic_openbal.dw,SUM(ic_openbal.nassistnum) AS nassistnum,SUM(ic_openbal.nnum) AS sl,SUM(ic_openbal.nweight) AS zl,SUM(ic_openbal.ncostmny) AS je FROM (select ic_openbal_h.pk_org,ic_openbal_h.vbillcode AS djh,ic_openbal_b.crowno AS xh,ic_openbal_h.dbilldate AS rkrq,ic_openbal_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,bd_material.pk_marbasclass,bd_marbasclass.pk_marbasclass AS lbdm,ic_openbal_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_openbal_b.vbatchcode,ic_openbal_b.nassistnum,ic_openbal_b.nnum,ic_openbal_b.nweight,ic_openbal_b.ncostmny,ic_openbal_b.vnotebody AS rkmemo,ic_openbal_b.cgeneralbid from ic_openbal_h,ic_openbal_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_openbal_h.cgeneralhid = ic_openbal_b.cgeneralhid AND ic_openbal_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_openbal_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_openbal_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_openbal_h.dr=0 and ic_openbal_b.dr=0 AND SUBSTR(ic_openbal_h.dbilldate,1,4)= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_openbal_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code = '" & Me.TxtCkdm.Text & "')", "") & ") ic_openbal GROUP BY ic_openbal.ckdm,ic_openbal.lbdm,ic_openbal.cpdm,ic_openbal.cpmc,ic_openbal.dw"
+                rcOleDbCommand.CommandText = "SELECT ic_openbal.ckdm,ic_openbal.lbdm,ic_openbal.cpdm,ic_openbal.cpmc,ic_openbal.dw,SUM(ic_openbal.nassistnum) AS nassistnum,SUM(ic_openbal.nnum) AS sl,SUM(ic_openbal.nweight) AS zl,SUM(ic_openbal.ncostmny) AS je FROM (select ic_openbal_h.pk_org,ic_openbal_h.vbillcode AS djh,ic_openbal_b.crowno AS xh,ic_openbal_h.dbilldate AS rkrq,ic_openbal_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,bd_material.pk_marbasclass,bd_marbasclass.pk_marbasclass AS lbdm,ic_openbal_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_openbal_b.vbatchcode,ic_openbal_b.nassistnum,ic_openbal_b.nnum,ic_openbal_b.nweight,ic_openbal_b.ncostmny,ic_openbal_b.vnotebody AS rkmemo,ic_openbal_b.cgeneralbid from ic_openbal_h,ic_openbal_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_openbal_h.cgeneralhid = ic_openbal_b.cgeneralhid AND ic_openbal_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_openbal_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_openbal_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_openbal_h.dr=0 and ic_openbal_b.dr=0 AND SUBSTR(ic_openbal_h.dbilldate,1,4)= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_openbal_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & "))", "") & ") ic_openbal GROUP BY ic_openbal.ckdm,ic_openbal.lbdm,ic_openbal.cpdm,ic_openbal.cpmc,ic_openbal.dw"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbCommand.Parameters.Add("@intYear", OleDbType.Integer, 4).Value = Me.NudYear.Value
@@ -928,11 +1073,22 @@ Public Class FrmImpNC
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                '删除历史期初余额
-                rcOleDbCommand.CommandText = "DELETE FROM inv_cpyeb WHERE kjnd = ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND ckdm ='" & Me.TxtCkdm.Text & "'", "")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
-                rcOleDbCommand.ExecuteNonQuery()
+                '删除历史单据
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM inv_cpyeb WHERE kjnd = ?" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM inv_cpyeb WHERE kjnd = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_openbal").Rows.Count
                 For i = 0 To rcDataset.Tables("ic_openbal").Rows.Count - 1
                     Me.ProgressBar1.Value = i + 1
@@ -1013,23 +1169,36 @@ Public Class FrmImpNC
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                '序列删除再重建
-                rcOleDbCommand.CommandText = "DROP SEQUENCE DBDJ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "CREATE SEQUENCE DBDJ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                '更新单据号至0
-                rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'DBDJ'"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
-                rcOleDbCommand.ExecuteNonQuery()
+                If String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '序列删除再重建
+                    rcOleDbCommand.CommandText = "DROP SEQUENCE DBDJ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "CREATE SEQUENCE DBDJ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '更新单据号至0
+                    rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'DBDJ'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 '删除历史单据
-                rcOleDbCommand.CommandText = "DELETE FROM inv_dbd WHERE SUBSTR(djh,5,6)= ?"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM inv_dbd WHERE SUBSTR(djh,5,6)= ?" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND cckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM inv_dbd WHERE SUBSTR(djh,5,6)= ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_transout").Rows.Count
                 'Dim oldStrDjh As String = ""
                 'Dim blnNew As Boolean = False
@@ -1040,6 +1209,37 @@ Public Class FrmImpNC
                     'Else
                     '    blnNew = False
                     'End If
+
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_transout").Rows(i).Item("cckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_transout").Rows(i).Item("cckdm")) Then
+                            rcDataset.Tables("ic_transout").Rows(i).Item("cckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_transout").Rows(i).Item("cckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_transout").Rows(i).Item("cckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_transout").Rows(i).Item("cckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_transout").Rows(i).Item("cckdm") = Mid(rcDataset.Tables("ic_transout").Rows(i).Item("cckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_transout").Rows(i).Item("cckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+                    If rcDataset.Tables("ic_transout").Rows(i).Item("rckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_transout").Rows(i).Item("rckdm")) Then
+                            rcDataset.Tables("ic_transout").Rows(i).Item("rckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_transout").Rows(i).Item("rckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_transout").Rows(i).Item("rckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_transout").Rows(i).Item("rckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_transout").Rows(i).Item("rckdm") = Mid(rcDataset.Tables("ic_transout").Rows(i).Item("rckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_transout").Rows(i).Item("rckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_INV_DBD"
@@ -1047,7 +1247,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "DBDJ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_transout").Rows(i).Item("djh"), rcDataset.Tables("ic_transout").Rows(i).Item("djh").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraDateCkrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_transout").Rows(i).Item("dbrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrCckdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_transout").Rows(i).Item("cckdm")
@@ -1163,7 +1363,7 @@ Public Class FrmImpNC
                 rcOleDbCommand.Connection = NCOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ic_finprodin.pk_org,ic_finprodin.djh,ic_finprodin.xh,ic_finprodin.rkrq,ic_finprodin.cwarehouseid,ic_finprodin.ckdm,ic_finprodin.ckmc,ic_finprodin.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_finprodin.pk_marbasclass,ic_finprodin.lbdm,ic_finprodin.cmaterialvid,ic_finprodin.cpdm,ic_finprodin.cpmc,ic_finprodin.pk_measdoc,ic_finprodin.dw,ic_finprodin.vbatchcode,ic_finprodin.nassistnum,ic_finprodin.nnum AS sl,ic_finprodin.nweight AS zl,COALESCE(ic_finprodin.ncostprice,0.0) AS dj,COALESCE(ic_finprodin.ncostmny,0.0) As je,ic_finprodin.rkmemo,ic_finprodin.cgeneralbid FROM (select ic_finprodin_h.pk_org,ic_finprodin_h.vbillcode AS djh,ic_finprodin_b.crowno AS xh,ic_finprodin_h.dbilldate AS rkrq,ic_finprodin_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_finprodin_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_finprodin_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_finprodin_b.vbatchcode,ic_finprodin_b.nassistnum,ic_finprodin_b.nnum,ic_finprodin_b.nweight,ic_finprodin_b.ncostprice,ic_finprodin_b.ncostmny,ic_finprodin_b.vnotebody AS rkmemo,ic_finprodin_b.cgeneralbid from ic_finprodin_h,ic_finprodin_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_finprodin_h.cgeneralhid = ic_finprodin_b.cgeneralhid AND ic_finprodin_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_finprodin_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_finprodin_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND  ic_finprodin_h.dr=0 and ic_finprodin_b.dr=0 AND to_date(ic_finprodin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_finprodin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_finprodin_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code = '" & Me.TxtCkdm.Text & "')", "") & ") ic_finprodin left join org_dept on org_dept.pk_dept = ic_finprodin.cdptid ORDER BY ic_finprodin.djh,ic_finprodin.xh"
+                rcOleDbCommand.CommandText = "SELECT ic_finprodin.pk_org,ic_finprodin.djh,ic_finprodin.xh,ic_finprodin.rkrq,ic_finprodin.cwarehouseid,ic_finprodin.ckdm,ic_finprodin.ckmc,ic_finprodin.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_finprodin.pk_marbasclass,ic_finprodin.lbdm,ic_finprodin.cmaterialvid,ic_finprodin.cpdm,ic_finprodin.cpmc,ic_finprodin.pk_measdoc,ic_finprodin.dw,ic_finprodin.vbatchcode,ic_finprodin.nassistnum,ic_finprodin.nnum AS sl,ic_finprodin.nweight AS zl,COALESCE(ic_finprodin.ncostprice,0.0) AS dj,COALESCE(ic_finprodin.ncostmny,0.0) As je,ic_finprodin.rkmemo,ic_finprodin.cgeneralbid FROM (select ic_finprodin_h.pk_org,ic_finprodin_h.vbillcode AS djh,ic_finprodin_b.crowno AS xh,ic_finprodin_h.dbilldate AS rkrq,ic_finprodin_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_finprodin_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_finprodin_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_finprodin_b.vbatchcode,ic_finprodin_b.nassistnum,ic_finprodin_b.nnum,ic_finprodin_b.nweight,ic_finprodin_b.ncostprice,ic_finprodin_b.ncostmny,ic_finprodin_b.vnotebody AS rkmemo,ic_finprodin_b.cgeneralbid from ic_finprodin_h,ic_finprodin_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs where ic_finprodin_h.cgeneralhid = ic_finprodin_b.cgeneralhid AND ic_finprodin_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_finprodin_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_finprodin_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND  ic_finprodin_h.dr=0 and ic_finprodin_b.dr=0 AND to_date(ic_finprodin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_finprodin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_finprodin_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & "))", "") & ") ic_finprodin left join org_dept on org_dept.pk_dept = ic_finprodin.cdptid ORDER BY ic_finprodin.djh,ic_finprodin.xh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
@@ -1202,10 +1402,21 @@ Public Class FrmImpNC
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
                 '删除历史单据
-                rcOleDbCommand.CommandText = "DELETE FROM inv_rkd WHERE SUBSTR(djh,1,10)= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND ckdm ='" & Me.TxtCkdm.Text & "'", "")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 10).Value = "SCRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM inv_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'SCRK'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM inv_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'SCRK'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_finprodin").Rows.Count
                 Dim oldStrDjh As String = ""
                 Dim blnNew As Boolean = False
@@ -1216,6 +1427,23 @@ Public Class FrmImpNC
                     Else
                         blnNew = False
                     End If
+
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm")) Then
+                            rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm") = Mid(rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_INV_RKD"
@@ -1223,7 +1451,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "SCRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_finprodin").Rows(i).Item("djh"), rcDataset.Tables("ic_finprodin").Rows(i).Item("djh").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_finprodin").Rows(i).Item("xh"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_finprodin").Rows(i).Item("xh"))
                     rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("rkrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
@@ -1231,7 +1459,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("bmdm")
                     rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("bmmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("ckdm")
-                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("ckmc")
+                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 40).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("ckmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("cpdm")
                     rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_finprodin").Rows(i).Item("cpmc")
                     rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = ""
@@ -1335,7 +1563,7 @@ Public Class FrmImpNC
                 rcOleDbCommand.Connection = NCOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ic_subcontin.pk_org,ic_subcontin.djh,ic_subcontin.xh,ic_subcontin.rkrq,ic_subcontin.cwarehouseid,ic_subcontin.ckdm,ic_subcontin.ckmc,ic_subcontin.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_subcontin.pk_marbasclass,ic_subcontin.lbdm,ic_subcontin.cmaterialvid,ic_subcontin.cpdm,ic_subcontin.cpmc,ic_subcontin.pk_measdoc,ic_subcontin.dw,ic_subcontin.vbatchcode,ic_subcontin.nassistnum,ic_subcontin.nnum AS sl,ic_subcontin.nweight AS zl,ic_subcontin.ncostprice AS dj,ic_subcontin.ncostmny AS je,ic_subcontin.rkmemo,ic_subcontin.cgeneralbid FROM (select ic_subcontin_h.pk_org,ic_subcontin_h.vbillcode AS djh,ic_subcontin_b.crowno AS xh,ic_subcontin_h.dbilldate AS rkrq,ic_subcontin_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_subcontin_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_subcontin_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_subcontin_b.vbatchcode,ic_subcontin_b.nassistnum,ic_subcontin_b.nnum,ic_subcontin_b.nweight,ic_subcontin_b.ncostprice,ic_subcontin_b.ncostmny,ic_subcontin_b.vnotebody AS rkmemo,ic_subcontin_b.cgeneralbid from ic_subcontin_h,ic_subcontin_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs WHERE ic_subcontin_h.cgeneralhid = ic_subcontin_b.cgeneralhid AND ic_subcontin_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_subcontin_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_subcontin_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND  ic_subcontin_h.dr=0 and ic_subcontin_b.dr=0 AND to_date(ic_subcontin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_subcontin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_subcontin_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code = '" & Me.TxtCkdm.Text & "')", "") & ") ic_subcontin left join org_dept on org_dept.pk_dept = ic_subcontin.cdptid ORDER BY ic_subcontin.djh,ic_subcontin.xh"
+                rcOleDbCommand.CommandText = "SELECT ic_subcontin.pk_org,ic_subcontin.djh,ic_subcontin.xh,ic_subcontin.rkrq,ic_subcontin.cwarehouseid,ic_subcontin.ckdm,ic_subcontin.ckmc,ic_subcontin.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_subcontin.pk_marbasclass,ic_subcontin.lbdm,ic_subcontin.cmaterialvid,ic_subcontin.cpdm,ic_subcontin.cpmc,ic_subcontin.pk_measdoc,ic_subcontin.dw,ic_subcontin.vbatchcode,ic_subcontin.nassistnum,ic_subcontin.nnum AS sl,ic_subcontin.nweight AS zl,ic_subcontin.ncostprice AS dj,ic_subcontin.ncostmny AS je,ic_subcontin.rkmemo,ic_subcontin.cgeneralbid FROM (select ic_subcontin_h.pk_org,ic_subcontin_h.vbillcode AS djh,ic_subcontin_b.crowno AS xh,ic_subcontin_h.dbilldate AS rkrq,ic_subcontin_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_subcontin_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_subcontin_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_subcontin_b.vbatchcode,ic_subcontin_b.nassistnum,ic_subcontin_b.nnum,ic_subcontin_b.nweight,ic_subcontin_b.ncostprice,ic_subcontin_b.ncostmny,ic_subcontin_b.vnotebody AS rkmemo,ic_subcontin_b.cgeneralbid from ic_subcontin_h,ic_subcontin_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs WHERE ic_subcontin_h.cgeneralhid = ic_subcontin_b.cgeneralhid AND ic_subcontin_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_subcontin_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_subcontin_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND  ic_subcontin_h.dr=0 and ic_subcontin_b.dr=0 AND to_date(ic_subcontin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_subcontin_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND EXISTS (SELECT 1 FROM bd_stordoc WHERE ic_subcontin_h.cwarehouseid = bd_stordoc.pk_stordoc AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & "))", "") & ") ic_subcontin left join org_dept on org_dept.pk_dept = ic_subcontin.cdptid ORDER BY ic_subcontin.djh,ic_subcontin.xh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
@@ -1374,10 +1602,21 @@ Public Class FrmImpNC
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
                 '删除历史单据
-                rcOleDbCommand.CommandText = "DELETE FROM inv_rkd WHERE SUBSTR(djh,1,10)= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND ckdm ='" & Me.TxtCkdm.Text & "'", "")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 10).Value = "WWRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM inv_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'WWRK'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM inv_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'WWRK'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_subcontin").Rows.Count
                 Dim oldStrDjh As String = ""
                 Dim blnNew As Boolean = False
@@ -1388,6 +1627,23 @@ Public Class FrmImpNC
                     Else
                         blnNew = False
                     End If
+
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm")) Then
+                            rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm") = Mid(rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_INV_RKD"
@@ -1395,7 +1651,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "WWRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_subcontin").Rows(i).Item("djh"), rcDataset.Tables("ic_subcontin").Rows(i).Item("djh").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_subcontin").Rows(i).Item("xh"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_subcontin").Rows(i).Item("xh"))
                     rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("rkrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
@@ -1403,7 +1659,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("bmdm")
                     rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("bmmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("ckdm")
-                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("ckmc")
+                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 40).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("ckmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("cpdm")
                     rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_subcontin").Rows(i).Item("cpmc")
                     rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = ""
@@ -1480,14 +1736,165 @@ Public Class FrmImpNC
         End If
 
         '销售出库
-        If Me.ChbOeXsd.Checked Then
+        If Me.ChbOeXsck.Checked Then
+            '写系统参数
+            If Not String.IsNullOrEmpty(Me.CmbZkCpdm.SelectedItem) Then
+                Try
+                    rcOleDbConn.Open()
+                    rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
+                    rcOleDbCommand.Connection = rcOleDbConn
+                    rcOleDbCommand.Transaction = rcOleDbTrans
+                    rcOleDbCommand.CommandTimeout = 300
+                    rcOleDbCommand.CommandType = CommandType.Text
+                    '删除数据
+                    rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '销售订单表体折扣原物料编码属性序号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '插入数据
+                    rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'销售订单表体折扣原物料编码属性序号',?,0)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.CmbZkCpdm.SelectedItem)
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbTrans.Commit()
+                Catch ex As Exception
+                    Try
+                        rcOleDbTrans.Rollback()
+                        MsgBox("程序错误。" & Chr(13) & ex.Message)
+                    Catch ey As OleDbException
+                        MsgBox("程序错误。" & Chr(13) & ey.Message)
+                    End Try
+                    Return
+                Finally
+                    rcOleDbConn.Close()
+                End Try
+            End If
+
+
+            '折扣原物料编码
+            Dim strZkCpdm As String = "1"
+            If Not String.IsNullOrEmpty(Me.CmbFph.SelectedItem) Then
+                strZkCpdm = Trim(Me.CmbZkCpdm.SelectedItem.ToString)
+            End If
+
+
             '读取销售出库
             Try
                 NCOleDbConn.Open()
                 rcOleDbCommand.Connection = NCOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ic_saleout.pk_org,ic_saleout.djh,ic_saleout.xh,ic_saleout.xsrq,ic_saleout.ccustomerid,ic_saleout.khdm,ic_saleout.khmc,ic_saleout.cwarehouseid,ic_saleout.ckdm,ic_saleout.ckmc,ic_saleout.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_saleout.pk_marbasclass,ic_saleout.lbdm,ic_saleout.cmaterialvid,ic_saleout.cpdm,ic_saleout.cpmc,ic_saleout.pk_measdoc,ic_saleout.dw,ic_saleout.vbatchcode,ic_saleout.nassistnum,ic_saleout.nnum AS sl,ic_saleout.nweight AS zl,ic_saleout.nprice AS dj,ic_saleout.ntaxprice AS hsdj,ic_saleout.nmny AS je,ic_saleout.ntaxrate AS shlv,ic_saleout.ntax AS se,ic_saleout.rkmemo,ic_saleout.cgeneralbid FROM (select ic_saleout_h.pk_org,ic_saleout_h.vbillcode AS djh,ic_saleout_b.crowno AS xh,ic_saleout_b.dbizdate AS xsrq,ic_saleout_h.ccustomerid,bd_customer.code AS khdm,bd_customer.name AS khmc,ic_saleout_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_saleout_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.pk_marbasclass AS lbdm,ic_saleout_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_saleout_b.vbatchcode,ic_saleout_b.nassistnum,ic_saleout_b.nnum,ic_saleout_b.nweight,ic_saleout_b.nprice,ic_saleout_b.ntaxprice,ic_saleout_b.nmny,ic_saleout_b.ntaxrate,ic_saleout_b.ntax,ic_saleout_b.vnotebody AS rkmemo,ic_saleout_b.cgeneralbid FROM ic_saleout_h,ic_saleout_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs,bd_customer where ic_saleout_h.cgeneralhid = ic_saleout_b.cgeneralhid AND ic_saleout_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_saleout_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_saleout_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_saleout_h.ccustomerid = bd_customer.pk_customer AND ic_saleout_h.dr=0 and ic_saleout_b.dr=0 AND to_date(ic_saleout_b.dbizdate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_saleout_b.dbizdate,'yyyy-mm-dd HH24:mi:ss') >= ?) ic_saleout left join org_dept on org_dept.pk_dept = ic_saleout.cdptid ORDER BY ic_saleout.djh,ic_saleout.xh"
+                rcOleDbCommand.CommandText = "SELECT ic_saleout.pk_org,
+         ic_saleout.cgeneralhid,
+       ic_saleout.vbillcode,
+       ic_saleout.crowno,
+       ic_saleout.xsrq,
+       ic_saleout.ccustomerid,
+       ic_saleout.shkhdm,
+       ic_saleout.shkhmc,
+       ic_saleout.cinvoicecustid,
+       ic_saleout.fpkhdm,
+       ic_saleout.fpkhmc,
+       ic_saleout.cwarehouseid,
+       ic_saleout.ckdm,
+       ic_saleout.ckmc,
+       ic_saleout.cdptid,
+       NVL(org_dept.code, '~') AS bmdm,
+       NVL(org_dept.name, '~') AS bmmc,
+       ic_saleout.pk_marbasclass,
+       ic_saleout.lbdm,
+       ic_saleout.cmaterialvid,
+        ic_saleout.zkcpdm,
+       ic_saleout.cpdm,
+       ic_saleout.cpmc,
+       ic_saleout.pk_measdoc,
+       ic_saleout.dw,
+       ic_saleout.vbatchcode,
+       ic_saleout.nassistnum,
+       ic_saleout.nnum AS sl,
+       ic_saleout.nweight AS zl,
+       ic_saleout.nprice AS dj,
+       ic_saleout.ntaxprice AS hsdj,
+       ic_saleout.nmny AS je,
+       ic_saleout.ntaxrate AS shlv,
+       ic_saleout.ntax AS se,
+       ic_saleout.rkmemo,
+       ic_saleout.cgeneralbid
+  FROM (SELECT ic_saleout_h.pk_org,
+                ic_saleout_h.cgeneralhid,
+               ic_saleout_h.vbillcode,
+               ic_saleout_b.crowno,
+               ic_saleout_b.dbizdate AS xsrq,
+               so_saleorder.ccustomerid,
+               kha.code AS shkhdm,
+               kha.name AS shkhmc,
+               so_saleorder.cinvoicecustid,
+               khb.code As fpkhdm,
+               khb.name as fpkhmc,
+               ic_saleout_h.cwarehouseid,
+               bd_stordoc.code AS ckdm,
+               bd_stordoc.name AS ckmc,
+               ic_saleout_h.cdptid,
+               bd_material.pk_marbasclass,
+               bd_marbasclass.pk_marbasclass AS lbdm,
+               ic_saleout_b.cmaterialvid,
+                so_saleorder_b.vbdef" & strZkCpdm & " AS zkcpdm,
+               bd_material.code AS cpdm,
+               bd_material.name || ',' || bd_material.materialtype || ',' ||
+               bd_material.materialspec AS cpmc,
+               bd_material.pk_measdoc,
+               bd_measdoc.name AS dw,
+               ic_saleout_b.vbatchcode,
+               ic_saleout_b.nassistnum,
+               ic_saleout_b.nnum,
+               ic_saleout_b.nweight,
+               ic_saleout_b.nprice,
+               ic_saleout_b.ntaxprice,
+               ic_saleout_b.nmny,
+               ic_saleout_b.ntaxrate,
+               ic_saleout_b.ntax,
+               ic_saleout_b.vnotebody AS rkmemo,
+               ic_saleout_b.cgeneralbid
+          FROM ic_saleout_h,
+               ic_saleout_b,
+               so_saleorder,
+                so_saleorder_b,
+               bd_stordoc,
+               bd_material,
+               bd_measdoc,
+               bd_marbasclass,
+               org_orgs,
+               bd_customer kha,
+               bd_customer khb
+         WHERE ic_saleout_h.cgeneralhid = ic_saleout_b.cgeneralhid
+            AND so_saleorder.csaleorderid = so_saleorder_b.csaleorderid
+            AND ic_saleout_b.cfirstbillhid = so_saleorder.csaleorderid
+            AND so_saleorder_b.csaleorderbid = ic_saleout_b.cfirstbillbid
+            AND ic_saleout_h.cwarehouseid = bd_stordoc.pk_stordoc" & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & ")", "") & "
+            AND ic_saleout_b.cmaterialvid = bd_material.pk_material
+            AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc
+            AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass
+            AND ic_saleout_h.pk_org = org_orgs.pk_org
+            AND org_orgs.code = ?
+            AND so_saleorder.ccustomerid = kha.pk_customer
+            AND so_saleorder.cinvoicecustid = khb.pk_customer
+            AND ic_saleout_h.dr = 0
+            AND ic_saleout_b.dr = 0
+                AND so_saleorder.dr = 0
+                AND so_saleorder_b.dr = 0
+                AND bd_stordoc.dr = 0
+                AND bd_material.dr = 0
+                AND bd_measdoc.dr = 0
+                AND bd_marbasclass.dr = 0
+                AND org_orgs.dr = 0
+                AND kha.dr = 0
+                AND khb.dr = 0
+                AND to_date(ic_saleout_b.dbizdate, 'yyyy-mm-dd HH24:mi:ss') <= ?
+           AND to_date(ic_saleout_b.dbizdate, 'yyyy-mm-dd HH24:mi:ss') >= ?) ic_saleout
+  LEFT JOIN org_dept
+    ON org_dept.pk_dept = ic_saleout.cdptid
+ ORDER BY ic_saleout.vbillcode, ic_saleout.crowno"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
@@ -1511,61 +1918,95 @@ Public Class FrmImpNC
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                '序列删除再重建
-                rcOleDbCommand.CommandText = "DROP SEQUENCE XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "CREATE SEQUENCE XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                '更新单据号至0
-                rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'XSCK'"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
-                rcOleDbCommand.ExecuteNonQuery()
+                If String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '序列删除再重建
+                    rcOleDbCommand.CommandText = "DROP SEQUENCE XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "CREATE SEQUENCE XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '更新单据号至0
+                    rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'XSCK'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 '删除历史单据
-                rcOleDbCommand.CommandText = "DELETE FROM oe_xsd WHERE SUBSTR(djh,5,6)= ?"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM oe_xsd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'XSCK'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM oe_xsd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'XSCK'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_saleout").Rows.Count
-                'Dim oldStrDjh As String = ""
-                'Dim blnNew As Boolean = False
+                Dim strDjh As String = "XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001"
+                Dim oldStrDjh As String = ""
+                Dim blnNewBill As Boolean = False
                 For i = 0 To rcDataset.Tables("ic_saleout").Rows.Count - 1
-                    'If oldStrDjh <> rcDataset.Tables("ic_saleout").Rows(i).Item("djh") Then
-                    '    blnNew = True
-                    '    oldStrDjh = rcDataset.Tables("ic_saleout").Rows(i).Item("djh")
-                    'Else
-                    '    blnNew = False
-                    'End If
+                    If oldStrDjh <> rcDataset.Tables("ic_saleout").Rows(i).Item("cgeneralhid") Then
+                        blnNewBill = True
+                        oldStrDjh = rcDataset.Tables("ic_saleout").Rows(i).Item("cgeneralhid")
+                    Else
+                        blnNewBill = False
+                    End If
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm")) Then
+                            rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm") = Mid(rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_OE_XSD"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
-                    rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_saleout").Rows(i).Item("djh"), rcDataset.Tables("ic_saleout").Rows(i).Item("djh").ToString.Length - 4, 5)
+                    rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = blnNewBill
+                    rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = strDjh '"XSCK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_saleout").Rows(i).Item("vbillcode"), rcDataset.Tables("ic_saleout").Rows(i).Item("vbillcode").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_saleout").Rows(i).Item("xh"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("crowno")
                     rcOleDbCommand.Parameters.Add("@paraDateXsrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("xsrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = "~"
-                    rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("khdm")
-                    rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("khmc")
+                    rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("shkhdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("shkhmc")
+                    rcOleDbCommand.Parameters.Add("@ParaStrFpKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("fpkhdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrFpKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("fpkhmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("bmdm")
                     rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("bmmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("ckdm")
-                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("ckmc")
-                    rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("cpdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 40).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("ckmc")
+                    rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = IIf(rcDataset.Tables("ic_saleout").Rows(i).Item("cpdm") = "888888888", Trim(rcDataset.Tables("ic_saleout").Rows(i).Item("zkcpdm")), rcDataset.Tables("ic_saleout").Rows(i).Item("cpdm"))
                     rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("cpmc")
                     rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraStrKhddh", OleDbType.VarChar, 30).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraStrKhlh", OleDbType.VarChar, 30).Value = "~"
-                    rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("sl")
+                    rcOleDbCommand.Parameters.Add("@paraStrPiHao", OleDbType.VarChar, 40).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("vbatchcode")
+                    rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("ic_saleout").Rows(i).Item("cpdm") = "888888888", 0, rcDataset.Tables("ic_saleout").Rows(i).Item("sl"))
                     rcOleDbCommand.Parameters.Add("@paraStrDw", OleDbType.VarChar, 8).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("dw")
                     rcOleDbCommand.Parameters.Add("@paraDblMjsl", OleDbType.Numeric, 18).Value = 0.0
-                    rcOleDbCommand.Parameters.Add("@paraDblFzsl", OleDbType.Numeric, 18).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("zl")
-                    rcOleDbCommand.Parameters.Add("@paraStrFzdw", OleDbType.VarChar, 8).Value = "KG"
+                    rcOleDbCommand.Parameters.Add("@paraDblFzsl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("ic_saleout").Rows(i).Item("cpdm") = "888888888", 0, rcDataset.Tables("ic_saleout").Rows(i).Item("zl"))
+                    rcOleDbCommand.Parameters.Add("@paraStrFzdw", OleDbType.VarChar, 8).Value = IIf(rcDataset.Tables("ic_saleout").Rows(i).Item("cpdm") = "888888888", "", "KG")
                     rcOleDbCommand.Parameters.Add("@paraIntJs", OleDbType.Integer, 12).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraDblLt", OleDbType.Numeric, 18).Value = 0.0
                     rcOleDbCommand.Parameters.Add("@paraIntTs", OleDbType.Integer, 12).Value = 0
@@ -1574,25 +2015,32 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraDblJe", OleDbType.Numeric, 14).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("je")
                     rcOleDbCommand.Parameters.Add("@paraDblShlv", OleDbType.Numeric, 6).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("shlv")
                     rcOleDbCommand.Parameters.Add("@paraDblSe", OleDbType.Numeric, 14).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("se")
-                    rcOleDbCommand.Parameters.Add("@paraStrXsmemo", OleDbType.VarChar, 50).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("djh") & " " & rcDataset.Tables("ic_saleout").Rows(i).Item("vbatchcode") & " " & rcDataset.Tables("ic_saleout").Rows(i).Item("rkmemo")
+                    rcOleDbCommand.Parameters.Add("@paraStrXsmemo", OleDbType.VarChar, 50).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("rkmemo")
                     rcOleDbCommand.Parameters.Add("@paraStrDdDjh", OleDbType.VarChar, 15).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraIntDdXh", OleDbType.Integer, 4).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrUserDspName", OleDbType.VarChar, 30).Value = g_User_DspName
                     rcOleDbCommand.Parameters.Add("@paraCbill_bid", OleDbType.VarChar, 20).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("cgeneralbid")
+                    rcOleDbCommand.Parameters.Add("@paraVbillcode", OleDbType.VarChar, 40).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("vbillcode")
+                    rcOleDbCommand.Parameters.Add("@paraCrowno", OleDbType.VarChar, 20).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("crowno")
                     rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                     rcOleDbCommand.ExecuteNonQuery()
                     If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
                         If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
-                            MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value + rcDataset.Tables("ic_saleout").Rows(i).Item("djh"), MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                            MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
                             Return
                         End If
                     End If
+                    If rcOleDbCommand.Parameters("@paraStrDjh").Value.GetType.ToString <> "System.DBNull" Then
+                        If rcOleDbCommand.Parameters("@paraStrDjh").Value <> "" Then
+                            strDjh = Trim(rcOleDbCommand.Parameters("@paraStrDjh").Value)
+                        End If
+                    End If
                     '检测客户编码
-                    If rcDataset.Tables("ic_saleout").Rows(i).Item("khdm") <> "~" Then
+                    If rcDataset.Tables("ic_saleout").Rows(i).Item("shkhdm") <> "~" Then
                         rcOleDbCommand.CommandType = CommandType.Text
                         rcOleDbCommand.CommandText = "SELECT khdm FROM rc_khxx WHERE khdm = ?"
                         rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("khdm")
+                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("shkhdm")
                         If rcDataset.Tables("rc_khxx") IsNot Nothing Then
                             rcDataset.Tables("rc_khxx").Clear()
                         End If
@@ -1600,8 +2048,26 @@ Public Class FrmImpNC
                         If rcDataset.Tables("rc_khxx").Rows.Count = 0 Then
                             rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (khdm,khmc,zczb) VALUES (?,?,0)"
                             rcOleDbCommand.Parameters.Clear()
-                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("khdm")
-                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("khmc")
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("shkhdm")
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("shkhmc")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                    '检测客户编码
+                    If rcDataset.Tables("ic_saleout").Rows(i).Item("fpkhdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT khdm FROM rc_khxx WHERE khdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("fpkhdm")
+                        If rcDataset.Tables("rc_khxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_khxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
+                        If rcDataset.Tables("rc_khxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (khdm,khmc,zczb) VALUES (?,?,0)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("fpkhdm")
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("fpkhmc")
                             rcOleDbCommand.ExecuteNonQuery()
                         End If
                     End If
@@ -1622,6 +2088,25 @@ Public Class FrmImpNC
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("cpdm")
                             rcOleDbCommand.Parameters.Add("@cpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("cpmc")
                             rcOleDbCommand.Parameters.Add("@dw", OleDbType.VarChar, 8).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("dw")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                    '检测部门编码
+                    If rcDataset.Tables("ic_saleout").Rows(i).Item("bmdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT bmdm FROM rc_bmxx WHERE bmdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("bmdm")
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("rc_bmxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_bmxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_bmxx")
+                        If rcDataset.Tables("rc_bmxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_bmxx (bmdm,bmmc) VALUES (?,?)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("bmdm")
+                            rcOleDbCommand.Parameters.Add("@bmmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_saleout").Rows(i).Item("bmmc")
                             rcOleDbCommand.ExecuteNonQuery()
                         End If
                     End If
@@ -1658,6 +2143,720 @@ Public Class FrmImpNC
                 rcOleDbConn.Close()
             End Try
         End If
+        '产品销售发票
+        If Me.ChbOeXsfp.Checked Then
+            '写系统参数
+            If Not String.IsNullOrEmpty(Me.CmbZkCpdm.SelectedItem) Then
+                Try
+                    rcOleDbConn.Open()
+                    rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
+                    rcOleDbCommand.Connection = rcOleDbConn
+                    rcOleDbCommand.Transaction = rcOleDbTrans
+                    rcOleDbCommand.CommandTimeout = 300
+                    rcOleDbCommand.CommandType = CommandType.Text
+                    '删除数据
+                    rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '销售订单表体折扣原物料编码属性序号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '插入数据
+                    rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'销售订单表体折扣原物料编码属性序号',?,0)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.CmbZkCpdm.SelectedItem)
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbTrans.Commit()
+                Catch ex As Exception
+                    Try
+                        rcOleDbTrans.Rollback()
+                        MsgBox("程序错误。" & Chr(13) & ex.Message)
+                    Catch ey As OleDbException
+                        MsgBox("程序错误。" & Chr(13) & ey.Message)
+                    End Try
+                    Return
+                Finally
+                    rcOleDbConn.Close()
+                End Try
+            End If
+            '写系统参数
+            If Not String.IsNullOrEmpty(Me.CmbFph.SelectedItem) Then
+                Try
+                    rcOleDbConn.Open()
+                    rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
+                    rcOleDbCommand.Connection = rcOleDbConn
+                    rcOleDbCommand.Transaction = rcOleDbTrans
+                    rcOleDbCommand.CommandTimeout = 300
+                    rcOleDbCommand.CommandType = CommandType.Text
+                    '删除数据
+                    rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '销售发票表头发票号属性序号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '插入数据
+                    rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'销售发票表头发票号属性序号',?,0)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.CmbFph.SelectedItem)
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbTrans.Commit()
+                Catch ex As Exception
+                    Try
+                        rcOleDbTrans.Rollback()
+                        MsgBox("程序错误。" & Chr(13) & ex.Message)
+                    Catch ey As OleDbException
+                        MsgBox("程序错误。" & Chr(13) & ey.Message)
+                    End Try
+                    Return
+                Finally
+                    rcOleDbConn.Close()
+                End Try
+            End If
+
+            Dim strFph As String = ""
+            If Not String.IsNullOrEmpty(Me.CmbFph.SelectedItem) Then
+                strFph = Trim(Me.CmbFph.SelectedItem.ToString)
+            End If
+            '折扣原物料编码
+            Dim strZkCpdm As String = "1"
+            If Not String.IsNullOrEmpty(Me.CmbFph.SelectedItem) Then
+                strZkCpdm = Trim(Me.CmbZkCpdm.SelectedItem.ToString)
+            End If
+
+
+            '读取产品销售发票
+            Try
+                NCOleDbConn.Open()
+                rcOleDbCommand.Connection = NCOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT list.pk_org,
+         list.csaleinvoiceid,
+       list.vbillcode,
+       list.xh,
+       list.fprq,
+       list.ccustomerid,
+       list.shkhdm,
+       list.shkhmc,
+       list.cinvoicecustid,
+       list.fpkhdm,
+       list.fpkhmc,
+       list.cdeptid,
+       NVL(org_dept.code, '~') AS bmdm,
+       NVL(org_dept.name, '~') AS bmmc,
+       list.pk_marbasclass,
+       list.lbdm,
+       list.cmaterialvid,
+         list.zkcpdm,
+       list.cpdm,
+       list.cpmc,
+       list.pk_measdoc,
+       list.dw,
+       list.vbatchcode,
+       list.nnum AS sl,
+       list.nprice AS dj,
+       list.ntaxprice AS hsdj,
+       list.nmny AS je,
+       list.ntaxrate AS shlv,
+       list.ntax AS se,
+       list.fpmemo,
+       list.cbill_bid,
+       list.vsrccode AS xsddjh,
+       list.vsrcrowno AS xsdxh
+  FROM (SELECT h.pk_org,
+                h.csaleinvoiceid,
+               " & IIf(Me.CmbFph.SelectedIndex = -1, "h.vbillcode", "CASE WHEN h.vdef" & strFph & " <> '~' THEN h.vdef" & strFph & " ELSE h.vbillcode END") & " AS vbillcode,
+               b.crowno AS xh,
+               h.dbilldate AS fprq,
+               so_saleorder.ccustomerid,
+               kha.code AS shkhdm,
+               kha.name AS shkhmc,
+               so_saleorder.cinvoicecustid,
+               khb.code AS fpkhdm,
+               khb.name AS fpkhmc,
+               b.cdeptid,
+               bd_material.pk_marbasclass,
+               bd_marbasclass.pk_marbasclass AS lbdm,
+               b.cmaterialvid,
+               so_saleorder_b.vbdef" & strZkCpdm & " AS zkcpdm,
+               bd_material.code AS cpdm,
+               bd_material.name || ',' || bd_material.materialtype || ',' ||
+               bd_material.materialspec AS cpmc,
+               b.cunitid pk_measdoc,
+               bd_measdoc.name AS dw,
+               b.vbatchcode,
+               b.nnum,
+               b.nprice,
+               b.ntaxprice,
+               b.nmny,
+               b.ntaxrate,
+               b.ntax,
+               b.vrownote AS fpmemo,
+               b.csaleinvoicebid cbill_bid,
+               b.vsrccode,
+               b.vsrcrowno
+          FROM so_saleinvoice   h,
+               so_saleinvoice_b b,
+               so_saleorder,
+                so_saleorder_b,
+               bd_material,
+               bd_measdoc,
+               bd_marbasclass,
+                bd_stordoc,
+               org_orgs,
+               bd_customer      kha,
+               bd_customer      khb
+         WHERE h.csaleinvoiceid = b.csaleinvoiceid
+              AND so_saleorder.csaleorderid = so_saleorder_b.csaleorderid
+           AND b.cfirstid = so_saleorder.csaleorderid
+              AND b.cfirstbid = so_saleorder_b.csaleorderbid
+           AND b.cmaterialvid = bd_material.pk_material
+           AND b.cunitid = bd_measdoc.pk_measdoc
+           AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass
+              AND b.csendstordocid = bd_stordoc.pk_stordoc " & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & ")", "") & "
+           AND h.pk_org = org_orgs.pk_org
+           AND org_orgs.code = ?
+           AND so_saleorder.ccustomerid = kha.pk_customer
+           AND so_saleorder.cinvoicecustid = khb.pk_customer
+           AND h.dr = 0
+           AND b.dr = 0
+            AND so_saleorder.dr = 0
+            AND so_saleorder_b.dr = 0
+           AND bd_material.dr = 0
+              AND bd_measdoc.dr = 0
+            AND bd_marbasclass.dr = 0
+            AND org_orgs.dr = 0
+            AND kha.dr = 0
+            AND khb.dr = 0
+           AND to_date(h.dbilldate, 'yyyy-mm-dd HH24:mi:ss') <= ?
+           AND to_date(h.dbilldate, 'yyyy-mm-dd HH24:mi:ss') >= ?) list
+  LEFT JOIN org_dept
+    ON org_dept.pk_dept = list.cdeptid
+ ORDER BY list.vbillcode, list.shkhdm, list.xh"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
+                rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
+                rcOleDbCommand.Parameters.Add("@dateBegin", OleDbType.Date, 8).Value = dateBegin
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("so_saleinvoice") IsNot Nothing Then
+                    Me.rcDataset.Tables("so_saleinvoice").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "so_saleinvoice")
+                Me.ProgressBar1.Maximum = rcDataset.Tables("so_saleinvoice").Rows.Count
+            Catch ex As Exception
+                MsgBox("程序错误1。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                Return
+            Finally
+                NCOleDbConn.Close()
+            End Try
+            Try
+                rcOleDbConn.Open()
+                rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.Transaction = rcOleDbTrans
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                If String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '序列删除再重建
+                    rcOleDbCommand.CommandText = "DROP SEQUENCE XSFP" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "CREATE SEQUENCE XSFP" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '更新单据号至0
+                    rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'XSFP'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '删除历史单据
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        'rcOleDbCommand.CommandText = "DELETE FROM oe_fp WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'XSFP'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.CommandText = "DELETE FROM oe_fp WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'XSFP'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND exists (select 1 from oe_xsd where oe_xsd.vbillcode = oe_fp.xsddjh and to_number(oe_xsd.crowno) = oe_fp.xsdxh AND oe_xsd.ckdm ='" & strCkdm(i) & "')", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM oe_fp WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'XSFP'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                Me.ProgressBar1.Maximum = rcDataset.Tables("so_saleinvoice").Rows.Count
+                Dim strDjh As String = "XSFP" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001" ' Mid(rcDataset.Tables("so_saleinvoice").Rows(i).Item("djh"), rcDataset.Tables("so_saleinvoice").Rows(i).Item("djh").ToString.Length - 4, 5)
+                Dim oldStrVbillcode As String = ""
+                Dim blnNewBill As Boolean = False
+                For i = 0 To rcDataset.Tables("so_saleinvoice").Rows.Count - 1
+                    If oldStrVbillcode <> rcDataset.Tables("so_saleinvoice").Rows(i).Item("csaleinvoiceid") Then
+                        blnNewBill = True
+                        oldStrVbillcode = rcDataset.Tables("so_saleinvoice").Rows(i).Item("csaleinvoiceid")
+                    Else
+                        blnNewBill = False
+                    End If
+                    Me.ProgressBar1.Value = i + 1
+                    rcOleDbCommand.CommandType = CommandType.StoredProcedure
+                    rcOleDbCommand.CommandText = "USP3_SAVE_OE_FP"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
+                    rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = blnNewBill
+                    rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = strDjh
+                    rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("xh")
+                    rcOleDbCommand.Parameters.Add("@paraDateFprq", OleDbType.Date, 8).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("fprq")
+                    rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpkhdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpkhmc")
+                    rcOleDbCommand.Parameters.Add("@ParaStrShKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("shkhdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrShKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("shkhmc")
+                    rcOleDbCommand.Parameters.Add("@ParaStrYspz", OleDbType.VarChar, 30).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("vbillcode")
+                    rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = IIf(rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm") = "888888888", Trim(rcDataset.Tables("so_saleinvoice").Rows(i).Item("zkcpdm")), rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm"))
+                    rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpmc")
+                    rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("bmdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("bmmc")
+                    rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm") = "888888888", 0, rcDataset.Tables("so_saleinvoice").Rows(i).Item("sl"))
+                    rcOleDbCommand.Parameters.Add("@paraStrDw", OleDbType.VarChar, 8).Value = IIf(rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm") = "888888888", "", rcDataset.Tables("so_saleinvoice").Rows(i).Item("dw"))
+                    rcOleDbCommand.Parameters.Add("@paraDblMjsl", OleDbType.Numeric, 18).Value = 0.0
+                    rcOleDbCommand.Parameters.Add("@paraDblFzsl", OleDbType.Numeric, 18).Value = 0.0
+                    rcOleDbCommand.Parameters.Add("@paraStrFzdw", OleDbType.VarChar, 8).Value = ""
+                    rcOleDbCommand.Parameters.Add("@paraDblDj", OleDbType.Numeric, 18).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("dj")
+                    rcOleDbCommand.Parameters.Add("@paraDblHsdj", OleDbType.Numeric, 18).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("hsdj")
+                    rcOleDbCommand.Parameters.Add("@paraDblJe", OleDbType.Numeric, 14).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("je")
+                    rcOleDbCommand.Parameters.Add("@paraDblShlv", OleDbType.Numeric, 6).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("shlv")
+                    rcOleDbCommand.Parameters.Add("@paraDblSe", OleDbType.Numeric, 14).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("se")
+                    rcOleDbCommand.Parameters.Add("@paraStrFpmemo", OleDbType.VarChar, 50).Value = "" 'IIf(rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpmemo").GetType.ToString <> "System.DBNull", Mid(rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpmemo"), 1, 50), "")
+                    rcOleDbCommand.Parameters.Add("@paraStrDdDjh", OleDbType.VarChar, 15).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@paraIntDdXh", OleDbType.Integer, 6).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraStrXsdDjh", OleDbType.VarChar, 40).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("xsddjh")
+                    rcOleDbCommand.Parameters.Add("@paraIntXsdXh", OleDbType.Integer, 6).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("xsdxh")
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdDj", OleDbType.Numeric, 18).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdHsdj", OleDbType.Numeric, 18).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdJe", OleDbType.Numeric, 14).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdShlv", OleDbType.Numeric, 6).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdSe", OleDbType.Numeric, 14).Value = 0
+
+                    rcOleDbCommand.Parameters.Add("@paraStrUserDspName", OleDbType.VarChar, 30).Value = g_User_DspName
+                    'rcOleDbCommand.Parameters.Add("@paraCbill_bid", OleDbType.VarChar, 20).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("cgeneralbid")
+                    rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
+                    rcOleDbCommand.ExecuteNonQuery()
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                        If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                            MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value + rcDataset.Tables("so_saleinvoice").Rows(i).Item("vbillcode") + " " + rcDataset.Tables("so_saleinvoice").Rows(i).Item("xh") + " " + rcDataset.Tables("so_saleinvoice").Rows(i).Item("dj").ToString, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                            Return
+                        End If
+                    End If
+                    If rcOleDbCommand.Parameters("@paraStrDjh").Value.GetType.ToString <> "System.DBNull" Then
+                        If rcOleDbCommand.Parameters("@paraStrDjh").Value <> "" Then
+                            strDjh = Trim(rcOleDbCommand.Parameters("@paraStrDjh").Value)
+                        End If
+                    End If
+
+                    '检测客户编码
+                    If rcDataset.Tables("so_saleinvoice").Rows(i).Item("shkhdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT khdm FROM rc_khxx WHERE khdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("shkhdm")
+                        If rcDataset.Tables("rc_khxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_khxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
+                        If rcDataset.Tables("rc_khxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (khdm,khmc,zczb) VALUES (?,?,0)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("shkhdm")
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("shkhmc")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                    '检测客户编码
+                    If rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpkhdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT khdm FROM rc_khxx WHERE khdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpkhdm")
+                        If rcDataset.Tables("rc_khxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_khxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
+                        If rcDataset.Tables("rc_khxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (khdm,khmc,zczb) VALUES (?,?,0)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpkhdm")
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("fpkhmc")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                    '检测物料编码
+                    If rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT cpdm FROM rc_cpxx WHERE cpdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm")
+                        If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_cpxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_cpxx")
+                        If rcDataset.Tables("rc_cpxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw) VALUES (?,?,?,?)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("lbdm")
+                            rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm")
+                            rcOleDbCommand.Parameters.Add("@cpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpmc")
+                            rcOleDbCommand.Parameters.Add("@dw", OleDbType.VarChar, 8).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("dw")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                Next
+                rcOleDbTrans.Commit()
+            Catch ex As Exception
+                Try
+                    rcOleDbTrans.Rollback()
+                    MsgBox("程序错误。" & Chr(13) & ex.Message)
+                Catch ey As OleDbException
+                    MsgBox("程序错误。" & Chr(13) & ey.Message)
+                End Try
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+        End If
+
+
+        '暂估回冲
+        If Me.ChbOeZgys.Checked Then
+            '写系统参数
+            If Not String.IsNullOrEmpty(Me.CmbZkCpdm.SelectedItem) Then
+                Try
+                    rcOleDbConn.Open()
+                    rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
+                    rcOleDbCommand.Connection = rcOleDbConn
+                    rcOleDbCommand.Transaction = rcOleDbTrans
+                    rcOleDbCommand.CommandTimeout = 300
+                    rcOleDbCommand.CommandType = CommandType.Text
+                    '删除数据
+                    rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '销售订单表体折扣原物料编码属性序号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '插入数据
+                    rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'销售订单表体折扣原物料编码属性序号',?,0)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                    rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.CmbZkCpdm.SelectedItem)
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbTrans.Commit()
+                Catch ex As Exception
+                    Try
+                        rcOleDbTrans.Rollback()
+                        MsgBox("程序错误。" & Chr(13) & ex.Message)
+                    Catch ey As OleDbException
+                        MsgBox("程序错误。" & Chr(13) & ey.Message)
+                    End Try
+                    Return
+                Finally
+                    rcOleDbConn.Close()
+                End Try
+            End If
+            '折扣原物料编码
+            Dim strZkCpdm As String = "1"
+            If Not String.IsNullOrEmpty(Me.CmbFph.SelectedItem) Then
+                strZkCpdm = Trim(Me.CmbZkCpdm.SelectedItem.ToString)
+            End If
+
+
+            '读取未确认应收单
+            Try
+                NCOleDbConn.Open()
+                rcOleDbCommand.Connection = NCOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT list.pk_estirecbill,
+       list.billdate as fprq,
+       list.billno         AS vbillcode,
+       list.rowno          AS xh,
+       list.ccustomerid,
+       list.shkhdm,
+       list.shkhmc,
+       list.cinvoicecustid,
+       list.fpkhdm,
+       list.fpkhmc,
+       list.pk_deptid,
+       org_dept.code as bmdm,
+       org_dept.name as bmmc,
+       list.pk_material,
+        list.zkcpdm,
+       list.cpdm,
+       list.cpmc,
+list.pk_measdoc,
+list.dw,
+       list.batchcode,
+       list.sl,
+       list.dj,
+       list.hsdj,
+       list.je,
+       list.shlv,
+       list.se,
+       list.jese
+  FROM (SELECT b.pk_estirecbill,
+               b.billno,
+               b.rowno,
+               b.billdate,
+               so_saleorder.ccustomerid,
+               kha.code AS shkhdm,
+               kha.name AS shkhmc,
+               so_saleorder.cinvoicecustid,
+               khb.code AS fpkhdm,
+               khb.name AS fpkhmc,
+               b.pk_deptid,
+               b.material AS pk_material,
+                so_saleorder_b.vbdef" & strZkCpdm & " AS zkcpdm,
+               bd_material.code AS cpdm,
+               bd_material.name || ',' || bd_material.materialtype || ',' ||
+               bd_material.materialspec AS cpmc,
+               so_saleorder_b.cunitid pk_measdoc,
+               bd_measdoc.name AS dw,
+               b.batchcode,
+               b.quantity_de AS sl,
+               b.price AS dj,
+               b.taxprice AS hsdj,
+               b.local_notax_de AS je,
+               b.taxrate AS shlv,
+               b.local_tax_de AS se,
+               b.local_money_de AS jese
+          FROM ar_estirecitem b,
+               so_saleorder,
+               so_saleorder_b,
+               org_orgs,
+               bd_material,
+               bd_customer    kha,
+               bd_customer    khb,
+                bd_measdoc  
+        
+         WHERE nvl(b.dr, 0) = 0
+            and so_saleorder.dr = 0
+            and so_saleorder_b.dr = 0
+           AND org_orgs.dr = 0
+           AND bd_material.dr = 0
+           AND kha.dr = 0
+           AND khb.dr = 0
+              AND bd_measdoc.dr = 0
+           AND so_saleorder.csaleorderid = so_saleorder_b.csaleorderid
+           AND b. src_billid = so_saleorder.csaleorderid
+           AND b.src_itemid = so_saleorder_b.csaleorderbid
+           AND b.pk_org = org_orgs.pk_org
+           AND org_orgs.code = ?
+           AND b.material = bd_material.pk_material
+           AND so_saleorder.ccustomerid = kha.pk_customer
+           AND so_saleorder.cinvoicecustid = khb.pk_customer
+              AND so_saleorder_b.cunitid = bd_measdoc.pk_measdoc
+            AND to_date(b.billdate, 'yyyy-mm-dd HH24:mi:ss') <= ?
+           AND to_date(b.billdate, 'yyyy-mm-dd HH24:mi:ss') >= ?) list
+  LEFT JOIN org_dept
+    ON org_dept.pk_dept = list.pk_deptid
+ ORDER BY list.billno, list.rowno"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
+                rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
+                rcOleDbCommand.Parameters.Add("@dateBegin", OleDbType.Date, 8).Value = dateBegin
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("ar_estirec") IsNot Nothing Then
+                    Me.rcDataset.Tables("ar_estirec").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "ar_estirec")
+                Me.ProgressBar1.Maximum = rcDataset.Tables("ar_estirec").Rows.Count
+            Catch ex As Exception
+                MsgBox("程序错误1。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                Return
+            Finally
+                NCOleDbConn.Close()
+            End Try
+            Try
+                rcOleDbConn.Open()
+                rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.Transaction = rcOleDbTrans
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                If String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '序列删除再重建
+                    rcOleDbCommand.CommandText = "DROP SEQUENCE ZGYS" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "CREATE SEQUENCE ZGYS" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '更新单据号至0
+                    rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'ZGYS'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '删除历史单据
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        'rcOleDbCommand.CommandText = "DELETE FROM oe_fp WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'ZGYS'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.CommandText = "DELETE FROM oe_fp WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'ZGYS'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND exists (select 1 from oe_xsd where oe_xsd.vbillcode = oe_fp.xsddjh and to_number(oe_xsd.crowno) = oe_fp.xsdxh AND oe_xsd.ckdm ='" & strCkdm(i) & "')", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM oe_fp WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'ZGYS'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                Me.ProgressBar1.Maximum = rcDataset.Tables("ar_estirec").Rows.Count
+                Dim strDjh As String = "ZGYS" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & "00001" ' Mid(rcDataset.Tables("ar_estirec").Rows(i).Item("djh"), rcDataset.Tables("ar_estirec").Rows(i).Item("djh").ToString.Length - 4, 5)
+                Dim oldStrVbillcode As String = ""
+                Dim blnNewBill As Boolean = False
+                For i = 0 To rcDataset.Tables("ar_estirec").Rows.Count - 1
+                    If oldStrVbillcode <> rcDataset.Tables("ar_estirec").Rows(i).Item("vbillcode") Then
+                        blnNewBill = True
+                        oldStrVbillcode = rcDataset.Tables("ar_estirec").Rows(i).Item("vbillcode")
+                    Else
+                        blnNewBill = False
+                    End If
+                    Me.ProgressBar1.Value = i + 1
+                    rcOleDbCommand.CommandType = CommandType.StoredProcedure
+                    rcOleDbCommand.CommandText = "USP3_SAVE_OE_FP"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
+                    rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = blnNewBill
+                    rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = strDjh
+                    rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("xh")
+                    rcOleDbCommand.Parameters.Add("@paraDateFprq", OleDbType.Date, 8).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("fprq")
+                    rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("fpkhdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("fpkhmc")
+                    rcOleDbCommand.Parameters.Add("@ParaStrShKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("shkhdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrShKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("shkhmc")
+                    rcOleDbCommand.Parameters.Add("@ParaStrYspz", OleDbType.VarChar, 30).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("vbillcode")
+                    rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = IIf(rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm") = "888888888", Trim(rcDataset.Tables("ar_estirec").Rows(i).Item("zkcpdm")), rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm"))
+                    rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("cpmc")
+                    rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("bmdm")
+                    rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("bmmc")
+                    rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm") = "888888888", 0, rcDataset.Tables("ar_estirec").Rows(i).Item("sl"))
+                    rcOleDbCommand.Parameters.Add("@paraStrDw", OleDbType.VarChar, 8).Value = IIf(rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm") = "888888888", "", rcDataset.Tables("ar_estirec").Rows(i).Item("dw"))
+                    rcOleDbCommand.Parameters.Add("@paraDblMjsl", OleDbType.Numeric, 18).Value = 0.0
+                    rcOleDbCommand.Parameters.Add("@paraDblFzsl", OleDbType.Numeric, 18).Value = 0.0
+                    rcOleDbCommand.Parameters.Add("@paraStrFzdw", OleDbType.VarChar, 8).Value = ""
+                    rcOleDbCommand.Parameters.Add("@paraDblDj", OleDbType.Numeric, 18).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("dj")
+                    rcOleDbCommand.Parameters.Add("@paraDblHsdj", OleDbType.Numeric, 18).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("hsdj")
+                    rcOleDbCommand.Parameters.Add("@paraDblJe", OleDbType.Numeric, 14).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("je")
+                    rcOleDbCommand.Parameters.Add("@paraDblShlv", OleDbType.Numeric, 6).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("shlv")
+                    rcOleDbCommand.Parameters.Add("@paraDblSe", OleDbType.Numeric, 14).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("se")
+                    rcOleDbCommand.Parameters.Add("@paraStrFpmemo", OleDbType.VarChar, 50).Value = "" 'IIf(rcDataset.Tables("ar_estirec").Rows(i).Item("fpmemo").GetType.ToString <> "System.DBNull", Mid(rcDataset.Tables("ar_estirec").Rows(i).Item("fpmemo"), 1, 50), "")
+                    rcOleDbCommand.Parameters.Add("@paraStrDdDjh", OleDbType.VarChar, 15).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@paraIntDdXh", OleDbType.Integer, 6).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraStrXsdDjh", OleDbType.VarChar, 40).Value = "" 'rcDataset.Tables("ar_estirec").Rows(i).Item("xsddjh")
+                    rcOleDbCommand.Parameters.Add("@paraIntXsdXh", OleDbType.Integer, 6).Value = 0 'rcDataset.Tables("ar_estirec").Rows(i).Item("xsdxh")
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdDj", OleDbType.Numeric, 18).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdHsdj", OleDbType.Numeric, 18).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdJe", OleDbType.Numeric, 14).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdShlv", OleDbType.Numeric, 6).Value = 0
+                    rcOleDbCommand.Parameters.Add("@paraDblXsdSe", OleDbType.Numeric, 14).Value = 0
+
+                    rcOleDbCommand.Parameters.Add("@paraStrUserDspName", OleDbType.VarChar, 30).Value = g_User_DspName
+                    'rcOleDbCommand.Parameters.Add("@paraCbill_bid", OleDbType.VarChar, 20).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("cgeneralbid")
+                    rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
+                    rcOleDbCommand.ExecuteNonQuery()
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                        If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                            MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value + rcDataset.Tables("ar_estirec").Rows(i).Item("vbillcode") + " " + rcDataset.Tables("ar_estirec").Rows(i).Item("xh") + " " + rcDataset.Tables("ar_estirec").Rows(i).Item("dj").ToString, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                            Return
+                        End If
+                    End If
+                    If rcOleDbCommand.Parameters("@paraStrDjh").Value.GetType.ToString <> "System.DBNull" Then
+                        If rcOleDbCommand.Parameters("@paraStrDjh").Value <> "" Then
+                            strDjh = Trim(rcOleDbCommand.Parameters("@paraStrDjh").Value)
+                        End If
+                    End If
+
+                    '检测客户编码
+                    If rcDataset.Tables("ar_estirec").Rows(i).Item("shkhdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT khdm FROM rc_khxx WHERE khdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("shkhdm")
+                        If rcDataset.Tables("rc_khxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_khxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
+                        If rcDataset.Tables("rc_khxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (khdm,khmc,zczb) VALUES (?,?,0)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("shkhdm")
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("shkhmc")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                    '检测客户编码
+                    If rcDataset.Tables("ar_estirec").Rows(i).Item("fpkhdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT khdm FROM rc_khxx WHERE khdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("fpkhdm")
+                        If rcDataset.Tables("rc_khxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_khxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
+                        If rcDataset.Tables("rc_khxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (khdm,khmc,zczb) VALUES (?,?,0)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("fpkhdm")
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("fpkhmc")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                    '检测物料编码
+                    If rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm") <> "~" Then
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT cpdm FROM rc_cpxx WHERE cpdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm")
+                        If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_cpxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_cpxx")
+                        If rcDataset.Tables("rc_cpxx").Rows.Count = 0 Then
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw) VALUES (?,?,?,?)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("lbdm")
+                            rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm")
+                            rcOleDbCommand.Parameters.Add("@cpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("cpmc")
+                            rcOleDbCommand.Parameters.Add("@dw", OleDbType.VarChar, 8).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("dw")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        End If
+                    End If
+                Next
+                rcOleDbTrans.Commit()
+            Catch ex As Exception
+                Try
+                    rcOleDbTrans.Rollback()
+                    MsgBox("程序错误。" & Chr(13) & ex.Message)
+                Catch ey As OleDbException
+                    MsgBox("程序错误。" & Chr(13) & ey.Message)
+                End Try
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+        End If
+
         '采购入库
         If Me.ChbPoRkd.Checked Then
             '读取采购入库
@@ -1666,7 +2865,8 @@ Public Class FrmImpNC
                 rcOleDbCommand.Connection = NCOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ic_purchasein.pk_org,ic_purchasein.djh,ic_purchasein.xh,ic_purchasein.rkrq,ic_purchasein.cvendorid,ic_purchasein.csdm,ic_purchasein.csmc,ic_purchasein.cwarehouseid,ic_purchasein.ckdm,ic_purchasein.ckmc,ic_purchasein.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_purchasein.pk_marbasclass,ic_purchasein.lbdm,ic_purchasein.cmaterialvid,ic_purchasein.cpdm,ic_purchasein.cpmc,ic_purchasein.pk_measdoc,ic_purchasein.dw,ic_purchasein.vbatchcode,ic_purchasein.nassistnum,ic_purchasein.nnum AS sl,ic_purchasein.nweight AS zl,ic_purchasein.dj,ic_purchasein.hsdj,ic_purchasein.je,ic_purchasein.shlv,ic_purchasein.se,ic_purchasein.rkmemo,ic_purchasein.cgeneralbid FROM (select ic_purchasein_h.pk_org,ic_purchasein_h.vbillcode AS djh,ic_purchasein_b.crowno AS xh,ic_purchasein_h.dbilldate AS rkrq,ic_purchasein_h.cvendorid,bd_supplier.code AS csdm,bd_supplier.name AS csmc,ic_purchasein_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_purchasein_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_purchasein_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_purchasein_b.vbatchcode,ic_purchasein_b.nassistnum,ic_purchasein_b.nnum,ic_purchasein_b.nweight,ic_purchasein_b.nqtnetprice AS dj,ic_purchasein_b.nqttaxnetprice AS hsdj,ic_purchasein_b.norigmny AS je,ic_purchasein_b.ntaxrate AS shlv,ic_purchasein_b.ntax AS se,ic_purchasein_b.vnotebody AS rkmemo,ic_purchasein_b.cgeneralbid from ic_purchasein_h,ic_purchasein_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs,bd_supplier where ic_purchasein_h.cgeneralhid = ic_purchasein_b.cgeneralhid AND ic_purchasein_h.cwarehouseid = bd_stordoc.pk_stordoc AND ic_purchasein_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_purchasein_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_purchasein_h.cvendorid = bd_supplier.pk_supplier AND ic_purchasein_h.dr=0 and ic_purchasein_b.dr=0 AND to_date(ic_purchasein_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_purchasein_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?) ic_purchasein left join org_dept on org_dept.pk_dept = ic_purchasein.cdptid ORDER BY ic_purchasein.djh,ic_purchasein.xh"
+                rcOleDbCommand.CommandText = "SELECT ic_purchasein.pk_org,ic_purchasein.djh,ic_purchasein.xh,ic_purchasein.rkrq,ic_purchasein.cvendorid,ic_purchasein.csdm,ic_purchasein.csmc,ic_purchasein.cwarehouseid,ic_purchasein.ckdm,ic_purchasein.ckmc,ic_purchasein.cdptid,NVL(org_dept.code,'~') AS bmdm,NVL(org_dept.name,'~') AS bmmc,ic_purchasein.pk_marbasclass,ic_purchasein.lbdm,ic_purchasein.cmaterialvid,ic_purchasein.cpdm,ic_purchasein.cpmc,ic_purchasein.pk_measdoc,ic_purchasein.dw,ic_purchasein.vbatchcode,ic_purchasein.nassistnum,ic_purchasein.nnum AS sl,ic_purchasein.nweight AS zl,ic_purchasein.dj,ic_purchasein.hsdj,ic_purchasein.je,ic_purchasein.shlv,ic_purchasein.se,ic_purchasein.rkmemo,ic_purchasein.cgeneralbid FROM 
+                    (select ic_purchasein_h.pk_org,ic_purchasein_h.vbillcode AS djh,ic_purchasein_b.crowno AS xh,ic_purchasein_h.dbilldate AS rkrq,ic_purchasein_h.cvendorid,bd_supplier.code AS csdm,bd_supplier.name AS csmc,ic_purchasein_h.cwarehouseid,bd_stordoc.code AS ckdm,bd_stordoc.name AS ckmc,ic_purchasein_h.cdptid,bd_material.pk_marbasclass,bd_marbasclass.code AS lbdm,ic_purchasein_b.cmaterialvid,bd_material.code AS cpdm,bd_material.name || ',' || bd_material.materialtype || ',' || bd_material.materialspec AS cpmc,bd_material.pk_measdoc,bd_measdoc.name AS dw,ic_purchasein_b.vbatchcode,ic_purchasein_b.nassistnum,ic_purchasein_b.nnum,ic_purchasein_b.nweight,ic_purchasein_b.nqtnetprice AS dj,ic_purchasein_b.nqttaxnetprice AS hsdj,ic_purchasein_b.norigmny AS je,ic_purchasein_b.ntaxrate AS shlv,ic_purchasein_b.ntax AS se,ic_purchasein_b.vnotebody AS rkmemo,ic_purchasein_b.cgeneralbid from ic_purchasein_h,ic_purchasein_b,bd_stordoc,bd_material,bd_measdoc,bd_marbasclass,org_orgs,bd_supplier where ic_purchasein_h.cgeneralhid = ic_purchasein_b.cgeneralhid AND ic_purchasein_h.cwarehouseid = bd_stordoc.pk_stordoc" & IIf(Not String.IsNullOrEmpty(Me.TxtNCCkdm.Text), " AND bd_stordoc.code IN (" & Me.TxtNCCkdm.Text & ")", "") & " AND ic_purchasein_b.cmaterialvid = bd_material.pk_material AND bd_material.pk_measdoc = bd_measdoc.pk_measdoc AND bd_material.pk_marbasclass = bd_marbasclass.pk_marbasclass AND ic_purchasein_h.pk_org = org_orgs.pk_org AND org_orgs.code = ? AND ic_purchasein_h.cvendorid = bd_supplier.pk_supplier AND ic_purchasein_h.dr=0 and ic_purchasein_b.dr=0 AND to_date(ic_purchasein_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') <= ? AND to_date(ic_purchasein_h.dbilldate,'yyyy-mm-dd HH24:mi:ss') >= ?) ic_purchasein left join org_dept on org_dept.pk_dept = ic_purchasein.cdptid ORDER BY ic_purchasein.djh,ic_purchasein.xh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@NCAccountingBook", OleDbType.VarChar, 40).Value = NCAccountingBook
                 rcOleDbCommand.Parameters.Add("@dateEnd", OleDbType.Date, 8).Value = dateEnd
@@ -1690,23 +2890,36 @@ Public Class FrmImpNC
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
+                'If String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
                 '序列删除再重建
                 rcOleDbCommand.CommandText = "DROP SEQUENCE CGRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "CREATE SEQUENCE CGRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                '更新单据号至0
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "CREATE SEQUENCE CGRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                '更新单据号至0 
                 rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'CGRK'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
                 rcOleDbCommand.ExecuteNonQuery()
-                '删除历史单据
+                'End If
+                ''删除历史单据
+                'If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                '    '仓库编码处理
+                '    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                '    For i = 0 To strCkdm.Length - 1
+                '        rcOleDbCommand.CommandText = "DELETE FROM po_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'CGRK'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                '        rcOleDbCommand.Parameters.Clear()
+                '        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                '        rcOleDbCommand.ExecuteNonQuery()
+                '    Next
+                'Else
                 rcOleDbCommand.CommandText = "DELETE FROM po_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'CGRK'"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                'End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_purchasein").Rows.Count
                 'Dim oldStrDjh As String = ""
                 'Dim blnNew As Boolean = False
@@ -1717,6 +2930,23 @@ Public Class FrmImpNC
                     'Else
                     '    blnNew = False
                     'End If
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm")) Then
+                            rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm") = Mid(rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_PO_RKD"
@@ -1724,7 +2954,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "CGRK" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_purchasein").Rows(i).Item("djh"), rcDataset.Tables("ic_purchasein").Rows(i).Item("djh").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_purchasein").Rows(i).Item("xh"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_purchasein").Rows(i).Item("xh"))
                     rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_purchasein").Rows(i).Item("rkrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
@@ -1733,7 +2963,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraStrCsmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ic_purchasein").Rows(i).Item("csmc")
                     rcOleDbCommand.Parameters.Add("@paraStrYspz", OleDbType.VarChar, 12).Value = "~"
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_purchasein").Rows(i).Item("ckdm")
-                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_purchasein").Rows(i).Item("ckmc")
+                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 40).Value = rcDataset.Tables("ic_purchasein").Rows(i).Item("ckmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_purchasein").Rows(i).Item("cpdm")
                     rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_purchasein").Rows(i).Item("cpmc")
                     rcOleDbCommand.Parameters.Add("@paraStrKuwei", OleDbType.VarChar, 40).Value = "~"
@@ -1865,23 +3095,36 @@ Public Class FrmImpNC
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                '序列删除再重建
-                rcOleDbCommand.CommandText = "DROP SEQUENCE RKTZ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "CREATE SEQUENCE RKTZ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
-                '更新单据号至0
-                rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'RKTZ'"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
-                rcOleDbCommand.ExecuteNonQuery()
+                If String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '序列删除再重建
+                    rcOleDbCommand.CommandText = "DROP SEQUENCE RKTZ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "CREATE SEQUENCE RKTZ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " INCREMENT BY 1 START WITH 1 MAXVALUE 99999 MINVALUE 1 NOCYCLE NOCACHE NOORDER"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    '更新单据号至0
+                    rcOleDbCommand.CommandText = "UPDATE rc_lx SET pzno" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " = 0 WHERE kjnd = ? AND pzlxdm = 'RKTZ'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 '删除历史单据
-                rcOleDbCommand.CommandText = "DELETE FROM po_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'RKTZ'"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.ExecuteNonQuery()
+                If Not String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
+                    '仓库编码处理
+                    Dim strCkdm As String() = Me.TxtCkdm.Text.Split(",")
+                    For i = 0 To strCkdm.Length - 1
+                        rcOleDbCommand.CommandText = "DELETE FROM po_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'RKTZ'" & IIf(Not String.IsNullOrEmpty(strCkdm(i)), " AND ckdm ='" & strCkdm(i) & "'", "")
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                Else
+                    rcOleDbCommand.CommandText = "DELETE FROM po_rkd WHERE SUBSTR(djh,5,6)= ? AND SUBSTR(djh,1,4) = 'RKTZ'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 Me.ProgressBar1.Maximum = rcDataset.Tables("ic_generalin").Rows.Count
                 'Dim oldStrDjh As String = ""
                 'Dim blnNew As Boolean = False
@@ -1892,6 +3135,25 @@ Public Class FrmImpNC
                     'Else
                     '    blnNew = False
                     'End If
+
+
+                    '仓库编码处理
+                    If rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm").GetType.ToString <> "System.DBNull" Then
+                        If String.IsNullOrEmpty(rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm")) Then
+                            rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm") = "~"
+                        End If
+                    Else
+                        rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm") = "~"
+                    End If
+                    If rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm").length > NCAccountingBook.Length Then
+                        '判断仓库编码是否以账套编码开头
+                        If Mid(rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm"), 1, NCAccountingBook.Length) = NCAccountingBook Then
+                            '仓库编码去掉账套前缀
+                            rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm") = Mid(rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm"), NCAccountingBook.Length + 1, rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm").Length - NCAccountingBook.Length)
+                        End If
+                    End If
+
+
                     Me.ProgressBar1.Value = i + 1
                     rcOleDbCommand.CommandType = CommandType.StoredProcedure
                     rcOleDbCommand.CommandText = "USP3_SAVE_PO_RKD"
@@ -1899,7 +3161,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = "RKTZ" & Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0") & Mid(rcDataset.Tables("ic_generalin").Rows(i).Item("djh"), rcDataset.Tables("ic_generalin").Rows(i).Item("djh").ToString.Length - 4, 5)
                     rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_generalin").Rows(i).Item("xh"))
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1 'IIf(blnNew, 1, rcDataset.Tables("ic_generalin").Rows(i).Item("xh"))
                     rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = rcDataset.Tables("ic_generalin").Rows(i).Item("rkrq")
                     rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                     rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = "~"
@@ -1908,7 +3170,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@paraStrCsmc", OleDbType.VarChar, 50).Value = "~"
                     rcOleDbCommand.Parameters.Add("@paraStrYspz", OleDbType.VarChar, 12).Value = "~"
                     rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ic_generalin").Rows(i).Item("ckdm")
-                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("ic_generalin").Rows(i).Item("ckmc")
+                    rcOleDbCommand.Parameters.Add("@paraStrCkmc", OleDbType.VarChar, 40).Value = rcDataset.Tables("ic_generalin").Rows(i).Item("ckmc")
                     rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("ic_generalin").Rows(i).Item("cpdm")
                     rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ic_generalin").Rows(i).Item("cpmc")
                     rcOleDbCommand.Parameters.Add("@paraStrKuwei", OleDbType.VarChar, 40).Value = "~"
@@ -2270,9 +3532,7 @@ Public Class FrmImpNC
                                         rcOleDbCommand.Parameters.Clear()
                                         rcOleDbCommand.Parameters.Add("@pk_customer", OleDbType.VarChar, 20).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("value" & j.ToString)
                                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                                        If rcDataset.Tables("bd_customer") IsNot Nothing Then
-                                            rcDataset.Tables("bd_customer").Clear()
-                                        End If
+                                        rcDataset.Tables("bd_customer")?.Clear()
                                         rcOleDbDataAdpt.Fill(rcDataset, "bd_customer")
                                         If rcDataset.Tables("bd_customer").Rows.Count > 0 Then
                                             rcDataset.Tables("gl_kmyeb").Rows(i).Item("khdm") = rcDataset.Tables("bd_customer").Rows(0).Item("code")
@@ -2465,9 +3725,7 @@ Public Class FrmImpNC
                         rcOleDbCommand.CommandText = "SELECT csdm FROM rc_csxx WHERE csdm = ?"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_kmyeb").Rows(i).Item("csdm")
-                        If rcDataset.Tables("rc_csxx") IsNot Nothing Then
-                            rcDataset.Tables("rc_csxx").Clear()
-                        End If
+                        rcDataset.Tables("rc_csxx")?.Clear()
                         rcOleDbDataAdpt.Fill(rcDataset, "rc_csxx")
                         If rcDataset.Tables("rc_csxx").Rows.Count = 0 Then
                             rcOleDbCommand.CommandText = "INSERT INTO rc_csxx (csdm,csmc) VALUES (?,?)"
@@ -2574,7 +3832,6 @@ Public Class FrmImpNC
                 Try
                     rcOleDbTrans.Rollback()
                     MsgBox("程序错误。" & Chr(13) & ex.Message)
-
                 Catch ey As OleDbException
                     MsgBox("程序错误。" & Chr(13) & ey.Message)
                 End Try
@@ -2582,7 +3839,6 @@ Public Class FrmImpNC
             Finally
                 rcOleDbConn.Close()
             End Try
-
         End If
         If ChbCpdm.Checked Then
             Try
@@ -2693,16 +3949,16 @@ Public Class FrmImpNC
         MsgBox("数据读入完成,请检查数据。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
     End Sub
 
-    Private Sub ChbOeXsd_CheckedChanged(sender As Object, e As EventArgs) Handles ChbOeXsd.CheckedChanged, ChbPoRkd.CheckedChanged, ChbInvDbd.CheckedChanged
-        If Me.ChbOeXsd.Checked Or Me.ChbPoRkd.Checked Or Me.ChbInvDbd.Checked Then
-            Me.TxtCkdm.Text = ""
-            Me.TxtCkdm.Enabled = False
-        End If
-    End Sub
+    'Private Sub ChbOeXsd_CheckedChanged(sender As Object, e As EventArgs)
+    '    If Me.ChbPoRkd.Checked Or Me.ChbInvDbd.Checked Then
+    '        Me.TxtCkdm.Text = ""
+    '        Me.TxtCkdm.Enabled = False
+    '    End If
+    'End Sub
 
-    Private Sub ChbInvRkd_CheckedChanged(sender As Object, e As EventArgs) Handles ChbInvRkd1.CheckedChanged, ChbInvCkd.CheckedChanged
+    Private Sub ChbInvRkd_CheckedChanged(sender As Object, e As EventArgs) Handles ChbPoRkd.CheckedChanged, ChbInvDbd.CheckedChanged, ChbInvRkd1.CheckedChanged, ChbInvCkd.CheckedChanged, ChbOeXsck.CheckedChanged, ChbOeXsfp.CheckedChanged, ChbOeZgys.CheckedChanged
         '需要分仓库读入
-        If Me.ChbInvRkd1.Checked Or Me.ChbInvCkd.Checked Then
+        If Me.ChbInvRkd1.Checked Or Me.ChbInvCkd.Checked Or Me.ChbOeXsck.Checked Or Me.ChbOeXsfp.Checked Or Me.ChbOeZgys.Checked Then
             Me.TxtCkdm.Enabled = True
         End If
     End Sub
@@ -2868,4 +4124,15 @@ Public Class FrmImpNC
             MsgBox("回写NC期初余额成本完成。")
         End If
     End Sub
+
+    Private Sub ChbPz_CheckedChanged(sender As Object, e As EventArgs) Handles ChbPz.CheckedChanged
+        If Me.ChbPz.Checked Then
+            Me.NudMonth.Enabled = True
+            Me.NudYear.Enabled = True
+        Else
+            Me.NudMonth.Enabled = False
+            Me.NudYear.Enabled = False
+        End If
+    End Sub
+
 End Class

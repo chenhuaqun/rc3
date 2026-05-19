@@ -421,6 +421,10 @@ Public Class FrmZcbjeSrz
 #Region "保存数据事件"
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
+        If String.IsNullOrEmpty(Me.TxtBmdm.Text) Then
+            MsgBox(Me.LblBmdm.Text & "不能为空。")
+            Return
+        End If
         Try
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)

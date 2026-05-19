@@ -40,6 +40,8 @@ Public Class FrmYwfJsz
         Me.DgtbcYwf_Zl.Format = g_FormatJe0
         Me.DgtbcCdhpje.Format = g_FormatJe0
         Me.DgtbcYwf_cdhp.Format = g_FormatJe0
+        Me.DgtbcGylpjje.Format = g_FormatJe0
+        Me.DgtbcYwf_gylpj.Format = g_FormatJe0
         Me.DgtbcYwf_Tx.Format = g_FormatJe0
         Me.DgtbcYongJinJe.Format = g_FormatJe0
         Me.DgtbcYwf_Yj.Format = g_FormatJe0

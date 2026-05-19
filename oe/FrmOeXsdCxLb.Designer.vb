@@ -22,68 +22,74 @@ Partial Class FrmOeXsdCxLb
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle
-        Me.DgtbcDjh = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcXh = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcXsrq = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBdelete = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcKhdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcKhmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSktj = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSkqx = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBmdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBmmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcZydm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcZymc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCkdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCkmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCpdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCpmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcHth = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcKhddh = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcKhlh = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSl = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcFpsl = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcWfp = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcDw = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcMjsl = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcFzsl = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcFzdw = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcDj = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcHsdj = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcJe = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcShlv = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSe = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcJese = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcXsmemo = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcDdDjh = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcDdXh = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCbje = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcBsign = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSrr = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcShr = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcJzr = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcSkje = New System.Windows.Forms.DataGridTextBoxColumn
+        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle()
+        Me.DgtbcDjh = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcXh = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcXsrq = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBdelete = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKhdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKhmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcFpkhdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcFpkhmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSktj = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSkqx = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBmdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBmmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcZydm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcZymc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCkdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCkmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCpdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCpmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcHth = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKhddh = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKhlh = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcPiHao = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSl = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcFpsl = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcWfp = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcDw = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcMjsl = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcFzsl = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcFzdw = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcZl = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcDj = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcHsdj = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcJe = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcShlv = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSe = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcJese = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSkje = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcXsmemo = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcDdDjh = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcDdXh = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCbje = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcBsign = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcSrr = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcShr = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcJzr = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcVbillcode = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCrowno = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rcDataGrid
+        'RcDataGrid
         '
-        Me.rcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
+        Me.RcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
         '
         'Label1
         '
         Me.Label1.Location = New System.Drawing.Point(408, 8)
-        Me.Label1.Size = New System.Drawing.Size(164, 23)
+        Me.Label1.Size = New System.Drawing.Size(166, 26)
         Me.Label1.Text = "产品送货单列表"
         '
         'DataGridTableStyle1
         '
-        Me.DataGridTableStyle1.DataGrid = Me.rcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDjh, Me.DgtbcXh, Me.DgtbcXsrq, Me.DgtbcBdelete, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcSktj, Me.DgtbcSkqx, Me.DgtbcBmdm, Me.DgtbcBmmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcCkdm, Me.DgtbcCkmc, Me.DgtbcCpdm, Me.DgtbcCpmc, Me.DgtbcHth, Me.DgtbcKhddh, Me.DgtbcKhlh, Me.DgtbcSl, Me.DgtbcFpsl, Me.DgtbcWfp, Me.DgtbcDw, Me.DgtbcMjsl, Me.DgtbcFzsl, Me.DgtbcFzdw, Me.DgtbcDj, Me.DgtbcHsdj, Me.DgtbcJe, Me.DgtbcShlv, Me.DgtbcSe, Me.DgtbcJese, Me.DgtbcSkje, Me.DgtbcXsmemo, Me.DgtbcDdDjh, Me.DgtbcDdXh, Me.DgtbcCbje, Me.DgtbcBsign, Me.DgtbcSrr, Me.DgtbcShr, Me.DgtbcJzr})
+        Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDjh, Me.DgtbcXh, Me.DgtbcXsrq, Me.DgtbcBdelete, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcFpkhdm, Me.DgtbcFpkhmc, Me.DgtbcSktj, Me.DgtbcSkqx, Me.DgtbcBmdm, Me.DgtbcBmmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcCkdm, Me.DgtbcCkmc, Me.DgtbcCpdm, Me.DgtbcCpmc, Me.DgtbcHth, Me.DgtbcKhddh, Me.DgtbcKhlh, Me.DgtbcPiHao, Me.DgtbcSl, Me.DgtbcFpsl, Me.DgtbcWfp, Me.DgtbcDw, Me.DgtbcMjsl, Me.DgtbcFzsl, Me.DgtbcFzdw, Me.DgtbcZl, Me.DgtbcDj, Me.DgtbcHsdj, Me.DgtbcJe, Me.DgtbcShlv, Me.DgtbcSe, Me.DgtbcJese, Me.DgtbcSkje, Me.DgtbcXsmemo, Me.DgtbcDdDjh, Me.DgtbcDdXh, Me.DgtbcCbje, Me.DgtbcBsign, Me.DgtbcSrr, Me.DgtbcShr, Me.DgtbcJzr, Me.DgtbcVbillcode, Me.DgtbcCrowno})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "xsdlb"
         '
@@ -127,7 +133,7 @@ Partial Class FrmOeXsdCxLb
         '
         Me.DgtbcKhdm.Format = ""
         Me.DgtbcKhdm.FormatInfo = Nothing
-        Me.DgtbcKhdm.HeaderText = "客户编码"
+        Me.DgtbcKhdm.HeaderText = "收货客户编码"
         Me.DgtbcKhdm.MappingName = "khdm"
         Me.DgtbcKhdm.NullText = ""
         Me.DgtbcKhdm.Width = 75
@@ -136,10 +142,28 @@ Partial Class FrmOeXsdCxLb
         '
         Me.DgtbcKhmc.Format = ""
         Me.DgtbcKhmc.FormatInfo = Nothing
-        Me.DgtbcKhmc.HeaderText = "客户名称"
+        Me.DgtbcKhmc.HeaderText = "收货客户名称"
         Me.DgtbcKhmc.MappingName = "khmc"
         Me.DgtbcKhmc.NullText = ""
         Me.DgtbcKhmc.Width = 210
+        '
+        'DgtbcFpkhdm
+        '
+        Me.DgtbcFpkhdm.Format = ""
+        Me.DgtbcFpkhdm.FormatInfo = Nothing
+        Me.DgtbcFpkhdm.HeaderText = "开票客户编码"
+        Me.DgtbcFpkhdm.MappingName = "fpkhdm"
+        Me.DgtbcFpkhdm.NullText = ""
+        Me.DgtbcFpkhdm.Width = 75
+        '
+        'DgtbcFpkhmc
+        '
+        Me.DgtbcFpkhmc.Format = ""
+        Me.DgtbcFpkhmc.FormatInfo = Nothing
+        Me.DgtbcFpkhmc.HeaderText = "开票客户名称"
+        Me.DgtbcFpkhmc.MappingName = "fpkhmc"
+        Me.DgtbcFpkhmc.NullText = ""
+        Me.DgtbcFpkhmc.Width = 210
         '
         'DgtbcSktj
         '
@@ -258,6 +282,15 @@ Partial Class FrmOeXsdCxLb
         Me.DgtbcKhlh.NullText = ""
         Me.DgtbcKhlh.Width = 75
         '
+        'DgtbcPiHao
+        '
+        Me.DgtbcPiHao.Format = ""
+        Me.DgtbcPiHao.FormatInfo = Nothing
+        Me.DgtbcPiHao.HeaderText = "批次号"
+        Me.DgtbcPiHao.MappingName = "pihao"
+        Me.DgtbcPiHao.NullText = ""
+        Me.DgtbcPiHao.Width = 75
+        '
         'DgtbcSl
         '
         Me.DgtbcSl.Alignment = System.Windows.Forms.HorizontalAlignment.Right
@@ -326,6 +359,16 @@ Partial Class FrmOeXsdCxLb
         Me.DgtbcFzdw.NullText = ""
         Me.DgtbcFzdw.Width = 30
         '
+        'DgtbcZl
+        '
+        Me.DgtbcZl.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcZl.Format = ""
+        Me.DgtbcZl.FormatInfo = Nothing
+        Me.DgtbcZl.HeaderText = "重量"
+        Me.DgtbcZl.MappingName = "zl"
+        Me.DgtbcZl.NullText = ""
+        Me.DgtbcZl.Width = 75
+        '
         'DgtbcDj
         '
         Me.DgtbcDj.Alignment = System.Windows.Forms.HorizontalAlignment.Right
@@ -385,6 +428,16 @@ Partial Class FrmOeXsdCxLb
         Me.DgtbcJese.MappingName = "jese"
         Me.DgtbcJese.NullText = ""
         Me.DgtbcJese.Width = 75
+        '
+        'DgtbcSkje
+        '
+        Me.DgtbcSkje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcSkje.Format = ""
+        Me.DgtbcSkje.FormatInfo = Nothing
+        Me.DgtbcSkje.HeaderText = "收款金额"
+        Me.DgtbcSkje.MappingName = "skje"
+        Me.DgtbcSkje.NullText = ""
+        Me.DgtbcSkje.Width = 75
         '
         'DgtbcXsmemo
         '
@@ -459,15 +512,23 @@ Partial Class FrmOeXsdCxLb
         Me.DgtbcJzr.NullText = ""
         Me.DgtbcJzr.Width = 75
         '
-        'DgtbcSkje
+        'DgtbcVbillcode
         '
-        Me.DgtbcSkje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcSkje.Format = ""
-        Me.DgtbcSkje.FormatInfo = Nothing
-        Me.DgtbcSkje.HeaderText = "收款金额"
-        Me.DgtbcSkje.MappingName = "skje"
-        Me.DgtbcSkje.NullText = ""
-        Me.DgtbcSkje.Width = 75
+        Me.DgtbcVbillcode.Format = ""
+        Me.DgtbcVbillcode.FormatInfo = Nothing
+        Me.DgtbcVbillcode.HeaderText = "NC单据号"
+        Me.DgtbcVbillcode.MappingName = "vbillcode"
+        Me.DgtbcVbillcode.NullText = ""
+        Me.DgtbcVbillcode.Width = 75
+        '
+        'DgtbcCrowno
+        '
+        Me.DgtbcCrowno.Format = ""
+        Me.DgtbcCrowno.FormatInfo = Nothing
+        Me.DgtbcCrowno.HeaderText = "NC行号"
+        Me.DgtbcCrowno.MappingName = "crowno"
+        Me.DgtbcCrowno.NullText = ""
+        Me.DgtbcCrowno.Width = 75
         '
         'FrmOeXsdCxLb
         '
@@ -478,7 +539,7 @@ Partial Class FrmOeXsdCxLb
         Me.Text = "产品送货单列表"
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -527,4 +588,10 @@ Partial Class FrmOeXsdCxLb
     Friend WithEvents DgtbcSktj As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcSkqx As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcSkje As System.Windows.Forms.DataGridTextBoxColumn
+    Friend WithEvents DgtbcZl As DataGridTextBoxColumn
+    Friend WithEvents DgtbcPiHao As DataGridTextBoxColumn
+    Friend WithEvents DgtbcFpkhdm As DataGridTextBoxColumn
+    Friend WithEvents DgtbcFpkhmc As DataGridTextBoxColumn
+    Friend WithEvents DgtbcVbillcode As DataGridTextBoxColumn
+    Friend WithEvents DgtbcCrowno As DataGridTextBoxColumn
 End Class

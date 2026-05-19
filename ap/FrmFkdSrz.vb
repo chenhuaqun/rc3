@@ -629,26 +629,26 @@ Public Class FrmFkdSrz
                         rcOleDbCommand.CommandText = "UPDATE ap_fksq SET fkje = je + se WHERE djh = ? AND xh = ?"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("djh")
-                        rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
+                        rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
                         rcOleDbCommand.ExecuteNonQuery()
                         Select Case True
                             Case rcDataset.Tables("rc_fpnr").Rows(i).Item("fktj") = "款到发货"
                                 rcOleDbCommand.CommandText = "UPDATE po_cgd SET fkje = je + se WHERE djh = ? AND xh = ?"
                                 rcOleDbCommand.Parameters.Clear()
                                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sdjh")
-                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sxh")
+                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sxh")
                                 rcOleDbCommand.ExecuteNonQuery()
                             Case rcDataset.Tables("rc_fpnr").Rows(i).Item("fktj") = "货到付款"
                                 rcOleDbCommand.CommandText = "UPDATE po_rkd SET fkje = je + se WHERE djh = ? AND xh = ?"
                                 rcOleDbCommand.Parameters.Clear()
                                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sdjh")
-                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sxh")
+                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sxh")
                                 rcOleDbCommand.ExecuteNonQuery()
                             Case rcDataset.Tables("rc_fpnr").Rows(i).Item("fktj") = "月结"
                                 rcOleDbCommand.CommandText = "UPDATE po_fp SET fkje = je + se WHERE djh = ? AND xh = ?"
                                 rcOleDbCommand.Parameters.Clear()
                                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sdjh")
-                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sxh")
+                                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sxh")
                                 rcOleDbCommand.ExecuteNonQuery()
                         End Select
                     End If
@@ -714,7 +714,7 @@ Public Class FrmFkdSrz
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@paraDblFkje", OleDbType.Numeric, 14).Value = IIf(dblFkje >= rcDataset.Tables("rc_fpnr").Rows(i).Item("rkjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yifje"), rcDataset.Tables("rc_fpnr").Rows(i).Item("rkjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yifje"), dblFkje)
                             rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("djh")
-                            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
+                            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("xh")
                             rcOleDbCommand.ExecuteNonQuery()
                             dblHxje += IIf(dblFkje >= rcDataset.Tables("rc_fpnr").Rows(i).Item("rkjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yifje"), rcDataset.Tables("rc_fpnr").Rows(i).Item("rkjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yifje"), dblFkje)
                             dblFkje -= IIf(dblFkje >= rcDataset.Tables("rc_fpnr").Rows(i).Item("rkjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yifje"), rcDataset.Tables("rc_fpnr").Rows(i).Item("rkjese") - rcDataset.Tables("rc_fpnr").Rows(i).Item("yifje"), dblFkje)

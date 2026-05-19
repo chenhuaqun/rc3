@@ -776,7 +776,7 @@ Public Class FrmPoRkdSrz
                             rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(sl),0.0) AS cgsl FROM po_cgd WHERE djh = ? AND xh = ?"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgdDjh").Value
-                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgdXh").Value
+                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgdXh").Value
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                             If rcDataset.Tables("t_cgd") IsNot Nothing Then
                                 rcDataset.Tables("t_cgd").Clear()
@@ -787,7 +787,7 @@ Public Class FrmPoRkdSrz
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = Me.TxtDjh.Text
                             rcOleDbCommand.Parameters.Add("@cgddjh", OleDbType.VarChar, 15).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgdDjh").Value
-                            rcOleDbCommand.Parameters.Add("@cgdxh", OleDbType.Numeric, 4).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgdXh").Value
+                            rcOleDbCommand.Parameters.Add("@cgdxh", OleDbType.Numeric, 6).Value = Me.rcDataGridView.CurrentRow.Cells("ColCgdXh").Value
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                             If rcDataset.Tables("t_rkd") IsNot Nothing Then
                                 rcDataset.Tables("t_rkd").Clear()
@@ -1404,7 +1404,7 @@ Public Class FrmPoRkdSrz
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = Me.DtpRkrq.Value
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = IIf(String.IsNullOrEmpty(Me.LblBdelete.Text), 0, 1)
                 rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = Me.TxtZydm.Text
@@ -1695,6 +1695,8 @@ Public Class FrmPoRkdSrz
 #Region "准备打印数据事件"
 
     Private Sub PreparePrintData()
+        Dim slFormat As String = g_FormatSl
+        Dim slMaxFormat As String = " "
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If
@@ -1749,6 +1751,13 @@ Public Class FrmPoRkdSrz
         For intPage = 1 To System.Math.Ceiling(rcDataset.Tables("rc_rkdnr").Rows.Count / rcRps.LinesPerPage.ToString)
             For i = (intPage - 1) * rcRps.LinesPerPage.ToString To System.Math.Min(intPage * rcRps.LinesPerPage.ToString - 1, rcDataset.Tables("rc_rkdnr").Rows.Count - 1)
                 If rcDataset.Tables("rc_rkdnr").Rows(i).RowState <> 8 Then
+                    If Not rcDataset.Tables("rc_rkdnr").Rows(i).Item("dw").GetType.ToString = "System.DBNull" Then
+                        slFormat = ReadJldwXsws(rcDataset.Tables("rc_rkdnr").Rows(i).Item("dw"))
+                        If slFormat > slMaxFormat Then
+                            slMaxFormat = slFormat
+                        End If
+                    End If
+
                     If Not rcDataset.Tables("rc_rkdnr").Rows(i).Item("cpdm").GetType.ToString = "System.DBNull" Then
                         rcRps.Text(j + 1, 1) = Trim(rcDataset.Tables("rc_rkdnr").Rows(i).Item("cpdm"))
                     End If
@@ -1768,7 +1777,7 @@ Public Class FrmPoRkdSrz
                         rcRps.Text(j + 1, 6) = rcDataset.Tables("rc_rkdnr").Rows(i).Item("pihao")
                     End If
                     If Not rcDataset.Tables("rc_rkdnr").Rows(i).Item("sl").GetType.ToString = "System.DBNull" Then
-                        rcRps.Text(j + 1, 7) = Format(rcDataset.Tables("rc_rkdnr").Rows(i).Item("sl"), g_FormatSl)
+                        rcRps.Text(j + 1, 7) = Format(rcDataset.Tables("rc_rkdnr").Rows(i).Item("sl"), slFormat)
                         dblTotalSl += rcDataset.Tables("rc_rkdnr").Rows(i).Item("sl")
                     End If
                     'If Not rcDataSet.Tables("rc_rkdnr").Rows(i).Item("hsdj").GetType.ToString = "System.DBNull" Then
@@ -1790,6 +1799,9 @@ Public Class FrmPoRkdSrz
                     j += 1
                 End If
             Next
+            If slFormat > slMaxFormat Then
+                slMaxFormat = slFormat
+            End If
 
             Dim m As New models.ChineseNum With {
                 .InputString = dblTotalJe

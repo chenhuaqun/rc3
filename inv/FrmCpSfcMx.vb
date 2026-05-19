@@ -27,6 +27,7 @@ Public Class FrmCpSfcMx
         dtCpsfcMx.Columns.Add("jcsl", Type.GetType("System.Double"))
         dtCpsfcMx.Columns.Add("jcdj", Type.GetType("System.Double"))
         dtCpsfcMx.Columns.Add("jcje", Type.GetType("System.Double"))
+        dtCpsfcMx.Columns.Add("mxzindex", Type.GetType("System.String"))
         rcDataset.Tables.Add(dtCpsfcMx)
         With rcDataset.Tables("cpsfcmx")
             .Columns("djh").DefaultValue = ""
@@ -323,7 +324,7 @@ Public Class FrmCpSfcMx
                 rcOleDbCommand.Connection = rcOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT '" & rqEnd.ToString & "' As rq,'本月合计' As zy ,Coalesce(Sum(rksl),0.0) As rksl,CASE WHEN Coalesce(Sum(rksl),0.0) <> 0 THEN Coalesce(Sum(rkje),0.0) / Coalesce(Sum(rksl),0.0) ELSE 0.0 END AS rkdj,Coalesce(Sum(rkje),0.0) As rkje,Coalesce(sum(cksl),0.0) As cksl,CASE WHEN Coalesce(Sum(cksl),0.0) <> 0 THEN Coalesce(Sum(ckje),0.0) / Coalesce(Sum(cksl),0.0) ELSE 0.0 END AS ckdj,Coalesce(Sum(ckje),0.0) As ckje," & dblJcsl & " + Sum(rksl) - Sum(cksl) As jcsl,CASE WHEN " & dblJcsl & " + Sum(rksl) - Sum(cksl) <> 0 THEN (" & dblJcje & " + Sum(rkje) - Sum(ckje)) / (" & dblJcsl & " + Sum(rksl) - Sum(cksl)) ELSE 0 END AS jcdj," & dblJcje & " + Sum(rkje) - Sum(ckje) As jcje FROM (" &
+                rcOleDbCommand.CommandText = "SELECT '" & rqEnd.ToString & "' As rq,'本月合计' As zy ,Coalesce(Sum(rksl),0.0) As rksl,CASE WHEN Coalesce(Sum(rksl),0.0) <> 0 THEN Coalesce(Sum(rkje),0.0) / Coalesce(Sum(rksl),0.0) ELSE 0.0 END AS rkdj,Coalesce(Sum(rkje),0.0) As rkje,Coalesce(sum(cksl),0.0) As cksl,CASE WHEN Coalesce(Sum(cksl),0.0) <> 0 THEN Coalesce(Sum(ckje),0.0) / Coalesce(Sum(cksl),0.0) ELSE 0.0 END AS ckdj,Coalesce(Sum(ckje),0.0) As ckje," & dblJcsl & " + Sum(rksl) - Sum(cksl) As jcsl,CASE WHEN " & dblJcsl & " + Sum(rksl) - Sum(cksl) <> 0 THEN (" & dblJcje & " + Sum(rkje) - Sum(ckje)) / (" & dblJcsl & " + Sum(rksl) - Sum(cksl)) ELSE 0 END AS jcdj," & dblJcje & " + Sum(rkje) - Sum(ckje) As jcje,'98' AS mxzindex FROM (" &
                     "(SELECT Sum(inv_rkd.sl) As rksl,Sum(inv_rkd.je) As rkje,0.0 As cksl,0.0 As ckje FROM inv_rkd WHERE inv_rkd.bdelete = 0" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " AND cpdm = ? AND inv_rkd.rkrq >= ? AND inv_rkd.rkrq >= ? AND inv_rkd.rkrq <= ?)" &
                     " UNION ALL (SELECT Sum(po_rkd.sl) As rksl,Sum(po_rkd.je) As rkje,0.0 As cksl,0.0 As ckje FROM po_rkd WHERE po_rkd.bdelete = 0" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND po_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " AND cpdm = ? AND po_rkd.rkrq >= ? AND po_rkd.rkrq >= ? AND po_rkd.rkrq <= ?)" &
                     " UNION ALL (SELECT Sum(inv_dbd.sl) As rksl,Sum(inv_dbd.je) As rkje,0.0 As cksl,0.0 As ckje FROM inv_dbd WHERE inv_dbd.bdelete = 0" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.rckdm ='" & Me.TxtCkdm.Text & "'", "") & " AND cpdm = ? AND TRUNC(inv_dbd.dbrq,'mi') >= ? AND TRUNC(inv_dbd.dbrq,'mi') >= ? AND TRUNC(inv_dbd.dbrq,'mi') <= ?)" &
@@ -380,7 +381,7 @@ Public Class FrmCpSfcMx
                 rcOleDbCommand.Connection = rcOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT '" & rqEnd.ToString & "' As rq,'本年累计' As zy ,Coalesce(Sum(rksl),0.0) As rksl,CASE WHEN Coalesce(Sum(rksl),0.0) <> 0 THEN Coalesce(Sum(rkje),0.0) / Coalesce(Sum(rksl),0.0) ELSE 0.0 END AS rkdj,Coalesce(Sum(rkje),0.0) As rkje,Coalesce(sum(cksl),0.0) As cksl,CASE WHEN Coalesce(Sum(cksl),0.0) <> 0 THEN Coalesce(Sum(ckje),0.0) / Coalesce(Sum(cksl),0.0) ELSE 0.0 END AS ckdj,Coalesce(Sum(ckje),0.0) As ckje,0.0 As jcsl,0.0 As jcje FROM (" &
+                rcOleDbCommand.CommandText = "SELECT '" & rqEnd.ToString & "' As rq,'本年累计' As zy ,Coalesce(Sum(rksl),0.0) As rksl,CASE WHEN Coalesce(Sum(rksl),0.0) <> 0 THEN Coalesce(Sum(rkje),0.0) / Coalesce(Sum(rksl),0.0) ELSE 0.0 END AS rkdj,Coalesce(Sum(rkje),0.0) As rkje,Coalesce(sum(cksl),0.0) As cksl,CASE WHEN Coalesce(Sum(cksl),0.0) <> 0 THEN Coalesce(Sum(ckje),0.0) / Coalesce(Sum(cksl),0.0) ELSE 0.0 END AS ckdj,Coalesce(Sum(ckje),0.0) As ckje,0.0 As jcsl,0.0 As jcje,'99' AS mxzindex FROM (" &
                     "(SELECT Sum(inv_rkd.sl) As rksl,Sum(inv_rkd.je) As rkje,0.0 As cksl,0.0 As ckje FROM inv_rkd WHERE inv_rkd.bdelete = 0" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " AND cpdm = ? AND inv_rkd.rkrq >= ? AND inv_rkd.rkrq >= ? AND inv_rkd.rkrq <= ?)" &
                     " UNION ALL (SELECT Sum(po_rkd.sl) As rksl,Sum(po_rkd.je) As rkje,0.0 As cksl,0.0 As ckje FROM po_rkd WHERE po_rkd.bdelete = 0" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND po_rkd.ckdm ='" & Me.TxtCkdm.Text & "'", "") & " AND cpdm = ? AND po_rkd.rkrq >= ? AND po_rkd.rkrq >= ? AND po_rkd.rkrq <= ?)" &
                     " UNION ALL (SELECT Sum(inv_dbd.sl) As rksl,Sum(inv_dbd.je) As rkje,0.0 As cksl,0.0 As ckje FROM inv_dbd WHERE inv_dbd.bdelete = 0" & IIf(Not String.IsNullOrEmpty(Me.TxtCkdm.Text), " AND inv_dbd.rckdm ='" & Me.TxtCkdm.Text & "'", "") & " AND cpdm = ? AND TRUNC(inv_dbd.dbrq,'mi') >= ? AND TRUNC(inv_dbd.dbrq,'mi') >= ? AND TRUNC(inv_dbd.dbrq,'mi') <= ?)" &
@@ -430,7 +431,7 @@ Public Class FrmCpSfcMx
         Dim rcFrm As New FrmCpSfcMxz
         With rcFrm
             .paraDataSet = rcDataset
-            .paraDataView = New DataView(rcDataset.Tables("cpsfcmx"), "TRUE", "rq,zy", DataViewRowState.CurrentRows)
+            .ParaDataView = New DataView(rcDataset.Tables("cpsfcmx"), "TRUE", "rq,mxzindex,zy", DataViewRowState.CurrentRows)
             '.paraDataTable = rcDataset.Tables("cpsfcmx")
             .Label2.Text = NudYear.Value & "年" & NudMonthBegin.Value & "月至" & NudMonthEnd.Value & "月"
             If rcDataset.Tables("rc_cpxx").Rows.Count > 0 Then

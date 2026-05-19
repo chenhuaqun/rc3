@@ -22,18 +22,10 @@ Partial Class FrmKhzyxx
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.rcDataGridView = New System.Windows.Forms.DataGridView()
-        Me.ColZydm = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColZymc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColKhdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColKhmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColKsPeriod = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColJsPeriod = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColXslbdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColXslbmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LblXslbmc = New System.Windows.Forms.Label()
         Me.LblXslbdm = New System.Windows.Forms.Label()
@@ -68,6 +60,14 @@ Partial Class FrmKhzyxx
         Me.BtnDelete = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.BtnExit = New System.Windows.Forms.ToolStripButton()
+        Me.ColZydm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColZymc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColKhdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColKhmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColKsPeriod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColJsPeriod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColXslbdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColXslbmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.rcDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
@@ -81,121 +81,41 @@ Partial Class FrmKhzyxx
         '
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.rcDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.rcDataGridView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.rcDataGridView.ColumnHeadersHeight = 30
         Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColZydm, Me.ColZymc, Me.ColKhdm, Me.ColKhmc, Me.ColKsPeriod, Me.ColJsPeriod, Me.ColXslbdm, Me.ColXslbmc})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.rcDataGridView.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.rcDataGridView.DefaultCellStyle = DataGridViewCellStyle2
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rcDataGridView.Location = New System.Drawing.Point(0, 0)
-        Me.rcDataGridView.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.rcDataGridView.Margin = New System.Windows.Forms.Padding(2)
         Me.rcDataGridView.Name = "rcDataGridView"
         Me.rcDataGridView.ReadOnly = True
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.rcDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.rcDataGridView.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.rcDataGridView.RowHeadersWidth = 62
         Me.rcDataGridView.RowTemplate.Height = 30
-        Me.rcDataGridView.Size = New System.Drawing.Size(280, 232)
+        Me.rcDataGridView.Size = New System.Drawing.Size(755, 661)
         Me.rcDataGridView.TabIndex = 0
-        '
-        'ColZydm
-        '
-        Me.ColZydm.DataPropertyName = "zydm"
-        Me.ColZydm.HeaderText = "职员编码"
-        Me.ColZydm.MinimumWidth = 8
-        Me.ColZydm.Name = "ColZydm"
-        Me.ColZydm.ReadOnly = True
-        Me.ColZydm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColZydm.Width = 150
-        '
-        'ColZymc
-        '
-        Me.ColZymc.DataPropertyName = "zymc"
-        Me.ColZymc.HeaderText = "职员姓名"
-        Me.ColZymc.MinimumWidth = 8
-        Me.ColZymc.Name = "ColZymc"
-        Me.ColZymc.ReadOnly = True
-        Me.ColZymc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColZymc.Width = 150
-        '
-        'ColKhdm
-        '
-        Me.ColKhdm.DataPropertyName = "khdm"
-        Me.ColKhdm.HeaderText = "客户编码"
-        Me.ColKhdm.MinimumWidth = 8
-        Me.ColKhdm.Name = "ColKhdm"
-        Me.ColKhdm.ReadOnly = True
-        Me.ColKhdm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColKhdm.Width = 150
-        '
-        'ColKhmc
-        '
-        Me.ColKhmc.DataPropertyName = "khmc"
-        Me.ColKhmc.HeaderText = "客户名称"
-        Me.ColKhmc.MinimumWidth = 8
-        Me.ColKhmc.Name = "ColKhmc"
-        Me.ColKhmc.ReadOnly = True
-        Me.ColKhmc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColKhmc.Width = 150
-        '
-        'ColKsPeriod
-        '
-        Me.ColKsPeriod.DataPropertyName = "ksperiod"
-        Me.ColKsPeriod.HeaderText = "开始会计期间"
-        Me.ColKsPeriod.MinimumWidth = 8
-        Me.ColKsPeriod.Name = "ColKsPeriod"
-        Me.ColKsPeriod.ReadOnly = True
-        Me.ColKsPeriod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColKsPeriod.Width = 150
-        '
-        'ColJsPeriod
-        '
-        Me.ColJsPeriod.DataPropertyName = "jsperiod"
-        Me.ColJsPeriod.HeaderText = "结束会计期间"
-        Me.ColJsPeriod.MinimumWidth = 8
-        Me.ColJsPeriod.Name = "ColJsPeriod"
-        Me.ColJsPeriod.ReadOnly = True
-        Me.ColJsPeriod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColJsPeriod.Width = 150
-        '
-        'ColXslbdm
-        '
-        Me.ColXslbdm.DataPropertyName = "xslbdm"
-        Me.ColXslbdm.HeaderText = "销售类别编码"
-        Me.ColXslbdm.MinimumWidth = 8
-        Me.ColXslbdm.Name = "ColXslbdm"
-        Me.ColXslbdm.ReadOnly = True
-        Me.ColXslbdm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColXslbdm.Width = 150
-        '
-        'ColXslbmc
-        '
-        Me.ColXslbmc.DataPropertyName = "xslbmc"
-        Me.ColXslbmc.HeaderText = "销售类别名称"
-        Me.ColXslbmc.MinimumWidth = 8
-        Me.ColXslbmc.Name = "ColXslbmc"
-        Me.ColXslbmc.ReadOnly = True
-        Me.ColXslbmc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ColXslbmc.Width = 150
         '
         'Panel1
         '
@@ -213,10 +133,10 @@ Partial Class FrmKhzyxx
         Me.Panel1.Controls.Add(Me.TxtZydm)
         Me.Panel1.Controls.Add(Me.LblZydm)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel1.Location = New System.Drawing.Point(280, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Location = New System.Drawing.Point(755, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(253, 232)
+        Me.Panel1.Size = New System.Drawing.Size(253, 661)
         Me.Panel1.TabIndex = 1
         '
         'LblXslbmc
@@ -251,7 +171,7 @@ Partial Class FrmKhzyxx
         Me.CmbJsPeriod.Enabled = False
         Me.CmbJsPeriod.FormattingEnabled = True
         Me.CmbJsPeriod.Location = New System.Drawing.Point(118, 148)
-        Me.CmbJsPeriod.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CmbJsPeriod.Margin = New System.Windows.Forms.Padding(2)
         Me.CmbJsPeriod.Name = "CmbJsPeriod"
         Me.CmbJsPeriod.Size = New System.Drawing.Size(82, 20)
         Me.CmbJsPeriod.TabIndex = 55
@@ -271,7 +191,7 @@ Partial Class FrmKhzyxx
         Me.CmbKsPeriod.Enabled = False
         Me.CmbKsPeriod.FormattingEnabled = True
         Me.CmbKsPeriod.Location = New System.Drawing.Point(118, 120)
-        Me.CmbKsPeriod.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CmbKsPeriod.Margin = New System.Windows.Forms.Padding(2)
         Me.CmbKsPeriod.Name = "CmbKsPeriod"
         Me.CmbKsPeriod.Size = New System.Drawing.Size(82, 20)
         Me.CmbKsPeriod.TabIndex = 53
@@ -348,15 +268,15 @@ Partial Class FrmKhzyxx
         Me.ToolStripContainer1.ContentPanel.AutoScroll = True
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.rcDataGridView)
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.Panel1)
-        Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(533, 232)
+        Me.ToolStripContainer1.ContentPanel.Margin = New System.Windows.Forms.Padding(2)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1008, 661)
         Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStripContainer1.LeftToolStripPanelVisible = False
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ToolStripContainer1.Margin = New System.Windows.Forms.Padding(2)
         Me.ToolStripContainer1.Name = "ToolStripContainer1"
         Me.ToolStripContainer1.RightToolStripPanelVisible = False
-        Me.ToolStripContainer1.Size = New System.Drawing.Size(533, 300)
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(1008, 729)
         Me.ToolStripContainer1.TabIndex = 56
         Me.ToolStripContainer1.Text = "ToolStripContainer1"
         '
@@ -372,7 +292,7 @@ Partial Class FrmKhzyxx
         Me.MenuStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiFile, Me.MnuiHelp})
         Me.MenuStripMain.Location = New System.Drawing.Point(0, 0)
         Me.MenuStripMain.Name = "MenuStripMain"
-        Me.MenuStripMain.Size = New System.Drawing.Size(533, 25)
+        Me.MenuStripMain.Size = New System.Drawing.Size(1008, 25)
         Me.MenuStripMain.TabIndex = 0
         Me.MenuStripMain.Text = "MenuStrip1"
         '
@@ -513,14 +433,92 @@ Partial Class FrmKhzyxx
         Me.BtnExit.Size = New System.Drawing.Size(72, 40)
         Me.BtnExit.Text = "退出"
         '
+        'ColZydm
+        '
+        Me.ColZydm.DataPropertyName = "zydm"
+        Me.ColZydm.HeaderText = "职员编码"
+        Me.ColZydm.MinimumWidth = 8
+        Me.ColZydm.Name = "ColZydm"
+        Me.ColZydm.ReadOnly = True
+        Me.ColZydm.Width = 150
+        '
+        'ColZymc
+        '
+        Me.ColZymc.DataPropertyName = "zymc"
+        Me.ColZymc.HeaderText = "职员姓名"
+        Me.ColZymc.MinimumWidth = 8
+        Me.ColZymc.Name = "ColZymc"
+        Me.ColZymc.ReadOnly = True
+        Me.ColZymc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ColZymc.Width = 150
+        '
+        'ColKhdm
+        '
+        Me.ColKhdm.DataPropertyName = "khdm"
+        Me.ColKhdm.HeaderText = "客户编码"
+        Me.ColKhdm.MinimumWidth = 8
+        Me.ColKhdm.Name = "ColKhdm"
+        Me.ColKhdm.ReadOnly = True
+        Me.ColKhdm.Width = 150
+        '
+        'ColKhmc
+        '
+        Me.ColKhmc.DataPropertyName = "khmc"
+        Me.ColKhmc.HeaderText = "客户名称"
+        Me.ColKhmc.MinimumWidth = 8
+        Me.ColKhmc.Name = "ColKhmc"
+        Me.ColKhmc.ReadOnly = True
+        Me.ColKhmc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ColKhmc.Width = 150
+        '
+        'ColKsPeriod
+        '
+        Me.ColKsPeriod.DataPropertyName = "ksperiod"
+        Me.ColKsPeriod.HeaderText = "开始会计期间"
+        Me.ColKsPeriod.MinimumWidth = 8
+        Me.ColKsPeriod.Name = "ColKsPeriod"
+        Me.ColKsPeriod.ReadOnly = True
+        Me.ColKsPeriod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ColKsPeriod.Width = 150
+        '
+        'ColJsPeriod
+        '
+        Me.ColJsPeriod.DataPropertyName = "jsperiod"
+        Me.ColJsPeriod.HeaderText = "结束会计期间"
+        Me.ColJsPeriod.MinimumWidth = 8
+        Me.ColJsPeriod.Name = "ColJsPeriod"
+        Me.ColJsPeriod.ReadOnly = True
+        Me.ColJsPeriod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ColJsPeriod.Width = 150
+        '
+        'ColXslbdm
+        '
+        Me.ColXslbdm.DataPropertyName = "xslbdm"
+        Me.ColXslbdm.HeaderText = "销售类别编码"
+        Me.ColXslbdm.MinimumWidth = 8
+        Me.ColXslbdm.Name = "ColXslbdm"
+        Me.ColXslbdm.ReadOnly = True
+        Me.ColXslbdm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ColXslbdm.Width = 150
+        '
+        'ColXslbmc
+        '
+        Me.ColXslbmc.DataPropertyName = "xslbmc"
+        Me.ColXslbmc.HeaderText = "销售类别名称"
+        Me.ColXslbmc.MinimumWidth = 8
+        Me.ColXslbmc.Name = "ColXslbmc"
+        Me.ColXslbmc.ReadOnly = True
+        Me.ColXslbmc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ColXslbmc.Width = 150
+        '
         'FrmKhzyxx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(533, 300)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.Controls.Add(Me.ToolStripContainer1)
         Me.MainMenuStrip = Me.MenuStripMain
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "FrmKhzyxx"
         Me.Text = "客户专管理业务员设置"
         CType(Me.rcDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

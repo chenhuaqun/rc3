@@ -39,7 +39,7 @@ Public Class FrmOeBmHzb
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT oe_xsd.bmdm,rc_bmxx.bmmc,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.je) AS je,SUM(oe_xsd.se) AS se,SUM(oe_xsd.je + oe_xsd.se) AS jese,SUM(oe_xsd.cbje) AS cbje FROM oe_xsd,rc_lx,rc_bmxx WHERE rc_bmxx.bmdm = oe_xsd.bmdm AND SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '产品送货单' AND oe_xsd.bdelete = 0 AND xsrq >= ? AND xsrq >= ? AND xsrq <= ? GROUP BY oe_xsd.bmdm,rc_bmxx.bmmc"
+            rcOleDbCommand.CommandText = "SELECT oe_xsd.bmdm,rc_bmxx.bmmc,SUM(oe_xsd.sl) AS sl,ROUND(SUM(oe_xsd.sl* rc_cpxx.cpweight)/1000,2) AS zl,SUM(oe_xsd.je) AS je,SUM(oe_xsd.se) AS se,SUM(oe_xsd.je + oe_xsd.se) AS jese,SUM(oe_xsd.cbje) AS cbje FROM oe_xsd,rc_lx,rc_bmxx,rc_cpxx WHERE rc_cpxx.cpdm = oe_xsd.cpdm AND rc_bmxx.bmdm = oe_xsd.bmdm AND SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '产品送货单' AND oe_xsd.bdelete = 0 AND xsrq >= ? AND xsrq >= ? AND xsrq <= ? GROUP BY oe_xsd.bmdm,rc_bmxx.bmmc"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = g_Dwrq.Date
             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = Me.DtpHzrqBegin.Value

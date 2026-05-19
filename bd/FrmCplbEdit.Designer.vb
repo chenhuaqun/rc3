@@ -22,36 +22,36 @@ Partial Class FrmCplbEdit
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel
-        Me.MnuMain = New System.Windows.Forms.MenuStrip
-        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCancel = New System.Windows.Forms.ToolStripMenuItem
-        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMain = New System.Windows.Forms.ToolStrip
-        Me.BtnTop = New System.Windows.Forms.ToolStripButton
-        Me.BtnPrevious = New System.Windows.Forms.ToolStripButton
-        Me.BtnNext = New System.Windows.Forms.ToolStripButton
-        Me.BtnBottom = New System.Windows.Forms.ToolStripButton
-        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnNew = New System.Windows.Forms.ToolStripButton
-        Me.BtnEdit = New System.Windows.Forms.ToolStripButton
-        Me.BtnSave = New System.Windows.Forms.ToolStripButton
-        Me.BtnCancel = New System.Windows.Forms.ToolStripButton
-        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnExit = New System.Windows.Forms.ToolStripButton
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.LblLbmc = New System.Windows.Forms.Label
-        Me.TxtLbmc = New System.Windows.Forms.TextBox
-        Me.LblLbdm = New System.Windows.Forms.Label
-        Me.LblLbsm = New System.Windows.Forms.Label
-        Me.TxtLbdm = New System.Windows.Forms.TextBox
-        Me.TxtLbsm = New System.Windows.Forms.TextBox
+        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel()
+        Me.MnuMain = New System.Windows.Forms.MenuStrip()
+        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCancel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMain = New System.Windows.Forms.ToolStrip()
+        Me.BtnTop = New System.Windows.Forms.ToolStripButton()
+        Me.BtnPrevious = New System.Windows.Forms.ToolStripButton()
+        Me.BtnNext = New System.Windows.Forms.ToolStripButton()
+        Me.BtnBottom = New System.Windows.Forms.ToolStripButton()
+        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnNew = New System.Windows.Forms.ToolStripButton()
+        Me.BtnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.BtnSave = New System.Windows.Forms.ToolStripButton()
+        Me.BtnCancel = New System.Windows.Forms.ToolStripButton()
+        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnExit = New System.Windows.Forms.ToolStripButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.LblLbmc = New System.Windows.Forms.Label()
+        Me.TxtLbmc = New System.Windows.Forms.TextBox()
+        Me.LblLbdm = New System.Windows.Forms.Label()
+        Me.LblLbsm = New System.Windows.Forms.Label()
+        Me.TxtLbdm = New System.Windows.Forms.TextBox()
+        Me.TxtLbsm = New System.Windows.Forms.TextBox()
         Me.ToolStripPanel1.SuspendLayout()
         Me.MnuMain.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
@@ -67,15 +67,16 @@ Partial Class FrmCplbEdit
         Me.ToolStripPanel1.Name = "ToolStripPanel1"
         Me.ToolStripPanel1.Orientation = System.Windows.Forms.Orientation.Horizontal
         Me.ToolStripPanel1.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.ToolStripPanel1.Size = New System.Drawing.Size(376, 64)
+        Me.ToolStripPanel1.Size = New System.Drawing.Size(657, 73)
         '
         'MnuMain
         '
-        Me.MnuMain.Dock = System.Windows.Forms.DockStyle.None
+        Me.MnuMain.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MnuMain.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiFile, Me.MnuiHelp})
         Me.MnuMain.Location = New System.Drawing.Point(0, 0)
         Me.MnuMain.Name = "MnuMain"
-        Me.MnuMain.Size = New System.Drawing.Size(376, 25)
+        Me.MnuMain.Size = New System.Drawing.Size(657, 32)
         Me.MnuMain.TabIndex = 0
         '
         'MnuiFile
@@ -83,45 +84,45 @@ Partial Class FrmCplbEdit
         Me.MnuiFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiNew, Me.MnuiEdit, Me.MnuiSave, Me.MnuiCancel, Me.MenuItem11, Me.MnuiExit})
         Me.MnuiFile.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiFile.Name = "MnuiFile"
-        Me.MnuiFile.Size = New System.Drawing.Size(58, 21)
+        Me.MnuiFile.Size = New System.Drawing.Size(84, 28)
         Me.MnuiFile.Text = "文件(&F)"
         '
         'MnuiNew
         '
         Me.MnuiNew.Name = "MnuiNew"
         Me.MnuiNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.MnuiNew.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiNew.Size = New System.Drawing.Size(245, 34)
         Me.MnuiNew.Text = "新增(&A)"
         '
         'MnuiEdit
         '
         Me.MnuiEdit.Name = "MnuiEdit"
-        Me.MnuiEdit.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiEdit.Size = New System.Drawing.Size(245, 34)
         Me.MnuiEdit.Text = "修改(&E)"
         '
         'MnuiSave
         '
         Me.MnuiSave.Name = "MnuiSave"
         Me.MnuiSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.MnuiSave.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiSave.Size = New System.Drawing.Size(245, 34)
         Me.MnuiSave.Text = "保存(&S)"
         '
         'MnuiCancel
         '
         Me.MnuiCancel.Name = "MnuiCancel"
-        Me.MnuiCancel.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiCancel.Size = New System.Drawing.Size(245, 34)
         Me.MnuiCancel.Text = "取消(&C)"
         '
         'MenuItem11
         '
         Me.MenuItem11.Name = "MenuItem11"
-        Me.MenuItem11.Size = New System.Drawing.Size(163, 6)
+        Me.MenuItem11.Size = New System.Drawing.Size(242, 6)
         '
         'MnuiExit
         '
         Me.MnuiExit.Name = "MnuiExit"
         Me.MnuiExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.MnuiExit.Size = New System.Drawing.Size(166, 22)
+        Me.MnuiExit.Size = New System.Drawing.Size(245, 34)
         Me.MnuiExit.Text = "退出(&X)"
         '
         'MnuiHelp
@@ -129,23 +130,22 @@ Partial Class FrmCplbEdit
         Me.MnuiHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiAbout})
         Me.MnuiHelp.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiHelp.Name = "MnuiHelp"
-        Me.MnuiHelp.Size = New System.Drawing.Size(61, 21)
+        Me.MnuiHelp.Size = New System.Drawing.Size(88, 28)
         Me.MnuiHelp.Text = "帮助(&H)"
         '
         'MnuiAbout
         '
         Me.MnuiAbout.Name = "MnuiAbout"
-        Me.MnuiAbout.Size = New System.Drawing.Size(116, 22)
+        Me.MnuiAbout.Size = New System.Drawing.Size(171, 34)
         Me.MnuiAbout.Text = "关于(&A)"
         '
         'ToolStripMain
         '
-        Me.ToolStripMain.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStripMain.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BtnTop, Me.BtnPrevious, Me.BtnNext, Me.BtnBottom, Me.Tss1, Me.BtnNew, Me.BtnEdit, Me.BtnSave, Me.BtnCancel, Me.Tss2, Me.BtnExit})
-        Me.ToolStripMain.Location = New System.Drawing.Point(3, 25)
+        Me.ToolStripMain.Location = New System.Drawing.Point(3, 32)
         Me.ToolStripMain.Name = "ToolStripMain"
-        Me.ToolStripMain.Size = New System.Drawing.Size(348, 39)
+        Me.ToolStripMain.Size = New System.Drawing.Size(354, 41)
         Me.ToolStripMain.TabIndex = 1
         '
         'BtnTop
@@ -187,7 +187,7 @@ Partial Class FrmCplbEdit
         'Tss1
         '
         Me.Tss1.Name = "Tss1"
-        Me.Tss1.Size = New System.Drawing.Size(6, 39)
+        Me.Tss1.Size = New System.Drawing.Size(6, 41)
         '
         'BtnNew
         '
@@ -228,7 +228,7 @@ Partial Class FrmCplbEdit
         'Tss2
         '
         Me.Tss2.Name = "Tss2"
-        Me.Tss2.Size = New System.Drawing.Size(6, 39)
+        Me.Tss2.Size = New System.Drawing.Size(6, 41)
         '
         'BtnExit
         '
@@ -249,70 +249,78 @@ Partial Class FrmCplbEdit
         Me.Panel1.Controls.Add(Me.TxtLbdm)
         Me.Panel1.Controls.Add(Me.TxtLbsm)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 64)
+        Me.Panel1.Location = New System.Drawing.Point(0, 73)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(376, 134)
+        Me.Panel1.Size = New System.Drawing.Size(657, 224)
         Me.Panel1.TabIndex = 0
         '
         'LblLbmc
         '
         Me.LblLbmc.AutoSize = True
-        Me.LblLbmc.Location = New System.Drawing.Point(48, 57)
+        Me.LblLbmc.Location = New System.Drawing.Point(72, 86)
+        Me.LblLbmc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblLbmc.Name = "LblLbmc"
-        Me.LblLbmc.Size = New System.Drawing.Size(89, 12)
+        Me.LblLbmc.Size = New System.Drawing.Size(134, 18)
         Me.LblLbmc.TabIndex = 2
         Me.LblLbmc.Text = "物料类别名称："
         '
         'TxtLbmc
         '
-        Me.TxtLbmc.Location = New System.Drawing.Point(143, 54)
-        Me.TxtLbmc.MaxLength = 40
+        Me.TxtLbmc.Location = New System.Drawing.Point(214, 81)
+        Me.TxtLbmc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TxtLbmc.MaxLength = 50
         Me.TxtLbmc.Name = "TxtLbmc"
-        Me.TxtLbmc.Size = New System.Drawing.Size(183, 21)
+        Me.TxtLbmc.Size = New System.Drawing.Size(371, 28)
         Me.TxtLbmc.TabIndex = 3
         '
         'LblLbdm
         '
         Me.LblLbdm.AutoSize = True
-        Me.LblLbdm.Location = New System.Drawing.Point(48, 28)
+        Me.LblLbdm.Location = New System.Drawing.Point(72, 42)
+        Me.LblLbdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblLbdm.Name = "LblLbdm"
-        Me.LblLbdm.Size = New System.Drawing.Size(89, 12)
+        Me.LblLbdm.Size = New System.Drawing.Size(134, 18)
         Me.LblLbdm.TabIndex = 0
         Me.LblLbdm.Text = "物料类别编码："
         '
         'LblLbsm
         '
         Me.LblLbsm.AutoSize = True
-        Me.LblLbsm.Location = New System.Drawing.Point(48, 86)
+        Me.LblLbsm.Location = New System.Drawing.Point(72, 129)
+        Me.LblLbsm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LblLbsm.Name = "LblLbsm"
-        Me.LblLbsm.Size = New System.Drawing.Size(89, 12)
+        Me.LblLbsm.Size = New System.Drawing.Size(134, 18)
         Me.LblLbsm.TabIndex = 4
         Me.LblLbsm.Text = "记   忆   码："
         '
         'TxtLbdm
         '
         Me.TxtLbdm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtLbdm.Location = New System.Drawing.Point(143, 25)
+        Me.TxtLbdm.Location = New System.Drawing.Point(214, 38)
+        Me.TxtLbdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TxtLbdm.MaxLength = 12
         Me.TxtLbdm.Name = "TxtLbdm"
-        Me.TxtLbdm.Size = New System.Drawing.Size(96, 21)
+        Me.TxtLbdm.Size = New System.Drawing.Size(142, 28)
         Me.TxtLbdm.TabIndex = 1
         '
         'TxtLbsm
         '
-        Me.TxtLbsm.Location = New System.Drawing.Point(143, 83)
+        Me.TxtLbsm.Location = New System.Drawing.Point(214, 124)
+        Me.TxtLbsm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TxtLbsm.MaxLength = 8
         Me.TxtLbsm.Name = "TxtLbsm"
-        Me.TxtLbsm.Size = New System.Drawing.Size(96, 21)
+        Me.TxtLbsm.Size = New System.Drawing.Size(142, 28)
         Me.TxtLbsm.TabIndex = 5
         '
         'FrmCplbEdit
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(376, 198)
+        Me.ClientSize = New System.Drawing.Size(657, 297)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStripPanel1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FrmCplbEdit"
         Me.Text = "物料类别信息编辑"
         Me.ToolStripPanel1.ResumeLayout(False)

@@ -21,24 +21,24 @@ Partial Class FrmPoFpSh
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TxtCsdm = New System.Windows.Forms.TextBox
-        Me.LblCsdm = New System.Windows.Forms.Label
-        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.TxtZydm = New System.Windows.Forms.TextBox
-        Me.LblZydm = New System.Windows.Forms.Label
-        Me.ChbSh = New System.Windows.Forms.CheckBox
-        Me.LblRkrqEnd = New System.Windows.Forms.Label
-        Me.DtpEnd = New System.Windows.Forms.DateTimePicker
-        Me.LblRkrqBegin = New System.Windows.Forms.Label
-        Me.DtpBegin = New System.Windows.Forms.DateTimePicker
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown
-        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.ChbJe = New System.Windows.Forms.CheckBox
-        Me.TxtYspz = New System.Windows.Forms.TextBox
-        Me.LblYspz = New System.Windows.Forms.Label
+        Me.TxtCsdm = New System.Windows.Forms.TextBox()
+        Me.LblCsdm = New System.Windows.Forms.Label()
+        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TxtZydm = New System.Windows.Forms.TextBox()
+        Me.LblZydm = New System.Windows.Forms.Label()
+        Me.ChbSh = New System.Windows.Forms.CheckBox()
+        Me.LblRkrqEnd = New System.Windows.Forms.Label()
+        Me.DtpEnd = New System.Windows.Forms.DateTimePicker()
+        Me.LblRkrqBegin = New System.Windows.Forms.Label()
+        Me.DtpBegin = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown()
+        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.ChbJe = New System.Windows.Forms.CheckBox()
+        Me.TxtYspz = New System.Windows.Forms.TextBox()
+        Me.LblYspz = New System.Windows.Forms.Label()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudDjhEnd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudDjhBegin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -111,7 +111,7 @@ Partial Class FrmPoFpSh
         Me.ChbSh.Name = "ChbSh"
         Me.ChbSh.Size = New System.Drawing.Size(163, 24)
         Me.ChbSh.TabIndex = 19
-        Me.ChbSh.Text = "只显示未审核的入库单"
+        Me.ChbSh.Text = "只显示未审核的采购发票"
         '
         'LblRkrqEnd
         '
@@ -239,7 +239,7 @@ Partial Class FrmPoFpSh
         Me.Controls.Add(Me.NudDjhBegin)
         Me.Controls.Add(Me.Label4)
         Me.Name = "FrmPoFpSh"
-        Me.Text = "物料入库单审核"
+        Me.Text = "采购发票审核"
         Me.Controls.SetChildIndex(Me.DlgPanel, 0)
         Me.Controls.SetChildIndex(Me.Label4, 0)
         Me.Controls.SetChildIndex(Me.NudDjhBegin, 0)

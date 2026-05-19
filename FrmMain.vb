@@ -36,10 +36,8 @@ Public Class FrmMain
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@USER_Account", OleDbType.VarChar, 30).Value = g_User_Account
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataSet.Tables("rc_userinrole") IsNot Nothing Then
-                rcDataSet.Tables("rc_userinrole").Clear()
-            End If
-            rcOleDbDataAdpt.Fill(rcDataSet, "rc_userinrole")
+            rcDataset.Tables("rc_userinrole")?.Clear()
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_userinrole")
         Catch ex As Exception
             MsgBox("程序错误1。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             End
@@ -62,10 +60,8 @@ Public Class FrmMain
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@roleid", OleDbType.VarChar, 12).Value = rcDataSet.Tables("rc_userinrole").Rows(i).Item("roleid")
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataSet.Tables("rc_roleqx") IsNot Nothing Then
-                    rcDataSet.Tables("rc_roleqx").Clear()
-                End If
-                rcOleDbDataAdpt.Fill(rcDataSet, "rc_roleqx")
+                rcDataset.Tables("rc_roleqx")?.Clear()
+                rcOleDbDataAdpt.Fill(rcDataset, "rc_roleqx")
             Catch ex As Exception
                 MsgBox("程序错误2。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 End
@@ -491,10 +487,20 @@ Public Class FrmMain
         End With
     End Sub
 
-    '期初库存余额输入
+    '期初产品库存余额装入
     Private Sub MnuiQcyeSr_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiQccpyeSr.Click
         AddLog(Me.MnuiQccpyeSr.Text)
         Dim rcFrm As New FrmQccpyeSr
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '期初发出商品余额装入
+    Private Sub MnuiQcfcspyeSr_Click(sender As Object, e As EventArgs) Handles MnuiQcfcspyeSr.Click
+        AddLog(Me.MnuiQccpyeSr.Text)
+        Dim rcFrm As New FrmQcfcspyeSr
         With rcFrm
             .MdiParent = Me
             .Show()
@@ -833,7 +839,7 @@ Public Class FrmMain
         End With
     End Sub
 
-    '产品销售单输入
+    '产品销售发票输入
     Private Sub MnuiOeFpSr_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeFpSr.Click
         AddLog(Me.MnuiOeFpSr.Text)
         Dim rcFrm As New FrmOeFpSr
@@ -843,7 +849,7 @@ Public Class FrmMain
         End With
     End Sub
 
-    '产品销售单审核
+    '产品销售发票审核
     Private Sub MnuiOeFpSh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeFpSh.Click
         AddLog(Me.MnuiOeFpSh.Text)
         Dim rcFrm As New FrmOeFpSh
@@ -883,7 +889,7 @@ Public Class FrmMain
         End With
     End Sub
 
-    '产品销售单查询
+    '产品销售发票查询
     Private Sub MnuiOeFpCx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeFpCx.Click
         AddLog(Me.MnuiOeFpCx.Text)
         Dim rcFrm As New FrmOeFpCx
@@ -977,6 +983,46 @@ Public Class FrmMain
     Private Sub MnuiOeZyHzb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeZyHzb.Click
         AddLog(Me.MnuiOeZyHzb.Text)
         Dim rcFrm As New FrmOeZyHzb
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '部门销售发票汇总表
+    Private Sub MnuiOeBmFpHzb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeBmFpHzb.Click
+        AddLog(Me.MnuiOeBmFpHzb.Text)
+        Dim rcFrm As New FrmOeBmFpHzb
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '产品销售发票汇总表
+    Private Sub MnuiOeCpFpHzb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeCpFpHzb.Click
+        AddLog(Me.MnuiOeCpFpHzb.Text)
+        Dim rcFrm As New FrmOeCpFpHzb
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '客户销售发票汇总表
+    Private Sub MnuiOeKhFpHzb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeKhFpHzb.Click
+        AddLog(Me.MnuiOeKhFpHzb.Text)
+        Dim rcFrm As New FrmOeKhFpHzb
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '客户销售发票对比分析表
+    Private Sub MnuiOeKhFpFxb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiOeKhFpFxb.Click
+        AddLog(Me.MnuiOeKhFpFxb.Text)
+        Dim rcFrm As New FrmOeKhFpFxb
         With rcFrm
             .MdiParent = Me
             .Show()
@@ -1468,6 +1514,16 @@ Public Class FrmMain
         End With
     End Sub
 
+    '期末发出商品输入与修改
+    Private Sub MnuiFcspSr_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspSr.Click
+        AddLog(Me.MnuiFcspSr.Text)
+        Dim rcFrm As New FrmFcspSr
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
     '物料盘存表审核
     Private Sub MnuiInvPcSh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiInvPcSh.Click
         AddLog(Me.MnuiInvPcSh.Text)
@@ -1572,6 +1628,36 @@ Public Class FrmMain
     Private Sub MnuiCpkcZlfx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiCpkcZlfx.Click
         AddLog(Me.MnuiCpkcZlfx.Text)
         Dim rcFrm As New FrmCpkcZlfx
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '发出商品盘存表
+    Private Sub MnuiFcspPcb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspPcb.Click
+        AddLog(Me.MnuiFcspPcb.Text)
+        Dim rcFrm As New FrmFcspPcb
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '发出商品收发存明细账
+    Private Sub MnuiFcspSfcMx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspSfcMx.Click
+        AddLog(Me.MnuiFcspSfcMx.Text)
+        Dim rcFrm As New FrmFcspSfcMx
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '发出商品收发存汇总表
+    Private Sub MnuiFcspSfcHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspSfcHz.Click
+        AddLog(Me.MnuiFcspSfcHz.Text)
+        Dim rcFrm As New FrmFcspSfcHz
         With rcFrm
             .MdiParent = Me
             .Show()
@@ -1891,6 +1977,16 @@ Public Class FrmMain
         End With
     End Sub
 
+    '发出商品成本结转
+    Private Sub MnuiCbjz_Fcsp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiCbjz_Fcsp.Click
+        AddLog(Me.MnuiCbjz_Fcsp.Text)
+        Dim rcFrm As New FrmCbjz_Fcsp
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
     Private Sub MnuiZcclMx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiZcclMx.Click
         AddLog(Me.MnuiZcclMx.Text)
         Dim rcFrm As New FrmZcclMx
@@ -1942,7 +2038,7 @@ Public Class FrmMain
     '物料清单查询
     Private Sub MnuiBomCx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiBomCx.Click
         AddLog(Me.MnuiBomCx.Text)
-        Dim rcFrm As New FrmBomCx
+        Dim rcFrm As New FrmFcspCx
         With rcFrm
             .MdiParent = Me
             .Show()
@@ -2075,6 +2171,16 @@ Public Class FrmMain
     Private Sub MnuiDjjz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiDjjz.Click
         AddLog(Me.MnuiDjjz.Text)
         Dim rcFrm As New FrmDjjz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '发出商品处理
+    Private Sub MnuiFcspJz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspJz.Click
+        AddLog(Me.MnuiFcspJz.Text)
+        Dim rcFrm As New FrmFcspJz
         With rcFrm
             .MdiParent = Me
             .Show()
@@ -2237,6 +2343,36 @@ Public Class FrmMain
     Private Sub MnuiNewYear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiNewYear.Click
         AddLog(Me.MnuiNewYear.Text)
         Dim rcFrm As New FrmNewYear
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '发出商品客户收发存汇总表
+    Private Sub MnuiFcspKhSfcHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspKhSfcHz.Click
+        AddLog(Me.MnuiFcspKhSfcHz.Text)
+        Dim rcFrm As New FrmFcspKhSfcHz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '发出商品部门收发存汇总表
+    Private Sub MnuiFcspBmSfcHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspBmSfcHz.Click
+        AddLog(Me.MnuiFcspBmSfcHz.Text)
+        Dim rcFrm As New FrmFcspBmSfcHz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '发出商品清单查询
+    Private Sub MnuiFcspCx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiFcspCx.Click
+        AddLog(Me.MnuiFcspCx.Text)
+        Dim rcFrm As New FrmFcspCx
         With rcFrm
             .MdiParent = Me
             .Show()
@@ -2445,9 +2581,18 @@ Public Class FrmMain
         End With
     End Sub
 
-    '重新汇总总帐
+    '重新汇总库存总帐
     Private Sub MnuiRedoCpyeHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiRedoCpyeHz.Click
         Dim rcFrm As New FrmRedoCpyeHz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '重新汇总发出商品总账
+    Private Sub MnuiRedoFcspyeHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiRedoFcspyeHz.Click
+        Dim rcFrm As New FrmRedoFcspyeHz
         With rcFrm
             .MdiParent = Me
             .Show()

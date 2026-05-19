@@ -3,6 +3,7 @@ Public Class FrmCpkcZlfxz
     Private Sub FrmCpkcZlfxz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim i As Integer
         Me.DgtbcKcsl_Tot.Format = g_FormatSl0
+        Me.DgtbcKczl_Tot.Format = g_FormatSl0
         Me.DgtbcKcje_Tot.Format = g_FormatJe0
         '’À¡‰∑÷∂Œ–≈œ¢
         For i = 0 To ParaDataSet.Tables("rc_kczlfd").Rows.Count - 1

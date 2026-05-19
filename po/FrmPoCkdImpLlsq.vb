@@ -301,7 +301,7 @@ Public Class FrmPoCkdImpLlsq
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         Dim i As Integer
-        Dim j As Integer
+        'Dim j As Integer
         Dim dblCksl As Double
         Dim dblCkje As Double
         'È¡Êý¾Ý

@@ -1675,7 +1675,7 @@ Public Class FrmPoCkdSrz
                 End If
                 If IsAdding Then
                     '检查是否有后续领料未回收
-                    rcOleDbCommand.CommandText = "SELECT COALESCE(COUNT(*),0) AS gs FROM inv_ckd WHERE inv_ckd.ckrq >= ? AND inv_ckd.fadm = ? AND inv_ckd.cpdm = ?"
+                    rcOleDbCommand.CommandText = "SELECT COALESCE(COUNT(*),0) AS gs FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND inv_ckd.ckrq >= ? AND inv_ckd.fadm = ? AND inv_ckd.cpdm = ?"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = Me.DtpCkrq.Value
                     rcOleDbCommand.Parameters.Add("@fadm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("rc_ckdnr").Rows(i).Item("fadm"))
@@ -1722,7 +1722,7 @@ Public Class FrmPoCkdSrz
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraDateCkrq", OleDbType.Date, 8).Value = Me.DtpCkrq.Value
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = IIf(String.IsNullOrEmpty(Me.LblBdelete.Text), 0, 1)
                 rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = Me.TxtCkdm.Text

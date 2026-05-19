@@ -22,87 +22,88 @@ Partial Class FrmOeXsdShz
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel
-        Me.MnuMain = New System.Windows.Forms.MenuStrip
-        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiSh = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiXs = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiQs = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiQx = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiPrevious = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiNext = New System.Windows.Forms.ToolStripMenuItem
-        Me.Mnui12 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPrintView = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem
-        Me.Mnui13 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCut = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCopy = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPaste = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.LblBmmc = New System.Windows.Forms.Label
-        Me.TxtBmdm = New System.Windows.Forms.TextBox
-        Me.LblBmdm = New System.Windows.Forms.Label
-        Me.LblCkmc = New System.Windows.Forms.Label
-        Me.TxtCkdm = New System.Windows.Forms.TextBox
-        Me.LblCkdm = New System.Windows.Forms.Label
-        Me.LblKhmc = New System.Windows.Forms.Label
-        Me.TxtKhdm = New System.Windows.Forms.TextBox
-        Me.LblKhdm = New System.Windows.Forms.Label
-        Me.LblZymc = New System.Windows.Forms.Label
-        Me.LblXsrq = New System.Windows.Forms.Label
-        Me.DtpXsrq = New System.Windows.Forms.DateTimePicker
-        Me.TxtDjh = New System.Windows.Forms.TextBox
-        Me.LblDjh = New System.Windows.Forms.Label
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.LblBdelete = New System.Windows.Forms.Label
-        Me.LblDd = New System.Windows.Forms.Label
-        Me.TxtZydm = New System.Windows.Forms.TextBox
-        Me.LblZydm = New System.Windows.Forms.Label
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.Panel4 = New System.Windows.Forms.Panel
-        Me.LblJese = New System.Windows.Forms.Label
-        Me.LblSe = New System.Windows.Forms.Label
-        Me.LblFzsl = New System.Windows.Forms.Label
-        Me.LblJe = New System.Windows.Forms.Label
-        Me.LblSl = New System.Windows.Forms.Label
-        Me.LblJzr = New System.Windows.Forms.Label
-        Me.LblShr = New System.Windows.Forms.Label
-        Me.LblSrr = New System.Windows.Forms.Label
-        Me.BtnPrevious = New System.Windows.Forms.Button
-        Me.BtnNext = New System.Windows.Forms.Button
-        Me.BtnExit = New System.Windows.Forms.Button
-        Me.BtnSh = New System.Windows.Forms.Button
-        Me.BtnPrint = New System.Windows.Forms.Button
-        Me.BtnHelp = New System.Windows.Forms.Button
-        Me.BtnQs = New System.Windows.Forms.Button
-        Me.BtnQx = New System.Windows.Forms.Button
-        Me.BtnXs = New System.Windows.Forms.Button
-        Me.rcDataGridView = New System.Windows.Forms.DataGridView
-        Me.ColCpdm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColCpmc = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColHth = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColKhddh = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColKhlh = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColSl = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColDw = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColMjsl = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColFzsl = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColFzdw = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColDj = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColHsdj = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColJe = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColShlv = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColSe = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColJese = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColXsmemo = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColDdDjh = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColDdXh = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel()
+        Me.MnuMain = New System.Windows.Forms.MenuStrip()
+        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiSh = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiXs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiQs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiQx = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiPrevious = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiNext = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Mnui12 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPrintView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Mnui13 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.LblBmmc = New System.Windows.Forms.Label()
+        Me.TxtBmdm = New System.Windows.Forms.TextBox()
+        Me.LblBmdm = New System.Windows.Forms.Label()
+        Me.LblCkmc = New System.Windows.Forms.Label()
+        Me.TxtCkdm = New System.Windows.Forms.TextBox()
+        Me.LblCkdm = New System.Windows.Forms.Label()
+        Me.LblKhmc = New System.Windows.Forms.Label()
+        Me.TxtKhdm = New System.Windows.Forms.TextBox()
+        Me.LblKhdm = New System.Windows.Forms.Label()
+        Me.LblZymc = New System.Windows.Forms.Label()
+        Me.LblXsrq = New System.Windows.Forms.Label()
+        Me.DtpXsrq = New System.Windows.Forms.DateTimePicker()
+        Me.TxtDjh = New System.Windows.Forms.TextBox()
+        Me.LblDjh = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.LblBdelete = New System.Windows.Forms.Label()
+        Me.LblDd = New System.Windows.Forms.Label()
+        Me.TxtZydm = New System.Windows.Forms.TextBox()
+        Me.LblZydm = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.LblJese = New System.Windows.Forms.Label()
+        Me.LblSe = New System.Windows.Forms.Label()
+        Me.LblFzsl = New System.Windows.Forms.Label()
+        Me.LblJe = New System.Windows.Forms.Label()
+        Me.LblSl = New System.Windows.Forms.Label()
+        Me.LblJzr = New System.Windows.Forms.Label()
+        Me.LblShr = New System.Windows.Forms.Label()
+        Me.LblSrr = New System.Windows.Forms.Label()
+        Me.BtnPrevious = New System.Windows.Forms.Button()
+        Me.BtnNext = New System.Windows.Forms.Button()
+        Me.BtnExit = New System.Windows.Forms.Button()
+        Me.BtnSh = New System.Windows.Forms.Button()
+        Me.BtnPrint = New System.Windows.Forms.Button()
+        Me.BtnHelp = New System.Windows.Forms.Button()
+        Me.BtnQs = New System.Windows.Forms.Button()
+        Me.BtnQx = New System.Windows.Forms.Button()
+        Me.BtnXs = New System.Windows.Forms.Button()
+        Me.rcDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ColCpdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColCpmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColHth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColKhddh = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColKhlh = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColPiHao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColSl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColDw = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColMjsl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColFzsl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColFzdw = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColDj = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColHsdj = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColJe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColShlv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColSe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColJese = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColXsmemo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColDdDjh = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColDdXh = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStripPanel1.SuspendLayout()
         Me.MnuMain.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -666,7 +667,7 @@ Partial Class FrmOeXsdShz
         '
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.ColumnHeadersHeight = 30
-        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColCpdm, Me.ColCpmc, Me.ColHth, Me.ColKhddh, Me.ColKhlh, Me.ColSl, Me.ColDw, Me.ColMjsl, Me.ColFzsl, Me.ColFzdw, Me.ColDj, Me.ColHsdj, Me.ColJe, Me.ColShlv, Me.ColSe, Me.ColJese, Me.ColXsmemo, Me.ColDdDjh, Me.ColDdXh})
+        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColCpdm, Me.ColCpmc, Me.ColHth, Me.ColKhddh, Me.ColKhlh, Me.ColPiHao, Me.ColSl, Me.ColDw, Me.ColMjsl, Me.ColFzsl, Me.ColFzdw, Me.ColDj, Me.ColHsdj, Me.ColJe, Me.ColShlv, Me.ColSe, Me.ColJese, Me.ColXsmemo, Me.ColDdDjh, Me.ColDdXh})
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rcDataGridView.Location = New System.Drawing.Point(0, 143)
         Me.rcDataGridView.Name = "rcDataGridView"
@@ -718,6 +719,15 @@ Partial Class FrmOeXsdShz
         Me.ColKhlh.Name = "ColKhlh"
         Me.ColKhlh.ReadOnly = True
         Me.ColKhlh.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ColPiHao
+        '
+        Me.ColPiHao.DataPropertyName = "pihao"
+        Me.ColPiHao.HeaderText = "批次号"
+        Me.ColPiHao.MaxInputLength = 40
+        Me.ColPiHao.Name = "ColPiHao"
+        Me.ColPiHao.ReadOnly = True
+        Me.ColPiHao.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'ColSl
         '
@@ -940,23 +950,24 @@ Partial Class FrmOeXsdShz
     Public WithEvents LblFzsl As System.Windows.Forms.Label
     Public WithEvents LblJe As System.Windows.Forms.Label
     Public WithEvents LblSl As System.Windows.Forms.Label
-    Friend WithEvents ColCpdm As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColCpmc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColHth As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColKhddh As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColKhlh As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColSl As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColDw As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColMjsl As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColFzsl As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColFzdw As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColDj As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColHsdj As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColJe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColShlv As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColSe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColJese As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColXsmemo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColDdDjh As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColDdXh As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColCpdm As DataGridViewTextBoxColumn
+    Friend WithEvents ColCpmc As DataGridViewTextBoxColumn
+    Friend WithEvents ColHth As DataGridViewTextBoxColumn
+    Friend WithEvents ColKhddh As DataGridViewTextBoxColumn
+    Friend WithEvents ColKhlh As DataGridViewTextBoxColumn
+    Friend WithEvents ColPiHao As DataGridViewTextBoxColumn
+    Friend WithEvents ColSl As DataGridViewTextBoxColumn
+    Friend WithEvents ColDw As DataGridViewTextBoxColumn
+    Friend WithEvents ColMjsl As DataGridViewTextBoxColumn
+    Friend WithEvents ColFzsl As DataGridViewTextBoxColumn
+    Friend WithEvents ColFzdw As DataGridViewTextBoxColumn
+    Friend WithEvents ColDj As DataGridViewTextBoxColumn
+    Friend WithEvents ColHsdj As DataGridViewTextBoxColumn
+    Friend WithEvents ColJe As DataGridViewTextBoxColumn
+    Friend WithEvents ColShlv As DataGridViewTextBoxColumn
+    Friend WithEvents ColSe As DataGridViewTextBoxColumn
+    Friend WithEvents ColJese As DataGridViewTextBoxColumn
+    Friend WithEvents ColXsmemo As DataGridViewTextBoxColumn
+    Friend WithEvents ColDdDjh As DataGridViewTextBoxColumn
+    Friend WithEvents ColDdXh As DataGridViewTextBoxColumn
 End Class

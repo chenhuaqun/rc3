@@ -164,7 +164,7 @@ Public Class Form3
                     rcOleDbCommand.CommandType = CommandType.Text
                     rcOleDbCommand.CommandText = "update po_cgjh set bsenddingtalk = 1 where xh = ? and djh = ?"
                     rcOleDbCommand.Parameters.Clear()
-                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = rcDataset.Tables("po_cgjh").Rows(i).Item("xh")
+                    rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = rcDataset.Tables("po_cgjh").Rows(i).Item("xh")
                     rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("po_cgjh").Rows(i).Item("djh")
                     rcOleDbCommand.ExecuteNonQuery()
                     rcOleDbTrans.Commit()

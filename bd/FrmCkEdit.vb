@@ -64,6 +64,7 @@ Public Class FrmCkEdit
         Me.TxtCkmc.DataBindings.Add("Text", rcDataView, "ckmc")
         Me.TxtCksm.DataBindings.Add("Text", rcDataView, "cksm")
         Me.ChbBScrkcb.DataBindings.Add("Checked", rcDataView, "bscrkcb")
+        Me.CmbHsfl.DataBindings.Add("SelectedItem", rcDataView, "hsfl")
         BindingContext(rcDataView, "").Position = currentPos
         SetAll(True)
         If isAdding Then
@@ -80,7 +81,7 @@ Public Class FrmCkEdit
 
 #Region "控键回车键的处理"
 
-    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtCkdm.KeyPress, TxtCksm.KeyPress, TxtCkmc.KeyPress, ChbBScrkcb.KeyPress
+    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtCkdm.KeyPress, TxtCksm.KeyPress, TxtCkmc.KeyPress, ChbBScrkcb.KeyPress, CmbHsfl.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
@@ -99,6 +100,7 @@ Public Class FrmCkEdit
             Me.TxtCksm.Enabled = False
             Me.TxtCkmc.Enabled = False
             Me.ChbBScrkcb.Enabled = False
+            Me.CmbHsfl.Enabled = False
             Me.BtnTop.Enabled = True
             Me.BtnPrevious.Enabled = True
             Me.BtnNext.Enabled = True
@@ -118,6 +120,7 @@ Public Class FrmCkEdit
             Me.TxtCksm.Enabled = True
             Me.TxtCkmc.Enabled = True
             Me.ChbBScrkcb.Enabled = True
+            Me.CmbHsfl.Enabled = True
             Me.BtnTop.Enabled = False
             Me.BtnPrevious.Enabled = False
             Me.BtnNext.Enabled = False
@@ -246,12 +249,13 @@ Public Class FrmCkEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "Insert Into rc_ckxx (ckdm,ckmc,cksm,bscrkcb) VALUES (?,?,?,?)"
+                rcOleDbCommand.CommandText = "Insert Into rc_ckxx (ckdm,ckmc,cksm,bscrkcb,hsfl) VALUES (?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(TxtCkdm.Text)
                 rcOleDbCommand.Parameters.Add("@ckmc", OleDbType.VarChar, 30).Value = Trim(TxtCkmc.Text)
                 rcOleDbCommand.Parameters.Add("@cksm", OleDbType.VarChar, 12).Value = Trim(TxtCksm.Text)
                 rcOleDbCommand.Parameters.Add("@bscrkcb", OleDbType.Numeric, 1).Value = IIf(Me.ChbBScrkcb.Checked, 1, 0)
+                rcOleDbCommand.Parameters.Add("@hsfl", OleDbType.VarChar, 10).Value = Me.CmbHsfl.SelectedItem
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "SELECT * FROM rc_ckxx ORDER BY ckdm"
                 rcOleDbCommand.Parameters.Clear()
@@ -283,11 +287,12 @@ Public Class FrmCkEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "UPDATE rc_ckxx SET ckmc = ? , cksm = ? , bscrkcb = ?  WHERE  ckdm = ?"
+                rcOleDbCommand.CommandText = "UPDATE rc_ckxx SET ckmc = ? , cksm = ? , bscrkcb = ?, hsfl = ?  WHERE  ckdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@ckmc", OleDbType.VarChar, 30).Value = Trim(TxtCkmc.Text)
                 rcOleDbCommand.Parameters.Add("@cksm", OleDbType.VarChar, 12).Value = Trim(TxtCksm.Text)
                 rcOleDbCommand.Parameters.Add("@bscrkcb", OleDbType.Numeric, 1).Value = IIf(Me.ChbBScrkcb.Checked, 1, 0)
+                rcOleDbCommand.Parameters.Add("@hsfl", OleDbType.VarChar, 10).Value = Me.CmbHsfl.SelectedItem
                 rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(TxtCkdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
                 '填充数据

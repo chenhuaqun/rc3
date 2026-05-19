@@ -148,6 +148,8 @@ Public Class FrmOeFpSrz
         dtXsd.Columns.Add("oldcpdm", Type.GetType("System.String"))
         dtXsd.Columns.Add("cpmc", Type.GetType("System.String"))
         dtXsd.Columns.Add("hth", Type.GetType("System.String"))
+        dtXsd.Columns.Add("bmdm", Type.GetType("System.String"))
+        dtXsd.Columns.Add("bmmc", Type.GetType("System.String"))
         dtXsd.Columns.Add("sl", Type.GetType("System.Double"))
         dtXsd.Columns.Add("dw", Type.GetType("System.String"))
         dtXsd.Columns.Add("mjsl", Type.GetType("System.Double"))
@@ -174,6 +176,8 @@ Public Class FrmOeFpSrz
             .Columns("cpdm").DefaultValue = ""
             .Columns("oldcpdm").DefaultValue = ""
             .Columns("hth").DefaultValue = ""
+            .Columns("bmdm").DefaultValue = ""
+            .Columns("bmmc").DefaultValue = ""
             .Columns("sl").DefaultValue = 0.0
             .Columns("mjsl").DefaultValue = 0.0
             .Columns("fzsl").DefaultValue = 0.0
@@ -390,7 +394,7 @@ Public Class FrmOeFpSrz
                                         Me.TxtYspz.Text = rcDataset.Tables("rc_fpml").Rows(0).Item("yspz")
                                     End If
                                     '修改单据
-                                    rcOleDbCommand.CommandText = "SELECT oe_fp.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_fp.hth,'') AS hth,oe_fp.sl,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,(oe_fp.je+ oe_fp.se) AS jese,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse FROM oe_fp,rc_cpxx WHERE oe_fp.cpdm = rc_cpxx.cpdm AND (oe_fp.djh = ?) ORDER BY oe_fp.xh"
+                                    rcOleDbCommand.CommandText = "SELECT oe_fp.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_fp.hth,'') AS hth,oe_fp.bmdm,oe_fp.bmmc,oe_fp.sl,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,(oe_fp.je+ oe_fp.se) AS jese,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse FROM oe_fp,rc_cpxx WHERE oe_fp.cpdm = rc_cpxx.cpdm AND (oe_fp.djh = ?) ORDER BY oe_fp.xh"
                                     rcOleDbCommand.Parameters.Clear()
                                     rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = TxtDjh.Text
                                     rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -404,6 +408,7 @@ Public Class FrmOeFpSrz
                                             'Me.BtnImp.Enabled = False
                                             Me.rcDataGridView.AllowUserToAddRows = False
                                             Me.ColCpdm.ReadOnly = True
+                                            Me.ColBmdm.ReadOnly = True
                                             'Me.ColSl.ReadOnly = True
                                             'Me.ColMjsl.ReadOnly = True
                                             'Me.ColFzsl.ReadOnly = True
@@ -479,24 +484,23 @@ Public Class FrmOeFpSrz
 #End Region
 
 #Region "职员编码的事件"
-
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
             Case Keys.F3
                 Dim rcFrm As New models.FrmF3KeyPress
                 With rcFrm
-                    .paraOleDbConn = rcOleDbConn
-                    .paraTableName = "rc_zyxx"
-                    .paraField1 = "zydm"
-                    .paraField2 = "zymc"
-                    .paraField3 = "zysm"
-                    .paraOrderField = "zymc"
-                    .paraTitle = "职员"
-                    .paraOldValue = ""
-                    .paraAddName = ""
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_zyxx"
+                    .ParaField1 = "zydm"
+                    .ParaField2 = "zymc"
+                    .ParaField3 = "zysm"
+                    .ParaOrderField = "zymc"
+                    .ParaTitle = "职员"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
-                        Me.TxtZydm.Text = Trim(.paraField1)
-                        Me.LblZymc.Text = Trim(.paraField2)
+                        Me.TxtZydm.Text = Trim(.ParaField1)
+                        Me.LblZymc.Text = Trim(.ParaField2)
                     End If
                 End With
             Case Keys.Down
@@ -547,25 +551,24 @@ Public Class FrmOeFpSrz
 #End Region
 
 #Region "客户编码事件"
-
     Private Sub TxtKhdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtKhdm.KeyDown
         Select Case e.KeyCode
             Case Keys.F3
                 Dim rcFrmF3KeyPress As New models.FrmF3KeyPress
                 With rcFrmF3KeyPress
-                    .paraOleDbConn = rcOleDbConn
-                    .paraTableName = "rc_khxx"
-                    .paraField1 = "khdm"
-                    .paraField2 = "khmc"
-                    .paraField3 = "khsm"
-                    .paraCondition = "0=0"
-                    .paraOrderField = "khmc"
-                    .paraTitle = "客户"
-                    .paraOldValue = ""
-                    .paraAddName = ""
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_khxx"
+                    .ParaField1 = "khdm"
+                    .ParaField2 = "khmc"
+                    .ParaField3 = "khsm"
+                    .ParaCondition = "0=0"
+                    .ParaOrderField = "khmc"
+                    .ParaTitle = "客户"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
-                        TxtKhdm.Text = Trim(.paraField1)
-                        LblKhmc.Text = Trim(.paraField2)
+                        TxtKhdm.Text = Trim(.ParaField1)
+                        LblKhmc.Text = Trim(.ParaField2)
                     End If
                 End With
             Case Keys.Down
@@ -636,77 +639,108 @@ Public Class FrmOeFpSrz
             End If
             If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColCpdm" Then
                 If Not String.IsNullOrEmpty(e.FormattedValue) Then
-                    If Not String.IsNullOrEmpty(e.FormattedValue) Then
-                        '取产品信息
-                        Try
-                            rcOleDbConn.Open()
-                            rcOleDbCommand.Connection = rcOleDbConn
-                            rcOleDbCommand.CommandTimeout = 300
-                            rcOleDbCommand.CommandType = CommandType.Text
-                            rcOleDbCommand.CommandText = "SELECT * FROM rc_cpxx WHERE (rc_cpxx.cpdm = ? OR rc_cpxx.oldcpdm = ?) AND ty <> 1"
+                    '取产品信息
+                    Try
+                        rcOleDbConn.Open()
+                        rcOleDbCommand.Connection = rcOleDbConn
+                        rcOleDbCommand.CommandTimeout = 300
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT * FROM rc_cpxx WHERE (rc_cpxx.cpdm = ? OR rc_cpxx.oldcpdm = ?) AND ty <> 1"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue
+                        rcOleDbCommand.Parameters.Add("@oldcpdm", OleDbType.VarChar, 15).Value = rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_cpxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_cpxx")
+                        If rcDataset.Tables("rc_cpxx").Rows.Count > 0 Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("cpdm")
+                            Me.rcDataGridView.CurrentRow.Cells("ColCpmc").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("cpmc")
+                            Me.rcDataGridView.CurrentRow.Cells("ColDw").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("dw")
+                            If rcDataset.Tables("rc_cpxx").Rows(0).Item("mjsl").GetType.ToString <> "System.DBNull" And Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value = 0 Then
+                                Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("mjsl")
+                            End If
+                            If rcDataset.Tables("rc_cpxx").Rows(0).Item("fzdw").GetType.ToString <> "System.DBNull" Then
+                                Me.rcDataGridView.CurrentRow.Cells("ColFzdw").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("fzdw")
+                            End If
+                            rcOleDbCommand.CommandText = "SELECT COALESCE(Sum(qcsl+idsl),0.0) as kcsl FROM inv_cpyeb WHERE kjnd = ? AND cpdm = ?"
                             rcOleDbCommand.Parameters.Clear()
-                            rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue
-                            rcOleDbCommand.Parameters.Add("@oldcpdm", OleDbType.VarChar, 15).Value = rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue
+                            rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = strYear
+                            rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                            If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
-                                rcDataset.Tables("rc_cpxx").Clear()
+                            If rcDataset.Tables("inv_cpyeb") IsNot Nothing Then
+                                rcDataset.Tables("inv_cpyeb").Clear()
                             End If
-                            rcOleDbDataAdpt.Fill(rcDataset, "rc_cpxx")
-                            If rcDataset.Tables("rc_cpxx").Rows.Count > 0 Then
-                                Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("cpdm")
-                                Me.rcDataGridView.CurrentRow.Cells("ColCpmc").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("cpmc")
-                                Me.rcDataGridView.CurrentRow.Cells("ColDw").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("dw")
-                                If rcDataset.Tables("rc_cpxx").Rows(0).Item("mjsl").GetType.ToString <> "System.DBNull" And Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value = 0 Then
-                                    Me.rcDataGridView.CurrentRow.Cells("ColMjsl").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("mjsl")
-                                End If
-                                If rcDataset.Tables("rc_cpxx").Rows(0).Item("fzdw").GetType.ToString <> "System.DBNull" Then
-                                    Me.rcDataGridView.CurrentRow.Cells("ColFzdw").Value = rcDataset.Tables("rc_cpxx").Rows(0).Item("fzdw")
-                                End If
-                                rcOleDbCommand.CommandText = "SELECT COALESCE(Sum(qcsl+idsl),0.0) as kcsl FROM inv_cpyeb WHERE kjnd = ? AND cpdm = ?"
-                                rcOleDbCommand.Parameters.Clear()
-                                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = strYear
-                                rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColCpdm").EditedFormattedValue
-                                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                                If rcDataset.Tables("inv_cpyeb") IsNot Nothing Then
-                                    rcDataset.Tables("inv_cpyeb").Clear()
-                                End If
-                                rcOleDbDataAdpt.Fill(rcDataset, "inv_cpyeb")
-                                If rcDataset.Tables("inv_cpyeb").Rows.Count = 1 Then
-                                    Me.LblMsg.Text = "当前库存数量：" & rcDataset.Tables("inv_cpyeb").Rows(0).Item("kcsl")
-                                Else
-                                    Me.LblMsg.Text = "当前库存数量： 0.00 "
-                                End If
-                                'If Me.rcDataGridView.CurrentRow.Cells("ColSl").Value = 0 And Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = 0 Then
-                                '    If Not String.IsNullOrEmpty(Me.TxtKhdm.Text) Then
-                                '        '取未出库订单号及未出库数量
-                                '        rcOleDbCommand.CommandText = "SELECT khdm,cpdm,hth,sl - hxsl - cksl AS wcksl,dj,oe_dd.djh AS dddjh,oe_dd.xh AS ddxh FROM oe_dd WHERE khdm = ? AND cpdm = ? AND sl - hxsl - cksl > 0 ORDER BY qdrq,xh"
-                                '        rcOleDbCommand.Parameters.Clear()
-                                '        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Me.TxtKhdm.Text
-                                '        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataSet.Tables("rc_cpxx").Rows(0).Item("cpdm")
-                                '        If Not rcDataSet.Tables("oe_dd") Is Nothing Then
-                                '            rcDataSet.Tables("oe_dd").Clear()
-                                '        End If
-                                '        rcOleDbDataAdpt.Fill(rcDataSet, "oe_dd")
-                                '        If rcDataSet.Tables("oe_dd").Rows.Count > 0 Then
-                                '            Me.rcDataGridView.CurrentRow.Cells("ColHth").Value = rcDataSet.Tables("oe_dd").Rows(0).Item("hth")
-                                '            Me.rcDataGridView.CurrentRow.Cells("ColSl").Value = rcDataSet.Tables("oe_dd").Rows(0).Item("wcksl")
-                                '            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = rcDataSet.Tables("oe_dd").Rows(0).Item("dj")
-                                '        End If
-                                '    End If
-                                'End If
+                            rcOleDbDataAdpt.Fill(rcDataset, "inv_cpyeb")
+                            If rcDataset.Tables("inv_cpyeb").Rows.Count = 1 Then
+                                Me.LblMsg.Text = "当前库存数量：" & rcDataset.Tables("inv_cpyeb").Rows(0).Item("kcsl")
                             Else
-                                Me.LblMsg.Text = "产品编码不存在。"
-                                e.Cancel = True
+                                Me.LblMsg.Text = "当前库存数量： 0.00 "
                             End If
-                        Catch ex As Exception
-                            MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-                            Return
-                        Finally
-                            rcOleDbConn.Close()
-                        End Try
-                    End If
+                            'If Me.rcDataGridView.CurrentRow.Cells("ColSl").Value = 0 And Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = 0 Then
+                            '    If Not String.IsNullOrEmpty(Me.TxtKhdm.Text) Then
+                            '        '取未出库订单号及未出库数量
+                            '        rcOleDbCommand.CommandText = "SELECT khdm,cpdm,hth,sl - hxsl - cksl AS wcksl,dj,oe_dd.djh AS dddjh,oe_dd.xh AS ddxh FROM oe_dd WHERE khdm = ? AND cpdm = ? AND sl - hxsl - cksl > 0 ORDER BY qdrq,xh"
+                            '        rcOleDbCommand.Parameters.Clear()
+                            '        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Me.TxtKhdm.Text
+                            '        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataSet.Tables("rc_cpxx").Rows(0).Item("cpdm")
+                            '        If Not rcDataSet.Tables("oe_dd") Is Nothing Then
+                            '            rcDataSet.Tables("oe_dd").Clear()
+                            '        End If
+                            '        rcOleDbDataAdpt.Fill(rcDataSet, "oe_dd")
+                            '        If rcDataSet.Tables("oe_dd").Rows.Count > 0 Then
+                            '            Me.rcDataGridView.CurrentRow.Cells("ColHth").Value = rcDataSet.Tables("oe_dd").Rows(0).Item("hth")
+                            '            Me.rcDataGridView.CurrentRow.Cells("ColSl").Value = rcDataSet.Tables("oe_dd").Rows(0).Item("wcksl")
+                            '            Me.rcDataGridView.CurrentRow.Cells("ColDj").Value = rcDataSet.Tables("oe_dd").Rows(0).Item("dj")
+                            '        End If
+                            '    End If
+                            'End If
+                        Else
+                            Me.LblMsg.Text = "产品编码不存在。"
+                            e.Cancel = True
+                        End If
+                    Catch ex As Exception
+                        MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                        Return
+                    Finally
+                        rcOleDbConn.Close()
+                    End Try
                 End If
             End If
+            '部门编码
+            If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColBmdm" Then
+                If Not String.IsNullOrEmpty(e.FormattedValue) Then
+                    '取部门信息
+                    Try
+                        rcOleDbConn.Open()
+                        rcOleDbCommand.Connection = rcOleDbConn
+                        rcOleDbCommand.CommandTimeout = 300
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT * FROM rc_bmxx WHERE rc_bmxx.bmdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColBmdm").EditedFormattedValue
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("rc_bmxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_bmxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_bmxx")
+                        If rcDataset.Tables("rc_bmxx").Rows.Count > 0 Then
+                            Me.rcDataGridView.CurrentRow.Cells("ColBmdm").Value = rcDataset.Tables("rc_bmxx").Rows(0).Item("bmdm")
+                            Me.rcDataGridView.CurrentRow.Cells("ColBmmc").Value = rcDataset.Tables("rc_bmxx").Rows(0).Item("bmmc")
+                        Else
+                            Me.LblMsg.Text = "部门编码不存在。"
+                            e.Cancel = True
+                        End If
+                    Catch ex As Exception
+                        MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                        Return
+                    Finally
+                        rcOleDbConn.Close()
+                    End Try
+                End If
+            End If
+
             '订单号事件
             'If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColHth" Then
             '    If Not String.IsNullOrEmpty(e.FormattedValue) Then
@@ -788,7 +822,7 @@ Public Class FrmOeFpSrz
                             rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(sl),0.0) AS ddsl,COALESCE(SUM(je),0.0) AS ddje,COALESCE(SUM(se),0.0) AS ddse FROM oe_dd WHERE djh = ? AND xh = ?"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = Me.rcDataGridView.CurrentRow.Cells("ColDdDjh").Value
-                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = Me.rcDataGridView.CurrentRow.Cells("ColDdXh").Value
+                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = Me.rcDataGridView.CurrentRow.Cells("ColDdXh").Value
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                             If rcDataset.Tables("t_dd") IsNot Nothing Then
                                 rcDataset.Tables("t_dd").Clear()
@@ -953,6 +987,30 @@ Public Class FrmOeFpSrz
                     End With
             End Select
         End If
+        If Me.rcDataGridView.Columns(Me.rcDataGridView.CurrentCell.ColumnIndex).Name = "ColBmdm" And Me.ColBmdm.ReadOnly = False Then
+            Select Case e.KeyCode
+                Case Keys.F3
+                    Dim rcFrm As New models.FrmF3KeyPress
+                    With rcFrm
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "rc_bmxx"
+                        .ParaField1 = "bmdm"
+                        .ParaField2 = "bmmc"
+                        .ParaField3 = "bmsm"
+                        .ParaCondition = "0=0"
+                        .ParaOrderField = "bmmc"
+                        .ParaTitle = "部门"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        If .ShowDialog = DialogResult.OK Then
+                            '将用户在rcfrmselectcpdm所选择的cpdm带入rcdatarid'
+                            Me.rcDataGridView.CurrentRow.Cells("ColBmdm").Value = .ParaField1
+                            Me.rcBindingSource.EndEdit()
+                            Me.rcDataGridView.EndEdit()
+                        End If
+                    End With
+            End Select
+        End If
     End Sub
 
     Private Sub RcDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles rcDataGridView.EditingControlShowing
@@ -960,7 +1018,7 @@ Public Class FrmOeFpSrz
         If Not EditingControl.IsHandleCreated Then
             AddHandler EditingControl.KeyDown, New KeyEventHandler(AddressOf EditingControl_KeyDown)
         End If
-        If Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColCpdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColKhdm" Then
+        If Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColCpdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColBmdm" Then
             EditingControl.CharacterCasing = CharacterCasing.Upper
         Else
             EditingControl.CharacterCasing = CharacterCasing.Normal
@@ -986,6 +1044,31 @@ Public Class FrmOeFpSrz
                         If .ShowDialog = DialogResult.OK Then
                             '将用户在rcfrmselectcpdm所选择的cpdm带入rcdatarid'
                             Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value = .paraField1
+                            Me.rcDataGridView.EndEdit()
+                            Me.rcBindingSource.EndEdit()
+                        End If
+                    End With
+                    e.Handled = True
+            End Select
+        End If
+        If Me.rcDataGridView.Columns(Me.rcDataGridView.CurrentCell.ColumnIndex).Name = "ColBmdm" And Me.ColCpdm.ReadOnly = False Then
+            Select Case e.KeyCode
+                Case Keys.F3
+                    Dim rcFrm As New models.FrmF3KeyPress
+                    With rcFrm
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "rc_bmxx"
+                        .ParaField1 = "bmdm"
+                        .ParaField2 = "bmmc"
+                        .ParaField3 = "bmsm"
+                        .ParaCondition = "0=0"
+                        .ParaOrderField = "bmmc"
+                        .ParaTitle = "部门"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        If .ShowDialog = DialogResult.OK Then
+                            '将用户在rcfrmselectcpdm所选择的cpdm带入rcdatarid'
+                            Me.rcDataGridView.CurrentRow.Cells("ColBmdm").Value = .ParaField1
                             Me.rcDataGridView.EndEdit()
                             Me.rcBindingSource.EndEdit()
                         End If
@@ -1025,6 +1108,7 @@ Public Class FrmOeFpSrz
                 .ShowDialog()
                 Me.rcDataGridView.AllowUserToAddRows = False
                 Me.ColCpdm.ReadOnly = True
+                Me.ColBmdm.ReadOnly = True
                 'Me.ColSl.ReadOnly = True
                 'Me.ColMjsl.ReadOnly = True
                 'Me.ColFzsl.ReadOnly = True
@@ -1052,6 +1136,7 @@ Public Class FrmOeFpSrz
                 .ShowDialog()
                 Me.rcDataGridView.AllowUserToAddRows = False
                 Me.ColCpdm.ReadOnly = True
+                Me.ColBmdm.ReadOnly = True
                 'Me.ColSl.ReadOnly = True
                 'Me.ColMjsl.ReadOnly = True
                 'Me.ColFzsl.ReadOnly = True
@@ -1187,6 +1272,12 @@ Public Class FrmOeFpSrz
             If rcDataset.Tables("rc_fpnr").Rows(i).Item("hth").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("rc_fpnr").Rows(i).Item("hth") = ""
             End If
+            If rcDataset.Tables("rc_fpnr").Rows(i).Item("bmdm").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("rc_fpnr").Rows(i).Item("bmdm") = ""
+            End If
+            If rcDataset.Tables("rc_fpnr").Rows(i).Item("bmmc").GetType.ToString = "System.DBNull" Then
+                rcDataset.Tables("rc_fpnr").Rows(i).Item("bmmc") = ""
+            End If
             If rcDataset.Tables("rc_fpnr").Rows(i).Item("sl").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("rc_fpnr").Rows(i).Item("sl") = 0.0
             End If
@@ -1250,7 +1341,11 @@ Public Class FrmOeFpSrz
             If rcDataset.Tables("rc_fpnr").Rows(i).Item("xsdse").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("rc_fpnr").Rows(i).Item("xsdse") = 0.0
             End If
+            If rcDataset.Tables("rc_fpnr").Rows(i).Item("cpdm") = "" And rcDataset.Tables("rc_fpnr").Rows(i).Item("sl") = 0.0 Then
+                rcDataset.Tables("rc_fpnr").Rows(i).Delete()
+            End If
         Next
+        rcDataset.Tables("rc_fpnr").AcceptChanges()
 
         '(1)是否有需要存储的数据
         If rcDataset.Tables("rc_fpnr").Rows.Count = 0 Then
@@ -1277,6 +1372,19 @@ Public Class FrmOeFpSrz
 
                     If rcDataset.Tables("cpdmcnt").Rows.Count <> 1 Then
                         MsgBox(Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("cpdm")) & "产品编码不正确，请检查。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                        Return
+                    End If
+                    rcOleDbCommand.CommandText = "SELECT * FROM rc_bmxx WHERE bmdm = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.AddWithValue("@bmdm", Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("bmdm")))
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    If rcDataset.Tables("bmdmcnt") IsNot Nothing Then
+                        Me.rcDataset.Tables("bmdmcnt").Clear()
+                    End If
+                    rcOleDbDataAdpt.Fill(rcDataset, "bmdmcnt")
+
+                    If rcDataset.Tables("bmdmcnt").Rows.Count <> 1 Then
+                        MsgBox(Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("bmdm")) & "部门编码不正确，请检查。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
                         Return
                     End If
                     If rcDataset.Tables("rc_fpnr").Rows(i).Item("sl").GetType.ToString <> "System.DBNull" Then
@@ -1368,19 +1476,24 @@ Public Class FrmOeFpSrz
             For i = 0 To rcDataset.Tables("rc_fpnr").Rows.Count - 1
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
+                rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = IIf(i = 0, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraDateFprq", OleDbType.Date, 8).Value = Me.DtpFprq.Value
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = IIf(String.IsNullOrEmpty(Me.LblBdelete.Text), 0, 1)
                 rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = Me.TxtZydm.Text
                 rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = Me.LblZymc.Text
                 rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = Me.TxtKhdm.Text
                 rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = Me.LblKhmc.Text
+                rcOleDbCommand.Parameters.Add("@ParaStrShKhdm", OleDbType.VarChar, 12).Value = Me.TxtKhdm.Text
+                rcOleDbCommand.Parameters.Add("@paraStrShKhmc", OleDbType.VarChar, 50).Value = Me.LblKhmc.Text
                 rcOleDbCommand.Parameters.Add("@paraStrYspz", OleDbType.VarChar, 30).Value = Me.TxtYspz.Text
                 rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("cpdm")).ToUpper
                 rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("cpmc")
                 rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 30).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("hth")
+                rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("bmdm")
+                rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("bmmc")
                 rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("sl")
                 rcOleDbCommand.Parameters.Add("@paraStrDw", OleDbType.VarChar, 8).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("dw")
                 rcOleDbCommand.Parameters.Add("@paraDblMjsl", OleDbType.Numeric, 18).Value = rcDataset.Tables("rc_fpnr").Rows(i).Item("mjsl")
@@ -1507,7 +1620,7 @@ Public Class FrmOeFpSrz
                             Me.TxtYspz.Text = rcDataset.Tables("rc_fpml").Rows(0).Item("yspz")
                         End If
                         '修改单据
-                        rcOleDbCommand.CommandText = "SELECT oe_fp.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_fp.hth,'') AS hth,(0 - oe_fp.sl) AS sl,oe_fp.dw,oe_fp.mjsl,(0 - oe_fp.fzsl) AS fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,0 - oe_fp.je AS je,oe_fp.shlv,0 - oe_fp.se AS se,0 - (oe_fp.je+ oe_fp.se) AS jese,oe_fp.fpmemo || oe_fp.djh AS fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse FROM oe_fp,rc_cpxx WHERE oe_fp.cpdm = rc_cpxx.cpdm AND (oe_fp.djh = ?) ORDER BY oe_fp.xh"
+                        rcOleDbCommand.CommandText = "SELECT oe_fp.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_fp.hth,'') AS hth,oe_fp.bmdm,oe_fp.bmmc,(0 - oe_fp.sl) AS sl,oe_fp.dw,oe_fp.mjsl,(0 - oe_fp.fzsl) AS fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,0 - oe_fp.je AS je,oe_fp.shlv,0 - oe_fp.se AS se,0 - (oe_fp.je+ oe_fp.se) AS jese,oe_fp.fpmemo || oe_fp.djh AS fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse FROM oe_fp,rc_cpxx WHERE oe_fp.cpdm = rc_cpxx.cpdm AND (oe_fp.djh = ?) ORDER BY oe_fp.xh"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = strDjh
                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -1520,6 +1633,7 @@ Public Class FrmOeFpSrz
                                 'Me.BtnImp.Enabled = False
                                 Me.rcDataGridView.AllowUserToAddRows = False
                                 Me.ColCpdm.ReadOnly = True
+                                Me.ColBmdm.ReadOnly = True
                                 'Me.ColSl.ReadOnly = True
                                 'Me.ColMjsl.ReadOnly = True
                                 'Me.ColFzsl.ReadOnly = True
@@ -1791,6 +1905,21 @@ Public Class FrmOeFpSrz
     Private Sub ExitEvent()
         Me.Close()
     End Sub
+
+#Region "导入excel模板数据"
+    Private Sub MnuiImpXls_Click(sender As Object, e As EventArgs) Handles MnuiImpXls.Click
+        '调用表单
+        Dim rcFrm As New FrmOeFpImpXls
+        With rcFrm
+            .ParaStrPzlxdm = Me.CmbPzlxjc.SelectedValue
+            .ParaStrKjqj = strKjqj
+            .WindowState = FormWindowState.Maximized
+            .MdiParent = Me.MdiParent
+            .Show()
+        End With
+    End Sub
+
+#End Region
 
     'Private Sub FrmxsdSrz2_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
     '    If IsEditing Then

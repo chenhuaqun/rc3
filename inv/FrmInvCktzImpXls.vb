@@ -177,7 +177,7 @@ Public Class FrmInvCktzImpXls
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
                 rcOleDbCommand.Parameters.Add("@ParaStrDjh", OleDbType.VarChar, 15).Value = strPzlxdm & strKjqj & "00001"
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1
                 rcOleDbCommand.Parameters.Add("@paraDateCkrq", OleDbType.Date, 8).Value = rcDataset.Tables("result").Rows(i).Item("³ö¿âÈÕÆÚ")
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                 rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("²Ö¿â±àÂë")

@@ -131,7 +131,7 @@ Public Class FrmOeBjdImpXls
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(isAdding, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = strDjh
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = j + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = j + 1
                 rcOleDbCommand.Parameters.Add("@paraDateBjrq", OleDbType.Date, 8).Value = rcDataset.Tables("result").Rows(i).Item("报价日期")
                 rcOleDbCommand.Parameters.Add("@paraStrWbdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("result").Rows(i).Item("币种编码")
                 rcOleDbCommand.Parameters.Add("@paraDblWbhl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("汇率")

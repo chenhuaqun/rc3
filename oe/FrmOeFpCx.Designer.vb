@@ -22,34 +22,36 @@ Partial Class FrmOeFpCx
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TxtHth = New System.Windows.Forms.TextBox
-        Me.LblHth = New System.Windows.Forms.Label
-        Me.TxtCpmc = New System.Windows.Forms.TextBox
-        Me.LblCpmc = New System.Windows.Forms.Label
-        Me.TxtZydm = New System.Windows.Forms.TextBox
-        Me.LblZydm = New System.Windows.Forms.Label
-        Me.TxtKhdm = New System.Windows.Forms.TextBox
-        Me.LblKhdm = New System.Windows.Forms.Label
-        Me.ChbLbfs = New System.Windows.Forms.CheckBox
-        Me.TxtCpdm = New System.Windows.Forms.TextBox
-        Me.LblCpdm = New System.Windows.Forms.Label
-        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown
-        Me.LblDjhEnd = New System.Windows.Forms.Label
-        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown
-        Me.LblDjhBegin = New System.Windows.Forms.Label
-        Me.LblEnd = New System.Windows.Forms.Label
-        Me.DtpEnd = New System.Windows.Forms.DateTimePicker
-        Me.LblBegin = New System.Windows.Forms.Label
-        Me.DtpBegin = New System.Windows.Forms.DateTimePicker
-        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.ChbYjWsk = New System.Windows.Forms.CheckBox
-        Me.TxtLbdm = New System.Windows.Forms.TextBox
-        Me.LblLbdm = New System.Windows.Forms.Label
-        Me.ChbDelete = New System.Windows.Forms.CheckBox
-        Me.TxtYspz = New System.Windows.Forms.TextBox
-        Me.LblYspz = New System.Windows.Forms.Label
-        Me.ChbWsk = New System.Windows.Forms.CheckBox
+        Me.TxtHth = New System.Windows.Forms.TextBox()
+        Me.LblHth = New System.Windows.Forms.Label()
+        Me.TxtCpmc = New System.Windows.Forms.TextBox()
+        Me.LblCpmc = New System.Windows.Forms.Label()
+        Me.TxtZydm = New System.Windows.Forms.TextBox()
+        Me.LblZydm = New System.Windows.Forms.Label()
+        Me.TxtKhdm = New System.Windows.Forms.TextBox()
+        Me.LblKhdm = New System.Windows.Forms.Label()
+        Me.ChbLbfs = New System.Windows.Forms.CheckBox()
+        Me.TxtCpdm = New System.Windows.Forms.TextBox()
+        Me.LblCpdm = New System.Windows.Forms.Label()
+        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown()
+        Me.LblDjhEnd = New System.Windows.Forms.Label()
+        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown()
+        Me.LblDjhBegin = New System.Windows.Forms.Label()
+        Me.LblEnd = New System.Windows.Forms.Label()
+        Me.DtpEnd = New System.Windows.Forms.DateTimePicker()
+        Me.LblBegin = New System.Windows.Forms.Label()
+        Me.DtpBegin = New System.Windows.Forms.DateTimePicker()
+        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ChbYjWsk = New System.Windows.Forms.CheckBox()
+        Me.TxtLbdm = New System.Windows.Forms.TextBox()
+        Me.LblLbdm = New System.Windows.Forms.Label()
+        Me.ChbDelete = New System.Windows.Forms.CheckBox()
+        Me.TxtYspz = New System.Windows.Forms.TextBox()
+        Me.LblYspz = New System.Windows.Forms.Label()
+        Me.ChbWsk = New System.Windows.Forms.CheckBox()
+        Me.TxtBmdm = New System.Windows.Forms.TextBox()
+        Me.LblBmdm = New System.Windows.Forms.Label()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudDjhEnd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudDjhBegin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -308,11 +310,30 @@ Partial Class FrmOeFpCx
         Me.ChbWsk.TabIndex = 28
         Me.ChbWsk.Text = "显示全部未收款业务"
         '
+        'TxtBmdm
+        '
+        Me.TxtBmdm.Location = New System.Drawing.Point(295, 200)
+        Me.TxtBmdm.MaxLength = 12
+        Me.TxtBmdm.Name = "TxtBmdm"
+        Me.TxtBmdm.Size = New System.Drawing.Size(104, 21)
+        Me.TxtBmdm.TabIndex = 30
+        '
+        'LblBmdm
+        '
+        Me.LblBmdm.AutoSize = True
+        Me.LblBmdm.Location = New System.Drawing.Point(224, 204)
+        Me.LblBmdm.Name = "LblBmdm"
+        Me.LblBmdm.Size = New System.Drawing.Size(65, 12)
+        Me.LblBmdm.TabIndex = 29
+        Me.LblBmdm.Text = "部门编码："
+        '
         'FrmOeFpCx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(424, 350)
+        Me.Controls.Add(Me.TxtBmdm)
+        Me.Controls.Add(Me.LblBmdm)
         Me.Controls.Add(Me.ChbWsk)
         Me.Controls.Add(Me.TxtYspz)
         Me.Controls.Add(Me.LblYspz)
@@ -342,7 +363,7 @@ Partial Class FrmOeFpCx
         Me.Controls.Add(Me.LblBegin)
         Me.Controls.Add(Me.DtpBegin)
         Me.Name = "FrmOeFpCx"
-        Me.Text = "产品销售单(销售发票)查询范围"
+        Me.Text = "产品销售发票查询范围"
         Me.Controls.SetChildIndex(Me.DlgPanel, 0)
         Me.Controls.SetChildIndex(Me.DtpBegin, 0)
         Me.Controls.SetChildIndex(Me.LblBegin, 0)
@@ -372,6 +393,8 @@ Partial Class FrmOeFpCx
         Me.Controls.SetChildIndex(Me.LblYspz, 0)
         Me.Controls.SetChildIndex(Me.TxtYspz, 0)
         Me.Controls.SetChildIndex(Me.ChbWsk, 0)
+        Me.Controls.SetChildIndex(Me.LblBmdm, 0)
+        Me.Controls.SetChildIndex(Me.TxtBmdm, 0)
         Me.DlgPanel.ResumeLayout(False)
         CType(Me.NudDjhEnd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudDjhBegin, System.ComponentModel.ISupportInitialize).EndInit()
@@ -407,4 +430,6 @@ Partial Class FrmOeFpCx
     Public WithEvents TxtYspz As System.Windows.Forms.TextBox
     Public WithEvents LblYspz As System.Windows.Forms.Label
     Friend WithEvents ChbWsk As System.Windows.Forms.CheckBox
+    Public WithEvents TxtBmdm As TextBox
+    Public WithEvents LblBmdm As Label
 End Class

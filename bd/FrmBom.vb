@@ -653,7 +653,7 @@ Public Class FrmBom
             For i = 0 To rcDataset.Tables("rc_gx").Rows.Count - 1
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@parentcpdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtParentCpdm.Text)
-                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@gxdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_gx").Rows(i).Item("gxdm")
                 rcOleDbCommand.Parameters.Add("@gxmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("rc_gx").Rows(i).Item("gxmc")
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_gx").Rows(i).Item("bmdm")

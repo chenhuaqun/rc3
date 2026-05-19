@@ -83,7 +83,7 @@ Public Class FrmCpxx
         dtCp.Columns.Add("khmc", Type.GetType("System.String"))
         dtCp.Columns.Add("xsdj", Type.GetType("System.Double"))
         dtCp.Columns.Add("cgdj", Type.GetType("System.Double"))
-        dtCp.Columns.Add("beishu", Type.GetType("System.Int32"))
+        dtCp.Columns.Add("beishu", Type.GetType("System.Double"))
         dtCp.Columns.Add("bzcb", Type.GetType("System.Double"))
         dtCp.Columns.Add("clcb", Type.GetType("System.Double"))
         dtCp.Columns.Add("rgcb", Type.GetType("System.Double"))

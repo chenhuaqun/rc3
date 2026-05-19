@@ -34,12 +34,14 @@ Public Class FrmCkxx
         dtCk.Columns.Add("ckmc", Type.GetType("System.String"))
         dtCk.Columns.Add("cksm", Type.GetType("System.String"))
         dtCk.Columns.Add("bscrkcb", Type.GetType("System.Boolean"))
+        dtCk.Columns.Add("hsfl", Type.GetType("System.String"))
         rcDataset.Tables.Add(dtCk)
         With dtCk
             .Columns("ckdm").DefaultValue = ""
             .Columns("ckmc").DefaultValue = ""
             .Columns("cksm").DefaultValue = ""
             .Columns("bscrkcb").DefaultValue = False
+            .Columns("hsfl").DefaultValue = ""
         End With
         '显示等待样式鼠标
         Cursor.Current = New Cursor(Application.StartupPath & "\" & "Wait.cur")

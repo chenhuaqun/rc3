@@ -22,28 +22,31 @@ Partial Class FrmCpkcZlfxz
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle
-        Me.DgtbcCpdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCpmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcDw = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCkdm = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcCkmc = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcKcsl_Tot = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.DgtbcKcje_Tot = New System.Windows.Forms.DataGridTextBoxColumn
-        Me.Label3 = New System.Windows.Forms.Label
+        Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle()
+        Me.DgtbcCpdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCpmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcDw = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCkdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcCkmc = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKcsl_Tot = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKcje_Tot = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.DgtbcCpweight = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKczl_Tot = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rcDataGrid
+        'RcDataGrid
         '
-        Me.rcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
+        Me.RcDataGrid.TableStyles.AddRange(New System.Windows.Forms.DataGridTableStyle() {Me.DataGridTableStyle1})
         '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.SetChildIndex(Me.Panel4, 0)
         Me.Panel1.Controls.SetChildIndex(Me.Label3, 0)
         Me.Panel1.Controls.SetChildIndex(Me.Label1, 0)
         Me.Panel1.Controls.SetChildIndex(Me.Label2, 0)
@@ -56,8 +59,8 @@ Partial Class FrmCpkcZlfxz
         '
         'DataGridTableStyle1
         '
-        Me.DataGridTableStyle1.DataGrid = Me.rcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcCpdm, Me.DgtbcCpmc, Me.DgtbcDw, Me.DgtbcCkdm, Me.DgtbcCkmc, Me.DgtbcKcsl_Tot, Me.DgtbcKcje_Tot})
+        Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcCpdm, Me.DgtbcCpmc, Me.DgtbcDw, Me.DgtbcCkdm, Me.DgtbcCkmc, Me.DgtbcKcsl_Tot, Me.DgtbcCpweight, Me.DgtbcKczl_Tot, Me.DgtbcKcje_Tot})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "cpsfchz"
         '
@@ -135,6 +138,26 @@ Partial Class FrmCpkcZlfxz
         Me.Label3.TabIndex = 15
         Me.Label3.Text = "仓库："
         '
+        'DgtbcCpweight
+        '
+        Me.DgtbcCpweight.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcCpweight.Format = ""
+        Me.DgtbcCpweight.FormatInfo = Nothing
+        Me.DgtbcCpweight.HeaderText = "单重"
+        Me.DgtbcCpweight.MappingName = "cpweight"
+        Me.DgtbcCpweight.NullText = ""
+        Me.DgtbcCpweight.Width = 75
+        '
+        'DgtbcKczl_Tot
+        '
+        Me.DgtbcKczl_Tot.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcKczl_Tot.Format = ""
+        Me.DgtbcKczl_Tot.FormatInfo = Nothing
+        Me.DgtbcKczl_Tot.HeaderText = "结存重量"
+        Me.DgtbcKczl_Tot.MappingName = "kczl_tot"
+        Me.DgtbcKczl_Tot.NullText = ""
+        Me.DgtbcKczl_Tot.Width = 75
+        '
         'FrmCpkcZlfxz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -144,7 +167,7 @@ Partial Class FrmCpkcZlfxz
         Me.Text = "物料库存账龄分析表"
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -160,4 +183,6 @@ Partial Class FrmCpkcZlfxz
     Friend WithEvents DgtbcCkdm As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcCkmc As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents DgtbcCpweight As DataGridTextBoxColumn
+    Friend WithEvents DgtbcKczl_Tot As DataGridTextBoxColumn
 End Class

@@ -30,6 +30,10 @@ Partial Class FrmGlZlfxHz
         Me.NudYear = New System.Windows.Forms.NumericUpDown()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TxtKhdm = New System.Windows.Forms.TextBox()
+        Me.LblKhdm = New System.Windows.Forms.Label()
+        Me.TxtZydm = New System.Windows.Forms.TextBox()
+        Me.LblZydm = New System.Windows.Forms.Label()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.LblMsg = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -53,10 +57,8 @@ Partial Class FrmGlZlfxHz
         Me.BtnUnSelectAllKmdm = New System.Windows.Forms.Button()
         Me.BtnUnSelectOneKmdm = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.TxtKhdm = New System.Windows.Forms.TextBox()
-        Me.LblKhdm = New System.Windows.Forms.Label()
-        Me.TxtZydm = New System.Windows.Forms.TextBox()
-        Me.LblZydm = New System.Windows.Forms.Label()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,38 +69,21 @@ Partial Class FrmGlZlfxHz
         Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'BtnCancel
-        '
-        Me.BtnCancel.Location = New System.Drawing.Point(124, 4)
-        Me.BtnCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.BtnCancel.Size = New System.Drawing.Size(111, 34)
-        '
-        'BtnHelp
-        '
-        Me.BtnHelp.Location = New System.Drawing.Point(244, 4)
-        Me.BtnHelp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.BtnHelp.Size = New System.Drawing.Size(112, 34)
-        '
         'BtnOk
         '
-        Me.BtnOk.Location = New System.Drawing.Point(4, 4)
-        Me.BtnOk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.BtnOk.Size = New System.Drawing.Size(111, 34)
         '
         'DlgPanel
         '
-        Me.DlgPanel.Location = New System.Drawing.Point(412, 630)
-        Me.DlgPanel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.DlgPanel.Size = New System.Drawing.Size(362, 46)
+        Me.DlgPanel.Location = New System.Drawing.Point(275, 460)
+        Me.DlgPanel.Size = New System.Drawing.Size(241, 31)
         '
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
         Me.RadioButton2.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.RadioButton2.Location = New System.Drawing.Point(266, 160)
-        Me.RadioButton2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RadioButton2.Location = New System.Drawing.Point(177, 107)
         Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(251, 28)
+        Me.RadioButton2.Size = New System.Drawing.Size(169, 20)
         Me.RadioButton2.TabIndex = 1
         Me.RadioButton2.Text = "供应商(按贷方分析)"
         Me.RadioButton2.UseVisualStyleBackColor = True
@@ -108,10 +93,9 @@ Partial Class FrmGlZlfxHz
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Checked = True
         Me.RadioButton1.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.RadioButton1.Location = New System.Drawing.Point(24, 160)
-        Me.RadioButton1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RadioButton1.Location = New System.Drawing.Point(16, 107)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(227, 28)
+        Me.RadioButton1.Size = New System.Drawing.Size(153, 20)
         Me.RadioButton1.TabIndex = 0
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "客户(按借方分析)"
@@ -121,22 +105,20 @@ Partial Class FrmGlZlfxHz
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label3.Location = New System.Drawing.Point(460, 49)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(307, 33)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(34, 24)
+        Me.Label3.Size = New System.Drawing.Size(23, 16)
         Me.Label3.TabIndex = 118
         Me.Label3.Text = "月"
         '
         'NudMonth
         '
         Me.NudMonth.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.NudMonth.Location = New System.Drawing.Point(381, 41)
-        Me.NudMonth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.NudMonth.Location = New System.Drawing.Point(254, 27)
         Me.NudMonth.Maximum = New Decimal(New Integer() {13, 0, 0, 0})
         Me.NudMonth.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.NudMonth.Name = "NudMonth"
-        Me.NudMonth.Size = New System.Drawing.Size(68, 35)
+        Me.NudMonth.Size = New System.Drawing.Size(45, 26)
         Me.NudMonth.TabIndex = 117
         Me.NudMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.NudMonth.Value = New Decimal(New Integer() {1, 0, 0, 0})
@@ -145,22 +127,20 @@ Partial Class FrmGlZlfxHz
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label2.Location = New System.Drawing.Point(333, 49)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(222, 33)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(34, 24)
+        Me.Label2.Size = New System.Drawing.Size(23, 16)
         Me.Label2.TabIndex = 116
         Me.Label2.Text = "年"
         '
         'NudYear
         '
         Me.NudYear.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.NudYear.Location = New System.Drawing.Point(232, 41)
-        Me.NudYear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.NudYear.Location = New System.Drawing.Point(155, 27)
         Me.NudYear.Maximum = New Decimal(New Integer() {2050, 0, 0, 0})
         Me.NudYear.Minimum = New Decimal(New Integer() {1951, 0, 0, 0})
         Me.NudYear.Name = "NudYear"
-        Me.NudYear.Size = New System.Drawing.Size(88, 35)
+        Me.NudYear.Size = New System.Drawing.Size(59, 26)
         Me.NudYear.TabIndex = 115
         Me.NudYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.NudYear.Value = New Decimal(New Integer() {1999, 0, 0, 0})
@@ -169,10 +149,9 @@ Partial Class FrmGlZlfxHz
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label1.Location = New System.Drawing.Point(88, 49)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(59, 33)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(130, 24)
+        Me.Label1.Size = New System.Drawing.Size(87, 16)
         Me.Label1.TabIndex = 114
         Me.Label1.Text = "会计期间："
         '
@@ -192,21 +171,56 @@ Partial Class FrmGlZlfxHz
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.GroupBox2.Size = New System.Drawing.Size(792, 210)
+        Me.GroupBox2.Size = New System.Drawing.Size(528, 140)
         Me.GroupBox2.TabIndex = 119
         Me.GroupBox2.TabStop = False
+        '
+        'TxtKhdm
+        '
+        Me.TxtKhdm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.TxtKhdm.Location = New System.Drawing.Point(370, 61)
+        Me.TxtKhdm.MaxLength = 12
+        Me.TxtKhdm.Name = "TxtKhdm"
+        Me.TxtKhdm.Size = New System.Drawing.Size(112, 26)
+        Me.TxtKhdm.TabIndex = 124
+        '
+        'LblKhdm
+        '
+        Me.LblKhdm.AutoSize = True
+        Me.LblKhdm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblKhdm.Location = New System.Drawing.Point(274, 65)
+        Me.LblKhdm.Name = "LblKhdm"
+        Me.LblKhdm.Size = New System.Drawing.Size(87, 16)
+        Me.LblKhdm.TabIndex = 123
+        Me.LblKhdm.Text = "客户编码："
+        '
+        'TxtZydm
+        '
+        Me.TxtZydm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.TxtZydm.Location = New System.Drawing.Point(155, 61)
+        Me.TxtZydm.MaxLength = 12
+        Me.TxtZydm.Name = "TxtZydm"
+        Me.TxtZydm.Size = New System.Drawing.Size(112, 26)
+        Me.TxtZydm.TabIndex = 122
+        '
+        'LblZydm
+        '
+        Me.LblZydm.AutoSize = True
+        Me.LblZydm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblZydm.Location = New System.Drawing.Point(59, 65)
+        Me.LblZydm.Name = "LblZydm"
+        Me.LblZydm.Size = New System.Drawing.Size(87, 16)
+        Me.LblZydm.TabIndex = 121
+        Me.LblZydm.Text = "职员编码："
         '
         'RadioButton3
         '
         Me.RadioButton3.AutoSize = True
         Me.RadioButton3.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.RadioButton3.Location = New System.Drawing.Point(534, 160)
-        Me.RadioButton3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RadioButton3.Location = New System.Drawing.Point(356, 107)
         Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(251, 28)
+        Me.RadioButton3.Size = New System.Drawing.Size(169, 20)
         Me.RadioButton3.TabIndex = 120
         Me.RadioButton3.Text = "供应商(按借方分析)"
         Me.RadioButton3.UseVisualStyleBackColor = True
@@ -216,10 +230,9 @@ Partial Class FrmGlZlfxHz
         Me.LblMsg.AutoSize = True
         Me.LblMsg.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblMsg.ForeColor = System.Drawing.Color.Navy
-        Me.LblMsg.Location = New System.Drawing.Point(18, 604)
-        Me.LblMsg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblMsg.Location = New System.Drawing.Point(12, 403)
         Me.LblMsg.Name = "LblMsg"
-        Me.LblMsg.Size = New System.Drawing.Size(130, 24)
+        Me.LblMsg.Size = New System.Drawing.Size(87, 16)
         Me.LblMsg.TabIndex = 120
         Me.LblMsg.Text = "提示信息。"
         '
@@ -227,11 +240,9 @@ Partial Class FrmGlZlfxHz
         '
         Me.GroupBox1.Controls.Add(Me.TabControl1)
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 210)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 140)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.GroupBox1.Size = New System.Drawing.Size(792, 386)
+        Me.GroupBox1.Size = New System.Drawing.Size(528, 257)
         Me.GroupBox1.TabIndex = 121
         Me.GroupBox1.TabStop = False
         '
@@ -240,11 +251,10 @@ Partial Class FrmGlZlfxHz
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(4, 25)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabControl1.Location = New System.Drawing.Point(3, 17)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(784, 357)
+        Me.TabControl1.Size = New System.Drawing.Size(522, 237)
         Me.TabControl1.TabIndex = 122
         '
         'TabPage1
@@ -257,88 +267,79 @@ Partial Class FrmGlZlfxHz
         Me.TabPage1.Controls.Add(Me.BtnUnSelectAllDwdm)
         Me.TabPage1.Controls.Add(Me.LblYuxuanDwdm)
         Me.TabPage1.Controls.Add(Me.LblYixuanDwdm)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 28)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TabPage1.Size = New System.Drawing.Size(776, 325)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(514, 211)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "选择核算单位"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'ListBoxYuxuanDwdm
         '
-        Me.ListBoxYuxuanDwdm.ItemHeight = 18
-        Me.ListBoxYuxuanDwdm.Location = New System.Drawing.Point(9, 52)
-        Me.ListBoxYuxuanDwdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ListBoxYuxuanDwdm.ItemHeight = 12
+        Me.ListBoxYuxuanDwdm.Location = New System.Drawing.Point(6, 35)
         Me.ListBoxYuxuanDwdm.Name = "ListBoxYuxuanDwdm"
-        Me.ListBoxYuxuanDwdm.Size = New System.Drawing.Size(301, 256)
+        Me.ListBoxYuxuanDwdm.Size = New System.Drawing.Size(202, 172)
         Me.ListBoxYuxuanDwdm.Sorted = True
         Me.ListBoxYuxuanDwdm.TabIndex = 23
         '
         'ListBoxYixuanDwdm
         '
-        Me.ListBoxYixuanDwdm.ItemHeight = 18
-        Me.ListBoxYixuanDwdm.Location = New System.Drawing.Point(460, 52)
-        Me.ListBoxYixuanDwdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ListBoxYixuanDwdm.ItemHeight = 12
+        Me.ListBoxYixuanDwdm.Location = New System.Drawing.Point(307, 35)
         Me.ListBoxYixuanDwdm.Name = "ListBoxYixuanDwdm"
-        Me.ListBoxYixuanDwdm.Size = New System.Drawing.Size(301, 256)
+        Me.ListBoxYixuanDwdm.Size = New System.Drawing.Size(202, 172)
         Me.ListBoxYixuanDwdm.Sorted = True
         Me.ListBoxYixuanDwdm.TabIndex = 24
         '
         'BtnSelectAllDwdm
         '
-        Me.BtnSelectAllDwdm.Location = New System.Drawing.Point(328, 64)
-        Me.BtnSelectAllDwdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnSelectAllDwdm.Location = New System.Drawing.Point(219, 43)
         Me.BtnSelectAllDwdm.Name = "BtnSelectAllDwdm"
-        Me.BtnSelectAllDwdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnSelectAllDwdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnSelectAllDwdm.TabIndex = 17
         Me.BtnSelectAllDwdm.Text = "-->>"
         '
         'BtnSelectOneDwdm
         '
-        Me.BtnSelectOneDwdm.Location = New System.Drawing.Point(328, 124)
-        Me.BtnSelectOneDwdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnSelectOneDwdm.Location = New System.Drawing.Point(219, 83)
         Me.BtnSelectOneDwdm.Name = "BtnSelectOneDwdm"
-        Me.BtnSelectOneDwdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnSelectOneDwdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnSelectOneDwdm.TabIndex = 18
         Me.BtnSelectOneDwdm.Text = "-->"
         '
         'BtnUnSelectOneDwdm
         '
-        Me.BtnUnSelectOneDwdm.Location = New System.Drawing.Point(328, 184)
-        Me.BtnUnSelectOneDwdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnUnSelectOneDwdm.Location = New System.Drawing.Point(219, 123)
         Me.BtnUnSelectOneDwdm.Name = "BtnUnSelectOneDwdm"
-        Me.BtnUnSelectOneDwdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnUnSelectOneDwdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnUnSelectOneDwdm.TabIndex = 19
         Me.BtnUnSelectOneDwdm.Text = "<--"
         '
         'BtnUnSelectAllDwdm
         '
-        Me.BtnUnSelectAllDwdm.Location = New System.Drawing.Point(328, 244)
-        Me.BtnUnSelectAllDwdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnUnSelectAllDwdm.Location = New System.Drawing.Point(219, 163)
         Me.BtnUnSelectAllDwdm.Name = "BtnUnSelectAllDwdm"
-        Me.BtnUnSelectAllDwdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnUnSelectAllDwdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnUnSelectAllDwdm.TabIndex = 20
         Me.BtnUnSelectAllDwdm.Text = "<<--"
         '
         'LblYuxuanDwdm
         '
         Me.LblYuxuanDwdm.AutoSize = True
-        Me.LblYuxuanDwdm.Location = New System.Drawing.Point(9, 16)
-        Me.LblYuxuanDwdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblYuxuanDwdm.Location = New System.Drawing.Point(6, 11)
         Me.LblYuxuanDwdm.Name = "LblYuxuanDwdm"
-        Me.LblYuxuanDwdm.Size = New System.Drawing.Size(116, 18)
+        Me.LblYuxuanDwdm.Size = New System.Drawing.Size(77, 12)
         Me.LblYuxuanDwdm.TabIndex = 21
         Me.LblYuxuanDwdm.Text = "预选核算单位"
         '
         'LblYixuanDwdm
         '
         Me.LblYixuanDwdm.AutoSize = True
-        Me.LblYixuanDwdm.Location = New System.Drawing.Point(460, 16)
-        Me.LblYixuanDwdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblYixuanDwdm.Location = New System.Drawing.Point(307, 11)
         Me.LblYixuanDwdm.Name = "LblYixuanDwdm"
-        Me.LblYixuanDwdm.Size = New System.Drawing.Size(116, 18)
+        Me.LblYixuanDwdm.Size = New System.Drawing.Size(77, 12)
         Me.LblYixuanDwdm.TabIndex = 22
         Me.LblYixuanDwdm.Text = "已选核算单位"
         '
@@ -352,88 +353,79 @@ Partial Class FrmGlZlfxHz
         Me.TabPage2.Controls.Add(Me.BtnSelectOneKmdm)
         Me.TabPage2.Controls.Add(Me.BtnUnSelectAllKmdm)
         Me.TabPage2.Controls.Add(Me.BtnUnSelectOneKmdm)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 28)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TabPage2.Size = New System.Drawing.Size(775, 313)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(514, 211)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "选择科目"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'ListBoxYuxuanKmdm
         '
-        Me.ListBoxYuxuanKmdm.ItemHeight = 18
-        Me.ListBoxYuxuanKmdm.Location = New System.Drawing.Point(10, 51)
-        Me.ListBoxYuxuanKmdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ListBoxYuxuanKmdm.ItemHeight = 12
+        Me.ListBoxYuxuanKmdm.Location = New System.Drawing.Point(7, 34)
         Me.ListBoxYuxuanKmdm.Name = "ListBoxYuxuanKmdm"
-        Me.ListBoxYuxuanKmdm.Size = New System.Drawing.Size(298, 238)
+        Me.ListBoxYuxuanKmdm.Size = New System.Drawing.Size(200, 160)
         Me.ListBoxYuxuanKmdm.Sorted = True
         Me.ListBoxYuxuanKmdm.TabIndex = 23
         '
         'ListBoxYixuanKmdm
         '
-        Me.ListBoxYixuanKmdm.ItemHeight = 18
-        Me.ListBoxYixuanKmdm.Location = New System.Drawing.Point(460, 51)
-        Me.ListBoxYixuanKmdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ListBoxYixuanKmdm.ItemHeight = 12
+        Me.ListBoxYixuanKmdm.Location = New System.Drawing.Point(307, 34)
         Me.ListBoxYixuanKmdm.Name = "ListBoxYixuanKmdm"
-        Me.ListBoxYixuanKmdm.Size = New System.Drawing.Size(298, 238)
+        Me.ListBoxYixuanKmdm.Size = New System.Drawing.Size(200, 160)
         Me.ListBoxYixuanKmdm.Sorted = True
         Me.ListBoxYixuanKmdm.TabIndex = 24
         '
         'LblYixuanKmdm
         '
         Me.LblYixuanKmdm.AutoSize = True
-        Me.LblYixuanKmdm.Location = New System.Drawing.Point(460, 15)
-        Me.LblYixuanKmdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblYixuanKmdm.Location = New System.Drawing.Point(307, 10)
         Me.LblYixuanKmdm.Name = "LblYixuanKmdm"
-        Me.LblYixuanKmdm.Size = New System.Drawing.Size(80, 18)
+        Me.LblYixuanKmdm.Size = New System.Drawing.Size(53, 12)
         Me.LblYixuanKmdm.TabIndex = 22
         Me.LblYixuanKmdm.Text = "已选科目"
         '
         'BtnSelectAllKmdm
         '
-        Me.BtnSelectAllKmdm.Location = New System.Drawing.Point(328, 63)
-        Me.BtnSelectAllKmdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnSelectAllKmdm.Location = New System.Drawing.Point(219, 42)
         Me.BtnSelectAllKmdm.Name = "BtnSelectAllKmdm"
-        Me.BtnSelectAllKmdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnSelectAllKmdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnSelectAllKmdm.TabIndex = 17
         Me.BtnSelectAllKmdm.Text = "-->>"
         '
         'LblYuxuanKmdm
         '
         Me.LblYuxuanKmdm.AutoSize = True
-        Me.LblYuxuanKmdm.Location = New System.Drawing.Point(10, 15)
-        Me.LblYuxuanKmdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblYuxuanKmdm.Location = New System.Drawing.Point(7, 10)
         Me.LblYuxuanKmdm.Name = "LblYuxuanKmdm"
-        Me.LblYuxuanKmdm.Size = New System.Drawing.Size(80, 18)
+        Me.LblYuxuanKmdm.Size = New System.Drawing.Size(53, 12)
         Me.LblYuxuanKmdm.TabIndex = 21
         Me.LblYuxuanKmdm.Text = "预选科目"
         '
         'BtnSelectOneKmdm
         '
-        Me.BtnSelectOneKmdm.Location = New System.Drawing.Point(328, 123)
-        Me.BtnSelectOneKmdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnSelectOneKmdm.Location = New System.Drawing.Point(219, 82)
         Me.BtnSelectOneKmdm.Name = "BtnSelectOneKmdm"
-        Me.BtnSelectOneKmdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnSelectOneKmdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnSelectOneKmdm.TabIndex = 18
         Me.BtnSelectOneKmdm.Text = "-->"
         '
         'BtnUnSelectAllKmdm
         '
-        Me.BtnUnSelectAllKmdm.Location = New System.Drawing.Point(328, 243)
-        Me.BtnUnSelectAllKmdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnUnSelectAllKmdm.Location = New System.Drawing.Point(219, 162)
         Me.BtnUnSelectAllKmdm.Name = "BtnUnSelectAllKmdm"
-        Me.BtnUnSelectAllKmdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnUnSelectAllKmdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnUnSelectAllKmdm.TabIndex = 20
         Me.BtnUnSelectAllKmdm.Text = "<<--"
         '
         'BtnUnSelectOneKmdm
         '
-        Me.BtnUnSelectOneKmdm.Location = New System.Drawing.Point(328, 183)
-        Me.BtnUnSelectOneKmdm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BtnUnSelectOneKmdm.Location = New System.Drawing.Point(219, 122)
         Me.BtnUnSelectOneKmdm.Name = "BtnUnSelectOneKmdm"
-        Me.BtnUnSelectOneKmdm.Size = New System.Drawing.Size(112, 34)
+        Me.BtnUnSelectOneKmdm.Size = New System.Drawing.Size(75, 23)
         Me.BtnUnSelectOneKmdm.TabIndex = 19
         Me.BtnUnSelectOneKmdm.Text = "<--"
         '
@@ -441,66 +433,46 @@ Partial Class FrmGlZlfxHz
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.ForeColor = System.Drawing.Color.Blue
-        Me.CheckBox1.Location = New System.Drawing.Point(22, 643)
-        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckBox1.Location = New System.Drawing.Point(15, 429)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(304, 22)
+        Me.CheckBox1.Size = New System.Drawing.Size(204, 16)
         Me.CheckBox1.TabIndex = 122
         Me.CheckBox1.Text = "不显示没有发生额没有余额的数据"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'TxtKhdm
+        'CheckBox2
         '
-        Me.TxtKhdm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.TxtKhdm.Location = New System.Drawing.Point(555, 92)
-        Me.TxtKhdm.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtKhdm.MaxLength = 12
-        Me.TxtKhdm.Name = "TxtKhdm"
-        Me.TxtKhdm.Size = New System.Drawing.Size(166, 35)
-        Me.TxtKhdm.TabIndex = 124
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.ForeColor = System.Drawing.Color.Blue
+        Me.CheckBox2.Location = New System.Drawing.Point(15, 453)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(156, 16)
+        Me.CheckBox2.TabIndex = 123
+        Me.CheckBox2.Text = "含发出商品(按开票客户)"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
-        'LblKhdm
+        'CheckBox3
         '
-        Me.LblKhdm.AutoSize = True
-        Me.LblKhdm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.LblKhdm.Location = New System.Drawing.Point(411, 97)
-        Me.LblKhdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblKhdm.Name = "LblKhdm"
-        Me.LblKhdm.Size = New System.Drawing.Size(130, 24)
-        Me.LblKhdm.TabIndex = 123
-        Me.LblKhdm.Text = "客户编码："
-        '
-        'TxtZydm
-        '
-        Me.TxtZydm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.TxtZydm.Location = New System.Drawing.Point(232, 92)
-        Me.TxtZydm.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtZydm.MaxLength = 12
-        Me.TxtZydm.Name = "TxtZydm"
-        Me.TxtZydm.Size = New System.Drawing.Size(166, 35)
-        Me.TxtZydm.TabIndex = 122
-        '
-        'LblZydm
-        '
-        Me.LblZydm.AutoSize = True
-        Me.LblZydm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.LblZydm.Location = New System.Drawing.Point(88, 97)
-        Me.LblZydm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LblZydm.Name = "LblZydm"
-        Me.LblZydm.Size = New System.Drawing.Size(130, 24)
-        Me.LblZydm.TabIndex = 121
-        Me.LblZydm.Text = "职员编码："
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.ForeColor = System.Drawing.Color.Blue
+        Me.CheckBox3.Location = New System.Drawing.Point(15, 477)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(156, 16)
+        Me.CheckBox3.TabIndex = 124
+        Me.CheckBox3.Text = "含发出商品(按收货客户)"
+        Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'FrmGlZlfxHz
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(792, 695)
+        Me.ClientSize = New System.Drawing.Size(528, 503)
+        Me.Controls.Add(Me.CheckBox3)
+        Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.LblMsg)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FrmGlZlfxHz"
         Me.Text = "汇总账龄分析表"
         Me.Controls.SetChildIndex(Me.DlgPanel, 0)
@@ -508,6 +480,8 @@ Partial Class FrmGlZlfxHz
         Me.Controls.SetChildIndex(Me.GroupBox2, 0)
         Me.Controls.SetChildIndex(Me.GroupBox1, 0)
         Me.Controls.SetChildIndex(Me.CheckBox1, 0)
+        Me.Controls.SetChildIndex(Me.CheckBox2, 0)
+        Me.Controls.SetChildIndex(Me.CheckBox3, 0)
         Me.DlgPanel.ResumeLayout(False)
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).EndInit()
@@ -558,4 +532,6 @@ Partial Class FrmGlZlfxHz
     Public WithEvents LblKhdm As Label
     Public WithEvents TxtZydm As TextBox
     Public WithEvents LblZydm As Label
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents CheckBox3 As CheckBox
 End Class

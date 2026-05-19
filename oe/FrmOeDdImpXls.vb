@@ -174,7 +174,7 @@ Public Class FrmOeDdImpXls
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = strDjh
                 rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = Mid(strDjh, 5, 11)
                 rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("客户编码")
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("产品编码")).ToUpper
                 rcOleDbCommand.Parameters.Add("@paraStrKhlh", OleDbType.VarChar, 50).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户料号")).ToUpper
                 rcOleDbCommand.Parameters.Add("@paraDblKhsl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("订单数量")

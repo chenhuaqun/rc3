@@ -4,10 +4,12 @@ Imports System.Data.OleDb
 
 Module MdlMain
     Declare Function DogRead_Str Lib "Win32dll" Alias "DogRead" (ByVal DogBytes As Integer, ByVal DogAddr As Integer, ByVal DogData As String) As Integer
+
+    '全局变量声明
     Public g_Module As String = ""
     Public g_Kjrq As Date = Now()
     Public g_Dwrq As Date = Now() '起用日期
-    Public g_Kjqj As String = g_Kjrq.Year & g_Kjrq.Month
+    Public g_Kjqj As String = g_Kjrq.Year.ToString("0000") & g_Kjrq.Month.ToString("00") '会计期间
     Public g_User_Account As String = "ADMIN"
     Public g_User_DspName As String = "系统管理员"
     Public g_Dwdm As String = "0000"
@@ -15,6 +17,7 @@ Module MdlMain
     Public g_PrnDwmc As String = "杭州锐创软件有限公司"
     Public g_PrnDwmc_EN As String = "HANGZHOU RICHEN SOFTWARE CO,.LTD"
     Public g_Demo As Integer = 0 '试用版
+    Public g_Wbdm As String = ""
 
     Public g_CpdmText As String = "物料编码"
     Public g_CpmcText As String = "物料描述"
@@ -41,80 +44,90 @@ Module MdlMain
     Public sysConnectionString As String
     Public rcConnectionString As String
 
+    <STAThread()>
     Sub Main()
         '检查新版本
-        Dim sourceFileName As String = Application.StartupPath + "\update\rcerm.exe"
-        Dim destFileName As String = Application.StartupPath + "\rcerm.exe"
+        Dim sourceFileName As String = Path.Combine(Application.StartupPath, "update\rcerm.exe")
+        Dim destFileName As String = Path.Combine(Application.StartupPath, "rcerm.exe")
         If File.Exists(destFileName) Then
             File.Delete(destFileName)
         End If
         If File.Exists(sourceFileName) Then
             File.Move(sourceFileName, destFileName)
             '升级
-            System.Diagnostics.Process.Start(Application.StartupPath + "\rcerm.exe")
-            End
+            System.Diagnostics.Process.Start(destFileName)
+            Application.Exit()
         End If
-        '
+        '读取数据源配置文件并解密
         Dim c As New models.rcCryptography
-        Dim rcStreamReader As StreamReader
-        Dim rcFileName As String = CurDir() + "\richen.config"
+        Dim rcFileName As String = Path.Combine(Application.StartupPath, "richen.config")
         If Not File.Exists(rcFileName) Then
             Dim rcFrmDataSource As New models.FrmDataSource
             If Not rcFrmDataSource.ShowDialog() = DialogResult.OK Then
-                End
+                Application.Exit()
             End If
         End If
         If Not File.Exists(rcFileName) Then
             MsgBox("运行系统，必须配置系统数据库信息！")
             Exit Sub
         End If
-        rcStreamReader = File.OpenText(rcFileName)
-        PubStrDatabaseServer = Trim(rcStreamReader.ReadLine)
-        If PubStrDatabaseServer.Length <> 0 Then
-            PubStrDatabaseServer = Trim(c.DeCryptography(PubStrDatabaseServer))
-        Else
-            PubStrDatabaseServer = ""
-        End If
-        PubStrDatabaseName = Trim(rcStreamReader.ReadLine)
-        If PubStrDatabaseName.Length <> 0 Then
-            PubStrDatabaseName = Trim(c.DeCryptography(PubStrDatabaseName))
-        Else
-            PubStrDatabaseName = ""
-        End If
-        PubStrUserName = Trim(rcStreamReader.ReadLine)
-        If PubStrUserName.Length <> 0 Then
-            PubStrUserName = Trim(c.DeCryptography(PubStrUserName))
-        Else
-            PubStrUserName = ""
-        End If
-        PubStrPassword = Trim(rcStreamReader.ReadLine)
-        If PubStrPassword.Length <> 0 Then
-            PubStrPassword = Trim(c.DeCryptography(PubStrPassword))
-        Else
-            PubStrPassword = ""
-        End If
+        Using rcStreamReader As StreamReader = File.OpenText(rcFileName)
+            PubStrDatabaseServer = Trim(rcStreamReader.ReadLine)
+            If PubStrDatabaseServer.Length <> 0 Then
+                PubStrDatabaseServer = Trim(c.DeCryptography(PubStrDatabaseServer))
+            Else
+                PubStrDatabaseServer = ""
+            End If
+            PubStrDatabaseName = Trim(rcStreamReader.ReadLine)
+            If PubStrDatabaseName.Length <> 0 Then
+                PubStrDatabaseName = Trim(c.DeCryptography(PubStrDatabaseName))
+            Else
+                PubStrDatabaseName = ""
+            End If
+            PubStrUserName = Trim(rcStreamReader.ReadLine)
+            If PubStrUserName.Length <> 0 Then
+                PubStrUserName = Trim(c.DeCryptography(PubStrUserName))
+            Else
+                PubStrUserName = ""
+            End If
+            PubStrPassword = Trim(rcStreamReader.ReadLine)
+            If PubStrPassword.Length <> 0 Then
+                PubStrPassword = Trim(c.DeCryptography(PubStrPassword))
+            Else
+                PubStrPassword = ""
+            End If
+        End Using
         'SQL Server
         'sysConnectionString = "Provider=SQLOLEDB.1;OLE DB Services=-1;Data Source=" & PubStrDatabaseServer & ";Initial Catalog=" & PubStrDatabaseName & ";User ID=" & PubStrUserName & ";PWD=" & PubStrPassword 'Integrated Security=SSPI;
         'Orcal 9.i
         sysConnectionString = "Provider=OraOLEDB.Oracle.1;Persist Security Info=False;Data Source = (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = " & PubStrDatabaseServer & ")(PORT = 1521)))(CONNECT_DATA = (SERVICE_NAME = " & PubStrDatabaseName & ")));User ID=" & PubStrUserName & ";Password=" & PubStrPassword ' &";Pooling = false" 'Integrated Security=SSPI;
         sysOleDbConn.ConnectionString = sysConnectionString
-        rcStreamReader.Close()
         '检查能否建立连接
         Try
             sysOleDbConn.Open()
         Catch ex As Exception
             MsgBox("对不起，数据库服务器连接不上。" & Chr(13) & "请稍后再试或与系统管理员联系。" & Chr(13) & Chr(13) & ex.Message, MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "提示信息")
-            End
+            Application.Exit()
         Finally
             sysOleDbConn.Close()
         End Try
+        Application.EnableVisualStyles()
+        Application.SetCompatibleTextRenderingDefault(False)
         '操作员登陆
-        Dim rcFrmUserLogin As New FrmUserLogin
-        If Not rcFrmUserLogin.ShowDialog() = DialogResult.OK Then
-            End
-        End If
-        Dim rcFrmOe As New FrmMain
-        Application.Run(rcFrmOe)
+        Try
+            '等待一秒
+            System.Threading.Thread.Sleep(2000) ' 等待1秒(New TimeSpan(0, 0, 1)))
+            'MsgBox("准备显示登录窗口")
+            Dim rcFrmUserLogin As New FrmUserLogin
+            If rcFrmUserLogin.ShowDialog() = DialogResult.OK Then
+                Application.Run(New FrmMain)
+            Else
+                Application.Exit()
+            End If
+        Catch ex As Exception
+            MsgBox("主程序异常：" & ex.Message)
+            Application.Exit()
+        End Try
     End Sub
 
     'Function getOeBegin(ByVal intYear As Integer, ByVal intMonth As Integer) As Date

@@ -21,7 +21,6 @@ Public Class FrmQckmyeSr
         Me.LblKhmc.Text = ""
         Me.LblCsmc.Text = ""
         Me.LblDw.Text = ""
-        Me.LblBz.Text = ""
         Me.TxtNcwb.Text = 0.0
         Me.TxtNcje.Text = 0.0
     End Sub
@@ -30,7 +29,7 @@ Public Class FrmQckmyeSr
 
 #Region "控键回车键的处理"
 
-    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtKmdm.KeyPress, TxtBmdm.KeyPress, TxtZydm.KeyPress, TxtXmdm.KeyPress, TxtKhdm.KeyPress, TxtCsdm.KeyPress, TxtYhzh.KeyPress, TxtJxzh.KeyPress, RdoBtnJie.KeyPress, RdoBtnDai.KeyPress, TxtNcsl.KeyPress, TxtNcje.KeyPress, TxtNcwb.KeyPress
+    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtKmdm.KeyPress, TxtBmdm.KeyPress, TxtZydm.KeyPress, TxtXmdm.KeyPress, TxtKhdm.KeyPress, TxtCsdm.KeyPress, TxtYhzh.KeyPress, TxtJxzh.KeyPress, RdoBtnJie.KeyPress, RdoBtnDai.KeyPress, TxtNcsl.KeyPress， TxtWbdm.KeyPress, TxtNcje.KeyPress, TxtNcwb.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
@@ -134,14 +133,14 @@ Public Class FrmQckmyeSr
                 Else
                     Me.TxtNcsl.Enabled = False
                 End If
-                If rcDataset.Tables("gl_kmxx").Rows(0).Item("kmgs") = 2 Then
-                    If rcDataset.Tables("gl_kmxx").Rows(0).Item("bz").GetType.ToString <> "System.DBNull" Then
-                        Me.LblDw.Text = rcDataset.Tables("gl_kmxx").Rows(0).Item("bz")
-                    End If
-                    Me.TxtNcwb.Enabled = True
-                Else
-                    Me.TxtNcwb.Enabled = False
-                End If
+                'If rcDataset.Tables("gl_kmxx").Rows(0).Item("kmgs") = 2 Then
+                '    If rcDataset.Tables("gl_kmxx").Rows(0).Item("bz").GetType.ToString <> "System.DBNull" Then
+                '        Me.LblDw.Text = rcDataset.Tables("gl_kmxx").Rows(0).Item("bz")
+                '    End If
+                '    Me.TxtNcwb.Enabled = True
+                'Else
+                '    Me.TxtNcwb.Enabled = False
+                'End If
             Else
                 MsgBox("科目编码不存在或非明细科目。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 e.Cancel = True
@@ -417,17 +416,17 @@ Public Class FrmQckmyeSr
             Case Keys.F3
                 Dim rcFrm As New models.FrmF3KeyPress
                 With rcFrm
-                    .paraOleDbConn = rcOleDbConn
-                    .paraTableName = "rc_csxx"
-                    .paraField1 = "csdm"
-                    .paraField2 = "csmc"
-                    .paraField3 = "cssm"
-                    .paraTitle = "供应商"
-                    .paraOldValue = ""
-                    .paraAddName = ""
-                    .paraCondition = ""
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_csxx"
+                    .ParaField1 = "csdm"
+                    .ParaField2 = "csmc"
+                    .ParaField3 = "cssm"
+                    .ParaTitle = "供应商"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
+                    .ParaCondition = ""
                     If .ShowDialog = DialogResult.OK Then
-                        Me.TxtCsdm.Text = Trim(.paraField1)
+                        Me.TxtCsdm.Text = Trim(.ParaField1)
                     End If
                 End With
         End Select
@@ -471,6 +470,67 @@ Public Class FrmQckmyeSr
 
 #End Region
 
+#Region "币种编码事件"
+
+    Private Sub TxtWbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtWbdm.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F3
+                Dim rcFrm As New models.FrmF3KeyPress
+                With rcFrm
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_wbxx"
+                    .ParaField1 = "wbdm"
+                    .ParaField2 = "wbmc"
+                    .ParaField3 = "wbsm"
+                    .ParaTitle = "币种"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
+                    .ParaCondition = "kjnd ='" & Mid(g_Kjqj, 1, 4) & "'"
+                    If .ShowDialog = DialogResult.OK Then
+                        Me.TxtWbdm.Text = Trim(.ParaField1)
+                    End If
+                End With
+        End Select
+    End Sub
+
+    Private Sub TxtWBdm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtWbdm.Validating
+        If Not String.IsNullOrEmpty(Me.TxtWbdm.Text) Then
+            Try
+                rcOleDbConn.Open()
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT * FROM rc_wbxx WHERE (kjnd = ? AND wbdm = ?)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
+                rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = Trim(TxtWbdm.Text)
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("rc_wbxx") IsNot Nothing Then
+                    Me.rcDataset.Tables("rc_wbxx").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "rc_wbxx")
+            Catch ex As Exception
+                Try
+                    MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                Catch ey As OleDbException
+                    MsgBox("程序错误。" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                End Try
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+            If rcDataset.Tables("rc_wbxx").Rows.Count > 0 Then
+                Me.TxtWbdm.Text = Trim(rcDataset.Tables("rc_wbxx").Rows(0).Item("wbdm"))
+            Else
+                MsgBox("币种编码不存在。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                e.Cancel = True
+            End If
+            LoadSavedKmye()
+        End If
+    End Sub
+
+#End Region
+
 #Region "取原来保存的年初数量"
 
     Private Sub LoadSavedKmye()
@@ -481,7 +541,7 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Connection = rcOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje FROM gl_kmyeb WHERE kjnd = ? AND jxzh = ? AND yhzh = ? AND csdm = ? AND khdm = ? AND xmdm = ? AND zydm = ? AND bmdm = ? AND kmdm = ?"
+                rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje FROM gl_kmyeb WHERE kjnd = ? AND jxzh = ? AND yhzh = ? AND csdm = ? AND khdm = ? AND xmdm = ? AND zydm = ? AND bmdm = ? AND wbdm = ? AND kmdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
                 rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtJxzh.Text).ToUpper), "~", (Me.TxtJxzh.Text).ToUpper）
@@ -491,6 +551,7 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper）
+                rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(String.IsNullOrEmpty((Me.TxtWbdm.Text).ToUpper), "~", (Me.TxtWbdm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKmdm.Text).ToUpper
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("kmye") IsNot Nothing Then
@@ -516,6 +577,7 @@ Public Class FrmQckmyeSr
                     Me.RdoBtnJie.Checked = True
                     Me.RdoBtnDai.Checked = False
                 End If
+                Me.TxtWbdm.Text = IIf(rcDataset.Tables("kmye").Rows(0).Item("wbdm") = "~", "", rcDataset.Tables("kmye").Rows(0).Item("wbdm"))
                 Me.TxtBmdm.Text = IIf(rcDataset.Tables("kmye").Rows(0).Item("bmdm") = "~", "", rcDataset.Tables("kmye").Rows(0).Item("bmdm"))
                 Me.TxtZydm.Text = IIf(rcDataset.Tables("kmye").Rows(0).Item("zydm") = "~", "", rcDataset.Tables("kmye").Rows(0).Item("zydm"))
                 Me.TxtXmdm.Text = IIf(rcDataset.Tables("kmye").Rows(0).Item("xmdm") = "~", "", rcDataset.Tables("kmye").Rows(0).Item("xmdm"))
@@ -550,7 +612,7 @@ Public Class FrmQckmyeSr
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje FROM gl_kmyeb WHERE kjnd = ? AND jxzh = ? AND yhzh = ? AND csdm = ? AND khdm = ? AND xmdm = ? AND zydm = ? AND bmdm = ? AND kmdm = ?"
+            rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje FROM gl_kmyeb WHERE kjnd = ? AND jxzh = ? AND yhzh = ? AND csdm = ? AND khdm = ? AND xmdm = ? AND zydm = ? AND bmdm = ? AND wbdm = ? AND kmdm = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
             rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtJxzh.Text).ToUpper), "~", (Me.TxtJxzh.Text).ToUpper）
@@ -560,6 +622,7 @@ Public Class FrmQckmyeSr
             rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper）
             rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper）
             rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper）
+            rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(String.IsNullOrEmpty((Me.TxtWbdm.Text).ToUpper), "~", (Me.TxtWbdm.Text).ToUpper）
             rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKmdm.Text).ToUpper
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("kmye") IsNot Nothing Then
@@ -581,10 +644,11 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje) values (?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
                 rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Me.TxtKmdm.Text
+                rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(String.IsNullOrEmpty((Me.TxtWbdm.Text).ToUpper), "~", (Me.TxtWbdm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper）
@@ -618,7 +682,7 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "UPDATE gl_kmyeb SET jd = ? ,ncsl = ?,ncwb = ?,ncje = ? WHERE kjnd = ? AND jxzh = ? AND yhzh = ? AND csdm = ? AND khdm = ? AND xmdm =  ? AND zydm = ? AND bmdm = ? AND kmdm = ?"
+                rcOleDbCommand.CommandText = "UPDATE gl_kmyeb SET jd = ? ,ncsl = ?,ncwb = ?,ncje = ? WHERE kjnd = ? AND jxzh = ? AND yhzh = ? AND csdm = ? AND khdm = ? AND xmdm =  ? AND zydm = ? AND bmdm = ? AND wbdm =? AND kmdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@jd", OleDbType.VarChar, 2).Value = IIf(Me.RdoBtnJie.Checked, "借", "贷")
                 rcOleDbCommand.Parameters.Add("@ncsl", OleDbType.Numeric, 18).Value = Me.TxtNcsl.Text
@@ -632,6 +696,7 @@ Public Class FrmQckmyeSr
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtXmdm.Text).ToUpper), "~", (Me.TxtXmdm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtZydm.Text).ToUpper), "~", (Me.TxtZydm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = IIf(String.IsNullOrEmpty((Me.TxtBmdm.Text).ToUpper), "~", (Me.TxtBmdm.Text).ToUpper）
+                rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(String.IsNullOrEmpty((Me.TxtWbdm.Text).ToUpper), "~", (Me.TxtWbdm.Text).ToUpper）
                 rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(TxtKmdm.Text).ToUpper
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbTrans.Commit()
@@ -670,11 +735,22 @@ Public Class FrmQckmyeSr
         Me.TxtJxzh.Enabled = True
         Me.TxtJxzh.Text = ""
         Me.LblDw.Text = ""
-        Me.LblBz.Text = ""
+        Me.TxtWbdm.Text = ""
         Me.TxtNcsl.Text = 0.0
         Me.TxtNcwb.Text = 0.0
         Me.TxtNcje.Text = 0.0
         Me.TxtKmdm.Focus()
+    End Sub
+
+    Private Sub BtnImpXls_Click(sender As Object, e As EventArgs) Handles BtnImpXls.Click
+        '调用表单
+        Dim rcFrm As New FrmQckmyeImpXls
+        With rcFrm
+            .ParaStrKjqj = Mid(g_Kjqj, 1, 4)
+            .WindowState = FormWindowState.Maximized
+            .MdiParent = Me.MdiParent
+            .Show()
+        End With
     End Sub
 
 #End Region

@@ -246,7 +246,7 @@ Public Class FrmCplbEdit
                 rcOleDbCommand.CommandText = "Insert Into rc_cplb (lbdm,lbmc,lbsm) VALUES (?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(TxtLbdm.Text)
-                rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 30).Value = Trim(TxtLbmc.Text)
+                rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 60).Value = Trim(TxtLbmc.Text)
                 rcOleDbCommand.Parameters.Add("@lbsm", OleDbType.VarChar, 12).Value = Trim(TxtLbsm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "SELECT * FROM rc_cplb ORDER BY lbdm"
@@ -281,7 +281,7 @@ Public Class FrmCplbEdit
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "UPDATE rc_cplb SET lbmc = ? , lbsm = ? WHERE  lbdm = ?"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 30).Value = Trim(Me.TxtLbmc.Text)
+                rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 60).Value = Trim(Me.TxtLbmc.Text)
                 rcOleDbCommand.Parameters.Add("@lbsm", OleDbType.VarChar, 12).Value = Trim(Me.TxtLbsm.Text)
                 rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtLbdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()

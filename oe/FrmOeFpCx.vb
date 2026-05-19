@@ -56,7 +56,7 @@ Public Class FrmOeFpCx
 
 #Region "控键回车键的处理"
 
-    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles DtpBegin.KeyPress, DtpEnd.KeyPress, CmbPzlxjc.KeyPress, NudDjhBegin.KeyPress, NudDjhEnd.KeyPress, TxtCpdm.KeyPress, TxtCpmc.KeyPress, TxtHth.KeyPress, TxtKhdm.KeyPress, TxtYspz.KeyPress, TxtZydm.KeyPress, ChbLbfs.KeyPress
+    Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles DtpBegin.KeyPress, DtpEnd.KeyPress, CmbPzlxjc.KeyPress, NudDjhBegin.KeyPress, NudDjhEnd.KeyPress, TxtCpdm.KeyPress, TxtCpmc.KeyPress, TxtHth.KeyPress, TxtKhdm.KeyPress, TxtYspz.KeyPress, TxtZydm.KeyPress, TxtBmdm.KeyPress, ChbLbfs.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
@@ -166,7 +166,7 @@ Public Class FrmOeFpCx
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
-                        TxtKhdm.Text = Trim(.paraField1)
+                        Me.TxtKhdm.Text = Trim(.ParaField1)
                     End If
                 End With
         End Select
@@ -195,6 +195,63 @@ Public Class FrmOeFpCx
                     End If
                 End With
         End Select
+    End Sub
+
+#End Region
+
+#Region "部门编码的事件"
+
+    Private Sub TxtBmdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtBmdm.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F3
+                Dim rcFrm As New models.FrmF3KeyPress
+                With rcFrm
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "rc_bmxx"
+                    .ParaField1 = "bmdm"
+                    .ParaField2 = "bmmc"
+                    .ParaField3 = "bmsm"
+                    .ParaTitle = "部门"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
+                    If .ShowDialog = DialogResult.OK Then
+                        TxtBmdm.Text = Trim(.ParaField1)
+                    End If
+                End With
+            Case Keys.Down
+                SendKeys.Send("{TAB}")
+            Case Keys.Up
+                SendKeys.Send("+{TAB}")
+        End Select
+    End Sub
+
+    Private Sub TxtBmdm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtBmdm.Validating
+        If Not String.IsNullOrEmpty(Me.TxtBmdm.Text) Then
+            Try
+                rcOleDbConn.Open()
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT * FROM rc_bmxx WHERE (bmdm = ?)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = Trim(TxtBmdm.Text)
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("rc_bmxx") IsNot Nothing Then
+                    Me.rcDataset.Tables("rc_bmxx").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "rc_bmxx")
+            Catch ex As Exception
+                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+            If rcDataset.Tables("rc_bmxx").Rows.Count > 0 Then
+                TxtBmdm.Text = Trim(rcDataset.Tables("rc_bmxx").Rows(0).Item("bmdm"))
+            Else
+                e.Cancel = True
+            End If
+        End If
     End Sub
 
 #End Region
@@ -259,12 +316,12 @@ Public Class FrmOeFpCx
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
                 If Me.ChbYjWsk.Checked Then
-                    rcOleDbCommand.CommandText = "SELECT oe_fpa.*,oe_dd.sktj,oe_dd.skqx FROM (SELECT oe_fp.djh,oe_fp.xh,oe_fp.fprq,oe_fp.bdelete,oe_fp.zydm,oe_fp.zymc,oe_fp.khdm,oe_fp.khmc,oe_fp.yspz,oe_fp.cpdm,oe_fp.cpmc,oe_fp.hth,oe_fp.sl,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.skje,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse,oe_fp.je -  oe_fp.xsdje AS xsdjece,oe_fp.se - oe_fp.xsdse AS xsdsece,oe_fp.srr,oe_fp.srrq,oe_fp.shr,oe_fp.shrq,oe_fp.jzr FROM rc_cpxx,oe_fp,rc_lx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '产品销售单'" & IIf(Me.ChbDelete.Checked, "", " AND oe_fp.bdelete = 0") & IIf(Trim(Me.TxtLbdm.Text).Length > 0, " and rc_cpxx.lbdm = '" & Trim(Me.TxtLbdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_fp.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_fp.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_fp.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_fp.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(TxtYspz.Text).Length > 0, " and oe_fp.yspz LIKE '" & LTrim(TxtYspz.Text) & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_fp.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Me.ChbYjWsk.Checked, " AND oe_fp.je + oe_fp.se  <> oe_fp.skje", "") & ") oe_fpa,oe_dd WHERE oe_fpa.ddxh = oe_dd.xh AND oe_fpa.dddjh = oe_dd.djh AND oe_dd.sktj = '月结' AND oe_fpa.je + oe_fpa.se <> oe_fpa.skje AND oe_fpa.fprq + oe_dd.skqx < SYSDATE ORDER BY oe_fpa.djh,oe_fpa.xh"
+                    rcOleDbCommand.CommandText = "SELECT oe_fpa.*,oe_dd.sktj,oe_dd.skqx FROM (SELECT oe_fp.djh,oe_fp.xh,oe_fp.fprq,oe_fp.bdelete,oe_fp.zydm,oe_fp.zymc,oe_fp.khdm,oe_fp.khmc,oe_fp.shkhdm,oe_fp.shkhmc,oe_fp.yspz,oe_fp.cpdm,oe_fp.cpmc,oe_fp.hth,oe_fp.sl,oe_fp.bmdm,oe_fp.bmmc,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.skje,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse,oe_fp.je -  oe_fp.xsdje AS xsdjece,oe_fp.se - oe_fp.xsdse AS xsdsece,oe_fp.srr,oe_fp.srrq,oe_fp.shr,oe_fp.shrq,oe_fp.jzr FROM rc_cpxx,oe_fp,rc_lx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '产品销售单'" & IIf(Me.ChbDelete.Checked, "", " AND oe_fp.bdelete = 0") & IIf(Trim(Me.TxtLbdm.Text).Length > 0, " and rc_cpxx.lbdm = '" & Trim(Me.TxtLbdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_fp.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_fp.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and oe_fp.bmdm LIKE '" & LTrim(TxtBmdm.Text) & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_fp.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_fp.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(TxtYspz.Text).Length > 0, " and oe_fp.yspz LIKE '" & LTrim(TxtYspz.Text) & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_fp.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Me.ChbYjWsk.Checked, " AND oe_fp.je + oe_fp.se  <> oe_fp.skje", "") & ") oe_fpa,oe_dd WHERE oe_fpa.ddxh = oe_dd.xh AND oe_fpa.dddjh = oe_dd.djh AND oe_dd.sktj = '月结' AND oe_fpa.je + oe_fpa.se <> oe_fpa.skje AND oe_fpa.fprq + oe_dd.skqx < SYSDATE ORDER BY oe_fpa.djh,oe_fpa.xh"
                 Else
                     If ChbWsk.Checked Then
-                        rcOleDbCommand.CommandText = "SELECT oe_fp.djh,oe_fp.xh,oe_fp.fprq,oe_fp.bdelete,oe_fp.zydm,oe_fp.zymc,oe_fp.khdm,oe_fp.khmc,oe_fp.yspz,oe_fp.cpdm,oe_fp.cpmc,oe_fp.hth,oe_fp.sl,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.skje,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse,oe_fp.je -  oe_fp.xsdje AS xsdjece,oe_fp.se - oe_fp.xsdse AS xsdsece,oe_fp.srr,oe_fp.srrq,oe_fp.shr,oe_fp.shrq,oe_fp.jzr FROM rc_cpxx,oe_fp,rc_lx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '产品销售单'" & IIf(Me.ChbDelete.Checked, "", " AND oe_fp.bdelete = 0") & IIf(Trim(Me.TxtLbdm.Text).Length > 0, " and rc_cpxx.lbdm = '" & Trim(Me.TxtLbdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_fp.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_fp.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_fp.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_fp.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(TxtYspz.Text).Length > 0, " and oe_fp.yspz LIKE '" & LTrim(TxtYspz.Text) & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_fp.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Me.ChbWsk.Checked, " AND oe_fp.je + oe_fp.se <> oe_fp.skje", "")
+                        rcOleDbCommand.CommandText = "SELECT oe_fp.djh,oe_fp.xh,oe_fp.fprq,oe_fp.bdelete,oe_fp.zydm,oe_fp.zymc,oe_fp.khdm,oe_fp.khmc,oe_fp.shkhdm,oe_fp.shkhmc,oe_fp.yspz,oe_fp.cpdm,oe_fp.cpmc,oe_fp.hth,oe_fp.bmdm,oe_fp.bmmc,oe_fp.sl,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.skje,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse,oe_fp.je -  oe_fp.xsdje AS xsdjece,oe_fp.se - oe_fp.xsdse AS xsdsece,oe_fp.srr,oe_fp.srrq,oe_fp.shr,oe_fp.shrq,oe_fp.jzr FROM rc_cpxx,oe_fp,rc_lx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '产品销售单'" & IIf(Me.ChbDelete.Checked, "", " AND oe_fp.bdelete = 0") & IIf(Trim(Me.TxtLbdm.Text).Length > 0, " and rc_cpxx.lbdm = '" & Trim(Me.TxtLbdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_fp.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_fp.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and oe_fp.bmdm LIKE '" & LTrim(TxtBmdm.Text) & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_fp.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_fp.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(TxtYspz.Text).Length > 0, " and oe_fp.yspz LIKE '" & LTrim(TxtYspz.Text) & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_fp.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Me.ChbWsk.Checked, " AND oe_fp.je + oe_fp.se <> oe_fp.skje", "")
                     Else
-                        rcOleDbCommand.CommandText = "SELECT oe_fpa.*,oe_xsd.cbje FROM (SELECT oe_fp.djh,oe_fp.xh,oe_fp.fprq,oe_fp.bdelete,oe_fp.zydm,oe_fp.zymc,oe_fp.khdm,oe_fp.khmc,oe_fp.yspz,oe_fp.cpdm,oe_fp.cpmc,oe_fp.hth,oe_fp.sl,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.skje,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse,oe_fp.je -  oe_fp.xsdje AS xsdjece,oe_fp.se - oe_fp.xsdse AS xsdsece,oe_fp.srr,oe_fp.srrq,oe_fp.shr,oe_fp.shrq,oe_fp.jzr FROM rc_cpxx,oe_fp,rc_lx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '产品销售单'" & IIf(Me.ChbDelete.Checked, "", " AND oe_fp.bdelete = 0") & " AND fprq >= ? AND fprq <= ? AND SUBSTR(oe_fp.djh,11,5) >= ?  AND SUBSTR(oe_fp.djh,11,5) <= ?" & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(oe_fp.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & IIf(Trim(Me.TxtLbdm.Text).Length > 0, " and rc_cpxx.lbdm = '" & Trim(Me.TxtLbdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_fp.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_fp.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_fp.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_fp.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(TxtYspz.Text).Length > 0, " and oe_fp.yspz LIKE '" & LTrim(TxtYspz.Text) & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_fp.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & ") oe_fpa LEFT JOIN oe_xsd ON oe_xsd.xh = oe_fpa.xsdxh AND  oe_xsd.djh = oe_fpa.xsddjh ORDER BY oe_fpa.djh,oe_fpa.xh"
+                        rcOleDbCommand.CommandText = "SELECT oe_fp.djh,oe_fp.xh,oe_fp.fprq,oe_fp.bdelete,oe_fp.zydm,oe_fp.zymc,oe_fp.khdm,oe_fp.khmc,oe_fp.shkhdm,oe_fp.shkhmc,oe_fp.yspz,oe_fp.cpdm,oe_fp.cpmc,oe_fp.hth,oe_fp.bmdm,oe_fp.bmmc,oe_fp.sl,oe_fp.dw,oe_fp.mjsl,oe_fp.fzsl,oe_fp.fzdw,oe_fp.dj,oe_fp.hsdj,oe_fp.je,oe_fp.shlv,oe_fp.se,oe_fp.je + oe_fp.se AS jese,oe_fp.skje,oe_fp.fpmemo,oe_fp.dddjh,oe_fp.ddxh,oe_fp.xsddjh,oe_fp.xsdxh,oe_fp.xsddj,oe_fp.xsdhsdj,oe_fp.xsdje,oe_fp.xsdshlv,oe_fp.xsdse,oe_fp.je -  oe_fp.xsdje AS xsdjece,oe_fp.se - oe_fp.xsdse AS xsdsece,oe_fp.srr,oe_fp.srrq,oe_fp.shr,oe_fp.shrq,oe_fp.jzr,oe_fp.cbje FROM rc_cpxx,oe_fp,rc_lx WHERE rc_cpxx.cpdm = oe_fp.cpdm AND SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '产品销售单'" & IIf(Me.ChbDelete.Checked, "", " AND oe_fp.bdelete = 0") & " AND fprq >= ? AND fprq <= ? AND SUBSTR(oe_fp.djh,11,5) >= ?  AND SUBSTR(oe_fp.djh,11,5) <= ?" & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(oe_fp.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & IIf(Trim(Me.TxtLbdm.Text).Length > 0, " and rc_cpxx.lbdm = '" & Trim(Me.TxtLbdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_fp.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_fp.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(Trim(Me.TxtBmdm.Text).Length > 0, " and oe_fp.bmdm LIKE '" & LTrim(TxtBmdm.Text) & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_fp.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_fp.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(TxtYspz.Text).Length > 0, " and oe_fp.yspz LIKE '" & LTrim(TxtYspz.Text) & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_fp.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & " ORDER BY oe_fp.djh,oe_fp.xh"
                     End If
                 End If
                 rcOleDbCommand.Parameters.Clear()
@@ -275,37 +332,37 @@ Public Class FrmOeFpCx
                     rcOleDbCommand.Parameters.Add("@djh2", OleDbType.VarChar, 5).Value = NudDjhEnd.Value.ToString.PadLeft(5, "0")
                 End If
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataset.Tables("xsdlb") IsNot Nothing Then
-                    rcDataset.Tables("xsdlb").Clear()
+                If rcDataset.Tables("fplb") IsNot Nothing Then
+                    rcDataset.Tables("fplb").Clear()
                 End If
-                rcOleDbDataAdpt.Fill(rcDataset, "xsdlb")
+                rcOleDbDataAdpt.Fill(rcDataset, "fplb")
             Catch ex As Exception
                 MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
-            If rcDataset.Tables("xsdlb").Rows.Count <= 0 Then
+            If rcDataset.Tables("fplb").Rows.Count <= 0 Then
                 MsgBox("没有满足条件的数据。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             End If
             Dim rcDataRow As DataRow
-            rcDataRow = rcDataset.Tables("xsdlb").NewRow
+            rcDataRow = rcDataset.Tables("fplb").NewRow
             rcDataRow.Item("djh") = "合计"
-            rcDataRow.Item("sl") = rcDataset.Tables("xsdlb").Compute("Sum(sl)", "")
-            rcDataRow.Item("je") = rcDataset.Tables("xsdlb").Compute("Sum(je)", "")
-            rcDataRow.Item("se") = rcDataset.Tables("xsdlb").Compute("Sum(se)", "")
-            rcDataRow.Item("jese") = rcDataset.Tables("xsdlb").Compute("Sum(jese)", "")
-            rcDataRow.Item("skje") = rcDataset.Tables("xsdlb").Compute("Sum(skje)", "")
+            rcDataRow.Item("sl") = rcDataset.Tables("fplb").Compute("Sum(sl)", "")
+            rcDataRow.Item("je") = rcDataset.Tables("fplb").Compute("Sum(je)", "")
+            rcDataRow.Item("se") = rcDataset.Tables("fplb").Compute("Sum(se)", "")
+            rcDataRow.Item("jese") = rcDataset.Tables("fplb").Compute("Sum(jese)", "")
+            rcDataRow.Item("skje") = rcDataset.Tables("fplb").Compute("Sum(skje)", "")
             If Not Me.ChbYjWsk.Checked And Not Me.ChbWsk.Checked Then
-                rcDataRow.Item("cbje") = rcDataset.Tables("xsdlb").Compute("Sum(cbje)", "")
+                rcDataRow.Item("cbje") = rcDataset.Tables("fplb").Compute("Sum(cbje)", "")
             End If
-            rcDataset.Tables("xsdlb").Rows.Add(rcDataRow)
+            rcDataset.Tables("fplb").Rows.Add(rcDataRow)
             '调用表单
             Dim rcFrm As New FrmOeFpCxLb
             With rcFrm
                 .ParaDataSet = rcDataset
-                .ParaDataView = New DataView(rcDataset.Tables("xsdlb"), "TRUE", "djh,xh", DataViewRowState.CurrentRows)
+                .ParaDataView = New DataView(rcDataset.Tables("fplb"), "TRUE", "djh,xh", DataViewRowState.CurrentRows)
                 .WindowState = FormWindowState.Maximized
                 .MdiParent = Me.MdiParent
                 .Show()

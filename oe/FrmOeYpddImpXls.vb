@@ -148,7 +148,7 @@ Public Class FrmOeYpddImpXls
                 rcOleDbCommand.Parameters.Add("@pStrDjh", OleDbType.VarChar, 15).Value = strDjh
                 rcOleDbCommand.Parameters.Add("@pStrHth", OleDbType.VarChar, 11).Value = rcDataset.Tables("result").Rows(i).Item("合同编码")
                 rcOleDbCommand.Parameters.Add("@pStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("客户编码")
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1
                 rcOleDbCommand.Parameters.Add("@pStrCpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("产品编码")).ToUpper
                 rcOleDbCommand.Parameters.Add("@pStrCpmc", OleDbType.VarChar, 40).Value = Trim(rcDataset.Tables("result").Rows(i).Item("东磁型号"))
                 rcOleDbCommand.Parameters.Add("@pStrCpgg", OleDbType.VarChar, 40).Value = Trim(rcDataset.Tables("result").Rows(i).Item("材质"))

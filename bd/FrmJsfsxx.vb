@@ -34,12 +34,14 @@ Public Class FrmJsfsxx
         dtJsfs.Columns.Add("jsfsmc", Type.GetType("System.String"))
         dtJsfs.Columns.Add("jsfssm", Type.GetType("System.String"))
         dtJsfs.Columns.Add("bkywf", Type.GetType("System.Boolean"))
+        dtJsfs.Columns.Add("bgylk", Type.GetType("System.Boolean"))
         rcDataset.Tables.Add(dtJsfs)
         With dtJsfs
             .Columns("jsfsdm").DefaultValue = ""
             .Columns("jsfsmc").DefaultValue = ""
             .Columns("jsfssm").DefaultValue = ""
             .Columns("bkywf").DefaultValue = 0
+            .Columns("bgylk").DefaultValue = 0
         End With
         '显示等待样式鼠标
         Cursor.Current = New Cursor(Application.StartupPath & "\" & "Wait.cur")

@@ -253,6 +253,8 @@ Public Class FrmYwfJs
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         Dim i As Integer
         Dim j As Integer
+        Dim dateBegin As Date = GetInvBegin(Me.NudYear.Value, Me.NudMonth.Value)
+        Dim dateEnd As Date = GetInvEnd(Me.NudYear.Value, Me.NudMonth.Value)
         '查询科目权限
         If Me.ListBoxYixuanDwdm.Items.Count = 0 Then
             Return
@@ -264,6 +266,7 @@ Public Class FrmYwfJs
         If String.IsNullOrEmpty(strKmdm) Then
             strKmdm = "0=0"
         End If
+        Me.LblMsg.Text = "写系统参数。"
         '写系统参数
         Try
             rcOleDbConn.Open()
@@ -331,6 +334,7 @@ Public Class FrmYwfJs
             rcOleDbCommand.Transaction = rcOleDbTrans
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
+            Me.LblMsg.Text = "删除历史数据"
             '删除历史数据
             rcOleDbCommand.CommandText = "DELETE FROM gl_ywfjsb WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
@@ -346,6 +350,7 @@ Public Class FrmYwfJs
             rcOleDbCommand.ExecuteNonQuery()
 
             For j = 0 To Me.ListBoxYixuanDwdm.Items.Count - 1
+                Me.LblMsg.Text = "插入客户与年初余额"
                 '插入客户与年初余额
                 rcOleDbCommand.CommandText = "INSERT INTO gl_ywfjsb (cperiod,khdm,qmye) SELECT ?,khdm,0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_kmyeb WHERE kjnd = ? AND khdm <> '~' AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_kmyeb.khdm AND rc_khxx.bjsywf = 1) AND (" & strKmdm & ") AND NOT EXISTS (SELECT 1 FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod = ? AND gl_ywfjsb.khdm = gl_kmyeb.khdm) GROUP BY khdm"
                 rcOleDbCommand.Parameters.Clear()
@@ -353,13 +358,25 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                If CheckBox3.Checked Then
+                    Me.LblMsg.Text = "正在插入本期发出商品的客户"
+                    '插入发出商品的客户
+                    rcOleDbCommand.CommandText = "INSERT INTO gl_ywfjsb (cperiod,khdm,qmye) SELECT ?,shkhdm AS khdm,0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".oe_xsd_fcsp WHERE cperiod = ? AND shkhdm <> '~' AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = oe_xsd_fcsp.shkhdm AND rc_khxx.bjsywf = 1) AND NOT EXISTS (SELECT 1 FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod = ? AND gl_ywfjsb.khdm = oe_xsd_fcsp.shkhdm) GROUP BY shkhdm"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                Me.LblMsg.Text = "抵扣业务中"
                 '抵扣业务中
                 rcOleDbCommand.CommandText = "INSERT INTO gl_ywfjsb (cperiod,khdm,qmye) SELECT ?,khdm,0 AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND khdm <> '~' AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfdkyw.khdm AND rc_khxx.bjsywf = 1) AND NOT EXISTS (SELECT 1 FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod = ? AND gl_ywfjsb.khdm = gl_ywfdkyw.khdm) GROUP BY khdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
-                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新期末余额"
                 '更新期末余额
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET qmye = NVL(qmye,0) +  (SELECT COALESCE(SUM(CASE WHEN gl_kmyeb.jd = '借' THEN ncje ELSE 0 - ncje END),0.0) AS qmye FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_kmyeb WHERE kjnd = ? AND khdm <> '~' AND (" & strKmdm & ") AND gl_kmyeb.khdm = gl_ywfjsb.khdm GROUP BY khdm) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_kmyeb WHERE kjnd = ? AND khdm <> '~' AND (" & strKmdm & ") AND gl_kmyeb.khdm = gl_ywfjsb.khdm)"
                 rcOleDbCommand.Parameters.Clear()
@@ -367,6 +384,7 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value.ToString
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "计算期末余额"
                 '计算期末余额
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET qmye = NVL(qmye,0) + (SELECT COALESCE(SUM(CASE WHEN gl_pz.jd = '借' THEN je ELSE 0 - je END),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.cperiod <= ? AND gl_pz.cperiod >= ?) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.cperiod <= ? AND gl_pz.cperiod >= ?)"
                 rcOleDbCommand.Parameters.Clear()
@@ -376,11 +394,23 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & "01"
                 rcOleDbCommand.ExecuteNonQuery()
+                If CheckBox3.Checked Then
+                    Me.LblMsg.Text = "计算期末余额+发出商品"
+                    '计算期末余额+发出商品
+                    rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET qmye = NVL(qmye,0) + (SELECT COALESCE(SUM(NVL(oe_xsd_fcsp.je,0) + NVL(oe_xsd_fcsp.se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".oe_xsd_fcsp WHERE oe_xsd_fcsp.shkhdm = gl_ywfjsb.khdm AND oe_xsd_fcsp.cperiod = ?) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".oe_xsd_fcsp WHERE oe_xsd_fcsp.shkhdm = gl_ywfjsb.khdm AND oe_xsd_fcsp.cperiod = ?)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                Me.LblMsg.Text = "更新客户名称、业务员编码"
                 '更新客户名称、业务员编码
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET khmc = (SELECT khmc FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfjsb.khdm) WHERE cperiod = ? AND gl_ywfjsb.khmc IS NULL"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新业务员编码、销售销售分类--根据专管业务员"
                 '更新业务员编码、销售销售分类--根据专管业务员
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET (zydm,xslbdm) = (SELECT zydm,xslbdm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khzyxx WHERE (SUBSTR(rc_khzyxx.ksperiod,1,4) = ? OR SUBSTR(rc_khzyxx.jsperiod,1,4) = ?) AND (rc_khzyxx.ksperiod <= ? OR rc_khzyxx.ksperiod IS NULL) AND (rc_khzyxx.jsperiod IS NULL OR rc_khzyxx.jsperiod >= ? ) AND rc_khzyxx.khdm = gl_ywfjsb.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khzyxx WHERE rc_khzyxx.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.cperiod = ?"
                 rcOleDbCommand.Parameters.Clear()
@@ -390,6 +420,7 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新上年业务员编码--根据专管业务员"
                 '更新上年业务员编码--根据专管业务员
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET t_zydm = (SELECT zydm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khzyxx WHERE (SUBSTR(rc_khzyxx.ksperiod,1,4) = ? OR SUBSTR(rc_khzyxx.jsperiod,1,4) = ?) AND (rc_khzyxx.ksperiod <= ? OR rc_khzyxx.ksperiod IS NULL) AND (rc_khzyxx.jsperiod IS NULL OR rc_khzyxx.jsperiod >= ? ) AND rc_khzyxx.khdm = gl_ywfjsb.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khzyxx WHERE rc_khzyxx.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.cperiod = ?"
                 rcOleDbCommand.Parameters.Clear()
@@ -399,6 +430,7 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新上年销售分类编码--根据专管业务员"
                 '更新上年销售分类编码--根据专管业务员
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET t_xslbdm = (SELECT xslbdm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khzyxx WHERE (SUBSTR(rc_khzyxx.ksperiod,1,4) = ? OR SUBSTR(rc_khzyxx.jsperiod,1,4) = ?) AND (rc_khzyxx.ksperiod <= ? OR rc_khzyxx.ksperiod IS NULL) AND (rc_khzyxx.jsperiod IS NULL OR rc_khzyxx.jsperiod >= ? ) AND rc_khzyxx.khdm = gl_ywfjsb.khdm) WHERE EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khzyxx WHERE rc_khzyxx.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.cperiod = ?"
                 rcOleDbCommand.Parameters.Clear()
@@ -408,48 +440,67 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新业务员编码--根据客户信息"
                 '更新业务员编码--根据客户信息
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET zydm = (SELECT zydm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfjsb.khdm) WHERE gl_ywfjsb.cperiod = ? AND gl_ywfjsb.zydm IS NULL"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新上年业务员编码--根据客户信息"
                 '更新上年业务员编码--根据客户信息
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET t_zydm = (SELECT zydm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfjsb.khdm) WHERE gl_ywfjsb.cperiod = ? AND gl_ywfjsb.t_zydm IS NULL"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新上年销售分类编码--根据客户信息"
                 '更新上年销售分类编码--根据客户信息
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET t_xslbdm = (SELECT xslbdm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfjsb.khdm) WHERE gl_ywfjsb.cperiod = ? AND gl_ywfjsb.t_xslbdm IS NULL"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新业务员姓名"
                 '更新业务员姓名
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET zymc = (SELECT zymc FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_zyxx WHERE rc_zyxx.zydm = gl_ywfjsb.zydm) WHERE cperiod = ? AND gl_ywfjsb.zymc IS NULL"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新上年业务员姓名"
                 '更新上年业务员姓名
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET t_zymc = (SELECT zymc FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_zyxx WHERE rc_zyxx.zydm = gl_ywfjsb.t_zydm) WHERE cperiod = ? AND gl_ywfjsb.t_zymc IS NULL"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新上年客户名称--根据客户信息"
                 '更新上年客户名称--根据客户信息
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET khmc = (SELECT khmc FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfjsb.khdm) WHERE gl_ywfjsb.cperiod = ? AND exists (select 1 from rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx where rc_khxx.khdm = gl_ywfjsb.khdm)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新收款期限"
                 '更新收款期限
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET skqx = (SELECT skqx FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfjsb.khdm) WHERE cperiod = ? AND (gl_ywfjsb.skqx IS NULL OR gl_ywfjsb.skqx = 0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
-                '本月发出
+                Me.LblMsg.Text = "本月发出+科目"
+                '本月发出+科目
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET byjf = NVL(byjf,0) + (SELECT COALESCE(SUM(je),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.jd = '借' AND gl_pz.cperiod= ?) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.cperiod = ?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                If CheckBox3.Checked Then
+                    Me.LblMsg.Text = "本月发出+发出商品"
+                    '本月发出+发出商品
+                    rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET byjf = NVL(byjf,0) + (SELECT COALESCE(SUM(NVL(je,0)+NVL(se,0)),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".oe_xsd_fcsp WHERE oe_xsd_fcsp.shkhdm = gl_ywfjsb.khdm AND ckkjqj = ?) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".oe_xsd_fcsp WHERE oe_xsd_fcsp.shkhdm = gl_ywfjsb.khdm AND ckkjqj = ?)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                Me.LblMsg.Text = "本月收款"
                 '本月收款
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET bydf = NVL(bydf,0) + (SELECT COALESCE(SUM(je),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.jd = '贷' AND gl_pz.cperiod= ?) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.cperiod = ?)"
                 rcOleDbCommand.Parameters.Clear()
@@ -457,6 +508,7 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新1至13个月科目借方发生金额"
                 '更新1至13个月借方金额'
                 For i = 1 To 13
                     rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET jf" & i.ToString.PadLeft(2, "0") & " = NVL(jf" & i.ToString.PadLeft(2, "0") & ",0) + (SELECT COALESCE(SUM(je),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.jd = '借' AND gl_pz.cperiod= ?) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz WHERE gl_pz.khdm = gl_ywfjsb.khdm AND (" & strKmdm & ") AND gl_pz.cperiod = ?)"
@@ -466,16 +518,31 @@ Public Class FrmYwfJs
                     rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = IIf(Me.NudMonth.Value - i + 1 <= 0, (Me.NudYear.Value - 1).ToString & (Me.NudMonth.Value - i + 13).ToString.PadLeft(2, "0"), Me.NudYear.Value.ToString & (Me.NudMonth.Value - i + 1).ToString.PadLeft(2, "0"))
                     rcOleDbCommand.ExecuteNonQuery()
                 Next
+                If CheckBox3.Checked Then
+                    Me.LblMsg.Text = "更新1至13个月发出商品发生金额"
+                    '更新1至13个月发出商品发生金额'
+                    For i = 1 To 13
+                        rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET jf" & i.ToString.PadLeft(2, "0") & " = NVL(jf" & i.ToString.PadLeft(2, "0") & ",0) + (SELECT COALESCE(SUM(je),0.0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".oe_xsd_fcsp WHERE oe_xsd_fcsp.shkhdm = gl_ywfjsb.khdm AND ckkjqj= ?) WHERE cperiod = ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".oe_xsd_fcsp WHERE oe_xsd_fcsp.shkhdm = gl_ywfjsb.khdm AND ckkjqj = ?)"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = IIf(Me.NudMonth.Value - i + 1 <= 0, (Me.NudYear.Value - 1).ToString & (Me.NudMonth.Value - i + 13).ToString.PadLeft(2, "0"), Me.NudYear.Value.ToString & (Me.NudMonth.Value - i + 1).ToString.PadLeft(2, "0"))
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                        rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = IIf(Me.NudMonth.Value - i + 1 <= 0, (Me.NudYear.Value - 1).ToString & (Me.NudMonth.Value - i + 13).ToString.PadLeft(2, "0"), Me.NudYear.Value.ToString & (Me.NudMonth.Value - i + 1).ToString.PadLeft(2, "0"))
+                        rcOleDbCommand.ExecuteNonQuery()
+                    Next
+                End If
+                Me.LblMsg.Text = "更新客户销售分类"
                 '更新客户销售分类
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET xslbdm = (SELECT xslbdm FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxx WHERE rc_khxx.khdm = gl_ywfjsb.khdm) WHERE cperiod = ? AND xslbdm IS NULL"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新业务费标准系数"
                 '更新业务费标准系数
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywfbl = (SELECT ywfbl FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_khxslb WHERE rc_khxslb.xslbdm = gl_ywfjsb.xslbdm) WHERE cperiod = ? AND (ywfbl IS NULL OR ywfbl = 0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "更新汇率差金额到计算表"
                 '更新汇率差金额到计算表
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_hlc = NVL(ywf_hlc,0) + (SELECT NVL(SUM(NVL(gl_pz.je,0) * NVL(ywfbl,0) * NVL(rc_wbxx.ywftzbl,0) / 10000),0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".gl_pz,rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_wbxx WHERE gl_pz.bz = rc_wbxx.wbdm AND rc_wbxx.kjnd = ? AND (" & strKmdm & ") AND gl_pz.jd = '贷' AND gl_pz.cperiod = ? AND gl_pz.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
                 rcOleDbCommand.Parameters.Clear()
@@ -484,6 +551,7 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
+            Me.LblMsg.Text = "把负数发生额踢掉"
             '把负数发生额踢掉
             For i = 1 To 13
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET jf" & i.ToString.PadLeft(2, "0") & " = 0 WHERE cperiod = ? AND jf" & i.ToString.PadLeft(2, "0") & " < 0 "
@@ -491,17 +559,20 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
+            Me.LblMsg.Text = "根据余额进行分解成各月的发货额"
             '根据余额进行分解成各月的发货额
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET jf00 = 0,jf01 = 0,jf02 = 0,jf03 = 0,jf04 = 0,jf05 = 0,jf06 = 0,jf07 = 0,jf08 = 0,jf09 = 0,jf10 = 0,jf11 = 0,jf12 = 0,jf13 = 0,jf14 = 0  WHERE cperiod = ? AND CASE WHEN NVL(qmye,0) >0 THEN NVL(qmye,0) ELSE 0 END + CASE WHEN NVL(bydf,0) >0 THEN NVL(bydf,0) ELSE 0 END <= 0"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "预收款"
             '预收款
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET jf00 = CASE WHEN NVL(bydf,0) > 0 - NVL(qmye,0) THEN 0 - NVL(qmye,0) ELSE NVL(bydf,0) END WHERE cperiod = ? AND NVL(qmye,0) < 0 OR (qmye = 0 AND bydf < 0)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
             For i = 1 To 13 Step 1
+                Me.LblMsg.Text = "期末余额+本月收款>0,上月底余额>=0"
                 '期末余额+本月收款>0,上月底余额>=0
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET jf" & i.ToString.PadLeft(2, "0") & " = CASE WHEN CASE WHEN NVL(qmye,0) >0 THEN NVL(qmye,0) ELSE 0 END + NVL(bydf,0) > NVL(jf00,0)"
                 For j = 1 To i - 1
@@ -530,6 +601,7 @@ Public Class FrmYwfJs
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "根据收款期进行应收借方金额调整"
             '根据收款期进行应收借方金额调整
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET jf14 = jf14 +jf13 +jf12 +jf11 +jf10 +jf09 +jf08,jf13 = 0,jf12 =0,jf11 =0,jf10 =0,jf09 =0,jf08 = 0 WHERE cperiod = ? AND skqx = 0"
             rcOleDbCommand.Parameters.Clear()
@@ -555,7 +627,9 @@ Public Class FrmYwfJs
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Application.DoEvents()
 
+            Me.LblMsg.Text = "将本月回笼额根据发出额的时间先后顺序分解到各时间段的回笼额中"
 
             '将本月回笼额根据发出额的时间先后顺序分解到各时间段的回笼额中
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET df14 = (CASE WHEN bydf >= jf14 THEN jf14 ELSE bydf END) WHERE cperiod = ? AND bydf > 0"
@@ -581,6 +655,7 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
+            Me.LblMsg.Text = "根据收款期进行逾期金额调整"
             '根据收款期进行逾期金额调整
             'rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET df14 = df14 +df13 +df12 +df11 +df10 +df09 +df08,df13 = df07,df12 =df06,df11 =df05,df10 =df04,df09 =df03,df08 = df02,df07 =df01,df06 =0,df05 =0,df04 =0,df03 =0,df02 =0,df01 =0 WHERE cperiod = ? AND skqx = 0"
             'rcOleDbCommand.Parameters.Clear()
@@ -606,12 +681,14 @@ Public Class FrmYwfJs
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "预收款全部加到30天内"
             '预收款全部加到30天内
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET df01 = df01 + jf00 WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
 
+            Me.LblMsg.Text = "读取业务费倒扣比率前面8行"
             '读取业务费倒扣比率前面8行
             rcOleDbCommand.CommandText = "SELECT * FROM gl_ywfdkl WHERE ROWNUM<=8 ORDER BY xh"
             rcOleDbCommand.Parameters.Clear()
@@ -626,30 +703,48 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
+            Me.LblMsg.Text = "计算账龄业务费"
             '计算账龄业务费
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_zl = ROUND(NVL(df07,0) * NVL(ywfbl,0) * NVL(dkl07,0) + NVL(df08,0) * NVL(ywfbl,0) * NVL(dkl08,0) + NVL(df09,0) * NVL(ywfbl,0) * NVL(dkl09,0) + NVL(df10,0) * NVL(ywfbl,0) * NVL(dkl10,0) + NVL(df11,0) * NVL(ywfbl,0) * NVL(dkl11,0) + NVL(df12,0) * NVL(ywfbl,0) * NVL(dkl12,0) + NVL(df13,0) * NVL(ywfbl,0) * NVL(dkl13,0) + (NVL(jf14,0) - NVL(df14,0)) * NVL(dkl14,0) * 100,-2) / 10000  WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
             For j = 0 To Me.ListBoxYixuanDwdm.Items.Count - 1
+                Me.LblMsg.Text = "提取收款方式为承兑汇票的金额"
                 '提取收款方式为承兑汇票的金额
                 rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET cdhpje = NVL(cdhpje,0) + (SELECT NVL(SUM(JE),0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".ar_skd WHERE SUBSTR(djh,5,6)=  ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_jsfs WHERE rc_jsfs.bkywf = 1 AND rc_jsfs.jsfsdm = ar_skd.jsfsdm) AND ar_skd.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.ExecuteNonQuery()
+                Me.LblMsg.Text = "提取收款方式为供应链票据的金额"
+                '提取收款方式为承兑汇票的金额
+                rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET gylpjje = NVL(gylpjje,0) + (SELECT NVL(SUM(JE),0) FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".ar_skd WHERE SUBSTR(djh,5,6)=  ? AND EXISTS (SELECT 1 FROM rcdata_" & Mid(Me.ListBoxYixuanDwdm.Items(j), 1, InStr(Me.ListBoxYixuanDwdm.Items(j), " ") - 1) & ".rc_jsfs WHERE rc_jsfs.bgylk = 1 AND rc_jsfs.jsfsdm = ar_skd.jsfsdm) AND ar_skd.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+                rcOleDbCommand.ExecuteNonQuery()
             Next
+            Me.LblMsg.Text = "计算承兑汇票倒扣金额"
             '计算承兑汇票倒扣金额
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_cdhp = ROUND(NVL(gl_ywfjsb.cdhpje,0) * NVL(gl_ywfjsb.ywfbl,0) / 10000 * " & Me.TxtCdhp.Text & ",2) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            '计算供应链票据倒扣金额
+            rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_gylpj = ROUND(NVL(gl_ywfjsb.gylpjje,0) * NVL(gl_ywfjsb.ywfbl,0) / 10000 * " & Me.TxtCdhp.Text & ",2) WHERE cperiod = ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+            rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = ""
             '抵扣业务计算
+            Me.LblMsg.Text = "更新业务费标准系数"
             '（1）更新业务费标准系数
             rcOleDbCommand.CommandText = "UPDATE gl_ywfdkyw SET ywfbl = (SELECT ywfbl FROM rc_khxslb,rc_khxx WHERE rc_khxslb.xslbdm = rc_khxx.xslbdm AND rc_khxx.khdm = gl_ywfdkyw.khdm) WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "抵扣业务"
             '抵扣业务
             rcOleDbCommand.CommandText = "SELECT gl_ywfdkyw.djh,gl_ywfdkgs.jsgs FROM gl_ywfdkyw,gl_ywfdkgs WHERE gl_ywfdkyw.dkgsdm = gl_ywfdkgs.dkgsdm AND SUBSTR(gl_ywfdkyw.djh,5,6) = ? ORDER BY gl_ywfdkyw.djh"
             rcOleDbCommand.Parameters.Clear()
@@ -666,30 +761,35 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = rcDataSet.Tables("gl_ywfdkyw").Rows(i).Item("djh")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
+            Me.LblMsg.Text = "更新贴息金额到计算表"
             '更新贴息金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET tiexije = (SELECT SUM(NVL(fyje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%贴息%'  AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新贴息扣款金额到计算表"
             '更新贴息扣款金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_tx = (SELECT SUM(NVL(dkje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%贴息%' AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新佣金金额到计算表"
             '更新佣金金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET (skje_yj,yongjinje) = (SELECT SUM(NVL(skje,0)),SUM(NVL(fyje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%佣金%'  AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新佣金扣款金额到计算表"
             '更新佣金扣款金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_yj = (SELECT SUM(NVL(dkje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%佣金%' AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "计算新客户提升比例"
             '计算新客户提升比例
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET newkhbl =  0 WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
@@ -703,48 +803,56 @@ Public Class FrmYwfJs
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "计算新客户提升业务费"
             '计算新客户提升业务费
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_newkh = ROUND((NVL(bydf,0) - NVL(yongjinje,0) - NVL(tiexije,0)) * NVL(ywfbl,0) * NVL(newkhbl,0) / 10000,2)  WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "计算标准业务费"
             '计算标准业务费
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_bz = ROUND((NVL(bydf,0) - NVL(yongjinje,0) - NVL(tiexije,0)) * NVL(ywfbl,0) / 100,2)  WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新呆账金额到计算表"
             '更新呆账金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET daizhang = (SELECT SUM(NVL(skje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%呆账%'  AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新呆账扣款金额到计算表"
             '更新呆账扣款金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_dz = (SELECT SUM(NVL(dkje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%呆账%' AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新诉讼金额到计算表"
             '更新诉讼金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET susong = (SELECT SUM(NVL(skje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%诉讼%'  AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新诉讼扣款金额到计算表"
             '更新诉讼扣款金额到计算表
             rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_ss = (SELECT SUM(NVL(dkje,0)) FROM gl_ywfdkyw WHERE SUBSTR(gl_ywfdkyw.djh,5,6) = ? AND gl_ywfdkyw.dkgsmc LIKE '%诉讼%' AND gl_ywfdkyw.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbCommand.ExecuteNonQuery()
+            Me.LblMsg.Text = "更新汇率差金额*结算系数到计算表"
             ''更新汇率差金额*结算系数到计算表
             'rcOleDbCommand.CommandText = "UPDATE gl_ywfjsb SET ywf_hlc = NVL(ywf_hlc,0) * NVL(ywfbl,0) WHERE cperiod = ?"
             'rcOleDbCommand.Parameters.Clear()
             'rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             'rcOleDbCommand.ExecuteNonQuery()
 
+            Me.LblMsg.Text = "读取数据"
             '读取数据
-            rcOleDbCommand.CommandText = "SELECT gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.zydm,gl_ywfjsb.zymc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl,gl_ywfjsb.newkhbl,gl_ywfjsb.skqx,gl_ywfjsb.byjf,gl_ywfjsb.bydf,gl_ywfjsb.qmye,gl_ywfjsb.jf00,gl_ywfjsb.jf01,gl_ywfjsb.jf02,gl_ywfjsb.jf03,gl_ywfjsb.jf04,gl_ywfjsb.jf05,gl_ywfjsb.jf06,gl_ywfjsb.jf07,gl_ywfjsb.jf08,gl_ywfjsb.jf09,gl_ywfjsb.jf10,gl_ywfjsb.jf11,gl_ywfjsb.jf12,gl_ywfjsb.jf13,gl_ywfjsb.jf14,gl_ywfjsb.df01,gl_ywfjsb.df02,gl_ywfjsb.df03,gl_ywfjsb.df04,gl_ywfjsb.df05,gl_ywfjsb.df06,gl_ywfjsb.df07,gl_ywfjsb.df08,gl_ywfjsb.df09,gl_ywfjsb.df10,gl_ywfjsb.df11,gl_ywfjsb.df12,gl_ywfjsb.df13,gl_ywfjsb.df14,gl_ywfjsb.ywf_bz,gl_ywfjsb.ywf_newkh,0 - gl_ywfjsb.ywf_zl AS ywf_zl,gl_ywfjsb.cdhpje,0 - gl_ywfjsb.ywf_cdhp AS ywf_cdhp,gl_ywfjsb.tiexije, 0 - gl_ywfjsb.ywf_tx AS ywf_tx,gl_ywfjsb.skje_yj,gl_ywfjsb.yongjinje,0 - gl_ywfjsb.ywf_yj AS ywf_yj,gl_ywfjsb.daizhang,0 - gl_ywfjsb.ywf_dz AS ywf_dz,gl_ywfjsb.susong,0 - gl_ywfjsb.ywf_ss AS ywf_ss,gl_ywfjsb.ywf_hlc,NVL(gl_ywfjsb.ywf_bz,0) + NVL(gl_ywfjsb.ywf_newkh,0) - NVL(gl_ywfjsb.ywf_zl,0) - NVL(gl_ywfjsb.ywf_cdhp,0) - NVL(gl_ywfjsb.ywf_tx,0) - NVL(gl_ywfjsb.ywf_yj,0) - NVL(gl_ywfjsb.ywf_dz,0) - NVL(gl_ywfjsb.ywf_ss,0) + NVL(gl_ywfjsb.ywf_hlc,0) AS ywf_hj FROM gl_ywfjsb WHERE cperiod = ? ORDER BY gl_ywfjsb.khdm"
+            rcOleDbCommand.CommandText = "SELECT gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.zydm,gl_ywfjsb.zymc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl,gl_ywfjsb.newkhbl,gl_ywfjsb.skqx,gl_ywfjsb.byjf,gl_ywfjsb.bydf,gl_ywfjsb.qmye,gl_ywfjsb.jf00,gl_ywfjsb.jf01,gl_ywfjsb.jf02,gl_ywfjsb.jf03,gl_ywfjsb.jf04,gl_ywfjsb.jf05,gl_ywfjsb.jf06,gl_ywfjsb.jf07,gl_ywfjsb.jf08,gl_ywfjsb.jf09,gl_ywfjsb.jf10,gl_ywfjsb.jf11,gl_ywfjsb.jf12,gl_ywfjsb.jf13,gl_ywfjsb.jf14,gl_ywfjsb.df01,gl_ywfjsb.df02,gl_ywfjsb.df03,gl_ywfjsb.df04,gl_ywfjsb.df05,gl_ywfjsb.df06,gl_ywfjsb.df07,gl_ywfjsb.df08,gl_ywfjsb.df09,gl_ywfjsb.df10,gl_ywfjsb.df11,gl_ywfjsb.df12,gl_ywfjsb.df13,gl_ywfjsb.df14,gl_ywfjsb.ywf_bz,gl_ywfjsb.ywf_newkh,0 - gl_ywfjsb.ywf_zl AS ywf_zl,gl_ywfjsb.cdhpje,0 - gl_ywfjsb.ywf_cdhp AS ywf_cdhp,gl_ywfjsb.gylpjje,0 - gl_ywfjsb.ywf_gylpj AS ywf_gylpj,gl_ywfjsb.tiexije, 0 - gl_ywfjsb.ywf_tx AS ywf_tx,gl_ywfjsb.skje_yj,gl_ywfjsb.yongjinje,0 - gl_ywfjsb.ywf_yj AS ywf_yj,gl_ywfjsb.daizhang,0 - gl_ywfjsb.ywf_dz AS ywf_dz,gl_ywfjsb.susong,0 - gl_ywfjsb.ywf_ss AS ywf_ss,gl_ywfjsb.ywf_hlc,NVL(gl_ywfjsb.ywf_bz,0) + NVL(gl_ywfjsb.ywf_newkh,0) - NVL(gl_ywfjsb.ywf_zl,0) - NVL(gl_ywfjsb.ywf_cdhp,0) - NVL(gl_ywfjsb.ywf_gylpj , 0) - NVL(gl_ywfjsb.ywf_tx,0) - NVL(gl_ywfjsb.ywf_yj,0) - NVL(gl_ywfjsb.ywf_dz,0) - NVL(gl_ywfjsb.ywf_ss,0) + NVL(gl_ywfjsb.ywf_hlc,0) AS ywf_hj FROM gl_ywfjsb WHERE cperiod = ? ORDER BY gl_ywfjsb.khdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand

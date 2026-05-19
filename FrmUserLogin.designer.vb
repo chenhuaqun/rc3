@@ -109,7 +109,7 @@ Partial Class FrmUserLogin
         Me.LblYtdm.Name = "LblYtdm"
         Me.LblYtdm.Size = New System.Drawing.Size(65, 12)
         Me.LblYtdm.TabIndex = 0
-        Me.LblYtdm.Text = "登陆账号："
+        Me.LblYtdm.Text = "登录账号："
         '
         'LblYtmc
         '
@@ -142,7 +142,7 @@ Partial Class FrmUserLogin
         '
         Me.CmbDwmc.FormattingEnabled = True
         Me.CmbDwmc.Location = New System.Drawing.Point(225, 96)
-        Me.CmbDwmc.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CmbDwmc.Margin = New System.Windows.Forms.Padding(2)
         Me.CmbDwmc.Name = "CmbDwmc"
         Me.CmbDwmc.Size = New System.Drawing.Size(184, 20)
         Me.CmbDwmc.TabIndex = 5

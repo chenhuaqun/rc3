@@ -458,15 +458,18 @@ Public Class FrmQtysSrz
             rcOleDbCommand.CommandText = "USP3_SAVE_OE_FP"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
+            rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = 1 '
             rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
             rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+            rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
             rcOleDbCommand.Parameters.Add("@paraDateFprq", OleDbType.Date, 8).Value = Me.DtpFprq.Value
             rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
             rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = Me.TxtZydm.Text
             rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = Me.LblZymc.Text
             rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = Me.TxtKhdm.Text
             rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = Me.LblKhmc.Text
+            rcOleDbCommand.Parameters.Add("@ParaStrShKhdm", OleDbType.VarChar, 12).Value = Me.TxtKhdm.Text
+            rcOleDbCommand.Parameters.Add("@paraStrShKhmc", OleDbType.VarChar, 50).Value = Me.LblKhmc.Text
             rcOleDbCommand.Parameters.Add("@paraStrYspz", OleDbType.VarChar, 30).Value = ""
             rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = ""
             rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = ""

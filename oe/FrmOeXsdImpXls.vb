@@ -181,15 +181,18 @@ Public Class FrmOeXsdImpXls
                 rcOleDbCommand.CommandText = "USP3_SAVE_OE_XSD"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
+                rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = 1 'IIf(i = 0, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = strPzlxdm & strKjqj & "00001"
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = 1
                 rcOleDbCommand.Parameters.Add("@paraDateXsrq", OleDbType.Date, 8).Value = rcDataset.Tables("result").Rows(i).Item("销售日期")
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = 0
                 rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("职员编码")
                 rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = rcDataset.Tables("result").Rows(i).Item("职员姓名")
                 rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("客户编码")
-                rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("result").Rows(i).Item("客户名称")
+                rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("result").Rows(i).Item("客户名称")
+                rcOleDbCommand.Parameters.Add("@ParaStrFpKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("客户编码")
+                rcOleDbCommand.Parameters.Add("@paraStrFpKhmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("result").Rows(i).Item("客户名称")
                 rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("部门编码")
                 rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 30).Value = rcDataset.Tables("result").Rows(i).Item("部门名称")
                 rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("仓库编码")
@@ -199,6 +202,7 @@ Public Class FrmOeXsdImpXls
                 rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = rcDataset.Tables("result").Rows(i).Item("订单号")
                 rcOleDbCommand.Parameters.Add("@paraStrKhddh", OleDbType.VarChar, 30).Value = rcDataset.Tables("result").Rows(i).Item("客户订单号")
                 rcOleDbCommand.Parameters.Add("@paraStrKhlh", OleDbType.VarChar, 30).Value = rcDataset.Tables("result").Rows(i).Item("客户料号")
+                rcOleDbCommand.Parameters.Add("@paraStrPiHao", OleDbType.VarChar, 40).Value = rcDataset.Tables("result").Rows(i).Item("批次号")
                 rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("数量")
                 rcOleDbCommand.Parameters.Add("@paraStrDw", OleDbType.VarChar, 8).Value = rcDataset.Tables("result").Rows(i).Item("单位")
                 rcOleDbCommand.Parameters.Add("@paraDblMjsl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("换算系数")
@@ -217,6 +221,8 @@ Public Class FrmOeXsdImpXls
                 rcOleDbCommand.Parameters.Add("@paraIntDdXh", OleDbType.Integer, 4).Value = rcDataset.Tables("result").Rows(i).Item("订单行号")
                 rcOleDbCommand.Parameters.Add("@paraStrUserDspName", OleDbType.VarChar, 30).Value = g_User_DspName
                 rcOleDbCommand.Parameters.Add("@paraCbill_bid", OleDbType.VarChar, 50).Value = ""
+                rcOleDbCommand.Parameters.Add("@paraVbillcode", OleDbType.VarChar, 40).Value = rcDataset.Tables("result").Rows(i).Item("NC单据号")
+                rcOleDbCommand.Parameters.Add("@paraCrowno", OleDbType.VarChar, 20).Value = rcDataset.Tables("result").Rows(i).Item("NC行号")
                 rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
                 If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then

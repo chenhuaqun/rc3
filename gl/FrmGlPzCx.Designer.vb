@@ -22,32 +22,33 @@ Partial Class FrmGlPzCx
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TxtXmdm = New System.Windows.Forms.TextBox
-        Me.LblXmdm = New System.Windows.Forms.Label
-        Me.TxtBmdm = New System.Windows.Forms.TextBox
-        Me.LblBmdm = New System.Windows.Forms.Label
-        Me.TxtKmmc = New System.Windows.Forms.TextBox
-        Me.LblKmmc = New System.Windows.Forms.Label
-        Me.TxtCsdm = New System.Windows.Forms.TextBox
-        Me.LblCsdm = New System.Windows.Forms.Label
-        Me.TxtKmdm = New System.Windows.Forms.TextBox
-        Me.LblKmdm = New System.Windows.Forms.Label
-        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.TxtKhdm = New System.Windows.Forms.TextBox
-        Me.LblKhdm = New System.Windows.Forms.Label
-        Me.LblEnd = New System.Windows.Forms.Label
-        Me.DtpEnd = New System.Windows.Forms.DateTimePicker
-        Me.LblBegin = New System.Windows.Forms.Label
-        Me.DtpBegin = New System.Windows.Forms.DateTimePicker
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown
-        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.ChbSh = New System.Windows.Forms.CheckBox
-        Me.ChbLbfs = New System.Windows.Forms.CheckBox
-        Me.TxtJxzh = New System.Windows.Forms.TextBox
-        Me.LblJxzh = New System.Windows.Forms.Label
+        Me.TxtXmdm = New System.Windows.Forms.TextBox()
+        Me.LblXmdm = New System.Windows.Forms.Label()
+        Me.TxtBmdm = New System.Windows.Forms.TextBox()
+        Me.LblBmdm = New System.Windows.Forms.Label()
+        Me.TxtKmmc = New System.Windows.Forms.TextBox()
+        Me.LblKmmc = New System.Windows.Forms.Label()
+        Me.TxtCsdm = New System.Windows.Forms.TextBox()
+        Me.LblCsdm = New System.Windows.Forms.Label()
+        Me.TxtKmdm = New System.Windows.Forms.TextBox()
+        Me.LblKmdm = New System.Windows.Forms.Label()
+        Me.CmbPzlxjc = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TxtKhdm = New System.Windows.Forms.TextBox()
+        Me.LblKhdm = New System.Windows.Forms.Label()
+        Me.LblEnd = New System.Windows.Forms.Label()
+        Me.DtpEnd = New System.Windows.Forms.DateTimePicker()
+        Me.LblBegin = New System.Windows.Forms.Label()
+        Me.DtpBegin = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.NudDjhEnd = New System.Windows.Forms.NumericUpDown()
+        Me.NudDjhBegin = New System.Windows.Forms.NumericUpDown()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.ChbSh = New System.Windows.Forms.CheckBox()
+        Me.ChbLbfs = New System.Windows.Forms.CheckBox()
+        Me.TxtJxzh = New System.Windows.Forms.TextBox()
+        Me.LblJxzh = New System.Windows.Forms.Label()
+        Me.ChbLspz = New System.Windows.Forms.CheckBox()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudDjhEnd, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudDjhBegin, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -259,18 +260,18 @@ Partial Class FrmGlPzCx
         Me.ChbSh.Checked = True
         Me.ChbSh.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ChbSh.ForeColor = System.Drawing.Color.SteelBlue
-        Me.ChbSh.Location = New System.Drawing.Point(85, 241)
+        Me.ChbSh.Location = New System.Drawing.Point(33, 241)
         Me.ChbSh.Name = "ChbSh"
         Me.ChbSh.Size = New System.Drawing.Size(122, 24)
         Me.ChbSh.TabIndex = 24
-        Me.ChbSh.Text = "包含未记账单据"
+        Me.ChbSh.Text = "包含未记账凭证"
         '
         'ChbLbfs
         '
         Me.ChbLbfs.Checked = True
         Me.ChbLbfs.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ChbLbfs.ForeColor = System.Drawing.Color.SteelBlue
-        Me.ChbLbfs.Location = New System.Drawing.Point(225, 241)
+        Me.ChbLbfs.Location = New System.Drawing.Point(315, 241)
         Me.ChbLbfs.Name = "ChbLbfs"
         Me.ChbLbfs.Size = New System.Drawing.Size(104, 24)
         Me.ChbLbfs.TabIndex = 25
@@ -293,11 +294,21 @@ Partial Class FrmGlPzCx
         Me.LblJxzh.TabIndex = 22
         Me.LblJxzh.Text = "计息账号："
         '
+        'ChbLspz
+        '
+        Me.ChbLspz.ForeColor = System.Drawing.Color.SteelBlue
+        Me.ChbLspz.Location = New System.Drawing.Point(177, 241)
+        Me.ChbLspz.Name = "ChbLspz"
+        Me.ChbLspz.Size = New System.Drawing.Size(122, 24)
+        Me.ChbLspz.TabIndex = 102
+        Me.ChbLspz.Text = "查询临时凭证"
+        '
         'FrmGlPzCx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(475, 327)
+        Me.Controls.Add(Me.ChbLspz)
         Me.Controls.Add(Me.TxtJxzh)
         Me.Controls.Add(Me.LblJxzh)
         Me.Controls.Add(Me.ChbSh)
@@ -325,7 +336,7 @@ Partial Class FrmGlPzCx
         Me.Controls.Add(Me.NudDjhBegin)
         Me.Controls.Add(Me.Label4)
         Me.Name = "FrmGlPzCx"
-        Me.Text = "记账凭证查询"
+        Me.Text = "凭证查询"
         Me.Controls.SetChildIndex(Me.DlgPanel, 0)
         Me.Controls.SetChildIndex(Me.Label4, 0)
         Me.Controls.SetChildIndex(Me.NudDjhBegin, 0)
@@ -353,6 +364,7 @@ Partial Class FrmGlPzCx
         Me.Controls.SetChildIndex(Me.ChbSh, 0)
         Me.Controls.SetChildIndex(Me.LblJxzh, 0)
         Me.Controls.SetChildIndex(Me.TxtJxzh, 0)
+        Me.Controls.SetChildIndex(Me.ChbLspz, 0)
         Me.DlgPanel.ResumeLayout(False)
         CType(Me.NudDjhEnd, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudDjhBegin, System.ComponentModel.ISupportInitialize).EndInit()
@@ -386,4 +398,5 @@ Partial Class FrmGlPzCx
     Friend WithEvents ChbLbfs As System.Windows.Forms.CheckBox
     Public WithEvents TxtJxzh As System.Windows.Forms.TextBox
     Public WithEvents LblJxzh As System.Windows.Forms.Label
+    Friend WithEvents ChbLspz As CheckBox
 End Class

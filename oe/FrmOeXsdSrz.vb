@@ -44,7 +44,6 @@ Public Class FrmOeXsdSrz
     Dim strRpsId As String = "SHDBZ"
 
 #Region "初始化"
-
     Public Property ParaStrYear() As String
         Get
             ParaStrYear = strYear
@@ -148,6 +147,7 @@ Public Class FrmOeXsdSrz
         dtXsd.Columns.Add("hth", Type.GetType("System.String"))
         dtXsd.Columns.Add("khddh", Type.GetType("System.String"))
         dtXsd.Columns.Add("khlh", Type.GetType("System.String"))
+        dtXsd.Columns.Add("pihao", Type.GetType("System.String"))
         dtXsd.Columns.Add("sl", Type.GetType("System.Double"))
         dtXsd.Columns.Add("dw", Type.GetType("System.String"))
         dtXsd.Columns.Add("mjsl", Type.GetType("System.Double"))
@@ -165,6 +165,9 @@ Public Class FrmOeXsdSrz
         dtXsd.Columns.Add("xsmemo", Type.GetType("System.String"))
         dtXsd.Columns.Add("dddjh", Type.GetType("System.String"))
         dtXsd.Columns.Add("ddxh", Type.GetType("System.Int32"))
+        dtXsd.Columns.Add("cbill_bid", Type.GetType("System.String"))
+        dtXsd.Columns.Add("vbillcode", Type.GetType("System.String"))
+        dtXsd.Columns.Add("crowno", Type.GetType("System.String"))
         rcDataset.Tables.Add(dtXsd)
         With rcDataset.Tables("rc_xsdnr")
             .Columns("cpdm").DefaultValue = ""
@@ -172,6 +175,7 @@ Public Class FrmOeXsdSrz
             .Columns("hth").DefaultValue = ""
             .Columns("khddh").DefaultValue = ""
             .Columns("khlh").DefaultValue = ""
+            .Columns("pihao").DefaultValue = ""
             .Columns("sl").DefaultValue = 0.0
             .Columns("mjsl").DefaultValue = 0.0
             .Columns("fzsl").DefaultValue = 0.0
@@ -187,6 +191,9 @@ Public Class FrmOeXsdSrz
             .Columns("xsmemo").DefaultValue = ""
             .Columns("dddjh").DefaultValue = ""
             .Columns("ddxh").DefaultValue = 0
+            .Columns("cbill_bid").DefaultValue = ""
+            .Columns("vbillcode").DefaultValue = ""
+            .Columns("crowno").DefaultValue = ""
         End With
         '数据绑定
         dtXsdref.Columns.Add("xz", Type.GetType("System.Boolean"))
@@ -195,6 +202,7 @@ Public Class FrmOeXsdSrz
         dtXsdref.Columns.Add("hth", Type.GetType("System.String"))
         dtXsdref.Columns.Add("khddh", Type.GetType("System.String"))
         dtXsdref.Columns.Add("khlh", Type.GetType("System.String"))
+        dtXsdref.Columns.Add("pihao", Type.GetType("System.String"))
         dtXsdref.Columns.Add("scjhrq", Type.GetType("System.DateTime"))
         dtXsdref.Columns.Add("sl", Type.GetType("System.Double"))
         dtXsdref.Columns.Add("dw", Type.GetType("System.String"))
@@ -216,6 +224,7 @@ Public Class FrmOeXsdSrz
             .Columns("hth").DefaultValue = ""
             .Columns("khddh").DefaultValue = ""
             .Columns("khlh").DefaultValue = ""
+            .Columns("pihao").DefaultValue = ""
             .Columns("sl").DefaultValue = 0.0
             .Columns("dw").DefaultValue = ""
             .Columns("mjsl").DefaultValue = 0.0
@@ -407,7 +416,7 @@ Public Class FrmOeXsdSrz
                                             Me.LblCkmc.Text = rcDataset.Tables("rc_xsdml").Rows(0).Item("ckmc")
                                         End If
                                         '修改单据
-                                        rcOleDbCommand.CommandText = "SELECT oe_xsd.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_xsd.hth,'') AS hth,oe_xsd.khddh,oe_xsd.khlh,oe_xsd.sl,rc_cpxx.dw,rc_cpxx.mjsl,oe_xsd.fzsl,rc_cpxx.fzdw,oe_xsd.js,oe_xsd.lt,oe_xsd.ts,oe_xsd.dj,oe_xsd.hsdj,oe_xsd.je,oe_xsd.shlv,oe_xsd.se,(oe_xsd.je+ oe_xsd.se) AS jese,oe_xsd.xsmemo,oe_xsd.dddjh,oe_xsd.ddxh FROM oe_xsd,rc_cpxx WHERE oe_xsd.cpdm = rc_cpxx.cpdm AND (oe_xsd.djh = ?) ORDER BY oe_xsd.XH"
+                                        rcOleDbCommand.CommandText = "SELECT oe_xsd.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_xsd.hth,'') AS hth,oe_xsd.khddh,oe_xsd.khlh,oe_xsd.pihao,oe_xsd.sl,rc_cpxx.dw,rc_cpxx.mjsl,oe_xsd.fzsl,rc_cpxx.fzdw,oe_xsd.js,oe_xsd.lt,oe_xsd.ts,oe_xsd.dj,oe_xsd.hsdj,oe_xsd.je,oe_xsd.shlv,oe_xsd.se,(oe_xsd.je+ oe_xsd.se) AS jese,oe_xsd.xsmemo,oe_xsd.dddjh,oe_xsd.ddxh,oe_xsd.cbill_bid,oe_xsd.vbillcode,oe_xsd.crowno FROM oe_xsd,rc_cpxx WHERE oe_xsd.cpdm = rc_cpxx.cpdm AND (oe_xsd.djh = ?) ORDER BY oe_xsd.XH"
                                         rcOleDbCommand.Parameters.Clear()
                                         rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = TxtDjh.Text
                                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -966,7 +975,7 @@ Public Class FrmOeXsdSrz
                             rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(sl),0.0) AS ddsl FROM oe_dd WHERE djh = ? AND xh = ?"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = Me.rcDataGridView.CurrentRow.Cells("ColDdDjh").Value
-                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = Me.rcDataGridView.CurrentRow.Cells("ColDdXh").Value
+                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = Me.rcDataGridView.CurrentRow.Cells("ColDdXh").Value
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                             If rcDataset.Tables("t_dd") IsNot Nothing Then
                                 rcDataset.Tables("t_dd").Clear()
@@ -1372,7 +1381,7 @@ Public Class FrmOeXsdSrz
         Finally
             rcOleDbConn.Close()
         End Try
-        '(2)客户编码
+        '(2)部门编码
         If String.IsNullOrEmpty(Me.TxtBmdm.Text) Then
             MsgBox("请输入部门编码。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
             Return
@@ -1391,7 +1400,7 @@ Public Class FrmOeXsdSrz
             rcOleDbCommand.Parameters.Add("@paraIntRecordCount", OleDbType.Integer, 1).Direction = ParameterDirection.ReturnValue
             rcOleDbCommand.ExecuteNonQuery()
             If rcOleDbCommand.Parameters("@paraIntRecordCount").Value <> 1 Then
-                MsgBox("客户编码不正确，请检查。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                MsgBox("部门编码不正确，请检查。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
                 Return
             End If
         Catch ex As Exception
@@ -1459,7 +1468,11 @@ Public Class FrmOeXsdSrz
             If rcDataset.Tables("rc_xsdnr").Rows(i).Item("ddxh").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("rc_xsdnr").Rows(i).Item("ddxh") = 0
             End If
+            If rcDataset.Tables("rc_xsdnr").Rows(i).Item("cpdm") = "" And rcDataset.Tables("rc_xsdnr").Rows(i).Item("sl") = 0.0 Then
+                rcDataset.Tables("rc_xsdnr").Rows(i).Delete()
+            End If
         Next
+        rcDataset.Tables("rc_xsdnr").AcceptChanges()
 
         '(1)是否有需要存储的数据
         If rcDataset.Tables("rc_xsdnr").Rows.Count = 0 Then
@@ -1475,6 +1488,7 @@ Public Class FrmOeXsdSrz
         Try
             For i = 0 To rcDataset.Tables("rc_xsdnr").Rows.Count - 1
                 If rcDataset.Tables("rc_xsdnr").Rows(i).RowState <> DataRowState.Deleted Then
+
                     rcOleDbCommand.CommandText = "SELECT * FROM rc_cpxx WHERE cpdm = ? AND ty <> 1"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.AddWithValue("@cpdm", Trim(rcDataset.Tables("rc_xsdnr").Rows(i).Item("cpdm")))
@@ -1592,15 +1606,18 @@ Public Class FrmOeXsdSrz
             For i = 0 To rcDataset.Tables("rc_xsdnr").Rows.Count - 1
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
+                rcOleDbCommand.Parameters.Add("@paraIntIsNewBill", OleDbType.Integer, 1).Value = IIf(i = 0, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraDateXsrq", OleDbType.Date, 8).Value = Me.DtpXsrq.Value
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = IIf(String.IsNullOrEmpty(Me.LblBdelete.Text), 0, 1)
                 rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = Me.TxtZydm.Text
                 rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = Me.LblZymc.Text
                 rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = Me.TxtKhdm.Text
                 rcOleDbCommand.Parameters.Add("@paraStrKhmc", OleDbType.VarChar, 50).Value = Me.LblKhmc.Text
+                rcOleDbCommand.Parameters.Add("@ParaStrFpKhdm", OleDbType.VarChar, 12).Value = Me.TxtKhdm.Text
+                rcOleDbCommand.Parameters.Add("@paraStrFpKhmc", OleDbType.VarChar, 50).Value = Me.LblKhmc.Text
                 rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = Me.TxtBmdm.Text
                 rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = Me.LblBmmc.Text
                 rcOleDbCommand.Parameters.Add("@ParaStrCkdm", OleDbType.VarChar, 12).Value = Me.TxtCkdm.Text
@@ -1610,6 +1627,7 @@ Public Class FrmOeXsdSrz
                 rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("hth")
                 rcOleDbCommand.Parameters.Add("@paraStrKhddh", OleDbType.VarChar, 30).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("khddh")
                 rcOleDbCommand.Parameters.Add("@paraStrKhlh", OleDbType.VarChar, 30).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("khlh")
+                rcOleDbCommand.Parameters.Add("@paraStrPiHao", OleDbType.VarChar, 40).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("pihao")
                 rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("sl")
                 rcOleDbCommand.Parameters.Add("@paraStrDw", OleDbType.VarChar, 8).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("dw")
                 rcOleDbCommand.Parameters.Add("@paraDblMjsl", OleDbType.Numeric, 18).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("mjsl")
@@ -1627,7 +1645,9 @@ Public Class FrmOeXsdSrz
                 rcOleDbCommand.Parameters.Add("@paraStrDdDjh", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("dddjh")
                 rcOleDbCommand.Parameters.Add("@paraIntDdXh", OleDbType.Integer, 4).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("ddxh")
                 rcOleDbCommand.Parameters.Add("@paraStrUserDspName", OleDbType.VarChar, 30).Value = g_User_DspName
-                rcOleDbCommand.Parameters.Add("@paraCbill_bid", OleDbType.VarChar, 50).Value = ""
+                rcOleDbCommand.Parameters.Add("@paraCbill_bid", OleDbType.VarChar, 20).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("cbill_bid")
+                rcOleDbCommand.Parameters.Add("@paraVbillcode", OleDbType.VarChar, 40).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("vbillcode")
+                rcOleDbCommand.Parameters.Add("@paraCrowno", OleDbType.VarChar, 20).Value = rcDataset.Tables("rc_xsdnr").Rows(i).Item("crowno")
                 rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
                 If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
@@ -1696,7 +1716,7 @@ Public Class FrmOeXsdSrz
                 blnFp = .paraBlnFp
                 strDjh = .paraStrDjh
                 If blnFp Then
-                    MsgBox("该单据已经开票，不能冲销，请先冲销产品销售单。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                    MsgBox("该单据已经开票，不能冲销，请先冲销产品销售发票。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                     Return
                 End If
                 '读取红字冲销数据
@@ -1744,7 +1764,7 @@ Public Class FrmOeXsdSrz
                             Me.LblCkmc.Text = rcDataset.Tables("rc_xsdml").Rows(0).Item("ckmc")
                         End If
                         '修改单据
-                        rcOleDbCommand.CommandText = "SELECT oe_xsd.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_xsd.hth,'') AS hth,oe_xsd.khddh,oe_xsd.khlh,0 － oe_xsd.sl AS sl,rc_cpxx.dw,oe_xsd.mjsl,(0 - oe_xsd.fzsl) AS fzsl,rc_cpxx.fzdw,0- oe_xsd.js AS js,0- oe_xsd.lt AS lt,0- oe_xsd.ts AS ts,oe_xsd.dj,oe_xsd.hsdj,0 - oe_xsd.je AS je,oe_xsd.shlv,0 - oe_xsd.se AS se,0 - (oe_xsd.je+ oe_xsd.se) AS jese,oe_xsd.xsmemo || oe_xsd.djh AS xsmemo,oe_xsd.dddjh,oe_xsd.ddxh FROM oe_xsd,rc_cpxx WHERE oe_xsd.cpdm = rc_cpxx.cpdm AND (oe_xsd.djh = ?) ORDER BY oe_xsd.XH"
+                        rcOleDbCommand.CommandText = "SELECT oe_xsd.cpdm,rc_cpxx.oldcpdm,rc_cpxx.cpmc,COALESCE(oe_xsd.hth,'') AS hth,oe_xsd.khddh,oe_xsd.khlh,oe_xsd.pihao,0 － oe_xsd.sl AS sl,rc_cpxx.dw,oe_xsd.mjsl,(0 - oe_xsd.fzsl) AS fzsl,rc_cpxx.fzdw,0- oe_xsd.js AS js,0- oe_xsd.lt AS lt,0- oe_xsd.ts AS ts,oe_xsd.dj,oe_xsd.hsdj,0 - oe_xsd.je AS je,oe_xsd.shlv,0 - oe_xsd.se AS se,0 - (oe_xsd.je+ oe_xsd.se) AS jese,oe_xsd.xsmemo || oe_xsd.djh AS xsmemo,oe_xsd.dddjh,oe_xsd.ddxh FROM oe_xsd,rc_cpxx WHERE oe_xsd.cpdm = rc_cpxx.cpdm AND (oe_xsd.djh = ?) ORDER BY oe_xsd.XH"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = strDjh
                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand

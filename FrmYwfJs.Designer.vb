@@ -22,39 +22,40 @@ Partial Class FrmYwfJs
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.LblPeriod = New System.Windows.Forms.Label
-        Me.LblMonth = New System.Windows.Forms.Label
-        Me.LblYear = New System.Windows.Forms.Label
-        Me.NudMonth = New System.Windows.Forms.NumericUpDown
-        Me.NudYear = New System.Windows.Forms.NumericUpDown
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
-        Me.TxtCdhp = New System.Windows.Forms.TextBox
-        Me.LblCdhp = New System.Windows.Forms.Label
-        Me.TxtNewKh = New System.Windows.Forms.TextBox
-        Me.LblNewKh = New System.Windows.Forms.Label
-        Me.TxtOldKh = New System.Windows.Forms.TextBox
-        Me.LblOldKh = New System.Windows.Forms.Label
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.ListBoxYuxuanDwdm = New System.Windows.Forms.ListBox
-        Me.ListBoxYixuanDwdm = New System.Windows.Forms.ListBox
-        Me.BtnSelectAllDwdm = New System.Windows.Forms.Button
-        Me.BtnSelectOneDwdm = New System.Windows.Forms.Button
-        Me.BtnUnSelectOneDwdm = New System.Windows.Forms.Button
-        Me.BtnUnSelectAllDwdm = New System.Windows.Forms.Button
-        Me.LblYuxuanDwdm = New System.Windows.Forms.Label
-        Me.LblYixuanDwdm = New System.Windows.Forms.Label
-        Me.TabPage2 = New System.Windows.Forms.TabPage
-        Me.ListBoxYuxuanKmdm = New System.Windows.Forms.ListBox
-        Me.ListBoxYixuanKmdm = New System.Windows.Forms.ListBox
-        Me.LblYixuanKmdm = New System.Windows.Forms.Label
-        Me.BtnSelectAllKmdm = New System.Windows.Forms.Button
-        Me.LblYuxuanKmdm = New System.Windows.Forms.Label
-        Me.BtnSelectOneKmdm = New System.Windows.Forms.Button
-        Me.BtnUnSelectAllKmdm = New System.Windows.Forms.Button
-        Me.BtnUnSelectOneKmdm = New System.Windows.Forms.Button
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.LblPeriod = New System.Windows.Forms.Label()
+        Me.LblMonth = New System.Windows.Forms.Label()
+        Me.LblYear = New System.Windows.Forms.Label()
+        Me.NudMonth = New System.Windows.Forms.NumericUpDown()
+        Me.NudYear = New System.Windows.Forms.NumericUpDown()
+        Me.TxtCdhp = New System.Windows.Forms.TextBox()
+        Me.LblCdhp = New System.Windows.Forms.Label()
+        Me.TxtNewKh = New System.Windows.Forms.TextBox()
+        Me.LblNewKh = New System.Windows.Forms.Label()
+        Me.TxtOldKh = New System.Windows.Forms.TextBox()
+        Me.LblOldKh = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.ListBoxYuxuanDwdm = New System.Windows.Forms.ListBox()
+        Me.ListBoxYixuanDwdm = New System.Windows.Forms.ListBox()
+        Me.BtnSelectAllDwdm = New System.Windows.Forms.Button()
+        Me.BtnSelectOneDwdm = New System.Windows.Forms.Button()
+        Me.BtnUnSelectOneDwdm = New System.Windows.Forms.Button()
+        Me.BtnUnSelectAllDwdm = New System.Windows.Forms.Button()
+        Me.LblYuxuanDwdm = New System.Windows.Forms.Label()
+        Me.LblYixuanDwdm = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.ListBoxYuxuanKmdm = New System.Windows.Forms.ListBox()
+        Me.ListBoxYixuanKmdm = New System.Windows.Forms.ListBox()
+        Me.LblYixuanKmdm = New System.Windows.Forms.Label()
+        Me.BtnSelectAllKmdm = New System.Windows.Forms.Button()
+        Me.LblYuxuanKmdm = New System.Windows.Forms.Label()
+        Me.BtnSelectOneKmdm = New System.Windows.Forms.Button()
+        Me.BtnUnSelectAllKmdm = New System.Windows.Forms.Button()
+        Me.BtnUnSelectOneKmdm = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.LblMsg = New System.Windows.Forms.Label()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,7 +80,7 @@ Partial Class FrmYwfJs
         Me.LblPeriod.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblPeriod.Location = New System.Drawing.Point(50, 23)
         Me.LblPeriod.Name = "LblPeriod"
-        Me.LblPeriod.Size = New System.Drawing.Size(88, 16)
+        Me.LblPeriod.Size = New System.Drawing.Size(87, 16)
         Me.LblPeriod.TabIndex = 0
         Me.LblPeriod.Text = "会计期间："
         '
@@ -89,7 +90,7 @@ Partial Class FrmYwfJs
         Me.LblMonth.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblMonth.Location = New System.Drawing.Point(298, 23)
         Me.LblMonth.Name = "LblMonth"
-        Me.LblMonth.Size = New System.Drawing.Size(24, 16)
+        Me.LblMonth.Size = New System.Drawing.Size(23, 16)
         Me.LblMonth.TabIndex = 4
         Me.LblMonth.Text = "月"
         '
@@ -99,7 +100,7 @@ Partial Class FrmYwfJs
         Me.LblYear.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblYear.Location = New System.Drawing.Point(218, 23)
         Me.LblYear.Name = "LblYear"
-        Me.LblYear.Size = New System.Drawing.Size(24, 16)
+        Me.LblYear.Size = New System.Drawing.Size(23, 16)
         Me.LblYear.TabIndex = 2
         Me.LblYear.Text = "年"
         '
@@ -127,13 +128,6 @@ Partial Class FrmYwfJs
         Me.NudYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.NudYear.Value = New Decimal(New Integer() {1990, 0, 0, 0})
         '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.Location = New System.Drawing.Point(7, 408)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(399, 23)
-        Me.ProgressBar1.TabIndex = 11
-        '
         'TxtCdhp
         '
         Me.TxtCdhp.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
@@ -149,7 +143,7 @@ Partial Class FrmYwfJs
         Me.LblCdhp.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblCdhp.Location = New System.Drawing.Point(18, 101)
         Me.LblCdhp.Name = "LblCdhp"
-        Me.LblCdhp.Size = New System.Drawing.Size(208, 16)
+        Me.LblCdhp.Size = New System.Drawing.Size(207, 16)
         Me.LblCdhp.TabIndex = 9
         Me.LblCdhp.Text = "承兑汇票回笼下降比率(%)："
         '
@@ -168,7 +162,7 @@ Partial Class FrmYwfJs
         Me.LblNewKh.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblNewKh.Location = New System.Drawing.Point(66, 69)
         Me.LblNewKh.Name = "LblNewKh"
-        Me.LblNewKh.Size = New System.Drawing.Size(160, 16)
+        Me.LblNewKh.Size = New System.Drawing.Size(159, 16)
         Me.LblNewKh.TabIndex = 5
         Me.LblNewKh.Text = "新客户上升比率(%)："
         '
@@ -187,7 +181,7 @@ Partial Class FrmYwfJs
         Me.LblOldKh.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblOldKh.Location = New System.Drawing.Point(359, 69)
         Me.LblOldKh.Name = "LblOldKh"
-        Me.LblOldKh.Size = New System.Drawing.Size(160, 16)
+        Me.LblOldKh.Size = New System.Drawing.Size(159, 16)
         Me.LblOldKh.TabIndex = 7
         Me.LblOldKh.Text = "老客户下降比率(%)："
         '
@@ -386,6 +380,7 @@ Partial Class FrmYwfJs
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.CheckBox3)
         Me.GroupBox2.Controls.Add(Me.LblNewKh)
         Me.GroupBox2.Controls.Add(Me.NudYear)
         Me.GroupBox2.Controls.Add(Me.TxtOldKh)
@@ -404,20 +399,43 @@ Partial Class FrmYwfJs
         Me.GroupBox2.TabIndex = 123
         Me.GroupBox2.TabStop = False
         '
+        'LblMsg
+        '
+        Me.LblMsg.AutoSize = True
+        Me.LblMsg.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblMsg.ForeColor = System.Drawing.Color.Blue
+        Me.LblMsg.Location = New System.Drawing.Point(10, 414)
+        Me.LblMsg.Name = "LblMsg"
+        Me.LblMsg.Size = New System.Drawing.Size(87, 16)
+        Me.LblMsg.TabIndex = 124
+        Me.LblMsg.Text = "提示信息。"
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.CheckBox3.ForeColor = System.Drawing.Color.Blue
+        Me.CheckBox3.Location = New System.Drawing.Point(362, 102)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(202, 20)
+        Me.CheckBox3.TabIndex = 125
+        Me.CheckBox3.Text = "含发出商品(按收货客户)"
+        Me.CheckBox3.UseVisualStyleBackColor = True
+        '
         'FrmYwfJs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(664, 447)
+        Me.Controls.Add(Me.LblMsg)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.ProgressBar1)
         Me.Name = "FrmYwfJs"
         Me.Text = "业务费计算"
         Me.Controls.SetChildIndex(Me.DlgPanel, 0)
-        Me.Controls.SetChildIndex(Me.ProgressBar1, 0)
         Me.Controls.SetChildIndex(Me.GroupBox2, 0)
         Me.Controls.SetChildIndex(Me.GroupBox1, 0)
+        Me.Controls.SetChildIndex(Me.LblMsg, 0)
         Me.DlgPanel.ResumeLayout(False)
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).EndInit()
@@ -430,6 +448,7 @@ Partial Class FrmYwfJs
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents LblPeriod As System.Windows.Forms.Label
@@ -437,7 +456,6 @@ Partial Class FrmYwfJs
     Friend WithEvents LblYear As System.Windows.Forms.Label
     Friend WithEvents NudMonth As System.Windows.Forms.NumericUpDown
     Friend WithEvents NudYear As System.Windows.Forms.NumericUpDown
-    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Public WithEvents TxtCdhp As System.Windows.Forms.TextBox
     Public WithEvents LblCdhp As System.Windows.Forms.Label
     Public WithEvents TxtNewKh As System.Windows.Forms.TextBox
@@ -465,4 +483,6 @@ Partial Class FrmYwfJs
     Friend WithEvents BtnUnSelectAllKmdm As System.Windows.Forms.Button
     Friend WithEvents BtnUnSelectOneKmdm As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents LblMsg As Label
+    Friend WithEvents CheckBox3 As CheckBox
 End Class

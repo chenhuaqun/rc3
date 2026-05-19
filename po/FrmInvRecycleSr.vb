@@ -264,7 +264,7 @@ Public Class FrmInvRecycleSr
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("brecycle", OleDbType.Numeric, 1).Value = IIf(rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("brecycle"), 0, 1)
                         rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("djh")
-                        rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("xh")
+                        rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("xh")
                         intRows = rcOleDbCommand.ExecuteNonQuery()
                     Else
                         intRows = 1
@@ -277,7 +277,7 @@ Public Class FrmInvRecycleSr
                     rcOleDbCommand.Parameters.Add("brecycle", OleDbType.Numeric, 1).Value = IIf(rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("brecycle"), 0, 1)
                     rcOleDbCommand.Parameters.Add("recycler", OleDbType.VarChar, 30).Value = g_User_DspName
                     rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("djh")
-                    rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("xh")
+                    rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = rcDataset.Tables("rc_ckdnr").Rows(e.RowIndex).Item("xh")
                     intRows = rcOleDbCommand.ExecuteNonQuery()
                 End If
                 If intRows <> 1 Then

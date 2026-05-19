@@ -920,7 +920,7 @@ Public Class FrmPmDdSrz
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraDateQdrq", OleDbType.Date, 8).Value = Me.DtpQdrq.Value
                 rcOleDbCommand.Parameters.Add("@paraStrHth", OleDbType.VarChar, 30).Value = Me.TxtHth.Text
                 rcOleDbCommand.Parameters("@paraStrHth").Direction = ParameterDirection.InputOutput

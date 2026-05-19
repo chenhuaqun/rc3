@@ -22,23 +22,24 @@ Partial Class FrmDjjz
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.NudMonth = New System.Windows.Forms.NumericUpDown
-        Me.NudYear = New System.Windows.Forms.NumericUpDown
-        Me.rcDataGridView = New System.Windows.Forms.DataGridView
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.NudMonth = New System.Windows.Forms.NumericUpDown()
+        Me.NudYear = New System.Windows.Forms.NumericUpDown()
+        Me.rcDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ColXm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColBqzs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColWjzzs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColYjzzs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColBcjzzs = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rcBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ColXm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColBqzs = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColWjzzs = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColYjzzs = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColBcjzzs = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.BtnFjz = New System.Windows.Forms.Button()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,7 +70,7 @@ Partial Class FrmDjjz
         Me.Label1.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label1.Location = New System.Drawing.Point(44, 26)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(152, 16)
+        Me.Label1.Size = New System.Drawing.Size(151, 16)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "请选择记账的年月："
         '
@@ -79,7 +80,7 @@ Partial Class FrmDjjz
         Me.Label3.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label3.Location = New System.Drawing.Point(348, 26)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(24, 16)
+        Me.Label3.Size = New System.Drawing.Size(23, 16)
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "月"
         '
@@ -89,7 +90,7 @@ Partial Class FrmDjjz
         Me.Label2.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label2.Location = New System.Drawing.Point(276, 26)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(24, 16)
+        Me.Label2.Size = New System.Drawing.Size(23, 16)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "年"
         '
@@ -184,11 +185,21 @@ Partial Class FrmDjjz
         Me.ColBcjzzs.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ColBcjzzs.Width = 75
         '
+        'BtnFjz
+        '
+        Me.BtnFjz.Location = New System.Drawing.Point(28, 266)
+        Me.BtnFjz.Name = "BtnFjz"
+        Me.BtnFjz.Size = New System.Drawing.Size(75, 23)
+        Me.BtnFjz.TabIndex = 7
+        Me.BtnFjz.Text = "取消记帐"
+        Me.BtnFjz.UseVisualStyleBackColor = True
+        '
         'FrmDjjz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(562, 309)
+        Me.Controls.Add(Me.BtnFjz)
         Me.Controls.Add(Me.rcDataGridView)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label3)
@@ -204,6 +215,7 @@ Partial Class FrmDjjz
         Me.Controls.SetChildIndex(Me.Label3, 0)
         Me.Controls.SetChildIndex(Me.Label1, 0)
         Me.Controls.SetChildIndex(Me.rcDataGridView, 0)
+        Me.Controls.SetChildIndex(Me.BtnFjz, 0)
         Me.DlgPanel.ResumeLayout(False)
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).EndInit()
@@ -225,4 +237,5 @@ Partial Class FrmDjjz
     Friend WithEvents ColWjzzs As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColYjzzs As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColBcjzzs As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents BtnFjz As Button
 End Class

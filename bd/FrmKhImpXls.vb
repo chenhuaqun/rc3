@@ -90,45 +90,59 @@ Public Class FrmKhImpXls
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             For i = 0 To rcDataset.Tables("result").Rows.Count - 1
-                '删除已保存的数据
-                rcOleDbCommand.CommandText = "SELECT * FROM rc_khxx WHERE khdm = ?"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户编码")).ToUpper
-                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataset.Tables("cntcpxx") IsNot Nothing Then
-                    rcDataset.Tables("cntcpxx").Clear()
-                End If
-                rcOleDbDataAdpt.Fill(rcDataset, "cntcpxx")
-                '覆盖
-                If Me.RadioButton1.Checked Then
-                    If rcDataset.Tables("cntcpxx").Rows.Count > 0 Then
-                        '存在
-                        '更新克重，标准成本
-                        rcOleDbCommand.CommandText = "UPDATE rc_khxx SET khmc = ?,lbdm = ?,lbmc = ? WHERE khdm = ?"
-                        rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类编码")).ToUpper
-                        rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 30).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类名称")).ToUpper
-                        rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("result").Rows(i).Item("客户名称")
-                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户编码")).ToUpper
-                        rcOleDbCommand.ExecuteNonQuery()
-                    Else
-                        '不存在,则不操作
-                    End If
+                If Me.RadioButton3.Checked Then
+                    '更新销售类别
+                    '更新克重，标准成本
+                    rcOleDbCommand.CommandText = "UPDATE rc_khxx SET xslbdm = ? WHERE khdm = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@xslbdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("销售类别编码")
+                    rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户编码")).ToUpper
+                    rcOleDbCommand.ExecuteNonQuery()
                 Else
-                    '追加
-                    If rcDataset.Tables("cntcpxx").Rows.Count = 0 Then
-                        '添加客户信息信息
-                        rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (lbdm,lbmc,khdm,khmc,zczb) VALUES (?,?,?,?,0)"
-                        rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类编码")).ToUpper
-                        rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 30).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类名称")).ToUpper
-                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户编码")).ToUpper
-                        rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("result").Rows(i).Item("客户名称")
-                        rcOleDbCommand.ExecuteNonQuery()
-                    Else
-                        '存在则不操作
+                    '删除已保存的数据
+                    rcOleDbCommand.CommandText = "SELECT * FROM rc_khxx WHERE khdm = ?"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户编码")).ToUpper
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    If rcDataset.Tables("cntcpxx") IsNot Nothing Then
+                        rcDataset.Tables("cntcpxx").Clear()
                     End If
+                    rcOleDbDataAdpt.Fill(rcDataset, "cntcpxx")
+                    '覆盖
+                    If Me.RadioButton1.Checked Then
+                        If rcDataset.Tables("cntcpxx").Rows.Count > 0 Then
+                            '存在
+                            '更新克重，标准成本
+                            rcOleDbCommand.CommandText = "UPDATE rc_khxx SET khmc = ?,lbdm = ?,lbmc = ?,xslbdm=? WHERE khdm = ?"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("result").Rows(i).Item("客户名称")
+                            rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类编码")).ToUpper
+                            rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 30).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类名称")).ToUpper
+                            rcOleDbCommand.Parameters.Add("@xslbdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("销售类别编码")
+                            rcOleDbCommand.Parameters.Add("@djyear", OleDbType.Integer, 4).Value = rcDataset.Tables("result").Rows(i).Item("登记年份")
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户编码")).ToUpper
+                            rcOleDbCommand.ExecuteNonQuery()
+                        Else
+                            '不存在,则不操作
+                        End If
+                    Else
+                        '追加
+                        If rcDataset.Tables("cntcpxx").Rows.Count = 0 Then
+                            '添加客户信息信息
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (lbdm,lbmc,khdm,khmc,zczb,xslbdm,djyear) VALUES (?,?,?,?,0,?,?)"
+                            rcOleDbCommand.Parameters.Clear()
+                            rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类编码")).ToUpper
+                            rcOleDbCommand.Parameters.Add("@lbmc", OleDbType.VarChar, 30).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户分类名称")).ToUpper
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("客户编码")).ToUpper
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("result").Rows(i).Item("客户名称")
+                            rcOleDbCommand.Parameters.Add("@xslbdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("销售类别编码")
+                            rcOleDbCommand.Parameters.Add("@djyear", OleDbType.Integer, 4).Value = rcDataset.Tables("result").Rows(i).Item("登记年份")
+                            rcOleDbCommand.ExecuteNonQuery()
+                        Else
+                            '存在则不操作
+                        End If
 
+                    End If
                 End If
             Next
             rcOleDbTrans.Commit()

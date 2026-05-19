@@ -24,9 +24,7 @@ Public Class FrmCheckData
             rcOleDbCommand.CommandText = "SELECT table_name FROM user_tables WHERE table_name = 'RC_DICTABLE'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataset.Tables("user_tables") IsNot Nothing Then
-                rcDataset.Tables("user_tables").Clear()
-            End If
+            rcDataset.Tables("user_tables")?.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
             If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
@@ -272,56 +270,63 @@ Public Class FrmCheckData
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1022'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1022','期初客户应收明细装入','MnuiQckhyeSr','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1022','期初发出商品余额装入','MnuiQcfcspyeSr','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '1023
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1023'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1023','期初供应商应付明细装入','MnuiQccsyeSr','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1023','期初客户应收明细装入','MnuiQckhyeSr','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '1024
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1024'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1024','期初总账余额装入','MnuiQckmyeSr','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1024','期初供应商应付明细装入','MnuiQccsyeSr','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '1025
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1025'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1025','单据类型信息设置','MnuiPzlxxx','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1025','期初总账余额装入','MnuiQckmyeSr','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '1026
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1026'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1026','会计期间设置','MnuiKjqj','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1026','单据类型信息设置','MnuiPzlxxx','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '1027
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1027'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1027','角色和角色操作权限设置','MnuiRoles','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1027','会计期间设置','MnuiKjqj','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '1028
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1028'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1028','操作员和操作员角色设置','MnuiUsers','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1028','角色和角色操作权限设置','MnuiRoles','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '1029
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1029'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1029','选项','MnuiOption','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1029','操作员和操作员角色设置','MnuiUsers','RC3')"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                '1030
+                rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='1030'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('1030','选项','MnuiOption','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '2001
@@ -1031,6 +1036,27 @@ Public Class FrmCheckData
                 rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('5013','物料库存账龄分析表','MnuiCpkcZlfx','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
+                '5014
+                rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='5014'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('5014','发出商品盘存表','MnuiFcspPcb','RC3')"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                '5015
+                rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='5015'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('5015','发出商品收发存明细账','MnuiFcspSfcMx','RC3')"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                '5016
+                rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='5016'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('5016','发出商品收发存汇总表','MnuiFcspSfcHz','RC3')"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
                 '6023
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='6023'"
                 rcOleDbCommand.Parameters.Clear()
@@ -1098,42 +1124,49 @@ Public Class FrmCheckData
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='7007'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7007','在产材料成本明细表','MnuiZcclMx','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7007','发出商品成本结转','MnuiCbjz_Fcsp','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '7008
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='7008'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7008','在产品成本明细表','MnuiZcpMx','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7008','在产材料成本明细表','MnuiZcclMx','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '7009
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='7009'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7009','在产品部门工序汇总表','MnuiZcpBmGxHz','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7009','在产品成本明细表','MnuiZcpMx','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '7010
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='7010'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7010','产成品在产品成本汇总表','MnuiCcpZcpHz','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7010','在产品部门工序汇总表','MnuiZcpBmGxHz','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '7011
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='7011'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7011','产成品在产品各部门成本汇总表','MnuiCcpZcpBmHz','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7011','产成品在产品成本汇总表','MnuiCcpZcpHz','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '7012
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='7012'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7012','物料清单查询','MnuiBomCx','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7012','产成品在产品各部门成本汇总表','MnuiCcpZcpBmHz','RC3')"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                '7013
+                rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='7013'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('7013','物料清单查询','MnuiBomCx','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '8001
@@ -1315,42 +1348,49 @@ Public Class FrmCheckData
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='9015'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9015','计提存货跌价准备','MnuiJtchdjzb','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9015','发出商品处理','MnuiFcspJz','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '9016
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='9016'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9016','MRP运算','MnuiMrpJs','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9016','计提存货跌价准备','MnuiJtchdjzb','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '9017
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='9017'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9017','凭证生成','MnuiPzsc','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9017','MRP运算','MnuiMrpJs','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '9018
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='9018'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9018','凭证传递','MnuiPzcd','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9018','凭证生成','MnuiPzsc','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '9019
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='9019'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9019','期末结账','MnuiYdjz','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9019','凭证传递','MnuiPzcd','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 '9020
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='9020'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9020','建立新年度账','MnuiNewYear','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9020','期末结账','MnuiYdjz','RC3')"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                '9021
+                rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='9021'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('9021','建立新年度账','MnuiNewYear','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 'A001
@@ -1434,14 +1474,21 @@ Public Class FrmCheckData
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='A012'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('A012','物料数据修复','MnuiCpRepair','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('A012','重新汇总物料总账','MnuiRedoFcspyeHz','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 'A013
                 rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='A013'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('A013','检测数据','MnuiCheckData','RC3')"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('A013','物料数据修复','MnuiCpRepair','RC3')"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'A014
+                rcOleDbCommand.CommandText = "DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid ='A014'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_menu (mnuiid,mnuicaption,mnuiname,mnuiown) VALUES ('A014','检测数据','MnuiCheckData','RC3')"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
             End If
@@ -2192,7 +2239,49 @@ Public Class FrmCheckData
             rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
             If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
-                rcOleDbCommand.CommandText = "CREATE TABLE gl_pz (cperiod CHAR(6),jd VARCHAR2(3),pzlxdm VARCHAR2(4),pzh NUMBER(5,0),kmdm VARCHAR2(15),kmmc VARCHAR2(200),zydm VARCHAR2(12),zymc VARCHAR2(30),csmc VARCHAR2(100),khdm VARCHAR2(15),khmc VARCHAR2(200),yhzh VARCHAR2(12))" '待完善
+                rcOleDbCommand.CommandText = "create table GL_PZ (
+  djh     VARCHAR2(15) not null,
+  xh      NUMBER(4) not null,
+  bdelete NUMBER(1),
+  cperiod CHAR(6),
+  pzlxdm  VARCHAR2(4),
+  pzh     NUMBER(5),
+  pzrq    DATE,
+  fjzs    NUMBER(4),
+  jd      VARCHAR2(3),
+  zy      VARCHAR2(300),
+  kmdm    VARCHAR2(15),
+  kmmc    VARCHAR2(100),
+  bmdm    VARCHAR2(12),
+  bmmc    VARCHAR2(50),
+  zydm    VARCHAR2(12),
+  zymc    VARCHAR2(30),
+  xmdm    VARCHAR2(12),
+  xmmc    VARCHAR2(50),
+  khdm    VARCHAR2(15),
+  khmc    VARCHAR2(200),
+  csdm    VARCHAR2(12),
+  csmc    VARCHAR2(100),
+  yhzh    VARCHAR2(12),
+  jxzh    VARCHAR2(12),
+  dwmc    VARCHAR2(60),
+  dfkm    VARCHAR2(50),
+  dw      VARCHAR2(8),
+  sl      NUMBER(18,6) default 0.0,
+  bz      VARCHAR2(8),
+  dj      NUMBER(18,6) default 0.0,
+  wb      NUMBER(18,6) default 0.0,
+  hl      NUMBER(18,6) default 0.0,
+  je      NUMBER(14,2) default 0.0,
+  yspz    VARCHAR2(16),
+  jsr     VARCHAR2(30),
+  wldqr   DATE,
+  srr     VARCHAR2(30),
+  srrq    DATE,
+  shr     VARCHAR2(30),
+  shrq    DATE,
+  jzr     VARCHAR2(30),
+  jzrq    DATE)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "ALTER TABLE gl_pz ADD CONSTRAINT PK_GL_PZ primary key (djh,xh)"
@@ -2551,6 +2640,434 @@ Public Class FrmCheckData
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
                 rcOleDbCommand.CommandText = "create index IDX_GL_PZ_JXZH on GL_PZ (jxzh)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+            End If
+        Catch ex As Exception
+            MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '********************'
+        '*****rcdata_001*****'
+        ''****sys_pz*********'
+        '********************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT table_name FROM user_tables WHERE table_name = 'SYS_PZ'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("user_tables") IsNot Nothing Then
+                rcDataset.Tables("user_tables").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
+            If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
+                'table不存在,则新建
+                rcOleDbCommand.CommandText = "create table SYS_PZ (
+                  djh     VARCHAR2(15) not null,
+                  xh      NUMBER(4) not null,
+                  bdelete NUMBER(1),
+                  cperiod CHAR(6),
+                  pzlxdm  VARCHAR2(4),
+                  pzh     NUMBER(5),
+                  pzrq    DATE,
+                  fjzs    NUMBER(4),
+                  jd      VARCHAR2(3),
+                  zy      VARCHAR2(300),
+                  kmdm    VARCHAR2(15),
+                  kmmc    VARCHAR2(100),
+                  bmdm    VARCHAR2(12),
+                  bmmc    VARCHAR2(50),
+                  zydm    VARCHAR2(12),
+                  zymc    VARCHAR2(30),
+                  xmdm    VARCHAR2(12),
+                  xmmc    VARCHAR2(50),
+                  khdm    VARCHAR2(15),
+                  khmc    VARCHAR2(200),
+                  csdm    VARCHAR2(12),
+                  csmc    VARCHAR2(100),
+                  yhzh    VARCHAR2(12),
+                  jxzh    VARCHAR2(12),
+                  dwmc    VARCHAR2(60),
+                  dfkm    VARCHAR2(50),
+                  dw      VARCHAR2(8),
+                  sl      NUMBER(18,6) default 0.0,
+                  bz      VARCHAR2(8),
+                  dj      NUMBER(18,6) default 0.0,
+                  wb      NUMBER(18,6) default 0.0,
+                  hl      NUMBER(18,6) default 0.0,
+                  je      NUMBER(14,2) default 0.0,
+                  yspz    VARCHAR2(16),
+                  jsr     VARCHAR2(30),
+                  wldqr   DATE,
+                  srr     VARCHAR2(30),
+                  srrq    DATE,
+                  shr     VARCHAR2(30),
+                  shrq    DATE,
+                  jzr     VARCHAR2(30),
+                  jzrq    DATE)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD CONSTRAINT PK_SYS_PZ primary key (djh,xh)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+            Else
+                'table存在，则检测字段
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CPERIOD' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD cperiod CHAR(6)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY cperiod CHAR(6)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'table存在，则检测字段
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'JD' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD jd VARCHAR2(3)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY jd VARCHAR2(3)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'PZLXDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD pzlxdm VARCHAR2(4)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY pzlxdm VARCHAR2(4)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'PZH' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD pzh NUMBER(5,0)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY pzh NUMBER(5,0)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KMDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD kmdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY kmdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KMMC' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD kmmc VARCHAR2(100)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY kmmc VARCHAR2(100)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'ZYDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD zydm VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY zydm VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'ZYMC' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD zymc VARCHAR2(30)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY zymc VARCHAR2(30)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KHDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD khdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY khdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KHMC' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD khmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY khmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CSMC' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD csmc VARCHAR2(100)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY csmc VARCHAR2(100)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'YHZH' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz ADD yhzh VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE sys_pz MODIFY yhzh VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '重建索引
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "CREATE INDEX IDX_SYS_PZ on SYS_PZ (cperiod,pzlxdm,pzh,kmdm,bmdm,zydm,khdm,csdm,xmdm,yhzh,jxzh)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'cperiod
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_CPERIOD' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_CPERIOD"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_CPERIOD on SYS_PZ (cperiod)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'kmdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_KMDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_KMDM"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_KMDM on SYS_PZ (kmdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'bmdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_BMDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_BMDM"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_BMDM on SYS_PZ (bmdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'zydm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_ZYDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_ZYDM"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_ZYDM on SYS_PZ (zydm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'xmdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_XMDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_XMDM"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_XMDM on SYS_PZ (xmdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'khdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_KHDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_KHDM"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_KHDM on SYS_PZ (khdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'csdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_CSDM' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_CSDM"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_CSDM on SYS_PZ (csdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'yhzh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_YHZH' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_YHZH"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_YHZH on SYS_PZ (yhzh)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                'jxzh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_ind_columns WHERE index_name = 'IDX_SYS_PZ_JXZH' AND table_name ='SYS_PZ'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_ind_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_ind_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_ind_columns")
+                If rcDataset.Tables("user_ind_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "drop index IDX_SYS_PZ_JXZH"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "create index IDX_SYS_PZ_JXZH on SYS_PZ (jxzh)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
             End If
@@ -2944,7 +3461,7 @@ Public Class FrmCheckData
             rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
             If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
-                rcOleDbCommand.CommandText = "CREATE TABLE gl_ywfjsb (cperiod VARCHAR2(6) NOT NULL,khdm VARCHAR2(15) NOT NULL,khmc VARCHAR2(200),zydm VARCHAR2(12),zymc VARCHAR2(30),t_zydm VARCHAR2(12),t_zymc VARCHAR2(30),xslbdm VARCHAR2(12),t_xslbdm VARCHAR2(12),ywfbl NUMBER(7,3) DEFAULT 0,newkhbl NUMBER(6,2) DEFAULT 0,skqx NUMBER(4,0) DEFAULT 0,byjf NUMBER(14,2) DEFAULT 0,bydf NUMBER(14,2) DEFAULT 0,qmye NUMBER(14,2) DEFAULT 0,jf00 NUMBER(14,2) DEFAULT 0,jf01 NUMBER(14,2) DEFAULT 0,jf02 NUMBER(14,2) DEFAULT 0,jf03 NUMBER(14,2) DEFAULT 0,jf04 NUMBER(14,2) DEFAULT 0,jf05 NUMBER(14,2) DEFAULT 0,jf06 NUMBER(14,2) DEFAULT 0,jf07 NUMBER(14,2) DEFAULT 0,jf08 NUMBER(14,2) DEFAULT 0,jf09 NUMBER(14,2) DEFAULT 0,jf10 NUMBER(14,2) DEFAULT 0,jf11 NUMBER(14,2) DEFAULT 0,jf12 NUMBER(14,2) DEFAULT 0,jf13 NUMBER(14,2) DEFAULT 0,jf14 NUMBER(14,2) DEFAULT 0,df01 NUMBER(14,2) DEFAULT 0,df02 NUMBER(14,2) DEFAULT 0,df03 NUMBER(14,2) DEFAULT 0,df04 NUMBER(14,2) DEFAULT 0,df05 NUMBER(14,2) DEFAULT 0,df06 NUMBER(14,2) DEFAULT 0,df07 NUMBER(14,2) DEFAULT 0,df08 NUMBER(14,2) DEFAULT 0,df09 NUMBER(14,2) DEFAULT 0,df10 NUMBER(14,2) DEFAULT 0,df11 NUMBER(14,2) DEFAULT 0,df12 NUMBER(14,2) DEFAULT 0,df13 NUMBER(14,2) DEFAULT 0,df14 NUMBER(14,2) DEFAULT 0,dkl07 NUMBER(6,2) DEFAULT 0,dkl08 NUMBER(6,2) DEFAULT 0,dkl09 NUMBER(6,2) DEFAULT 0,dkl10 NUMBER(6,2) DEFAULT 0,dkl11 NUMBER(6,2) DEFAULT 0,dkl12 NUMBER(6,2) DEFAULT 0,dkl13 NUMBER(6,2) DEFAULT 0,dkl14 NUMBER(6,2) DEFAULT 0,ywf_bz NUMBER(14,2) DEFAULT 0,ywf_newkh NUMBER(14,2) DEFAULT 0,ywf_zl NUMBER(14,2) DEFAULT 0,cdhpje NUMBER(14,2) DEFAULT 0,ywf_cdhp NUMBER(14,2) DEFAULT 0,tiexije NUMBER(14,2) DEFAULT 0,ywf_tx NUMBER(14,2) DEFAULT 0,skje_yj NUMBER(14,2) DEFAULT 0,yongjinje NUMBER(14,2) DEFAULT 0,ywf_yj NUMBER(14,2) DEFAULT 0,daizhang NUMBER(14,2) DEFAULT 0,ywf_dz NUMBER(14,2) DEFAULT 0,susong NUMBER(14,2) DEFAULT 0,ywf_ss NUMBER(14,2) DEFAULT 0,ywf_hlc NUMBER(14,2) DEFAULT 0,ywfhj NUMBER(14,2) DEFAULT 0)"
+                rcOleDbCommand.CommandText = "CREATE TABLE gl_ywfjsb (cperiod VARCHAR2(6) NOT NULL,khdm VARCHAR2(15) NOT NULL,khmc VARCHAR2(200),zydm VARCHAR2(12),zymc VARCHAR2(30),t_zydm VARCHAR2(12),t_zymc VARCHAR2(30),xslbdm VARCHAR2(12),t_xslbdm VARCHAR2(12),ywfbl NUMBER(7,3) DEFAULT 0,newkhbl NUMBER(6,2) DEFAULT 0,skqx NUMBER(4,0) DEFAULT 0,byjf NUMBER(14,2) DEFAULT 0,bydf NUMBER(14,2) DEFAULT 0,qmye NUMBER(14,2) DEFAULT 0,jf00 NUMBER(14,2) DEFAULT 0,jf01 NUMBER(14,2) DEFAULT 0,jf02 NUMBER(14,2) DEFAULT 0,jf03 NUMBER(14,2) DEFAULT 0,jf04 NUMBER(14,2) DEFAULT 0,jf05 NUMBER(14,2) DEFAULT 0,jf06 NUMBER(14,2) DEFAULT 0,jf07 NUMBER(14,2) DEFAULT 0,jf08 NUMBER(14,2) DEFAULT 0,jf09 NUMBER(14,2) DEFAULT 0,jf10 NUMBER(14,2) DEFAULT 0,jf11 NUMBER(14,2) DEFAULT 0,jf12 NUMBER(14,2) DEFAULT 0,jf13 NUMBER(14,2) DEFAULT 0,jf14 NUMBER(14,2) DEFAULT 0,df01 NUMBER(14,2) DEFAULT 0,df02 NUMBER(14,2) DEFAULT 0,df03 NUMBER(14,2) DEFAULT 0,df04 NUMBER(14,2) DEFAULT 0,df05 NUMBER(14,2) DEFAULT 0,df06 NUMBER(14,2) DEFAULT 0,df07 NUMBER(14,2) DEFAULT 0,df08 NUMBER(14,2) DEFAULT 0,df09 NUMBER(14,2) DEFAULT 0,df10 NUMBER(14,2) DEFAULT 0,df11 NUMBER(14,2) DEFAULT 0,df12 NUMBER(14,2) DEFAULT 0,df13 NUMBER(14,2) DEFAULT 0,df14 NUMBER(14,2) DEFAULT 0,dkl07 NUMBER(6,2) DEFAULT 0,dkl08 NUMBER(6,2) DEFAULT 0,dkl09 NUMBER(6,2) DEFAULT 0,dkl10 NUMBER(6,2) DEFAULT 0,dkl11 NUMBER(6,2) DEFAULT 0,dkl12 NUMBER(6,2) DEFAULT 0,dkl13 NUMBER(6,2) DEFAULT 0,dkl14 NUMBER(6,2) DEFAULT 0,ywf_bz NUMBER(14,2) DEFAULT 0,ywf_newkh NUMBER(14,2) DEFAULT 0,ywf_zl NUMBER(14,2) DEFAULT 0,cdhpje NUMBER(14,2) DEFAULT 0,ywf_cdhp NUMBER(14,2) DEFAULT 0,gylpjje NUMBER(14,2) DEFAULT 0,ywf_gylpj NUMBER(14,2) DEFAULT 0,tiexije NUMBER(14,2) DEFAULT 0,ywf_tx NUMBER(14,2) DEFAULT 0,skje_yj NUMBER(14,2) DEFAULT 0,yongjinje NUMBER(14,2) DEFAULT 0,ywf_yj NUMBER(14,2) DEFAULT 0,daizhang NUMBER(14,2) DEFAULT 0,ywf_dz NUMBER(14,2) DEFAULT 0,susong NUMBER(14,2) DEFAULT 0,ywf_ss NUMBER(14,2) DEFAULT 0,ywf_hlc NUMBER(14,2) DEFAULT 0,ywfhj NUMBER(14,2) DEFAULT 0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "ALTER TABLE gl_ywfjsb ADD CONSTRAINT PK_GL_YWFJSB primary key (cperiod,khdm)"
@@ -3649,6 +4166,30 @@ Public Class FrmCheckData
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'GYLPJJE' AND table_name ='GL_YWFJSB'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE gl_ywfjsb ADD gylpjje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'YWF_GYLPJ' AND table_name ='GL_YWFJSB'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE gl_ywfjsb ADD ywf_gylpj NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'TIEXIJE' AND table_name ='GL_YWFJSB'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -3883,6 +4424,52 @@ Public Class FrmCheckData
                 rcOleDbCommand.ExecuteNonQuery()
             Else
                 'table存在，则检测字段
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='INV_CKD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_CKD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_CKD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '仓库名称
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CKMC' AND table_name ='INV_CKD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd ADD ckmc VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_CKD.ckmc is '仓库名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd MODIFY ckmc VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_CKD.ckmc is '仓库名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CPMC' AND table_name ='INV_CKD'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -3925,11 +4512,11 @@ Public Class FrmCheckData
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
                 If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
-                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd ADD pihao VARCHAR2(30)"
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd ADD pihao VARCHAR2(40)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 Else
-                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd MODIFY pihao VARCHAR2(30)"
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd MODIFY pihao VARCHAR2(40)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -4013,8 +4600,14 @@ Public Class FrmCheckData
                     rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd ADD cbill_bid VARCHAR2(20)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_CKD.cbill_bid is 'NC单据表体主键'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
                 Else
                     rcOleDbCommand.CommandText = "ALTER TABLE inv_ckd MODIFY cbill_bid VARCHAR2(20)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_CKD.cbill_bid is 'NC单据表体主键'"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -4063,6 +4656,19 @@ Public Class FrmCheckData
                 rcOleDbCommand.ExecuteNonQuery()
             Else
                 '检测索引
+                ''组合索引
+                'rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_INV_CPYEB_COMP' AND table_name = 'INV_CPYEB'"
+                'rcOleDbCommand.Parameters.Clear()
+                'rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                'If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                '    rcDataset.Tables("user_indexes").Clear()
+                'End If
+                'rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                'If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                '    rcOleDbCommand.CommandText = "CREATE INDEX idx_inv_cpyeb_comp ON inv_cpyeb(kjnd, cpdm, ckdm)"
+                '    rcOleDbCommand.Parameters.Clear()
+                '    rcOleDbCommand.ExecuteNonQuery()
+                'End If
                 rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_INV_CPYEB_CKDM' AND table_name = 'INV_CPYEB'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -4214,11 +4820,101 @@ Public Class FrmCheckData
                     rcOleDbCommand.CommandText = "ALTER TABLE inv_dbd ADD cbill_bid VARCHAR2(20)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_DBD.cbill_bid is 'NC单据表体主键'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
                 Else
                     rcOleDbCommand.CommandText = "ALTER TABLE inv_dbd MODIFY cbill_bid VARCHAR2(20)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_DBD.cbill_bid is 'NC单据表体主键'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
                 End If
+            End If
+        Catch ex As Exception
+            MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '********************'
+        '*****rcdata_001*****'
+        '*****inv_fcspyeb********'
+        '********************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT table_name FROM user_tables WHERE table_name = 'INV_FCSPYEB'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("user_tables") IsNot Nothing Then
+                rcDataset.Tables("user_tables").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
+            If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
+                'table不存在,则新建
+                rcOleDbCommand.CommandText = "CREATE TABLE inv_fcspyeb (kjnd VARCHAR2(4) not null,cpdm varchar2(15),bmdm VARCHAR2(12),khdm VARCHAR2(15),qcsl NUMBER(18,6) default 0,qcfzsl NUMBER(18,6) default 0,qcje NUMBER(14,2) default 0,idsl NUMBER(18,6) default 0,idfzsl NUMBER(18,6) default 0,idje NUMBER(14,2) default 0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "ALTER TABLE inv_fcspyeb ADD CONSTRAINT PK_inv_fcspyeb primary key (kjnd,cpdm,bmdm,khdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+            Else
+                '检测索引
+                ''组合索引
+                'rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_INV_FCSPYEB_COMP' AND table_name = 'INV_FCSPYEB'"
+                'rcOleDbCommand.Parameters.Clear()
+                'rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                'If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                '    rcDataset.Tables("user_indexes").Clear()
+                'End If
+                'rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                'If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                '    rcOleDbCommand.CommandText = "CREATE INDEX idx_inv_fcspyeb_comp ON INV_FCSPYEB(KJND, CPDM, BMDM, KHDM)"
+                '    rcOleDbCommand.Parameters.Clear()
+                '    rcOleDbCommand.ExecuteNonQuery()
+                'End If
+                '检测索引
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_INV_FCSPYEB_BMDM' AND table_name = 'INV_FCSPYEB'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_INV_FCSPYEB_BMDM on INV_FCSPYEB (bmdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_INV_FCSPYEB_KHDM' AND table_name = 'INV_FCSPYEB'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_INV_FCSPYEB_KHDM on INV_FCSPYEB (khdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_INV_FCSPYEB_CPDM' AND table_name = 'INV_FCSPYEB'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_INV_FCSPYEB_CPDM on INV_FCSPYEB (cpdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'table存在，则检测字段
             End If
         Catch ex As Exception
             MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
@@ -4302,6 +4998,29 @@ Public Class FrmCheckData
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
                 'table存在，则检测字段
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='INV_RKD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_rkd ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_RKD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE inv_rkd MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_RKD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CPMC' AND table_name ='INV_RKD'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -4483,8 +5202,14 @@ Public Class FrmCheckData
                     rcOleDbCommand.CommandText = "ALTER TABLE inv_rkd ADD cbill_bid VARCHAR2(20)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_RKD.cbill_bid is 'NC单据表体主键'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
                 Else
                     rcOleDbCommand.CommandText = "ALTER TABLE inv_rkd MODIFY cbill_bid VARCHAR2(20)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column INV_RKD.cbill_bid is 'NC单据表体主键'"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -4530,6 +5255,52 @@ Public Class FrmCheckData
                 rcOleDbCommand.ExecuteNonQuery()
             Else
                 'table存在，则检测字段
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='OE_DD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_dd ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_DD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_dd MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_DD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单税额
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'FPJE' AND table_name ='OE_DD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_dd ADD fpje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_DD.fpje is '发票金额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_dd MODIFY fpje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_DD.fpje is '发票金额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'SDJH' AND table_name ='OE_DD'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -4551,6 +5322,494 @@ Public Class FrmCheckData
                 rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
                 If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
                     rcOleDbCommand.CommandText = "ALTER TABLE oe_dd ADD sxh NUMBER(4,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '********************'
+        '*****rcdata_001*****'
+        ''****oe_fp*********'
+        '********************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT table_name FROM user_tables WHERE table_name = 'OE_FP'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("user_tables") IsNot Nothing Then
+                rcDataset.Tables("user_tables").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
+            If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
+                'table不存在,则新建
+                rcOleDbCommand.CommandText = "CREATE TABLE oe_fp (djh VARCHAR2(15) NOT NULL,xh number(4,0),sdjh VARCHAR2(15),sxh number(4,0))" '待完善
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD CONSTRAINT PK_OE_FP primary key (djh,xh)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+            Else
+                'table存在，则检测字段
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+
+                '客户编码
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KHDM' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD khdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.khdm is '客户编码'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY khdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.khdm is '客户编码'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '客户名称
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KHMC' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD khmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.khmc is '客户名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY khmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.khmc is '客户名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '收货客户编码
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'SHKHDM' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD shkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.shkhdm is '收货客户编码'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY shkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.shkhdm is '收货客户编码'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '客户名称
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'SHKHMC' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD shkhmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.shkhmc is '收货客户名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY shkhmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.shkhmc is '收货客户名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '部门编码bmdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BMDM' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD bmdm VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '部门名称bmmc
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BMMC' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD bmmc VARCHAR2(60)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY bmmc VARCHAR2(60)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单单据号xsddjh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSDDJH' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xsddjh VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsddjh is '送货单单据号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xsddjh VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsddjh is '送货单单据号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单行号xsdxh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSDXH' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xsdxh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdxh is '送货单行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xsdxh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdxh is '送货单行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单单价xsddj
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSDDJ' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xsddj NUMBER(18,6) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsddj is '送货单不含税单价'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xsddj NUMBER(18,6) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsddj is '送货单不含税单价'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单含税单价xsdhsdj
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSDHSDJ' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xsdhsdj NUMBER(18,6) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdhsdj is '送货单含税单价'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xsdhsdj NUMBER(18,6) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdhsdj is '送货单含税单价'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单金额xsdje
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSDJE' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xsdje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdje is '送货单金额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xsdje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdje is '送货单金额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单税率xsdshlv
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSDSHLV' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xsdshlv NUMBER(6,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdshlv is '送货单税率'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xsdshlv NUMBER(6,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdshlv is '送货单税率'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '送货单税额xsdse
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XSDSE' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD xsdse NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdse is '送货单税额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY xsdse NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.xsdse is '送货单税额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '成本单价cbdj
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CBDJ' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD cbdj NUMBER(18,6) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.cbdj is '成本单价'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY cbdj NUMBER(18,6) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.cbdj is '成本单价'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '成本金额cbje
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CBJE' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD cbje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.cbje is '成本金额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY cbje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.cbje is '成本金额'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'BRECYCLE回收标志
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BPZ' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD bpz NUMBER(1,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.bpz is '凭证生成标志'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY bpz  NUMBER(1,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.bpz is '凭证生成标志'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '检测索引
+                'bdelete, fprq, cpdm, bmdm, shkhdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_FP_COMP1' AND table_name = 'OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_FP_COMP1 on OE_FP (bdelete, fprq, cpdm, bmdm, shkhdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'fprq
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_FP_FPRQ' AND table_name = 'OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_FP_FPRQ on OE_FP (fprq)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'khdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_FP_KHDM' AND table_name = 'OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_FP_KHDM on OE_FP (khdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'shkhdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_FP_SHKHDM' AND table_name = 'OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_FP_SHKHDM on OE_FP (shkhdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'bmdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_FP_BMDM' AND table_name = 'OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_FP_BMDM on OE_FP (bmdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'cpdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_FP_CPDM' AND table_name = 'OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_FP_CPDM on OE_FP (cpdm)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -4586,6 +5845,121 @@ Public Class FrmCheckData
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
             Else
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '仓库名称
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CKMC' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD ckmc VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.ckmc is '仓库名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY ckmc VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.ckmc is '仓库名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '批号PIHAO
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'PIHAO' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD pihao VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.pihao is '批次号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY pihao VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.pihao is '批次号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '开票客户编码
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'FPKHDM' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD fpkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.fpkhdm is '开票客户编码'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY fpkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.fpkhdm is '开票客户编码'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '开票客户名称
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'FPKHMC' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD fpkhmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.fpkhmc is '开票客户名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY fpkhmc VARCHAR2(200)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.fpkhmc is '开票客户名称'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 'bmdm
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BMDM' AND table_name ='OE_XSD'"
                 rcOleDbCommand.Parameters.Clear()
@@ -4683,16 +6057,116 @@ Public Class FrmCheckData
                     rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD cbill_bid VARCHAR2(20)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.cbill_bid is 'NC单据表体主键'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
                 Else
                     rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY cbill_bid VARCHAR2(20)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.cbill_bid is 'NC单据表体主键'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
                 End If
-                '更新fzsl字段是空的为0
-                rcOleDbCommand.CommandText = "UPDATE oe_xsd SET fzsl = 0 WHERE fzsl IS NULL"
+                '单据号vbillcode
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'VBILLCODE' AND table_name ='OE_XSD'"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD vbillcode VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.vbillcode is 'NC单据号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY vbillcode VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.vbillcode is 'NC单据号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '单据号vbillcode
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CROWNO' AND table_name ='OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd ADD crowno VARCHAR2(20)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.crowno is 'NC行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd MODIFY crowno VARCHAR2(20)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD.crowno is 'NC行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 '检测索引
+                '复合覆盖索引1cpdm,ckdm,xsrq,bdelete
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_XSD_COMP1' AND table_name = 'OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "CREATE INDEX idx_oe_xsd_comp1 ON OE_XSD (CPDM,CKDM,XSRQ,BDELETE)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '复合覆盖索引2cpdm,bmdm,khdm,xsrq,bdelete
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_XSD_COMP2' AND table_name = 'OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "CREATE INDEX idx_oe_xsd_comp2 ON OE_XSD (bdelete, xsrq, cpdm, bmdm, khdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'khdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_XSD_KHDM' AND table_name = 'OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_XSD_KHDM on OE_XSD (khdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'fpkhdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_XSD_FPKHDM' AND table_name = 'OE_XSD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_indexes") IsNot Nothing Then
+                    rcDataset.Tables("user_indexes").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_indexes")
+                If rcDataset.Tables("user_indexes").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "create index IDX_OE_XSD_FPKHDM on OE_XSD (fpkhdm)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_XSD_BMDM' AND table_name = 'OE_XSD'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -4741,6 +6215,185 @@ Public Class FrmCheckData
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
+
+
+                '更新fzsl字段是空的为0
+                rcOleDbCommand.CommandText = "UPDATE oe_xsd SET fzsl = 0 WHERE fzsl IS NULL"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+
+            End If
+        Catch ex As Exception
+            MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '********************'
+        '*****rcdata_001*****'
+        '*****oe_xsd_fcsp********'
+        '********************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT table_name FROM user_tables WHERE table_name = 'OE_XSD_FCSP'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("user_tables") IsNot Nothing Then
+                rcDataset.Tables("user_tables").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
+            If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
+                'table不存在,则新建
+                rcOleDbCommand.CommandText = "CREATE TABLE oe_xsd_fcsp (cperiod CHAR(6),ckkjqj CHAR(6),djh VARCHAR2(40) NOT NULL,xh number(6,0),shkhdm VARCHAR2(15),fpkhdm VARCHAR2(15),bmdm VARCHAR2(12),cpdm VARCHAR2(15),sl NUMBER(18,6) DEFAULT 0,je NUMBER(14,2) DEFAULT 0,se NUMBER(14,2) DEFAULT 0,cbje NUMBER(14,2) DEFAULT 0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp ADD CONSTRAINT PK_OE_XSD_FCSP primary key (cperiod,djh,xh,shkhdm,fpkhdm,bmdm,cpdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+            Else
+                '销售出库日期xsrq
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CKKJQJ' AND table_name ='OE_XSD_FCSP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp ADD ckkjqj CHAR(6)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.ckkjqj is '出库会计期间'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp MODIFY ckkjqj CHAR(6)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.ckkjqj is '出库会计期间'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '单据号djh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'DJH' AND table_name ='OE_XSD_FCSP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp ADD djh VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.djh is '单据号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp MODIFY djh VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.djh is '单据号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='OE_XSD_FCSP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+
+                'khdm字段改名成shkhdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KHDM' AND table_name ='OE_XSD_FCSP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count > 0 Then
+                    rcOleDbCommand.CommandText = "alter table OE_XSD_FCSP rename column khdm to shkhdm"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.shkhdm is '送货客户'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+
+                '送货客户shkhdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'SHKHDM' AND table_name ='OE_XSD_FCSP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp ADD shkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.shkhdm is '收货客户'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp MODIFY shkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.shkhdm is '收货客户'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '开票客户fpkhdm
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'FPKHDM' AND table_name ='OE_XSD_FCSP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp ADD fpkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.fpkhdm is '开票客户'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_xsd_fcsp MODIFY fpkhdm VARCHAR2(15)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_XSD_FCSP.fpkhdm is '开票客户'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '删除主键、新增主键
+                rcOleDbCommand.CommandText = "alter table OE_XSD_FCSP drop constraint PK_OE_XSD_FCSP cascade"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "alter table OE_XSD_FCSP add constraint PK_OE_XSD_FCSP primary key (CPERIOD, DJH, XH, SHKHDM, FPKHDM, BMDM, CPDM)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
             End If
         Catch ex As Exception
             MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
@@ -5360,6 +7013,30 @@ Public Class FrmCheckData
                 rcOleDbCommand.ExecuteNonQuery()
             Else
                 'table存在，则检测字段
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='PO_CGD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_cgd ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_CGD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_cgd MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_CGD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'RKRQ' AND table_name ='PO_CGD'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -5431,6 +7108,164 @@ Public Class FrmCheckData
         End Try
         '********************'
         '*****rcdata_001*****'
+        ''****po_fp*********'
+        '********************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT table_name FROM user_tables WHERE table_name = 'PO_FP'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("user_tables") IsNot Nothing Then
+                rcDataset.Tables("user_tables").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
+            If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
+                'table不存在,则新建
+                rcOleDbCommand.CommandText = "CREATE TABLE po_fp (djh VARCHAR2(15) not null,xh NUMBER(4) not null,fprq DATE,bmdm VARCHAR2(12),bmmc VARCHAR2(30),cpdm VARCHAR2(15),cpmc VARCHAR2(200),sl NUMBER(18,6) default 0,dw VARCHAR2(8),mjsl NUMBER(18,6) default 0,fzsl NUMBER(18,6) default 0,fzdw VARCHAR2(8),jhshrq DATE,jhmemo VARCHAR2(200),srr VARCHAR2(30),srrq DATE default sysdate,shr VARCHAR2(30),shrq DATE,cgsl NUMBER(18,6) default 0,bclosed NUMBER(1) default 0,bcg NUMBER(1) default 0,bsenddingtalk NUMBER(1) default 0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD CONSTRAINT PK_PO_FP primary key (djh,xh)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.ExecuteNonQuery()
+            Else
+                'table存在，则检测字段
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='PO_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_FP.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_FP.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '入库单不含税单价
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'YSPZ' AND table_name ='PO_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD yspz VARCHAR2(30)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp MODIFY yspz VARCHAR2(30)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '入库单不含税单价
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'RKDDJ' AND table_name ='PO_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD rkddj NUMBER(18,6) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp MODIFY rkddj NUMBER(18,6) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '入库单含税单价
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'RKDHSDJ' AND table_name ='PO_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD rkdhsdj NUMBER(18,6) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp MODIFY rkdhsdj NUMBER(18,6) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '入库单金额
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'RKDJE' AND table_name ='PO_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD rkdje NUMBER(14,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp MODIFY rkdje NUMBER(14,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '入库单税率
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'RKDSHLV' AND table_name ='PO_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD rkdshlv NUMBER(6,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp MODIFY rkdshlv NUMBER(6,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '入库单不含税单价
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'RKDSE' AND table_name ='PO_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp ADD rkdse NUMBER(14,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_fp MODIFY rkdse NUMBER(14,2) DEFAULT 0.0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox("程序错误。" & ex.Message & Chr(13) & rcOleDbCommand.CommandText, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '********************'
+        '*****rcdata_001*****'
         ''****po_rkd*********'
         '********************'
         Try
@@ -5455,6 +7290,29 @@ Public Class FrmCheckData
                 rcOleDbCommand.ExecuteNonQuery()
             Else
                 'table存在，则检测字段
+                '行号xh
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XH' AND table_name ='PO_RKD'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_rkd ADD xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_RKD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE po_rkd MODIFY xh NUMBER(6,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_RKD.xh is '行号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 'rkrq
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'RKRQ' AND table_name ='PO_RKD'"
                 rcOleDbCommand.Parameters.Clear()
@@ -5565,8 +7423,14 @@ Public Class FrmCheckData
                     rcOleDbCommand.CommandText = "ALTER TABLE po_rkd ADD cbill_bid VARCHAR2(20)"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_RKD.cbill_bid is 'NC单据表体主键'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
                 Else
                     rcOleDbCommand.CommandText = "ALTER TABLE po_rkd MODIFY cbill_bid VARCHAR2(20)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column PO_RKD.cbill_bid is 'NC单据表体主键'"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -5727,7 +7591,7 @@ Public Class FrmCheckData
             rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
             If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
-                rcOleDbCommand.CommandText = "CREATE TABLE rc_ckxx (ckdm VARCHAR2(12) NOT NULL,ckmc VARCHAR2(40),cksm VARCHAR2(12),bscrkcb NUMERIC(1,0))"
+                rcOleDbCommand.CommandText = "CREATE TABLE rc_ckxx (ckdm VARCHAR2(12) NOT NULL,ckmc VARCHAR2(40),cksm VARCHAR2(12),bscrkcb NUMERIC(1,0),hsfl VARCHAR2(10))"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx ADD CONSTRAINT PK_RC_CKXX primary key (ckdm)"
@@ -5735,23 +7599,6 @@ Public Class FrmCheckData
                 rcOleDbCommand.ExecuteNonQuery()
             Else
                 'table存在，则检测字段
-                'BSCRKCB
-                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BSCRKCB' AND table_name ='RC_CKXX'"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
-                    rcDataset.Tables("user_tab_columns").Clear()
-                End If
-                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
-                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
-                    rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx ADD bscrkcb NUMERIC(1,0) DEFAULT 0"
-                    rcOleDbCommand.Parameters.Clear()
-                    rcOleDbCommand.ExecuteNonQuery()
-                Else
-                    rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx MODIFY bscrkcb NUMERIC(1,0) DEFAULT 0"
-                    rcOleDbCommand.Parameters.Clear()
-                    rcOleDbCommand.ExecuteNonQuery()
-                End If
                 'ckmc
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'CKMC' AND table_name ='RC_CKXX'"
                 rcOleDbCommand.Parameters.Clear()
@@ -5766,6 +7613,52 @@ Public Class FrmCheckData
                     rcOleDbCommand.ExecuteNonQuery()
                 Else
                     rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx MODIFY ckmc VARCHAR2(40)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                'BSCRKCB
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BSCRKCB' AND table_name ='RC_CKXX'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx ADD bscrkcb NUMERIC(1,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column RC_CKXX.bscrkcb is '生产入库按标准成本计算'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx MODIFY bscrkcb NUMERIC(1,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column RC_CKXX.bscrkcb is '生产入库按标准成本计算'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '核算分类
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'HSFL' AND table_name ='RC_CKXX'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx ADD hsfl VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column RC_CKXX.hsfl is '核算分类'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE rc_ckxx MODIFY hsfl VARCHAR2(12)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column RC_CKXX.hsfl is '核算分类'"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -6293,7 +8186,7 @@ Public Class FrmCheckData
             rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
             If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
-                rcOleDbCommand.CommandText = "CREATE TABLE rc_jsfs (jsfsdm VARCHAR2(12) NOT NULL,jsfsmc VARCHAR2(30),jsfssm VARCHAR2(12),bkywf NUMBER(1,0) DEFAULT 0)"
+                rcOleDbCommand.CommandText = "CREATE TABLE rc_jsfs (jsfsdm VARCHAR2(12) NOT NULL,jsfsmc VARCHAR2(30),jsfssm VARCHAR2(12),bkywf NUMBER(1,0) DEFAULT 0,bgylk NUMBER(1,0) DEFAULT 0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "ALTER TABLE rc_jsfs ADD CONSTRAINT PK_RC_JSFS primary key (jsfsdm)"
@@ -6337,7 +8230,7 @@ Public Class FrmCheckData
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
-                '扣业务费标志
+                '承兑汇票扣业务费标志
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BKYWF' AND table_name ='RC_JSFS'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -6347,6 +8240,19 @@ Public Class FrmCheckData
                 rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
                 If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
                     rcOleDbCommand.CommandText = "ALTER TABLE rc_jsfs ADD bkywf NUMBER(1,0) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '供应链票据扣业务费标志
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'BGYLK' AND table_name ='RC_JSFS'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE rc_jsfs ADD bgylk NUMBER(1,0) DEFAULT 0"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -7066,8 +8972,8 @@ Public Class FrmCheckData
             If rcDataset.Tables("user_tables") IsNot Nothing Then
                 rcDataset.Tables("user_tables").Clear()
             End If
-            rcOleDbDataAdpt.Fill(rcDataSet, "user_tables")
-            If rcDataSet.Tables("user_tables").Rows.Count <= 0 Then
+            rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
+            If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
                 rcOleDbCommand.CommandText = "CREATE TABLE rc_wbxx (kjnd VARCHAR2(4) NOT NULL,wbdm VARCHAR2(4) NOT NULL,wbmc VARCHAR2(20),wbsm VARCHAR2(4),ywftzbl numeric(10,6) DEFAULT 0)" '待完善
                 rcOleDbCommand.Parameters.Clear()
@@ -7097,11 +9003,11 @@ Public Class FrmCheckData
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'YWFTZBL' AND table_name ='RC_WBXX'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataSet.Tables("user_tab_columns") IsNot Nothing Then
-                    rcDataSet.Tables("user_tab_columns").Clear()
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
                 End If
-                rcOleDbDataAdpt.Fill(rcDataSet, "user_tab_columns")
-                If rcDataSet.Tables("user_tab_columns").Rows.Count <= 0 Then
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
                     rcOleDbCommand.CommandText = "ALTER TABLE rc_wbxx ADD ywftzbl numeric(10,6) DEFAULT 0"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
@@ -7182,6 +9088,301 @@ Public Class FrmCheckData
         End Try
 
         '数据库存储过程
+
+        '*************************'
+        '******rcdata_001*********'
+        '*****USP3_REDO_CPYEHZ*******'
+        '*************************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.Transaction = rcOleDbTrans
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_REDO_CPYEHZ(paraStrYear  IN VARCHAR2,
+                                             paraDateDwrq IN DATE,
+                                             paraStrMsg   OUT VARCHAR2) AS
+  vDateBegin DATE := GET_INV_BEGIN(paraStrYear, '01');
+  vDateEnd   DATE := GET_INV_END(paraStrYear, '12');
+BEGIN
+  -- 1. 清除当前年份的发生额字段（为重新计算做准备）
+  UPDATE inv_cpyeb
+     SET idsl = 0, idfzsl = 0, idje = 0
+   WHERE kjnd = paraStrYear;
+
+  -- 2. 删除期初和发生额全部为零的冗余记录（此时发生额已被清零）
+  DELETE FROM inv_cpyeb
+   WHERE kjnd = paraStrYear
+     AND qcsl = 0 AND qcfzsl = 0 AND qcje = 0
+     AND idsl = 0 AND idfzsl = 0 AND idje = 0;
+
+  -- 3. 处理采购入库单（PO_RKD）：加法
+  MERGE INTO inv_cpyeb i
+  USING (SELECT cpdm, ckdm,
+                COALESCE(SUM(sl), 0.0)   AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(je), 0.0)   AS sum_je
+           FROM po_rkd
+          WHERE bdelete = 0
+            AND rkrq <= vDateEnd
+            AND rkrq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, ckdm) p
+  ON (i.cpdm = p.cpdm AND i.ckdm = p.ckdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE SET i.idsl   = i.idsl + p.sum_sl,
+               i.idfzsl = i.idfzsl + p.sum_fzsl,
+               i.idje   = i.idje + p.sum_je
+  WHEN NOT MATCHED THEN
+    INSERT (kjnd, cpdm, ckdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES (paraStrYear, p.cpdm, p.ckdm, 0, 0, 0, p.sum_sl, p.sum_fzsl, p.sum_je);
+
+  -- 4. 处理出库单（INV_CKD）：减法
+  MERGE INTO inv_cpyeb i
+  USING (SELECT cpdm, ckdm,
+                COALESCE(SUM(sl), 0.0)   AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(je), 0.0)   AS sum_je
+           FROM inv_ckd
+          WHERE bdelete = 0
+            AND ckrq <= vDateEnd
+            AND ckrq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, ckdm) c
+  ON (i.cpdm = c.cpdm AND i.ckdm = c.ckdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE SET i.idsl   = i.idsl - c.sum_sl,
+               i.idfzsl = i.idfzsl - c.sum_fzsl,
+               i.idje   = i.idje - c.sum_je
+  WHEN NOT MATCHED THEN
+    INSERT (kjnd, cpdm, ckdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES (paraStrYear, c.cpdm, c.ckdm, 0, 0, 0, -c.sum_sl, -c.sum_fzsl, -c.sum_je);
+
+  -- 5. 处理调拨单（INV_DBD）：调入仓库（rckdm）加法，调出仓库（cckdm）减法
+  -- 5.1 调入仓库（加法）
+  MERGE INTO inv_cpyeb i
+  USING (SELECT cpdm, rckdm AS ckdm,
+                COALESCE(SUM(sl), 0.0)   AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(je), 0.0)   AS sum_je
+           FROM inv_dbd
+          WHERE bdelete = 0
+            AND dbrq <= vDateEnd
+            AND dbrq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, rckdm) d_in
+  ON (i.cpdm = d_in.cpdm AND i.ckdm = d_in.ckdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE SET i.idsl   = i.idsl + d_in.sum_sl,
+               i.idfzsl = i.idfzsl + d_in.sum_fzsl,
+               i.idje   = i.idje + d_in.sum_je
+  WHEN NOT MATCHED THEN
+    INSERT (kjnd, cpdm, ckdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES (paraStrYear, d_in.cpdm, d_in.ckdm, 0, 0, 0, d_in.sum_sl, d_in.sum_fzsl, d_in.sum_je);
+
+  -- 5.2 调出仓库（减法）
+  MERGE INTO inv_cpyeb i
+  USING (SELECT cpdm, cckdm AS ckdm,
+                COALESCE(SUM(sl), 0.0)   AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(je), 0.0)   AS sum_je
+           FROM inv_dbd
+          WHERE bdelete = 0
+            AND dbrq <= vDateEnd
+            AND dbrq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, cckdm) d_out
+  ON (i.cpdm = d_out.cpdm AND i.ckdm = d_out.ckdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE SET i.idsl   = i.idsl - d_out.sum_sl,
+               i.idfzsl = i.idfzsl - d_out.sum_fzsl,
+               i.idje   = i.idje - d_out.sum_je
+  WHEN NOT MATCHED THEN
+    INSERT (kjnd, cpdm, ckdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES (paraStrYear, d_out.cpdm, d_out.ckdm, 0, 0, 0, -d_out.sum_sl, -d_out.sum_fzsl, -d_out.sum_je);
+
+  -- 6. 处理其他入库单（INV_RKD）：加法
+  MERGE INTO inv_cpyeb i
+  USING (SELECT cpdm, ckdm,
+                COALESCE(SUM(sl), 0.0)   AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(je), 0.0)   AS sum_je
+           FROM inv_rkd
+          WHERE bdelete = 0
+            AND rkrq <= vDateEnd
+            AND rkrq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, ckdm) r
+  ON (i.cpdm = r.cpdm AND i.ckdm = r.ckdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE SET i.idsl   = i.idsl + r.sum_sl,
+               i.idfzsl = i.idfzsl + r.sum_fzsl,
+               i.idje   = i.idje + r.sum_je
+  WHEN NOT MATCHED THEN
+    INSERT (kjnd, cpdm, ckdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES (paraStrYear, r.cpdm, r.ckdm, 0, 0, 0, r.sum_sl, r.sum_fzsl, r.sum_je);
+
+  -- 7. 处理销售出库单（OE_XSD）：减法（使用成本金额 cbje）
+  MERGE INTO inv_cpyeb i
+  USING (SELECT cpdm, ckdm,
+                COALESCE(SUM(sl), 0.0)   AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(cbje), 0.0) AS sum_cbje
+           FROM oe_xsd
+          WHERE bdelete = 0
+            AND xsrq <= vDateEnd
+            AND xsrq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, ckdm) x
+  ON (i.cpdm = x.cpdm AND i.ckdm = x.ckdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE SET i.idsl   = i.idsl - x.sum_sl,
+               i.idfzsl = i.idfzsl - x.sum_fzsl,
+               i.idje   = i.idje - x.sum_cbje
+  WHEN NOT MATCHED THEN
+    INSERT (kjnd, cpdm, ckdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES (paraStrYear, x.cpdm, x.ckdm, 0, 0, 0, -x.sum_sl, -x.sum_fzsl, -x.sum_cbje);
+
+  COMMIT;
+  paraStrMsg := '执行成功';
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+    paraStrMsg := '执行SQL语句错误，发生在USP3_REDO_CPYEHZ：' || SQLERRM;
+END USP3_REDO_CPYEHZ;"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.ExecuteNonQuery()
+            rcOleDbTrans.Commit()
+        Catch ex As Exception
+            Try
+                rcOleDbTrans.Rollback()
+                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Catch ey As OleDbException
+                MsgBox("程序错误。" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            End Try
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '*************************'
+        '******rcdata_001*********'
+        '*****USP3_REDO_FCSPYEHZ*******'
+        '*************************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.Transaction = rcOleDbTrans
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            '2020年3月收款单增加结算方式的字段
+            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_REDO_FCSPYEHZ(paraStrYear  IN VARCHAR2,
+                                               paraDateDwrq IN DATE,
+                                               paraStrMsg   OUT VARCHAR2) AS
+  vDateBegin DATE := GET_INV_BEGIN(paraStrYear, '01');
+  vDateEnd   DATE := GET_INV_END(paraStrYear, '12');
+BEGIN
+  -- 1. 清除当前年份的发生额字段（为重新计算做准备）
+  UPDATE inv_fcspyeb
+     SET idsl = 0, idfzsl = 0, idje = 0
+   WHERE kjnd = paraStrYear;
+
+  -- 2. 处理销售出库单（oe_xsd）：累加发生额，并补全缺失的产品-部门-客户组合
+  MERGE INTO inv_fcspyeb i
+  USING (SELECT cpdm,
+                bmdm,
+                khdm,
+                COALESCE(SUM(sl), 0.0) AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(cbje), 0.0) AS sum_cbje
+           FROM oe_xsd
+          WHERE bdelete = 0
+            AND je <> 0
+            AND xsrq <= vDateEnd
+            AND xsrq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, bmdm, khdm) o
+  ON (i.cpdm = o.cpdm AND i.bmdm = o.bmdm AND i.khdm = o.khdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE
+       SET i.idsl   = i.idsl + o.sum_sl,
+           i.idfzsl = i.idfzsl + o.sum_fzsl,
+           i.idje   = i.idje + o.sum_cbje
+  WHEN NOT MATCHED THEN
+    INSERT
+      (kjnd, cpdm, bmdm, khdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES
+      (paraStrYear,
+       o.cpdm,
+       o.bmdm,
+       o.khdm,
+       0,
+       0,
+       0,
+       o.sum_sl,
+       o.sum_fzsl,
+       o.sum_cbje);
+
+  -- 3. 处理发票（oe_fp）：扣减发生额，并补全缺失的产品-部门-客户组合（注意客户字段为shkhdm）
+  MERGE INTO inv_fcspyeb i
+  USING (SELECT cpdm,
+                bmdm,
+                shkhdm AS khdm,
+                COALESCE(SUM(sl), 0.0) AS sum_sl,
+                COALESCE(SUM(fzsl), 0.0) AS sum_fzsl,
+                COALESCE(SUM(cbje), 0.0) AS sum_cbje
+           FROM oe_fp
+          WHERE bdelete = 0
+            AND fprq <= vDateEnd
+            AND fprq >= GREATEST(paraDateDwrq, vDateBegin)
+          GROUP BY cpdm, bmdm, shkhdm) o
+  ON (i.cpdm = o.cpdm AND i.bmdm = o.bmdm AND i.khdm = o.khdm AND i.kjnd = paraStrYear)
+  WHEN MATCHED THEN
+    UPDATE
+       SET i.idsl   = i.idsl - o.sum_sl,
+           i.idfzsl = i.idfzsl - o.sum_fzsl,
+           i.idje   = i.idje - o.sum_cbje
+  WHEN NOT MATCHED THEN
+    INSERT
+      (kjnd, cpdm, bmdm, khdm, qcsl, qcfzsl, qcje, idsl, idfzsl, idje)
+    VALUES
+      (paraStrYear,
+       o.cpdm,
+       o.bmdm,
+       o.khdm,
+       0,
+       0,
+       0,
+       -o.sum_sl,
+       -o.sum_fzsl,
+       -o.sum_cbje);
+
+  -- 4. 删除期初和发生额全部为零的冗余记录
+  DELETE FROM inv_fcspyeb
+   WHERE kjnd = paraStrYear
+     AND qcsl = 0
+     AND qcfzsl = 0
+     AND qcje = 0
+     AND idsl = 0
+     AND idfzsl = 0
+     AND idje = 0;
+
+  COMMIT;
+  --paraStrMsg := '执行成功';
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+    paraStrMsg := '执行SQL语句错误，发生在USP3_REDO_FCSPYEHZ：' || SQLERRM;
+END USP3_REDO_FCSPYEHZ;"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.ExecuteNonQuery()
+            rcOleDbTrans.Commit()
+        Catch ex As Exception
+            Try
+                rcOleDbTrans.Rollback()
+                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Catch ey As OleDbException
+                MsgBox("程序错误。" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            End Try
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+
         '*************************'
         '******rcdata_001*********'
         '*****USP3_REDO_KMYEHZ*******'
@@ -7273,58 +9474,58 @@ Public Class FrmCheckData
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             '2020年3月收款单增加结算方式的字段
-            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_SAVE_AR_SKD" & _
-                "   ( paraIntIsAdding	    IN INTEGER" & _
-                "   , paraStrDjh 		    IN OUT VARCHAR2" & _
-                "   , paraDateSkrq		    IN DATE" & _
-                "   , ParaStrKhdm 		    IN VARCHAR2" & _
-                "   , paraStrKhmc 		    IN VARCHAR2" & _
-                "   , paraStrJsfsdm 	    IN VARCHAR2" & _
-                "   , paraStrJsfsmc 	    IN VARCHAR2" & _
-                "   , paraStrKmdm 		    IN VARCHAR2" & _
-                "   , paraStrKmmc 		    IN VARCHAR2" & _
-                "   , paraStrYspz 		    IN VARCHAR2" & _
-                "   , paraDblJe		        IN NUMERIC" & _
-                "   , paraDblXsje		    IN NUMERIC" & _
-                "   , paraStrSkmemo		    IN VARCHAR2" & _
-                "   , paraStrUserDspName	IN VARCHAR2" & _
-                "   , paraStrMsg		    OUT VARCHAR2" & _
-                "   ) AS " & _
-                "vStrPzlxdm CHAR(4):='';" & _
-                "vStrYear CHAR(4):='';" & _
-                "vStrMonth CHAR(2):='';" & _
-                "vIntPzno INTEGER(5):=0;" & _
-                "vStrStatement VARCHAR(200):='';" & _
-                "vIntCount INTEGER(4) := 0;" & _
-                "CURSOR vCursorAr_skd IS SELECT ar_skd.djh,ar_skd.khdm,COALESCE(ar_skd.je,0.0) AS je FROM ar_skd WHERE djh = paraStrDjh;" & _
-                "BEGIN" & _
-                "   vStrPzlxdm := SUBSTR(paraStrDjh,1,4);" & _
-                "   vStrYear := SUBSTR(paraStrDjh,5,4);" & _
-                "   vStrMonth := SUBSTR(paraStrDjh,9,2);" & _
-                "   vIntPzno := SUBSTR(paraStrDjh,11,5);" & _
-                "   If paraIntIsAdding = 1 Then" & _
-                "       vStrStatement := 'SELECT pzno' || vStrMonth || ' FROM rc_lx WHERE pzlxdm =' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) || ' FOR UPDATE';" & _
-                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" & _
-                "       vStrStatement := 'SELECT ' || vStrPzlxdm || vStrYear || vStrMonth || '.NEXTVAL FROM dual';" & _
-                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" & _
-                "       vStrStatement := 'UPDATE rc_lx SET pzno' || vStrMonth ||' = ' || vIntPzno || ' WHERE pzlxdm = ' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) ;" & _
-                "       EXECUTE IMMEDIATE vStrStatement;" & _
-                "       paraStrDjh :=  vStrPzlxdm || vStrYear || vStrMonth || LPAD(vIntPzno,5,'0');" & _
-                "   Else" & _
-                "       FOR vAr_skd IN vCursorAr_skd LOOP" & _
-                "           UPDATE ar_khyeb SET idje = idje + vAr_skd.je WHERE kjnd = vStrYear AND khdm = vAr_skd.khdm;" & _
-                "       END LOOP;" & _
-                "       DELETE FROM ar_skd WHERE djh = paraStrDjh;" & _
-                "   END IF;" & _
-                "   INSERT INTO ar_skd (djh,skrq,khdm,khmc,jsfsdm,jsfsmc,kmdm,kmmc,yspz,je,xsje,skmemo,srr) VALUES (paraStrDjh,paraDateSkrq,ParaStrKhdm,paraStrKhmc,paraStrJsfsdm,paraStrJsfsmc,paraStrKmdm,paraStrKmmc,paraStrYspz,paraDblJe,paraDblXsje,paraStrSkmemo,paraStrUserDspName);" & _
-                "   SELECT COUNT(1) INTO vIntCount FROM ar_khyeb WHERE kjnd = vStrYear AND khdm = ParaStrKhdm;" & _
-                "   IF vIntCount = 0 THEN" & _
-                "       INSERT INTO ar_khyeb (kjnd,khdm,khmc,qcje,idje) VALUES (vStrYear,ParaStrKhdm,paraStrKhmc,0.0,0.0);" & _
-                "   END IF;" & _
-                "   UPDATE ar_khyeb SET idje = idje - paraDblJe WHERE kjnd = vStrYear AND khdm = ParaStrKhdm;" & _
-                "   Exception" & _
-                "       WHEN OTHERS THEN ROLLBACK;" & _
-                "       paraStrMsg := '执行SQL语句错误，发生在USP3_SAVE_AR_SKD' || sqlerrm;" & _
+            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_SAVE_AR_SKD" &
+                "   ( paraIntIsAdding	    IN INTEGER" &
+                "   , paraStrDjh 		    IN OUT VARCHAR2" &
+                "   , paraDateSkrq		    IN DATE" &
+                "   , ParaStrKhdm 		    IN VARCHAR2" &
+                "   , paraStrKhmc 		    IN VARCHAR2" &
+                "   , paraStrJsfsdm 	    IN VARCHAR2" &
+                "   , paraStrJsfsmc 	    IN VARCHAR2" &
+                "   , paraStrKmdm 		    IN VARCHAR2" &
+                "   , paraStrKmmc 		    IN VARCHAR2" &
+                "   , paraStrYspz 		    IN VARCHAR2" &
+                "   , paraDblJe		        IN NUMERIC" &
+                "   , paraDblXsje		    IN NUMERIC" &
+                "   , paraStrSkmemo		    IN VARCHAR2" &
+                "   , paraStrUserDspName	IN VARCHAR2" &
+                "   , paraStrMsg		    OUT VARCHAR2" &
+                "   ) AS " &
+                "vStrPzlxdm CHAR(4):='';" &
+                "vStrYear CHAR(4):='';" &
+                "vStrMonth CHAR(2):='';" &
+                "vIntPzno INTEGER(5):=0;" &
+                "vStrStatement VARCHAR(200):='';" &
+                "vIntCount INTEGER(4) := 0;" &
+                "CURSOR vCursorAr_skd IS SELECT ar_skd.djh,ar_skd.khdm,COALESCE(ar_skd.je,0.0) AS je FROM ar_skd WHERE djh = paraStrDjh;" &
+                "BEGIN" &
+                "   vStrPzlxdm := SUBSTR(paraStrDjh,1,4);" &
+                "   vStrYear := SUBSTR(paraStrDjh,5,4);" &
+                "   vStrMonth := SUBSTR(paraStrDjh,9,2);" &
+                "   vIntPzno := SUBSTR(paraStrDjh,11,5);" &
+                "   If paraIntIsAdding = 1 Then" &
+                "       vStrStatement := 'SELECT pzno' || vStrMonth || ' FROM rc_lx WHERE pzlxdm =' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) || ' FOR UPDATE';" &
+                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" &
+                "       vStrStatement := 'SELECT ' || vStrPzlxdm || vStrYear || vStrMonth || '.NEXTVAL FROM dual';" &
+                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" &
+                "       vStrStatement := 'UPDATE rc_lx SET pzno' || vStrMonth ||' = ' || vIntPzno || ' WHERE pzlxdm = ' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) ;" &
+                "       EXECUTE IMMEDIATE vStrStatement;" &
+                "       paraStrDjh :=  vStrPzlxdm || vStrYear || vStrMonth || LPAD(vIntPzno,5,'0');" &
+                "   Else" &
+                "       FOR vAr_skd IN vCursorAr_skd LOOP" &
+                "           UPDATE ar_khyeb SET idje = idje + vAr_skd.je WHERE kjnd = vStrYear AND khdm = vAr_skd.khdm;" &
+                "       END LOOP;" &
+                "       DELETE FROM ar_skd WHERE djh = paraStrDjh;" &
+                "   END IF;" &
+                "   INSERT INTO ar_skd (djh,skrq,khdm,khmc,jsfsdm,jsfsmc,kmdm,kmmc,yspz,je,xsje,skmemo,srr) VALUES (paraStrDjh,paraDateSkrq,ParaStrKhdm,paraStrKhmc,paraStrJsfsdm,paraStrJsfsmc,paraStrKmdm,paraStrKmmc,paraStrYspz,paraDblJe,paraDblXsje,paraStrSkmemo,paraStrUserDspName);" &
+                "   SELECT COUNT(1) INTO vIntCount FROM ar_khyeb WHERE kjnd = vStrYear AND khdm = ParaStrKhdm;" &
+                "   IF vIntCount = 0 THEN" &
+                "       INSERT INTO ar_khyeb (kjnd,khdm,khmc,qcje,idje) VALUES (vStrYear,ParaStrKhdm,paraStrKhmc,0.0,0.0);" &
+                "   END IF;" &
+                "   UPDATE ar_khyeb SET idje = idje - paraDblJe WHERE kjnd = vStrYear AND khdm = ParaStrKhdm;" &
+                "   Exception" &
+                "       WHEN OTHERS THEN ROLLBACK;" &
+                "       paraStrMsg := '执行SQL语句错误，发生在USP3_SAVE_AR_SKD' || sqlerrm;" &
                 "END USP3_SAVE_AR_SKD;"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.ExecuteNonQuery()
@@ -7473,45 +9674,45 @@ Public Class FrmCheckData
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             '2020年3月收款单增加结算方式的字段
-            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_SAVE_GL_YWFDKYW" & _
-                "   ( paraIntIsAdding	    IN INTEGER" & _
-                "   , paraStrDjh 		    IN OUT VARCHAR2" & _
-                "   , paraDateDkrq		    IN DATE" & _
-                "   , ParaStrKhdm 		    IN VARCHAR2" & _
-                "   , paraStrKhmc 		    IN VARCHAR2" & _
-                "   , paraStrDkgsdm 	    IN VARCHAR2" & _
-                "   , paraStrDkgsmc 	    IN VARCHAR2" & _
-                "   , paraDblSkje		    IN NUMERIC" & _
-                "   , paraDblFyje		    IN NUMERIC" & _
-                "   , paraStrDkmemo		    IN VARCHAR2" & _
-                "   , paraStrUserDspName	IN VARCHAR2" & _
-                "   , paraStrMsg		    OUT VARCHAR2" & _
-                "   ) AS " & _
-                "vStrPzlxdm CHAR(4):='';" & _
-                "vStrYear CHAR(4):='';" & _
-                "vStrMonth CHAR(2):='';" & _
-                "vIntPzno INTEGER(5):=0;" & _
-                "vStrStatement VARCHAR(200):='';" & _
-                "BEGIN" & _
-                "   vStrPzlxdm := SUBSTR(paraStrDjh,1,4);" & _
-                "   vStrYear := SUBSTR(paraStrDjh,5,4);" & _
-                "   vStrMonth := SUBSTR(paraStrDjh,9,2);" & _
-                "   vIntPzno := SUBSTR(paraStrDjh,11,5);" & _
-                "   If paraIntIsAdding = 1 Then" & _
-                "       vStrStatement := 'SELECT pzno' || vStrMonth || ' FROM rc_lx WHERE pzlxdm =' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) || ' FOR UPDATE';" & _
-                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" & _
-                "       vStrStatement := 'SELECT ' || vStrPzlxdm || vStrYear || vStrMonth || '.NEXTVAL FROM dual';" & _
-                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" & _
-                "       vStrStatement := 'UPDATE rc_lx SET pzno' || vStrMonth ||' = ' || vIntPzno || ' WHERE pzlxdm = ' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) ;" & _
-                "       EXECUTE IMMEDIATE vStrStatement;" & _
-                "       paraStrDjh :=  vStrPzlxdm || vStrYear || vStrMonth || LPAD(vIntPzno,5,'0');" & _
-                "   Else" & _
-                "       DELETE FROM gl_ywfdkyw WHERE djh = paraStrDjh;" & _
-                "   END IF;" & _
-                "   INSERT INTO gl_ywfdkyw (djh,dkrq,khdm,khmc,dkgsdm,dkgsmc,skje,fyje,dkmemo,srr) VALUES (paraStrDjh,paraDateDkrq,ParaStrKhdm,paraStrKhmc,paraStrDkgsdm,paraStrDkgsmc,paraDblSkje,paraDblFyje,paraStrDkmemo,paraStrUserDspName);" & _
-                "   Exception" & _
-                "       WHEN OTHERS THEN ROLLBACK;" & _
-                "       paraStrMsg := '执行SQL语句错误，发生在USP3_SAVE_GL_YWFDKYW' || sqlerrm;" & _
+            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_SAVE_GL_YWFDKYW" &
+                "   ( paraIntIsAdding	    IN INTEGER" &
+                "   , paraStrDjh 		    IN OUT VARCHAR2" &
+                "   , paraDateDkrq		    IN DATE" &
+                "   , ParaStrKhdm 		    IN VARCHAR2" &
+                "   , paraStrKhmc 		    IN VARCHAR2" &
+                "   , paraStrDkgsdm 	    IN VARCHAR2" &
+                "   , paraStrDkgsmc 	    IN VARCHAR2" &
+                "   , paraDblSkje		    IN NUMERIC" &
+                "   , paraDblFyje		    IN NUMERIC" &
+                "   , paraStrDkmemo		    IN VARCHAR2" &
+                "   , paraStrUserDspName	IN VARCHAR2" &
+                "   , paraStrMsg		    OUT VARCHAR2" &
+                "   ) AS " &
+                "vStrPzlxdm CHAR(4):='';" &
+                "vStrYear CHAR(4):='';" &
+                "vStrMonth CHAR(2):='';" &
+                "vIntPzno INTEGER(5):=0;" &
+                "vStrStatement VARCHAR(200):='';" &
+                "BEGIN" &
+                "   vStrPzlxdm := SUBSTR(paraStrDjh,1,4);" &
+                "   vStrYear := SUBSTR(paraStrDjh,5,4);" &
+                "   vStrMonth := SUBSTR(paraStrDjh,9,2);" &
+                "   vIntPzno := SUBSTR(paraStrDjh,11,5);" &
+                "   If paraIntIsAdding = 1 Then" &
+                "       vStrStatement := 'SELECT pzno' || vStrMonth || ' FROM rc_lx WHERE pzlxdm =' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) || ' FOR UPDATE';" &
+                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" &
+                "       vStrStatement := 'SELECT ' || vStrPzlxdm || vStrYear || vStrMonth || '.NEXTVAL FROM dual';" &
+                "       EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;" &
+                "       vStrStatement := 'UPDATE rc_lx SET pzno' || vStrMonth ||' = ' || vIntPzno || ' WHERE pzlxdm = ' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) ;" &
+                "       EXECUTE IMMEDIATE vStrStatement;" &
+                "       paraStrDjh :=  vStrPzlxdm || vStrYear || vStrMonth || LPAD(vIntPzno,5,'0');" &
+                "   Else" &
+                "       DELETE FROM gl_ywfdkyw WHERE djh = paraStrDjh;" &
+                "   END IF;" &
+                "   INSERT INTO gl_ywfdkyw (djh,dkrq,khdm,khmc,dkgsdm,dkgsmc,skje,fyje,dkmemo,srr) VALUES (paraStrDjh,paraDateDkrq,ParaStrKhdm,paraStrKhmc,paraStrDkgsdm,paraStrDkgsmc,paraDblSkje,paraDblFyje,paraStrDkmemo,paraStrUserDspName);" &
+                "   Exception" &
+                "       WHEN OTHERS THEN ROLLBACK;" &
+                "       paraStrMsg := '执行SQL语句错误，发生在USP3_SAVE_GL_YWFDKYW' || sqlerrm;" &
                 "END USP3_SAVE_GL_YWFDKYW;"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.ExecuteNonQuery()
@@ -8117,6 +10318,303 @@ Public Class FrmCheckData
 
         '*****************************'
         '******rcdata_001*************'
+        '*****USP3_SAVE_OE_FP*********'
+        '*****************************'
+        Try
+            rcOleDbConn.Open()
+            rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.Transaction = rcOleDbTrans
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            '2020年3月收款单增加结算方式的字段
+            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_SAVE_OE_FP(paraIntIsAdding    IN INTEGER,
+                                                        paraIntIsNewBill   IN INTEGER,
+                                                        paraStrDjh         IN OUT VARCHAR2,
+                                                        paraIntXh          IN INTEGER,
+                                                        paraDateFprq       IN DATE,
+                                                        paraBlnDelete      IN INTEGER,
+                                                        paraStrZydm        IN VARCHAR2,
+                                                        paraStrZymc        IN VARCHAR2,
+                                                        paraStrKhdm        IN VARCHAR2,
+                                                        paraStrKhmc        IN VARCHAR2,
+                                                        paraStrShKhdm      IN VARCHAR2,
+                                                        paraStrShKhmc      IN VARCHAR2,
+                                                        paraStrYspz        IN VARCHAR2,
+                                                        paraStrCpdm        IN VARCHAR2,
+                                                        paraStrCpmc        IN VARCHAR2,
+                                                        paraStrHth         IN VARCHAR2,
+                                                        paraStrBmdm        IN VARCHAR2,
+                                                        paraStrBmmc        IN VARCHAR2,
+                                                        paraDblSl          IN NUMERIC,
+                                                        paraStrDw          IN VARCHAR2,
+                                                        paraDblMjsl        IN NUMERIC,
+                                                        paraDblFzsl        IN NUMERIC,
+                                                        paraStrFzdw        IN VARCHAR2,
+                                                        paraDblDj          IN NUMERIC,
+                                                        paraDblHsdj        IN NUMERIC,
+                                                        paraDblJe          IN NUMERIC,
+                                                        paraDblShlv        IN NUMERIC,
+                                                        paraDblSe          IN NUMERIC,
+                                                        paraStrFpmemo      IN VARCHAR2,
+                                                        paraStrDdDjh       IN VARCHAR2,
+                                                        paraIntDdXh        IN INTEGER,
+                                                        paraStrXsdDjh      IN VARCHAR2,
+                                                        paraIntXsdXh       IN INTEGER,
+                                                        paraDblXsdDj       IN NUMERIC,
+                                                        paraDblXsdHsdj     IN NUMERIC,
+                                                        paraDblXsdJe       IN NUMERIC,
+                                                        paraDblXsdShlv     IN NUMERIC,
+                                                        paraDblXsdSe       IN NUMERIC,
+                                                        paraStrUserDspName IN VARCHAR2,
+                                                        paraStrMsg         OUT VARCHAR2) AS
+
+                vStrPzlxdm    CHAR(4) := '';
+                vStrYear      CHAR(4) := '';
+                vStrMonth     CHAR(2) := '';
+                vIntPzno      INTEGER(5) := 0;
+                vStrStatement VARCHAR(200) := '';
+                vIntCount     INTEGER(4) := 0;
+                vDblFpsl      NUMERIC(18, 6) := 0;
+                vDblFpje      NUMERIC(14, 2) := 0;
+                vDblFpse      NUMERIC(14, 2) := 0;
+                CURSOR vCursorOe_fp IS
+                    SELECT oe_fp.djh,
+                           oe_fp.bdelete,
+                           oe_fp.xh,
+                           oe_fp.khdm,
+                           oe_fp.cpdm,
+                           oe_fp.bmdm,
+                           oe_fp.hth,
+                           COALESCE(oe_fp.sl, 0.0) AS sl,
+                           COALESCE(oe_fp.je, 0.0) AS je,
+                           COALESCE(oe_fp.se, 0.0) AS se,
+                           COALESCE(oe_fp.cbje, 0.0) AS cbje,
+                           oe_fp.dddjh,
+                           oe_fp.ddxh,
+                           oe_fp.xsddjh,
+                           oe_fp.xsdxh,
+                           oe_fp.xsdje,
+                           oe_fp.xsdse
+                      FROM oe_fp
+                     WHERE djh = paraStrDjh
+                     ORDER BY xh;
+            BEGIN
+                vStrPzlxdm := SUBSTR(paraStrDjh, 1, 4);
+                vStrYear   := SUBSTR(paraStrDjh, 5, 4);
+                vStrMonth  := SUBSTR(paraStrDjh, 9, 2);
+                vIntPzno   := SUBSTR(paraStrDjh, 11, 5);
+                IF paraIntIsNewBill = 1 THEN
+                    IF paraIntIsAdding = 1 THEN
+                        vStrStatement := 'SELECT ' || vStrPzlxdm || vStrYear ||
+                                         vStrMonth || '.NEXTVAL FROM dual';
+                        EXECUTE IMMEDIATE vStrStatement
+                            INTO vIntPzno;
+                        /*更新表rc_lx*/
+                        vStrStatement := 'UPDATE rc_lx SET pzno' || vStrMonth || ' = ' ||
+                                         vIntPzno || ' WHERE pzlxdm = ' || chr(39) ||
+                                         vStrPzlxdm || chr(39) || ' AND kjnd = ' ||
+                                         chr(39) || vStrYear || chr(39);
+                        EXECUTE IMMEDIATE vStrStatement;
+                        paraStrDjh := vStrPzlxdm || vStrYear || vStrMonth ||
+                                      LPAD(vIntPzno, 5, '0');
+                    ELSE
+                        /*对已保存的单据负项处理*/
+                        FOR vOe_fp IN vCursorOe_fp LOOP
+                            vDblFpsl := vOe_fp.sl;
+                            vDblFpje := vOe_fp.je;
+                            vDblFpse := vOe_fp.se;
+                            IF NOT vOe_fp.dddjh IS NULL AND vOe_fp.ddxh > 0 AND
+                               vOe_fp.bdelete = 0 THEN
+                                UPDATE oe_dd
+                                   SET fpsl = fpsl - vOe_fp.sl,
+                                       fpje = fpje - paraDblJe - paraDblSe
+                                 WHERE djh = vOe_fp.dddjh
+                                   AND xh = vOe_fp.ddxh;
+                            END IF;
+                            IF NOT vOe_fp.xsddjh IS NULL AND vOe_fp.xsdxh > 0 AND
+                               vOe_fp.bdelete = 0 THEN
+                                UPDATE oe_xsd
+                                   SET fpsl = fpsl - vOe_fp.sl,
+                                       fpje = fpje - paraDblJe - paraDblSe
+                                 WHERE djh = vOe_fp.xsddjh
+                                   AND xh = vOe_fp.xsdxh;
+                            END IF;
+                            IF vOe_fp.bdelete <> 1 THEN
+                                UPDATE inv_fcspyeb
+                                   SET idsl = idsl + vOe_fp.sl,
+                                       idje = idje + vOe_fp.cbje
+                                 WHERE kjnd = vStrYear
+                                   AND cpdm = vOe_fp.cpdm
+                                   AND khdm = vOe_fp.khdm
+                                   AND bmdm = vOe_fp.bmdm;
+                                UPDATE ar_khyeb
+                                   SET idfpje = idfpje - vOe_fp.je - vOe_fp.se
+                                 WHERE kjnd = vStrYear
+                                   AND khdm = vOe_fp.khdm;
+                            END IF;
+                        END LOOP;
+                        DELETE FROM oe_fp WHERE djh = paraStrDjh;
+                    END IF;
+                END IF;
+                IF NOT paraStrDdDjh IS NULL AND paraIntDdXh > 0 AND paraBlnDelete = 0 THEN
+                    UPDATE oe_dd
+                       SET fpsl = fpsl + paraDblSl, fpje = fpje + paraDblJe + paraDblSe
+                     WHERE djh = paraStrDdDjh
+                       AND xh = paraIntDdXh;
+                END IF;
+                IF NOT paraStrXsdDjh IS NULL AND paraIntXsdXh > 0 AND paraBlnDelete = 0 THEN
+                    UPDATE oe_xsd
+                       SET fpsl = fpsl + paraDblSl, fpje = fpje + paraDblJe + paraDblSe
+                     WHERE djh = paraStrXsdDjh
+                       AND xh = paraIntXsdXh;
+                END IF;
+                IF paraBlnDelete <> 1 THEN
+                    /*更新inv_fcspyeb表*/
+                    IF NOT paraStrCpdm IS NULL AND NOT paraStrKhdm IS NULL AND
+                       NOT paraStrBmdm IS NULL THEN
+                        SELECT COUNT(1)
+                          INTO vIntCount
+                          FROM inv_fcspyeb
+                         WHERE kjnd = vStrYear
+                           AND cpdm = paraStrCpdm
+                           AND khdm = paraStrKhdm
+                           AND bmdm = paraStrBmdm;
+                        IF vIntCount = 0 THEN
+                            INSERT INTO inv_fcspyeb
+                                (kjnd, cpdm, khdm, bmdm, qcsl, qcje, idsl, idje)
+                            VALUES
+                                (vStrYear,
+                                 paraStrCpdm,
+                                 paraStrKhdm,
+                                 paraStrBmdm,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 0.0);
+                        END IF;
+                        UPDATE inv_fcspyeb
+                           SET idsl = idsl - paraDblSl
+                         WHERE kjnd = vStrYear
+                           AND cpdm = paraStrCpdm
+                           AND khdm = paraStrKhdm
+                           AND bmdm = paraStrBmdm;
+                    END IF;
+    
+                    IF NOT paraStrKhdm IS NULL THEN
+                        /*更新ar_khyeb表*/
+                        SELECT COUNT(1)
+                          INTO vIntCount
+                          FROM ar_khyeb
+                         WHERE kjnd = vStrYear
+                           AND khdm = paraStrKhdm;
+                        IF vIntCount = 0 THEN
+                            INSERT INTO ar_khyeb
+                                (kjnd, khdm, khmc, qcje, idje, qcfpje, idfpje)
+                            VALUES
+                                (vStrYear,
+                                 paraStrKhdm,
+                                 paraStrKhmc,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 0.0);
+                        END IF;
+                        UPDATE ar_khyeb
+                           SET idfpje = idfpje + paraDblJe + paraDblSe
+                         WHERE kjnd = vStrYear
+                           AND khdm = paraStrKhdm;
+                    END IF;
+                END IF;
+                /*添加数据oe_fp*/
+                INSERT INTO oe_fp
+                    (djh,xh,fprq,bdelete,zydm,zymc,khdm,khmc,shkhdm,shkhmc,bmdm,bmmc,yspz,
+                     cpdm,
+                     cpmc,
+                     hth,
+                     sl,
+                     dw,
+                     mjsl,
+                     fzsl,
+                     fzdw,
+                     dj,
+                     hsdj,
+                     je,
+                     shlv,
+                     se,
+                     fpmemo,
+                     dddjh,
+                     ddxh,
+                     xsddjh,
+                     xsdxh,
+                     xsddj,
+                     xsdhsdj,
+                     xsdje,
+                     xsdshlv,
+                     xsdse,
+                     srr,
+                     srrq)
+                VALUES
+                    (paraStrDjh,
+                     paraIntXh,
+                     paraDateFprq,
+                     paraBlnDelete,
+                     paraStrZydm,
+                     paraStrZymc,
+                     paraStrKhdm,
+                     paraStrKhmc,
+                        paraStrShKhdm,
+                        paraStrShKhmc,
+                     paraStrBmdm,
+                     paraStrBmmc,
+                     paraStrYspz,
+                     paraStrCpdm,
+                     paraStrCpmc,
+                     paraStrHth,
+                     paraDblSl,
+                     paraStrDw,
+                     paraDblMjsl,
+                     paraDblFzsl,
+                     paraStrFzdw,
+                     paraDblDj,
+                     paraDblHsdj,
+                     paraDblJe,
+                     paraDblShlv,
+                     paraDblSe,
+                     paraStrFpmemo,
+                     paraStrDdDjh,
+                     paraIntDdXh,
+                     paraStrXsdDjh,
+                     paraIntXsdXh,
+                     paraDblXsdDj,
+                     paraDblXsdHsdj,
+                     paraDblXsdJe,
+                     paraDblXsdShlv,
+                     paraDblXsdSe,
+                     paraStrUserDspName,
+                     SYSDATE());
+            EXCEPTION
+                WHEN OTHERS THEN
+                    ROLLBACK;
+                    paraStrMsg := '执行SQL语句错误，发生在USP3_SAVE_OE_FP' || SQLERRM;
+            END USP3_SAVE_OE_FP;"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.ExecuteNonQuery()
+            rcOleDbTrans.Commit()
+        Catch ex As Exception
+            Try
+                rcOleDbTrans.Rollback()
+                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Catch ey As OleDbException
+                MsgBox("程序错误。" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            End Try
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+
+        '*****************************'
+        '******rcdata_001*************'
         '*****USP3_SAVE_OE_XSD*********'
         '*****************************'
         Try
@@ -8127,121 +10625,301 @@ Public Class FrmCheckData
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             '2020年3月收款单增加结算方式的字段
-            rcOleDbCommand.CommandText = "CREATE Or Replace PROCEDURE USP3_SAVE_OE_XSD 
-              ( paraIntIsAdding IN INTEGER
-              , paraStrDjh IN OUT VARCHAR2
-              , paraIntXh IN INTEGER
-              , paraDateXsrq IN DATE
-              , paraBlnDelete IN NUMERIC
-              , paraStrZydm IN VARCHAR2
-              , paraStrZymc IN VARCHAR2
-              , ParaStrKhdm IN VARCHAR2
-              , paraStrKhmc IN VARCHAR2
-              , ParaStrBmdm IN VARCHAR2
-              , paraStrBmmc IN VARCHAR2
-              , ParaStrCkdm IN VARCHAR2
-              , paraStrCkmc IN VARCHAR2
-              , ParaStrCpdm IN VARCHAR2
-              , paraStrCpmc IN VARCHAR2
-              , paraStrHth IN VARCHAR2
-              , paraStrKhddh IN VARCHAR2
-              , paraStrKhlh IN VARCHAR2
-              , paraDblSl IN NUMERIC
-              , paraStrDw IN VARCHAR2
-              , paraDblMjsl IN NUMERIC
-              , paraDblFzsl IN NUMERIC
-              , paraStrFzdw IN VARCHAR2
-              , paraIntJs IN INTEGER
-              , paraDblLt IN NUMERIC
-              , paraIntTs IN INTEGER
-              , paraDblDj IN NUMERIC
-              , paraDblHsdj IN NUMERIC
-              , paraDblJe IN NUMERIC
-              , paraDblShlv IN NUMERIC
-              , paraDblSe IN NUMERIC
-              , paraStrXsmemo IN VARCHAR2
-              , paraStrDdDjh IN VARCHAR2
-              , paraIntDdXh IN INTEGER
-              , paraStrUserDspName IN VARCHAR2
-              , paraCbill_bid IN VARCHAR2
-              , paraStrMsg OUT VARCHAR2
-              ) AS 
-            vStrPzlxdm Char(4):='';
-            vStrYear Char(4):='';
-            vStrMonth Char(2):='';
-            vIntPzno Integer(5):=0;
-            vStrStatement VARCHAR(200):='';
-            vIntCount Integer(4) := 0;
-            vDblCksl NUMERIC(18, 6) := 0;
-            vStrCpdm VARCHAR(15) := '';
-            vStrDddjh VARCHAR(15) := '';
-            vIntDdxh Integer(5) := 0;
-            Cursor vCursorOe_xsd Is SELECT oe_xsd.djh, oe_xsd.bdelete, oe_xsd.xh, oe_xsd.khdm, oe_xsd.ckdm, oe_xsd.cpdm, oe_xsd.hth, COALESCE(oe_xsd.sl, 0.0) As sl, COALESCE(oe_xsd.je, 0.0) As je, COALESCE(oe_xsd.cbje, 0.0) As cbje, oe_xsd.dddjh, oe_xsd.ddxh FROM oe_xsd WHERE djh = paraStrDjh ORDER BY xh;
-            BEGIN
-                vStrPzlxdm := SUBSTR(paraStrDjh, 1, 4);
-                vStrYear := SUBSTR(paraStrDjh, 5, 4);
-                vStrMonth := SUBSTR(paraStrDjh, 9, 2);
-                vIntPzno := SUBSTR(paraStrDjh, 11, 5);
-                If paraIntXh = 1 Then
-                    /*新增单据*/
-                    If paraIntIsAdding = 1 Then
-                        vStrStatement := 'SELECT ' || vStrPzlxdm || vStrYear || vStrMonth || '.NEXTVAL FROM dual';
-                        EXECUTE IMMEDIATE vStrStatement INTO vIntPzno;
-                        /*更新表rc_lx*/
-                        vStrStatement := 'UPDATE rc_lx SET pzno' || vStrMonth ||' = ' || vIntPzno || ' WHERE pzlxdm = ' || chr(39) || vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) || vStrYear || chr(39) ;
-                        EXECUTE IMMEDIATE vStrStatement;
-                        paraStrDjh :=  vStrPzlxdm || vStrYear || vStrMonth || LPAD(vIntPzno, 5,'0');
-                    ELSE
-                        /*对已保存的单据负项处理*/
-                        For vOe_xsd IN vCursorOe_xsd LOOP
-                            If Not vOe_xsd.hth Is NULL And vOe_xsd.bdelete <> 1 Then
-                                        vDblCksl := vOe_xsd.sl;
-                                --vStrHth := vOe_xsd.hth;
-                                vStrCpdm := vOe_xsd.cpdm;
-                                If Not vOe_xsd.dddjh Is NULL And vOe_xsd.ddxh > 0 Then
-                                            Update oe_dd SET cksl = cksl - vOe_xsd.sl WHERE djh = vOe_xsd.dddjh And xh = vOe_xsd.ddxh;
-                                End If;
-                               IF vDblCksl <> 0 THEN
-                                    Update oe_dd SET ceck = ceck - vDblCksl WHERE djh = vStrDddjh And xh = vIntDdxh;
-                                End If;
-                            End If;
-                            If vOe_xsd.bdelete <> 1 Then
-                                Update inv_cpyeb Set idsl = idsl + vOe_xsd.sl, idje = idje + vOe_xsd.cbje WHERE kjnd = vStrYear And cpdm = vOe_xsd.cpdm And ckdm = vOe_xsd.ckdm;
-                                Update ar_khyeb SET idje = idje - vOe_xsd.je WHERE kjnd = vStrYear And khdm = vOe_xsd.khdm;
-                            End If;
-                        End Loop;
-                        DELETE From oe_xsd Where djh = paraStrDjh;
-                    End If;
-                End If;
-                If Not paraStrDdDjh Is NULL And paraIntDdXh > 0 And paraBlnDelete = 0 Then
-                    Update oe_dd SET cksl = cksl + paraDblSl WHERE djh = paraStrDdDjh And xh = paraIntDdXh;
-                    Update oe_fhd Set cksl = cksl + paraDblSl WHERE TRUNC(fhrq,'dd') = TRUNC(paraDateXsrq,'dd') AND djh = paraStrDdDjh AND xh = paraIntDdXh;
-                End If;
-                If paraBlnDelete = 0 Then
-                    /*更新inv_cpyeb表*/
-                    If Not ParaStrCpdm Is NULL And Not ParaStrCkdm Is NULL Then
-                                    Select COUNT(1) INTO vIntCount FROM inv_cpyeb WHERE kjnd = vStrYear And cpdm = ParaStrCpdm And ckdm = ParaStrCkdm;
-                        If vIntCount = 0 Then
-                            INSERT INTO inv_cpyeb (kjnd, cpdm, ckdm, qcsl, qcje, idsl, idje) VALUES (vStrYear,ParaStrCpdm,ParaStrCkdm,0.0,0.0,0.0,0.0);
-                        End If;
-                        Update inv_cpyeb SET idsl = idsl - paraDblSl WHERE kjnd = vStrYear And cpdm = ParaStrCpdm And ckdm = ParaStrCkdm;
-                    End If;
-                    If Not ParaStrKhdm Is NULL Then
-                        /*更新ar_khyeb表*/
-                        Select COUNT(1) INTO vIntCount FROM ar_khyeb WHERE kjnd = vStrYear And khdm = ParaStrKhdm;
-                        If vIntCount = 0 Then
-                            INSERT INTO ar_khyeb (kjnd, khdm, khmc, qcje, idje) VALUES (vStrYear,ParaStrKhdm,paraStrKhmc,0.0,0.0);
-                        End If;
-                        Update ar_khyeb SET idje = idje + paraDblJe WHERE kjnd = vStrYear And khdm = ParaStrKhdm;
-                    End If;
-                End If;
-                /*添加数据oe_xsd*/
-                INSERT INTO oe_xsd (djh, xh, xsrq, bdelete, zydm, zymc, khdm, khmc, bmdm, bmmc, ckdm, ckmc, cpdm, cpmc, hth, khddh, khlh, sl, dw, mjsl, fzsl, fzdw, js, lt, ts, dj, hsdj, je, shlv, se, xsmemo, dddjh, ddxh, srr,cbill_bid) VALUES (paraStrDjh,paraIntXh,paraDateXsrq,paraBlnDelete,paraStrZydm,paraStrZymc,ParaStrKhdm,paraStrKhmc,ParaStrBmdm,paraStrBmmc,ParaStrCkdm,paraStrCkmc,ParaStrCpdm,paraStrCpmc,paraStrHth,paraStrKhddh,paraStrKhlh,paraDblSl,paraStrDw,paraDblMjsl,paraDblFzsl,paraStrFzdw,paraIntJs,paraDblLt,paraIntTs,paraDblDj,paraDblHsdj,paraDblJe,paraDblShlv,paraDblSe,paraStrXsmemo,paraStrDdDjh,paraIntDdXh,paraStrUserDspName,paraCbill_bid);
-            Exception
-                WHEN OTHERS THEN
-                ROLLBACK;
-                paraStrMsg := '执行SQL语句错误，发生在USP3_SAVE_OE_XSD' || sqlerrm ;
-            End USP3_SAVE_OE_XSD;"
+            '2025年6月增加传入参数IsNewBill，用于区分新增单据
+            '2025年6月增加NC单据号与NC行号Vbillcode、Crowno
+            rcOleDbCommand.CommandText = "CREATE OR REPLACE PROCEDURE USP3_SAVE_OE_XSD(paraIntIsAdding    IN INTEGER,
+                                             paraIntIsNewBill   IN INTEGER,
+                                             paraStrDjh         IN OUT VARCHAR2,
+                                             paraIntXh          IN INTEGER,
+                                             paraDateXsrq       IN DATE,
+                                             paraBlnDelete      IN NUMERIC,
+                                             paraStrZydm        IN VARCHAR2,
+                                             paraStrZymc        IN VARCHAR2,
+                                             ParaStrKhdm        IN VARCHAR2,
+                                             paraStrKhmc        IN VARCHAR2,
+                                             ParaStrFpKhdm        IN VARCHAR2,
+                                             paraStrFpKhmc        IN VARCHAR2,
+                                             ParaStrBmdm        IN VARCHAR2,
+                                             paraStrBmmc        IN VARCHAR2,
+                                             ParaStrCkdm        IN VARCHAR2,
+                                             paraStrCkmc        IN VARCHAR2,
+                                             ParaStrCpdm        IN VARCHAR2,
+                                             paraStrCpmc        IN VARCHAR2,
+                                             paraStrHth         IN VARCHAR2,
+                                             paraStrKhddh       IN VARCHAR2,
+                                             paraStrKhlh        IN VARCHAR2,
+                                             paraStrPiHao       IN VARCHAR2,
+                                             paraDblSl          IN NUMERIC,
+                                             paraStrDw          IN VARCHAR2,
+                                             paraDblMjsl        IN NUMERIC,
+                                             paraDblFzsl        IN NUMERIC,
+                                             paraStrFzdw        IN VARCHAR2,
+                                             paraIntJs          IN INTEGER,
+                                             paraDblLt          IN NUMERIC,
+                                             paraIntTs          IN INTEGER,
+                                             paraDblDj          IN NUMERIC,
+                                             paraDblHsdj        IN NUMERIC,
+                                             paraDblJe          IN NUMERIC,
+                                             paraDblShlv        IN NUMERIC,
+                                             paraDblSe          IN NUMERIC,
+                                             paraStrXsmemo      IN VARCHAR2,
+                                             paraStrDdDjh       IN VARCHAR2,
+                                             paraIntDdXh        IN INTEGER,
+                                             paraStrUserDspName IN VARCHAR2,
+                                             paraCbill_bid      IN VARCHAR2,
+                                             paraVbillcode      IN VARCHAR2,
+                                             paraCrowno         IN VARCHAR2,
+                                             paraStrMsg         OUT VARCHAR2) AS
+  vStrPzlxdm    Char(4) := '';
+  vStrYear      Char(4) := '';
+  vStrMonth     Char(2) := '';
+  vIntPzno      Integer(5) := 0;
+  vStrStatement VARCHAR(200) := '';
+  vIntCount     Integer(4) := 0;
+  vDblCksl      NUMERIC(18, 6) := 0;
+  vStrCpdm      VARCHAR(15) := '';
+  vStrDddjh     VARCHAR(15) := '';
+  vIntDdxh      Integer(5) := 0;
+  Cursor vCursorOe_xsd Is
+    SELECT oe_xsd.djh,
+           oe_xsd.bdelete,
+           oe_xsd.xh,
+           oe_xsd.khdm,
+           oe_xsd.ckdm,
+           oe_xsd.cpdm,
+           oe_xsd.hth,
+           COALESCE(oe_xsd.sl, 0.0) As sl,
+           COALESCE(oe_xsd.je, 0.0) As je,
+           COALESCE(oe_xsd.cbje, 0.0) As cbje,
+           oe_xsd.dddjh,
+           oe_xsd.ddxh
+      FROM oe_xsd
+     WHERE djh = paraStrDjh
+     ORDER BY xh;
+BEGIN
+  vStrPzlxdm := SUBSTR(paraStrDjh, 1, 4);
+  vStrYear   := SUBSTR(paraStrDjh, 5, 4);
+  vStrMonth  := SUBSTR(paraStrDjh, 9, 2);
+  vIntPzno   := SUBSTR(paraStrDjh, 11, 5);
+  If paraIntIsNewBill = 1 Then
+    /*新增单据*/
+    If paraIntIsAdding = 1 Then
+      vStrStatement := 'SELECT ' || vStrPzlxdm || vStrYear || vStrMonth ||
+                       '.NEXTVAL FROM dual';
+      EXECUTE IMMEDIATE vStrStatement
+        INTO vIntPzno;
+      /*更新表rc_lx*/
+      vStrStatement := 'UPDATE rc_lx SET pzno' || vStrMonth || ' = ' ||
+                       vIntPzno || ' WHERE pzlxdm = ' || chr(39) ||
+                       vStrPzlxdm || chr(39) || ' AND kjnd = ' || chr(39) ||
+                       vStrYear || chr(39);
+      EXECUTE IMMEDIATE vStrStatement;
+      paraStrDjh := vStrPzlxdm || vStrYear || vStrMonth ||
+                    LPAD(vIntPzno, 5, '0');
+    ELSE
+      /*对已保存的单据负项处理*/
+      For vOe_xsd IN vCursorOe_xsd LOOP
+        If Not vOe_xsd.hth Is NULL And vOe_xsd.bdelete <> 1 Then
+          vDblCksl := vOe_xsd.sl;
+          --vStrHth := vOe_xsd.hth;  
+          vStrCpdm := vOe_xsd.cpdm;
+          If Not vOe_xsd.dddjh Is NULL And vOe_xsd.ddxh > 0 Then
+            Update oe_dd
+               SET cksl = cksl - vOe_xsd.sl
+             WHERE djh = vOe_xsd.dddjh
+               And xh = vOe_xsd.ddxh;
+          End If;
+          IF vDblCksl <> 0 THEN
+            Update oe_dd
+               SET ceck = ceck - vDblCksl
+             WHERE djh = vStrDddjh
+               And xh = vIntDdxh;
+          End If;
+        End If;
+        If vOe_xsd.bdelete <> 1 Then
+          Update inv_cpyeb
+             Set idsl = idsl + vOe_xsd.sl, idje = idje + vOe_xsd.cbje
+           WHERE kjnd = vStrYear
+             And cpdm = vOe_xsd.cpdm
+             And ckdm = vOe_xsd.ckdm;
+          Update ar_khyeb
+             SET idje = idje - vOe_xsd.je
+           WHERE kjnd = vStrYear
+             And khdm = vOe_xsd.khdm;
+        End If;
+      End Loop;
+      DELETE From oe_xsd Where djh = paraStrDjh;
+    End If;
+  End If;
+  If Not paraStrDdDjh Is NULL And paraIntDdXh > 0 And paraBlnDelete = 0 Then
+    Update oe_dd
+       SET cksl = cksl + paraDblSl
+     WHERE djh = paraStrDdDjh
+       And xh = paraIntDdXh;
+    Update oe_fhd
+       Set cksl = cksl + paraDblSl
+     WHERE TRUNC(fhrq, 'dd') = TRUNC(paraDateXsrq, 'dd')
+       AND djh = paraStrDdDjh
+       AND xh = paraIntDdXh;
+  End If;
+  If paraBlnDelete = 0 Then
+    /*更新inv_cpyeb表*/
+    If Not ParaStrCpdm Is NULL And Not ParaStrCkdm Is NULL Then
+      Select COUNT(1)
+        INTO vIntCount
+        FROM inv_cpyeb
+       WHERE kjnd = vStrYear
+         And cpdm = ParaStrCpdm
+         And ckdm = ParaStrCkdm;
+      If vIntCount = 0 Then
+        INSERT INTO inv_cpyeb
+          (kjnd, cpdm, ckdm, qcsl, qcje, idsl, idje)
+        VALUES
+          (vStrYear, ParaStrCpdm, ParaStrCkdm, 0.0, 0.0, 0.0, 0.0);
+      End If;
+      Update inv_cpyeb
+         SET idsl = idsl - paraDblSl
+       WHERE kjnd = vStrYear
+         And cpdm = ParaStrCpdm
+         And ckdm = ParaStrCkdm;
+    End If;
+    /*更新inv_fcspyeb表*/
+    IF NOT paraStrCpdm IS NULL AND NOT paraStrKhdm IS NULL AND
+       NOT paraStrBmdm IS NULL THEN
+      SELECT COUNT(1)
+        INTO vIntCount
+        FROM inv_fcspyeb
+       WHERE kjnd = vStrYear
+         AND cpdm = paraStrCpdm
+         AND khdm = paraStrKhdm
+         AND bmdm = paraStrBmdm;
+      IF vIntCount = 0 THEN
+        INSERT INTO inv_fcspyeb
+          (kjnd, cpdm, khdm, bmdm, qcsl, qcje, idsl, idje)
+        VALUES
+          (vStrYear,
+           paraStrCpdm,
+           paraStrKhdm,
+           paraStrBmdm,
+           0.0,
+           0.0,
+           0.0,
+           0.0);
+      END IF;
+      UPDATE inv_fcspyeb
+         SET idsl = idsl - paraDblSl
+       WHERE kjnd = vStrYear
+         AND cpdm = paraStrCpdm
+         AND khdm = paraStrKhdm
+         AND bmdm = paraStrBmdm;
+    END IF;
+    /*更新ar_khyeb表*/
+    If Not ParaStrKhdm Is NULL Then
+      Select COUNT(1)
+        INTO vIntCount
+        FROM ar_khyeb
+       WHERE kjnd = vStrYear
+         And khdm = ParaStrKhdm;
+      If vIntCount = 0 Then
+        INSERT INTO ar_khyeb
+          (kjnd, khdm, khmc, qcje, idje)
+        VALUES
+          (vStrYear, ParaStrKhdm, paraStrKhmc, 0.0, 0.0);
+      End If;
+      Update ar_khyeb
+         SET idje = idje + paraDblJe
+       WHERE kjnd = vStrYear
+         And khdm = ParaStrKhdm;
+    End If;
+  End If;
+  /*添加数据oe_xsd*/
+  INSERT INTO oe_xsd
+    (djh,
+     xh,
+     xsrq,
+     bdelete,
+     zydm,
+     zymc,
+     khdm,
+     khmc,
+        fpkhdm,
+        fpkhmc,
+     bmdm,
+     bmmc,
+     ckdm,
+     ckmc,
+     cpdm,
+     cpmc,
+     hth,
+     khddh,
+     khlh,
+     pihao,
+     sl,
+     dw,
+     mjsl,
+     fzsl,
+     fzdw,
+     js,
+     lt,
+     ts,
+     dj,
+     hsdj,
+     je,
+     shlv,
+     se,
+     xsmemo,
+     dddjh,
+     ddxh,
+     srr,
+     cbill_bid,
+     vbillcode,
+     crowno)
+  VALUES
+    (paraStrDjh,
+     paraIntXh,
+     paraDateXsrq,
+     paraBlnDelete,
+     paraStrZydm,
+     paraStrZymc,
+     ParaStrKhdm,
+     paraStrKhmc,
+        ParaStrFpKhdm,
+        paraStrFpKhmc,
+     ParaStrBmdm,
+     paraStrBmmc,
+     ParaStrCkdm,
+     paraStrCkmc,
+     ParaStrCpdm,
+     paraStrCpmc,
+     paraStrHth,
+     paraStrKhddh,
+     paraStrKhlh,
+     paraStrPiHao,
+     paraDblSl,
+     paraStrDw,
+     paraDblMjsl,
+     paraDblFzsl,
+     paraStrFzdw,
+     paraIntJs,
+     paraDblLt,
+     paraIntTs,
+     paraDblDj,
+     paraDblHsdj,
+     paraDblJe,
+     paraDblShlv,
+     paraDblSe,
+     paraStrXsmemo,
+     paraStrDdDjh,
+     paraIntDdXh,
+     paraStrUserDspName,
+     paraCbill_bid,
+     paraVbillcode,
+     paraCrowno);
+Exception
+  WHEN OTHERS THEN
+    ROLLBACK;
+    paraStrMsg := '执行SQL语句错误，发生在USP3_SAVE_OE_XSD' || sqlerrm;
+End USP3_SAVE_OE_XSD;"
 
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.ExecuteNonQuery()

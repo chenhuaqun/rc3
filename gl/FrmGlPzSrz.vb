@@ -6,7 +6,7 @@ Public Class FrmGlPzSrz
 #Region "定义变量"
 
     '建立数据适配器
-    ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
+    Dim rcOleDbDataAdpt As New OleDbDataAdapter
     '建立DataSet对象
     ReadOnly rcDataset As New DataSet
     '表示要在数据源执行的 SQL 事务
@@ -58,6 +58,8 @@ Public Class FrmGlPzSrz
         Me.rcDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Me.rcDataGridView.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
 
+        Me.rcDataGridView.Columns("ColWb").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        Me.rcDataGridView.Columns("ColWb").DefaultCellStyle.Format = g_FormatJe
         Me.rcDataGridView.Columns("ColJfje").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.rcDataGridView.Columns("ColJfje").DefaultCellStyle.Format = g_FormatJe
         Me.rcDataGridView.Columns("ColDfje").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -93,6 +95,8 @@ Public Class FrmGlPzSrz
         dtPz.Columns.Add("kmmc", Type.GetType("System.String"))
         dtPz.Columns.Add("bmdm", Type.GetType("System.String"))
         dtPz.Columns.Add("bmmc", Type.GetType("System.String"))
+        dtPz.Columns.Add("zydm", Type.GetType("System.String"))
+        dtPz.Columns.Add("zymc", Type.GetType("System.String"))
         dtPz.Columns.Add("xmdm", Type.GetType("System.String"))
         dtPz.Columns.Add("xmmc", Type.GetType("System.String"))
         dtPz.Columns.Add("khdm", Type.GetType("System.String"))
@@ -121,6 +125,8 @@ Public Class FrmGlPzSrz
             .Columns("kmmc").DefaultValue = ""
             .Columns("bmdm").DefaultValue = ""
             .Columns("bmmc").DefaultValue = ""
+            .Columns("zydm").DefaultValue = ""
+            .Columns("zymc").DefaultValue = ""
             .Columns("xmdm").DefaultValue = ""
             .Columns("xmmc").DefaultValue = ""
             .Columns("khdm").DefaultValue = ""
@@ -136,7 +142,7 @@ Public Class FrmGlPzSrz
             .Columns("dw").DefaultValue = ""
             .Columns("sl").DefaultValue = 0.0
             .Columns("dj").DefaultValue = 0.0
-            .Columns("bz").DefaultValue = ""
+            .Columns("bz").DefaultValue = g_Wbdm
             .Columns("wb").DefaultValue = 0.0
             .Columns("hl").DefaultValue = 0.0
             .Columns("jfje").DefaultValue = 0.0
@@ -324,7 +330,7 @@ Public Class FrmGlPzSrz
                                 Me.TxtFjzs.Text = rcDataSet.Tables("pzml").Rows(0).Item("fjzs")
                                 Me.LblBdelete.Text = IIf(rcDataSet.Tables("pzml").Rows(0).Item("bdelete"), "作废", "")
                                 '修改单据
-                                rcOleDbCommand.CommandText = "SELECT gl_pz.xh,gl_pz.zy,gl_pz.kmdm,gl_pz.kmmc,gl_pz.bmdm,gl_pz.bmmc,gl_pz.xmdm,gl_pz.xmmc,gl_pz.khdm,gl_pz.khmc,gl_pz.csdm,gl_pz.csmc,gl_pz.yhzh,gl_pz.jxzh,gl_pz.dwmc,gl_pz.sl,gl_pz.dj,gl_pz.wb,gl_pz.hl,Case When jd = '借' Then je Else 0 End As jfje,Case When jd = '贷' Then je Else 0 End As dfje FROM gl_pz Where (gl_pz.djh = ?) ORDER BY gl_pz.xh"
+                                rcOleDbCommand.CommandText = "SELECT gl_pz.xh,gl_pz.zy,gl_pz.kmdm,gl_pz.kmmc,gl_pz.bmdm,gl_pz.zydm,gl_pz.zymc,gl_pz.bmmc,gl_pz.xmdm,gl_pz.xmmc,gl_pz.khdm,gl_pz.khmc,gl_pz.csdm,gl_pz.csmc,gl_pz.yhzh,gl_pz.jxzh,gl_pz.dwmc,gl_pz.sl,gl_pz.dj,gl_pz.bz,gl_pz.wb,gl_pz.hl,Case When jd = '借' Then je Else 0 End As jfje,Case When jd = '贷' Then je Else 0 End As dfje FROM gl_pz Where (gl_pz.djh = ?) ORDER BY gl_pz.xh"
                                 rcOleDbCommand.Parameters.Clear()
                                 rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = Me.TxtDjh.Text
                                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -488,36 +494,36 @@ Public Class FrmGlPzSrz
                             End With
                         End If
                         '外币
-                        If rcDataSet.Tables("gl_kmxx").Rows(0).Item("kmgs") = 2 Then
-                            Dim rcFrm As New FrmGlPzWbje
-                            With rcFrm
-                                .TxtWbdm.Text = rcDataSet.Tables("gl_kmxx").Rows(0).Item("kmbz")
-                                .TxtWb.Text = Me.rcDataGridView.CurrentRow.Cells("ColWb").Value
-                                .TxtHl.Text = Me.rcDataGridView.CurrentRow.Cells("ColHl").Value
-                                If Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value <> 0.0 Then
-                                    .CmbJd.SelectedIndex = 0
-                                    .TxtJe.Text = Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value
-                                Else
-                                    If Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value <> 0.0 Then
-                                        .CmbJd.SelectedIndex = 1
-                                        .TxtJe.Text = Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value
-                                    Else
-                                        .CmbJd.SelectedIndex = 0
-                                    End If
-                                End If
-                                If .ShowDialog() = DialogResult.OK Then
-                                    Me.rcDataGridView.CurrentRow.Cells("ColWb").Value = .TxtWb.Text
-                                    Me.rcDataGridView.CurrentRow.Cells("ColHl").Value = .TxtHl.Text
-                                    If .CmbJd.SelectedIndex = 0 Then
-                                        Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value = .TxtJe.Text
-                                        Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value = 0.0
-                                    Else
-                                        Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value = 0.0
-                                        Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value = .TxtJe.Text
-                                    End If
-                                End If
-                            End With
-                        End If
+                        'If rcDataSet.Tables("gl_kmxx").Rows(0).Item("kmgs") = 2 Then
+                        '    Dim rcFrm As New FrmGlPzWbje
+                        '    With rcFrm
+                        '        .TxtWbdm.Text = rcDataSet.Tables("gl_kmxx").Rows(0).Item("kmbz")
+                        '        .TxtWb.Text = Me.rcDataGridView.CurrentRow.Cells("ColWb").Value
+                        '        .TxtHl.Text = Me.rcDataGridView.CurrentRow.Cells("ColHl").Value
+                        '        If Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value <> 0.0 Then
+                        '            .CmbJd.SelectedIndex = 0
+                        '            .TxtJe.Text = Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value
+                        '        Else
+                        '            If Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value <> 0.0 Then
+                        '                .CmbJd.SelectedIndex = 1
+                        '                .TxtJe.Text = Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value
+                        '            Else
+                        '                .CmbJd.SelectedIndex = 0
+                        '            End If
+                        '        End If
+                        '        If .ShowDialog() = DialogResult.OK Then
+                        '            Me.rcDataGridView.CurrentRow.Cells("ColWb").Value = .TxtWb.Text
+                        '            Me.rcDataGridView.CurrentRow.Cells("ColHl").Value = .TxtHl.Text
+                        '            If .CmbJd.SelectedIndex = 0 Then
+                        '                Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value = .TxtJe.Text
+                        '                Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value = 0.0
+                        '            Else
+                        '                Me.rcDataGridView.CurrentRow.Cells("ColJfje").Value = 0.0
+                        '                Me.rcDataGridView.CurrentRow.Cells("ColDfje").Value = .TxtJe.Text
+                        '            End If
+                        '        End If
+                        '    End With
+                        'End If
                         '数量
                         If rcDataSet.Tables("gl_kmxx").Rows(0).Item("kmgs") = 1 Then
                             Dim rcFrm As New FrmGlPzSlje
@@ -537,23 +543,22 @@ Public Class FrmGlPzSrz
                     End If
                 End If
             End If
-            If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColBmdm" Then
+            If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColBz" Then
                 If Not String.IsNullOrEmpty(e.FormattedValue) Then
-                    '取科目名称
-                    rcOleDbConn.Open()
-                    rcOleDbCommand.Connection = rcOleDbConn
-                    rcOleDbCommand.CommandTimeout = 300
-                    rcOleDbCommand.CommandType = CommandType.Text
                     Try
-                        '取dwdb
-                        rcOleDbCommand.CommandText = "SELECT * FROM gl_bmxx WHERE bmdm = ?"
+                        rcOleDbConn.Open()
+                        rcOleDbCommand.Connection = rcOleDbConn
+                        rcOleDbCommand.CommandTimeout = 300
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT * FROM rc_wbxx WHERE wbdm = ? AND kjnd =?"
                         rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.AddWithValue("@bmdm", Me.rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColBmdm").EditedFormattedValue)
+                        rcOleDbCommand.Parameters.AddWithValue("@wbdm", Me.rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColBz").EditedFormattedValue)
+                        rcOleDbCommand.Parameters.AddWithValue("@kjnd", Mid(g_Kjqj, 1, 4))
                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                        If rcDataSet.Tables("gl_bmxx") IsNot Nothing Then
-                            rcDataSet.Tables("gl_bmxx").Clear()
+                        If rcDataset.Tables("rc_wbxx") IsNot Nothing Then
+                            rcDataset.Tables("rc_wbxx").Clear()
                         End If
-                        rcOleDbDataAdpt.Fill(rcDataSet, "gl_bmxx")
+                        rcOleDbDataAdpt.Fill(rcDataset, "rc_wbxx")
                     Catch ex As Exception
                         Try
                             MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
@@ -564,9 +569,42 @@ Public Class FrmGlPzSrz
                     Finally
                         rcOleDbConn.Close()
                     End Try
-                    If rcDataSet.Tables("gl_bmxx").Rows.Count > 0 Then
-                        Me.rcDataGridView.CurrentRow.Cells("ColBmdm").Value = rcDataSet.Tables("gl_bmxx").Rows(0).Item("bmdm")
-                        Me.rcDataGridView.CurrentRow.Cells("ColBmmc").Value = rcDataSet.Tables("gl_bmxx").Rows(0).Item("bmmc")
+                    If rcDataset.Tables("rc_wbxx").Rows.Count > 0 Then
+                        Me.rcDataGridView.CurrentRow.Cells("ColBz").Value = rcDataset.Tables("rc_wbxx").Rows(0).Item("wbdm")
+                    Else
+                        Me.LblMsg.Text = "币种不存在。"
+                        e.Cancel = True
+                    End If
+                End If
+            End If
+            If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColBmdm" Then
+                If Not String.IsNullOrEmpty(e.FormattedValue) Then
+                    Try
+                        rcOleDbConn.Open()
+                        rcOleDbCommand.Connection = rcOleDbConn
+                        rcOleDbCommand.CommandTimeout = 300
+                        rcOleDbCommand.CommandType = CommandType.Text
+                        rcOleDbCommand.CommandText = "SELECT * FROM gl_bmxx WHERE bmdm = ?"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.AddWithValue("@bmdm", Me.rcDataGridView.Rows(rcDataGridView.CurrentRow.Index).Cells("ColBmdm").EditedFormattedValue)
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("gl_bmxx") IsNot Nothing Then
+                            rcDataset.Tables("gl_bmxx").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "gl_bmxx")
+                    Catch ex As Exception
+                        Try
+                            MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                        Catch ey As OleDbException
+                            MsgBox("程序错误。" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                        End Try
+                        Return
+                    Finally
+                        rcOleDbConn.Close()
+                    End Try
+                    If rcDataset.Tables("gl_bmxx").Rows.Count > 0 Then
+                        Me.rcDataGridView.CurrentRow.Cells("ColBmdm").Value = rcDataset.Tables("gl_bmxx").Rows(0).Item("bmdm")
+                        Me.rcDataGridView.CurrentRow.Cells("ColBmmc").Value = rcDataset.Tables("gl_bmxx").Rows(0).Item("bmmc")
                     Else
                         Me.LblMsg.Text = "部门编码不存在。"
                         e.Cancel = True
@@ -680,18 +718,41 @@ Public Class FrmGlPzSrz
                 Case Keys.F3
                     Dim rcFrm As New models.FrmF3KeyPress
                     With rcFrm
-                        .paraOleDbConn = rcOleDbConn
-                        .paraTableName = "gl_kmxx"
-                        .paraField1 = "kmdm"
-                        .paraField2 = "kmmc"
-                        .paraField3 = "kmsm"
-                        .paraTitle = "科目"
-                        .paraOldValue = ""
-                        .paraAddName = ""
-                        .paraCondition = ""
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "gl_kmxx"
+                        .ParaField1 = "kmdm"
+                        .ParaField2 = "kmmc"
+                        .ParaField3 = "kmsm"
+                        .ParaTitle = "科目"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        .ParaCondition = ""
                         If .ShowDialog = DialogResult.OK Then
                             '将用户在rcfrmselectkmdm所选择的kmdm带入rcdataridView'
-                            Me.rcDataGridView.CurrentRow.Cells("ColKmdm").Value = .paraField1
+                            Me.rcDataGridView.CurrentRow.Cells("ColKmdm").Value = .ParaField1
+                            Me.rcDataGridView.EndEdit()
+                            Me.rcBindingSource.EndEdit()
+                        End If
+                    End With
+            End Select
+        End If
+        If Me.rcDataGridView.Columns(Me.rcDataGridView.CurrentCell.ColumnIndex).Name = "ColBz" Then
+            Select Case e.KeyCode
+                Case Keys.F3
+                    Dim rcFrm As New models.FrmF3KeyPress
+                    With rcFrm
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "rc_wbxx"
+                        .ParaField1 = "wbdm"
+                        .ParaField2 = "wbmc"
+                        .ParaField3 = "wbsm"
+                        .ParaTitle = "币种"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        .ParaCondition = "kjnd ='" & Mid(g_Kjqj, 1, 4) & "'"
+                        If .ShowDialog = DialogResult.OK Then
+                            '将用户在rcfrmselectkmdm所选择的kmdm带入rcdataridView'
+                            Me.rcDataGridView.CurrentRow.Cells("ColKmdm").Value = .ParaField1
                             Me.rcDataGridView.EndEdit()
                             Me.rcBindingSource.EndEdit()
                         End If
@@ -769,7 +830,7 @@ Public Class FrmGlPzSrz
             AddHandler EditingControl.KeyDown, New KeyEventHandler(AddressOf EditingControl_KeyDown)
             AddHandler EditingControl.KeyPress, New KeyPressEventHandler(AddressOf EditingControl_KeyPress)
         End If
-        If Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColKmdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColBmdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColKhdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColCsdm" Then
+        If Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColKmdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColBz" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColBmdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColKhdm" Or Me.rcDataGridView.CurrentCell.OwningColumn.Name = "ColCsdm" Then
             EditingControl.CharacterCasing = CharacterCasing.Upper
         Else
             EditingControl.CharacterCasing = CharacterCasing.Normal
@@ -782,18 +843,42 @@ Public Class FrmGlPzSrz
                 Case Keys.F3
                     Dim rcFrm As New models.FrmF3KeyPress
                     With rcFrm
-                        .paraOleDbConn = rcOleDbConn
-                        .paraTableName = "gl_kmxx"
-                        .paraField1 = "kmdm"
-                        .paraField2 = "kmmc"
-                        .paraField3 = "kmsm"
-                        .paraTitle = "科目"
-                        .paraOldValue = ""
-                        .paraAddName = ""
-                        .paraCondition = ""
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "gl_kmxx"
+                        .ParaField1 = "kmdm"
+                        .ParaField2 = "kmmc"
+                        .ParaField3 = "kmsm"
+                        .ParaTitle = "科目"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        .ParaCondition = ""
                         If .ShowDialog = DialogResult.OK Then
                             '将用户在rcfrmselectkmdm所选择的kmdm带入rcdatarid'
-                            Me.rcDataGridView.CurrentRow.Cells("ColKmdm").Value = .paraField1
+                            Me.rcDataGridView.CurrentRow.Cells("ColKmdm").Value = .ParaField1
+                            Me.rcDataGridView.EndEdit()
+                            Me.rcBindingSource.EndEdit()
+                        End If
+                    End With
+                    e.Handled = True
+            End Select
+        End If
+        If Me.rcDataGridView.Columns(Me.rcDataGridView.CurrentCell.ColumnIndex).Name = "ColBz" Then
+            Select Case e.KeyCode
+                Case Keys.F3
+                    Dim rcFrm As New models.FrmF3KeyPress
+                    With rcFrm
+                        .ParaOleDbConn = rcOleDbConn
+                        .ParaTableName = "rc_wbxx"
+                        .ParaField1 = "wbdm"
+                        .ParaField2 = "wbmc"
+                        .ParaField3 = "wbsm"
+                        .ParaTitle = "币种"
+                        .ParaOldValue = ""
+                        .ParaAddName = ""
+                        .ParaCondition = "kjnd ='" & Mid(g_Kjqj, 1, 4) & "'"
+                        If .ShowDialog = DialogResult.OK Then
+                            '将用户在rcfrmselectwbdm所选择的wbdm带入rcdatarid'
+                            Me.rcDataGridView.CurrentRow.Cells("ColBz").Value = .ParaField1
                             Me.rcDataGridView.EndEdit()
                             Me.rcBindingSource.EndEdit()
                         End If
@@ -1058,7 +1143,7 @@ Public Class FrmGlPzSrz
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = IIf(String.IsNullOrEmpty(Me.LblBdelete.Text), 0, 1)
                 rcOleDbCommand.Parameters.Add("@paraDatePzrq", OleDbType.Date, 8).Value = Me.DtpPzrq.Value
                 rcOleDbCommand.Parameters.Add("@paraIntFjzs", OleDbType.Integer, 4).Value = Trim(Me.TxtFjzs.Text)
@@ -1072,8 +1157,8 @@ Public Class FrmGlPzSrz
                 rcOleDbCommand.Parameters.Add("@paraStrKmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("rc_pz").Rows(i).Item("kmmc")
                 rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_pz").Rows(i).Item("bmdm")
                 rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("rc_pz").Rows(i).Item("bmmc")
-                rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_pz").Rows(i).Item("bmdm")
-                rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = rcDataset.Tables("rc_pz").Rows(i).Item("bmmc")
+                rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_pz").Rows(i).Item("zydm")
+                rcOleDbCommand.Parameters.Add("@paraStrZymc", OleDbType.VarChar, 30).Value = rcDataset.Tables("rc_pz").Rows(i).Item("zymc")
                 rcOleDbCommand.Parameters.Add("@paraStrXmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_pz").Rows(i).Item("xmdm")
                 rcOleDbCommand.Parameters.Add("@paraStrXmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("rc_pz").Rows(i).Item("xmmc")
                 rcOleDbCommand.Parameters.Add("@ParaStrKhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_pz").Rows(i).Item("khdm")
@@ -1190,6 +1275,21 @@ Public Class FrmGlPzSrz
         End If
     End Sub
 #End Region
+
+#Region "读入excel"
+    Private Sub BtnImpXls_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiImpXls.Click
+        '调用表单
+        Dim rcFrm As New FrmGlPzImpXls
+        With rcFrm
+            .ParaStrKjqj = strKjqj
+            .WindowState = FormWindowState.Maximized
+            .MdiParent = Me.MdiParent
+            .Show()
+        End With
+    End Sub
+
+#End Region
+
 
 #Region "打印事件"
 

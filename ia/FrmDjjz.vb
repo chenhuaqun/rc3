@@ -325,7 +325,7 @@ Public Class FrmDjjz
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             '取入库单本期张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bqzs FROM inv_ckd WHERE TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ?"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bqzs FROM inv_ckd WHERE bdelete = 0 AND TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -335,7 +335,7 @@ Public Class FrmDjjz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "bqzs")
             '取入库单本期未记账张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As wjzzs FROM inv_ckd WHERE TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ? And jzr Is Null"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As wjzzs FROM inv_ckd WHERE bdelete = 0 AND TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ? And jzr Is Null"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -345,7 +345,7 @@ Public Class FrmDjjz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "wjzzs")
             '取入库单本期未记账张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As yjzzs FROM inv_ckd WHERE TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ? And Not jzr Is Null"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As yjzzs FROM inv_ckd WHERE bdelete = 0 AND TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ? And Not jzr Is Null"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -355,7 +355,7 @@ Public Class FrmDjjz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "yjzzs")
             '取入库单本期未记账张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bcjzzs FROM inv_ckd WHERE TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ? And jzr Is Null And Not shr Is Null"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bcjzzs FROM inv_ckd WHERE bdelete = 0 AND TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ? And jzr Is Null And Not shr Is Null"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -388,7 +388,7 @@ Public Class FrmDjjz
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             '取入库单本期张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bqzs FROM inv_dbd WHERE TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ?"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bqzs FROM inv_dbd WHERE bdelete = 0 AND TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -398,7 +398,7 @@ Public Class FrmDjjz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "bqzs")
             '取入库单本期未记账张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As wjzzs FROM inv_dbd WHERE TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ? And jzr Is Null"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As wjzzs FROM inv_dbd WHERE bdelete = 0 AND TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ? And jzr Is Null"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -408,7 +408,7 @@ Public Class FrmDjjz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "wjzzs")
             '取入库单本期未记账张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As yjzzs FROM inv_dbd WHERE TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ? And Not jzr Is Null"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As yjzzs FROM inv_dbd WHERE bdelete = 0 AND TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ? And Not jzr Is Null"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -418,7 +418,7 @@ Public Class FrmDjjz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "yjzzs")
             '取入库单本期未记账张数
-            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bcjzzs FROM inv_dbd WHERE TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ? And jzr Is Null And Not shr Is Null"
+            rcOleDbCommand.CommandText = "SELECT Nvl(Count(*),0) As bcjzzs FROM inv_dbd WHERE bdelete = 0 AND TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ? And jzr Is Null And Not shr Is Null"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateZzrq.Date
@@ -987,6 +987,132 @@ Public Class FrmDjjz
             rcOleDbCommand.CommandText = "UPDATE gl_pz SET jzr = ?,jzrq = SYSDATE WHERE NOT gl_pz.shr IS NULL AND TRUNC(pzrq,'dd')>= ? AND TRUNC(pzrq,'dd') <= ?"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = g_User_DspName
+            rcOleDbCommand.Parameters.Add("@pzrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@pzrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            rcOleDbTrans.Commit()
+        Catch ex As Exception
+            Try
+                rcOleDbTrans.Rollback()
+                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Catch ey As OleDbException
+                MsgBox("程序错误。" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            End Try
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        MsgBox("本月记账完成。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+        Me.Close()
+    End Sub
+
+#End Region
+
+#Region "单据反记账"
+
+    Private Sub BtnFjz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnFjz.Click
+        Try
+            rcOleDbConn.Open()
+            rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.Transaction = rcOleDbTrans
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            'po_cgd
+            rcOleDbCommand.CommandText = "UPDATE po_cgd SET jzr = ?,jzrq = SYSDATE WHERE NOT po_cgd.jzr IS NULL AND TRUNC(cgrq,'dd')>= ? AND TRUNC(cgrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@cgrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@cgrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'po_rkd
+            rcOleDbCommand.CommandText = "UPDATE po_rkd SET jzr = ?,jzrq = SYSDATE WHERE NOT po_rkd.jzr IS NULL AND TRUNC(rkrq,'dd')>= ? AND TRUNC(rkrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'po_fp
+            rcOleDbCommand.CommandText = "UPDATE po_fp SET jzr = ?,jzrq = SYSDATE WHERE NOT po_fp.jzr IS NULL AND TRUNC(fprq,'dd')>= ? AND TRUNC(fprq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'ap_fkd
+            rcOleDbCommand.CommandText = "UPDATE ap_fkd SET jzr = ?,jzrq = SYSDATE WHERE NOT ap_fkd.jzr IS NULL AND TRUNC(fkrq,'dd')>= ? AND TRUNC(fkrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@fkrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@fkrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'inv_ckd
+            rcOleDbCommand.CommandText = "UPDATE inv_ckd SET jzr = ?,jzrq = SYSDATE WHERE Not inv_ckd.jzr IS NULL AND TRUNC(ckrq,'dd')>= ? AND TRUNC(ckrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'inv_dbd
+            rcOleDbCommand.CommandText = "UPDATE inv_dbd SET jzr = ?,jzrq = SYSDATE WHERE Not inv_dbd.jzr IS NULL AND TRUNC(dbrq,'dd')>= ? AND TRUNC(dbrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'inv_pc
+            rcOleDbCommand.CommandText = "UPDATE inv_pc SET jzr = ?,jzrq = SYSDATE WHERE NOT inv_pc.jzr IS NULL AND TRUNC(pcrq,'dd')>= ? AND TRUNC(pcrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@pcrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@pcrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'pm_dd
+            rcOleDbCommand.CommandText = "UPDATE pm_dd SET jzr = ?,jzrq = SYSDATE WHERE NOT pm_dd.jzr IS NULL AND TRUNC(qdrq,'dd')>= ? AND TRUNC(qdrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@qdrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@qdrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'inv_rkd
+            rcOleDbCommand.CommandText = "UPDATE inv_rkd SET jzr = ?,jzrq = SYSDATE WHERE NOT inv_rkd.jzr IS NULL AND TRUNC(rkrq,'dd')>= ? AND TRUNC(rkrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'oe_dd
+            rcOleDbCommand.CommandText = "UPDATE oe_dd SET jzr = ?,jzrq = SYSDATE WHERE NOT oe_dd.jzr IS NULL AND TRUNC(qdrq,'dd')>= ? AND TRUNC(qdrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@qdrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@qdrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'oe_xsd
+            rcOleDbCommand.CommandText = "UPDATE oe_xsd SET jzr = ?,jzrq = SYSDATE WHERE NOT oe_xsd.jzr IS NULL AND TRUNC(xsrq,'dd')>= ? AND TRUNC(xsrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'oe_fp
+            rcOleDbCommand.CommandText = "UPDATE oe_fp SET jzr = ?,jzrq = SYSDATE WHERE NOT oe_fp.jzr IS NULL AND TRUNC(fprq,'dd')>= ? AND TRUNC(fprq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'ar_skd
+            rcOleDbCommand.CommandText = "UPDATE ar_skd SET jzr = ?,jzrq = SYSDATE WHERE NOT ar_skd.jzr IS NULL AND TRUNC(skrq,'dd')>= ? AND TRUNC(skrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
+            rcOleDbCommand.Parameters.Add("@skrq", OleDbType.Date, 8).Value = dateKsrq.Date
+            rcOleDbCommand.Parameters.Add("@skrq", OleDbType.Date, 8).Value = dateZzrq.Date
+            rcOleDbCommand.ExecuteNonQuery()
+            'gl_pz
+            rcOleDbCommand.CommandText = "UPDATE gl_pz SET jzr = ?,jzrq = SYSDATE WHERE NOT gl_pz.jzr IS NULL AND TRUNC(pzrq,'dd')>= ? AND TRUNC(pzrq,'dd') <= ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = ""
             rcOleDbCommand.Parameters.Add("@pzrq", OleDbType.Date, 8).Value = dateKsrq.Date
             rcOleDbCommand.Parameters.Add("@pzrq", OleDbType.Date, 8).Value = dateZzrq.Date
             rcOleDbCommand.ExecuteNonQuery()

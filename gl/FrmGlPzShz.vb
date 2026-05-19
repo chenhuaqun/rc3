@@ -36,6 +36,8 @@ Public Class FrmGlPzShz
         Me.rcDataGridView.AutoGenerateColumns = False
         Me.rcDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Me.rcDataGridView.Font = New System.Drawing.Font("ËÎÌו", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.rcDataGridView.Columns("ColWb").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        Me.rcDataGridView.Columns("ColWb").DefaultCellStyle.Format = g_FormatJe
         Me.rcDataGridView.Columns("ColJfje").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.rcDataGridView.Columns("ColJfje").DefaultCellStyle.Format = g_FormatJe0
         Me.rcDataGridView.Columns("ColDfje").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight

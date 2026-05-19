@@ -64,6 +64,7 @@ Public Class FrmJsfsEdit
         Me.TxtJsfsmc.DataBindings.Add("Text", rcDataView, "jsfsmc")
         Me.TxtJsfssm.DataBindings.Add("Text", rcDataView, "jsfssm")
         Me.ChbBkywf.DataBindings.Add("Checked", rcDataView, "bkywf")
+        Me.ChbBgylk.DataBindings.Add("Checked", rcDataView, "bgylk")
         BindingContext(rcDataView, "").Position = currentPos
         SetAll(True)
         If isAdding Then
@@ -244,12 +245,13 @@ Public Class FrmJsfsEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "INSERT INTO rc_jsfs (jsfsdm,jsfsmc,jsfssm,bkywf) VALUES (?,?,?,?)"
+                rcOleDbCommand.CommandText = "INSERT INTO rc_jsfs (jsfsdm,jsfsmc,jsfssm,bkywf,bgylk) VALUES (?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@jsfsdm", OleDbType.VarChar, 12).Value = Trim(TxtJsfsdm.Text)
                 rcOleDbCommand.Parameters.Add("@jsfsmc", OleDbType.VarChar, 30).Value = Trim(TxtJsfsmc.Text)
                 rcOleDbCommand.Parameters.Add("@jsfssm", OleDbType.VarChar, 12).Value = Trim(TxtJsfssm.Text)
                 rcOleDbCommand.Parameters.Add("@bkywf", OleDbType.Numeric, 1).Value = Me.ChbBkywf.Checked
+                rcOleDbCommand.Parameters.Add("@bgylk", OleDbType.Numeric, 1).Value = Me.ChbBgylk.Checked
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "SELECT * FROM rc_jsfs ORDER BY jsfsdm"
                 rcOleDbCommand.Parameters.Clear()
@@ -281,11 +283,12 @@ Public Class FrmJsfsEdit
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "UPDATE rc_jsfs SET jsfsmc = ? , jsfssm = ? ,bkywf = ? WHERE  jsfsdm = ?"
+                rcOleDbCommand.CommandText = "UPDATE rc_jsfs SET jsfsmc = ? , jsfssm = ? ,bkywf = ?,bgylk = ? WHERE  jsfsdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@jsfsmc", OleDbType.VarChar, 30).Value = Trim(Me.TxtJsfsmc.Text)
                 rcOleDbCommand.Parameters.Add("@jsfssm", OleDbType.VarChar, 12).Value = Trim(Me.TxtJsfssm.Text)
                 rcOleDbCommand.Parameters.Add("@bkywf", OleDbType.Numeric, 1).Value = Me.ChbBkywf.Checked
+                rcOleDbCommand.Parameters.Add("@bgylk", OleDbType.Numeric, 1).Value = Me.ChbBgylk.Checked
                 rcOleDbCommand.Parameters.Add("@jsfsdm", OleDbType.VarChar, 12).Value = Trim(Me.TxtJsfsdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
                 'Ìî³äÊý¾Ý

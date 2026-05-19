@@ -418,7 +418,7 @@ Public Class FrmCpkcZlfx
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.ExecuteNonQuery()
 
-            rcOleDbCommand.CommandText = "SELECT t_cpkczlfx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,t_cpkczlfx.ckdm,rc_ckxx.ckmc,t_cpkczlfx.kcsl_tot,t_cpkczlfx.kcje_tot,t_cpkczlfx.kcsl_01,t_cpkczlfx.kcje_01,t_cpkczlfx.kcsl_02,t_cpkczlfx.kcje_02,t_cpkczlfx.kcsl_03,t_cpkczlfx.kcje_03,t_cpkczlfx.kcsl_04,t_cpkczlfx.kcje_04,t_cpkczlfx.kcsl_05,t_cpkczlfx.kcje_05,t_cpkczlfx.kcsl_06,t_cpkczlfx.kcje_06,t_cpkczlfx.kcsl_07,t_cpkczlfx.kcje_07 FROM t_cpkczlfx left join RC_CPXX on RC_CPXX.CPDM = T_CPKCZLFX.CPDM LEFT JOIN rc_ckxx ON rc_ckxx.ckdm = t_cpkczlfx.ckdm ORDER BY cpdm,ckdm"
+            rcOleDbCommand.CommandText = "SELECT t_cpkczlfx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,t_cpkczlfx.ckdm,rc_ckxx.ckmc,t_cpkczlfx.kcsl_tot,rc_cpxx.cpweight,ROUND(t_cpkczlfx.kcsl_tot * rc_cpxx.cpweight / 1000,4) AS kczl_tot,t_cpkczlfx.kcje_tot,t_cpkczlfx.kcsl_01,t_cpkczlfx.kcje_01,t_cpkczlfx.kcsl_02,t_cpkczlfx.kcje_02,t_cpkczlfx.kcsl_03,t_cpkczlfx.kcje_03,t_cpkczlfx.kcsl_04,t_cpkczlfx.kcje_04,t_cpkczlfx.kcsl_05,t_cpkczlfx.kcje_05,t_cpkczlfx.kcsl_06,t_cpkczlfx.kcje_06,t_cpkczlfx.kcsl_07,t_cpkczlfx.kcje_07 FROM t_cpkczlfx left join RC_CPXX on RC_CPXX.CPDM = T_CPKCZLFX.CPDM LEFT JOIN rc_ckxx ON rc_ckxx.ckdm = t_cpkczlfx.ckdm ORDER BY cpdm,ckdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("cpsfchz") IsNot Nothing Then

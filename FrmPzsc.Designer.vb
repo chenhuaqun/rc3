@@ -22,32 +22,38 @@ Partial Class FrmPzsc
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.RadioBtnPoRkd = New System.Windows.Forms.RadioButton
-        Me.RadioBtnInvCkd = New System.Windows.Forms.RadioButton
-        Me.RadioBtnInvRkd = New System.Windows.Forms.RadioButton
-        Me.RadioBtnOeXsd = New System.Windows.Forms.RadioButton
-        Me.RadioBtnOeQtys = New System.Windows.Forms.RadioButton
-        Me.RadioBtnPoQtyf = New System.Windows.Forms.RadioButton
-        Me.RadioBtnArSkd = New System.Windows.Forms.RadioButton
-        Me.RadioBtnApFkd = New System.Windows.Forms.RadioButton
-        Me.rcDataGridView = New System.Windows.Forms.DataGridView
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.NudMonth = New System.Windows.Forms.NumericUpDown
-        Me.NudYear = New System.Windows.Forms.NumericUpDown
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.BtnImp = New System.Windows.Forms.Button
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.BtnPzsc = New System.Windows.Forms.Button
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.BtnExit = New System.Windows.Forms.Button
-        Me.BtnUnSelectAll = New System.Windows.Forms.Button
-        Me.BtnSelectAll = New System.Windows.Forms.Button
-        Me.ColXz = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.ColDjh = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColPzrq = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColJe = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.RadioBtnPoRkd = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnInvCkd = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnInvRkd = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnOeXsd = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnOeQtys = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnPoQtyf = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnArSkd = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnApFkd = New System.Windows.Forms.RadioButton()
+        Me.rcDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ColXz = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ColDjh = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColXh = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColPzrq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColJe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColKhdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColBmdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.NudMonth = New System.Windows.Forms.NumericUpDown()
+        Me.NudYear = New System.Windows.Forms.NumericUpDown()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.RadioBtnOeXsd_Cb = New System.Windows.Forms.RadioButton()
+        Me.RadioBtnOeFp = New System.Windows.Forms.RadioButton()
+        Me.BtnImp = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.BtnZsPzsc = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnLsPzsc = New System.Windows.Forms.Button()
+        Me.BtnExit = New System.Windows.Forms.Button()
+        Me.BtnUnSelectAll = New System.Windows.Forms.Button()
+        Me.BtnSelectAll = New System.Windows.Forms.Button()
         CType(Me.rcDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,21 +77,23 @@ Partial Class FrmPzsc
         'RadioBtnInvCkd
         '
         Me.RadioBtnInvCkd.AutoSize = True
+        Me.RadioBtnInvCkd.ForeColor = System.Drawing.Color.DarkGreen
         Me.RadioBtnInvCkd.Location = New System.Drawing.Point(21, 44)
         Me.RadioBtnInvCkd.Name = "RadioBtnInvCkd"
-        Me.RadioBtnInvCkd.Size = New System.Drawing.Size(257, 16)
+        Me.RadioBtnInvCkd.Size = New System.Drawing.Size(287, 16)
         Me.RadioBtnInvCkd.TabIndex = 1
-        Me.RadioBtnInvCkd.Text = "物料出库单      借:生产成本   贷:原材料"
+        Me.RadioBtnInvCkd.Text = "物料出库单       借:生产成本       贷:原材料"
         Me.RadioBtnInvCkd.UseVisualStyleBackColor = True
         '
         'RadioBtnInvRkd
         '
         Me.RadioBtnInvRkd.AutoSize = True
+        Me.RadioBtnInvRkd.ForeColor = System.Drawing.Color.DarkGreen
         Me.RadioBtnInvRkd.Location = New System.Drawing.Point(21, 68)
         Me.RadioBtnInvRkd.Name = "RadioBtnInvRkd"
-        Me.RadioBtnInvRkd.Size = New System.Drawing.Size(269, 16)
+        Me.RadioBtnInvRkd.Size = New System.Drawing.Size(299, 16)
         Me.RadioBtnInvRkd.TabIndex = 2
-        Me.RadioBtnInvRkd.Text = "产品入库单      借:库存商品   贷:生产成本"
+        Me.RadioBtnInvRkd.Text = "产品入库单       借:库存商品       贷:生产成本"
         Me.RadioBtnInvRkd.UseVisualStyleBackColor = True
         '
         'RadioBtnOeXsd
@@ -93,15 +101,15 @@ Partial Class FrmPzsc
         Me.RadioBtnOeXsd.AutoSize = True
         Me.RadioBtnOeXsd.Location = New System.Drawing.Point(21, 92)
         Me.RadioBtnOeXsd.Name = "RadioBtnOeXsd"
-        Me.RadioBtnOeXsd.Size = New System.Drawing.Size(293, 16)
+        Me.RadioBtnOeXsd.Size = New System.Drawing.Size(323, 16)
         Me.RadioBtnOeXsd.TabIndex = 3
-        Me.RadioBtnOeXsd.Text = "产品送货单      借:应收账款   贷:主营业务收入"
+        Me.RadioBtnOeXsd.Text = "产品送货单(应收) 借:应收账款       贷:主营业务收入"
         Me.RadioBtnOeXsd.UseVisualStyleBackColor = True
         '
         'RadioBtnOeQtys
         '
         Me.RadioBtnOeQtys.AutoSize = True
-        Me.RadioBtnOeQtys.Location = New System.Drawing.Point(21, 116)
+        Me.RadioBtnOeQtys.Location = New System.Drawing.Point(21, 164)
         Me.RadioBtnOeQtys.Name = "RadioBtnOeQtys"
         Me.RadioBtnOeQtys.Size = New System.Drawing.Size(293, 16)
         Me.RadioBtnOeQtys.TabIndex = 4
@@ -111,7 +119,7 @@ Partial Class FrmPzsc
         'RadioBtnPoQtyf
         '
         Me.RadioBtnPoQtyf.AutoSize = True
-        Me.RadioBtnPoQtyf.Location = New System.Drawing.Point(21, 140)
+        Me.RadioBtnPoQtyf.Location = New System.Drawing.Point(21, 188)
         Me.RadioBtnPoQtyf.Name = "RadioBtnPoQtyf"
         Me.RadioBtnPoQtyf.Size = New System.Drawing.Size(269, 16)
         Me.RadioBtnPoQtyf.TabIndex = 5
@@ -121,7 +129,7 @@ Partial Class FrmPzsc
         'RadioBtnArSkd
         '
         Me.RadioBtnArSkd.AutoSize = True
-        Me.RadioBtnArSkd.Location = New System.Drawing.Point(21, 164)
+        Me.RadioBtnArSkd.Location = New System.Drawing.Point(21, 212)
         Me.RadioBtnArSkd.Name = "RadioBtnArSkd"
         Me.RadioBtnArSkd.Size = New System.Drawing.Size(269, 16)
         Me.RadioBtnArSkd.TabIndex = 6
@@ -131,7 +139,7 @@ Partial Class FrmPzsc
         'RadioBtnApFkd
         '
         Me.RadioBtnApFkd.AutoSize = True
-        Me.RadioBtnApFkd.Location = New System.Drawing.Point(21, 188)
+        Me.RadioBtnApFkd.Location = New System.Drawing.Point(21, 236)
         Me.RadioBtnApFkd.Name = "RadioBtnApFkd"
         Me.RadioBtnApFkd.Size = New System.Drawing.Size(245, 16)
         Me.RadioBtnApFkd.TabIndex = 7
@@ -143,13 +151,66 @@ Partial Class FrmPzsc
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.AllowUserToDeleteRows = False
         Me.rcDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColXz, Me.ColDjh, Me.ColPzrq, Me.ColJe})
+        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColXz, Me.ColDjh, Me.ColXh, Me.ColPzrq, Me.ColJe, Me.ColKhdm, Me.ColBmdm})
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.rcDataGridView.Location = New System.Drawing.Point(402, 0)
+        Me.rcDataGridView.Location = New System.Drawing.Point(452, 0)
         Me.rcDataGridView.Name = "rcDataGridView"
         Me.rcDataGridView.RowTemplate.Height = 23
-        Me.rcDataGridView.Size = New System.Drawing.Size(382, 564)
+        Me.rcDataGridView.Size = New System.Drawing.Size(332, 564)
         Me.rcDataGridView.TabIndex = 8
+        '
+        'ColXz
+        '
+        Me.ColXz.DataPropertyName = "xz"
+        Me.ColXz.HeaderText = "选择"
+        Me.ColXz.Name = "ColXz"
+        Me.ColXz.Width = 45
+        '
+        'ColDjh
+        '
+        Me.ColDjh.DataPropertyName = "djh"
+        Me.ColDjh.HeaderText = "单据号"
+        Me.ColDjh.Name = "ColDjh"
+        Me.ColDjh.ReadOnly = True
+        Me.ColDjh.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ColXh
+        '
+        Me.ColXh.DataPropertyName = "xh"
+        Me.ColXh.HeaderText = "行号"
+        Me.ColXh.Name = "ColXh"
+        Me.ColXh.ReadOnly = True
+        Me.ColXh.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ColPzrq
+        '
+        Me.ColPzrq.DataPropertyName = "pzrq"
+        Me.ColPzrq.HeaderText = "业务日期"
+        Me.ColPzrq.Name = "ColPzrq"
+        '
+        'ColJe
+        '
+        Me.ColJe.DataPropertyName = "je"
+        Me.ColJe.HeaderText = "金额"
+        Me.ColJe.Name = "ColJe"
+        Me.ColJe.ReadOnly = True
+        Me.ColJe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ColKhdm
+        '
+        Me.ColKhdm.DataPropertyName = "khdm"
+        Me.ColKhdm.HeaderText = "客户编码"
+        Me.ColKhdm.Name = "ColKhdm"
+        Me.ColKhdm.ReadOnly = True
+        Me.ColKhdm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ColBmdm
+        '
+        Me.ColBmdm.DataPropertyName = "bmdm"
+        Me.ColBmdm.HeaderText = "部门编码"
+        Me.ColBmdm.Name = "ColBmdm"
+        Me.ColBmdm.ReadOnly = True
+        Me.ColBmdm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Label3
         '
@@ -193,7 +254,7 @@ Partial Class FrmPzsc
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(24, 310)
+        Me.Label1.Location = New System.Drawing.Point(24, 420)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(365, 26)
         Me.Label1.TabIndex = 111
@@ -201,6 +262,8 @@ Partial Class FrmPzsc
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.RadioBtnOeXsd_Cb)
+        Me.GroupBox1.Controls.Add(Me.RadioBtnOeFp)
         Me.GroupBox1.Controls.Add(Me.RadioBtnPoRkd)
         Me.GroupBox1.Controls.Add(Me.RadioBtnInvCkd)
         Me.GroupBox1.Controls.Add(Me.RadioBtnInvRkd)
@@ -211,9 +274,31 @@ Partial Class FrmPzsc
         Me.GroupBox1.Controls.Add(Me.RadioBtnApFkd)
         Me.GroupBox1.Location = New System.Drawing.Point(24, 83)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(365, 224)
+        Me.GroupBox1.Size = New System.Drawing.Size(365, 334)
         Me.GroupBox1.TabIndex = 112
         Me.GroupBox1.TabStop = False
+        '
+        'RadioBtnOeXsd_Cb
+        '
+        Me.RadioBtnOeXsd_Cb.AutoSize = True
+        Me.RadioBtnOeXsd_Cb.ForeColor = System.Drawing.Color.DarkGreen
+        Me.RadioBtnOeXsd_Cb.Location = New System.Drawing.Point(21, 116)
+        Me.RadioBtnOeXsd_Cb.Name = "RadioBtnOeXsd_Cb"
+        Me.RadioBtnOeXsd_Cb.Size = New System.Drawing.Size(299, 16)
+        Me.RadioBtnOeXsd_Cb.TabIndex = 9
+        Me.RadioBtnOeXsd_Cb.Text = "产品送货单(成本) 借:发出商品       贷:库存商品"
+        Me.RadioBtnOeXsd_Cb.UseVisualStyleBackColor = True
+        '
+        'RadioBtnOeFp
+        '
+        Me.RadioBtnOeFp.AutoSize = True
+        Me.RadioBtnOeFp.ForeColor = System.Drawing.Color.DarkGreen
+        Me.RadioBtnOeFp.Location = New System.Drawing.Point(21, 140)
+        Me.RadioBtnOeFp.Name = "RadioBtnOeFp"
+        Me.RadioBtnOeFp.Size = New System.Drawing.Size(299, 16)
+        Me.RadioBtnOeFp.TabIndex = 8
+        Me.RadioBtnOeFp.Text = "销售发票(成本)   借:主营业务成本   贷:发出商品"
+        Me.RadioBtnOeFp.UseVisualStyleBackColor = True
         '
         'BtnImp
         '
@@ -237,20 +322,21 @@ Partial Class FrmPzsc
         Me.GroupBox2.TabIndex = 114
         Me.GroupBox2.TabStop = False
         '
-        'BtnPzsc
+        'BtnZsPzsc
         '
-        Me.BtnPzsc.Location = New System.Drawing.Point(204, 339)
-        Me.BtnPzsc.Name = "BtnPzsc"
-        Me.BtnPzsc.Size = New System.Drawing.Size(75, 23)
-        Me.BtnPzsc.TabIndex = 114
-        Me.BtnPzsc.Text = "生成凭证"
-        Me.BtnPzsc.UseVisualStyleBackColor = True
+        Me.BtnZsPzsc.Location = New System.Drawing.Point(250, 449)
+        Me.BtnZsPzsc.Name = "BtnZsPzsc"
+        Me.BtnZsPzsc.Size = New System.Drawing.Size(75, 23)
+        Me.BtnZsPzsc.TabIndex = 114
+        Me.BtnZsPzsc.Text = "正式凭证"
+        Me.BtnZsPzsc.UseVisualStyleBackColor = True
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.BtnLsPzsc)
         Me.Panel1.Controls.Add(Me.BtnExit)
         Me.Panel1.Controls.Add(Me.BtnUnSelectAll)
-        Me.Panel1.Controls.Add(Me.BtnPzsc)
+        Me.Panel1.Controls.Add(Me.BtnZsPzsc)
         Me.Panel1.Controls.Add(Me.BtnSelectAll)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -258,13 +344,21 @@ Partial Class FrmPzsc
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(402, 564)
+        Me.Panel1.Size = New System.Drawing.Size(452, 564)
         Me.Panel1.TabIndex = 115
+        '
+        'BtnLsPzsc
+        '
+        Me.BtnLsPzsc.Location = New System.Drawing.Point(175, 449)
+        Me.BtnLsPzsc.Name = "BtnLsPzsc"
+        Me.BtnLsPzsc.Size = New System.Drawing.Size(75, 23)
+        Me.BtnLsPzsc.TabIndex = 118
+        Me.BtnLsPzsc.Text = "临时凭证"
+        Me.BtnLsPzsc.UseVisualStyleBackColor = True
         '
         'BtnExit
         '
-        Me.BtnExit.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnExit.Location = New System.Drawing.Point(287, 339)
+        Me.BtnExit.Location = New System.Drawing.Point(325, 449)
         Me.BtnExit.Name = "BtnExit"
         Me.BtnExit.Size = New System.Drawing.Size(75, 23)
         Me.BtnExit.TabIndex = 117
@@ -272,7 +366,7 @@ Partial Class FrmPzsc
         '
         'BtnUnSelectAll
         '
-        Me.BtnUnSelectAll.Location = New System.Drawing.Point(121, 339)
+        Me.BtnUnSelectAll.Location = New System.Drawing.Point(100, 449)
         Me.BtnUnSelectAll.Name = "BtnUnSelectAll"
         Me.BtnUnSelectAll.Size = New System.Drawing.Size(75, 23)
         Me.BtnUnSelectAll.TabIndex = 116
@@ -281,41 +375,12 @@ Partial Class FrmPzsc
         '
         'BtnSelectAll
         '
-        Me.BtnSelectAll.Location = New System.Drawing.Point(38, 339)
+        Me.BtnSelectAll.Location = New System.Drawing.Point(25, 449)
         Me.BtnSelectAll.Name = "BtnSelectAll"
         Me.BtnSelectAll.Size = New System.Drawing.Size(75, 23)
         Me.BtnSelectAll.TabIndex = 115
         Me.BtnSelectAll.TabStop = False
         Me.BtnSelectAll.Text = "全选"
-        '
-        'ColXz
-        '
-        Me.ColXz.DataPropertyName = "xz"
-        Me.ColXz.HeaderText = "选择"
-        Me.ColXz.Name = "ColXz"
-        Me.ColXz.Width = 45
-        '
-        'ColDjh
-        '
-        Me.ColDjh.DataPropertyName = "djh"
-        Me.ColDjh.HeaderText = "单据号"
-        Me.ColDjh.Name = "ColDjh"
-        Me.ColDjh.ReadOnly = True
-        Me.ColDjh.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'ColPzrq
-        '
-        Me.ColPzrq.DataPropertyName = "pzrq"
-        Me.ColPzrq.HeaderText = "业务日期"
-        Me.ColPzrq.Name = "ColPzrq"
-        '
-        'ColJe
-        '
-        Me.ColJe.DataPropertyName = "je"
-        Me.ColJe.HeaderText = "金额"
-        Me.ColJe.Name = "ColJe"
-        Me.ColJe.ReadOnly = True
-        Me.ColJe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'FrmPzsc
         '
@@ -355,12 +420,18 @@ Partial Class FrmPzsc
     Friend WithEvents BtnImp As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents BtnPzsc As System.Windows.Forms.Button
+    Friend WithEvents BtnZsPzsc As System.Windows.Forms.Button
     Friend WithEvents BtnUnSelectAll As System.Windows.Forms.Button
     Friend WithEvents BtnSelectAll As System.Windows.Forms.Button
     Friend WithEvents BtnExit As System.Windows.Forms.Button
-    Friend WithEvents ColXz As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents ColDjh As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColPzrq As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColJe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RadioBtnOeFp As RadioButton
+    Friend WithEvents ColXz As DataGridViewCheckBoxColumn
+    Friend WithEvents ColDjh As DataGridViewTextBoxColumn
+    Friend WithEvents ColXh As DataGridViewTextBoxColumn
+    Friend WithEvents ColPzrq As DataGridViewTextBoxColumn
+    Friend WithEvents ColJe As DataGridViewTextBoxColumn
+    Friend WithEvents ColKhdm As DataGridViewTextBoxColumn
+    Friend WithEvents ColBmdm As DataGridViewTextBoxColumn
+    Friend WithEvents BtnLsPzsc As Button
+    Friend WithEvents RadioBtnOeXsd_Cb As RadioButton
 End Class

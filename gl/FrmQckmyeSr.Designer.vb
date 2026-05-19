@@ -56,8 +56,8 @@ Partial Class FrmQckmyeSr
         Me.RdoBtnJie = New System.Windows.Forms.RadioButton()
         Me.RdoBtnDai = New System.Windows.Forms.RadioButton()
         Me.LblKjnd = New System.Windows.Forms.Label()
-        Me.TxtDw = New System.Windows.Forms.TextBox()
         Me.TxtWbdm = New System.Windows.Forms.TextBox()
+        Me.BtnImpXls = New System.Windows.Forms.Button()
         Me.DlgPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -75,13 +75,13 @@ Partial Class FrmQckmyeSr
         '
         'DlgPanel
         '
-        Me.DlgPanel.Location = New System.Drawing.Point(165, 408)
+        Me.DlgPanel.Location = New System.Drawing.Point(165, 370)
         Me.DlgPanel.TabIndex = 35
         '
         'TxtNcje
         '
         Me.TxtNcje.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtNcje.Location = New System.Drawing.Point(141, 356)
+        Me.TxtNcje.Location = New System.Drawing.Point(141, 332)
         Me.TxtNcje.MaxLength = 12
         Me.TxtNcje.Name = "TxtNcje"
         Me.TxtNcje.Size = New System.Drawing.Size(104, 21)
@@ -90,7 +90,7 @@ Partial Class FrmQckmyeSr
         'LblNcje
         '
         Me.LblNcje.AutoSize = True
-        Me.LblNcje.Location = New System.Drawing.Point(41, 360)
+        Me.LblNcje.Location = New System.Drawing.Point(41, 336)
         Me.LblNcje.Name = "LblNcje"
         Me.LblNcje.Size = New System.Drawing.Size(89, 12)
         Me.LblNcje.TabIndex = 33
@@ -99,7 +99,7 @@ Partial Class FrmQckmyeSr
         'LblBz
         '
         Me.LblBz.AutoSize = True
-        Me.LblBz.Location = New System.Drawing.Point(65, 310)
+        Me.LblBz.Location = New System.Drawing.Point(65, 286)
         Me.LblBz.Name = "LblBz"
         Me.LblBz.Size = New System.Drawing.Size(65, 12)
         Me.LblBz.TabIndex = 29
@@ -108,11 +108,11 @@ Partial Class FrmQckmyeSr
         'LblDw
         '
         Me.LblDw.AutoSize = True
-        Me.LblDw.Location = New System.Drawing.Point(65, 260)
+        Me.LblDw.Location = New System.Drawing.Point(251, 261)
         Me.LblDw.Name = "LblDw"
-        Me.LblDw.Size = New System.Drawing.Size(65, 12)
+        Me.LblDw.Size = New System.Drawing.Size(53, 12)
         Me.LblDw.TabIndex = 25
-        Me.LblDw.Text = "计量单位："
+        Me.LblDw.Text = "计量单位"
         '
         'LblJd
         '
@@ -134,7 +134,7 @@ Partial Class FrmQckmyeSr
         '
         'TxtNcwb
         '
-        Me.TxtNcwb.Location = New System.Drawing.Point(141, 331)
+        Me.TxtNcwb.Location = New System.Drawing.Point(141, 307)
         Me.TxtNcwb.MaxLength = 16
         Me.TxtNcwb.Name = "TxtNcwb"
         Me.TxtNcwb.Size = New System.Drawing.Size(104, 21)
@@ -143,7 +143,7 @@ Partial Class FrmQckmyeSr
         'LblNcwb
         '
         Me.LblNcwb.AutoSize = True
-        Me.LblNcwb.Location = New System.Drawing.Point(41, 335)
+        Me.LblNcwb.Location = New System.Drawing.Point(41, 311)
         Me.LblNcwb.Name = "LblNcwb"
         Me.LblNcwb.Size = New System.Drawing.Size(89, 12)
         Me.LblNcwb.TabIndex = 31
@@ -169,7 +169,7 @@ Partial Class FrmQckmyeSr
         '
         'TxtNcsl
         '
-        Me.TxtNcsl.Location = New System.Drawing.Point(141, 281)
+        Me.TxtNcsl.Location = New System.Drawing.Point(141, 257)
         Me.TxtNcsl.MaxLength = 30
         Me.TxtNcsl.Name = "TxtNcsl"
         Me.TxtNcsl.Size = New System.Drawing.Size(104, 21)
@@ -178,7 +178,7 @@ Partial Class FrmQckmyeSr
         'LblNcsl
         '
         Me.LblNcsl.AutoSize = True
-        Me.LblNcsl.Location = New System.Drawing.Point(65, 285)
+        Me.LblNcsl.Location = New System.Drawing.Point(65, 261)
         Me.LblNcsl.Name = "LblNcsl"
         Me.LblNcsl.Size = New System.Drawing.Size(65, 12)
         Me.LblNcsl.TabIndex = 27
@@ -222,7 +222,7 @@ Partial Class FrmQckmyeSr
         '
         Me.TxtXmdm.Font = New System.Drawing.Font("宋体", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TxtXmdm.Location = New System.Drawing.Point(141, 115)
-        Me.TxtXmdm.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtXmdm.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtXmdm.Name = "TxtXmdm"
         Me.TxtXmdm.Size = New System.Drawing.Size(87, 21)
         Me.TxtXmdm.TabIndex = 10
@@ -364,7 +364,7 @@ Partial Class FrmQckmyeSr
         Me.RdoBtnJie.AutoSize = True
         Me.RdoBtnJie.Checked = True
         Me.RdoBtnJie.Location = New System.Drawing.Point(141, 236)
-        Me.RdoBtnJie.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RdoBtnJie.Margin = New System.Windows.Forms.Padding(2)
         Me.RdoBtnJie.Name = "RdoBtnJie"
         Me.RdoBtnJie.Size = New System.Drawing.Size(35, 16)
         Me.RdoBtnJie.TabIndex = 23
@@ -376,7 +376,7 @@ Partial Class FrmQckmyeSr
         '
         Me.RdoBtnDai.AutoSize = True
         Me.RdoBtnDai.Location = New System.Drawing.Point(185, 235)
-        Me.RdoBtnDai.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RdoBtnDai.Margin = New System.Windows.Forms.Padding(2)
         Me.RdoBtnDai.Name = "RdoBtnDai"
         Me.RdoBtnDai.Size = New System.Drawing.Size(35, 16)
         Me.RdoBtnDai.TabIndex = 24
@@ -392,29 +392,30 @@ Partial Class FrmQckmyeSr
         Me.LblKjnd.TabIndex = 36
         Me.LblKjnd.Text = "会计年度："
         '
-        'TxtDw
-        '
-        Me.TxtDw.Location = New System.Drawing.Point(141, 256)
-        Me.TxtDw.MaxLength = 30
-        Me.TxtDw.Name = "TxtDw"
-        Me.TxtDw.Size = New System.Drawing.Size(104, 21)
-        Me.TxtDw.TabIndex = 26
-        '
         'TxtWbdm
         '
-        Me.TxtWbdm.Location = New System.Drawing.Point(141, 306)
+        Me.TxtWbdm.Location = New System.Drawing.Point(141, 282)
         Me.TxtWbdm.MaxLength = 30
         Me.TxtWbdm.Name = "TxtWbdm"
         Me.TxtWbdm.Size = New System.Drawing.Size(104, 21)
         Me.TxtWbdm.TabIndex = 30
         '
+        'BtnImpXls
+        '
+        Me.BtnImpXls.Location = New System.Drawing.Point(18, 373)
+        Me.BtnImpXls.Name = "BtnImpXls"
+        Me.BtnImpXls.Size = New System.Drawing.Size(141, 23)
+        Me.BtnImpXls.TabIndex = 37
+        Me.BtnImpXls.Text = "导入EXCEL数据(&I)"
+        Me.BtnImpXls.UseVisualStyleBackColor = True
+        '
         'FrmQckmyeSr
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 450)
+        Me.ClientSize = New System.Drawing.Size(418, 412)
+        Me.Controls.Add(Me.BtnImpXls)
         Me.Controls.Add(Me.TxtWbdm)
-        Me.Controls.Add(Me.TxtDw)
         Me.Controls.Add(Me.LblKjnd)
         Me.Controls.Add(Me.RdoBtnDai)
         Me.Controls.Add(Me.RdoBtnJie)
@@ -486,8 +487,8 @@ Partial Class FrmQckmyeSr
         Me.Controls.SetChildIndex(Me.RdoBtnJie, 0)
         Me.Controls.SetChildIndex(Me.RdoBtnDai, 0)
         Me.Controls.SetChildIndex(Me.LblKjnd, 0)
-        Me.Controls.SetChildIndex(Me.TxtDw, 0)
         Me.Controls.SetChildIndex(Me.TxtWbdm, 0)
+        Me.Controls.SetChildIndex(Me.BtnImpXls, 0)
         Me.DlgPanel.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -527,6 +528,6 @@ Partial Class FrmQckmyeSr
     Friend WithEvents RdoBtnJie As RadioButton
     Friend WithEvents RdoBtnDai As RadioButton
     Public WithEvents LblKjnd As Label
-    Public WithEvents TxtDw As TextBox
     Public WithEvents TxtWbdm As TextBox
+    Friend WithEvents BtnImpXls As Button
 End Class

@@ -22,37 +22,38 @@ Partial Class FrmJsfsEdit
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel
-        Me.MnuMain = New System.Windows.Forms.MenuStrip
-        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiCancel = New System.Windows.Forms.ToolStripMenuItem
-        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMain = New System.Windows.Forms.ToolStrip
-        Me.BtnTop = New System.Windows.Forms.ToolStripButton
-        Me.BtnPrevious = New System.Windows.Forms.ToolStripButton
-        Me.BtnNext = New System.Windows.Forms.ToolStripButton
-        Me.BtnBottom = New System.Windows.Forms.ToolStripButton
-        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnNew = New System.Windows.Forms.ToolStripButton
-        Me.BtnEdit = New System.Windows.Forms.ToolStripButton
-        Me.BtnSave = New System.Windows.Forms.ToolStripButton
-        Me.BtnCancel = New System.Windows.Forms.ToolStripButton
-        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnExit = New System.Windows.Forms.ToolStripButton
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.LblJsfsmc = New System.Windows.Forms.Label
-        Me.TxtJsfsmc = New System.Windows.Forms.TextBox
-        Me.LblJsfsdm = New System.Windows.Forms.Label
-        Me.LblJsfssm = New System.Windows.Forms.Label
-        Me.TxtJsfsdm = New System.Windows.Forms.TextBox
-        Me.TxtJsfssm = New System.Windows.Forms.TextBox
-        Me.ChbBkywf = New System.Windows.Forms.CheckBox
+        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel()
+        Me.MnuMain = New System.Windows.Forms.MenuStrip()
+        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiSave = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiCancel = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMain = New System.Windows.Forms.ToolStrip()
+        Me.BtnTop = New System.Windows.Forms.ToolStripButton()
+        Me.BtnPrevious = New System.Windows.Forms.ToolStripButton()
+        Me.BtnNext = New System.Windows.Forms.ToolStripButton()
+        Me.BtnBottom = New System.Windows.Forms.ToolStripButton()
+        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnNew = New System.Windows.Forms.ToolStripButton()
+        Me.BtnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.BtnSave = New System.Windows.Forms.ToolStripButton()
+        Me.BtnCancel = New System.Windows.Forms.ToolStripButton()
+        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnExit = New System.Windows.Forms.ToolStripButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ChbBkywf = New System.Windows.Forms.CheckBox()
+        Me.LblJsfsmc = New System.Windows.Forms.Label()
+        Me.TxtJsfsmc = New System.Windows.Forms.TextBox()
+        Me.LblJsfsdm = New System.Windows.Forms.Label()
+        Me.LblJsfssm = New System.Windows.Forms.Label()
+        Me.TxtJsfsdm = New System.Windows.Forms.TextBox()
+        Me.TxtJsfssm = New System.Windows.Forms.TextBox()
+        Me.ChbBgylk = New System.Windows.Forms.CheckBox()
         Me.ToolStripPanel1.SuspendLayout()
         Me.MnuMain.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
@@ -243,6 +244,7 @@ Partial Class FrmJsfsEdit
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.ChbBgylk)
         Me.Panel1.Controls.Add(Me.ChbBkywf)
         Me.Panel1.Controls.Add(Me.LblJsfsmc)
         Me.Panel1.Controls.Add(Me.TxtJsfsmc)
@@ -253,8 +255,18 @@ Partial Class FrmJsfsEdit
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 64)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(376, 148)
+        Me.Panel1.Size = New System.Drawing.Size(376, 181)
         Me.Panel1.TabIndex = 0
+        '
+        'ChbBkywf
+        '
+        Me.ChbBkywf.AutoSize = True
+        Me.ChbBkywf.Location = New System.Drawing.Point(143, 118)
+        Me.ChbBkywf.Name = "ChbBkywf"
+        Me.ChbBkywf.Size = New System.Drawing.Size(132, 16)
+        Me.ChbBkywf.TabIndex = 16
+        Me.ChbBkywf.Text = "是否承兑倒扣业务费"
+        Me.ChbBkywf.UseVisualStyleBackColor = True
         '
         'LblJsfsmc
         '
@@ -308,21 +320,21 @@ Partial Class FrmJsfsEdit
         Me.TxtJsfssm.Size = New System.Drawing.Size(96, 21)
         Me.TxtJsfssm.TabIndex = 5
         '
-        'ChbBkywf
+        'ChbBgylk
         '
-        Me.ChbBkywf.AutoSize = True
-        Me.ChbBkywf.Location = New System.Drawing.Point(143, 118)
-        Me.ChbBkywf.Name = "ChbBkywf"
-        Me.ChbBkywf.Size = New System.Drawing.Size(108, 16)
-        Me.ChbBkywf.TabIndex = 16
-        Me.ChbBkywf.Text = "是否倒扣业务费"
-        Me.ChbBkywf.UseVisualStyleBackColor = True
+        Me.ChbBgylk.AutoSize = True
+        Me.ChbBgylk.Location = New System.Drawing.Point(143, 140)
+        Me.ChbBgylk.Name = "ChbBgylk"
+        Me.ChbBgylk.Size = New System.Drawing.Size(144, 16)
+        Me.ChbBgylk.TabIndex = 17
+        Me.ChbBgylk.Text = "是否供应链倒扣业务费"
+        Me.ChbBgylk.UseVisualStyleBackColor = True
         '
         'FrmJsfsEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(376, 212)
+        Me.ClientSize = New System.Drawing.Size(376, 245)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStripPanel1)
         Me.Name = "FrmJsfsEdit"
@@ -370,4 +382,5 @@ Partial Class FrmJsfsEdit
     Friend WithEvents TxtJsfsdm As System.Windows.Forms.TextBox
     Friend WithEvents TxtJsfssm As System.Windows.Forms.TextBox
     Friend WithEvents ChbBkywf As System.Windows.Forms.CheckBox
+    Friend WithEvents ChbBgylk As CheckBox
 End Class

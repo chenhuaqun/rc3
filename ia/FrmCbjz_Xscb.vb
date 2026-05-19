@@ -71,6 +71,7 @@ Public Class FrmCbjz_Xscb
         Dim dblQcdj As Double
         '结转成本
         If Me.CheckBox4.Checked Then
+            '新
             '汇总总账
             Try
                 rcOleDbConn.Open()
@@ -81,7 +82,14 @@ Public Class FrmCbjz_Xscb
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@ParaStrYear", OleDbType.VarChar, 4).Value = Me.NudYear.Value
                 rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = g_Dwrq
+                rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                        MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                        Return
+                    End If
+                End If
             Catch ex As Exception
                 MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
             Finally
@@ -156,6 +164,86 @@ Public Class FrmCbjz_Xscb
                     rcOleDbCommand.Parameters.Add("@ny", OleDbType.VarChar, 6).Value = NudYear.Value & NudMonth.Value.ToString.PadLeft(2, "0")
                     rcOleDbCommand.ExecuteNonQuery()
                 Next
+                If Me.CheckBox3.Checked Then
+                    '当月调拨数量合计小于零，按上月调入仓库结存单价计算调拨成本
+                    rcOleDbCommand.CommandText = "SELECT inv_dbd.cpdm,inv_dbd.cckdm,inv_dbd.rckdm,SUM(sl) AS sl FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') <= ? AND TRUNC(inv_dbd.dbrq,'mi') >= ? GROUP BY inv_dbd.cpdm,inv_dbd.cckdm,inv_dbd.rckdm HAVING SUM(SL) < 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateJsrq
+                    rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    If rcDataset.Tables("redinv_dbd") IsNot Nothing Then
+                        rcDataset.Tables("redinv_dbd").Clear()
+                    End If
+                    rcOleDbDataAdpt.Fill(rcDataset, "redinv_dbd")
+                    For j = 0 To rcDataset.Tables("redinv_dbd").Rows.Count - 1
+                        '取调入仓库的物料的库存金额
+                        rcOleDbCommand.CommandText = "SELECT cpdm,ckdm,COALESCE(sum(qcsl),0.0) + COALESCE(sum(qccgrksl),0.0) + COALESCE(sum(qcscrksl),0.0) + COALESCE(sum(qcdbrksl),0.0) + COALESCE(sum(qcxscksl),0.0) - COALESCE(sum(qcckcksl),0.0) - COALESCE(sum(qcdbcksl),0.0) AS qcsl,COALESCE(sum(qcje),0.0) + COALESCE(sum(qccgrkje),0.0) + COALESCE(sum(qcscrkje),0.0) + COALESCE(sum(qcdbrkje),0.0) - COALESCE(sum(qcxsckje),0.0) - COALESCE(sum(qcckckje),0.0) - COALESCE(sum(qcdbckje),0.0) as qcje FROM (SELECT clnc.cpdm,clnc.ckdm,clnc.qcsl,clnc.qcje,qccgrk.qccgrksl,qccgrk.qccgrkje,qcscrk.qcscrksl,qcscrk.qcscrkje,qcdbrk.qcdbrksl,qcdbrk.qcdbrkje,qcxsck.qcxscksl,qcxsck.qcxsckje,qcckck.qcckcksl,qcckck.qcckckje,qcdbck.qcdbcksl,qcdbck.qcdbckje FROM" &
+                            " (SELECT inv_cpyeb.cpdm,inv_cpyeb.ckdm,sum(qcsl) as qcsl,sum(qcje) as qcje FROM inv_cpyeb WHERE kjnd = ? AND ckdm = ? AND cpdm = ? GROUP by inv_cpyeb.cpdm,inv_cpyeb.ckdm) clnc" &
+                            " Left join (SELECT po_rkd.cpdm,po_rkd.ckdm,sum(po_rkd.sl) as qccgrksl,sum(po_rkd.je) as qccgrkje FROM po_rkd WHERE po_rkd.bdelete = 0 AND TRUNC(po_rkd.rkrq,'mi') >= ? AND TRUNC(po_rkd.rkrq,'mi') >= ? AND TRUNC(po_rkd.rkrq,'mi') <= ? AND po_rkd.ckdm = ? AND po_rkd.cpdm = ? GROUP BY po_rkd.cpdm,po_rkd.ckdm) qccgrk ON clnc.cpdm = qccgrk.cpdm AND clnc.ckdm = qccgrk.ckdm" &
+                            " Left join (SELECT inv_rkd.cpdm,inv_rkd.ckdm,sum(inv_rkd.sl) as qcscrksl,sum(inv_rkd.je) as qcscrkje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND TRUNC(inv_rkd.rkrq,'mi') >= ? and TRUNC(inv_rkd.rkrq,'mi') >= ? and TRUNC(inv_rkd.rkrq,'mi') <= ? AND inv_rkd.ckdm = ? AND inv_rkd.cpdm = ? GROUP BY inv_rkd.cpdm,inv_rkd.ckdm) qcscrk ON clnc.cpdm = qcscrk.cpdm AND clnc.ckdm = qcscrk.ckdm" &
+                            " Left join (SELECT inv_dbd.cpdm,inv_dbd.rckdm AS ckdm,sum(inv_dbd.sl) as qcdbrksl,sum(inv_dbd.je) as qcdbrkje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ? AND inv_dbd.rckdm = ? AND inv_dbd.cpdm = ? GROUP BY inv_dbd.cpdm,inv_dbd.rckdm) qcdbrk ON clnc.cpdm = qcdbrk.cpdm AND clnc.ckdm = qcdbrk.ckdm" &
+                            " Left join (SELECT oe_xsd.cpdm,oe_xsd.ckdm,sum(oe_xsd.sl) as qcxscksl,sum(oe_xsd.cbje) as qcxsckje FROM oe_xsd WHERE oe_xsd.bdelete = 0 AND TRUNC(oe_xsd.xsrq,'mi') >= ? and TRUNC(oe_xsd.xsrq,'mi') >= ? and TRUNC(oe_xsd.xsrq,'mi') < ? AND oe_xsd.ckdm = ? AND oe_xsd.cpdm = ? GROUP BY oe_xsd.cpdm,oe_xsd.ckdm) qcxsck ON clnc.cpdm = qcxsck.cpdm AND clnc.ckdm = qcxsck.ckdm" &
+                            " Left join (SELECT inv_ckd.cpdm,inv_ckd.ckdm,sum(inv_ckd.sl) as qcckcksl,sum(inv_ckd.je) as qcckckje FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND TRUNC(inv_ckd.ckrq,'mi') >= ? and TRUNC(inv_ckd.ckrq,'mi') >= ? and TRUNC(inv_ckd.ckrq,'mi') < ? AND inv_ckd.ckdm = ? AND inv_ckd.cpdm = ? GROUP BY inv_ckd.cpdm,inv_ckd.ckdm) qcckck ON clnc.cpdm = qcckck.cpdm AND clnc.ckdm = qcckck.ckdm" &
+                            " Left join (SELECT inv_dbd.cpdm,inv_dbd.cckdm AS ckdm,sum(inv_dbd.sl) as qcdbcksl,sum(inv_dbd.je) as qcdbckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ? AND inv_dbd.cckdm = ? AND inv_dbd.cpdm = ? GROUP BY inv_dbd.cpdm,inv_dbd.cckdm) qcdbck ON clnc.cpdm = qcdbck.cpdm AND clnc.ckdm = qcdbck.ckdm) asfchz GROUP BY cpdm,ckdm"
+                        rcOleDbCommand.Parameters.Clear()
+                        rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePoBegin1
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePoBegin1
+                        rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePoBegin1
+                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+                        rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = datePoBegin1
+                        rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dateKsrq
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+                        rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = datePoBegin1
+                        rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateKsrq
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
+                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePoBegin1
+                        rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                        rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cpdm"))
+                        rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                        If rcDataset.Tables("clsyye") IsNot Nothing Then
+                            rcDataset.Tables("clsyye").Clear()
+                        End If
+                        rcOleDbDataAdpt.Fill(rcDataset, "clsyye")
+                        '如果不为0，则替换
+                        If rcDataset.Tables("clsyye").Rows.Count > 0 Then
+                            If rcDataset.Tables("clsyye").Rows(0).Item("qcsl") <> 0 And rcDataset.Tables("clsyye").Rows(0).Item("qcje") <> 0 Then
+                                rcOleDbCommand.CommandText = "UPDATE inv_dbd SET inv_dbd.je = inv_dbd.sl * ?,inv_dbd.dj = ? WHERE inv_dbd.cpdm = ? AND cckdm = ? AND rckdm = ? AND SUBSTR(inv_dbd.djh,5,6) >= ? AND SUBSTR(inv_dbd.djh,5,6) <= ?"
+                                rcOleDbCommand.Parameters.Clear()
+                                rcOleDbCommand.Parameters.Add("@dj", OleDbType.Numeric, 18).Value = rcDataset.Tables("clsyye").Rows(0).Item("qcje") / rcDataset.Tables("clsyye").Rows(0).Item("qcsl")
+                                rcOleDbCommand.Parameters.Add("@dj", OleDbType.Numeric, 18).Value = rcDataset.Tables("clsyye").Rows(0).Item("qcje") / rcDataset.Tables("clsyye").Rows(0).Item("qcsl")
+                                rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("clsyye").Rows(0).Item("cpdm")
+                                rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("cckdm"))
+                                rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
+                                rcOleDbCommand.Parameters.Add("@ny", OleDbType.VarChar, 6).Value = NudYear.Value & NudMonth.Value.ToString.PadLeft(2, "0")
+                                rcOleDbCommand.Parameters.Add("@ny", OleDbType.VarChar, 6).Value = NudYear.Value & NudMonth.Value.ToString.PadLeft(2, "0")
+                                rcOleDbCommand.ExecuteNonQuery()
+                            End If
+                        End If
+                    Next
+
+
+                End If
+
                 '取分仓库含本期调拨与本期出库数据的收发存汇总表
                 '分仓库汇总,含调拨单的入库数量与金额，用来计算出库单的出库成本
                 rcOleDbCommand.CommandText = "SELECT cpdm,ckdm,COALESCE(sum(qcsl),0.0) as qcsl,COALESCE(sum(qcje),0.0) as qcje,COALESCE(sum(qccgrksl),0.0) as qccgrksl,COALESCE(sum(qccgrkje),0.0) as qccgrkje,COALESCE(sum(qcscrksl),0.0) as qcscrksl,COALESCE(sum(qcscrkje),0.0) as qcscrkje,COALESCE(sum(qcdbrksl),0.0) as qcdbrksl,COALESCE(sum(qcdbrkje),0.0) as qcdbrkje,COALESCE(sum(qcxscksl),0.0) as qcxscksl,COALESCE(sum(qcxsckje),0.0) as qcxsckje,COALESCE(sum(qcckcksl),0.0) as qcckcksl,COALESCE(sum(qcckckje),0.0) as qcckckje,COALESCE(sum(qcdbcksl),0.0) as qcdbcksl,COALESCE(sum(qcdbckje),0.0) as qcdbckje FROM (SELECT clnc.cpdm,clnc.ckdm,clnc.qcsl,clnc.qcje,qccgrk.qccgrksl,qccgrk.qccgrkje,qcscrk.qcscrksl,qcscrk.qcscrkje,qcdbrk.qcdbrksl,qcdbrk.qcdbrkje,qcxsck.qcxscksl,qcxsck.qcxsckje,qcckck.qcckcksl,qcckck.qcckckje,qcdbck.qcdbcksl,qcdbck.qcdbckje FROM" &
@@ -353,7 +441,14 @@ Public Class FrmCbjz_Xscb
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@ParaStrYear", OleDbType.VarChar, 4).Value = Me.NudYear.Value
                 rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = g_Dwrq
+                rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                        MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                        Return
+                    End If
+                End If
             Catch ex As Exception
                 Try
                     MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
@@ -464,37 +559,37 @@ Public Class FrmCbjz_Xscb
                             " Left join (SELECT inv_dbd.cpdm,inv_dbd.cckdm AS ckdm,sum(inv_dbd.sl) as qcdbcksl,sum(inv_dbd.je) as qcdbckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') >= ? and TRUNC(inv_dbd.dbrq,'mi') < ? AND inv_dbd.cckdm = ? AND inv_dbd.cpdm = ? GROUP BY inv_dbd.cpdm,inv_dbd.cckdm) qcdbck ON clnc.cpdm = qcdbck.cpdm AND clnc.ckdm = qcdbck.ckdm) asfchz GROUP BY cpdm,ckdm"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
-                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(i).Item("rckdm"))
+                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("cpxx").Rows(i).Item("cpdm"))
                             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
                             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePoBegin1
                             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
-                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(i).Item("rckdm"))
+                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("cpxx").Rows(i).Item("cpdm"))
                             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
                             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = datePoBegin1
                             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = dateKsrq
-                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(i).Item("rckdm"))
+                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("cpxx").Rows(i).Item("cpdm"))
                             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
                             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePoBegin1
                             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq
-                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(i).Item("rckdm"))
+                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("cpxx").Rows(i).Item("cpdm"))
                             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = g_Dwrq.Date
                             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = datePoBegin1
                             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dateKsrq
-                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(i).Item("rckdm"))
+                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("cpxx").Rows(i).Item("cpdm"))
                             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = g_Dwrq.Date
                             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = datePoBegin1
                             rcOleDbCommand.Parameters.Add("@ckrq", OleDbType.Date, 8).Value = dateKsrq
-                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(i).Item("rckdm"))
+                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("cpxx").Rows(i).Item("cpdm"))
                             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = g_Dwrq.Date
                             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = datePoBegin1
                             rcOleDbCommand.Parameters.Add("@dbrq", OleDbType.Date, 8).Value = dateKsrq
-                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(i).Item("rckdm"))
+                            rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("redinv_dbd").Rows(j).Item("rckdm"))
                             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("cpxx").Rows(i).Item("cpdm"))
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                             If rcDataset.Tables("clsyye") IsNot Nothing Then
@@ -780,7 +875,14 @@ Public Class FrmCbjz_Xscb
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@ParaStrYear", OleDbType.VarChar, 4).Value = Me.NudYear.Value
                 rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = g_Dwrq
+                rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                    If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
+                        MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                        Return
+                    End If
+                End If
             Catch ex As Exception
                 Try
                     MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")

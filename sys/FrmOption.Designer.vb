@@ -35,9 +35,9 @@ Partial Class FrmOption
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TxtYcl = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.TxtKcsp = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TxtSccb = New System.Windows.Forms.TextBox()
+        Me.TxtKcspKm = New System.Windows.Forms.TextBox()
+        Me.LblKcspKm = New System.Windows.Forms.Label()
+        Me.TxtSccbKm = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.CmbPzlxjc = New System.Windows.Forms.ComboBox()
@@ -50,7 +50,19 @@ Partial Class FrmOption
         Me.LblDefaultShlv = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TxtZzbcpKm = New System.Windows.Forms.TextBox()
+        Me.LblZzbcpKm = New System.Windows.Forms.Label()
+        Me.TxtFcspKm = New System.Windows.Forms.TextBox()
+        Me.LblFcspKm = New System.Windows.Forms.Label()
+        Me.CmbFcsp = New System.Windows.Forms.ComboBox()
+        Me.LblFcspKjqj = New System.Windows.Forms.Label()
+        Me.TxtWbdm = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TxtNCUserAccount = New System.Windows.Forms.TextBox()
+        Me.LblNCUserAccount = New System.Windows.Forms.Label()
+        Me.TxtNcServletUrl = New System.Windows.Forms.TextBox()
+        Me.LblNcServletUrl = New System.Windows.Forms.Label()
         Me.TxtNCAccountingBook = New System.Windows.Forms.TextBox()
         Me.LblNCAccountingBook = New System.Windows.Forms.Label()
         Me.BtnNCSave = New System.Windows.Forms.Button()
@@ -78,8 +90,6 @@ Partial Class FrmOption
         Me.ChbCostElements = New System.Windows.Forms.CheckBox()
         Me.BtnCostRegion = New System.Windows.Forms.Button()
         Me.ChbCostRegion = New System.Windows.Forms.CheckBox()
-        Me.TxtWbdm = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox4.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -95,7 +105,7 @@ Partial Class FrmOption
         Me.BtnSave.Location = New System.Drawing.Point(462, 376)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(80, 23)
-        Me.BtnSave.TabIndex = 2
+        Me.BtnSave.TabIndex = 30
         Me.BtnSave.Text = "保存设置(&X)"
         '
         'TextBox3
@@ -121,7 +131,7 @@ Partial Class FrmOption
         Me.Label1.Location = New System.Drawing.Point(15, 71)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(125, 12)
-        Me.Label1.TabIndex = 3
+        Me.Label1.TabIndex = 5
         Me.Label1.Text = "总账应收账款科目编码"
         '
         'TxtYszk
@@ -129,102 +139,102 @@ Partial Class FrmOption
         Me.TxtYszk.Location = New System.Drawing.Point(234, 67)
         Me.TxtYszk.Name = "TxtYszk"
         Me.TxtYszk.Size = New System.Drawing.Size(100, 21)
-        Me.TxtYszk.TabIndex = 4
+        Me.TxtYszk.TabIndex = 6
         '
         'TxtYfzk
         '
-        Me.TxtYfzk.Location = New System.Drawing.Point(234, 94)
+        Me.TxtYfzk.Location = New System.Drawing.Point(234, 88)
         Me.TxtYfzk.Name = "TxtYfzk"
         Me.TxtYfzk.Size = New System.Drawing.Size(100, 21)
-        Me.TxtYfzk.TabIndex = 6
+        Me.TxtYfzk.TabIndex = 8
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(15, 98)
+        Me.Label2.Location = New System.Drawing.Point(15, 92)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(125, 12)
-        Me.Label2.TabIndex = 5
+        Me.Label2.TabIndex = 7
         Me.Label2.Text = "总账应付账款科目编码"
         '
         'TxtZyywsr
         '
-        Me.TxtZyywsr.Location = New System.Drawing.Point(234, 121)
+        Me.TxtZyywsr.Location = New System.Drawing.Point(234, 109)
         Me.TxtZyywsr.Name = "TxtZyywsr"
         Me.TxtZyywsr.Size = New System.Drawing.Size(100, 21)
-        Me.TxtZyywsr.TabIndex = 8
+        Me.TxtZyywsr.TabIndex = 10
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(15, 125)
+        Me.Label4.Location = New System.Drawing.Point(15, 113)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(149, 12)
-        Me.Label4.TabIndex = 7
+        Me.Label4.TabIndex = 9
         Me.Label4.Text = "总账主营业务收入科目编码"
         '
         'TxtZyywcb
         '
-        Me.TxtZyywcb.Location = New System.Drawing.Point(234, 148)
+        Me.TxtZyywcb.Location = New System.Drawing.Point(234, 130)
         Me.TxtZyywcb.Name = "TxtZyywcb"
         Me.TxtZyywcb.Size = New System.Drawing.Size(100, 21)
-        Me.TxtZyywcb.TabIndex = 10
+        Me.TxtZyywcb.TabIndex = 12
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(15, 152)
+        Me.Label5.Location = New System.Drawing.Point(15, 134)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(149, 12)
-        Me.Label5.TabIndex = 9
+        Me.Label5.TabIndex = 11
         Me.Label5.Text = "总账主营业务成本科目编码"
         '
         'TxtYcl
         '
-        Me.TxtYcl.Location = New System.Drawing.Point(234, 176)
+        Me.TxtYcl.Location = New System.Drawing.Point(234, 151)
         Me.TxtYcl.Name = "TxtYcl"
         Me.TxtYcl.Size = New System.Drawing.Size(100, 21)
-        Me.TxtYcl.TabIndex = 12
+        Me.TxtYcl.TabIndex = 14
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(15, 180)
+        Me.Label6.Location = New System.Drawing.Point(15, 155)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(113, 12)
-        Me.Label6.TabIndex = 11
+        Me.Label6.TabIndex = 13
         Me.Label6.Text = "总账原材料科目编码"
         '
-        'TxtKcsp
+        'TxtKcspKm
         '
-        Me.TxtKcsp.Location = New System.Drawing.Point(234, 205)
-        Me.TxtKcsp.Name = "TxtKcsp"
-        Me.TxtKcsp.Size = New System.Drawing.Size(100, 21)
-        Me.TxtKcsp.TabIndex = 14
+        Me.TxtKcspKm.Location = New System.Drawing.Point(234, 172)
+        Me.TxtKcspKm.Name = "TxtKcspKm"
+        Me.TxtKcspKm.Size = New System.Drawing.Size(100, 21)
+        Me.TxtKcspKm.TabIndex = 16
         '
-        'Label7
+        'LblKcspKm
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(15, 209)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(125, 12)
-        Me.Label7.TabIndex = 13
-        Me.Label7.Text = "总账库存商品科目编码"
+        Me.LblKcspKm.AutoSize = True
+        Me.LblKcspKm.Location = New System.Drawing.Point(15, 176)
+        Me.LblKcspKm.Name = "LblKcspKm"
+        Me.LblKcspKm.Size = New System.Drawing.Size(125, 12)
+        Me.LblKcspKm.TabIndex = 15
+        Me.LblKcspKm.Text = "总账库存商品科目编码"
         '
-        'TxtSccb
+        'TxtSccbKm
         '
-        Me.TxtSccb.Location = New System.Drawing.Point(234, 232)
-        Me.TxtSccb.Name = "TxtSccb"
-        Me.TxtSccb.Size = New System.Drawing.Size(100, 21)
-        Me.TxtSccb.TabIndex = 16
+        Me.TxtSccbKm.Location = New System.Drawing.Point(234, 235)
+        Me.TxtSccbKm.Name = "TxtSccbKm"
+        Me.TxtSccbKm.Size = New System.Drawing.Size(100, 21)
+        Me.TxtSccbKm.TabIndex = 22
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(15, 236)
+        Me.Label8.Location = New System.Drawing.Point(15, 239)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(125, 12)
-        Me.Label8.TabIndex = 15
+        Me.Label8.TabIndex = 21
         Me.Label8.Text = "总账生产成本科目编码"
         '
         'Label9
@@ -233,7 +243,7 @@ Partial Class FrmOption
         Me.Label9.Location = New System.Drawing.Point(15, 264)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(173, 12)
-        Me.Label9.TabIndex = 17
+        Me.Label9.TabIndex = 23
         Me.Label9.Text = "凭证生成中使用的记账凭证类型"
         '
         'CmbPzlxjc
@@ -242,7 +252,7 @@ Partial Class FrmOption
         Me.CmbPzlxjc.Location = New System.Drawing.Point(234, 260)
         Me.CmbPzlxjc.Name = "CmbPzlxjc"
         Me.CmbPzlxjc.Size = New System.Drawing.Size(100, 20)
-        Me.CmbPzlxjc.TabIndex = 18
+        Me.CmbPzlxjc.TabIndex = 24
         '
         'ChbXsdDy
         '
@@ -250,7 +260,7 @@ Partial Class FrmOption
         Me.ChbXsdDy.Location = New System.Drawing.Point(420, 44)
         Me.ChbXsdDy.Name = "ChbXsdDy"
         Me.ChbXsdDy.Size = New System.Drawing.Size(132, 16)
-        Me.ChbXsdDy.TabIndex = 20
+        Me.ChbXsdDy.TabIndex = 4
         Me.ChbXsdDy.Text = "套打格式打印销售单"
         Me.ChbXsdDy.UseVisualStyleBackColor = True
         '
@@ -261,7 +271,7 @@ Partial Class FrmOption
         Me.GroupBox4.Location = New System.Drawing.Point(17, 295)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(384, 64)
-        Me.GroupBox4.TabIndex = 21
+        Me.GroupBox4.TabIndex = 25
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Anyi311账务系统路径"
         '
@@ -290,7 +300,7 @@ Partial Class FrmOption
         Me.TxtDefaultShlv.Location = New System.Drawing.Point(234, 39)
         Me.TxtDefaultShlv.Name = "TxtDefaultShlv"
         Me.TxtDefaultShlv.Size = New System.Drawing.Size(100, 21)
-        Me.TxtDefaultShlv.TabIndex = 23
+        Me.TxtDefaultShlv.TabIndex = 3
         '
         'LblDefaultShlv
         '
@@ -298,7 +308,7 @@ Partial Class FrmOption
         Me.LblDefaultShlv.Location = New System.Drawing.Point(15, 43)
         Me.LblDefaultShlv.Name = "LblDefaultShlv"
         Me.LblDefaultShlv.Size = New System.Drawing.Size(89, 12)
-        Me.LblDefaultShlv.TabIndex = 22
+        Me.LblDefaultShlv.TabIndex = 2
         Me.LblDefaultShlv.Text = "增值税默认税率"
         '
         'TabControl1
@@ -311,11 +321,17 @@ Partial Class FrmOption
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(579, 443)
-        Me.TabControl1.TabIndex = 24
+        Me.TabControl1.Size = New System.Drawing.Size(579, 458)
+        Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.TxtZzbcpKm)
+        Me.TabPage1.Controls.Add(Me.LblZzbcpKm)
+        Me.TabPage1.Controls.Add(Me.TxtFcspKm)
+        Me.TabPage1.Controls.Add(Me.LblFcspKm)
+        Me.TabPage1.Controls.Add(Me.CmbFcsp)
+        Me.TabPage1.Controls.Add(Me.LblFcspKjqj)
         Me.TabPage1.Controls.Add(Me.TxtWbdm)
         Me.TabPage1.Controls.Add(Me.Label10)
         Me.TabPage1.Controls.Add(Me.ChbXsdDy)
@@ -330,13 +346,13 @@ Partial Class FrmOption
         Me.TabPage1.Controls.Add(Me.Label1)
         Me.TabPage1.Controls.Add(Me.Label9)
         Me.TabPage1.Controls.Add(Me.TxtYszk)
-        Me.TabPage1.Controls.Add(Me.TxtSccb)
+        Me.TabPage1.Controls.Add(Me.TxtSccbKm)
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.Label8)
         Me.TabPage1.Controls.Add(Me.TxtYfzk)
-        Me.TabPage1.Controls.Add(Me.TxtKcsp)
+        Me.TabPage1.Controls.Add(Me.TxtKcspKm)
         Me.TabPage1.Controls.Add(Me.Label4)
-        Me.TabPage1.Controls.Add(Me.Label7)
+        Me.TabPage1.Controls.Add(Me.LblKcspKm)
         Me.TabPage1.Controls.Add(Me.TxtZyywsr)
         Me.TabPage1.Controls.Add(Me.TxtYcl)
         Me.TabPage1.Controls.Add(Me.Label5)
@@ -344,13 +360,82 @@ Partial Class FrmOption
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(571, 417)
+        Me.TabPage1.Size = New System.Drawing.Size(571, 432)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "会计科目设置"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'TxtZzbcpKm
+        '
+        Me.TxtZzbcpKm.Location = New System.Drawing.Point(234, 214)
+        Me.TxtZzbcpKm.Name = "TxtZzbcpKm"
+        Me.TxtZzbcpKm.Size = New System.Drawing.Size(100, 21)
+        Me.TxtZzbcpKm.TabIndex = 20
+        '
+        'LblZzbcpKm
+        '
+        Me.LblZzbcpKm.AutoSize = True
+        Me.LblZzbcpKm.Location = New System.Drawing.Point(15, 218)
+        Me.LblZzbcpKm.Name = "LblZzbcpKm"
+        Me.LblZzbcpKm.Size = New System.Drawing.Size(137, 12)
+        Me.LblZzbcpKm.TabIndex = 19
+        Me.LblZzbcpKm.Text = "总账自制半成品科目编码"
+        '
+        'TxtFcspKm
+        '
+        Me.TxtFcspKm.Location = New System.Drawing.Point(234, 193)
+        Me.TxtFcspKm.Name = "TxtFcspKm"
+        Me.TxtFcspKm.Size = New System.Drawing.Size(100, 21)
+        Me.TxtFcspKm.TabIndex = 18
+        '
+        'LblFcspKm
+        '
+        Me.LblFcspKm.AutoSize = True
+        Me.LblFcspKm.Location = New System.Drawing.Point(15, 197)
+        Me.LblFcspKm.Name = "LblFcspKm"
+        Me.LblFcspKm.Size = New System.Drawing.Size(125, 12)
+        Me.LblFcspKm.TabIndex = 17
+        Me.LblFcspKm.Text = "总账发出商品科目编码"
+        '
+        'CmbFcsp
+        '
+        Me.CmbFcsp.FormattingEnabled = True
+        Me.CmbFcsp.Location = New System.Drawing.Point(234, 393)
+        Me.CmbFcsp.Name = "CmbFcsp"
+        Me.CmbFcsp.Size = New System.Drawing.Size(100, 20)
+        Me.CmbFcsp.TabIndex = 29
+        '
+        'LblFcspKjqj
+        '
+        Me.LblFcspKjqj.AutoSize = True
+        Me.LblFcspKjqj.Location = New System.Drawing.Point(15, 396)
+        Me.LblFcspKjqj.Name = "LblFcspKjqj"
+        Me.LblFcspKjqj.Size = New System.Drawing.Size(125, 12)
+        Me.LblFcspKjqj.TabIndex = 28
+        Me.LblFcspKjqj.Text = "发出商品启用会计期间"
+        '
+        'TxtWbdm
+        '
+        Me.TxtWbdm.Location = New System.Drawing.Point(234, 365)
+        Me.TxtWbdm.Name = "TxtWbdm"
+        Me.TxtWbdm.Size = New System.Drawing.Size(100, 21)
+        Me.TxtWbdm.TabIndex = 27
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(15, 369)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(65, 12)
+        Me.Label10.TabIndex = 26
+        Me.Label10.Text = "本位币币种"
+        '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.TxtNCUserAccount)
+        Me.TabPage2.Controls.Add(Me.LblNCUserAccount)
+        Me.TabPage2.Controls.Add(Me.TxtNcServletUrl)
+        Me.TabPage2.Controls.Add(Me.LblNcServletUrl)
         Me.TabPage2.Controls.Add(Me.TxtNCAccountingBook)
         Me.TabPage2.Controls.Add(Me.LblNCAccountingBook)
         Me.TabPage2.Controls.Add(Me.BtnNCSave)
@@ -358,10 +443,44 @@ Partial Class FrmOption
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(571, 407)
+        Me.TabPage2.Size = New System.Drawing.Size(571, 432)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "用友NC6.X数据源及参数设置"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TxtNCUserAccount
+        '
+        Me.TxtNCUserAccount.Location = New System.Drawing.Point(104, 212)
+        Me.TxtNCUserAccount.MaxLength = 20
+        Me.TxtNCUserAccount.Name = "TxtNCUserAccount"
+        Me.TxtNCUserAccount.Size = New System.Drawing.Size(96, 21)
+        Me.TxtNCUserAccount.TabIndex = 18
+        '
+        'LblNCUserAccount
+        '
+        Me.LblNCUserAccount.AutoSize = True
+        Me.LblNCUserAccount.Location = New System.Drawing.Point(27, 216)
+        Me.LblNCUserAccount.Name = "LblNCUserAccount"
+        Me.LblNCUserAccount.Size = New System.Drawing.Size(77, 12)
+        Me.LblNCUserAccount.TabIndex = 17
+        Me.LblNCUserAccount.Text = "NC用户编码："
+        '
+        'TxtNcServletUrl
+        '
+        Me.TxtNcServletUrl.Location = New System.Drawing.Point(29, 185)
+        Me.TxtNcServletUrl.MaxLength = 200
+        Me.TxtNcServletUrl.Name = "TxtNcServletUrl"
+        Me.TxtNcServletUrl.Size = New System.Drawing.Size(518, 21)
+        Me.TxtNcServletUrl.TabIndex = 16
+        '
+        'LblNcServletUrl
+        '
+        Me.LblNcServletUrl.AutoSize = True
+        Me.LblNcServletUrl.Location = New System.Drawing.Point(27, 170)
+        Me.LblNcServletUrl.Name = "LblNcServletUrl"
+        Me.LblNcServletUrl.Size = New System.Drawing.Size(173, 12)
+        Me.LblNcServletUrl.TabIndex = 15
+        Me.LblNcServletUrl.Text = "NC服务器的Servlet的URL地址："
         '
         'TxtNCAccountingBook
         '
@@ -374,7 +493,7 @@ Partial Class FrmOption
         'LblNCAccountingBook
         '
         Me.LblNCAccountingBook.AutoSize = True
-        Me.LblNCAccountingBook.Location = New System.Drawing.Point(27, 143)
+        Me.LblNCAccountingBook.Location = New System.Drawing.Point(27, 144)
         Me.LblNCAccountingBook.Name = "LblNCAccountingBook"
         Me.LblNCAccountingBook.Size = New System.Drawing.Size(65, 12)
         Me.LblNCAccountingBook.TabIndex = 13
@@ -483,7 +602,7 @@ Partial Class FrmOption
         Me.TabPage4.Controls.Add(Me.GroupBox1)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(571, 407)
+        Me.TabPage4.Size = New System.Drawing.Size(571, 432)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "用友U8数据源及参数设置"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -588,7 +707,7 @@ Partial Class FrmOption
         Me.TabPage3.Controls.Add(Me.ChbCostRegion)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(571, 407)
+        Me.TabPage3.Size = New System.Drawing.Size(571, 432)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "成本参数"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -621,27 +740,11 @@ Partial Class FrmOption
         Me.ChbCostRegion.Text = "是否按成本域计算成本"
         Me.ChbCostRegion.UseVisualStyleBackColor = True
         '
-        'TxtWbdm
-        '
-        Me.TxtWbdm.Location = New System.Drawing.Point(234, 365)
-        Me.TxtWbdm.Name = "TxtWbdm"
-        Me.TxtWbdm.Size = New System.Drawing.Size(100, 21)
-        Me.TxtWbdm.TabIndex = 25
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(15, 369)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(65, 12)
-        Me.Label10.TabIndex = 24
-        Me.Label10.Text = "本位币币种"
-        '
         'FrmOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(579, 443)
+        Me.ClientSize = New System.Drawing.Size(579, 458)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "FrmOption"
         Me.Text = "选项"
@@ -676,9 +779,9 @@ Partial Class FrmOption
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents TxtYcl As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents TxtKcsp As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents TxtSccb As System.Windows.Forms.TextBox
+    Friend WithEvents TxtKcspKm As System.Windows.Forms.TextBox
+    Friend WithEvents LblKcspKm As System.Windows.Forms.Label
+    Friend WithEvents TxtSccbKm As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents CmbPzlxjc As System.Windows.Forms.ComboBox
@@ -721,4 +824,14 @@ Partial Class FrmOption
     Friend WithEvents ChbCostElements As CheckBox
     Friend WithEvents TxtWbdm As TextBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents LblFcspKjqj As Label
+    Friend WithEvents CmbFcsp As ComboBox
+    Friend WithEvents TxtFcspKm As TextBox
+    Friend WithEvents LblFcspKm As Label
+    Friend WithEvents TxtNcServletUrl As TextBox
+    Friend WithEvents LblNcServletUrl As Label
+    Friend WithEvents TxtNCUserAccount As TextBox
+    Friend WithEvents LblNCUserAccount As Label
+    Friend WithEvents TxtZzbcpKm As TextBox
+    Friend WithEvents LblZzbcpKm As Label
 End Class

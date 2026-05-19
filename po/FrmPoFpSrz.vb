@@ -34,6 +34,8 @@ Public Class FrmPoFpSrz
     Dim dblTotFzsl As Double = 0.0
     Dim dblTotJe As Double = 0.0
     Dim dblTotSe As Double = 0.0
+    '打印格式
+    Dim strRpsId As String = "FPBZ"
 
 
 #Region "窗体初始化"
@@ -703,7 +705,7 @@ Public Class FrmPoFpSrz
                             rcOleDbCommand.CommandText = "SELECT COALESCE(SUM(sl),0.0) AS rksl,COALESCE(SUM(je),0.0) AS rkje,COALESCE(SUM(se),0.0) AS rkse FROM po_rkd WHERE po_rkd.bdelete = 0 AND djh = ? AND xh = ?"
                             rcOleDbCommand.Parameters.Clear()
                             rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = Me.rcDataGridView.CurrentRow.Cells("ColRkdDjh").Value
-                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 4).Value = Me.rcDataGridView.CurrentRow.Cells("ColRkdXh").Value
+                            rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = Me.rcDataGridView.CurrentRow.Cells("ColRkdXh").Value
                             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                             If rcDataset.Tables("t_rkd") IsNot Nothing Then
                                 rcDataset.Tables("t_rkd").Clear()
@@ -1298,7 +1300,7 @@ Public Class FrmPoFpSrz
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
                 rcOleDbCommand.Parameters.Add("@paraStrDjh", OleDbType.VarChar, 15).Value = Trim(Me.TxtDjh.Text)
                 rcOleDbCommand.Parameters("@paraStrDjh").Direction = ParameterDirection.InputOutput
-                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 4).Value = i + 1
+                rcOleDbCommand.Parameters.Add("@paraIntXh", OleDbType.Integer, 6).Value = i + 1
                 rcOleDbCommand.Parameters.Add("@paraDateFprq", OleDbType.Date, 8).Value = Me.DtpFprq.Value
                 rcOleDbCommand.Parameters.Add("@paraBlnDelete", OleDbType.Numeric, 1).Value = IIf(String.IsNullOrEmpty(Me.LblBdelete.Text), 0, 1)
                 rcOleDbCommand.Parameters.Add("@paraStrZydm", OleDbType.VarChar, 12).Value = Me.TxtZydm.Text
@@ -1546,10 +1548,12 @@ Public Class FrmPoFpSrz
 #Region "准备打印数据事件"
 
     Private Sub PreparePrintData()
+        Dim slFormat As String = g_FormatSl
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If
-        Dim rft As String = CurDir() + "\reports\fpbz.rft"
+        Dim rft As String
+        rft = Application.StartupPath + "\reports\" & strRpsId & ".rft"
         rcRps.LoadTemplate(rft)
         '取RPS数据
         Try
@@ -1557,7 +1561,7 @@ Public Class FrmPoFpSrz
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT * FROM rc_rps WHERE rpsid = 'FPBZ'"
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_rps WHERE rpsid = '" & strRpsId & "'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataSet.Tables("rc_rps") IsNot Nothing Then
@@ -1586,8 +1590,10 @@ Public Class FrmPoFpSrz
 
         '套打
         'rcRps.PaperType = 1
-        rcRps.Text(-1, 1) = g_PrnDwmc & "物料入库单"
-        rcRps.Text(-1, 2) = "单据号：" & Trim(Me.TxtDjh.Text) & "  %p/%t"
+        Select Case True
+            Case strRpsId = "FPBZ"
+                rcRps.Text(-1, 1) = g_PrnDwmc & "物料入库单"
+                rcRps.Text(-1, 2) = "单据号：" & Trim(Me.TxtDjh.Text) & "  %p/%t"
         rcRps.Text(-1, 3) = "日期：" & Me.DtpFprq.Value.ToLongDateString
         rcRps.Text(-1, 4) = "供应商：(" & Trim(Me.TxtCsdm.Text) & ")" & Trim(LblCsmc.Text)
         rcRps.Text(-1, 5) = "经办人：(" & Trim(Me.TxtZydm.Text) & ")" & Trim(LblZymc.Text)
@@ -1657,6 +1663,77 @@ Public Class FrmPoFpSrz
             Next
         End If
         rcRps.Text(-1, 13) = "制单：" & g_User_DspName
+            Case strRpsId = "RKD_DC"
+                rcRps.Text(-1, 1) = g_PrnDwmc & "进货收料单"
+                rcRps.Text(-1, 2) = "单据号：" & Trim(Me.TxtDjh.Text) & "  %p/%t"
+                rcRps.Text(-1, 3) = "日期：" & Me.DtpFprq.Value.ToLongDateString
+                rcRps.Text(-1, 4) = "供应商：(" & Trim(Me.TxtCsdm.Text) & ")" & Trim(LblCsmc.Text)
+                rcRps.Text(-1, 5) = "经办人：(" & Trim(Me.TxtZydm.Text) & ")" & Trim(LblZymc.Text)
+                Dim i As Integer
+                Dim j As Integer
+                Dim intPage As Integer
+                Dim dblTotalSl As Double = 0.0
+                'Dim dblTotalJe As Double = 0.0
+                'Dim dblTotalSe As Double = 0.0
+                For intPage = 1 To System.Math.Ceiling(rcDataset.Tables("rc_fpnr").Rows.Count / rcRps.LinesPerPage.ToString)
+                    For i = (intPage - 1) * rcRps.LinesPerPage.ToString To System.Math.Min(intPage * rcRps.LinesPerPage.ToString - 1, rcDataset.Tables("rc_fpnr").Rows.Count - 1)
+                        If rcDataset.Tables("rc_fpnr").Rows(i).RowState <> 8 Then
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("dw").GetType.ToString = "System.DBNull" Then
+                                slFormat = ReadJldwXsws(rcDataset.Tables("rc_fpnr").Rows(i).Item("dw"))
+                            End If
+                            If rcDataset.Tables("rc_fpnr").Rows(i).Item("oldcpdm").GetType.ToString <> "System.DBNull" Then
+                                rcRps.Text(j + 1, 1) = Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("oldcpdm"))
+                            Else
+                                If rcDataset.Tables("rc_fpnr").Rows(i).Item("cpdm").GetType.ToString <> "System.DBNull" Then
+                                    rcRps.Text(j + 1, 1) = Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("cpdm"))
+                                End If
+                            End If
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("cpmc").GetType.ToString = "System.DBNull" Then
+                                rcRps.Text(j + 1, 2) = Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("cpmc"))
+                                'If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("sgddh").GetType.ToString = "System.DBNull" Then
+                                '    rcRps.Text(j + 1, 2) = Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("cpmc")) + " " + Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("sgddh"))
+                                'End If
+                            End If
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("dw").GetType.ToString = "System.DBNull" Then
+                                rcRps.Text(j + 1, 3) = Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("dw"))
+                            End If
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("sgddh").GetType.ToString = "System.DBNull" Then
+                                rcRps.Text(j + 1, 4) = rcDataset.Tables("rc_fpnr").Rows(i).Item("sgddh")
+                            End If
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("sl").GetType.ToString = "System.DBNull" Then
+                                rcRps.Text(j + 1, 5) = Format(rcDataset.Tables("rc_fpnr").Rows(i).Item("sl"), slFormat)
+                                dblTotalSl += rcDataset.Tables("rc_fpnr").Rows(i).Item("sl")
+                            End If
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("sl").GetType.ToString = "System.DBNull" Then
+                                rcRps.Text(j + 1, 6) = Format(rcDataset.Tables("rc_fpnr").Rows(i).Item("sl"), slFormat)
+                            End If
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("sl").GetType.ToString = "System.DBNull" Then
+                                rcRps.Text(j + 1, 7) = Format(rcDataset.Tables("rc_fpnr").Rows(i).Item("sl"), slFormat)
+                            End If
+                            If Not rcDataset.Tables("rc_fpnr").Rows(i).Item("fpmemo").GetType.ToString = "System.DBNull" Then
+                                rcRps.Text(j + 1, 9) = Trim(rcDataset.Tables("rc_fpnr").Rows(i).Item("fpmemo"))
+                            End If
+                            j += 1
+                        End If
+                    Next
+
+                    'Dim m As New models.ChineseNum With {.InputString = dblTotalJe + dblTotalSe}
+                    'rcRps.PerPageText(intPage, 6) = IIf(intPage = Math.Ceiling(rcDataset.Tables("rc_fpnr").Rows.Count / rcRps.LinesPerPage.ToString), "合计", "小计")
+                    'rcRps.PerPageText(intPage, 7) = m.OutString & "   (小写)" & Format(dblTotalJe + dblTotalSe, g_FormatJe) '大写
+                    'rcRps.PerPageText(intPage, 8) = Format(dblTotalJe, g_FormatJe)
+                    'rcRps.PerPageText(intPage, 10) = Format(dblTotalSe, g_FormatJe)
+                    'rcRps.PerPageText(intPage, 11) = Format(dblTotalJe + dblTotalSe, g_FormatJe)
+                Next
+                If Decimal.op_Modulus(rcDataset.Tables("rc_fpnr").Rows.Count, rcRps.LinesPerPage.ToString) <> 0 Then
+                    For i = Decimal.op_Modulus(rcDataset.Tables("rc_fpnr").Rows.Count, rcRps.LinesPerPage.ToString) + 1 To rcRps.LinesPerPage.ToString
+                        rcRps.Text(j + 1, 1) = ""
+                        j += 1
+                    Next
+                End If
+                rcRps.Text(-1, 7) = "仓管员：" & g_User_DspName
+            Case Else
+                MsgBox("s")
+        End Select
     End Sub
 
 #End Region
@@ -1690,6 +1767,11 @@ Public Class FrmPoFpSrz
             MsgBox("对不起，试用软件不能打印。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Return
         End If
+        Dim rcFrm As New FrmPoFpDy
+        With rcFrm
+            .ShowDialog()
+            strRpsId = IIf(.RadioButton1.Checked, "FPBZ", "RKD_DC")
+        End With
         PreparePrintData()
         Dim rcFrmPrint As New models.FrmPrint
         With rcFrmPrint
@@ -1703,6 +1785,11 @@ Public Class FrmPoFpSrz
 #Region "打印预览事件"
 
     Private Sub PrintViewEvent()
+        Dim rcFrm As New FrmPoFpDy
+        With rcFrm
+            .ShowDialog()
+            strRpsId = IIf(.RadioButton1.Checked, "FPBZ", "RKD_DC")
+        End With
         PreparePrintData()
         rcRps.Preview()
     End Sub

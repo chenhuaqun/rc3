@@ -105,7 +105,7 @@ Partial Class FrmZcbjeSrz
         Me.LblDjh.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblDjh.Location = New System.Drawing.Point(91, 29)
         Me.LblDjh.Name = "LblDjh"
-        Me.LblDjh.Size = New System.Drawing.Size(88, 16)
+        Me.LblDjh.Size = New System.Drawing.Size(87, 16)
         Me.LblDjh.TabIndex = 0
         Me.LblDjh.Text = "会计期间："
         '
@@ -125,7 +125,7 @@ Partial Class FrmZcbjeSrz
         Me.LblZcbje.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblZcbje.Location = New System.Drawing.Point(43, 159)
         Me.LblZcbje.Name = "LblZcbje"
-        Me.LblZcbje.Size = New System.Drawing.Size(136, 16)
+        Me.LblZcbje.Size = New System.Drawing.Size(135, 16)
         Me.LblZcbje.TabIndex = 18
         Me.LblZcbje.Text = "本期投入总成本："
         '
@@ -135,7 +135,7 @@ Partial Class FrmZcbjeSrz
         Me.LblQczcpje.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblQczcpje.Location = New System.Drawing.Point(43, 125)
         Me.LblQczcpje.Name = "LblQczcpje"
-        Me.LblQczcpje.Size = New System.Drawing.Size(136, 16)
+        Me.LblQczcpje.Size = New System.Drawing.Size(135, 16)
         Me.LblQczcpje.TabIndex = 11
         Me.LblQczcpje.Text = "期初在产品成本："
         '
@@ -155,7 +155,7 @@ Partial Class FrmZcbjeSrz
         Me.LblQmZcclje.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblQmZcclje.Location = New System.Drawing.Point(27, 227)
         Me.LblQmZcclje.Name = "LblQmZcclje"
-        Me.LblQmZcclje.Size = New System.Drawing.Size(152, 16)
+        Me.LblQmZcclje.Size = New System.Drawing.Size(151, 16)
         Me.LblQmZcclje.TabIndex = 32
         Me.LblQmZcclje.Text = "期末在产材料成本："
         '
@@ -176,7 +176,7 @@ Partial Class FrmZcbjeSrz
         Me.LblCcpje.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblCcpje.Location = New System.Drawing.Point(11, 193)
         Me.LblCcpje.Name = "LblCcpje"
-        Me.LblCcpje.Size = New System.Drawing.Size(168, 16)
+        Me.LblCcpje.Size = New System.Drawing.Size(167, 16)
         Me.LblCcpje.TabIndex = 25
         Me.LblCcpje.Text = "本期产成品入库成本："
         '
@@ -197,7 +197,7 @@ Partial Class FrmZcbjeSrz
         Me.LblQmzcpje.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblQmzcpje.Location = New System.Drawing.Point(43, 261)
         Me.LblQmzcpje.Name = "LblQmzcpje"
-        Me.LblQmzcpje.Size = New System.Drawing.Size(136, 16)
+        Me.LblQmzcpje.Size = New System.Drawing.Size(135, 16)
         Me.LblQmzcpje.TabIndex = 39
         Me.LblQmzcpje.Text = "期末在产品成本："
         '
@@ -236,7 +236,7 @@ Partial Class FrmZcbjeSrz
         Me.LblBmdm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblBmdm.Location = New System.Drawing.Point(91, 63)
         Me.LblBmdm.Name = "LblBmdm"
-        Me.LblBmdm.Size = New System.Drawing.Size(88, 16)
+        Me.LblBmdm.Size = New System.Drawing.Size(87, 16)
         Me.LblBmdm.TabIndex = 2
         Me.LblBmdm.Text = "部门编码："
         '
@@ -247,7 +247,7 @@ Partial Class FrmZcbjeSrz
         Me.Label1.ForeColor = System.Drawing.Color.Blue
         Me.Label1.Location = New System.Drawing.Point(33, 326)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(272, 16)
+        Me.Label1.Size = New System.Drawing.Size(271, 16)
         Me.Label1.TabIndex = 46
         Me.Label1.Text = "*期初在产品成本含期初在产材料成本"
         '
@@ -522,7 +522,7 @@ Partial Class FrmZcbjeSrz
         Me.Label2.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label2.Location = New System.Drawing.Point(187, 94)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(40, 16)
+        Me.Label2.Size = New System.Drawing.Size(39, 16)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "合计"
         '
@@ -532,7 +532,7 @@ Partial Class FrmZcbjeSrz
         Me.Label3.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label3.Location = New System.Drawing.Point(319, 94)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(72, 16)
+        Me.Label3.Size = New System.Drawing.Size(71, 16)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "材料成本"
         '
@@ -542,7 +542,7 @@ Partial Class FrmZcbjeSrz
         Me.Label4.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label4.Location = New System.Drawing.Point(451, 94)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(72, 16)
+        Me.Label4.Size = New System.Drawing.Size(71, 16)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "人工成本"
         '
@@ -552,7 +552,7 @@ Partial Class FrmZcbjeSrz
         Me.Label5.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label5.Location = New System.Drawing.Point(583, 94)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(72, 16)
+        Me.Label5.Size = New System.Drawing.Size(71, 16)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "能源成本"
         '
@@ -562,7 +562,7 @@ Partial Class FrmZcbjeSrz
         Me.Label6.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label6.Location = New System.Drawing.Point(715, 94)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(72, 16)
+        Me.Label6.Size = New System.Drawing.Size(71, 16)
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "折旧成本"
         '
@@ -572,7 +572,7 @@ Partial Class FrmZcbjeSrz
         Me.Label7.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label7.Location = New System.Drawing.Point(847, 94)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(72, 16)
+        Me.Label7.Size = New System.Drawing.Size(71, 16)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "管理成本"
         '

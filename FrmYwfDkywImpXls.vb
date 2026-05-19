@@ -130,13 +130,13 @@ Public Class FrmYwfDkywImpXls
             End Try
         End If
         For i = 0 To rcDataset.Tables("result").Rows.Count - 1
-                Try
-                    rcOleDbConn.Open()
-                    rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
-                    rcOleDbCommand.Connection = rcOleDbConn
-                    rcOleDbCommand.Transaction = rcOleDbTrans
-                    rcOleDbCommand.CommandTimeout = 300
-                    rcOleDbCommand.CommandType = CommandType.StoredProcedure
+            Try
+                rcOleDbConn.Open()
+                rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.Transaction = rcOleDbTrans
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.StoredProcedure
                 rcOleDbCommand.CommandText = "USP3_SAVE_GL_YWFDKYW"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = 1
@@ -160,13 +160,13 @@ Public Class FrmYwfDkywImpXls
                     End If
                 End If
                 rcOleDbTrans.Commit()
-                Catch ex As Exception
-                    MsgBox("执行程序时发生了错误。" & Chr(13) & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
-                    Return
-                Finally
-                    rcOleDbConn.Close()
-                End Try
-            Next
+            Catch ex As Exception
+                MsgBox("执行程序时发生了错误。" & Chr(13) & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+        Next
         MsgBox("业务费抵扣业务读入完成,请检查数据。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
         Me.Close()
     End Sub

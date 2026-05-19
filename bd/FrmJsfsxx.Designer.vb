@@ -23,43 +23,44 @@ Partial Class FrmJsfsxx
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmJsfsxx))
-        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel
-        Me.MnuMain = New System.Windows.Forms.MenuStrip
-        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPreview = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiExport = New System.Windows.Forms.ToolStripMenuItem
-        Me.Tss3 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiDelete = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiRefresh = New System.Windows.Forms.ToolStripMenuItem
-        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator
-        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMain = New System.Windows.Forms.ToolStrip
-        Me.BtnPageSetup = New System.Windows.Forms.ToolStripButton
-        Me.BtnPrint = New System.Windows.Forms.ToolStripButton
-        Me.BtnPreview = New System.Windows.Forms.ToolStripButton
-        Me.BtnExport = New System.Windows.Forms.ToolStripButton
-        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnNew = New System.Windows.Forms.ToolStripButton
-        Me.BtnEdit = New System.Windows.Forms.ToolStripButton
-        Me.BtnDelete = New System.Windows.Forms.ToolStripButton
-        Me.BtnRefresh = New System.Windows.Forms.ToolStripButton
-        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator
-        Me.BtnExit = New System.Windows.Forms.ToolStripButton
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.rcDataGridView = New System.Windows.Forms.DataGridView
-        Me.ColJsfsdm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColJsfsmc = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColJsfssm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ColBkywf = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel()
+        Me.MnuMain = New System.Windows.Forms.MenuStrip()
+        Me.MnuiFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPageSetup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPreview = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiPrint = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Tss3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiDelete = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiRefresh = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuItem11 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuiExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMain = New System.Windows.Forms.ToolStrip()
+        Me.BtnPageSetup = New System.Windows.Forms.ToolStripButton()
+        Me.BtnPrint = New System.Windows.Forms.ToolStripButton()
+        Me.BtnPreview = New System.Windows.Forms.ToolStripButton()
+        Me.BtnExport = New System.Windows.Forms.ToolStripButton()
+        Me.Tss1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnNew = New System.Windows.Forms.ToolStripButton()
+        Me.BtnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.BtnDelete = New System.Windows.Forms.ToolStripButton()
+        Me.BtnRefresh = New System.Windows.Forms.ToolStripButton()
+        Me.Tss2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BtnExit = New System.Windows.Forms.ToolStripButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.rcDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ColJsfsdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColJsfsmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColJsfssm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColBkywf = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ColBgylk = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ToolStripPanel1.SuspendLayout()
         Me.MnuMain.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
@@ -320,7 +321,7 @@ Partial Class FrmJsfsxx
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.AllowUserToDeleteRows = False
         Me.rcDataGridView.ColumnHeadersHeight = 30
-        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColJsfsdm, Me.ColJsfsmc, Me.ColJsfssm, Me.ColBkywf})
+        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColJsfsdm, Me.ColJsfsmc, Me.ColJsfssm, Me.ColBkywf, Me.ColBgylk})
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rcDataGridView.Location = New System.Drawing.Point(0, 112)
         Me.rcDataGridView.Name = "rcDataGridView"
@@ -356,9 +357,16 @@ Partial Class FrmJsfsxx
         'ColBkywf
         '
         Me.ColBkywf.DataPropertyName = "bkywf"
-        Me.ColBkywf.HeaderText = "扣业务费"
+        Me.ColBkywf.HeaderText = "承兑汇票扣业务费"
         Me.ColBkywf.Name = "ColBkywf"
         Me.ColBkywf.ReadOnly = True
+        '
+        'ColBgylk
+        '
+        Me.ColBgylk.DataPropertyName = "bgylk"
+        Me.ColBgylk.HeaderText = "供应链票据扣业务费"
+        Me.ColBgylk.Name = "ColBgylk"
+        Me.ColBgylk.ReadOnly = True
         '
         'FrmJsfsxx
         '
@@ -420,8 +428,9 @@ Partial Class FrmJsfsxx
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents rcDataGridView As System.Windows.Forms.DataGridView
     Friend WithEvents BtnPageSetup As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ColJsfsdm As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColJsfsmc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColJsfssm As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ColBkywf As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents ColJsfsdm As DataGridViewTextBoxColumn
+    Friend WithEvents ColJsfsmc As DataGridViewTextBoxColumn
+    Friend WithEvents ColJsfssm As DataGridViewTextBoxColumn
+    Friend WithEvents ColBkywf As DataGridViewCheckBoxColumn
+    Friend WithEvents ColBgylk As DataGridViewCheckBoxColumn
 End Class

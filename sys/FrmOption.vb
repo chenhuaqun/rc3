@@ -37,6 +37,32 @@ Public Class FrmOption
         End If
         '绑定凭证类型简称
         BindDropDownList(CmbPzlxjc, rcDataset.Tables("rc_lx"), "pzlxdm", "pzlxjc")
+        '取会计期间数据
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT ny FROM rc_yj ORDER BY ny"
+            rcOleDbCommand.Parameters.Clear()
+            'rcOleDbCommand.Parameters.Add("@year", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_yj") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_yj").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_yj")
+        Catch ex As Exception
+            MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        If rcDataset.Tables("rc_yj").Rows.Count = 0 Then
+            MsgBox("请先定义会计期间。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        End If
+        '绑定凭证类型简称
+        BindDropDownList(CmbFcsp, rcDataset.Tables("rc_yj"), "ny", "ny")
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -133,6 +159,7 @@ Public Class FrmOption
                     Me.TxtYcl.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
+            '总账库存商品科目
             rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '总账库存商品科目编码' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
@@ -143,7 +170,35 @@ Public Class FrmOption
             rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
             If rcDataset.Tables("rc_para").Rows.Count = 1 Then
                 If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
-                    Me.TxtKcsp.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+                    Me.TxtKcspKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+                End If
+            End If
+            '总账发出商品科目
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '总账发出商品科目编码' ORDER BY paraid"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+            If rcDataset.Tables("rc_para").Rows.Count = 1 Then
+                If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                    Me.TxtFcspKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+                End If
+            End If
+            '总账自制半成品科目
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '总账自制半成品科目编码' ORDER BY paraid"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+            If rcDataset.Tables("rc_para").Rows.Count = 1 Then
+                If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                    Me.TxtZzbcpKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
             rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '总账生产成本科目编码' ORDER BY paraid"
@@ -156,7 +211,7 @@ Public Class FrmOption
             rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
             If rcDataset.Tables("rc_para").Rows.Count = 1 Then
                 If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
-                    Me.TxtSccb.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+                    Me.TxtSccbKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
             rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '凭证生成中使用的凭证类型' ORDER BY paraid"
@@ -211,6 +266,21 @@ Public Class FrmOption
                     Me.TxtWbdm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
+            '发出商品启用会计期间
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '发出商品启用会计期间' ORDER BY paraid"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+            If rcDataset.Tables("rc_para").Rows.Count = 1 Then
+                If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                    Me.CmbFcsp.SelectedValue = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+                End If
+            End If
+
             rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? And (paraid = 'NCACCOUNTINGBOOK' or paraid = 'NCHOST' or paraid = 'NCSERVICE_NAME' or paraid = 'NCUser_ID' or paraid = 'NCPASSWORD') ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
@@ -234,6 +304,34 @@ Public Class FrmOption
                 End If
                 If rcDataset.Tables("rc_para").Rows(3).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
                     Me.TxtNCUser_ID.Text = rcDataset.Tables("rc_para").Rows(4).Item("parastrvalue")
+                End If
+            End If
+            'NC服务器的Servlet的URL地址
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? AND paraid = 'NC服务器的Servlet的URL地址' ORDER BY paraid"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+            If rcDataset.Tables("rc_para").Rows.Count = 1 Then
+                If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                    Me.TxtNcServletUrl.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
+                End If
+            End If
+            'NC用户编码
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? AND paraid = 'NC用户编码' ORDER BY paraid"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                Me.rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+            If rcDataset.Tables("rc_para").Rows.Count = 1 Then
+                If rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue").GetType.ToString <> "System.DBNull" Then
+                    Me.TxtNCUserAccount.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
             rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? And (paraid = 'U8Acc_ID' or paraid = 'U8HOST' or paraid = 'U8User_ID' or paraid = 'U8PASSWORD') ORDER BY paraid"
@@ -579,30 +677,30 @@ Public Class FrmOption
 
 #Region "库存商品科目编码的事件"
 
-    Private Sub TxtKcsp_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtKcsp.KeyDown
+    Private Sub TxtKcsp_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtKcspKm.KeyDown
         Select Case e.KeyCode
             Case Keys.F3
                 Dim rcFrm As New models.FrmF3KeyPress
                 With rcFrm
-                    .paraOleDbConn = rcOleDbConn
-                    .paraTableName = "gl_kmxx"
-                    .paraField1 = "kmdm"
-                    .paraField2 = "kmmc"
-                    .paraField3 = "kmsm"
-                    .paraCondition = "0=0"
-                    .paraOrderField = "kmdm"
-                    .paraTitle = "科目"
-                    .paraOldValue = ""
-                    .paraAddName = ""
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "gl_kmxx"
+                    .ParaField1 = "kmdm"
+                    .ParaField2 = "kmmc"
+                    .ParaField3 = "kmsm"
+                    .ParaCondition = "0=0"
+                    .ParaOrderField = "kmdm"
+                    .ParaTitle = "科目"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
-                        TxtKcsp.Text = Trim(.paraField1)
+                        TxtKcspKm.Text = Trim(.ParaField1)
                     End If
                 End With
         End Select
     End Sub
 
-    Private Sub TxtKcsp_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtKcsp.Validating
-        If Not String.IsNullOrEmpty(Me.TxtKcsp.Text) Then
+    Private Sub TxtKcsp_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtKcspKm.Validating
+        If Not String.IsNullOrEmpty(Me.TxtKcspKm.Text) Then
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -610,7 +708,7 @@ Public Class FrmOption
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "SELECT * FROM gl_kmxx WHERE (kmdm = ?) AND NOT EXISTS (SELECT 1 FROM gl_kmxx aa WHERE aa.parentid = gl_kmxx.kmdm)"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKcsp.Text)
+                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtKcspKm.Text)
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("gl_kmxx") IsNot Nothing Then
                     Me.rcDataset.Tables("gl_kmxx").Clear()
@@ -623,7 +721,64 @@ Public Class FrmOption
                 rcOleDbConn.Close()
             End Try
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
-                TxtKcsp.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
+                TxtKcspKm.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
+            Else
+                MsgBox("科目编码不存在或非明细科目。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                e.Cancel = True
+                Return
+            End If
+        End If
+    End Sub
+
+#End Region
+
+#Region "发出商品科目编码的事件"
+
+    Private Sub TxtFcspKm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtFcspKm.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F3
+                Dim rcFrm As New models.FrmF3KeyPress
+                With rcFrm
+                    .ParaOleDbConn = rcOleDbConn
+                    .ParaTableName = "gl_kmxx"
+                    .ParaField1 = "kmdm"
+                    .ParaField2 = "kmmc"
+                    .ParaField3 = "kmsm"
+                    .ParaCondition = "0=0"
+                    .ParaOrderField = "kmdm"
+                    .ParaTitle = "科目"
+                    .ParaOldValue = ""
+                    .ParaAddName = ""
+                    If .ShowDialog = DialogResult.OK Then
+                        TxtFcspKm.Text = Trim(.ParaField1)
+                    End If
+                End With
+        End Select
+    End Sub
+
+    Private Sub TxtFcspKm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtFcspKm.Validating
+        If Not String.IsNullOrEmpty(Me.TxtFcspKm.Text) Then
+            Try
+                rcOleDbConn.Open()
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT * FROM gl_kmxx WHERE (kmdm = ?) AND NOT EXISTS (SELECT 1 FROM gl_kmxx aa WHERE aa.parentid = gl_kmxx.kmdm)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtFcspKm.Text)
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("gl_kmxx") IsNot Nothing Then
+                    Me.rcDataset.Tables("gl_kmxx").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
+            Catch ex As Exception
+                MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                Return
+            Finally
+                rcOleDbConn.Close()
+            End Try
+            If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
+                TxtFcspKm.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
                 MsgBox("科目编码不存在或非明细科目。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 e.Cancel = True
@@ -636,7 +791,7 @@ Public Class FrmOption
 
 #Region "生产成本科目编码的事件"
 
-    Private Sub TxtSccb_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtSccb.KeyDown
+    Private Sub TxtSccb_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtSccbKm.KeyDown
         Select Case e.KeyCode
             Case Keys.F3
                 Dim rcFrm As New models.FrmF3KeyPress
@@ -652,14 +807,14 @@ Public Class FrmOption
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
-                        TxtSccb.Text = Trim(.paraField1)
+                        TxtSccbKm.Text = Trim(.paraField1)
                     End If
                 End With
         End Select
     End Sub
 
-    Private Sub TxtSccb_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtSccb.Validating
-        If Not String.IsNullOrEmpty(Me.TxtSccb.Text) Then
+    Private Sub TxtSccb_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtSccbKm.Validating
+        If Not String.IsNullOrEmpty(Me.TxtSccbKm.Text) Then
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -667,7 +822,7 @@ Public Class FrmOption
                 rcOleDbCommand.CommandType = CommandType.Text
                 rcOleDbCommand.CommandText = "SELECT * FROM gl_kmxx WHERE (kmdm = ?) AND NOT EXISTS (SELECT 1 FROM gl_kmxx aa WHERE aa.parentid = gl_kmxx.kmdm)"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtSccb.Text)
+                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtSccbKm.Text)
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("gl_kmxx") IsNot Nothing Then
                     Me.rcDataset.Tables("gl_kmxx").Clear()
@@ -680,7 +835,7 @@ Public Class FrmOption
                 rcOleDbConn.Close()
             End Try
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
-                TxtSccb.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
+                TxtSccbKm.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
                 MsgBox("科目编码不存在或非明细科目。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 e.Cancel = True
@@ -709,7 +864,7 @@ Public Class FrmOption
                     .ParaField1 = "wbdm"
                     .ParaField2 = "wbmc"
                     .ParaField3 = "wbsm"
-                    .ParaCondition = "0=0"
+                    .ParaCondition = "kjnd = '" & Mid(g_Kjqj, 1, 4) & "'"
                     .ParaOrderField = "wbdm"
                     .ParaTitle = "币种"
                     .ParaOldValue = ""
@@ -855,7 +1010,7 @@ Public Class FrmOption
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtYcl.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
-            If Not String.IsNullOrEmpty(Me.TxtKcsp.Text) Then
+            If Not String.IsNullOrEmpty(Me.TxtKcspKm.Text) Then
                 '删除数据
                 rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '总账库存商品科目编码'"
                 rcOleDbCommand.Parameters.Clear()
@@ -865,10 +1020,36 @@ Public Class FrmOption
                 rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'总账库存商品科目编码',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
-                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtKcsp.Text)
+                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtKcspKm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
-            If Not String.IsNullOrEmpty(Me.TxtSccb.Text) Then
+            If Not String.IsNullOrEmpty(Me.TxtFcspKm.Text) Then
+                '删除数据
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '总账发出商品科目编码'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.ExecuteNonQuery()
+                '插入数据
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'总账发出商品科目编码',?,0.0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtFcspKm.Text)
+                rcOleDbCommand.ExecuteNonQuery()
+            End If
+            If Not String.IsNullOrEmpty(Me.TxtZzbcpKm.Text) Then
+                '删除数据
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '总账自制半成品科目编码'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.ExecuteNonQuery()
+                '插入数据
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'总账自制半成品科目编码',?,0.0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtZzbcpKm.Text)
+                rcOleDbCommand.ExecuteNonQuery()
+            End If
+            If Not String.IsNullOrEmpty(Me.TxtSccbKm.Text) Then
                 '删除数据
                 rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '总账生产成本科目编码'"
                 rcOleDbCommand.Parameters.Clear()
@@ -878,7 +1059,7 @@ Public Class FrmOption
                 rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'总账生产成本科目编码',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
-                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtSccb.Text)
+                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtSccbKm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.CmbPzlxjc.SelectedValue) Then
@@ -920,6 +1101,32 @@ Public Class FrmOption
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtGlPath.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
+            If Not String.IsNullOrEmpty(Me.TxtWbdm.Text) Then
+                '删除数据
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '本位币币种编码'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.ExecuteNonQuery()
+                '插入数据
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'本位币币种编码',?,0.0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtWbdm.Text)
+                rcOleDbCommand.ExecuteNonQuery()
+            End If
+            If Not String.IsNullOrEmpty(Me.CmbPzlxjc.SelectedValue) Then
+                '删除数据
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '发出商品启用会计期间'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.ExecuteNonQuery()
+                '插入数据
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'发出商品启用会计期间',?,0.0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Me.CmbFcsp.SelectedValue
+                rcOleDbCommand.ExecuteNonQuery()
+            End If
             rcOleDbTrans.Commit()
         Catch ex As Exception
             Try
@@ -944,7 +1151,7 @@ Public Class FrmOption
         rcOleDbCommand.CommandType = CommandType.Text
         Try
             '删除数据
-            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And (paraid = 'NCACCOUNTINGBOOK' OR paraid = 'NCHOST' OR paraid = 'NCSERVICE_NAME' OR paraid = 'NCUser_ID' OR paraid = 'NCPASSWORD')"
+            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And (paraid = 'NCACCOUNTINGBOOK' OR paraid = 'NCHOST' OR paraid = 'NCSERVICE_NAME' OR paraid = 'NCUser_ID' OR paraid = 'NCPASSWORD' or paraid ='NC服务器的Servlet的URL地址' or paraid ='NC用户编码')"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
@@ -972,6 +1179,16 @@ Public Class FrmOption
             rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NCPASSWORD',?,0.0,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 20).Value = Trim(Me.TxtNCPwd.Text)
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbCommand.ExecuteNonQuery()
+            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NC服务器的Servlet的URL地址',?,0.0,?)"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 200).Value = Trim(Me.TxtNcServletUrl.Text)
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbCommand.ExecuteNonQuery()
+            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NC用户编码',?,0.0,?)"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 200).Value = Trim(Me.TxtNCUserAccount.Text)
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
             rcOleDbTrans.Commit()

@@ -60,6 +60,9 @@ Public Class ClsGetChineseSpell
             If code >= 50622 And code <= 50905 Then
                 getPyChar = "P"
             End If
+            If code >= 53456 And code <= 55295 Then
+                getPyChar = "V"
+            End If
             If code >= 50906 And code <= 51386 Then
                 getPyChar = "Q"
             End If

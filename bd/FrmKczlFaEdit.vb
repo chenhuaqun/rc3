@@ -1,32 +1,33 @@
 Imports System.Data.OleDb
 
 Public Class FrmKczlFaEdit
-    '½¨Á¢OLEDBÊý¾ÝÊÊÅäÆ÷¶ÔÏó
+    'ï¿½ï¿½ï¿½ï¿½OLEDBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'ï¿½ï¿½ï¿½ï¿½DataSetï¿½ï¿½ï¿½ï¿½
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDb´«µÝ¶ÔÏó
+    'ï¿½ï¿½ï¿½ï¿½OleDbï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbÃüÁî
+    'ï¿½ï¿½ï¿½ï¿½OleDbï¿½ï¿½ï¿½ï¿½
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "ï¿½Ø¼ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtFadm.KeyPress, TxtFamc.KeyPress, TxtFasm.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼þÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'Ö¸Ê¾ KeyPress ï¿½Â¼ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ Windows È±Ê¡ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "·½°¸Ãû³ÆÊÂ¼þ"
+#Region "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½"
 
     Private Sub TxtFamc_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtFamc.Validating
-        Me.TxtFasm.Text = Trim(Mid(GetChineseSpell(Me.TxtFamc.Text), 1, 12))
+        Dim spell As New ClsGetChineseSpell
+        Me.TxtFasm.Text = Trim(Mid(spell.GetChineseSpell(Me.TxtFamc.Text), 1, 12))
     End Sub
 
 #End Region
@@ -49,9 +50,9 @@ Public Class FrmKczlFaEdit
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌÐò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
             Catch ey As OleDbException
-                MsgBox("³ÌÐò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
             End Try
             Return
         Finally

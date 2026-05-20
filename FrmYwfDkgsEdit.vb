@@ -92,7 +92,8 @@ Public Class FrmYwfDkgsEdit
 #Region "抵扣规则名称事件"
 
     Private Sub TxtDkgsmc_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtDkgsmc.Validating
-        Me.TxtDkgssm.Text = Trim(Mid(GetChineseSpell(Me.TxtDkgsmc.Text), 1, 12))
+        Dim spell As New ClsGetChineseSpell
+        Me.TxtDkgssm.Text = Trim(Mid(spell.GetChineseSpell(Me.TxtDkgsmc.Text), 1, 12))
     End Sub
 
 #End Region

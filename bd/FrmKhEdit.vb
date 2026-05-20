@@ -2,26 +2,26 @@ Imports System.Data.OleDb
 
 Public Class FrmKhEdit
 
-#Region "¶¨Òå±äÁ¿"
+#Region "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
 
-    '½¨Á¢Êý¾ÝÊÊÅäÆ÷
+    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'ï¿½ï¿½ï¿½ï¿½DataSetï¿½ï¿½ï¿½ï¿½
     Dim rcDataset As New DataSet
-    'Êý¾Ý¸üÐÂ´«µÝ
+    'ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½Â´ï¿½ï¿½ï¿½
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'ï¿½ï¿½ï¿½ï¿½OleDbCommandï¿½ï¿½ï¿½ï¿½
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Êý¾ÝÊÓÍ¼
+    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
     Dim rcDataView As DataView
-    'ÐÂÔö±êÖ¾
+    'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
     Dim isAdding As Boolean = False
-    'µ±Ç°¼ÇÂ¼ºÅ
+    'ï¿½ï¿½Ç°ï¿½ï¿½Â¼ï¿½ï¿½
     Dim currentPos As Integer
 
 #End Region
 
-#Region "³õÊ¼»¯"
+#Region "ï¿½ï¿½Ê¼ï¿½ï¿½"
 
     Overloads Property ParaDataSet() As DataSet
         Get
@@ -97,9 +97,9 @@ Public Class FrmKhEdit
         BindingContext(rcDataView, "").Position = currentPos
         SetAll(True)
         If isAdding Then
-            'Çå³ýµ±Ç°±à¼­ÄÚÈÝ
+            'ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½à¼­ï¿½ï¿½ï¿½ï¿½
             BindingContext(rcDataView, "").EndCurrentEdit()
-            'Ôö¼ÓÒ»ÐÐ
+            'ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
             BindingContext(rcDataView, "").AddNew()
         Else
             Me.TxtKhdm.Enabled = False
@@ -108,20 +108,20 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "ï¿½Ø¼ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtLbdm.KeyPress, TxtKhdm.KeyPress, TxtKhmc.KeyPress, TxtKhsm.KeyPress, TxtAddress.KeyPress, TxtPostCode.KeyPress, TxtWaddress.KeyPress, TxtKhyh.KeyPress, TxtYhzh.KeyPress, TxtSwdjh.KeyPress, TxtFddbr.KeyPress, TxtGsdjh.KeyPress, TxtZczb.KeyPress, TxtJyfw.KeyPress, TxtLxr.KeyPress, TxtMobile.KeyPress, TxtTel.KeyPress, TxtFax.KeyPress, TxtEmail.KeyPress, TxtZydm.KeyPress, TxtZydm2.KeyPress, CmbSktj.KeyPress, TxtSkqx.KeyPress, TxtAbc.KeyPress, TxtDengJi.KeyPress, TxtZtts.KeyPress, TxtBjtk.KeyPress, TxtXslbdm.KeyPress, TxtDjYear.KeyPress, ChbBJsywf.KeyPress, ChbBYwfjszz.KeyPress, ChbBGuaKao.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼þÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'Ö¸Ê¾ KeyPress ï¿½Â¼ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ Windows È±Ê¡ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "ÉèÖÃ¿Ø¼þ"
+#Region "ï¿½ï¿½ï¿½Ã¿Ø¼ï¿½"
 
     Private Sub SetAll(ByVal medit As Boolean)
         If Not medit Then
@@ -224,7 +224,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "¿Í»§Àà±ð±àÂëµÄÊÂ¼þ"
+#Region "ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½"
 
     Private Sub Txtlbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtLbdm.KeyDown
         Select Case e.KeyCode
@@ -236,7 +236,7 @@ Public Class FrmKhEdit
                     .ParaField1 = "lbdm"
                     .ParaField2 = "lbmc"
                     .ParaField3 = "lbsm"
-                    .ParaTitle = "¿Í»§Àà±ð"
+                    .ParaTitle = "ï¿½Í»ï¿½ï¿½ï¿½ï¿½"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -262,7 +262,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_khlb")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -278,7 +278,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "¿Í»§ÏúÊÛÀà±ð±àÂëµÄÊÂ¼þ"
+#Region "ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½"
 
     Private Sub TxtXslbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtXslbdm.KeyDown
         Select Case e.KeyCode
@@ -290,7 +290,7 @@ Public Class FrmKhEdit
                     .ParaField1 = "xslbdm"
                     .ParaField2 = "xslbmc"
                     .ParaField3 = "xslbsm"
-                    .ParaTitle = "¿Í»§ÏúÊÛÀà±ð"
+                    .ParaTitle = "ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -316,7 +316,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_khxslb")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -331,7 +331,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "×Ô¶¯±àÂë"
+#Region "ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½"
 
     Private Sub BtnAutoKhdm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAutoKhdm.Click
         If Not String.IsNullOrEmpty(Me.TxtLbdm.Text) And Me.TxtLbdm.Text.Length = 2 And Me.TxtKhdm.Enabled Then
@@ -349,7 +349,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "autokhdm")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -369,15 +369,16 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "¿Í»§ÐÕÃûÊÂ¼þ"
+#Region "ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½"
 
     Private Sub TxtKhmc_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtKhmc.Validating
-        Me.TxtKhsm.Text = Trim(Mid(GetChineseSpell(Me.TxtKhmc.Text), 1, 12))
+        Dim spell As New ClsGetChineseSpell
+        Me.TxtKhsm.Text = Trim(Mid(spell.GetChineseSpell(Me.TxtKhmc.Text), 1, 12))
     End Sub
 
 #End Region
 
-#Region "Ö°Ô±±àÂëµÄÊÂ¼þ"
+#Region "Ö°Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown, TxtZydm2.KeyDown
         Select Case e.KeyCode
@@ -415,7 +416,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -445,7 +446,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -461,7 +462,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "Ê×ÉÏÏÂÄ©¼ÇÂ¼"
+#Region "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä©ï¿½ï¿½Â¼"
 
     Private Sub BtnTop_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnTop.Click
         If BindingContext(rcDataView, "").Count > 0 Then
@@ -493,19 +494,19 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "ÐÂÔö"
+#Region "ï¿½ï¿½ï¿½ï¿½"
 
     Private Sub BtnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNew.Click, MnuiNew.Click
         NewEvent()
     End Sub
 
     Private Sub NewEvent()
-        'ÐÂÔö
+        'ï¿½ï¿½ï¿½ï¿½
         If Not isAdding Then
             isAdding = True
             Try
                 currentPos = BindingContext(rcDataView, "").Position
-                'Çå³ýµ±Ç°±à¼­ÄÚÈÝ
+                'ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½à¼­ï¿½ï¿½ï¿½ï¿½
                 BindingContext(rcDataView, "").EndCurrentEdit()
                 BindingContext(rcDataView, "").AddNew()
             Catch eEndEdit As System.Exception
@@ -517,20 +518,20 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "ÐÞ¸Ä"
+#Region "ï¿½Þ¸ï¿½"
 
     Private Sub BtnEdit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnEdit.Click, MnuiEdit.Click
         EditEvent()
     End Sub
 
     Private Sub EditEvent()
-        'ÐÞ¸Ä
+        'ï¿½Þ¸ï¿½
         If isAdding Then
             isAdding = False
         End If
         Try
             currentPos = BindingContext(rcDataView, "").Position
-            'Çå³ýµ±Ç°±à¼­ÄÚÈÝ
+            'ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½à¼­ï¿½ï¿½ï¿½ï¿½
             BindingContext(rcDataView, "").EndCurrentEdit()
         Catch eEndEdit As System.Exception
             System.Windows.Forms.MessageBox.Show(eEndEdit.Message)
@@ -541,7 +542,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "±£´æ"
+#Region "ï¿½ï¿½ï¿½ï¿½"
 
     Private Sub TsSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnSave.Click, MnuiSave.Click
         SaveEvent()
@@ -550,7 +551,7 @@ Public Class FrmKhEdit
     Private Sub SaveEvent()
         Me.TabControl1.SelectedIndex = 1
         Me.TabControl1.SelectedIndex = 0
-        'ÑéÖ¤Êý¾Ý
+        'ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½
         If Not String.IsNullOrEmpty(Me.TxtZydm.Text) Then
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -566,7 +567,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -575,11 +576,11 @@ Public Class FrmKhEdit
                 Me.TxtZydm.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zydm")
                 Me.LblZymc.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zymc")
             Else
-                MsgBox("Ö°Ô±ÐÅÏ¢²»ÕýÈ·¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("Ö°Ô±ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             End If
         Else
-            MsgBox("ÇëÊäÈëÖ°Ô±ÐÅÏ¢¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°Ô±ï¿½ï¿½Ï¢ï¿½ï¿½", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
             Return
         End If
         If Not String.IsNullOrEmpty(Me.TxtZydm2.Text) Then
@@ -597,7 +598,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -606,16 +607,16 @@ Public Class FrmKhEdit
                 Me.TxtZydm2.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zydm")
                 Me.LblZymc2.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zymc")
             Else
-                MsgBox("Ö°Ô±ÐÅÏ¢²»ÕýÈ·¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("Ö°Ô±ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Return
             End If
         End If
-        '±£´æ
+        'ï¿½ï¿½ï¿½ï¿½
         If isAdding Then
             If Trim(TxtKhdm.Text).Length = 0 Then
                 Return
             End If
-            'REM Ôö¼Ó±£´æ
+            'REM ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -672,9 +673,9 @@ Public Class FrmKhEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Catch ey As OleDbException
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 End Try
                 Return
             Finally
@@ -682,7 +683,7 @@ Public Class FrmKhEdit
             End Try
             isAdding = False
         Else
-            REM ÐÞ¸ÄÕËºÅ
+            REM ï¿½Þ¸ï¿½ï¿½Ëºï¿½
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -727,7 +728,7 @@ Public Class FrmKhEdit
                 rcOleDbCommand.Parameters.Add("@bguakao", OleDbType.Integer, 1).Value = IIf(Me.ChbBGuaKao.Checked, 1, 0)
                 rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(TxtKhdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
-                'Ìî³äÊý¾Ý
+                'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 rcOleDbCommand.CommandText = "SELECT lbdm,lbmc,khdm,khmc,khsm,address,postcode,waddress,khyh,yhzh,swdjh,fddbr,gsdjh,NVL(zczb,0) AS zczb,jyfw,lxr,mobile,tel,fax,email,zydm,zymc,zydm2,zymc2,dengji,sktj,NVL(skqx,0) AS skqx,abc,NVL(ztts,0) AS ztts,bjtk,xslbdm,NVL(djyear,0) AS djyear,NVL(bjsywf,1) AS bjsywf,NVL(bywfjszz,0) AS bywfjszz,NVL(bguakao,0) AS bguakao,djrq FROM rc_khxx ORDER BY khdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -740,9 +741,9 @@ Public Class FrmKhEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 Catch ey As OleDbException
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
                 End Try
                 Return
             Finally
@@ -754,14 +755,14 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "È¡Ïû"
+#Region "È¡ï¿½ï¿½"
 
     Private Sub TsCancel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCancel.Click, MnuiCancel.Click
         CancelEvent()
     End Sub
 
     Private Sub CancelEvent()
-        'È¡Ïû
+        'È¡ï¿½ï¿½
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -776,7 +777,7 @@ Public Class FrmKhEdit
             rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
             BindingContext(rcDataView, "").Position = currentPos
         Catch ex As Exception
-            MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢")
             Return
         Finally
             rcOleDbConn.Close()
@@ -787,7 +788,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "¹Ø±Õ"
+#Region "ï¿½Ø±ï¿½"
 
     Private Sub BtnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
         Me.Close()
@@ -795,7 +796,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "¹ØÓÚ"
+#Region "ï¿½ï¿½ï¿½ï¿½"
 
     Private Sub MnuiAbout_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuiAbout.Click
         Dim rcFrm As New FrmAbout

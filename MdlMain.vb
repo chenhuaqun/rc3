@@ -128,13 +128,13 @@ Module MdlMain
                 Dim activationFile = Path.Combine(Application.StartupPath, "license", "license.dat")
 
                 If Not File.Exists(activationFile) Then
-                    Dim result = MsgBox("未检测到许可证文件，请先注册和激活。", MsgBoxStyle.OkCancel + MsgBoxIcon.Question, "提示信息")
+                    Dim result = MsgBox("未检测到许可证文件，请先注册和激活。", MsgBoxStyle.OkCancel + MsgBoxStyle.Information, "提示信息")
                     If result = MsgBoxResult.OK Then
-                        Dim frmReg As New sys.FrmRegister
+                        Dim frmReg As New FrmRegister
                         frmReg.ShowDialog()
                     End If
                     If Not File.Exists(activationFile) Then
-                        MsgBox("未激活程序，将退出系统。", MsgBoxStyle.OkOnly + MsgBoxIcon.Warning, "提示信息")
+                        MsgBox("未激活程序，将退出系统。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
                         Application.Exit()
                         Return
                     End If
@@ -143,20 +143,20 @@ Module MdlMain
                         Dim content = File.ReadAllText(activationFile)
                         Dim parts = content.Split("|"c)
                         If parts.Length >= 1 AndAlso parts(0) <> currentDeviceCode Then
-                            Dim result = MsgBox("检测到硬件变更，设备ID不匹配，请重新激活。", MsgBoxStyle.OkCancel + MsgBoxIcon.Warning, "提示信息")
+                            Dim result = MsgBox("检测到硬件变更，设备ID不匹配，请重新激活。", MsgBoxStyle.OkCancel + MsgBoxStyle.Information, "提示信息")
                             If result = MsgBoxResult.OK Then
-                                Dim frmReg As New sys.FrmRegister
+                                Dim frmReg As New FrmRegister
                                 frmReg.ShowDialog()
                             End If
                             If Not File.Exists(activationFile) Then
-                                MsgBox("未激活程序，将退出系统。", MsgBoxStyle.OkOnly + MsgBoxIcon.Warning, "提示信息")
+                                MsgBox("未激活程序，将退出系统。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
                                 Application.Exit()
                                 Return
                             End If
                         End If
                     Catch ex As Exception
-                        MsgBox("读取许可证文件失败，请重新激活。", MsgBoxStyle.OkOnly + MsgBoxIcon.Warning, "提示信息")
-                        Dim frmReg As New sys.FrmRegister
+                        MsgBox("读取许可证文件失败，请重新激活。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
+                        Dim frmReg As New FrmRegister
                         frmReg.ShowDialog()
                         If Not File.Exists(activationFile) Then
                             Application.Exit()

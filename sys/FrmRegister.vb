@@ -148,6 +148,7 @@ Public Class FrmRegister
                     MessageBox.Show("产品激活成功！本设备已获得授权。", "激活成功", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ' 可选：保存激活状态到本地，避免重复激活
                     SaveActivationInfo(deviceCode, licenseKey)
+                    Me.Close() ' 关闭注册窗口
                 Else
                     MessageBox.Show($"激活失败！{vbCrLf}HTTP {response.StatusCode}{vbCrLf}{responseBody}", "失败", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If

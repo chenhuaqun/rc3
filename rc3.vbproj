@@ -83,6 +83,8 @@
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -101,6 +103,12 @@
       <DependentUpon>FrmFcspJz.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmFcspJz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sys\FrmRegister.Designer.vb">
+      <DependentUpon>FrmRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sys\FrmRegister.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="gl\FrmGlPzImpXls.designer.vb">
@@ -3136,7 +3144,7 @@
     <Compile Include="bd\FrmJldwxx.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Task.vb" />
+    <Compile Include="WhatTask.vb" />
     <Compile Include="VoucherGenerator.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -3357,6 +3365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="po\FrmInvRecycleSr.resx">
       <DependentUpon>FrmInvRecycleSr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sys\FrmRegister.resx">
+      <DependentUpon>FrmRegister.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sys\FrmUpgrateData.resx">
       <DependentUpon>FrmUpgrateData.vb</DependentUpon>

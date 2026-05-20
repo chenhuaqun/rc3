@@ -7,7 +7,7 @@ Public Class Form2
     Inherits Form
 
     Private employees As New List(Of Employee)
-    Private tasks As New List(Of Task)
+    Private tasks As New List(Of WhatTask)
     Private WithEvents reportButton As New Button
     Friend WithEvents rcTimer As Timer
     Private components As System.ComponentModel.IContainer
@@ -59,10 +59,10 @@ Public Class Form2
         employees.Add(New Employee("Sally"))
         employees.Add(New Employee("Roy"))
         employees.Add(New Employee("Pris"))
-        tasks.Add(New Task(1, employees(1)))
-        tasks.Add(New Task(2))
-        tasks.Add(New Task(3, employees(2)))
-        tasks.Add(New Task(4))
+        tasks.Add(New WhatTask(1, employees(1)))
+        tasks.Add(New WhatTask(2))
+        tasks.Add(New WhatTask(3, employees(2)))
+        tasks.Add(New WhatTask(4))
     End Sub
 
     ' Configures columns for the DataGridView control.
@@ -109,7 +109,7 @@ Public Class Form2
         ByVal e As EventArgs) Handles reportButton.Click
 
         Dim report As New StringBuilder()
-        For Each t As Task In tasks
+        For Each t As WhatTask In tasks
             Dim assignment As String
             If t.AssignedTo Is Nothing Then
                 assignment = "unassigned"

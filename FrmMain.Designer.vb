@@ -101,8 +101,9 @@ Partial Class FrmMain
         Me.MnuiOeCkCpHzb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiOeKhHzb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiOeZyHzb = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiOeKhFpHzb = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiOeBmFpHzb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiOeCpFpHzb = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiOeKhFpHzb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiOeKhFpFxb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiPm = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiPmDdSr = New System.Windows.Forms.ToolStripMenuItem()
@@ -269,6 +270,7 @@ Partial Class FrmMain
         Me.MnuiCpRepair = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiUpgrateData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiRegister = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.TESTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiWindows = New System.Windows.Forms.ToolStripMenuItem()
@@ -285,7 +287,6 @@ Partial Class FrmMain
         Me.ToolStripPanel1 = New System.Windows.Forms.ToolStripPanel()
         Me.ToolStripPanel2 = New System.Windows.Forms.ToolStripPanel()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.MnuiOeBmFpHzb = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStripMain.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -835,17 +836,23 @@ Partial Class FrmMain
         Me.MnuiOeZyHzb.Text = "职员送货汇总表"
         Me.MnuiOeZyHzb.Visible = False
         '
-        'MnuiOeKhFpHzb
+        'MnuiOeBmFpHzb
         '
-        Me.MnuiOeKhFpHzb.Name = "MnuiOeKhFpHzb"
-        Me.MnuiOeKhFpHzb.Size = New System.Drawing.Size(220, 22)
-        Me.MnuiOeKhFpHzb.Text = "客户销售发票汇总表"
+        Me.MnuiOeBmFpHzb.Name = "MnuiOeBmFpHzb"
+        Me.MnuiOeBmFpHzb.Size = New System.Drawing.Size(220, 22)
+        Me.MnuiOeBmFpHzb.Text = "部门销售发票汇总表"
         '
         'MnuiOeCpFpHzb
         '
         Me.MnuiOeCpFpHzb.Name = "MnuiOeCpFpHzb"
         Me.MnuiOeCpFpHzb.Size = New System.Drawing.Size(220, 22)
         Me.MnuiOeCpFpHzb.Text = "产品销售发票汇总表"
+        '
+        'MnuiOeKhFpHzb
+        '
+        Me.MnuiOeKhFpHzb.Name = "MnuiOeKhFpHzb"
+        Me.MnuiOeKhFpHzb.Size = New System.Drawing.Size(220, 22)
+        Me.MnuiOeKhFpHzb.Text = "客户销售发票汇总表"
         '
         'MnuiOeKhFpFxb
         '
@@ -1876,7 +1883,7 @@ Partial Class FrmMain
         '
         'MnuiSys
         '
-        Me.MnuiSys.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiModPwd, Me.MnuiZtdl, Me.MnuiUpdate, Me.MnuiUploadFile, Me.MnuiUpdateDB, Me.MnuiImpNC, Me.MnuiImpU8, Me.MnuiCpdmGg, Me.MnuiKhdmGg, Me.MnuiCsdmGg, Me.MnuiZydmGg, Me.MnuiRedoCpyeHz, Me.MnuiRedoFcspyeHz, Me.MnuiCpRepair, Me.MnuiCheckData, Me.MnuiUpgrateData, Me.MnuiAbout, Me.TESTToolStripMenuItem})
+        Me.MnuiSys.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiModPwd, Me.MnuiZtdl, Me.MnuiUpdate, Me.MnuiUploadFile, Me.MnuiUpdateDB, Me.MnuiImpNC, Me.MnuiImpU8, Me.MnuiCpdmGg, Me.MnuiKhdmGg, Me.MnuiCsdmGg, Me.MnuiZydmGg, Me.MnuiRedoCpyeHz, Me.MnuiRedoFcspyeHz, Me.MnuiCpRepair, Me.MnuiCheckData, Me.MnuiUpgrateData, Me.MnuiRegister, Me.MnuiAbout, Me.TESTToolStripMenuItem})
         Me.MnuiSys.Name = "MnuiSys"
         Me.MnuiSys.Size = New System.Drawing.Size(83, 21)
         Me.MnuiSys.Text = "系统服务(&S)"
@@ -1985,6 +1992,12 @@ Partial Class FrmMain
         Me.MnuiUpgrateData.Name = "MnuiUpgrateData"
         Me.MnuiUpgrateData.Size = New System.Drawing.Size(196, 22)
         Me.MnuiUpgrateData.Text = "升级数据"
+        '
+        'MnuiRegister
+        '
+        Me.MnuiRegister.Name = "MnuiRegister"
+        Me.MnuiRegister.Size = New System.Drawing.Size(196, 22)
+        Me.MnuiRegister.Text = "注册与激活(&R)"
         '
         'MnuiAbout
         '
@@ -2107,12 +2120,6 @@ Partial Class FrmMain
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
-        'MnuiOeBmFpHzb
-        '
-        Me.MnuiOeBmFpHzb.Name = "MnuiOeBmFpHzb"
-        Me.MnuiOeBmFpHzb.Size = New System.Drawing.Size(220, 22)
-        Me.MnuiOeBmFpHzb.Text = "部门销售发票汇总表"
         '
         'FrmMain
         '
@@ -2405,4 +2412,5 @@ Partial Class FrmMain
     Friend WithEvents MnuiFcspBmSfcHz As ToolStripMenuItem
     Friend WithEvents MnuiOeKhFpFxb As ToolStripMenuItem
     Friend WithEvents MnuiOeBmFpHzb As ToolStripMenuItem
+    Friend WithEvents MnuiRegister As ToolStripMenuItem
 End Class

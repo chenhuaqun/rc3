@@ -1,4 +1,4 @@
-﻿Public Class Task
+﻿Public Class WhatTask
 
     Sub New(ByVal id As Int32)
         idValue = id

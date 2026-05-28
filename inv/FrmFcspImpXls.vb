@@ -1,15 +1,15 @@
 Imports System.Data.OleDb
 Public Class FrmFcspImpXls
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    'Êı¾İ¸üĞÂ´«µİ
+    'æ•°æ®æ›´æ–°ä¼ é€’
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '»á¼ÆÆÚ¼ä
+    'ä¼šè®¡æœŸé—´
     Dim strKjqj As String = g_Kjqj
 
-#Region "³õÊ¼»¯"
+#Region "åˆå§‹åŒ–"
 
     Public Property ParaStrKjqj() As String
         Get
@@ -22,7 +22,7 @@ Public Class FrmFcspImpXls
 
 #End Region
 
-#Region "¶ÁÈëÊı¾İ"
+#Region "è¯»å…¥æ•°æ®"
 
     Private Sub BtnXzwj_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnXzwj.Click
         If Me.OfdSourceExcelFileName.ShowDialog = DialogResult.OK Then
@@ -42,7 +42,7 @@ Public Class FrmFcspImpXls
             End If
             oleAdper.Fill(rcDataset, "result")
         Catch ex As Exception
-            MsgBox("ÄãÑ¡ÔñµÄÎÄ¼ş²»ÊÇExcelÎÄ¼ş¸ñÊ½£¬ÇëÖØĞÂÑ¡Ôñ" & Chr(13) & ex.ToString(), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ä½ é€‰æ‹©çš„æ–‡ä»¶ä¸æ˜¯Excelæ–‡ä»¶æ ¼å¼ï¼Œè¯·é‡æ–°é€‰æ‹©" & Chr(13) & ex.ToString(), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return False
         Finally
             oleConnection.Close()
@@ -62,11 +62,11 @@ Public Class FrmFcspImpXls
 
 #End Region
 
-#Region "±£´æÊÂ¼ş"
+#Region "ä¿å­˜äº‹ä»¶"
 
     Private Sub TsbSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TsbSave.Click
         Dim i As Integer
-        '(¶ş)´æ´¢
+        '(äºŒ)å­˜å‚¨
         Try
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
@@ -85,38 +85,38 @@ Public Class FrmFcspImpXls
             For i = 0 To rcDataset.Tables("result").Rows.Count - 1
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = strKjqj
-                rcOleDbCommand.Parameters.Add("@ckkjqj", OleDbType.VarChar, 20).Value = rcDataset.Tables("result").Rows(i).Item("³ö¿â»á¼ÆÆÚ¼ä")
-                rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 20).Value = rcDataset.Tables("result").Rows(i).Item("³ö¿âµ¥ºÅ")
-                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Integer, 6).Value = rcDataset.Tables("result").Rows(i).Item("ĞĞºÅ")
-                rcOleDbCommand.Parameters.Add("@shkhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("ÊÕ»õ¿Í»§±àÂë")
-                rcOleDbCommand.Parameters.Add("@fpkhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("¿ªÆ±¿Í»§±àÂë")
-                rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("²¿ÃÅ±àÂë")
-                rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("ÎïÁÏ±àÂë")
-                rcOleDbCommand.Parameters.Add("@sl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("ÊıÁ¿")
-                rcOleDbCommand.Parameters.Add("@je", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("½ğ¶î")
-                rcOleDbCommand.Parameters.Add("@se", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("Ë°¶î")
-                rcOleDbCommand.Parameters.Add("@cbje", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("³É±¾½ğ¶î")
+                rcOleDbCommand.Parameters.Add("@ckkjqj", OleDbType.VarChar, 20).Value = rcDataset.Tables("result").Rows(i).Item("å‡ºåº“ä¼šè®¡æœŸé—´")
+                rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 20).Value = rcDataset.Tables("result").Rows(i).Item("å‡ºåº“å•å·")
+                rcOleDbCommand.Parameters.Add("@xh", OleDbType.Integer, 6).Value = rcDataset.Tables("result").Rows(i).Item("è¡Œå·")
+                rcOleDbCommand.Parameters.Add("@shkhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("æ”¶è´§å®¢æˆ·ç¼–ç ")
+                rcOleDbCommand.Parameters.Add("@fpkhdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("å¼€ç¥¨å®¢æˆ·ç¼–ç ")
+                rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("éƒ¨é—¨ç¼–ç ")
+                rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("ç‰©æ–™ç¼–ç ")
+                rcOleDbCommand.Parameters.Add("@sl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("æ•°é‡")
+                rcOleDbCommand.Parameters.Add("@je", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("é‡‘é¢")
+                rcOleDbCommand.Parameters.Add("@se", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("ç¨é¢")
+                rcOleDbCommand.Parameters.Add("@cbje", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("æˆæœ¬é‡‘é¢")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
             rcOleDbTrans.Commit()
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        MsgBox("ÆÚÄ©·¢³öÉÌÆ·¶ÁÈëÍê³É,Çë¼ì²éÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+        MsgBox("æœŸæœ«å‘å‡ºå•†å“è¯»å…¥å®Œæˆ,è¯·æ£€æŸ¥æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
         Me.Close()
     End Sub
 
 #End Region
 
-#Region "ÍË³öÊÂ¼ş"
+#Region "é€€å‡ºäº‹ä»¶"
 
     Private Sub TsbExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TsbExit.Click, MnuiExit.Click
         Me.Close()

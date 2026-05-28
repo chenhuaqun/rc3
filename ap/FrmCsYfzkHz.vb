@@ -1,20 +1,20 @@
 Imports System.Data.OleDb
 
 Public Class FrmCsYfzkHz
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable
+    'å»ºç«‹Datatable
     ReadOnly dtCsYfzkHz As New DataTable("csyfzkhz")
 
     Private Sub FrmCsYfzkHz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         DtpHzrqBegin.Value = getInvBegin(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
         DtpHzrqEnd.Value = getInvEnd(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
-        '´´½¨datatable
+        'åˆ›å»ºdatatable
         dtCsYfzkHz.Columns.Add("csdm", Type.GetType("System.String"))
         dtCsYfzkHz.Columns.Add("csmc", Type.GetType("System.String"))
         dtCsYfzkHz.Columns.Add("zydm", Type.GetType("System.String"))
@@ -42,7 +42,7 @@ Public Class FrmCsYfzkHz
         End With
     End Sub
 
-#Region "Ö°Ô±±àÂëµÄÊÂ¼ş"
+#Region "èŒå‘˜ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
@@ -54,7 +54,7 @@ Public Class FrmCsYfzkHz
                     .paraField1 = "zydm"
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
-                    .paraTitle = "Ö°Ô±"
+                    .paraTitle = "èŒå‘˜"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -80,7 +80,7 @@ Public Class FrmCsYfzkHz
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -116,8 +116,8 @@ Public Class FrmCsYfzkHz
         'End If
         dtCsYfzkHz.Clear()
 
-        'È¡Êı¾İ
-        'È¡ÆÚ³õ¿â´æ¡¢ÆÚ³õÈë¿â¡¢ÆÚ³õ³ö¿â¡¢±¾ÆÚÈë¿â¡¢±¾ÆÚ³ö¿â
+        'å–æ•°æ®
+        'å–æœŸåˆåº“å­˜ã€æœŸåˆå…¥åº“ã€æœŸåˆå‡ºåº“ã€æœ¬æœŸå…¥åº“ã€æœ¬æœŸå‡ºåº“
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -150,7 +150,7 @@ Public Class FrmCsYfzkHz
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "csyfzkhz")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -176,7 +176,7 @@ Public Class FrmCsYfzkHz
         End If
         Dim rcDataRow As DataRow
         rcDataRow = rcDataset.Tables("csyfzkhz").NewRow
-        rcDataRow.Item("csdm") = "ºÏ¼Æ"
+        rcDataRow.Item("csdm") = "åˆè®¡"
         rcDataRow.Item("qcje") = dtCsYfzkHz.Compute("Sum(qcje)", "")
         rcDataRow.Item("yfje") = dtCsYfzkHz.Compute("Sum(yfje)", "")
         rcDataRow.Item("fkje") = dtCsYfzkHz.Compute("Sum(fkje)", "")
@@ -184,13 +184,13 @@ Public Class FrmCsYfzkHz
         rcDataRow.Item("wkpje") = dtCsYfzkHz.Compute("Sum(wkpje)", "")
         rcDataset.Tables("csyfzkhz").Rows.Add(rcDataRow)
 
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmCsYfzkHzz
         With rcFrm
             .ParaDataSet = rcDataset
             .ParaDataView = New DataView(rcDataset.Tables("csyfzkhz"), "TRUE", "csdm", DataViewRowState.CurrentRows)
-            .Label2.Text = DtpHzrqBegin.Value & "ÖÁ" & DtpHzrqEnd.Value
-            '.Label3.Text = "²Ö¿â£º" & Trim(Me.TxtCkdm.Text)
+            .Label2.Text = DtpHzrqBegin.Value & "è‡³" & DtpHzrqEnd.Value
+            '.Label3.Text = "ä»“åº“ï¼š" & Trim(Me.TxtCkdm.Text)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()

@@ -1,20 +1,20 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeZyHzb
-    '½¨Á¢Êý¾ÝÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable
+    'å»ºç«‹Datatable
     ReadOnly dtOeZyHzb As New DataTable("oezyhzb")
 
     Private Sub FrmOeZyHzb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         DtpHzrqBegin.Value = getInvBegin(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
         DtpHzrqEnd.Value = getInvEnd(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
-        '´´½¨datatable
+        'åˆ›å»ºdatatable
         dtOeZyHzb.Columns.Add("zydm", Type.GetType("System.String"))
         dtOeZyHzb.Columns.Add("zymc", Type.GetType("System.String"))
         dtOeZyHzb.Columns.Add("sl", Type.GetType("System.Double"))
@@ -29,13 +29,13 @@ Public Class FrmOeZyHzb
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         dtOeZyHzb.Clear()
-        'È¡Êý¾Ý
+        'å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_khxx.zydm,rc_khxx.zymc,SUM(oezyhzba.sl) AS sl,SUM(oezyhzba.je) AS je FROM (SELECT oe_xsd.khdm,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.je) AS je FROM oe_xsd,rc_lx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '²úÆ·ËÍ»õµ¥' AND oe_xsd.bdelete = 0 AND xsrq >= ? AND xsrq >= ? AND xsrq <= ? GROUP BY oe_xsd.khdm) oezyhzba,rc_khxx WHERE oezyhzba.khdm = rc_khxx.khdm GROUP BY rc_khxx.zydm,rc_khxx.zymc"
+            rcOleDbCommand.CommandText = "SELECT rc_khxx.zydm,rc_khxx.zymc,SUM(oezyhzba.sl) AS sl,SUM(oezyhzba.je) AS je FROM (SELECT oe_xsd.khdm,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.je) AS je FROM oe_xsd,rc_lx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = 'äº§å“é€è´§å•' AND oe_xsd.bdelete = 0 AND xsrq >= ? AND xsrq >= ? AND xsrq <= ? GROUP BY oe_xsd.khdm) oezyhzba,rc_khxx WHERE oezyhzba.khdm = rc_khxx.khdm GROUP BY rc_khxx.zydm,rc_khxx.zymc"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = g_Dwrq.Date
             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = Me.DtpHzrqBegin.Value
@@ -46,25 +46,25 @@ Public Class FrmOeZyHzb
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "oezyhzb")
         Catch ex As Exception
-            MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         Dim rcDataRow As DataRow
         rcDataRow = rcDataset.Tables("oezyhzb").NewRow
-        rcDataRow.Item("zydm") = "ºÏ¼Æ"
+        rcDataRow.Item("zydm") = "åˆè®¡"
         rcDataRow.Item("sl") = dtOeZyHzb.Compute("Sum(sl)", "")
         rcDataRow.Item("je") = dtOeZyHzb.Compute("Sum(je)", "")
         rcDataset.Tables("oezyhzb").Rows.Add(rcDataRow)
 
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeZyHzbz
         With rcFrm
             .ParaDataSet = rcDataset
             .ParaDataView = New DataView(rcDataset.Tables("oezyhzb"), "TRUE", "zydm", DataViewRowState.CurrentRows)
-            .Label2.Text = DtpHzrqBegin.Value & "ÖÁ" & DtpHzrqEnd.Value
-            '.Label3.Text = "²Ö¿â£º" & Trim(Me.TxtCkdm.Text)
+            .Label2.Text = DtpHzrqBegin.Value & "è‡³" & DtpHzrqEnd.Value
+            '.Label3.Text = "ä»“åº“ï¼š" & Trim(Me.TxtCkdm.Text)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()

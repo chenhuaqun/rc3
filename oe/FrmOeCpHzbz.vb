@@ -60,7 +60,7 @@ Public Class FrmOeCpHzbz
         With rcFrm
             .paraOleDbConn = rcOleDbConn
             .paraRpsId = "CKSFCHZ"
-            .paraRpsName = "²Ö¿âÊÕ·¢´æ»ã×Ü±í"
+            .paraRpsName = "ä»“åº“æ”¶å‘å­˜æ±‡æ€»è¡¨"
             .ShowDialog()
         End With
     End Sub
@@ -74,17 +74,17 @@ Public Class FrmOeCpHzbz
     End Sub
 
     Private Sub OeXsdCx()
-        ''È¡Êý¾Ý
+        ''å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             If blnCkd Then
-                rcOleDbCommand.CommandText = "(SELECT oe_xsd.djh,oe_xsd.xh,oe_xsd.xsrq,oe_xsd.bdelete,oe_xsd.zydm,oe_xsd.zymc,oe_xsd.khdm,oe_xsd.khmc,'' AS sktj,0 AS skqx,oe_xsd.bmdm,oe_xsd.bmmc,oe_xsd.ckdm,oe_xsd.ckmc,oe_xsd.cpdm,oe_xsd.cpmc,oe_xsd.hth,oe_xsd.khddh,oe_xsd.khlh,oe_xsd.sl,oe_xsd.fpsl,oe_xsd.sl - oe_xsd.fpsl AS wfp,oe_xsd.dw,oe_xsd.mjsl,oe_xsd.fzsl,oe_xsd.fzdw,oe_xsd.dj,oe_xsd.hsdj,oe_xsd.je,oe_xsd.shlv,oe_xsd.se,oe_xsd.je + oe_xsd.se AS jese,oe_xsd.cbje,oe_xsd.xsmemo,oe_xsd.dddjh,oe_xsd.ddxh,oe_xsd.skje,oe_xsd.bsign,oe_xsd.srr,oe_xsd.shr,oe_xsd.jzr FROM rc_cpxx,oe_xsd,rc_lx WHERE (" & strBmdm & ") AND oe_xsd.bdelete = 0 AND rc_cpxx.cpdm = oe_xsd.cpdm AND SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '²úÆ·ËÍ»õµ¥' AND TRUNC(oe_xsd.xsrq,'dd') >= ? AND TRUNC(oe_xsd.xsrq,'dd') <= ? AND oe_xsd.cpdm = ?)" & _
+                rcOleDbCommand.CommandText = "(SELECT oe_xsd.djh,oe_xsd.xh,oe_xsd.xsrq,oe_xsd.bdelete,oe_xsd.zydm,oe_xsd.zymc,oe_xsd.khdm,oe_xsd.khmc,'' AS sktj,0 AS skqx,oe_xsd.bmdm,oe_xsd.bmmc,oe_xsd.ckdm,oe_xsd.ckmc,oe_xsd.cpdm,oe_xsd.cpmc,oe_xsd.hth,oe_xsd.khddh,oe_xsd.khlh,oe_xsd.sl,oe_xsd.fpsl,oe_xsd.sl - oe_xsd.fpsl AS wfp,oe_xsd.dw,oe_xsd.mjsl,oe_xsd.fzsl,oe_xsd.fzdw,oe_xsd.dj,oe_xsd.hsdj,oe_xsd.je,oe_xsd.shlv,oe_xsd.se,oe_xsd.je + oe_xsd.se AS jese,oe_xsd.cbje,oe_xsd.xsmemo,oe_xsd.dddjh,oe_xsd.ddxh,oe_xsd.skje,oe_xsd.bsign,oe_xsd.srr,oe_xsd.shr,oe_xsd.jzr FROM rc_cpxx,oe_xsd,rc_lx WHERE (" & strBmdm & ") AND oe_xsd.bdelete = 0 AND rc_cpxx.cpdm = oe_xsd.cpdm AND SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = 'äº§å“é€è´§å•' AND TRUNC(oe_xsd.xsrq,'dd') >= ? AND TRUNC(oe_xsd.xsrq,'dd') <= ? AND oe_xsd.cpdm = ?)" & _
                     " UNION (SELECT inv_ckd.djh,inv_ckd.xh,inv_ckd.ckrq AS xsrq,inv_ckd.bdelete,inv_ckd.zydm,inv_ckd.zymc,'' AS khdm,'' AS khmc,'' AS sktj,0 AS skqx,inv_ckd.bmdm,inv_ckd.bmmc,inv_ckd.ckdm,inv_ckd.ckmc,inv_ckd.cpdm,inv_ckd.cpmc,'' AS hth,'' AS khddh,'' AS khlh,inv_ckd.sl,0 AS fpsl,0 AS wfp,inv_ckd.dw,inv_ckd.mjsl,inv_ckd.fzsl,inv_ckd.fzdw,inv_ckd.dj,0 AS hsdj,0 AS je,0 AS shlv,0 AS se,0 AS jese,inv_ckd.je AS cbje,inv_ckd.ckmemo AS xsmemo,'' AS dddjh,0 AS ddxh,0 AS skje,0 AS bsign,inv_ckd.srr,inv_ckd.shr,inv_ckd.jzr FROM inv_ckd WHERE SUBSTR(inv_ckd.djh,1,4) = 'CKTZ' AND inv_ckd.bdelete = 0 AND TRUNC(inv_ckd.ckrq,'dd') >= ? AND TRUNC(inv_ckd.ckrq,'dd') <= ? AND inv_ckd.cpdm = ?)"
             Else
-                rcOleDbCommand.CommandText = "SELECT oe_xsd.djh,oe_xsd.xh,oe_xsd.xsrq,oe_xsd.bdelete,oe_xsd.zydm,oe_xsd.zymc,oe_xsd.khdm,oe_xsd.khmc,'' AS sktj,0 AS skqx,oe_xsd.bmdm,oe_xsd.bmmc,oe_xsd.ckdm,oe_xsd.ckmc,oe_xsd.cpdm,oe_xsd.cpmc,oe_xsd.hth,oe_xsd.khddh,oe_xsd.khlh,oe_xsd.sl,oe_xsd.fpsl,oe_xsd.sl - oe_xsd.fpsl AS wfp,oe_xsd.dw,oe_xsd.mjsl,oe_xsd.fzsl,oe_xsd.fzdw,oe_xsd.dj,oe_xsd.hsdj,oe_xsd.je,oe_xsd.shlv,oe_xsd.se,oe_xsd.je + oe_xsd.se AS jese,oe_xsd.cbje,oe_xsd.xsmemo,oe_xsd.dddjh,oe_xsd.ddxh,oe_xsd.skje,oe_xsd.bsign,oe_xsd.srr,oe_xsd.shr,oe_xsd.jzr FROM rc_cpxx,oe_xsd,rc_lx WHERE (" & strBmdm & ") AND rc_cpxx.cpdm = oe_xsd.cpdm AND SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '²úÆ·ËÍ»õµ¥' AND TRUNC(oe_xsd.xsrq,'dd') >= ? AND TRUNC(oe_xsd.xsrq,'dd') <= ? AND oe_xsd.cpdm = ? ORDER BY oe_xsd.djh,oe_xsd.xh"
+                rcOleDbCommand.CommandText = "SELECT oe_xsd.djh,oe_xsd.xh,oe_xsd.xsrq,oe_xsd.bdelete,oe_xsd.zydm,oe_xsd.zymc,oe_xsd.khdm,oe_xsd.khmc,'' AS sktj,0 AS skqx,oe_xsd.bmdm,oe_xsd.bmmc,oe_xsd.ckdm,oe_xsd.ckmc,oe_xsd.cpdm,oe_xsd.cpmc,oe_xsd.hth,oe_xsd.khddh,oe_xsd.khlh,oe_xsd.sl,oe_xsd.fpsl,oe_xsd.sl - oe_xsd.fpsl AS wfp,oe_xsd.dw,oe_xsd.mjsl,oe_xsd.fzsl,oe_xsd.fzdw,oe_xsd.dj,oe_xsd.hsdj,oe_xsd.je,oe_xsd.shlv,oe_xsd.se,oe_xsd.je + oe_xsd.se AS jese,oe_xsd.cbje,oe_xsd.xsmemo,oe_xsd.dddjh,oe_xsd.ddxh,oe_xsd.skje,oe_xsd.bsign,oe_xsd.srr,oe_xsd.shr,oe_xsd.jzr FROM rc_cpxx,oe_xsd,rc_lx WHERE (" & strBmdm & ") AND rc_cpxx.cpdm = oe_xsd.cpdm AND SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = 'äº§å“é€è´§å•' AND TRUNC(oe_xsd.xsrq,'dd') >= ? AND TRUNC(oe_xsd.xsrq,'dd') <= ? AND oe_xsd.cpdm = ? ORDER BY oe_xsd.djh,oe_xsd.xh"
             End If
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@xsrq1", OleDbType.Date, 8).Value = dateBegin
@@ -101,18 +101,18 @@ Public Class FrmOeCpHzbz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "xsdlb")
         Catch ex As Exception
-            MsgBox("³ÌÐò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataSet.Tables("xsdlb").Rows.Count <= 0 Then
-            MsgBox("Ã»ÓÐÂú×ãÌõ¼þµÄÊý¾Ý¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         Dim rcDataRow As DataRow
         rcDataRow = rcDataSet.Tables("xsdlb").NewRow
-        rcDataRow.Item("djh") = "ºÏ¼Æ"
+        rcDataRow.Item("djh") = "åˆè®¡"
         rcDataRow.Item("sl") = rcDataSet.Tables("xsdlb").Compute("Sum(sl)", "")
         rcDataRow.Item("fzsl") = rcDataSet.Tables("xsdlb").Compute("Sum(fzsl)", "")
         rcDataRow.Item("je") = rcDataSet.Tables("xsdlb").Compute("Sum(je)", "")
@@ -121,7 +121,7 @@ Public Class FrmOeCpHzbz
         rcDataRow.Item("cbje") = rcDataSet.Tables("xsdlb").Compute("Sum(cbje)", "")
         rcDataRow.Item("skje") = rcDataSet.Tables("xsdlb").Compute("Sum(skje)", "")
         rcDataSet.Tables("xsdlb").Rows.Add(rcDataRow)
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeXsdCxLb
         With rcFrm
             .ParaDataSet = rcDataSet

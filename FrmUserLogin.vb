@@ -1,13 +1,13 @@
 Imports System.ComponentModel
 Imports System.Data.OleDb
 Public Class FrmUserLogin
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As New OleDbCommand '= rcOleDbConn.CreateCommand()
-    'ÃÜÂë´íÎóÀÛ¼Æ´ÎÊı
+    'å¯†ç é”™è¯¯ç´¯è®¡æ¬¡æ•°
     Dim iPwdErrCount As Integer = 0
 
     Private Sub TxtUser_Account_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtUser_Account.KeyPress, TxtUser_PWD.KeyPress, CmbDwmc.KeyPress, DtpKjrq.KeyPress
@@ -19,13 +19,13 @@ Public Class FrmUserLogin
     End Sub
 
     Private Function verifyAccountAndPwd() As Boolean
-        '½øĞĞÃÜÂëºË¶Ô 
+        'è¿›è¡Œå¯†ç æ ¸å¯¹ 
         Try
             sysOleDbConn.Open()
             rcOleDbCommand.Connection = sysOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            'È¡ÃÜÂë
+            'å–å¯†ç 
             rcOleDbCommand.CommandText = "SELECT User_Account,User_PWD,User_DspName FROM rc_users WHERE User_Account = '" & Trim(TxtUser_Account.Text).ToUpper & "'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -34,25 +34,25 @@ Public Class FrmUserLogin
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_users")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return False
         Finally
             sysOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_users").Rows.Count = 0 Then
-            MsgBox("µÇÂ¼ÕÊºÅ²»´æÔÚ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç™»å½•å¸å·ä¸å­˜åœ¨ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
             Me.TxtUser_Account.Text = ""
             Me.TxtUser_PWD.Text = ""
             Me.TxtUser_Account.Focus()
             Return False
         Else
-            '½âÃÜÂë
+            'è§£å¯†ç 
             If rcDataset.Tables("rc_users").Rows(0).Item("User_PWD").GetType.ToString = "System.DBNull" Then
                 rcDataset.Tables("rc_users").Rows(0).Item("User_PWD") = ""
             End If
             Dim c As New models.rcCryptography
             If Not c.DeCryptography(Trim(rcDataset.Tables("rc_users").Rows(0).Item("User_PWD"))) = Trim(TxtUser_PWD.Text) Then
-                MsgBox("ÃÜÂë´íÎó£¬ÇëÖØĞÂÊäÈë¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("å¯†ç é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
                 Me.TxtUser_PWD.Text = ""
                 Me.TxtUser_PWD.Focus()
                 iPwdErrCount = iPwdErrCount + 1
@@ -67,7 +67,7 @@ Public Class FrmUserLogin
             End If
         End If
 
-        'È¡ÕËÌ×±àÂë
+        'å–è´¦å¥—ç¼–ç 
         If Not String.IsNullOrEmpty(Me.TxtUser_Account.Text) Then
             Try
                 sysOleDbConn.Open()
@@ -83,7 +83,7 @@ Public Class FrmUserLogin
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_dwdm")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó1¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯1ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return False
             Finally
                 sysOleDbConn.Close()
@@ -94,19 +94,19 @@ Public Class FrmUserLogin
         End If
     End Function
     Private Sub TxtUser_Account_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtUser_Account.Validating
-        'ÓÃ»§ÕÊ»§»òÃÜÂëÊäÈëºó£¬½øĞĞÑéÖ¤
+        'ç”¨æˆ·å¸æˆ·æˆ–å¯†ç è¾“å…¥åï¼Œè¿›è¡ŒéªŒè¯
         If String.IsNullOrEmpty(Trim(Me.TxtUser_Account.Text)) Then
-            'MsgBox("ÇëÊäÈëµÇÂ¼ÕÊºÅ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+            'MsgBox("è¯·è¾“å…¥ç™»å½•å¸å·ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
             Return
         End If
-        'Ö»ÓĞÓÃ»§ÕÊ»§ÓëÃÜÂë¾ù²»Îª¿ÕÊ±£¬½øĞĞÑéÖ¤
+        'åªæœ‰ç”¨æˆ·å¸æˆ·ä¸å¯†ç å‡ä¸ä¸ºç©ºæ—¶ï¼Œè¿›è¡ŒéªŒè¯
         If Not String.IsNullOrEmpty(Trim(Me.TxtUser_PWD.Text)) Then
             Call verifyAccountAndPwd()
         End If
     End Sub
     Private Sub TxtUser_PWD_Validating(sender As Object, e As CancelEventArgs) Handles TxtUser_PWD.Validating
         If Not String.IsNullOrEmpty(Trim(Me.TxtUser_Account.Text)) Then
-            'ÓÃ»§ÕÊ»§²»Îª¿Õ£¬²»¹ÜÃÜÂëÊÇ·ñÎª¿Õ£¬¾ÍÒª½øĞĞÑéÖ¤
+            'ç”¨æˆ·å¸æˆ·ä¸ä¸ºç©ºï¼Œä¸ç®¡å¯†ç æ˜¯å¦ä¸ºç©ºï¼Œå°±è¦è¿›è¡ŒéªŒè¯
             Call verifyAccountAndPwd()
         End If
     End Sub
@@ -118,22 +118,22 @@ Public Class FrmUserLogin
             If g_Dwdm = "999" Then
                 rcOleDbConn.ConnectionString = sysOleDbConn.ConnectionString
             End If
-            'µ¥Î»±àÂë
+            'å•ä½ç¼–ç 
             g_Dwdm = Me.CmbDwmc.SelectedValue.ToString
             g_Dwmc = rcDataset.Tables("rc_dwdm").Rows(Me.CmbDwmc.SelectedIndex).Item("dwmc")
             g_PrnDwmc = g_Dwmc
-            'È¡OEÄ£¿éºËËãµ¥Î»ÆôÓÃ»á¼ÆÆÚ¼ä
+            'å–OEæ¨¡å—æ ¸ç®—å•ä½å¯ç”¨ä¼šè®¡æœŸé—´
             g_Kjrq = Me.DtpKjrq.Value
             g_Kjqj = GetInvKjqj(g_Kjrq)
-            g_Wbdm = GetParaValue("±¾Î»±Ò±ÒÖÖ±àÂë", True)
+            g_Wbdm = GetParaValue("æœ¬ä½å¸å¸ç§ç¼–ç ", True)
             g_Dwrq = GetInvBegin(Mid(rcDataset.Tables("rc_dwdm").Rows(Me.CmbDwmc.SelectedIndex).Item("dwrq"), 1, 4), Mid(rcDataset.Tables("rc_dwdm").Rows(Me.CmbDwmc.SelectedIndex).Item("dwrq"), 5, 2))
             Try
-                'È¡µ¥¾İ´òÓ¡ÖĞÌ§Í·Ê¹ÓÃµÄµ¥Î»Ãû³Æ
+                'å–å•æ®æ‰“å°ä¸­æŠ¬å¤´ä½¿ç”¨çš„å•ä½åç§°
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE paraid = 'µ¥¾İ´òÓ¡ÖĞÌ§Í·Ê¹ÓÃµÄµ¥Î»Ãû³Æ'"
+                rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE paraid = 'å•æ®æ‰“å°ä¸­æŠ¬å¤´ä½¿ç”¨çš„å•ä½åç§°'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_para") IsNot Nothing Then
@@ -145,7 +145,7 @@ Public Class FrmUserLogin
                         g_PrnDwmc = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                     End If
                 End If
-                rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE paraid = 'µ¥¾İ´òÓ¡ÖĞµ¥Î»Ãû³ÆÓ¢ÎÄ'"
+                rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE paraid = 'å•æ®æ‰“å°ä¸­å•ä½åç§°è‹±æ–‡'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_para") IsNot Nothing Then
@@ -158,7 +158,7 @@ Public Class FrmUserLogin
                     End If
                 End If
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Finally
                 rcOleDbConn.Close()
             End Try
@@ -167,7 +167,7 @@ Public Class FrmUserLogin
         End If
     End Sub
     Public Sub New()
-        ' ÔÚ´Ë²¶»ñ InitializeComponent µÄÈÎºÎÒì³£²¢¼ÇÂ¼²½Öè
+        ' åœ¨æ­¤æ•è· InitializeComponent çš„ä»»ä½•å¼‚å¸¸å¹¶è®°å½•æ­¥éª¤
         Try
             Log("Before InitializeComponent")
             InitializeComponent()
@@ -178,7 +178,7 @@ Public Class FrmUserLogin
         End Try
     End Sub
     Private Sub FrmUserLogin_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.Label2.Text = "°æ±¾£º" & System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion.ToString
+        Me.Label2.Text = "ç‰ˆæœ¬ï¼š" & System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion.ToString
     End Sub
     Private Sub Log(msg As String)
         Try

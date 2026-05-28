@@ -3,22 +3,22 @@ Imports System.Data.OleDb
 Imports Oracle.DataAccess.Client
 
 Public Class FrmUploadFile
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Ñ¡ÔñÎÄ¼ş
+    'é€‰æ‹©æ–‡ä»¶
     ReadOnly OpenFileDialog1 As New OpenFileDialog
 
 #End Region
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.Desktop
-        OpenFileDialog1.Filter = "ËùÓĞÎÄ¼ş(*.*)|*.*"
+        OpenFileDialog1.Filter = "æ‰€æœ‰æ–‡ä»¶(*.*)|*.*"
         If (OpenFileDialog1.ShowDialog(Me) = DialogResult.OK) Then
             Me.TextBox1.Text = OpenFileDialog1.FileName
         End If
@@ -26,17 +26,17 @@ Public Class FrmUploadFile
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         If Not File.Exists(Me.TextBox1.Text) Then
-            MsgBox("ÎÄ¼ş²»´æÔÚ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("æ–‡ä»¶ä¸å­˜åœ¨ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
             Return
         End If
         Me.LblMsg.Text = "1"
-        '¶ÁÈëÎÄ¼şÊı¾İ 
+        'è¯»å…¥æ–‡ä»¶æ•°æ® 
         Dim rcFileStream As New FileStream(Trim(Me.TextBox1.Text), IO.FileMode.Open, IO.FileAccess.Read)
         Dim imgData(rcFileStream.Length - 1) As Byte
         rcFileStream.Read(imgData, 0, rcFileStream.Length - 1)
         rcFileStream.Close()
         Me.LblMsg.Text = "2"
-        '¶ÁÈ¡Êı¾İ¿âÁ¬½Ó×Ö·û´®
+        'è¯»å–æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²
         Dim c As New models.rcCryptography
         Dim rcStreamReader As StreamReader
         Dim FileName As String = Application.StartupPath + "\richen.config"
@@ -47,7 +47,7 @@ Public Class FrmUploadFile
         Dim rcOracleConnection As New OracleConnection("Data Source = (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = " & c.DeCryptography(rcStreamReader.ReadLine) & ")(PORT = 1521)))(CONNECT_DATA = (SERVICE_NAME = " & c.DeCryptography(rcStreamReader.ReadLine) & ")));User ID=" & c.DeCryptography(rcStreamReader.ReadLine) & ";Password=" & c.DeCryptography(rcStreamReader.ReadLine))
         rcStreamReader.Close()
         Try
-            'È¡·şÎñÆ÷Ãû
+            'å–æœåŠ¡å™¨å
             sysOleDbConn.Open()
             rcOleDbCommand.Connection = sysOleDbConn
             rcOleDbCommand.CommandTimeout = 300
@@ -60,20 +60,20 @@ Public Class FrmUploadFile
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_dwdm")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó7¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯7ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             sysOleDbConn.Close()
         End Try
 
-        'REM Ôö¼Ó±£´æ
-        '½¨Á¢ÃüÁî
+        'REM å¢åŠ ä¿å­˜
+        'å»ºç«‹å‘½ä»¤
         Dim rcOracleCommand As OracleCommand = rcOracleConnection.CreateCommand()
         Me.LblMsg.Text = "3"
         Dim i As Integer
         For i = 0 To rcDataset.Tables("rc_dwdm").Rows.Count - 1
             Try
-                '¡¯rcOracleConnection.ConnectionString = "Data Source = (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = " & rcDataset.Tables("rc_dwdm").Rows(i).Item("host") & ")(PORT = 1521)))(CONNECT_DATA = (SERVICE_NAME = " & rcDataset.Tables("rc_dwdm").Rows(i).Item("servicename") & ")));User ID=rcsystem;Password=123456"
+                'â€™rcOracleConnection.ConnectionString = "Data Source = (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = " & rcDataset.Tables("rc_dwdm").Rows(i).Item("host") & ")(PORT = 1521)))(CONNECT_DATA = (SERVICE_NAME = " & rcDataset.Tables("rc_dwdm").Rows(i).Item("servicename") & ")));User ID=rcsystem;Password=123456"
                 rcOracleConnection.Open()
                 rcOracleCommand.Connection = rcOracleConnection
                 rcOracleCommand.CommandTimeout = 300
@@ -89,11 +89,11 @@ Public Class FrmUploadFile
                 rcOracleCommand.Parameters.Add("fname", OpenFileDialog1.FileName.Substring(OpenFileDialog1.FileName.LastIndexOf("\") + 1))
                 Select Case OpenFileDialog1.FileName.Substring(OpenFileDialog1.FileName.LastIndexOf(".") + 1).ToUpper
                     Case "SQL"
-                        rcOracleCommand.Parameters.Add("filetype", "½Å±¾ÎÄ¼ş")
+                        rcOracleCommand.Parameters.Add("filetype", "è„šæœ¬æ–‡ä»¶")
                     Case "TXT"
-                        rcOracleCommand.Parameters.Add("filetype", "ÎÄ±¾ÎÄ¼ş")
+                        rcOracleCommand.Parameters.Add("filetype", "æ–‡æœ¬æ–‡ä»¶")
                     Case Else
-                        rcOracleCommand.Parameters.Add("filetype", "WINRAR×Ô½âÑ¹ÎÄ¼ş")
+                        rcOracleCommand.Parameters.Add("filetype", "WINRARè‡ªè§£å‹æ–‡ä»¶")
 
                 End Select
                 'rcOracleCommand.Parameters.add("filecontext", OleDbType.Binary).Value = imgData
@@ -106,9 +106,9 @@ Public Class FrmUploadFile
             Catch ex As Exception
                 Try
                     'rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" + ex.Message + Chr(13) + rcDataset.Tables("rc_dwdm").Rows(i).Item("host"), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message + Chr(13) + rcDataset.Tables("rc_dwdm").Rows(i).Item("host"), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -135,9 +135,9 @@ Public Class FrmUploadFile
             Catch ex As Exception
                 Try
                     'rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" + ex.Message + Chr(13) + rcDataset.Tables("rc_dwdm").Rows(i).Item("host"), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message + Chr(13) + rcDataset.Tables("rc_dwdm").Rows(i).Item("host"), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -147,7 +147,7 @@ Public Class FrmUploadFile
 
         Me.LblMsg.Text = "11"
         Me.TextBox1.Text = ""
-        Me.LblMsg.Text = "ÉÏ´«Íê±Ï£¡"
+        Me.LblMsg.Text = "ä¸Šä¼ å®Œæ¯•ï¼"
     End Sub
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged

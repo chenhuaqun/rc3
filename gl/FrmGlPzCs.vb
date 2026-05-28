@@ -2,33 +2,33 @@ Imports System.Data.OleDb
 
 Public Class FrmGlPzCs
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Êı¾İ¸üĞÂ´«µİ
+    'æ•°æ®æ›´æ–°ä¼ é€’
     ReadOnly rcOleDbTrans As OleDbTransaction
 
 #End Region
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtCsdm.KeyPress, TxtYspz.KeyPress, TxtJsr.KeyPress, DtpWldqr.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼şÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼Œå»æ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "¹©Ó¦ÉÌ±àÂëÊÂ¼ş"
+#Region "ä¾›åº”å•†ç¼–ç äº‹ä»¶"
 
     Private Sub TxtCsdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCsdm.KeyDown
         Select Case e.KeyCode
@@ -40,7 +40,7 @@ Public Class FrmGlPzCs
                     .paraField1 = "csdm"
                     .paraField2 = "csmc"
                     .paraField3 = "cssm"
-                    .paraTitle = "¹©Ó¦ÉÌ"
+                    .paraTitle = "ä¾›åº”å•†"
                     .paraOldValue = ""
                     .paraAddName = ""
                     .paraCondition = ""
@@ -75,9 +75,9 @@ Public Class FrmGlPzCs
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_csxx")
         Catch ex As Exception
             Try
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
@@ -87,14 +87,14 @@ Public Class FrmGlPzCs
             Me.TxtCsdm.Text = Trim(rcDataSet.Tables("rc_csxx").Rows(0).Item("csdm"))
             Me.TxtCsmc.Text = rcDataSet.Tables("rc_csxx").Rows(0).Item("csmc")
         Else
-            MsgBox("¹©Ó¦ÉÌ±àÂë²»´æÔÚ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ä¾›åº”å•†ç¼–ç ä¸å­˜åœ¨ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             e.Cancel = True
         End If
     End Sub
 
 #End Region
 
-#Region "È·¶¨ÊÂ¼ş"
+#Region "ç¡®å®šäº‹ä»¶"
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         Me.DialogResult = DialogResult.OK

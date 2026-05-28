@@ -2,36 +2,36 @@ Imports System.Data.OleDb
 
 Public Class FrmCostRegionxx
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    'Êı¾İ¸üĞÂ´«µİ
+    'æ•°æ®æ›´æ–°ä¼ é€’
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Êı¾İÊÓÍ¼
+    'æ•°æ®è§†å›¾
     Dim rcDataView As DataView
-    '½¨Á¢Datatable 'ÎÒÃÇÒªÀûÓÃ¸Ãdatatable½øĞĞ½ğ¶î¼ÆËã
+    'å»ºç«‹Datatable 'æˆ‘ä»¬è¦åˆ©ç”¨è¯¥datatableè¿›è¡Œé‡‘é¢è®¡ç®—
     ReadOnly dtCostRegion As New DataTable("rc_costregion")
-    '½¨Á¢Datatable 'ÎÒÃÇÒªÀûÓÃ¸Ãdatatable½øĞĞ½ğ¶î¼ÆËã
+    'å»ºç«‹Datatable 'æˆ‘ä»¬è¦åˆ©ç”¨è¯¥datatableè¿›è¡Œé‡‘é¢è®¡ç®—
     ReadOnly dtCkxx As New DataTable("ckxx")
-    '´òÓ¡ÎÄµµ
+    'æ‰“å°æ–‡æ¡£
     Dim rcRps As RPS.Document = Nothing
-    '¹ÜÀí°ó¶¨µ½ÏàÍ¬Êı¾İÔ´ºÍÊı¾İ³ÉÔ±µÄËùÓĞBinding¶ÔÏó
+    'ç®¡ç†ç»‘å®šåˆ°ç›¸åŒæ•°æ®æºå’Œæ•°æ®æˆå‘˜çš„æ‰€æœ‰Bindingå¯¹è±¡
     'Dim rcBmb As BindingManagerBase
-    'µ±Ç°¼ÇÂ¼ºÅ
+    'å½“å‰è®°å½•å·
     Dim currentPos As Integer
 
 #End Region
 
-#Region "³õÊ¼»¯"
+#Region "åˆå§‹åŒ–"
 
     Private Sub FrmCostRegionxx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        'Êı¾İ°ó¶¨
+        'æ•°æ®ç»‘å®š
         dtCostRegion.Columns.Add("crdm", Type.GetType("System.String"))
         dtCostRegion.Columns.Add("crmc", Type.GetType("System.String"))
         dtCostRegion.Columns.Add("crsm", Type.GetType("System.String"))
@@ -41,7 +41,7 @@ Public Class FrmCostRegionxx
             .Columns("crmc").DefaultValue = ""
             .Columns("crsm").DefaultValue = ""
         End With
-        'ÏÔÊ¾µÈ´ıÑùÊ½Êó±ê
+        'æ˜¾ç¤ºç­‰å¾…æ ·å¼é¼ æ ‡
         Cursor.Current = New Cursor(Application.StartupPath & "\" & "Wait.cur")
         Try
             rcOleDbConn.Open()
@@ -56,7 +56,7 @@ Public Class FrmCostRegionxx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_costregion")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -67,7 +67,7 @@ Public Class FrmCostRegionxx
 
 #End Region
 
-#Region "Ò³ÃæÉèÖÃ"
+#Region "é¡µé¢è®¾ç½®"
 
     Private Sub BtnPageSetup_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnPageSetup.Click, MnuiPageSetup.Click
         PageSetupEvent()
@@ -78,14 +78,14 @@ Public Class FrmCostRegionxx
         With rcFrm
             .paraOleDbConn = rcOleDbConn
             .paraRpsId = "CKXX"
-            .paraRpsName = "²Ö¿âĞÅÏ¢"
+            .paraRpsName = "ä»“åº“ä¿¡æ¯"
             .ShowDialog()
         End With
     End Sub
 
 #End Region
 
-#Region "´òÓ¡¡¢´òÓ¡Ô¤ÀÀ"
+#Region "æ‰“å°ã€æ‰“å°é¢„è§ˆ"
 
     Private Sub BtnPrint_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnPrint.Click, MnuiPrint.Click
         PrintEvent()
@@ -93,7 +93,7 @@ Public Class FrmCostRegionxx
 
     Private Sub PrintEvent()
         If g_Demo = 1 Then
-            MsgBox("¶Ô²»Æğ£¬ÊÔÓÃÈí¼ş²»ÄÜ´òÓ¡¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("å¯¹ä¸èµ·ï¼Œè¯•ç”¨è½¯ä»¶ä¸èƒ½æ‰“å°ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         PreparePrintData()
@@ -122,15 +122,15 @@ Public Class FrmCostRegionxx
         'rcRps.LoadCsvTemplate(rft1)
         'rcRps.SaveTemplate(rft)
         rcRps.LoadTemplate(rft)
-        rcRps.Text(-1, 2) = "µ¥Î»£º" + g_Dwmc
-        rcRps.Text(-1, 4) = "´òÓ¡ÈË£º" + g_User_DspName
+        rcRps.Text(-1, 2) = "å•ä½ï¼š" + g_Dwmc
+        rcRps.Text(-1, 4) = "æ‰“å°äººï¼š" + g_User_DspName
         Dim i As Integer
         For i = 0 To rcDataset.Tables("rc_costregion").Rows.Count - 1
             rcRps.Text(i + 1, 1) = Trim(rcDataset.Tables("rc_costregion").Rows(i).Item("crdm"))
             rcRps.Text(i + 1, 2) = Trim(rcDataset.Tables("rc_costregion").Rows(i).Item("crmc"))
             rcRps.Text(i + 1, 3) = Trim(rcDataset.Tables("rc_costregion").Rows(i).Item("crsm"))
         Next
-        'È¡RPSÊı¾İ
+        'å–RPSæ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -144,13 +144,13 @@ Public Class FrmCostRegionxx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_rps")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_rps").Rows.Count > 0 Then
-            'Éè¶¨Öµ
+            'è®¾å®šå€¼
             rcRps.Scale = rcDataset.Tables("rc_rps").Rows(0).Item("scale")
             rcRps.Orientation = rcDataset.Tables("rc_rps").Rows(0).Item("orientation")
             rcRps.PaperWidth = rcDataset.Tables("rc_rps").Rows(0).Item("paperwidth")
@@ -158,7 +158,7 @@ Public Class FrmCostRegionxx
             rcRps.PrinterLeft = rcDataset.Tables("rc_rps").Rows(0).Item("printerleft")
             rcRps.PrinterTop = rcDataset.Tables("rc_rps").Rows(0).Item("printertop")
         Else
-            'Ä¬ÈÏÖµ
+            'é»˜è®¤å€¼
             rcRps.Scale = 100
             rcRps.Orientation = 1
         End If
@@ -166,10 +166,10 @@ Public Class FrmCostRegionxx
 
 #End Region
 
-#Region "Êä³ö"
+#Region "è¾“å‡º"
 
     Private Sub BtnExport_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport.Click, MnuiExport.Click
-        'µ¼³öÊı¾İ
+        'å¯¼å‡ºæ•°æ®
         Exports2Excel(rcDataset.Tables("rc_costregion"))
     End Sub
 
@@ -196,21 +196,21 @@ Public Class FrmCostRegionxx
                 Next
                 myExcel.Range("A2").Resize(paraDataTable.Rows.Count, paraDataTable.Columns.Count).Value = DataArray
             Catch exp As Exception
-                MessageBox.Show("Êı¾İµ¼³öÊ§°Ü£¡Çë²é¿´ÊÇ·ñÒÑ¾­°²×°ÁËExcel¡£", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("æ•°æ®å¯¼å‡ºå¤±è´¥ï¼è¯·æŸ¥çœ‹æ˜¯å¦å·²ç»å®‰è£…äº†Excelã€‚", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Finally
                 Me.Cursor = Cursors.Default
             End Try
         Else
-            MessageBox.Show("Ã»ÓĞÊı¾İ£¡", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("æ²¡æœ‰æ•°æ®ï¼", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
 #End Region
 
-#Region "ĞÂÔö"
+#Region "æ–°å¢"
 
     Private Sub BtnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNew.Click, MnuiNew.Click
-        'ĞÂÔö
+        'æ–°å¢
         Dim rcFrm As New FrmCostRegionEdit
         With rcFrm
             .ParaAdding = True
@@ -224,10 +224,10 @@ Public Class FrmCostRegionxx
 
 #End Region
 
-#Region "ĞŞ¸Ä"
+#Region "ä¿®æ”¹"
 
     Private Sub BtnEdit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnEdit.Click, MnuiEdit.Click
-        'ĞŞ¸Ä
+        'ä¿®æ”¹
         Dim rcFrm As New FrmCostRegionEdit
         With rcFrm
             .ParaAdding = False
@@ -241,15 +241,15 @@ Public Class FrmCostRegionxx
 
 #End Region
 
-#Region "É¾³ı"
+#Region "åˆ é™¤"
 
     Private Sub BtnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnDelete.Click, MnuiDelete.Click
-        'É¾³ı
-        'É¾³ıÊı¾İ
-        If MessageBox.Show("ÄúÕæµØÒªÉ¾³ıÂğ£¿" & Trim(BindingContext(rcDataView, "").Current("crdm")), "ÌáÊ¾ĞÅÏ¢", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.OK Then
+        'åˆ é™¤
+        'åˆ é™¤æ•°æ®
+        If MessageBox.Show("æ‚¨çœŸåœ°è¦åˆ é™¤å—ï¼Ÿ" & Trim(BindingContext(rcDataView, "").Current("crdm")), "æç¤ºä¿¡æ¯", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.OK Then
             currentPos = BindingContext(rcDataView, "").Position
             If Trim(BindingContext(rcDataView, "").Current("crdm")) = "" Then
-                MessageBox.Show("±àÂë²»ÄÜÎª¿Õ¡£")
+                MessageBox.Show("ç¼–ç ä¸èƒ½ä¸ºç©ºã€‚")
                 Return
             End If
             Try
@@ -259,12 +259,12 @@ Public Class FrmCostRegionxx
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                'É¾³ı³É±¾Óò¹ØÁª²Ö¿âµÄÊı¾İ
+                'åˆ é™¤æˆæœ¬åŸŸå…³è”ä»“åº“çš„æ•°æ®
                 rcOleDbCommand.CommandText = "DELETE FROM rc_cr_ck WHERE crdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.AddWithValue("@crdm", BindingContext(rcDataView, "").Current("crdm"))
                 rcOleDbCommand.ExecuteNonQuery()
-                'É¾³ı³É±¾Óò±àÂë
+                'åˆ é™¤æˆæœ¬åŸŸç¼–ç 
                 rcOleDbCommand.CommandText = "DELETE FROM rc_costregion WHERE crdm = ?"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.AddWithValue("@crdm", BindingContext(rcDataView, "").Current("crdm"))
@@ -280,9 +280,9 @@ Public Class FrmCostRegionxx
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -295,7 +295,7 @@ Public Class FrmCostRegionxx
 
 #End Region
 
-#Region "Ë¢ĞÂ"
+#Region "åˆ·æ–°"
 
     Private Sub BtnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnRefresh.Click, MnuiRefresh.Click
         Try
@@ -311,7 +311,7 @@ Public Class FrmCostRegionxx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_costregion")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -320,7 +320,7 @@ Public Class FrmCostRegionxx
 
 #End Region
 
-#Region "¹ØÁª²Ö¿â"
+#Region "å…³è”ä»“åº“"
 
     Private Sub BtnRelation_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnRelation.Click, MnuiRelation.Click
         Try
@@ -337,7 +337,7 @@ Public Class FrmCostRegionxx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "ckxx")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -353,16 +353,16 @@ Public Class FrmCostRegionxx
 
 #End Region
 
-#Region "¹Ø±Õ"
+#Region "å…³é—­"
 
     Private Sub BtnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
-        '¹Ø±Õ
+        'å…³é—­
         Me.Close()
     End Sub
 
 #End Region
 
-#Region "¹ØÓÚ"
+#Region "å…³äº"
 
     Private Sub MnuiAbout_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuiAbout.Click
         Dim rcFrm As New FrmAbout

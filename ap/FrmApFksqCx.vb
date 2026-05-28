@@ -1,27 +1,27 @@
 Imports System.Data.OleDb
 
 Public Class FrmApFksqCx
-    'Ω®¡¢ ˝æ›  ≈‰∆˜
+    'Âª∫Á´ãÊï∞ÊçÆÈÄÇÈÖçÂô®
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    'Ω®¡¢DataSet∂‘œÛ
+    'Âª∫Á´ãDataSetÂØπË±°
     ReadOnly rcDataset As New DataSet
-    'Ω®¡¢OleDbCommand∂‘œÛ
+    'Âª∫Á´ãOleDbCommandÂØπË±°
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Ω®¡¢Datatable 'Œ“√«“™¿˚”√∏√datatableΩ¯––Ω∂Óº∆À„
+    'Âª∫Á´ãDatatable 'Êàë‰ª¨Ë¶ÅÂà©Áî®ËØ•datatableËøõË°åÈáëÈ¢ùËÆ°ÁÆó
     ReadOnly dtRkd As New DataTable("rkdlb")
     ReadOnly dblDefaultShlv As Double = 0.0
 
     Private Sub FrmApFksqCx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'ƒ¨»œ÷µ
+        'ÈªòËÆ§ÂÄº
         DtpBegin.Value = getInvBegin(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
         DtpEnd.Value = getInvEnd(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
-        '»°µ•æ›¿‡–Õ ˝æ›
+        'ÂèñÂçïÊçÆÁ±ªÂûãÊï∞ÊçÆ
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx WHERE kjnd = ? AND lxgs = '∏∂øÓ…Í«Îµ•' ORDER BY pzlxdm"
+            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx WHERE kjnd = ? AND lxgs = '‰ªòÊ¨æÁî≥ËØ∑Âçï' ORDER BY pzlxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -30,7 +30,7 @@ Public Class FrmApFksqCx
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_lx")
         Catch ex As Exception
-            MsgBox("≥Ã–Ú¥ÌŒÛ°£∂¡»°µ•æ›¿‡–Õ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+            MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇËØªÂèñÂçïÊçÆÁ±ªÂûã„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Return
         Finally
             rcOleDbConn.Close()
@@ -38,16 +38,16 @@ Public Class FrmApFksqCx
         Dim rcDataRow As DataRow
         rcDataRow = rcDataSet.Tables("rc_lx").NewRow
         rcDataRow.Item("pzlxdm") = "0000"
-        rcDataRow.Item("pzlxjc") = "»´≤øµ•æ›"
+        rcDataRow.Item("pzlxjc") = "ÂÖ®ÈÉ®ÂçïÊçÆ"
         rcDataSet.Tables("rc_lx").Rows.Add(rcDataRow)
         If rcDataSet.Tables("rc_lx").Rows.Count = 0 Then
-            MsgBox("«Î∂®“Âµ•æ›¿‡–Õ°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+            MsgBox("ËØ∑ÂÆö‰πâÂçïÊçÆÁ±ªÂûã„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Return
         End If
         BindDropDownList(CmbPzlxjc, rcDataSet.Tables("rc_lx"), "pzlxdm", "pzlxjc")
         CmbPzlxjc.SelectedValue = "0000"
 
-        ' ˝æ›∞Û∂®
+        'Êï∞ÊçÆÁªëÂÆö
         dtRkd.Columns.Add("djh", Type.GetType("System.String"))
         dtRkd.Columns.Add("xh", Type.GetType("System.Int32"))
         dtRkd.Columns.Add("sqrq", Type.GetType("System.DateTime"))
@@ -94,7 +94,7 @@ Public Class FrmApFksqCx
             .Columns("dj").DefaultValue = 0
             .Columns("hsdj").DefaultValue = 0
             .Columns("je").DefaultValue = 0.0
-            .Columns("shlv").DefaultValue = getParaValue("‘ˆ÷µÀ∞ƒ¨»œÀ∞¬ ", False)
+            .Columns("shlv").DefaultValue = getParaValue("Â¢ûÂÄºÁ®éÈªòËÆ§Á®éÁéá", False)
             .Columns("se").DefaultValue = 0
             .Columns("jese").DefaultValue = 0
             .Columns("sqmemo").DefaultValue = ""
@@ -102,7 +102,7 @@ Public Class FrmApFksqCx
 
     End Sub
 
-#Region "ŒÔ¡œ±‡¬Î ¬º˛"
+#Region "Áâ©ÊñôÁºñÁ†Å‰∫ã‰ª∂"
 
     Private Sub TxtCpdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCpdm.KeyDown
         Select Case e.KeyCode
@@ -116,7 +116,7 @@ Public Class FrmApFksqCx
                     .paraField3 = "dw"
                     .paraField4 = "cpsm"
                     .paraOrderField = "cpmc"
-                    .paraTitle = "ŒÔ¡œ"
+                    .paraTitle = "Áâ©Êñô"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -142,7 +142,7 @@ Public Class FrmApFksqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_cpxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -157,7 +157,7 @@ Public Class FrmApFksqCx
 
 #End Region
 
-#Region "π©”¶…Ã±‡¬Î ¬º˛"
+#Region "‰æõÂ∫îÂïÜÁºñÁ†Å‰∫ã‰ª∂"
 
     Private Sub TxtCsdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCsdm.KeyDown
         Select Case e.KeyCode
@@ -169,7 +169,7 @@ Public Class FrmApFksqCx
                     .paraField1 = "csdm"
                     .paraField2 = "csmc"
                     .paraField3 = "cssm"
-                    .paraTitle = "π©”¶…Ã"
+                    .paraTitle = "‰æõÂ∫îÂïÜ"
                     .paraOldValue = ""
                     .paraAddName = ""
                     .paraOrderField = "csmc"
@@ -196,7 +196,7 @@ Public Class FrmApFksqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_csxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£∂¡»°π©”¶…Ã±‡¬Î°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇËØªÂèñ‰æõÂ∫îÂïÜÁºñÁ†Å„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -211,7 +211,7 @@ Public Class FrmApFksqCx
 
 #End Region
 
-#Region "÷∞‘±±‡¬Îµƒ ¬º˛"
+#Region "ËÅåÂëòÁºñÁ†ÅÁöÑ‰∫ã‰ª∂"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
@@ -223,7 +223,7 @@ Public Class FrmApFksqCx
                     .paraField1 = "zydm"
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
-                    .paraTitle = "÷∞‘±"
+                    .paraTitle = "ËÅåÂëò"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -249,7 +249,7 @@ Public Class FrmApFksqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -266,13 +266,13 @@ Public Class FrmApFksqCx
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         If Me.ChbLbfs.Checked Then
-            '»° ˝æ›
+            'ÂèñÊï∞ÊçÆ
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT ap_fksq.djh,ap_fksq.xh,ap_fksq.sqrq,ap_fksq.zydm,ap_fksq.zymc,ap_fksq.csdm,ap_fksq.csmc,ap_fksq.fktj,ap_fksq.fkts,ap_fksq.srq,ap_fksq.sdjh,ap_fksq.sxh,ap_fksq.cpdm,ap_fksq.cpmc,ap_fksq.sl,ap_fksq.dw,ap_fksq.mjsl,ap_fksq.fzsl,ap_fksq.fzdw,ap_fksq.dj,ap_fksq.hsdj,ap_fksq.je,ap_fksq.shlv,ap_fksq.se,(ap_fksq.je+ap_fksq.se) AS jese,ap_fksq.fkje,ap_fksq.sqmemo,ap_fksq.fkje,ap_fksq.srr,ap_fksq.srrq,ap_fksq.shr,ap_fksq.shrq FROM ap_fksq,rc_lx WHERE SUBSTR(ap_fksq.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(ap_fksq.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '∏∂øÓ…Í«Îµ•'" & IIf(Me.ChbSh.Checked, " AND ap_fksq.shr IS NULL", "") & IIf(Me.ChbFk.Checked, " AND (ap_fksq.je + ap_fksq.se > 0 AND ap_fksq.je + ap_fksq.se > ap_fksq.fkje OR ap_fksq.je + ap_fksq.se < 0 AND ap_fksq.je + ap_fksq.se < ap_fksq.fkje) ", "") & " AND sqrq >= ? AND sqrq <= ? AND SUBSTR(ap_fksq.djh,11, 5) >= ?  AND SUBSTR(ap_fksq.djh,11,5) <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and ap_fksq.cpdm = '" & Trim(Me.TxtCpdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " and ap_fksq.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsdm.Text), " and ap_fksq.csdm = '" & Trim(Me.TxtCsdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsmc.Text), " and ap_fksq.csmc Like '%" & Trim(Me.TxtCsmc.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtZydm.Text), " and ap_fksq.zydm = '" & Trim(TxtZydm.Text) & "'", "") & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(ap_fksq.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & " ORDER BY ap_fksq.djh"
+                rcOleDbCommand.CommandText = "SELECT ap_fksq.djh,ap_fksq.xh,ap_fksq.sqrq,ap_fksq.zydm,ap_fksq.zymc,ap_fksq.csdm,ap_fksq.csmc,ap_fksq.fktj,ap_fksq.fkts,ap_fksq.srq,ap_fksq.sdjh,ap_fksq.sxh,ap_fksq.cpdm,ap_fksq.cpmc,ap_fksq.sl,ap_fksq.dw,ap_fksq.mjsl,ap_fksq.fzsl,ap_fksq.fzdw,ap_fksq.dj,ap_fksq.hsdj,ap_fksq.je,ap_fksq.shlv,ap_fksq.se,(ap_fksq.je+ap_fksq.se) AS jese,ap_fksq.fkje,ap_fksq.sqmemo,ap_fksq.fkje,ap_fksq.srr,ap_fksq.srrq,ap_fksq.shr,ap_fksq.shrq FROM ap_fksq,rc_lx WHERE SUBSTR(ap_fksq.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(ap_fksq.djh,5,4) = rc_lx.kjnd AND rc_lx.lxgs = '‰ªòÊ¨æÁî≥ËØ∑Âçï'" & IIf(Me.ChbSh.Checked, " AND ap_fksq.shr IS NULL", "") & IIf(Me.ChbFk.Checked, " AND (ap_fksq.je + ap_fksq.se > 0 AND ap_fksq.je + ap_fksq.se > ap_fksq.fkje OR ap_fksq.je + ap_fksq.se < 0 AND ap_fksq.je + ap_fksq.se < ap_fksq.fkje) ", "") & " AND sqrq >= ? AND sqrq <= ? AND SUBSTR(ap_fksq.djh,11, 5) >= ?  AND SUBSTR(ap_fksq.djh,11,5) <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and ap_fksq.cpdm = '" & Trim(Me.TxtCpdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCpmc.Text), " and ap_fksq.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsdm.Text), " and ap_fksq.csdm = '" & Trim(Me.TxtCsdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsmc.Text), " and ap_fksq.csmc Like '%" & Trim(Me.TxtCsmc.Text) & "%'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtZydm.Text), " and ap_fksq.zydm = '" & Trim(TxtZydm.Text) & "'", "") & IIf(Me.CmbPzlxjc.SelectedValue <> "0000", " AND SUBSTR(ap_fksq.djh,1, 4) ='" & Me.CmbPzlxjc.SelectedValue & "'", "") & " ORDER BY ap_fksq.djh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@sqrq1", OleDbType.Date, 8).Value = Me.DtpBegin.Value
                 rcOleDbCommand.Parameters.Add("@sqrq2", OleDbType.Date, 8).Value = Me.DtpEnd.Value
@@ -284,24 +284,24 @@ Public Class FrmApFksqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rkdlb")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
             If rcDataSet.Tables("rkdlb").Rows.Count <= 0 Then
-                MsgBox("√ª”–¬˙◊„Ãıº˛µƒ ˝æ›°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Ê≤°ÊúâÊª°Ë∂≥Êù°‰ª∂ÁöÑÊï∞ÊçÆ„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             End If
             Dim rcDataRow As DataRow
             rcDataRow = rcDataSet.Tables("rkdlb").NewRow
-            rcDataRow.Item("djh") = "∫œº∆"
+            rcDataRow.Item("djh") = "ÂêàËÆ°"
             rcDataRow.Item("sl") = rcDataSet.Tables("rkdlb").Compute("Sum(sl)", "")
             rcDataRow.Item("je") = rcDataSet.Tables("rkdlb").Compute("Sum(je)", "")
             rcDataRow.Item("se") = rcDataSet.Tables("rkdlb").Compute("Sum(se)", "")
             rcDataRow.Item("jese") = rcDataSet.Tables("rkdlb").Compute("Sum(jese)", "")
             rcDataSet.Tables("rkdlb").Rows.Add(rcDataRow)
-            'µ˜”√±Ìµ•
+            'Ë∞ÉÁî®Ë°®Âçï
             Dim rcFrm As New FrmApFksqCxLb
             With rcFrm
                 .paraDataSet = rcDataset
@@ -311,13 +311,13 @@ Public Class FrmApFksqCx
                 .Show()
             End With
         Else
-            '»° ˝æ›
+            'ÂèñÊï∞ÊçÆ
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT djh FROM ap_fksq,rc_lx WHERE  SUBSTR(ap_fksq.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(ap_fksq.djh,5,4) = rc_lx.kjnd AND lxgs = '∏∂øÓ…Í«Îµ•' AND sqrq >= ? AND sqrq <= ? AND SUBSTR(djh,11,5) >= ?  AND SUBSTR(djh,11,5) <= ? " & IIf(Me.ChbSh.Checked, " AND ap_fksq.shr IS NULL", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsdm.Text), " and ap_fksq.csdm = '" & Trim(Me.TxtCsdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsmc.Text), " and ap_fksq.csmc Like '%" & Trim(Me.TxtCsmc.Text) & "%'", "") & IIf(Trim(Me.TxtZydm.Text).Length > 0, " and ap_fksq.zydm = '" & Trim(TxtZydm.Text) & "'", "") & " GROUP BY djh ORDER BY djh"
+                rcOleDbCommand.CommandText = "SELECT djh FROM ap_fksq,rc_lx WHERE  SUBSTR(ap_fksq.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(ap_fksq.djh,5,4) = rc_lx.kjnd AND lxgs = '‰ªòÊ¨æÁî≥ËØ∑Âçï' AND sqrq >= ? AND sqrq <= ? AND SUBSTR(djh,11,5) >= ?  AND SUBSTR(djh,11,5) <= ? " & IIf(Me.ChbSh.Checked, " AND ap_fksq.shr IS NULL", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsdm.Text), " and ap_fksq.csdm = '" & Trim(Me.TxtCsdm.Text) & "'", "") & IIf(Not String.IsNullOrEmpty(Me.TxtCsmc.Text), " and ap_fksq.csmc Like '%" & Trim(Me.TxtCsmc.Text) & "%'", "") & IIf(Trim(Me.TxtZydm.Text).Length > 0, " and ap_fksq.zydm = '" & Trim(TxtZydm.Text) & "'", "") & " GROUP BY djh ORDER BY djh"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@sqrq1", OleDbType.Date, 8).Value = DtpBegin.Value
                 rcOleDbCommand.Parameters.Add("@sqrq2", OleDbType.Date, 8).Value = Me.DtpEnd.Value
@@ -329,16 +329,16 @@ Public Class FrmApFksqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rkdml")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
             If rcDataset.Tables("rkdml").Rows.Count <= 0 Then
-                MsgBox("√ª”–¬˙◊„Ãıº˛µƒ ˝æ›°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Ê≤°ÊúâÊª°Ë∂≥Êù°‰ª∂ÁöÑÊï∞ÊçÆ„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             End If
-            'µ˜”√±Ìµ•
+            'Ë∞ÉÁî®Ë°®Âçï
             Dim rcFrm As New FrmApFksqCxz
             With rcFrm
                 .ParaDataSet = rcDataset

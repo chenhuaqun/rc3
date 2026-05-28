@@ -1,14 +1,14 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeDddjSh
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
-#Region "ÎïÁÏÀà±ğ±àÂëµÄÊÂ¼ş"
+#Region "ç‰©æ–™ç±»åˆ«ç¼–ç çš„äº‹ä»¶"
 
     Private Sub Txtlbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtLbdm.KeyDown
         Select Case e.KeyCode
@@ -20,7 +20,7 @@ Public Class FrmOeDddjSh
                     .paraField1 = "lbdm"
                     .paraField2 = "lbmc"
                     .paraField3 = "lbsm"
-                    .paraTitle = "ÎïÁÏÀà±ğ"
+                    .paraTitle = "ç‰©æ–™ç±»åˆ«"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -50,7 +50,7 @@ Public Class FrmOeDddjSh
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_cplb")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -65,7 +65,7 @@ Public Class FrmOeDddjSh
 
 #End Region
 
-#Region "µ¥¾İºÅÊÂ¼ş"
+#Region "å•æ®å·äº‹ä»¶"
 
     Private Sub TxtDjh_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtDjh.KeyDown
         Select Case e.KeyCode
@@ -79,7 +79,7 @@ Public Class FrmOeDddjSh
 #End Region
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
-        'È¨ÏŞ¿ØÖÆ
+        'æƒé™æ§åˆ¶
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -94,13 +94,13 @@ Public Class FrmOeDddjSh
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_cplb")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó2¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯2ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_cplb").Rows.Count <= 0 Then
-            MsgBox("ÄãÎŞÈ¨²é¿´¸Ã±¨±í¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ä½ æ— æƒæŸ¥çœ‹è¯¥æŠ¥è¡¨ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Return
         End If
         Dim strExpLbdm As String = ""
@@ -122,7 +122,7 @@ Public Class FrmOeDddjSh
             End If
         End If
 
-        'È¡Êı¾İ
+        'å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -136,17 +136,17 @@ Public Class FrmOeDddjSh
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_ddnr")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_ddnr").Rows.Count <= 0 Then
-            MsgBox("Ã»ÓĞÂú×ãÌõ¼şµÄÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         'For j = 0 To rcDataset.Tables("rc_ddnr").Rows.Count - 1
-        '    'È¡Êı¾İ
+        '    'å–æ•°æ®
         '    Try
         '        rcOleDbConn.Open()
         '        rcOleDbCommand.Connection = rcOleDbConn
@@ -166,13 +166,13 @@ Public Class FrmOeDddjSh
         '            End If
         '        End If
         '    Catch ex As Exception
-        '        MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+        '        MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
         '        Return
         '    Finally
         '        rcOleDbConn.Close()
         '    End Try
         'Next
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeDddjShz
         With rcFrm
             .ParaDataSet = rcDataset

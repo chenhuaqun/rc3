@@ -30,14 +30,14 @@ Public Class FrmYwfKhHzz
         With rcFrm
             .paraOleDbConn = rcOleDbConn
             .paraRpsId = "GlZlfx"
-            .paraRpsName = "ÎïÁÏÅÌ´æ±í"
+            .paraRpsName = "ç‰©æ–™ç›˜å­˜è¡¨"
             .ShowDialog()
         End With
     End Sub
 
     Overrides Sub PrintEvent()
         If g_Demo = 1 Then
-            MsgBox("¶Ô²»Æğ£¬ÊÔÓÃÈí¼ş²»ÄÜ´òÓ¡¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("å¯¹ä¸èµ·ï¼Œè¯•ç”¨è½¯ä»¶ä¸èƒ½æ‰“å°ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         PreparePrintData()
@@ -62,7 +62,7 @@ Public Class FrmYwfKhHzz
         'rcRps.LoadCsvTemplate(rft1)
         'rcRps.SaveTemplate(rft)
         rcRps.LoadTemplate(rft)
-        'È¡RPS´òÓ¡²ÎÊı
+        'å–RPSæ‰“å°å‚æ•°
         rcOleDbConn.Open()
         rcOleDbCommand.Connection = rcOleDbConn
         rcOleDbCommand.CommandTimeout = 300
@@ -76,13 +76,13 @@ Public Class FrmYwfKhHzz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_rps")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataSet.Tables("rc_rps").Rows.Count > 0 Then
-            'Éè¶¨Öµ
+            'è®¾å®šå€¼
             rcRps.Scale = rcDataSet.Tables("rc_rps").Rows(0).Item("scale")
             rcRps.Orientation = rcDataSet.Tables("rc_rps").Rows(0).Item("orientation")
             rcRps.PaperWidth = rcDataSet.Tables("rc_rps").Rows(0).Item("paperwidth")
@@ -90,15 +90,15 @@ Public Class FrmYwfKhHzz
             rcRps.PrinterLeft = rcDataSet.Tables("rc_rps").Rows(0).Item("printerleft")
             rcRps.PrinterTop = rcDataSet.Tables("rc_rps").Rows(0).Item("printertop")
         Else
-            'Ä¬ÈÏÖµ
+            'é»˜è®¤å€¼
             rcRps.Scale = 100
             rcRps.Orientation = 1
         End If
-        'Ì×´ò
+        'å¥—æ‰“
         'rcRps.PaperType = 1
-        rcRps.Text(-1, 1) = "ÎïÁÏÕËÃæÊÕ·¢´æ»ã×Ü±í"
+        rcRps.Text(-1, 1) = "ç‰©æ–™è´¦é¢æ”¶å‘å­˜æ±‡æ€»è¡¨"
         rcRps.Text(-1, 2) = Trim(Label2.Text)
-        rcRps.Text(-1, 4) = "´òÓ¡ÈË£º" & Trim(g_User_DspName)
+        rcRps.Text(-1, 4) = "æ‰“å°äººï¼š" & Trim(g_User_DspName)
         Dim i As Integer
         Dim j As Integer
         For i = 0 To rcDataView.Count - 1

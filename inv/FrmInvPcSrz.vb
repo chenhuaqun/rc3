@@ -4,36 +4,36 @@ Imports System.IO
 
 Public Class FrmInvPcSrz
 
-    '½¨Á¢OLEDBÊı¾İÊÊÅäÆ÷¶ÔÏó
+    'å»ºç«‹OLEDBæ•°æ®é€‚é…å™¨å¯¹è±¡
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDb´«µİ¶ÔÏó
+    'å»ºç«‹OleDbä¼ é€’å¯¹è±¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbÃüÁî
+    'å»ºç«‹OleDbå‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable 'ÎÒÃÇÒªÀûÓÃ¸Ãdatatable½øĞĞ½ğ¶î¼ÆËã
+    'å»ºç«‹Datatable 'æˆ‘ä»¬è¦åˆ©ç”¨è¯¥datatableè¿›è¡Œé‡‘é¢è®¡ç®—
     ReadOnly dtPc As New DataTable("rc_pcnr")
-    '½¨Á¢DataGridViewTextBoxEditingControl¶ÔÏó
+    'å»ºç«‹DataGridViewTextBoxEditingControlå¯¹è±¡
     Dim EditingControl As DataGridViewTextBoxEditingControl
-    '»á¼ÆÆÚ¼ä
+    'ä¼šè®¡æœŸé—´
     Dim strKjqj As String = g_Kjqj
-    'ÅÌ´æÈÕÆÚ
+    'ç›˜å­˜æ—¥æœŸ
     Dim datePcrq As Date = Now.Date()
-    '²Ö¿â±àÂë
+    'ä»“åº“ç¼–ç 
     Dim strCkdm As String = ""
-    'Ôö¼Óµ¥¾İµÄ±äÁ¿
+    'å¢åŠ å•æ®çš„å˜é‡
     Dim IsAdding As Boolean = False
-    'ĞŞ¸Äµ¥¾İµÄ±äÁ¿
+    'ä¿®æ”¹å•æ®çš„å˜é‡
     Dim IsEditing As Boolean = False
-    'ºÏ¼Æ±äÁ¿
+    'åˆè®¡å˜é‡
     Dim dblTotSl As Double = 0.0
     Dim dblTotJcsl As Double = 0.0
     Dim dblTotJcje As Double = 0.0
-    '´òÓ¡ÎÄµµ
+    'æ‰“å°æ–‡æ¡£
     Dim rcRps As RPS.Document = Nothing
 
-#Region "³õÊ¼»¯"
+#Region "åˆå§‹åŒ–"
 
     Public Property ParaDatePcrq() As String
         Get
@@ -54,7 +54,7 @@ Public Class FrmInvPcSrz
     End Property
 
     Private Sub FrmInvPcSrz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'ÉèÖÃDataGridView
+        'è®¾ç½®DataGridView
         Me.rcDataGridView.AutoGenerateColumns = False
         Me.rcDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Me.rcDataGridView.Columns("ColSl").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -70,7 +70,7 @@ Public Class FrmInvPcSrz
         Me.rcDataGridView.Columns("ColCe").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.rcDataGridView.Columns("ColCe").DefaultCellStyle.Format = g_FormatSl
 
-        'Êı¾İ°ó¶¨
+        'æ•°æ®ç»‘å®š
         dtPc.Columns.Add("cpdm", Type.GetType("System.String"))
         dtPc.Columns.Add("cpmc", Type.GetType("System.String"))
         dtPc.Columns.Add("dw", Type.GetType("System.String"))
@@ -85,10 +85,10 @@ Public Class FrmInvPcSrz
             .Columns("sl").DefaultValue = 0.0
             .Columns("jcsl").DefaultValue = 0.0
             .Columns("jcje").DefaultValue = 0.0
-            .Columns("byk").DefaultValue = "Æ½"
+            .Columns("byk").DefaultValue = "å¹³"
             .Columns("ce").DefaultValue = 0.0
         End With
-        '°ó¶¨Êı¾İthe DataGrid to the DataSet.
+        'ç»‘å®šæ•°æ®the DataGrid to the DataSet.
         Me.rcBindingSource.DataSource = dtPc
         Me.rcDataGridView.DataSource = Me.rcBindingSource
         Me.DtpPcrq.Value = datePcrq
@@ -98,7 +98,7 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "ÉèÖÃ¿Ø¼ş"
+#Region "è®¾ç½®æ§ä»¶"
 
     Private Sub SetControlEnableEvent()
         If IsEditing = True Then
@@ -122,13 +122,13 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles DtpPcrq.KeyPress, TxtZydm.KeyPress, TxtCkdm.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼şÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼Œå»æ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
@@ -149,10 +149,10 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "¼ÆËãºÏ¼ÆÊı"
+#Region "è®¡ç®—åˆè®¡æ•°"
 
     Private Sub SumSlJe()
-        '¼ÆËãºÏ¼ÆÊı
+        'è®¡ç®—åˆè®¡æ•°
         dblTotSl = 0.0
         dblTotJcsl = 0.0
         dblTotJcje = 0.0
@@ -162,14 +162,14 @@ Public Class FrmInvPcSrz
             dblTotJcsl = dtPc.Compute("Sum(jcsl)", "")
             dblTotJcje = dtPc.Compute("Sum(jcje)", "")
         End If
-        Me.LblSl.Text = "ÅÌ´æÊıÁ¿ºÏ¼Æ£º" + Format(dblTotSl, g_FormatSl)
-        Me.LblJcsl.Text = "½á´æÊıÁ¿ºÏ¼Æ£º" + Format(dblTotJcsl, g_FormatSl)
-        Me.LblJcje.Text = "½á´æ½ğ¶îºÏ¼Æ£º" + Format(dblTotJcje, g_FormatJe)
+        Me.LblSl.Text = "ç›˜å­˜æ•°é‡åˆè®¡ï¼š" + Format(dblTotSl, g_FormatSl)
+        Me.LblJcsl.Text = "ç»“å­˜æ•°é‡åˆè®¡ï¼š" + Format(dblTotJcsl, g_FormatSl)
+        Me.LblJcje.Text = "ç»“å­˜é‡‘é¢åˆè®¡ï¼š" + Format(dblTotJcje, g_FormatJe)
     End Sub
 
 #End Region
 
-#Region "Ö°Ô±±àÂëµÄÊÂ¼ş"
+#Region "èŒå‘˜ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
@@ -182,7 +182,7 @@ Public Class FrmInvPcSrz
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
                     .paraOrderField = "zymc"
-                    .paraTitle = "Ö°Ô±"
+                    .paraTitle = "èŒå‘˜"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -215,7 +215,7 @@ Public Class FrmInvPcSrz
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Finally
                 rcOleDbConn.Close()
             End Try
@@ -223,7 +223,7 @@ Public Class FrmInvPcSrz
                 Me.TxtZydm.Text = Trim(rcDataset.Tables("rc_zyxx").Rows(0).Item("zydm"))
                 Me.LblZymc.Text = Trim(rcDataset.Tables("rc_zyxx").Rows(0).Item("zymc"))
             Else
-                MsgBox("Ö°Ô±±àÂë²»´æÔÚ£¬ÇëÖØÊäÈë¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("èŒå‘˜ç¼–ç ä¸å­˜åœ¨ï¼Œè¯·é‡è¾“å…¥ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
             End If
         End If
@@ -237,7 +237,7 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "²Ö¿â±àÂëµÄÊÂ¼ş"
+#Region "ä»“åº“ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtCkdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCkdm.KeyDown
         Select Case e.KeyCode
@@ -249,7 +249,7 @@ Public Class FrmInvPcSrz
                     .paraField1 = "ckdm"
                     .paraField2 = "ckmc"
                     .paraField3 = "cksm"
-                    .paraTitle = "²Ö¿â"
+                    .paraTitle = "ä»“åº“"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -279,7 +279,7 @@ Public Class FrmInvPcSrz
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_ckxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -299,7 +299,7 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "DataGridViewµÄÊÂ¼ş"
+#Region "DataGridViewçš„äº‹ä»¶"
 
     'Private Sub rcDataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles rcDataGridView.CellEnter
     '    If Me.rcDataGridView.CurrentCell.ReadOnly Then My.Computer.Keyboard.SendKeys("{Enter}")
@@ -314,7 +314,7 @@ Public Class FrmInvPcSrz
             If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColCpdm" Then
                 If Not String.IsNullOrEmpty(e.FormattedValue) Then
                     If Not String.IsNullOrEmpty(e.FormattedValue) Then
-                        'È¡²úÆ·ĞÅÏ¢
+                        'å–äº§å“ä¿¡æ¯
                         Try
                             rcOleDbConn.Open()
                             rcOleDbCommand.Connection = rcOleDbConn
@@ -373,7 +373,7 @@ Public Class FrmInvPcSrz
                                 Me.rcDataGridView.CurrentRow.Cells("ColJcsl").Value = rcDataset.Tables("cpsfchz").Rows(0).Item("jcsl")
                                 Me.rcDataGridView.CurrentRow.Cells("ColJcje").Value = rcDataset.Tables("cpsfchz").Rows(0).Item("jcje")
 
-                                'È¡×îĞÂ¿â´æÊıÁ¿
+                                'å–æœ€æ–°åº“å­˜æ•°é‡
                                 rcOleDbCommand.CommandText = "SELECT COALESCE(Sum(qcsl+idsl),0.0) as kcsl FROM inv_cpyeb WHERE kjnd = ? AND ckdm = ? AND cpdm = ?"
                                 rcOleDbCommand.Parameters.Clear()
                                 rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = datePcrq.Date
@@ -385,16 +385,16 @@ Public Class FrmInvPcSrz
                                 End If
                                 rcOleDbDataAdpt.Fill(rcDataset, "inv_cpyeb")
                                 If rcDataset.Tables("inv_cpyeb").Rows.Count = 1 Then
-                                    Me.LblMsg.Text = "µ±Ç°¿â´æÊıÁ¿£º" & rcDataset.Tables("inv_cpyeb").Rows(0).Item("kcsl")
+                                    Me.LblMsg.Text = "å½“å‰åº“å­˜æ•°é‡ï¼š" & rcDataset.Tables("inv_cpyeb").Rows(0).Item("kcsl")
                                 Else
-                                    Me.LblMsg.Text = "µ±Ç°¿â´æÊıÁ¿£º 0.00 "
+                                    Me.LblMsg.Text = "å½“å‰åº“å­˜æ•°é‡ï¼š 0.00 "
                                 End If
                             Else
-                                Me.LblMsg.Text = "ÎïÁÏ±àÂë²»´æÔÚ¡£"
+                                Me.LblMsg.Text = "ç‰©æ–™ç¼–ç ä¸å­˜åœ¨ã€‚"
                                 e.Cancel = True
                             End If
                         Catch ex As Exception
-                            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                             Return
                         Finally
                             rcOleDbConn.Close()
@@ -406,12 +406,12 @@ Public Class FrmInvPcSrz
                 If e.FormattedValue.GetType.ToString <> "System.DBNull" Then
                     Me.rcDataGridView.CurrentRow.Cells("ColCe").Value = e.FormattedValue - Me.rcDataGridView.CurrentRow.Cells("ColJcsl").Value
                     If Me.rcDataGridView.CurrentRow.Cells("ColCe").Value > 0 Then
-                        Me.rcDataGridView.CurrentRow.Cells("ColByk").Value = "ÅÌÓ¯"
+                        Me.rcDataGridView.CurrentRow.Cells("ColByk").Value = "ç›˜ç›ˆ"
                     Else
                         If Me.rcDataGridView.CurrentRow.Cells("ColCe").Value = 0 Then
-                            Me.rcDataGridView.CurrentRow.Cells("ColByk").Value = "Æ½"
+                            Me.rcDataGridView.CurrentRow.Cells("ColByk").Value = "å¹³"
                         Else
-                            Me.rcDataGridView.CurrentRow.Cells("ColByk").Value = "ÅÌ¿÷"
+                            Me.rcDataGridView.CurrentRow.Cells("ColByk").Value = "ç›˜äº"
                         End If
                     End If
                 Else
@@ -424,10 +424,10 @@ Public Class FrmInvPcSrz
     Private Sub RcDataGridView_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles rcDataGridView.KeyDown
         Select Case e.KeyCode
             Case Keys.C And e.Control
-                '¸´ÖÆ
+                'å¤åˆ¶
                 Clipboard.SetDataObject(Me.rcDataGridView.GetClipboardContent())
             Case Keys.V And e.Control
-                'Õ³Ìù
+                'ç²˜è´´
                 Me.rcDataGridView.CurrentCell.Value = Clipboard.GetText()
                 Me.rcBindingSource.EndEdit()
                 Me.rcDataGridView.EndEdit()
@@ -444,11 +444,11 @@ Public Class FrmInvPcSrz
                         .paraField3 = "dw"
                         .paraField4 = "cpsm"
                         .paraOrderField = "cpmc"
-                        .paraTitle = "ÎïÁÏ"
+                        .paraTitle = "ç‰©æ–™"
                         .paraOldValue = ""
                         .paraAddName = ""
                         If .ShowDialog = DialogResult.OK Then
-                            '½«ÓÃ»§ÔÚrcfrmselectcpdmËùÑ¡ÔñµÄcpdm´øÈërcdatarid'
+                            'å°†ç”¨æˆ·åœ¨rcfrmselectcpdmæ‰€é€‰æ‹©çš„cpdmå¸¦å…¥rcdatarid'
                             Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value = .paraField1
                             Me.rcBindingSource.EndEdit()
                             Me.rcDataGridView.EndEdit()
@@ -483,11 +483,11 @@ Public Class FrmInvPcSrz
                         .paraField3 = "dw"
                         .paraField4 = "cpsm"
                         .paraOrderField = "cpmc"
-                        .paraTitle = "ÎïÁÏ"
+                        .paraTitle = "ç‰©æ–™"
                         .paraOldValue = ""
                         .paraAddName = ""
                         If .ShowDialog = DialogResult.OK Then
-                            '½«ÓÃ»§ÔÚrcfrmselectcpdmËùÑ¡ÔñµÄcpdm´øÈërcdatarid'
+                            'å°†ç”¨æˆ·åœ¨rcfrmselectcpdmæ‰€é€‰æ‹©çš„cpdmå¸¦å…¥rcdatarid'
                             Me.rcDataGridView.CurrentRow.Cells("ColCpdm").Value = .paraField1
                             Me.rcDataGridView.EndEdit()
                             Me.rcBindingSource.EndEdit()
@@ -516,7 +516,7 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "±£´æÊÂ¼ş"
+#Region "ä¿å­˜äº‹ä»¶"
 
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSave.Click, MnuiSave.Click
         SaveEvent(False)
@@ -524,14 +524,14 @@ Public Class FrmInvPcSrz
 
     Private Sub SaveEvent(ByVal blnPrint As Boolean)
         Dim i As Integer
-        '(Ò»)Êı¾İºÏ·¨ĞÔ¼ì²é
+        '(ä¸€)æ•°æ®åˆæ³•æ€§æ£€æŸ¥
         If String.IsNullOrEmpty(Me.TxtZydm.Text) Then
-            MsgBox("ÇëÊäÈë¾­ÊÖÈË¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("è¯·è¾“å…¥ç»æ‰‹äººã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Return
         End If
-        '(2)²Ö¿â±àÂë¼ì²é
+        '(2)ä»“åº“ç¼–ç æ£€æŸ¥
         If String.IsNullOrEmpty(Me.TxtCkdm.Text) Then
-            MsgBox("²Ö¿â±àÂë²»ÄÜÎª¿Õ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ä»“åº“ç¼–ç ä¸èƒ½ä¸ºç©ºã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
             Return
         End If
         Try
@@ -548,24 +548,24 @@ Public Class FrmInvPcSrz
             rcOleDbCommand.Parameters.Add("@paraIntRecordCount", OleDbType.Integer, 1).Direction = ParameterDirection.ReturnValue
             rcOleDbCommand.ExecuteNonQuery()
             If rcOleDbCommand.Parameters.Item("@paraIntRecordCount").Value <> 1 Then
-                MsgBox(Trim(TxtCkdm.Text) & "²Ö¿â±àÂë²»ÕıÈ·£¬Çë¼ì²é¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox(Trim(TxtCkdm.Text) & "ä»“åº“ç¼–ç ä¸æ­£ç¡®ï¼Œè¯·æ£€æŸ¥ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
                 Me.TxtCkdm.Text = ""
                 Me.LblCkmc.Text = ""
                 Me.TxtCkdm.Focus()
                 Return
             End If
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        '(1)ÊÇ·ñÓĞĞèÒª´æ´¢µÄÊı¾İ
+        '(1)æ˜¯å¦æœ‰éœ€è¦å­˜å‚¨çš„æ•°æ®
         If rcDataset.Tables("rc_pcnr").Rows.Count = 0 Then
-            MsgBox("Ã»ÓĞÏàÓ¦µÄÒµÎñ£¬ÇëÊäÈë¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("æ²¡æœ‰ç›¸åº”çš„ä¸šåŠ¡ï¼Œè¯·è¾“å…¥ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Return
         End If
-        '(2)Ö°Ô±±àÂë
+        '(2)èŒå‘˜ç¼–ç 
         If Not String.IsNullOrEmpty(Me.TxtZydm.Text) Then
             Try
                 rcOleDbConn.Open()
@@ -581,17 +581,17 @@ Public Class FrmInvPcSrz
                 rcOleDbCommand.Parameters.Add("@paraIntRecordCount", OleDbType.Integer, 1).Direction = ParameterDirection.ReturnValue
                 rcOleDbCommand.ExecuteNonQuery()
                 If rcOleDbCommand.Parameters("@paraIntRecordCount").Value <> 1 Then
-                    MsgBox("Ö°Ô±±àÂë²»ÕıÈ·£¬Çë¼ì²é¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("èŒå‘˜ç¼–ç ä¸æ­£ç¡®ï¼Œè¯·æ£€æŸ¥ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
                     Return
                 End If
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
         End If
-        '(3)ÎïÁÏ±àÂë
+        '(3)ç‰©æ–™ç¼–ç 
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -609,18 +609,18 @@ Public Class FrmInvPcSrz
                     rcOleDbDataAdpt.Fill(rcDataset, "cpdmcnt")
 
                     If rcDataset.Tables("cpdmcnt").Rows.Count <> 1 Then
-                        MsgBox(Trim(rcDataset.Tables("rc_pcnr").Rows(i).Item("cpdm")) & "ÎïÁÏ±àÂë²»ÕıÈ·£¬Çë¼ì²é¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox(Trim(rcDataset.Tables("rc_pcnr").Rows(i).Item("cpdm")) & "ç‰©æ–™ç¼–ç ä¸æ­£ç¡®ï¼Œè¯·æ£€æŸ¥ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
                         Return
                     End If
                 End If
             Next
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        '(¶ş)´æ´¢
+        '(äºŒ)å­˜å‚¨
         Try
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
@@ -630,7 +630,7 @@ Public Class FrmInvPcSrz
             rcOleDbCommand.CommandType = CommandType.StoredProcedure
             rcOleDbCommand.CommandText = "USP3_SAVE_INV_PC"
             For i = 0 To rcDataset.Tables("rc_pcnr").Rows.Count - 1
-                If rcDataset.Tables("rc_pcnr").Rows(i).Item("byk") <> "Æ½" Then
+                If rcDataset.Tables("rc_pcnr").Rows(i).Item("byk") <> "å¹³" Then
                     rcOleDbCommand.Parameters.Clear()
                     'rcOleDbCommand.Parameters.Add("@paraIntIsAdding", OleDbType.Integer, 1).Value = IIf(IsAdding, 1, 0)
                     rcOleDbCommand.Parameters.Add("@paraDateRkrq", OleDbType.Date, 8).Value = Me.DtpPcrq.Value
@@ -645,14 +645,14 @@ Public Class FrmInvPcSrz
                     rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = rcDataset.Tables("rc_pcnr").Rows(i).Item("sl")
                     rcOleDbCommand.Parameters.Add("@paraDblJcsl", OleDbType.Numeric, 18).Value = rcDataset.Tables("rc_pcnr").Rows(i).Item("jcsl")
                     rcOleDbCommand.Parameters.Add("@paraDblJcje", OleDbType.Numeric, 14).Value = rcDataset.Tables("rc_pcnr").Rows(i).Item("jcje")
-                    rcOleDbCommand.Parameters.Add("@paraBlnByk", OleDbType.Numeric, 1).Value = IIf(rcDataset.Tables("rc_pcnr").Rows(i).Item("byk") = "ÅÌÓ¯", 1, 0)
+                    rcOleDbCommand.Parameters.Add("@paraBlnByk", OleDbType.Numeric, 1).Value = IIf(rcDataset.Tables("rc_pcnr").Rows(i).Item("byk") = "ç›˜ç›ˆ", 1, 0)
                     rcOleDbCommand.Parameters.Add("@paraDblCe", OleDbType.Numeric, 14).Value = rcDataset.Tables("rc_pcnr").Rows(i).Item("ce")
                     rcOleDbCommand.Parameters.Add("@paraStrUserDspName", OleDbType.VarChar, 30).Value = g_User_DspName
                     rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                     rcOleDbCommand.ExecuteNonQuery()
                     If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
                         If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
-                            MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+                            MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
                             Return
                         End If
                     End If
@@ -662,30 +662,30 @@ Public Class FrmInvPcSrz
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        '´òÓ¡
+        'æ‰“å°
         If blnPrint Then
             PrintEvent()
         End If
-        '¿Ø¼şÉèÖÃ
+        'æ§ä»¶è®¾ç½®
         SetControlEnableEvent()
-        'ÉèÖÃ½¹µã
+        'è®¾ç½®ç„¦ç‚¹
         'Me.TxtDjh.Focus()
     End Sub
 
 #End Region
 
-#Region "È¡ÏûĞŞ¸ÄÊÂ¼ş"
+#Region "å–æ¶ˆä¿®æ”¹äº‹ä»¶"
 
     Private Sub BtnCancelEvent(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCancel.Click, MnuiCancel.Click
-        If MsgBox("ÊÇ·ñ·ÅÆúËù×öµÄĞŞ¸Ä£¿", MsgBoxStyle.YesNo + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢") = MsgBoxResult.Yes Then
+        If MsgBox("æ˜¯å¦æ”¾å¼ƒæ‰€åšçš„ä¿®æ”¹ï¼Ÿ", MsgBoxStyle.YesNo + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯") = MsgBoxResult.Yes Then
             IsAdding = False
             IsEditing = False
             SetControlEnableEvent()
@@ -695,7 +695,7 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "²åÈëDataGridViewĞĞÊÂ¼ş"
+#Region "æ’å…¥DataGridViewè¡Œäº‹ä»¶"
 
     Private Sub BtnIns_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnIns.Click, MnuiIns.Click
         If Me.rcDataGridView.ReadOnly = False Then
@@ -709,7 +709,7 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "É¾³ıDataGridViewĞĞÊÂ¼ş"
+#Region "åˆ é™¤DataGridViewè¡Œäº‹ä»¶"
 
     Private Sub BtnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnDelete.Click, MnuiDelete.Click
         DeleteEvent()
@@ -740,21 +740,21 @@ Public Class FrmInvPcSrz
     End Sub
 #End Region
 
-#Region "´òÓ¡ÉèÖÃ¡¢´òÓ¡¡¢´òÓ¡Ô¤ÀÀÊÂ¼ş"
+#Region "æ‰“å°è®¾ç½®ã€æ‰“å°ã€æ‰“å°é¢„è§ˆäº‹ä»¶"
 
     Private Sub PageSetupEvent()
         Dim rcFrmPageSetup As New models.FrmPageSetup
         With rcFrmPageSetup
             .paraOleDbConn = rcOleDbConn
             .paraRpsId = "PCBBZ"
-            .paraRpsName = "ÅÌ´æ±í±ê×¼¸ñÊ½"
+            .paraRpsName = "ç›˜å­˜è¡¨æ ‡å‡†æ ¼å¼"
             .ShowDialog()
         End With
     End Sub
 
     Private Sub PrintEvent()
         If g_Demo = 1 Then
-            MsgBox("¶Ô²»Æğ£¬ÊÔÓÃÈí¼ş²»ÄÜ´òÓ¡¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("å¯¹ä¸èµ·ï¼Œè¯•ç”¨è½¯ä»¶ä¸èƒ½æ‰“å°ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         PreparePrintData()
@@ -776,7 +776,7 @@ Public Class FrmInvPcSrz
         End If
         Dim rft As String = Application.StartupPath + "\reports\rkdbz.rft"
         rcRps.LoadTemplate(rft)
-        'È¡RPS´òÓ¡²ÎÊı
+        'å–RPSæ‰“å°å‚æ•°
         rcOleDbConn.Open()
         rcOleDbCommand.Connection = rcOleDbConn
         rcOleDbCommand.CommandTimeout = 300
@@ -790,13 +790,13 @@ Public Class FrmInvPcSrz
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_rps")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_rps").Rows.Count > 0 Then
-            'Éè¶¨Öµ
+            'è®¾å®šå€¼
             rcRps.Scale = rcDataset.Tables("rc_rps").Rows(0).Item("scale")
             rcRps.Orientation = rcDataset.Tables("rc_rps").Rows(0).Item("orientation")
             rcRps.PaperWidth = rcDataset.Tables("rc_rps").Rows(0).Item("paperwidth")
@@ -804,18 +804,18 @@ Public Class FrmInvPcSrz
             rcRps.PrinterLeft = rcDataset.Tables("rc_rps").Rows(0).Item("printerleft")
             rcRps.PrinterTop = rcDataset.Tables("rc_rps").Rows(0).Item("printertop")
         Else
-            'Ä¬ÈÏÖµ
+            'é»˜è®¤å€¼
             rcRps.Scale = 100
             rcRps.Orientation = 1
         End If
-        'Ì×´ò
+        'å¥—æ‰“
         'rcRps.PaperType = 1
-        rcRps.Text(-1, 1) = g_PrnDwmc & "ÎïÁÏÅÌ´æ±í"
-        'rcRps.Text(-1, 2) = "µ¥¾İºÅ£º" & Trim(Me.TxtDjh.Text) & "  %p/%t"
-        'rcRps.Text(-1, 3) = "¹©Ó¦ÉÌ£º(" & Trim(Me.TxtKhdm.Text) & ")" & Trim(Me.LblKhmc.Text)
-        rcRps.Text(-1, 4) = "¿â´æµØµã£º(" & Trim(Me.TxtCkdm.Text) & ")" & Trim(LblCkmc.Text)
-        rcRps.Text(-1, 5) = "ÈÕÆÚ£º" & DtpPcrq.Value.Date.ToLongDateString
-        rcRps.Text(-1, 22) = "¹¤×Ê"
+        rcRps.Text(-1, 1) = g_PrnDwmc & "ç‰©æ–™ç›˜å­˜è¡¨"
+        'rcRps.Text(-1, 2) = "å•æ®å·ï¼š" & Trim(Me.TxtDjh.Text) & "  %p/%t"
+        'rcRps.Text(-1, 3) = "ä¾›åº”å•†ï¼š(" & Trim(Me.TxtKhdm.Text) & ")" & Trim(Me.LblKhmc.Text)
+        rcRps.Text(-1, 4) = "åº“å­˜åœ°ç‚¹ï¼š(" & Trim(Me.TxtCkdm.Text) & ")" & Trim(LblCkmc.Text)
+        rcRps.Text(-1, 5) = "æ—¥æœŸï¼š" & DtpPcrq.Value.Date.ToLongDateString
+        rcRps.Text(-1, 22) = "å·¥èµ„"
         Dim i As Integer
         Dim j As Integer
         Dim intPage As Integer
@@ -854,8 +854,8 @@ Public Class FrmInvPcSrz
             Dim m As New models.ChineseNum With {
                 .InputString = dblTotalJe
             }
-            rcRps.PerPageText(intPage, 6) = IIf(intPage = Math.Ceiling(rcDataSet.Tables("rc_pcnr").Rows.Count / rcRps.LinesPerPage.ToString), "ºÏ¼Æ", "Ğ¡¼Æ")
-            rcRps.PerPageText(intPage, 7) = m.OutString '´óĞ´
+            rcRps.PerPageText(intPage, 6) = IIf(intPage = Math.Ceiling(rcDataSet.Tables("rc_pcnr").Rows.Count / rcRps.LinesPerPage.ToString), "åˆè®¡", "å°è®¡")
+            rcRps.PerPageText(intPage, 7) = m.OutString 'å¤§å†™
             rcRps.PerPageText(intPage, 8) = Format(dblTotalSl, g_FormatSl)
             rcRps.PerPageText(intPage, 10) = Format(dblTotalJe, g_FormatJe)
             'dblTotalJe = 0.0
@@ -866,7 +866,7 @@ Public Class FrmInvPcSrz
                 j += 1
             Next
         End If
-        rcRps.Text(-1, 13) = "ÊÕ»õÈË£¨²Ö¹Ü£©£º" & g_User_DspName
+        rcRps.Text(-1, 13) = "æ”¶è´§äººï¼ˆä»“ç®¡ï¼‰ï¼š" & g_User_DspName
     End Sub
 
     Private Sub MnuiPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiPrint.Click
@@ -891,7 +891,7 @@ Public Class FrmInvPcSrz
 
 #End Region
 
-#Region "ÍË³ö±íµ¥ÊÂ¼ş"
+#Region "é€€å‡ºè¡¨å•äº‹ä»¶"
 
     Private Sub BtnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExit.Click
         ExitEvent()
@@ -907,7 +907,7 @@ Public Class FrmInvPcSrz
 
     'Private Sub FrmInvPcSrz2_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
     '    If IsEditing Then
-    '        MsgBox("ÒÑ¾­±à¼­¹ıÊı¾İ£¬Çë±£´æÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+    '        MsgBox("å·²ç»ç¼–è¾‘è¿‡æ•°æ®ï¼Œè¯·ä¿å­˜æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
     '        e.Cancel = True
     '    End If
     'End Sub

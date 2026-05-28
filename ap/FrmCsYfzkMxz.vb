@@ -10,10 +10,10 @@ Public Class FrmCsYfzkMxz
         'For i = 0 To rcDataView.Table.Rows.Count - 1
         '    If rcDataView.Table.Rows(i).Item("zy").GetType.ToString <> "System.DBNull" Then
         '        Select Case rcDataView.Table.Rows(i).Item("zy")
-        '            Case "期初结存"
+        '            Case "鏈熷垵缁撳瓨"
         '                dblYe = rcDataView.Table.Rows(i).Item("ye")
-        '            Case "本月合计"
-        '            Case "本年累计"
+        '            Case "鏈湀鍚堣"
+        '            Case "鏈勾绱"
         '            Case Else
         '                dblYe = dblYe + rcDataView.Table.Rows(i).Item("yfje") - rcDataView.Table.Rows(i).Item("fkje")
         '                rcDataView.Table.Rows(i).Item("ye") = dblYe

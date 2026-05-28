@@ -1,7 +1,7 @@
 Public Class FrmOeFhdSr
 
     Private Sub FrmOeFhdSr_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         Me.NudYear.Value = Mid(g_Kjqj, 1, 4)
         Me.NudMonth.Value = Mid(g_Kjqj, 5, 2)
     End Sub
@@ -10,13 +10,13 @@ Public Class FrmOeFhdSr
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼şÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼Œå»æ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeFhdSrz
         With rcFrm
             .ParaStrYear = NudYear.Value.ToString.PadLeft(4, "0")

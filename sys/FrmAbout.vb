@@ -1,7 +1,7 @@
 Public Class FrmAbout
 
     Private Sub FrmAbout_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.Label4.Text = "»Ìº˛∞Ê±æ∫≈£∫" & System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion.ToString
+        Me.Label4.Text = "ËΩØ‰ª∂ÁâàÊú¨Âè∑Ôºö" & System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath).FileVersion.ToString
     End Sub
 
     Private Sub LblEmail_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LblEmail.LinkClicked

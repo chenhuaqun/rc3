@@ -1,29 +1,29 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeFpShz
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     Dim rcDataset As New DataSet
-    '±íÊ¾ÒªÔÚÊı¾İÔ´Ö´ĞĞµÄ SQL ÊÂÎñ
+    'è¡¨ç¤ºè¦åœ¨æ•°æ®æºæ‰§è¡Œçš„ SQL äº‹åŠ¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable 'ÎÒÃÇÒªÀûÓÃ¸Ãdatatable½øĞĞ½ğ¶î¼ÆËã
+    'å»ºç«‹Datatable 'æˆ‘ä»¬è¦åˆ©ç”¨è¯¥datatableè¿›è¡Œé‡‘é¢è®¡ç®—
     ReadOnly dtCkd As New DataTable("rc_fpnr")
-    'Êı¾İ°ó¶¨
+    'æ•°æ®ç»‘å®š
     Dim rcBmb As BindingManagerBase
-    '´òÓ¡ÎÄµµ
+    'æ‰“å°æ–‡æ¡£
     Dim rcRps As RPS.Document = Nothing
-    'ºÏ¼Æ±äÁ¿
+    'åˆè®¡å˜é‡
     Dim dblTotalSl As Double = 0.0
     Dim dblTotalFzsl As Double = 0.0
     Dim dblTotalJe As Double = 0.0
     Dim dblTotalSe As Double = 0.0
-    ''Ì×´ò±êÖ¾
+    ''å¥—æ‰“æ ‡å¿—
     'Dim blnTd As Boolean = False
 
-#Region "´°Ìå³õÊ¼»¯"
+#Region "çª—ä½“åˆå§‹åŒ–"
 
     Public Property ParaDataSet() As DataSet
         Get
@@ -35,7 +35,7 @@ Public Class FrmOeFpShz
     End Property
 
     Private Sub FrmOeFpShz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'ÉèÖÃDataGridView
+        'è®¾ç½®DataGridView
         Me.rcDataGridView.AutoGenerateColumns = False
         Me.rcDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Me.rcDataGridView.Columns("ColSl").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -66,13 +66,13 @@ Public Class FrmOeFpShz
         Me.rcDataGridView.Columns("ColXsdShlv").DefaultCellStyle.Format = g_FormatJe
         Me.rcDataGridView.Columns("ColXsdSe").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.rcDataGridView.Columns("ColXsdSe").DefaultCellStyle.Format = g_FormatJe
-        ''È¡Ì×´ò¸ñÊ½´òÓ¡ÏúÊÛµ¥
+        ''å–å¥—æ‰“æ ¼å¼æ‰“å°é”€å”®å•
         'Try
         '    rcOleDbConn.Open()
         '    rcOleDbCommand.Connection = rcOleDbConn
         '    rcOleDbCommand.CommandTimeout = 300
         '    rcOleDbCommand.CommandType = CommandType.Text
-        '    rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'Ì×´ò¸ñÊ½´òÓ¡ÏúÊÛµ¥' ORDER BY paraid"
+        '    rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'å¥—æ‰“æ ¼å¼æ‰“å°é”€å”®å•' ORDER BY paraid"
         '    rcOleDbCommand.Parameters.Clear()
         '    rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
         '    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -86,7 +86,7 @@ Public Class FrmOeFpShz
         '        End If
         '    End If
         'Catch ex As Exception
-        '    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+        '    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
         '    Return
         'Finally
         '    rcOleDbConn.Close()
@@ -99,12 +99,12 @@ Public Class FrmOeFpShz
 
 #End Region
 
-#Region "ÏÔÊ¾²úÆ·ÏúÊÛµ¥"
+#Region "æ˜¾ç¤ºäº§å“é”€å”®å•"
 
     Private Sub ShowXsd(ByVal xsdDjh As String)
-        'ÅĞ¶ÏxsdDjh
+        'åˆ¤æ–­xsdDjh
 
-        'È¡oe_fpÊı¾İ
+        'å–oe_fpæ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -119,15 +119,15 @@ Public Class FrmOeFpShz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_fpml")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        '¸³Öµ
+        'èµ‹å€¼
         Me.TxtDjh.Text = rcDataSet.Tables("rc_fpml").Rows(0).Item("djh")
         Me.DtpFprq.Value = rcDataSet.Tables("rc_fpml").Rows(0).Item("fprq")
-        Me.LblBdelete.Text = IIf(rcDataSet.Tables("rc_fpml").Rows(0).Item("bdelete"), "×÷·Ï", "")
+        Me.LblBdelete.Text = IIf(rcDataSet.Tables("rc_fpml").Rows(0).Item("bdelete"), "ä½œåºŸ", "")
         Me.TxtZydm.Text = Trim(rcDataSet.Tables("rc_fpml").Rows(0).Item("zydm"))
         Me.LblZymc.Text = rcDataSet.Tables("rc_fpml").Rows(0).Item("zymc")
         Me.TxtKhdm.Text = rcDataSet.Tables("rc_fpml").Rows(0).Item("khdm")
@@ -137,10 +137,10 @@ Public Class FrmOeFpShz
         Else
             Me.TxtYspz.Text = ""
         End If
-        Me.LblSrr.Text = "ÊäÈë£º" + rcDataSet.Tables("rc_fpml").Rows(0).Item("srr")
-        Me.LblShr.Text = "ÉóºË£º" + rcDataSet.Tables("rc_fpml").Rows(0).Item("shr")
-        Me.LblJzr.Text = "¼ÇÕË£º" + rcDataSet.Tables("rc_fpml").Rows(0).Item("jzr")
-        'È¡oe_fpÊı¾İ
+        Me.LblSrr.Text = "è¾“å…¥ï¼š" + rcDataSet.Tables("rc_fpml").Rows(0).Item("srr")
+        Me.LblShr.Text = "å®¡æ ¸ï¼š" + rcDataSet.Tables("rc_fpml").Rows(0).Item("shr")
+        Me.LblJzr.Text = "è®°è´¦ï¼š" + rcDataSet.Tables("rc_fpml").Rows(0).Item("jzr")
+        'å–oe_fpæ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -156,7 +156,7 @@ Public Class FrmOeFpShz
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_fpnr")
             rcDataGridView.DataSource = rcDataSet.Tables("rc_fpnr")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -166,10 +166,10 @@ Public Class FrmOeFpShz
 
 #End Region
 
-#Region "¼ÆËãºÏ¼ÆÊı"
+#Region "è®¡ç®—åˆè®¡æ•°"
 
     Private Sub SumSlJe()
-        '¼ÆËãºÏ¼ÆÊı
+        'è®¡ç®—åˆè®¡æ•°
         dblTotalSl = 0.0
         dblTotalFzsl = 0.0
         dblTotalJe = 0.0
@@ -180,16 +180,16 @@ Public Class FrmOeFpShz
             dblTotalJe = rcDataSet.Tables("rc_fpnr").Compute("Sum(je)", "")
             dblTotalSe = rcDataSet.Tables("rc_fpnr").Compute("Sum(se)", "")
         End If
-        Me.LblSl.Text = "ÊıÁ¿ºÏ¼Æ£º" + Format(dblTotalSl, g_FormatSl)
-        Me.LblFzsl.Text = "¸¨ÊıÁ¿ºÏ¼Æ£º" + Format(dblTotalFzsl, g_FormatSl)
-        Me.LblJe.Text = "½ğ¶îºÏ¼Æ£º" + Format(dblTotalJe, g_FormatJe)
-        Me.LblSe.Text = "Ë°¶îºÏ¼Æ£º" + Format(dblTotalSe, g_FormatJe)
-        Me.LblJese.Text = "¼ÛË°ºÏ¼Æ£º" + Format(dblTotalJe + dblTotalSe, g_FormatJe)
+        Me.LblSl.Text = "æ•°é‡åˆè®¡ï¼š" + Format(dblTotalSl, g_FormatSl)
+        Me.LblFzsl.Text = "è¾…æ•°é‡åˆè®¡ï¼š" + Format(dblTotalFzsl, g_FormatSl)
+        Me.LblJe.Text = "é‡‘é¢åˆè®¡ï¼š" + Format(dblTotalJe, g_FormatJe)
+        Me.LblSe.Text = "ç¨é¢åˆè®¡ï¼š" + Format(dblTotalSe, g_FormatJe)
+        Me.LblJese.Text = "ä»·ç¨åˆè®¡ï¼š" + Format(dblTotalJe + dblTotalSe, g_FormatJe)
     End Sub
 
 #End Region
 
-#Region "ÉóºË"
+#Region "å®¡æ ¸"
 
     Private Sub BtnSh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSh.Click, MnuiSh.Click
         ShEvent(rcBmb.Current("djh"))
@@ -213,20 +213,20 @@ Public Class FrmOeFpShz
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        LblShr.Text = "ÉóºË£º" + g_User_DspName
+        LblShr.Text = "å®¡æ ¸ï¼š" + g_User_DspName
     End Sub
 
 #End Region
 
-#Region "ÏûÉó"
+#Region "æ¶ˆå®¡"
 
     Private Sub BtnXs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnXs.Click, MnuiXs.Click
         XsEvent(rcBmb.Current("djh"))
@@ -250,23 +250,23 @@ Public Class FrmOeFpShz
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        LblShr.Text = "ÉóºË£º"
+        LblShr.Text = "å®¡æ ¸ï¼š"
     End Sub
 
 #End Region
 
-#Region "È«Éó"
+#Region "å…¨å®¡"
 
     Private Sub BtnQs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnQs.Click, MnuiQs.Click
-        If MsgBox("ÊÇ·ñÈ«ÉóËùÓĞÑ¡ÔñµÄµ¥¾İ£¿", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "ÌáÊ¾ĞÅÏ¢") <> MsgBoxResult.Yes Then
+        If MsgBox("æ˜¯å¦å…¨å®¡æ‰€æœ‰é€‰æ‹©çš„å•æ®ï¼Ÿ", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "æç¤ºä¿¡æ¯") <> MsgBoxResult.Yes Then
             Return
         End If
         QsEvent()
@@ -292,21 +292,21 @@ Public Class FrmOeFpShz
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
         Next
-        LblShr.Text = "ÉóºË£º" + g_User_DspName
+        LblShr.Text = "å®¡æ ¸ï¼š" + g_User_DspName
     End Sub
 
 #End Region
 
-#Region "È«Ïû"
+#Region "å…¨æ¶ˆ"
 
     Private Sub BtnQx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnQx.Click, MnuiQx.Click
         QxEvent()
@@ -332,21 +332,21 @@ Public Class FrmOeFpShz
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
         Next
-        LblShr.Text = "ÉóºË£º"
+        LblShr.Text = "å®¡æ ¸ï¼š"
     End Sub
 
 #End Region
 
-#Region "ÉÏÕÅ"
+#Region "ä¸Šå¼ "
 
     Private Sub BtnPrevious_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrevious.Click, MnuiPrevious.Click
         If rcBmb.Count > 0 Then
@@ -359,7 +359,7 @@ Public Class FrmOeFpShz
 
 #End Region
 
-#Region "ÏÂÕÅ"
+#Region "ä¸‹å¼ "
 
     Private Sub BtnNext_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnNext.Click, MnuiNext.Click
         If rcBmb.Count > 0 Then
@@ -372,7 +372,7 @@ Public Class FrmOeFpShz
 
 #End Region
 
-#Region "´òÓ¡ÉèÖÃ"
+#Region "æ‰“å°è®¾ç½®"
 
     Private Sub MnuiPageSetup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiPageSetup.Click
         PageSetupEvent()
@@ -383,14 +383,14 @@ Public Class FrmOeFpShz
         With rcFrmPageSetup
             .paraOleDbConn = rcOleDbConn
             .paraRpsId = "OEFPBZ"
-            .paraRpsName = "ÏúÊÛµ¥±ê×¼¸ñÊ½"
+            .paraRpsName = "é”€å”®å•æ ‡å‡†æ ¼å¼"
             .ShowDialog()
         End With
     End Sub
 
 #End Region
 
-#Region "´òÓ¡/´òÓ¡Ô¤ÀÀ"
+#Region "æ‰“å°/æ‰“å°é¢„è§ˆ"
 
     Private Sub BtnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click, MnuiPrint.Click
         PrintEvent()
@@ -398,7 +398,7 @@ Public Class FrmOeFpShz
 
     Private Sub PrintEvent()
         If g_Demo = 1 Then
-            MsgBox("¶Ô²»Æğ£¬ÊÔÓÃÈí¼ş²»ÄÜ´òÓ¡¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("å¯¹ä¸èµ·ï¼Œè¯•ç”¨è½¯ä»¶ä¸èƒ½æ‰“å°ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         PreparePrintData()
@@ -420,7 +420,7 @@ Public Class FrmOeFpShz
 
 #End Region
 
-#Region "×¼±¸´òÓ¡Êı¾İÊÂ¼ş"
+#Region "å‡†å¤‡æ‰“å°æ•°æ®äº‹ä»¶"
 
     Private Sub PreparePrintData()
         If rcRps Is Nothing Then
@@ -429,7 +429,7 @@ Public Class FrmOeFpShz
         Dim rft As String
         rft = Application.StartupPath + "\reports\oefpbz.rft"
         rcRps.LoadTemplate(rft)
-        'È¡RPS´òÓ¡²ÎÊı
+        'å–RPSæ‰“å°å‚æ•°
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -443,13 +443,13 @@ Public Class FrmOeFpShz
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_rps")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataSet.Tables("rc_rps").Rows.Count > 0 Then
-            'Éè¶¨Öµ
+            'è®¾å®šå€¼
             rcRps.Scale = rcDataSet.Tables("rc_rps").Rows(0).Item("scale")
             rcRps.Orientation = rcDataSet.Tables("rc_rps").Rows(0).Item("orientation")
             rcRps.PaperWidth = rcDataSet.Tables("rc_rps").Rows(0).Item("paperwidth")
@@ -457,19 +457,19 @@ Public Class FrmOeFpShz
             rcRps.PrinterLeft = rcDataSet.Tables("rc_rps").Rows(0).Item("printerleft")
             rcRps.PrinterTop = rcDataSet.Tables("rc_rps").Rows(0).Item("printertop")
         Else
-            'Ä¬ÈÏÖµ
+            'é»˜è®¤å€¼
             rcRps.Scale = 100
             rcRps.Orientation = 1
         End If
-        'Ì×´ò
+        'å¥—æ‰“
         'If blnTd Then
         '    rcRps.PaperType = 1
         'End If
-        rcRps.Text(-1, 1) = g_PrnDwmc & "²úÆ·ÏúÊÛµ¥"
-        rcRps.Text(-1, 2) = "µ¥¾İºÅ£º" & Trim(Me.TxtDjh.Text) & "  %p/%t"
-        rcRps.Text(-1, 3) = "ÈÕÆÚ£º" & Me.DtpFprq.Value.ToLongDateString
-        rcRps.Text(-1, 4) = "¿Í»§£º(" & Trim(Me.TxtKhdm.Text) & ")" & Trim(LblKhmc.Text)
-        rcRps.Text(-1, 5) = "¾­°ìÈË£º(" & Trim(Me.TxtZydm.Text) & ")" & Trim(LblZymc.Text)
+        rcRps.Text(-1, 1) = g_PrnDwmc & "äº§å“é”€å”®å•"
+        rcRps.Text(-1, 2) = "å•æ®å·ï¼š" & Trim(Me.TxtDjh.Text) & "  %p/%t"
+        rcRps.Text(-1, 3) = "æ—¥æœŸï¼š" & Me.DtpFprq.Value.ToLongDateString
+        rcRps.Text(-1, 4) = "å®¢æˆ·ï¼š(" & Trim(Me.TxtKhdm.Text) & ")" & Trim(LblKhmc.Text)
+        rcRps.Text(-1, 5) = "ç»åŠäººï¼š(" & Trim(Me.TxtZydm.Text) & ")" & Trim(LblZymc.Text)
         Dim i As Integer
         Dim j As Integer
         Dim intPage As Integer
@@ -519,8 +519,8 @@ Public Class FrmOeFpShz
             Dim m As New models.ChineseNum With {
                 .InputString = dblTotalJe + dblTotalSe
             }
-            rcRps.PerPageText(intPage, 6) = IIf(intPage = Math.Ceiling(rcDataSet.Tables("rc_fpnr").Rows.Count / rcRps.LinesPerPage.ToString), "ºÏ¼Æ", "Ğ¡¼Æ")
-            rcRps.PerPageText(intPage, 7) = m.OutString & "   (Ğ¡Ğ´)" & Format(dblTotalJe + dblTotalSe, g_FormatJe) '´óĞ´
+            rcRps.PerPageText(intPage, 6) = IIf(intPage = Math.Ceiling(rcDataSet.Tables("rc_fpnr").Rows.Count / rcRps.LinesPerPage.ToString), "åˆè®¡", "å°è®¡")
+            rcRps.PerPageText(intPage, 7) = m.OutString & "   (å°å†™)" & Format(dblTotalJe + dblTotalSe, g_FormatJe) 'å¤§å†™
             rcRps.PerPageText(intPage, 8) = Format(dblTotalJe, g_FormatJe)
             rcRps.PerPageText(intPage, 10) = Format(dblTotalSe, g_FormatJe)
             'rcRps.PerPageText(intPage, 11) = Format(dblTotalJe + dblTotalSe, g_FormatJe)
@@ -531,12 +531,12 @@ Public Class FrmOeFpShz
                 j += 1
             Next
         End If
-        rcRps.Text(-1, 13) = "ÖÆµ¥£º" & g_User_DspName
+        rcRps.Text(-1, 13) = "åˆ¶å•ï¼š" & g_User_DspName
     End Sub
 
 #End Region
 
-#Region "ÍË³ö"
+#Region "é€€å‡º"
 
     Private Sub BtnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
         ExitEvent()

@@ -2,11 +2,11 @@ Imports System.Data.OleDb
 
 Public Class FrmKhdmGg
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    'Ω®¡¢DataSet∂‘œÛ
+    'Âª∫Á´ãDataSetÂØπË±°
     ReadOnly rcDataset As New DataSet
-    '±Ì æ“™‘⁄ ˝æ›‘¥÷¥––µƒ SQL  ¬ŒÒ
+    'Ë°®Á§∫Ë¶ÅÂú®Êï∞ÊçÆÊ∫êÊâßË°åÁöÑ SQL ‰∫ãÂä°
     Dim rcOleDbTrans As OleDbTransaction
-    'Ω®¡¢OleDbCommand∂‘œÛ
+    'Âª∫Á´ãOleDbCommandÂØπË±°
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
     Private Sub FrmKhdmGg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -25,7 +25,7 @@ Public Class FrmKhdmGg
                     .paraField3 = "khsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "khmc"
-                    .paraTitle = "øÕªß"
+                    .paraTitle = "ÂÆ¢Êà∑"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -51,7 +51,7 @@ Public Class FrmKhdmGg
                     .paraField3 = "khsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "khmc"
-                    .paraTitle = "øÕªß"
+                    .paraTitle = "ÂÆ¢Êà∑"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -67,7 +67,7 @@ Public Class FrmKhdmGg
 
     Private Sub TxtOldKhdm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtOldKhdm.Validating
         If Not String.IsNullOrEmpty(Me.TxtOldKhdm.Text) Then
-            '∂¡»° ˝æ›
+            'ËØªÂèñÊï∞ÊçÆ
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -82,7 +82,7 @@ Public Class FrmKhdmGg
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "oldkhxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ1°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ1„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -92,7 +92,7 @@ Public Class FrmKhdmGg
                     TxtOldKhmc.Text = rcDataSet.Tables("oldkhxx").Rows(0).Item("khmc")
                 End If
             Else
-                MsgBox("∏√øÕªß±‡¬Î≤ª¥Ê‘⁄°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("ËØ•ÂÆ¢Êà∑ÁºñÁ†Å‰∏çÂ≠òÂú®„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 TxtOldKhdm.Focus()
             End If
         End If
@@ -100,7 +100,7 @@ Public Class FrmKhdmGg
 
     Private Sub TxtNewKhdm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtNewKhdm.Validating
         If Not String.IsNullOrEmpty(Me.TxtNewKhdm.Text) Then
-            '∂¡»° ˝æ›
+            'ËØªÂèñÊï∞ÊçÆ
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
@@ -115,7 +115,7 @@ Public Class FrmKhdmGg
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "newkhxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ2°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ2„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -137,22 +137,22 @@ Public Class FrmKhdmGg
         If rcDataSet.Tables("oldkhxx") Is Nothing Then
             Return
         End If
-        'Õ¨“ª±‡¬Î‘Ú∑µªÿ
+        'Âêå‰∏ÄÁºñÁ†ÅÂàôËøîÂõû
         If Me.TxtOldKhdm.Text = Me.TxtNewKhdm.Text Then
-            MsgBox("øÕªß±‡¬Îœ‡Õ¨£¨≤ª–Ë“™∏¸∏ƒ°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "Ã· æ–≈œ¢")
+            MsgBox("ÂÆ¢Êà∑ÁºñÁ†ÅÁõ∏ÂêåÔºå‰∏çÈúÄË¶ÅÊõ¥Êîπ„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÊèêÁ§∫‰ø°ÊÅØ")
             Return
         End If
         If rcDataSet.Tables("newkhxx").Rows.Count > 0 Then
-            If Not MsgBox("–¬øÕªß±‡¬Î“—æ≠¥Ê‘⁄°£ƒ˙ «∑Ò“™∫œ≤¢øÕªß±‡¬Î£ø", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Ã· æ–≈œ¢") = MsgBoxResult.Yes Then
+            If Not MsgBox("Êñ∞ÂÆ¢Êà∑ÁºñÁ†ÅÂ∑≤ÁªèÂ≠òÂú®„ÄÇÊÇ®ÊòØÂê¶Ë¶ÅÂêàÂπ∂ÂÆ¢Êà∑ÁºñÁ†ÅÔºü", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "ÊèêÁ§∫‰ø°ÊÅØ") = MsgBoxResult.Yes Then
                 TxtNewKhdm.Text = ""
                 TxtNewKhmc.Text = ""
                 TxtNewKhdm.Focus()
                 Return
             End If
         End If
-        'œ¬√Êø™ º∏¸∏ƒ±‡¬Î
-        '(1)AR_KHYEB(–Ë“™∫œ≤¢)
-        '∂¡»° ˝æ›
+        '‰∏ãÈù¢ÂºÄÂßãÊõ¥ÊîπÁºñÁ†Å
+        '(1)AR_KHYEB(ÈúÄË¶ÅÂêàÂπ∂)
+        'ËØªÂèñÊï∞ÊçÆ
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -167,34 +167,34 @@ Public Class FrmKhdmGg
                 rcDataset.Tables("sumkhyeb").Clear()
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "sumkhyeb")
-            'ø∆ƒø”‡∂Ó±Ì
-            rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,wbdm,bmdm,zydm,xmdm,csdm,yhzh,jxzh,'ΩË' AS jd,SUM(CASE WHEN jd ='ΩË' THEN ncsl ELSE 0 - ncsl END) AS ncsl,SUM(CASE WHEN jd ='ΩË' THEN ncwb ELSE 0 - ncwb END) AS ncwb,SUM(CASE WHEN jd ='ΩË' THEN ncje ELSE 0 - ncje END) AS ncje" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl01 ELSE 0 - jfsl01 END) AS jfsl01,SUM(CASE WHEN jd ='ΩË' THEN jfwb01 ELSE 0 - jfwb01 END) AS jfwb01,SUM(CASE WHEN jd ='ΩË' THEN jfje01 ELSE 0 - jfje01 END) AS jfje01" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl01 ELSE 0 - dfsl01 END) AS dfsl01,SUM(CASE WHEN jd ='ΩË' THEN dfwb01 ELSE 0 - dfwb01 END) AS dfwb01,SUM(CASE WHEN jd ='ΩË' THEN dfje01 ELSE 0 - dfje01 END) AS dfje01" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl02 ELSE 0 - jfsl02 END) AS jfsl02,SUM(CASE WHEN jd ='ΩË' THEN jfwb02 ELSE 0 - jfwb02 END) AS jfwb02,SUM(CASE WHEN jd ='ΩË' THEN jfje02 ELSE 0 - jfje02 END) AS jfje02" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl02 ELSE 0 - dfsl02 END) AS dfsl02,SUM(CASE WHEN jd ='ΩË' THEN dfwb02 ELSE 0 - dfwb02 END) AS dfwb02,SUM(CASE WHEN jd ='ΩË' THEN dfje02 ELSE 0 - dfje02 END) AS dfje02" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl03 ELSE 0 - jfsl03 END) AS jfsl03,SUM(CASE WHEN jd ='ΩË' THEN jfwb03 ELSE 0 - jfwb03 END) AS jfwb03,SUM(CASE WHEN jd ='ΩË' THEN jfje03 ELSE 0 - jfje03 END) AS jfje03" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl03 ELSE 0 - dfsl03 END) AS dfsl03,SUM(CASE WHEN jd ='ΩË' THEN dfwb03 ELSE 0 - dfwb03 END) AS dfwb03,SUM(CASE WHEN jd ='ΩË' THEN dfje03 ELSE 0 - dfje03 END) AS dfje03" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl04 ELSE 0 - jfsl04 END) AS jfsl04,SUM(CASE WHEN jd ='ΩË' THEN jfwb04 ELSE 0 - jfwb04 END) AS jfwb04,SUM(CASE WHEN jd ='ΩË' THEN jfje04 ELSE 0 - jfje04 END) AS jfje04" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl04 ELSE 0 - dfsl04 END) AS dfsl04,SUM(CASE WHEN jd ='ΩË' THEN dfwb04 ELSE 0 - dfwb04 END) AS dfwb04,SUM(CASE WHEN jd ='ΩË' THEN dfje04 ELSE 0 - dfje04 END) AS dfje04" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl05 ELSE 0 - jfsl05 END) AS jfsl05,SUM(CASE WHEN jd ='ΩË' THEN jfwb05 ELSE 0 - jfwb05 END) AS jfwb05,SUM(CASE WHEN jd ='ΩË' THEN jfje05 ELSE 0 - jfje05 END) AS jfje05" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl05 ELSE 0 - dfsl05 END) AS dfsl05,SUM(CASE WHEN jd ='ΩË' THEN dfwb05 ELSE 0 - dfwb05 END) AS dfwb05,SUM(CASE WHEN jd ='ΩË' THEN dfje05 ELSE 0 - dfje05 END) AS dfje05" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl06 ELSE 0 - jfsl06 END) AS jfsl06,SUM(CASE WHEN jd ='ΩË' THEN jfwb06 ELSE 0 - jfwb06 END) AS jfwb06,SUM(CASE WHEN jd ='ΩË' THEN jfje06 ELSE 0 - jfje06 END) AS jfje06" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl06 ELSE 0 - dfsl06 END) AS dfsl06,SUM(CASE WHEN jd ='ΩË' THEN dfwb06 ELSE 0 - dfwb06 END) AS dfwb06,SUM(CASE WHEN jd ='ΩË' THEN dfje06 ELSE 0 - dfje06 END) AS dfje06" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl07 ELSE 0 - jfsl07 END) AS jfsl07,SUM(CASE WHEN jd ='ΩË' THEN jfwb07 ELSE 0 - jfwb07 END) AS jfwb07,SUM(CASE WHEN jd ='ΩË' THEN jfje07 ELSE 0 - jfje07 END) AS jfje07" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl07 ELSE 0 - dfsl07 END) AS dfsl07,SUM(CASE WHEN jd ='ΩË' THEN dfwb07 ELSE 0 - dfwb07 END) AS dfwb07,SUM(CASE WHEN jd ='ΩË' THEN dfje07 ELSE 0 - dfje07 END) AS dfje07" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl08 ELSE 0 - jfsl08 END) AS jfsl08,SUM(CASE WHEN jd ='ΩË' THEN jfwb08 ELSE 0 - jfwb08 END) AS jfwb08,SUM(CASE WHEN jd ='ΩË' THEN jfje08 ELSE 0 - jfje08 END) AS jfje08" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl08 ELSE 0 - dfsl08 END) AS dfsl08,SUM(CASE WHEN jd ='ΩË' THEN dfwb08 ELSE 0 - dfwb08 END) AS dfwb08,SUM(CASE WHEN jd ='ΩË' THEN dfje08 ELSE 0 - dfje08 END) AS dfje08" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl09 ELSE 0 - jfsl09 END) AS jfsl09,SUM(CASE WHEN jd ='ΩË' THEN jfwb09 ELSE 0 - jfwb09 END) AS jfwb09,SUM(CASE WHEN jd ='ΩË' THEN jfje09 ELSE 0 - jfje09 END) AS jfje09" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl09 ELSE 0 - dfsl09 END) AS dfsl09,SUM(CASE WHEN jd ='ΩË' THEN dfwb09 ELSE 0 - dfwb09 END) AS dfwb09,SUM(CASE WHEN jd ='ΩË' THEN dfje09 ELSE 0 - dfje09 END) AS dfje09" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl10 ELSE 0 - jfsl10 END) AS jfsl10,SUM(CASE WHEN jd ='ΩË' THEN jfwb10 ELSE 0 - jfwb10 END) AS jfwb10,SUM(CASE WHEN jd ='ΩË' THEN jfje10 ELSE 0 - jfje10 END) AS jfje10" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl10 ELSE 0 - dfsl10 END) AS dfsl10,SUM(CASE WHEN jd ='ΩË' THEN dfwb10 ELSE 0 - dfwb10 END) AS dfwb10,SUM(CASE WHEN jd ='ΩË' THEN dfje10 ELSE 0 - dfje10 END) AS dfje10" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl11 ELSE 0 - jfsl11 END) AS jfsl11,SUM(CASE WHEN jd ='ΩË' THEN jfwb11 ELSE 0 - jfwb11 END) AS jfwb11,SUM(CASE WHEN jd ='ΩË' THEN jfje11 ELSE 0 - jfje11 END) AS jfje11" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl11 ELSE 0 - dfsl11 END) AS dfsl11,SUM(CASE WHEN jd ='ΩË' THEN dfwb11 ELSE 0 - dfwb11 END) AS dfwb11,SUM(CASE WHEN jd ='ΩË' THEN dfje11 ELSE 0 - dfje11 END) AS dfje11" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl12 ELSE 0 - jfsl12 END) AS jfsl12,SUM(CASE WHEN jd ='ΩË' THEN jfwb12 ELSE 0 - jfwb12 END) AS jfwb12,SUM(CASE WHEN jd ='ΩË' THEN jfje12 ELSE 0 - jfje12 END) AS jfje12" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl12 ELSE 0 - dfsl12 END) AS dfsl12,SUM(CASE WHEN jd ='ΩË' THEN dfwb12 ELSE 0 - dfwb12 END) AS dfwb12,SUM(CASE WHEN jd ='ΩË' THEN dfje12 ELSE 0 - dfje12 END) AS dfje12" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN jfsl13 ELSE 0 - jfsl13 END) AS jfsl13,SUM(CASE WHEN jd ='ΩË' THEN jfwb13 ELSE 0 - jfwb13 END) AS jfwb13,SUM(CASE WHEN jd ='ΩË' THEN jfje13 ELSE 0 - jfje13 END) AS jfje13" &
-                    ",SUM(CASE WHEN jd ='ΩË' THEN dfsl13 ELSE 0 - dfsl13 END) AS dfsl13,SUM(CASE WHEN jd ='ΩË' THEN dfwb13 ELSE 0 - dfwb13 END) AS dfwb13,SUM(CASE WHEN jd ='ΩË' THEN dfje13 ELSE 0 - dfje13 END) AS dfje13" &
+            'ÁßëÁõÆ‰ΩôÈ¢ùË°®
+            rcOleDbCommand.CommandText = "SELECT kjnd,kmdm,wbdm,bmdm,zydm,xmdm,csdm,yhzh,jxzh,'ÂÄü' AS jd,SUM(CASE WHEN jd ='ÂÄü' THEN ncsl ELSE 0 - ncsl END) AS ncsl,SUM(CASE WHEN jd ='ÂÄü' THEN ncwb ELSE 0 - ncwb END) AS ncwb,SUM(CASE WHEN jd ='ÂÄü' THEN ncje ELSE 0 - ncje END) AS ncje" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl01 ELSE 0 - jfsl01 END) AS jfsl01,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb01 ELSE 0 - jfwb01 END) AS jfwb01,SUM(CASE WHEN jd ='ÂÄü' THEN jfje01 ELSE 0 - jfje01 END) AS jfje01" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl01 ELSE 0 - dfsl01 END) AS dfsl01,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb01 ELSE 0 - dfwb01 END) AS dfwb01,SUM(CASE WHEN jd ='ÂÄü' THEN dfje01 ELSE 0 - dfje01 END) AS dfje01" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl02 ELSE 0 - jfsl02 END) AS jfsl02,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb02 ELSE 0 - jfwb02 END) AS jfwb02,SUM(CASE WHEN jd ='ÂÄü' THEN jfje02 ELSE 0 - jfje02 END) AS jfje02" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl02 ELSE 0 - dfsl02 END) AS dfsl02,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb02 ELSE 0 - dfwb02 END) AS dfwb02,SUM(CASE WHEN jd ='ÂÄü' THEN dfje02 ELSE 0 - dfje02 END) AS dfje02" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl03 ELSE 0 - jfsl03 END) AS jfsl03,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb03 ELSE 0 - jfwb03 END) AS jfwb03,SUM(CASE WHEN jd ='ÂÄü' THEN jfje03 ELSE 0 - jfje03 END) AS jfje03" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl03 ELSE 0 - dfsl03 END) AS dfsl03,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb03 ELSE 0 - dfwb03 END) AS dfwb03,SUM(CASE WHEN jd ='ÂÄü' THEN dfje03 ELSE 0 - dfje03 END) AS dfje03" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl04 ELSE 0 - jfsl04 END) AS jfsl04,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb04 ELSE 0 - jfwb04 END) AS jfwb04,SUM(CASE WHEN jd ='ÂÄü' THEN jfje04 ELSE 0 - jfje04 END) AS jfje04" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl04 ELSE 0 - dfsl04 END) AS dfsl04,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb04 ELSE 0 - dfwb04 END) AS dfwb04,SUM(CASE WHEN jd ='ÂÄü' THEN dfje04 ELSE 0 - dfje04 END) AS dfje04" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl05 ELSE 0 - jfsl05 END) AS jfsl05,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb05 ELSE 0 - jfwb05 END) AS jfwb05,SUM(CASE WHEN jd ='ÂÄü' THEN jfje05 ELSE 0 - jfje05 END) AS jfje05" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl05 ELSE 0 - dfsl05 END) AS dfsl05,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb05 ELSE 0 - dfwb05 END) AS dfwb05,SUM(CASE WHEN jd ='ÂÄü' THEN dfje05 ELSE 0 - dfje05 END) AS dfje05" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl06 ELSE 0 - jfsl06 END) AS jfsl06,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb06 ELSE 0 - jfwb06 END) AS jfwb06,SUM(CASE WHEN jd ='ÂÄü' THEN jfje06 ELSE 0 - jfje06 END) AS jfje06" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl06 ELSE 0 - dfsl06 END) AS dfsl06,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb06 ELSE 0 - dfwb06 END) AS dfwb06,SUM(CASE WHEN jd ='ÂÄü' THEN dfje06 ELSE 0 - dfje06 END) AS dfje06" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl07 ELSE 0 - jfsl07 END) AS jfsl07,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb07 ELSE 0 - jfwb07 END) AS jfwb07,SUM(CASE WHEN jd ='ÂÄü' THEN jfje07 ELSE 0 - jfje07 END) AS jfje07" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl07 ELSE 0 - dfsl07 END) AS dfsl07,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb07 ELSE 0 - dfwb07 END) AS dfwb07,SUM(CASE WHEN jd ='ÂÄü' THEN dfje07 ELSE 0 - dfje07 END) AS dfje07" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl08 ELSE 0 - jfsl08 END) AS jfsl08,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb08 ELSE 0 - jfwb08 END) AS jfwb08,SUM(CASE WHEN jd ='ÂÄü' THEN jfje08 ELSE 0 - jfje08 END) AS jfje08" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl08 ELSE 0 - dfsl08 END) AS dfsl08,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb08 ELSE 0 - dfwb08 END) AS dfwb08,SUM(CASE WHEN jd ='ÂÄü' THEN dfje08 ELSE 0 - dfje08 END) AS dfje08" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl09 ELSE 0 - jfsl09 END) AS jfsl09,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb09 ELSE 0 - jfwb09 END) AS jfwb09,SUM(CASE WHEN jd ='ÂÄü' THEN jfje09 ELSE 0 - jfje09 END) AS jfje09" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl09 ELSE 0 - dfsl09 END) AS dfsl09,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb09 ELSE 0 - dfwb09 END) AS dfwb09,SUM(CASE WHEN jd ='ÂÄü' THEN dfje09 ELSE 0 - dfje09 END) AS dfje09" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl10 ELSE 0 - jfsl10 END) AS jfsl10,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb10 ELSE 0 - jfwb10 END) AS jfwb10,SUM(CASE WHEN jd ='ÂÄü' THEN jfje10 ELSE 0 - jfje10 END) AS jfje10" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl10 ELSE 0 - dfsl10 END) AS dfsl10,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb10 ELSE 0 - dfwb10 END) AS dfwb10,SUM(CASE WHEN jd ='ÂÄü' THEN dfje10 ELSE 0 - dfje10 END) AS dfje10" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl11 ELSE 0 - jfsl11 END) AS jfsl11,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb11 ELSE 0 - jfwb11 END) AS jfwb11,SUM(CASE WHEN jd ='ÂÄü' THEN jfje11 ELSE 0 - jfje11 END) AS jfje11" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl11 ELSE 0 - dfsl11 END) AS dfsl11,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb11 ELSE 0 - dfwb11 END) AS dfwb11,SUM(CASE WHEN jd ='ÂÄü' THEN dfje11 ELSE 0 - dfje11 END) AS dfje11" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl12 ELSE 0 - jfsl12 END) AS jfsl12,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb12 ELSE 0 - jfwb12 END) AS jfwb12,SUM(CASE WHEN jd ='ÂÄü' THEN jfje12 ELSE 0 - jfje12 END) AS jfje12" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl12 ELSE 0 - dfsl12 END) AS dfsl12,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb12 ELSE 0 - dfwb12 END) AS dfwb12,SUM(CASE WHEN jd ='ÂÄü' THEN dfje12 ELSE 0 - dfje12 END) AS dfje12" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN jfsl13 ELSE 0 - jfsl13 END) AS jfsl13,SUM(CASE WHEN jd ='ÂÄü' THEN jfwb13 ELSE 0 - jfwb13 END) AS jfwb13,SUM(CASE WHEN jd ='ÂÄü' THEN jfje13 ELSE 0 - jfje13 END) AS jfje13" &
+                    ",SUM(CASE WHEN jd ='ÂÄü' THEN dfsl13 ELSE 0 - dfsl13 END) AS dfsl13,SUM(CASE WHEN jd ='ÂÄü' THEN dfwb13 ELSE 0 - dfwb13 END) AS dfwb13,SUM(CASE WHEN jd ='ÂÄü' THEN dfje13 ELSE 0 - dfje13 END) AS dfje13" &
                     " FROM gl_kmyeb WHERE (khdm = ? or khdm = ?) GROUP BY kjnd,kmdm,wbdm,bmdm,zydm,xmdm,csdm,yhzh,jxzh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtNewKhdm.Text)
@@ -205,7 +205,7 @@ Public Class FrmKhdmGg
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "sumkmyeb")
 
-            '»°¥¯khdm◊÷∂Œµƒ±Ì
+            'ÂèñÂ∏¶khdmÂ≠óÊÆµÁöÑË°®
             rcOleDbCommand.CommandText = "SELECT table_name,column_name FROM user_tab_columns WHERE column_name = 'KHDM' AND table_name <> 'AR_KHYEB' AND table_name <> 'RC_KHXX' AND table_name <> 'GL_KMYEB' AND table_name <> 'GL_YWFJSB'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -214,7 +214,7 @@ Public Class FrmKhdmGg
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "user_tab_columns")
         Catch ex As Exception
-            MsgBox("≥Ã–Ú¥ÌŒÛ10°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+            MsgBox("Á®ãÂ∫èÈîôËØØ10„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Return
         Finally
             rcOleDbConn.Close()
@@ -227,13 +227,13 @@ Public Class FrmKhdmGg
             rcOleDbCommand.Transaction = rcOleDbTrans
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            '…æ≥˝‘≠¿¥µƒ ˝æ›
+            'Âà†Èô§ÂéüÊù•ÁöÑÊï∞ÊçÆ
             rcOleDbCommand.CommandText = "DELETE FROM ar_khyeb WHERE (khdm = ? or khdm = ?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtNewKhdm.Text)
             rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtOldKhdm.Text)
             rcOleDbCommand.ExecuteNonQuery()
-            'ÃÌº” ˝æ›
+            'Ê∑ªÂä†Êï∞ÊçÆ
             For i = 0 To rcDataset.Tables("sumkhyeb").Rows.Count - 1
                 rcOleDbCommand.CommandText = "INSERT INTO ar_khyeb (kjnd,khdm,khmc,qcje,idje) VALUES (?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
@@ -244,19 +244,19 @@ Public Class FrmKhdmGg
                 rcOleDbCommand.Parameters.Add("@idje", OleDbType.VarNumeric, 14).Value = rcDataset.Tables("sumkhyeb").Rows(i).Item("idje")
                 rcOleDbCommand.ExecuteNonQuery()
             Next
-            '…æ≥˝“µŒÒ∑—º∆À„±Ìµƒ ˝æ›
+            'Âà†Èô§‰∏öÂä°Ë¥πËÆ°ÁÆóË°®ÁöÑÊï∞ÊçÆ
             rcOleDbCommand.CommandText = "DELETE FROM gl_ywfjsb WHERE (khdm = ? or khdm = ?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtNewKhdm.Text)
             rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtOldKhdm.Text)
             rcOleDbCommand.ExecuteNonQuery()
-            '…æ≥˝‘≠¿¥µƒ ˝æ›
+            'Âà†Èô§ÂéüÊù•ÁöÑÊï∞ÊçÆ
             rcOleDbCommand.CommandText = "DELETE FROM gl_kmyeb WHERE (khdm = ? or khdm = ?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtNewKhdm.Text)
             rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(Me.TxtOldKhdm.Text)
             rcOleDbCommand.ExecuteNonQuery()
-            'ÃÌº” ˝æ›
+            'Ê∑ªÂä†Êï∞ÊçÆ
             For i = 0 To rcDataSet.Tables("sumkmyeb").Rows.Count - 1
                 rcOleDbCommand.CommandText = "INSERT INTO gl_kmyeb (kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,yhzh,jxzh,jd,ncsl,ncwb,ncje" &
                     ",jfsl01,jfwb01,jfje01,dfsl01,dfwb01,dfje01" &
@@ -284,7 +284,7 @@ Public Class FrmKhdmGg
                 rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataSet.Tables("sumkmyeb").Rows(i).Item("csdm")
                 rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = rcDataSet.Tables("sumkmyeb").Rows(i).Item("yhzh")
                 rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = rcDataSet.Tables("sumkmyeb").Rows(i).Item("jxzh")
-                rcOleDbCommand.Parameters.Add("@jd", OleDbType.VarChar, 4).Value = IIf(rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncje") >= 0, "ΩË", "¥˚")
+                rcOleDbCommand.Parameters.Add("@jd", OleDbType.VarChar, 4).Value = IIf(rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncje") >= 0, "ÂÄü", "Ë¥∑")
                 rcOleDbCommand.Parameters.Add("@ncsl", OleDbType.VarNumeric, 18).Value = IIf(rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncje") >= 0, rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncsl"), 0 - rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncsl"))
                 rcOleDbCommand.Parameters.Add("@ncwb", OleDbType.VarNumeric, 18).Value = IIf(rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncje") >= 0, rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncwb"), 0 - rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncwb"))
                 rcOleDbCommand.Parameters.Add("@ncje", OleDbType.VarNumeric, 14).Value = IIf(rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncje") >= 0, rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncje"), 0 - rcDataSet.Tables("sumkmyeb").Rows(i).Item("ncje"))
@@ -372,9 +372,9 @@ Public Class FrmKhdmGg
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("≥Ã–Ú¥ÌŒÛ13°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ13„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Catch ey As OleDbException
-                MsgBox("≥Ã–Ú¥ÌŒÛ14°£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ14„ÄÇ" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             End Try
             Return
         Finally
@@ -398,17 +398,17 @@ Public Class FrmKhdmGg
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("≥Ã–Ú¥ÌŒÛ15°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ15„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Catch ey As OleDbException
-                MsgBox("≥Ã–Ú¥ÌŒÛ16°£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ16„ÄÇ" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        '(12)RC_KHXX(–Ë“™…æ≥˝/ªÚ∏¸∏ƒ)
+        '(12)RC_KHXX(ÈúÄË¶ÅÂà†Èô§/ÊàñÊõ¥Êîπ)
         If rcDataSet.Tables("newkhxx").Rows.Count > 0 Then
-            '…æ≥˝æ…±‡¬Î
+            'Âà†Èô§ÊóßÁºñÁ†Å
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -424,16 +424,16 @@ Public Class FrmKhdmGg
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("≥Ã–Ú¥ÌŒÛ17°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                    MsgBox("Á®ãÂ∫èÈîôËØØ17„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Catch ey As OleDbException
-                    MsgBox("≥Ã–Ú¥ÌŒÛ18°£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                    MsgBox("Á®ãÂ∫èÈîôËØØ18„ÄÇ" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 End Try
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
         Else
-            '∏¸∏ƒæ…±‡¬Î
+            'Êõ¥ÊîπÊóßÁºñÁ†Å
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
             rcOleDbCommand.Connection = rcOleDbConn
@@ -450,16 +450,16 @@ Public Class FrmKhdmGg
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("≥Ã–Ú¥ÌŒÛ19°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                    MsgBox("Á®ãÂ∫èÈîôËØØ19„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Catch ey As OleDbException
-                    MsgBox("≥Ã–Ú¥ÌŒÛ20°£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                    MsgBox("Á®ãÂ∫èÈîôËØØ20„ÄÇ" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 End Try
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
         End If
-        '(13)º«¬º∏¸∏ƒªÚ∫œ≤¢º«¬º
+        '(13)ËÆ∞ÂΩïÊõ¥ÊîπÊàñÂêàÂπ∂ËÆ∞ÂΩï
         rcOleDbConn.Open()
         rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
         rcOleDbCommand.Connection = rcOleDbConn
@@ -485,15 +485,15 @@ Public Class FrmKhdmGg
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("≥Ã–Ú¥ÌŒÛ21°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ21„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Catch ey As OleDbException
-                MsgBox("≥Ã–Ú¥ÌŒÛ22°£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ22„ÄÇ" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        MsgBox("∏¸∏ƒ”Î∫œ≤¢øÕªß±‡¬ÎÕÍ≥…°£" & Chr(13) & "«ÎºÏ≤Èø‚¥Ê ˝¡øº∞Ω∂Ó°¢”¶ ’°¢”¶∏∂µ»µƒ ˝æ›’˝»∑–‘°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+        MsgBox("Êõ¥Êîπ‰∏éÂêàÂπ∂ÂÆ¢Êà∑ÁºñÁ†ÅÂÆåÊàê„ÄÇ" & Chr(13) & "ËØ∑Ê£ÄÊü•Â∫ìÂ≠òÊï∞ÈáèÂèäÈáëÈ¢ù„ÄÅÂ∫îÊî∂„ÄÅÂ∫î‰ªòÁ≠âÁöÑÊï∞ÊçÆÊ≠£Á°ÆÊÄß„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
         Me.TxtOldKhdm.Text = ""
         Me.TxtNewKhdm.Text = ""
         Me.TxtOldKhmc.Text = ""

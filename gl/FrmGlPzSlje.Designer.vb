@@ -2,7 +2,7 @@
 Partial Class FrmGlPzSlje
     Inherits models.FrmDlgPortrait
 
-    '´°ÌåÖØĞ´ÊÍ·Å£¬ÒÔÇåÀí×é¼şÁĞ±í¡£
+    'çª—ä½“é‡å†™é‡Šæ”¾ï¼Œä»¥æ¸…ç†ç»„ä»¶åˆ—è¡¨ã€‚
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
@@ -11,12 +11,12 @@ Partial Class FrmGlPzSlje
         MyBase.Dispose(disposing)
     End Sub
 
-    'Windows ´°ÌåÉè¼ÆÆ÷Ëù±ØĞèµÄ
+    'Windows çª—ä½“è®¾è®¡å™¨æ‰€å¿…éœ€çš„
     Private components As System.ComponentModel.IContainer
 
-    '×¢Òâ: ÒÔÏÂ¹ı³ÌÊÇ Windows ´°ÌåÉè¼ÆÆ÷Ëù±ØĞèµÄ
-    '¿ÉÒÔÊ¹ÓÃ Windows ´°ÌåÉè¼ÆÆ÷ĞŞ¸ÄËü¡£
-    '²»ÒªÊ¹ÓÃ´úÂë±à¼­Æ÷ĞŞ¸ÄËü¡£
+    'æ³¨æ„: ä»¥ä¸‹è¿‡ç¨‹æ˜¯ Windows çª—ä½“è®¾è®¡å™¨æ‰€å¿…éœ€çš„
+    'å¯ä»¥ä½¿ç”¨ Windows çª—ä½“è®¾è®¡å™¨ä¿®æ”¹å®ƒã€‚
+    'ä¸è¦ä½¿ç”¨ä»£ç ç¼–è¾‘å™¨ä¿®æ”¹å®ƒã€‚
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TxtSl = New System.Windows.Forms.TextBox
@@ -39,7 +39,7 @@ Partial Class FrmGlPzSlje
         '
         'TxtSl
         '
-        Me.TxtSl.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.TxtSl.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TxtSl.Location = New System.Drawing.Point(149, 97)
         Me.TxtSl.Name = "TxtSl"
         Me.TxtSl.Size = New System.Drawing.Size(104, 26)
@@ -49,16 +49,16 @@ Partial Class FrmGlPzSlje
         'LblXmdm
         '
         Me.LblXmdm.AutoSize = True
-        Me.LblXmdm.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblXmdm.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblXmdm.Location = New System.Drawing.Point(44, 100)
         Me.LblXmdm.Name = "LblXmdm"
         Me.LblXmdm.Size = New System.Drawing.Size(88, 16)
         Me.LblXmdm.TabIndex = 4
-        Me.LblXmdm.Text = "Êı    Á¿£º"
+        Me.LblXmdm.Text = "æ•°    é‡ï¼š"
         '
         'TxtDj
         '
-        Me.TxtDj.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.TxtDj.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TxtDj.Location = New System.Drawing.Point(149, 129)
         Me.TxtDj.Name = "TxtDj"
         Me.TxtDj.Size = New System.Drawing.Size(104, 26)
@@ -68,16 +68,16 @@ Partial Class FrmGlPzSlje
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.Label1.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label1.Location = New System.Drawing.Point(44, 132)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(88, 16)
         Me.Label1.TabIndex = 6
-        Me.Label1.Text = "µ¥    ¼Û£º"
+        Me.Label1.Text = "å•    ä»·ï¼š"
         '
         'TxtJe
         '
-        Me.TxtJe.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.TxtJe.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TxtJe.Location = New System.Drawing.Point(149, 162)
         Me.TxtJe.Name = "TxtJe"
         Me.TxtJe.Size = New System.Drawing.Size(104, 26)
@@ -87,16 +87,16 @@ Partial Class FrmGlPzSlje
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.Label2.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label2.Location = New System.Drawing.Point(44, 165)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(88, 16)
         Me.Label2.TabIndex = 8
-        Me.Label2.Text = "½ğ    ¶î£º"
+        Me.Label2.Text = "é‡‘    é¢ï¼š"
         '
         'TxtDw
         '
-        Me.TxtDw.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.TxtDw.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TxtDw.Location = New System.Drawing.Point(149, 31)
         Me.TxtDw.Name = "TxtDw"
         Me.TxtDw.ReadOnly = True
@@ -106,35 +106,35 @@ Partial Class FrmGlPzSlje
         'LblDw
         '
         Me.LblDw.AutoSize = True
-        Me.LblDw.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblDw.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblDw.Location = New System.Drawing.Point(44, 34)
         Me.LblDw.Name = "LblDw"
         Me.LblDw.Size = New System.Drawing.Size(88, 16)
         Me.LblDw.TabIndex = 0
-        Me.LblDw.Text = "µ¥    Î»£º"
+        Me.LblDw.Text = "å•    ä½ï¼š"
         '
         'CmbJd
         '
-        Me.CmbJd.DisplayMember = "½è"
+        Me.CmbJd.DisplayMember = "å€Ÿ"
         Me.CmbJd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbJd.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.CmbJd.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.CmbJd.FormattingEnabled = True
-        Me.CmbJd.Items.AddRange(New Object() {"½è", "´û"})
+        Me.CmbJd.Items.AddRange(New Object() {"å€Ÿ", "è´·"})
         Me.CmbJd.Location = New System.Drawing.Point(149, 63)
         Me.CmbJd.Name = "CmbJd"
         Me.CmbJd.Size = New System.Drawing.Size(104, 24)
         Me.CmbJd.TabIndex = 3
-        Me.CmbJd.ValueMember = "½è"
+        Me.CmbJd.ValueMember = "å€Ÿ"
         '
         'LblJd
         '
         Me.LblJd.AutoSize = True
-        Me.LblJd.Font = New System.Drawing.Font("ËÎÌå", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblJd.Font = New System.Drawing.Font("å®‹ä½“", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblJd.Location = New System.Drawing.Point(44, 66)
         Me.LblJd.Name = "LblJd"
         Me.LblJd.Size = New System.Drawing.Size(88, 16)
         Me.LblJd.TabIndex = 2
-        Me.LblJd.Text = "½è´û·½Ïò£º"
+        Me.LblJd.Text = "å€Ÿè´·æ–¹å‘ï¼š"
         '
         'FrmGlPzSlje
         '
@@ -150,7 +150,7 @@ Partial Class FrmGlPzSlje
         Me.Controls.Add(Me.TxtSl)
         Me.Controls.Add(Me.LblXmdm)
         Me.Name = "FrmGlPzSlje"
-        Me.Text = "ÊıÁ¿*µ¥¼Û=½ğ¶î"
+        Me.Text = "æ•°é‡*å•ä»·=é‡‘é¢"
         Me.Controls.SetChildIndex(Me.DlgPanel, 0)
         Me.Controls.SetChildIndex(Me.LblXmdm, 0)
         Me.Controls.SetChildIndex(Me.TxtSl, 0)

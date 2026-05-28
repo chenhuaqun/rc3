@@ -2,17 +2,17 @@ Imports System.Data.OleDb
 
 Public Class FrmOeXsdHxz
 
-#Region "¶¨Òå±äÁ¿"
-    '½¨Á¢DataSet¶ÔÏó
+#Region "å®šä¹‰å˜é‡"
+    'å»ºç«‹DataSetå¯¹è±¡
     Dim rcDataset As New DataSet
-    '±íÊ¾ÒªÔÚÊı¾İÔ´Ö´ĞĞµÄ SQL ÊÂÎñ
+    'è¡¨ç¤ºè¦åœ¨æ•°æ®æºæ‰§è¡Œçš„ SQL äº‹åŠ¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
 #End Region
 
-#Region "´°Ìå³õÊ¼»¯"
+#Region "çª—ä½“åˆå§‹åŒ–"
 
     Public Property ParaDataSet() As DataSet
         Get
@@ -29,7 +29,7 @@ Public Class FrmOeXsdHxz
         Me.DataGridViewXsd.Columns("ColSl").DefaultCellStyle.Format = g_FormatSl
         Me.DataGridViewXsd.Columns("ColJe").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         Me.DataGridViewXsd.Columns("ColJe").DefaultCellStyle.Format = g_FormatJe
-        '°ó¶¨Êı¾İthe DataGridview to the DataTable.
+        'ç»‘å®šæ•°æ®the DataGridview to the DataTable.
         rcBindingSource.DataSource = rcDataSet.Tables("rc_xsdnr")
         Me.DataGridViewXsd.DataSource = rcBindingSource
     End Sub
@@ -40,7 +40,7 @@ Public Class FrmOeXsdHxz
         Me.DataGridViewXsd.ClearSelection()
     End Sub
 
-#Region "±£´æµ¥¾İµÄÊÂ¼ş"
+#Region "ä¿å­˜å•æ®çš„äº‹ä»¶"
 
     Private Sub MnuiSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiSave.Click
         SaveEvent()
@@ -52,7 +52,7 @@ Public Class FrmOeXsdHxz
 
     Private Sub SaveEvent()
         Dim i As Integer
-        '(¶ş)´æ´¢skd
+        '(äºŒ)å­˜å‚¨skd
         Try
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
@@ -60,7 +60,7 @@ Public Class FrmOeXsdHxz
             rcOleDbCommand.Transaction = rcOleDbTrans
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            '±£´æÀúÊ·ÏúÊÛµ¥ÉÏµÄÊÕ¿î½ğ¶î
+            'ä¿å­˜å†å²é”€å”®å•ä¸Šçš„æ”¶æ¬¾é‡‘é¢
             For i = 0 To rcDataSet.Tables("rc_xsdnr").Rows.Count - 1
                 If rcDataSet.Tables("rc_xsdnr").Rows(i).Item("bsign") Then
                     rcOleDbCommand.CommandText = "UPDATE oe_xsd SET bsign = 1 WHERE djh = ?"
@@ -76,18 +76,18 @@ Public Class FrmOeXsdHxz
             Next
             rcOleDbTrans.Commit()
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó£º" & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ï¼š" & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        MsgBox("±£´æÍê±Ï¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+        MsgBox("ä¿å­˜å®Œæ¯•ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
         Me.Close()
     End Sub
 
 #End Region
 
-#Region "ÍË³ö±íµ¥ÊÂ¼ş"
+#Region "é€€å‡ºè¡¨å•äº‹ä»¶"
 
     Private Sub BtnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExit.Click
         Me.Close()

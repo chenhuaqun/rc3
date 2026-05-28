@@ -2,24 +2,24 @@ Imports System.Data.OleDb
 Imports Microsoft.Office.Interop
 
 Public Class FrmYwfZyMx
-    'Ω®¡¢ ˝æ›  ≈‰∆˜
+    'Âª∫Á´ãÊï∞ÊçÆÈÄÇÈÖçÂô®
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    'Ω®¡¢DataSet∂‘œÛ
+    'Âª∫Á´ãDataSetÂØπË±°
     ReadOnly rcDataset As New DataSet
-    'Ω®¡¢OleDbCommand∂‘œÛ
+    'Âª∫Á´ãOleDbCommandÂØπË±°
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Ω®¡¢Datatable 'Œ“√«“™¿˚”√∏√datatableΩ¯––Ω∂Óº∆À„
+    'Âª∫Á´ãDatatable 'Êàë‰ª¨Ë¶ÅÂà©Áî®ËØ•datatableËøõË°åÈáëÈ¢ùËÆ°ÁÆó
     ReadOnly dtYwfzymx As New DataTable("ywfzymx")
 
-#Region "≥ı ºªØ"
+#Region "ÂàùÂßãÂåñ"
 
     Private Sub FrmYwfZyMx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'ƒ¨»œ÷µ
+        'ÈªòËÆ§ÂÄº
         Me.NudYear.Value = Mid(g_Kjqj, 1, 4)
         Me.NudMonthBegin.Value = 1
         Me.NudMonthEnd.Value = 12
 
-        ' ˝æ›∞Û∂®
+        'Êï∞ÊçÆÁªëÂÆö
         dtYwfzymx.Columns.Add("khdm", Type.GetType("System.String"))
         dtYwfzymx.Columns.Add("khmc", Type.GetType("System.String"))
         dtYwfzymx.Columns.Add("xslbdm", Type.GetType("System.String"))
@@ -53,20 +53,20 @@ Public Class FrmYwfZyMx
 
 #End Region
 
-#Region "øÿº¸ªÿ≥µº¸µƒ¥¶¿Ì"
+#Region "ÊéßÈîÆÂõûËΩ¶ÈîÆÁöÑÂ§ÑÁêÜ"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles NudYear.KeyPress, NudMonthBegin.KeyPress, NudMonthEnd.KeyPress, TxtBmdm.KeyPress, TxtZydm.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                '÷∏ æ KeyPress  ¬º˛“—¥¶¿Ì£¨»•µÙ Windows »± °µƒ∂£µ±…˘°£
+                'ÊåáÁ§∫ KeyPress ‰∫ã‰ª∂Â∑≤Â§ÑÁêÜÔºåÂéªÊéâ Windows Áº∫ÁúÅÁöÑÂèÆÂΩìÂ£∞„ÄÇ
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "≤ø√≈±‡¬Îµƒ ¬º˛"
+#Region "ÈÉ®Èó®ÁºñÁ†ÅÁöÑ‰∫ã‰ª∂"
     Private Sub TxtBmdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtBmdm.KeyDown
         Select Case e.KeyCode
             Case Keys.F3
@@ -77,7 +77,7 @@ Public Class FrmYwfZyMx
                     .paraField1 = "bmdm"
                     .paraField2 = "bmmc"
                     .paraField3 = "bmsm"
-                    .paraTitle = "≤ø√≈"
+                    .paraTitle = "ÈÉ®Èó®"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -107,7 +107,7 @@ Public Class FrmYwfZyMx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_bmxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -122,7 +122,7 @@ Public Class FrmYwfZyMx
 
 #End Region
 
-#Region "÷∞‘±±‡¬Îµƒ ¬º˛"
+#Region "ËÅåÂëòÁºñÁ†ÅÁöÑ‰∫ã‰ª∂"
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
             Case Keys.F3
@@ -134,7 +134,7 @@ Public Class FrmYwfZyMx
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
                     .paraOrderField = "zymc"
-                    .paraTitle = "÷∞‘±"
+                    .paraTitle = "ËÅåÂëò"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -160,14 +160,14 @@ Public Class FrmYwfZyMx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Finally
                 rcOleDbConn.Close()
             End Try
             If rcDataset.Tables("rc_zyxx").Rows.Count > 0 Then
                 Me.TxtZydm.Text = Trim(rcDataset.Tables("rc_zyxx").Rows(0).Item("zydm"))
             Else
-                MsgBox("÷∞‘±±‡¬Î≤ª¥Ê‘⁄£¨«Î÷ÿ ‰»Î°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "Ã· æ–≈œ¢")
+                MsgBox("ËÅåÂëòÁºñÁ†Å‰∏çÂ≠òÂú®ÔºåËØ∑ÈáçËæìÂÖ•„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÊèêÁ§∫‰ø°ÊÅØ")
                 e.Cancel = True
             End If
         End If
@@ -175,10 +175,10 @@ Public Class FrmYwfZyMx
 
 #End Region
 
-#Region "…˙≥…√˜œ∏ ˝æ›"
+#Region "ÁîüÊàêÊòéÁªÜÊï∞ÊçÆ"
     Private Sub ReadYwfZyMx(strZydm As String)
-        Dim dateKsrq As Date '≥…±æΩ·◊™ø™ º»’∆⁄
-        Dim dateJsrq As Date '≥…±æΩ·◊™Ω· ¯»’∆⁄
+        Dim dateKsrq As Date 'ÊàêÊú¨ÁªìËΩ¨ÂºÄÂßãÊó•Êúü
+        Dim dateJsrq As Date 'ÊàêÊú¨ÁªìËΩ¨ÁªìÊùüÊó•Êúü
         dateKsrq = GetInvBegin(Me.NudYear.Value, Me.NudMonthBegin.Value)
         dateJsrq = GetInvEnd(Me.NudYear.Value, Me.NudMonthBegin.Value)
         Try
@@ -186,12 +186,12 @@ Public Class FrmYwfZyMx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            '»° ˝æ›
+            'ÂèñÊï∞ÊçÆ
             rcOleDbCommand.CommandText = "SELECT khdm,khmc,xslbdm,gjxslb,bywfjszz,TO_CHAR(ywfbl,'0.000') || '%' AS ywfbl,SUM(bnqc) AS bnqc,SUM(bnjf) AS bnjf,SUM(bndf) AS bndf,SUM(bndj) AS bndj,SUM(bnhl) AS bnhl,SUM(ywf_bz) AS ywf_bz,SUM(snhl) AS snhl" &
-                " FROM (SELECT ywfzymxa.khdm,ywfzymxa.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN '–¬' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,rc_khxx.bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
-                " FROM ((SELECT khdm,khmc,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & '»°±æƒÍ ˝
-                " UNION ALL (SELECT khdm,khmc,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   '»°∆⁄≥ı”‡∂Ó
-                " UNION ALL (SELECT khdm,khmc,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & '»°…œƒÍ ˝ 
+                " FROM (SELECT ywfzymxa.khdm,ywfzymxa.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN 'Êñ∞' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,rc_khxx.bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
+                " FROM ((SELECT khdm,khmc,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & 'ÂèñÊú¨Âπ¥Êï∞
+                " UNION ALL (SELECT khdm,khmc,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   'ÂèñÊúüÂàù‰ΩôÈ¢ù
+                " UNION ALL (SELECT khdm,khmc,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & 'Âèñ‰∏äÂπ¥Êï∞ 
                 ") ywfzymxa LEFT JOIN rc_khxslb ON rc_khxslb.xslbdm = ywfzymxa.xslbdm LEFT JOIN rc_khxx ON ywfzymxa.khdm = rc_khxx.khdm) ywfzymxb GROUP BY khdm,khmc,xslbdm,gjxslb,bywfjszz,ywfbl"
 
             rcOleDbCommand.Parameters.Clear()
@@ -205,12 +205,12 @@ Public Class FrmYwfZyMx
                 rcDataset.Tables("ywfzymx").Clear()
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "ywfzymx")
-            '–°º∆
-            rcOleDbCommand.CommandText = "SELECT '–°º∆' AS khdm,xslbdm,gjxslb,bywfjszz,TO_CHAR(ywfbl,'0.000') || '%'  AS ywfbl,SUM(bnqc) AS bnqc,SUM(bnjf) AS bnjf,SUM(bndf) AS bndf,SUM(bndj) AS bndj,SUM(bnhl) AS bnhl,SUM(ywf_bz) AS ywf_bz,SUM(snhl) AS snhl" &
-                " FROM (SELECT ywfzymxa.khdm,rc_khxx.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN '–¬' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,rc_khxx.bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
-                " FROM ((SELECT khdm,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & '»°±æƒÍ ˝
-                " UNION ALL (SELECT khdm,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   '»°∆⁄≥ı”‡∂Ó
-                " UNION ALL (SELECT khdm,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & '»°…œƒÍ ˝ 
+            'Â∞èËÆ°
+            rcOleDbCommand.CommandText = "SELECT 'Â∞èËÆ°' AS khdm,xslbdm,gjxslb,bywfjszz,TO_CHAR(ywfbl,'0.000') || '%'  AS ywfbl,SUM(bnqc) AS bnqc,SUM(bnjf) AS bnjf,SUM(bndf) AS bndf,SUM(bndj) AS bndj,SUM(bnhl) AS bnhl,SUM(ywf_bz) AS ywf_bz,SUM(snhl) AS snhl" &
+                " FROM (SELECT ywfzymxa.khdm,rc_khxx.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN 'Êñ∞' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,rc_khxx.bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
+                " FROM ((SELECT khdm,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & 'ÂèñÊú¨Âπ¥Êï∞
+                " UNION ALL (SELECT khdm,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   'ÂèñÊúüÂàù‰ΩôÈ¢ù
+                " UNION ALL (SELECT khdm,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & 'Âèñ‰∏äÂπ¥Êï∞ 
                 ") ywfzymxa LEFT JOIN rc_khxslb ON rc_khxslb.xslbdm = ywfzymxa.xslbdm LEFT JOIN rc_khxx ON ywfzymxa.khdm = rc_khxx.khdm) ywfzymxb GROUP BY xslbdm,gjxslb,bywfjszz,ywfbl"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonthEnd.Value.ToString.PadLeft(2, "0")
@@ -220,12 +220,12 @@ Public Class FrmYwfZyMx
             rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonthBegin.Value.ToString.PadLeft(2, "0")
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             rcOleDbDataAdpt.Fill(rcDataset, "ywfzymx")
-            ''πÿº¸°¢∑«πÿ∫œº∆
-            rcOleDbCommand.CommandText = "SELECT CASE WHEN gjxslb = 0 AND bywfjszz = 0 THEN '∑«πÿ≤ªº∆À„‘ˆ≥§–°º∆' ELSE CASE WHEN gjxslb = 0 AND bywfjszz = 1 THEN '∑«πÿº∆À„‘ˆ≥§–°º∆' ELSE CASE WHEN gjxslb = 1 AND bywfjszz = 0 THEN 'πÿº¸≤ªº∆À„‘ˆ≥§–°º∆' ELSE 'πÿº¸º∆À„‘ˆ≥§–°º∆' END END END AS xslbdm,gjxslb,bywfjszz,'%' AS ywfbl,SUM(bnqc) AS bnqc,SUM(bnjf) AS bnjf,SUM(bndf) AS bndf,SUM(bndj) AS bndj,SUM(bnhl) AS bnhl,SUM(ywf_bz) AS ywf_bz,SUM(snhl) AS snhl" &
-                " FROM (SELECT ywfzymxa.khdm,rc_khxx.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN '–¬' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,rc_khxx.bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
-                " FROM ((SELECT khdm,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & '»°±æƒÍ ˝
-                " UNION ALL (SELECT khdm,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   '»°∆⁄≥ı”‡∂Ó
-                " UNION ALL (SELECT khdm,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & '»°…œƒÍ ˝ 
+            ''ÂÖ≥ÈîÆ„ÄÅÈùûÂÖ≥ÂêàËÆ°
+            rcOleDbCommand.CommandText = "SELECT CASE WHEN gjxslb = 0 AND bywfjszz = 0 THEN 'ÈùûÂÖ≥‰∏çËÆ°ÁÆóÂ¢ûÈïøÂ∞èËÆ°' ELSE CASE WHEN gjxslb = 0 AND bywfjszz = 1 THEN 'ÈùûÂÖ≥ËÆ°ÁÆóÂ¢ûÈïøÂ∞èËÆ°' ELSE CASE WHEN gjxslb = 1 AND bywfjszz = 0 THEN 'ÂÖ≥ÈîÆ‰∏çËÆ°ÁÆóÂ¢ûÈïøÂ∞èËÆ°' ELSE 'ÂÖ≥ÈîÆËÆ°ÁÆóÂ¢ûÈïøÂ∞èËÆ°' END END END AS xslbdm,gjxslb,bywfjszz,'%' AS ywfbl,SUM(bnqc) AS bnqc,SUM(bnjf) AS bnjf,SUM(bndf) AS bndf,SUM(bndj) AS bndj,SUM(bnhl) AS bnhl,SUM(ywf_bz) AS ywf_bz,SUM(snhl) AS snhl" &
+                " FROM (SELECT ywfzymxa.khdm,rc_khxx.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN 'Êñ∞' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,rc_khxx.bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
+                " FROM ((SELECT khdm,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & 'ÂèñÊú¨Âπ¥Êï∞
+                " UNION ALL (SELECT khdm,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   'ÂèñÊúüÂàù‰ΩôÈ¢ù
+                " UNION ALL (SELECT khdm,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & 'Âèñ‰∏äÂπ¥Êï∞ 
                 ") ywfzymxa LEFT JOIN rc_khxslb ON rc_khxslb.xslbdm = ywfzymxa.xslbdm LEFT JOIN rc_khxx ON ywfzymxa.khdm = rc_khxx.khdm) ywfzymxb GROUP BY gjxslb,bywfjszz"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonthEnd.Value.ToString.PadLeft(2, "0")
@@ -235,12 +235,12 @@ Public Class FrmYwfZyMx
             rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = (Me.NudYear.Value - 1).ToString & Me.NudMonthBegin.Value.ToString.PadLeft(2, "0")
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             rcOleDbDataAdpt.Fill(rcDataset, "ywfzymx")
-            '◊‹º∆
-            rcOleDbCommand.CommandText = "SELECT '∫œº∆' AS xslbdm,1 AS bywfjszz,'%' AS ywfbl,SUM(bnqc) AS bnqc,SUM(bnjf) AS bnjf,SUM(bndf) AS bndf,SUM(bndj) AS bndj,SUM(bnhl) AS bnhl,SUM(ywf_bz) AS ywf_bz,SUM(snhl) AS snhl" &
-                " FROM (SELECT ywfzymxa.khdm,rc_khxx.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN '–¬' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
-                " FROM ((SELECT khdm,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & '»°±æƒÍ ˝
-                " UNION ALL (SELECT khdm,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   '»°∆⁄≥ı”‡∂Ó
-                " UNION ALL (SELECT khdm,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & '»°…œƒÍ ˝ 
+            'ÊÄªËÆ°
+            rcOleDbCommand.CommandText = "SELECT 'ÂêàËÆ°' AS xslbdm,1 AS bywfjszz,'%' AS ywfbl,SUM(bnqc) AS bnqc,SUM(bnjf) AS bnjf,SUM(bndf) AS bndf,SUM(bndj) AS bndj,SUM(bnhl) AS bnhl,SUM(ywf_bz) AS ywf_bz,SUM(snhl) AS snhl" &
+                " FROM (SELECT ywfzymxa.khdm,rc_khxx.khmc,ywfzymxa.xslbdm || CASE WHEN rc_khxx.djyear >= " & Me.NudYear.Value - 1 & " THEN 'Êñ∞' ELSE '' END AS xslbdm ,rc_khxslb.gjxslb,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl" &
+                " FROM ((SELECT khdm,xslbdm,ywfbl,0 AS bnqc,SUM(COALESCE(byjf,0.0)) AS bnjf,SUM(COALESCE(bydf,0.0)) AS bndf,SUM(COALESCE(tiexije,0.0) + COALESCE(yongjinje,0.0)) AS bndj,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS bnhl,SUM(ywf_bz) AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" & 'ÂèñÊú¨Âπ¥Êï∞
+                " UNION ALL (SELECT khdm,xslbdm,ywfbl,SUM(COALESCE(qmye,0.0) + COALESCE(bydf,0.0) - COALESCE(byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM gl_ywfjsb WHERE EXISTS (SELECT 1 FROM (SELECT MIN(cperiod) AS cperiod,khdm FROM gl_ywfjsb gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = '" & strZydm & "' GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)" &   'ÂèñÊúüÂàù‰ΩôÈ¢ù
+                " UNION ALL (SELECT khdm,t_xslbdm AS xslbdm,rc_khxslb.ywfbl,0 AS bnqc,0 as bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(bydf,0.0)- COALESCE(tiexije,0.0) - COALESCE(yongjinje,0.0)) AS snhl FROM gl_ywfjsb,rc_khxslb WHERE gl_ywfjsb.t_xslbdm = rc_khxslb.xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = '" & strZydm & "' GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.t_xslbdm,rc_khxslb.ywfbl) " & 'Âèñ‰∏äÂπ¥Êï∞ 
                 ") ywfzymxa LEFT JOIN rc_khxslb ON rc_khxslb.xslbdm = ywfzymxa.xslbdm LEFT JOIN rc_khxx ON ywfzymxa.khdm = rc_khxx.khdm) ywfzymxb"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonthEnd.Value.ToString.PadLeft(2, "0")
@@ -252,9 +252,9 @@ Public Class FrmYwfZyMx
             rcOleDbDataAdpt.Fill(rcDataset, "ywfzymx")
         Catch ex As Exception
             Try
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Catch ey As OleDbException
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             End Try
             Return
         Finally
@@ -263,7 +263,7 @@ Public Class FrmYwfZyMx
     End Sub
 #End Region
 
-    '#Region " ‰≥ˆµΩExcel"
+    '#Region "ËæìÂá∫Âà∞Excel"
     '    Private Sub ToExcel(rcExcelApp As Microsoft.Office.Interop.Excel.Application, rcExcelWorksheet As Microsoft.Office.Interop.Excel.Application, strZydm As String, strZymc As String, dvYwfZyMx As DataView)
     '        If dvYwfZyMx.Count > 0 Then
     '            Try
@@ -271,7 +271,7 @@ Public Class FrmYwfZyMx
     '                rowIndex = 1
     '                colIndex = 0
 
-    '                'Ω´À˘µ√µΩµƒ±Ìµƒ¡–√˚,∏≥÷µ∏¯µ•‘™∏Ò
+    '                'Â∞ÜÊâÄÂæóÂà∞ÁöÑË°®ÁöÑÂàóÂêç,ËµãÂÄºÁªôÂçïÂÖÉÊ†º
     '                Dim i As Integer
     '                Dim rcDataColumn As DataColumn
     '                Dim rcDataRowView As DataRowView
@@ -281,7 +281,7 @@ Public Class FrmYwfZyMx
     '                    colIndex = colIndex + 1
     '                    rcExcelApp.Cells(1, colIndex) = rcDataColumn.ColumnName
     '                Next
-    '                'µ√µΩµƒ±ÌÀ˘”–––,∏≥÷µ∏¯µ•‘™∏Ò
+    '                'ÂæóÂà∞ÁöÑË°®ÊâÄÊúâË°å,ËµãÂÄºÁªôÂçïÂÖÉÊ†º
     '                For i = 0 To dvYwfZyMx.Count - 1
     '                    rcDataRowView = dvYwfZyMx.Item(i)
     '                    If rcDataRowView.Row.RowState <> DataRowState.Deleted Then
@@ -293,9 +293,9 @@ Public Class FrmYwfZyMx
     '                                Case dvYwfZyMx.Item(i).Row.Item(rcDataColumn.ColumnName).GetType.ToString = "System.String"
     '                                    rcExcelApp.Cells(rowIndex, colIndex) = "'" & Trim(dvYwfZyMx.Item(i).Row.Item(rcDataColumn.ColumnName))
     '                                Case dvYwfZyMx.Item(i).Row.Item(rcDataColumn.ColumnName).GetType.ToString = "System.Byte[]"
-    '                                    '…Ë÷√––∏ﬂ
+    '                                    'ËÆæÁΩÆË°åÈ´ò
     '                                    rcExcelWorksheet.Rows().RowHeight = 100
-    '                                    '…Ë÷√¡–øÌ
+    '                                    'ËÆæÁΩÆÂàóÂÆΩ
     '                                    rcExcelWorksheet.Columns().ColumnWidth = 16
     '                                    '
     '                                    Dim s As String
@@ -308,7 +308,7 @@ Public Class FrmYwfZyMx
     '                                    fs = New IO.FileStream(s, IO.FileMode.CreateNew)
     '                                    fs.Write(size, 0, size.Length - 0)
     '                                    fs.Close()
-    '                                    Dim range As Microsoft.Office.Interop.Excel.Range = rcExcelWorksheet.Range(rcExcelApp.Cells(rowIndex, colIndex), rcExcelApp.Cells(rowIndex, colIndex))  '’≥Ã˘Õº∆¨µƒŒª÷√
+    '                                    Dim range As Microsoft.Office.Interop.Excel.Range = rcExcelWorksheet.Range(rcExcelApp.Cells(rowIndex, colIndex), rcExcelApp.Cells(rowIndex, colIndex))  'Á≤òË¥¥ÂõæÁâáÁöÑ‰ΩçÁΩÆ
     '                                    range.Select()
     '                                    rcExcelApp.ActiveSheet.Pictures.Insert(s).Select()
 
@@ -322,26 +322,26 @@ Public Class FrmYwfZyMx
     '                For Each pic As Microsoft.Office.Interop.Excel.Shape In rcExcelApp.ActiveSheet.Shapes
     '                    pic.Height = 100
     '                Next
-    '                ''…Ë÷√¥Ú”°œ‘ æ—˘ Ω
+    '                ''ËÆæÁΩÆÊâìÂç∞ÊòæÁ§∫Ê†∑Âºè
     '                'With rcExcelWorksheet
-    '                '    .Range(.cell(1, 1), .cell(1, colIndex)).borderstyle.font = True '±ÍÃ‚º”¥÷
+    '                '    .Range(.cell(1, 1), .cell(1, colIndex)).borderstyle.font = True 'Ê†áÈ¢òÂä†Á≤ó
     '                '    .Range(.cell(1, 1), .cell(1, colIndex)).borderstyle.color = RGB(125, 25, 27)
-    '                '    .Range(.cell(1, 1), .cell(rowIndex, colIndex)).borderstyle.linestyle = 1 '…Ë÷√±ﬂøÚ—˘ Ω
+    '                '    .Range(.cell(1, 1), .cell(rowIndex, colIndex)).borderstyle.linestyle = 1 'ËÆæÁΩÆËæπÊ°ÜÊ†∑Âºè
     '                'End With
     '                'rcExcelApp.close()
     '            Catch ex As Exception
-    '                MessageBox.Show(" ˝æ›µº≥ˆ ß∞‹£°«Î≤Èø¥ «∑Ò“—æ≠∞≤◊∞¡ÀExcel°£", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '                MessageBox.Show("Êï∞ÊçÆÂØºÂá∫Â§±Ë¥•ÔºÅËØ∑Êü•ÁúãÊòØÂê¶Â∑≤ÁªèÂÆâË£Ö‰∫ÜExcel„ÄÇ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
     '            Finally
     '                Me.Cursor = Cursors.Default
     '            End Try
     '        Else
-    '            MessageBox.Show("√ª”– ˝æ›£°", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '            MessageBox.Show("Ê≤°ÊúâÊï∞ÊçÆÔºÅ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
     '        End If
     '        'Dim strConnection As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source = " + strFilename + ";Extended Properties = 'Excel 12.0;HDR=YES;IMEX=0;'"
     '        'Dim xlsOleDbConn As New OleDbConnection(strConnection)
     '        'Dim i As Integer
     '        'Dim j As Integer
-    '        ''≤Â»Îπ§◊˜±Ì
+    '        ''ÊèíÂÖ•Â∑•‰ΩúË°®
     '        'Dim xlApp As Excel.Application
     '        'Dim xlBook As Excel.Workbook
     '        'Dim xlSheet As Excel.Worksheet
@@ -375,7 +375,7 @@ Public Class FrmYwfZyMx
     '        '        For j = 0 To dvYwfZyMx.Table.Columns.Count - 1
     '        '            Select Case dvYwfZyMx.Table.Columns(j).DataType.ToString
     '        '                Case "System.Decimal", "System.Double", "System.Int16", "System.Int32"
-    '        '                    If dvYwfZyMx.Item(i).Row.Item(dvYwfZyMx.Table.Columns(j).ColumnName).ToString = "∑« ˝◊÷" Or dvYwfZyMx.Item(i).Row.Item(dvYwfZyMx.Table.Columns(j).ColumnName).ToString = "’˝Œﬁ«Ó¥Û" Or dvYwfZyMx.Item(i).Row.Item(dvYwfZyMx.Table.Columns(j).ColumnName).ToString = "∏∫Œﬁ«Ó¥Û" Then
+    '        '                    If dvYwfZyMx.Item(i).Row.Item(dvYwfZyMx.Table.Columns(j).ColumnName).ToString = "ÈùûÊï∞Â≠ó" Or dvYwfZyMx.Item(i).Row.Item(dvYwfZyMx.Table.Columns(j).ColumnName).ToString = "Ê≠£Êó†Á©∑Â§ß" Or dvYwfZyMx.Item(i).Row.Item(dvYwfZyMx.Table.Columns(j).ColumnName).ToString = "Ë¥üÊó†Á©∑Â§ß" Then
     '        '                        rcOleDbCommand.CommandText += IIf(j = 0, "'", ",0")
     '        '                    Else
     '        '                        rcOleDbCommand.CommandText += IIf(j = 0, "'", ",0") & dvYwfZyMx.Item(i).Row.Item(dvYwfZyMx.Table.Columns(j).ColumnName)
@@ -395,31 +395,31 @@ Public Class FrmYwfZyMx
     '        '    Next
     '        'Catch ex As Exception
     '        '    Try
-    '        '        MsgBox("≥Ã–Ú¥ÌŒÛ°£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+    '        '        MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
     '        '    Catch ey As OleDbException
-    '        '        MsgBox("≥Ã–Ú¥ÌŒÛ°£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+    '        '        MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
     '        '    End Try
     '        '    Return
     '        'Finally
     '        '    xlsOleDbConn.Close()
     '        'End Try
-    '        'MsgBox(" ˝æ›µº≥ˆÕÍ≥…°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "Ã· æ–≈œ¢")
+    '        'MsgBox("Êï∞ÊçÆÂØºÂá∫ÂÆåÊàê„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÊèêÁ§∫‰ø°ÊÅØ")
     '    End Sub
 
     '#End Region
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         If String.IsNullOrEmpty(Me.TxtZydm.Text) Then
-            MsgBox("«Î—°‘Ò÷∞‘±±‡¬Î°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "Ã· æ–≈œ¢")
+            MsgBox("ËØ∑ÈÄâÊã©ËÅåÂëòÁºñÁ†Å„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÊèêÁ§∫‰ø°ÊÅØ")
             Return
         End If
         ReadYwfZyMx(Me.TxtZydm.Text)
-        'µ˜”√±Ìµ•
+        'Ë∞ÉÁî®Ë°®Âçï
         Dim rcFrm As New FrmYwfZyMxz
         With rcFrm
             .ParaDataSet = rcDataset
             .ParaDataView = New DataView(rcDataset.Tables("ywfzymx"), "TRUE", "gjxslb desc,bywfjszz,ywfbl,xslbdm,khdm", DataViewRowState.CurrentRows)
-            .Label2.Text = "ª·º∆∆⁄º‰£∫" & Me.NudYear.Value & "ƒÍ" & Me.NudMonthBegin.Value & "‘¬÷¡" & Me.NudMonthEnd.Value & "‘¬"
-            '.Label3.Text = "≤÷ø‚£∫" & Trim(Me.TxtCkdm.Text)
+            .Label2.Text = "‰ºöËÆ°ÊúüÈó¥Ôºö" & Me.NudYear.Value & "Âπ¥" & Me.NudMonthBegin.Value & "ÊúàËá≥" & Me.NudMonthEnd.Value & "Êúà"
+            '.Label3.Text = "‰ªìÂ∫ìÔºö" & Trim(Me.TxtCkdm.Text)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()
@@ -429,7 +429,7 @@ Public Class FrmYwfZyMx
     Private Sub BtnToExcel_Click(sender As Object, e As EventArgs) Handles BtnToExcel.Click
         Dim i As Integer
         If String.IsNullOrEmpty(Me.TxtBmdm.Text) Then
-            MsgBox("«Î—°‘Ò≤ø√≈±‡¬Î°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "Ã· æ–≈œ¢")
+            MsgBox("ËØ∑ÈÄâÊã©ÈÉ®Èó®ÁºñÁ†Å„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÊèêÁ§∫‰ø°ÊÅØ")
             Return
         End If
         Try
@@ -446,7 +446,7 @@ Public Class FrmYwfZyMx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
         Catch ex As Exception
-            MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+            MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
         Finally
             rcOleDbConn.Close()
         End Try
@@ -458,14 +458,14 @@ Public Class FrmYwfZyMx
             rcExcelWorksheet = rcExcelWorkbook.Worksheets("sheet1")
         End If
         rcExcelApp.Visible = True
-        '∂®“Â––∫≈£¨¡–∫≈
+        'ÂÆö‰πâË°åÂè∑ÔºåÂàóÂè∑
         Dim rowIndex, colIndex As Integer
         rowIndex = 1
         colIndex = 0
         For i = 0 To rcDataset.Tables("rc_zyxx").Rows.Count - 1
-            '∂¡»° ˝æ›
+            'ËØªÂèñÊï∞ÊçÆ
             ReadYwfZyMx(rcDataset.Tables("rc_zyxx").Rows(i).Item("zydm"))
-            ''—°‘Ò ‰≥ˆŒƒº˛
+            ''ÈÄâÊã©ËæìÂá∫Êñá‰ª∂
             'Dim rcFileName As String = CurDir() + "\report.xls"
             'If Me.OpenFileDialogExcel.ShowDialog = DialogResult.OK Then
             '    rcFileName = Me.OpenFileDialogExcel.FileName
@@ -476,12 +476,12 @@ Public Class FrmYwfZyMx
                 rcExcelWorksheet = rcExcelWorkbook.Worksheets.Add()
                 rcExcelWorksheet.Name = rcDataset.Tables("rc_zyxx").Rows(i).Item("zymc")
             End If
-            ' ‰≥ˆ
+            'ËæìÂá∫
             Dim dvYwfzyMx As New DataView(rcDataset.Tables("ywfzymx"), "TRUE", "gjxslb desc,bywfjszz,ywfbl,xslbdm,khdm", DataViewRowState.CurrentRows)
             If dvYwfzyMx.Count > 0 Then
                 Try
 
-                    'Ω´À˘µ√µΩµƒ±Ìµƒ¡–√˚,∏≥÷µ∏¯µ•‘™∏Ò
+                    'Â∞ÜÊâÄÂæóÂà∞ÁöÑË°®ÁöÑÂàóÂêç,ËµãÂÄºÁªôÂçïÂÖÉÊ†º
                     Dim j As Integer
                     Dim rcDataColumn As DataColumn
                     Dim rcDataRowView As DataRowView
@@ -493,16 +493,16 @@ Public Class FrmYwfZyMx
                     End If
                     If rowIndex = 1 Then
                         If Not Me.CheckBox1.Checked Then
-                            rcExcelApp.Cells(rowIndex, 1) = "÷∞‘±±‡¬Î"
-                            rcExcelApp.Cells(rowIndex, 2) = "÷∞‘±–’√˚"
+                            rcExcelApp.Cells(rowIndex, 1) = "ËÅåÂëòÁºñÁ†Å"
+                            rcExcelApp.Cells(rowIndex, 2) = "ËÅåÂëòÂßìÂêç"
                         End If
-                        '–¥¡–√˚
+                        'ÂÜôÂàóÂêç
                         For Each rcDataColumn In dvYwfzyMx.Table.Columns
                             colIndex += 1
                             rcExcelApp.Cells(1, colIndex) = rcDataColumn.ColumnName
                         Next
                     End If
-                    'µ√µΩµƒ±ÌÀ˘”–––,∏≥÷µ∏¯µ•‘™∏Ò
+                    'ÂæóÂà∞ÁöÑË°®ÊâÄÊúâË°å,ËµãÂÄºÁªôÂçïÂÖÉÊ†º
                     For j = 0 To dvYwfzyMx.Count - 1
                         rcDataRowView = dvYwfzyMx.Item(j)
                         If rcDataRowView.Row.RowState <> DataRowState.Deleted Then
@@ -523,20 +523,20 @@ Public Class FrmYwfZyMx
                             Next
                         End If
                     Next
-                    ''…Ë÷√¥Ú”°œ‘ æ—˘ Ω
+                    ''ËÆæÁΩÆÊâìÂç∞ÊòæÁ§∫Ê†∑Âºè
                     'With rcExcelWorksheet
-                    '    .Range(.cell(1, 1), .cell(1, colIndex)).borderstyle.font = True '±ÍÃ‚º”¥÷
+                    '    .Range(.cell(1, 1), .cell(1, colIndex)).borderstyle.font = True 'Ê†áÈ¢òÂä†Á≤ó
                     '    .Range(.cell(1, 1), .cell(1, colIndex)).borderstyle.color = RGB(125, 25, 27)
-                    '    .Range(.cell(1, 1), .cell(rowIndex, colIndex)).borderstyle.linestyle = 1 '…Ë÷√±ﬂøÚ—˘ Ω
+                    '    .Range(.cell(1, 1), .cell(rowIndex, colIndex)).borderstyle.linestyle = 1 'ËÆæÁΩÆËæπÊ°ÜÊ†∑Âºè
                     'End With
                     'rcExcelApp.close()
                 Catch ex As Exception
-                    MessageBox.Show(" ˝æ›µº≥ˆ ß∞‹£°«Î≤Èø¥ «∑Ò“—æ≠∞≤◊∞¡ÀExcel°£", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("Êï∞ÊçÆÂØºÂá∫Â§±Ë¥•ÔºÅËØ∑Êü•ÁúãÊòØÂê¶Â∑≤ÁªèÂÆâË£Ö‰∫ÜExcel„ÄÇ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Finally
                     Me.Cursor = Cursors.Default
                 End Try
             Else
-                MessageBox.Show("√ª”– ˝æ›£°", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Ê≤°ÊúâÊï∞ÊçÆÔºÅ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
             'ToExcel(rcDataset.Tables("rc_zyxx").Rows(i).Item("zydm"), rcDataset.Tables("rc_zyxx").Rows(i).Item("zymc"), New DataView(rcDataset.Tables("ywfzymx"), "TRUE", "gjxslb desc,ywfbl,xslbdm,khdm", DataViewRowState.CurrentRows))
         Next

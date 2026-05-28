@@ -1,23 +1,23 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeKhFpFxb
-    'Ω®¡¢ ˝æ›  ≈‰∆˜
+    'Âª∫Á´ãÊï∞ÊçÆÈÄÇÈÖçÂô®
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    'Ω®¡¢DataSet∂‘œÛ
+    'Âª∫Á´ãDataSetÂØπË±°
     ReadOnly rcDataset As New DataSet
-    ' ˝æ›OleDb∏¸–¬¥´µ›
+    'Êï∞ÊçÆOleDbÊõ¥Êñ∞‰º†ÈÄí
     Dim rcOleDbTrans As OleDbTransaction
-    'Ω®¡¢√¸¡Ó
+    'Âª∫Á´ãÂëΩ‰ª§
     ReadOnly rcOleDbCommand As OleDbCommand = sysOleDbConn.CreateCommand()
-    'Ω®¡¢Datatable
+    'Âª∫Á´ãDatatable
     ReadOnly dtOeKhFpFxb As New DataTable("oekhfpfxb")
 
     Private Sub FrmOeKhFpFxb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'ƒ¨»œ÷µ
-        'ƒ¨»œ÷µ
+        'ÈªòËÆ§ÂÄº
+        'ÈªòËÆ§ÂÄº
         NudYear.Value = Mid(g_Kjqj, 1, 4)
         NudMonth.Value = Mid(g_Kjqj, 5, 2)
-        ''¥¥Ω®datatable
+        ''ÂàõÂª∫datatable
         'dtOeKhFpFxb.Columns.Add("khlbdm", Type.GetType("System.String"))
         'dtOeKhFpFxb.Columns.Add("khlbmc", Type.GetType("System.String"))
         'dtOeKhFpFxb.Columns.Add("khdm", Type.GetType("System.String"))
@@ -81,12 +81,12 @@ Public Class FrmOeKhFpFxb
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                '÷∏ æ KeyPress  ¬º˛“—¥¶¿Ì£¨»•µÙ Windows »± °µƒ∂£µ±…˘°£
+                'ÊåáÁ§∫ KeyPress ‰∫ã‰ª∂Â∑≤Â§ÑÁêÜÔºåÂéªÊéâ Windows Áº∫ÁúÅÁöÑÂèÆÂΩìÂ£∞„ÄÇ
                 e.Handled = True
         End Select
     End Sub
 
-#Region "øÕªß¿‡±±‡¬Îµƒ ¬º˛"
+#Region "ÂÆ¢Êà∑Á±ªÂà´ÁºñÁ†ÅÁöÑ‰∫ã‰ª∂"
 
     Private Sub Txtlbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtLbdm.KeyDown
         Select Case e.KeyCode
@@ -98,7 +98,7 @@ Public Class FrmOeKhFpFxb
                     .ParaField1 = "lbdm"
                     .ParaField2 = "lbmc"
                     .ParaField3 = "lbsm"
-                    .ParaTitle = "øÕªß¿‡±"
+                    .ParaTitle = "ÂÆ¢Êà∑Á±ªÂà´"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -124,7 +124,7 @@ Public Class FrmOeKhFpFxb
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_khlb")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -139,7 +139,7 @@ Public Class FrmOeKhFpFxb
 
 #End Region
 
-#Region "≤ø√≈±‡¬Îµƒ ¬º˛"
+#Region "ÈÉ®Èó®ÁºñÁ†ÅÁöÑ‰∫ã‰ª∂"
 
     Private Sub TxtBmdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtBmdm.KeyDown
         Select Case e.KeyCode
@@ -151,7 +151,7 @@ Public Class FrmOeKhFpFxb
                     .ParaField1 = "bmdm"
                     .ParaField2 = "bmmc"
                     .ParaField3 = "bmsm"
-                    .ParaTitle = "≤ø√≈"
+                    .ParaTitle = "ÈÉ®Èó®"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -181,7 +181,7 @@ Public Class FrmOeKhFpFxb
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_bmxx")
             Catch ex As Exception
-                MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -189,7 +189,7 @@ Public Class FrmOeKhFpFxb
             If rcDataset.Tables("rc_bmxx").Rows.Count > 0 Then
                 TxtBmdm.Text = Trim(rcDataset.Tables("rc_bmxx").Rows(0).Item("bmdm"))
             Else
-                MsgBox("≤ø√≈±‡¬Î≤ª¥Ê‘⁄£¨«Î∞¥F3º¸—°‘Ò°£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+                MsgBox("ÈÉ®Èó®ÁºñÁ†Å‰∏çÂ≠òÂú®ÔºåËØ∑ÊåâF3ÈîÆÈÄâÊã©„ÄÇ", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
                 e.Cancel = True
             End If
         End If
@@ -208,7 +208,7 @@ Public Class FrmOeKhFpFxb
 
 
         dtOeKhFpFxb.Clear()
-        '»° ˝æ›
+        'ÂèñÊï∞ÊçÆ
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -216,8 +216,8 @@ Public Class FrmOeKhFpFxb
             rcOleDbCommand.Transaction = rcOleDbTrans
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            '¥¥Ω®¡Ÿ ±±Ì
-            Me.LblMsg.Text = "’˝‘⁄¥¥Ω®¡Ÿ ±±Ì£¨«Î…‘∫Ú......"
+            'ÂàõÂª∫‰∏¥Êó∂Ë°®
+            Me.LblMsg.Text = "Ê≠£Âú®ÂàõÂª∫‰∏¥Êó∂Ë°®ÔºåËØ∑Á®çÂÄô......"
             rcOleDbCommand.CommandText = "SELECT * FROM user_tables WHERE table_name='T_OEKHFPFXB'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -236,42 +236,42 @@ Public Class FrmOeKhFpFxb
             'rcOleDbCommand.CommandText = "alter table T_OEKHFPFXB  add constraint PK_OEKHFPFXB primary key (KHDM,ZYDM)"
             'rcOleDbCommand.Parameters.Clear()
             'rcOleDbCommand.ExecuteNonQuery()
-            Me.LblMsg.Text = "’˝‘⁄≤Â»Î±æ‘¬ ˝æ›£¨«Î…‘∫Ú......"
+            Me.LblMsg.Text = "Ê≠£Âú®ÊèíÂÖ•Êú¨ÊúàÊï∞ÊçÆÔºåËØ∑Á®çÂÄô......"
             If Me.ChbLb.Checked Then
-                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,bysl,byfzsl,byje,byse,bycbje,bymle,bymll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl AS bysy,oekhfpfxbc.fzsl AS byfzsl,oekhfpfxbc.je AS byje,oekhfpfxbc.se AS byse,oekhfpfxbc.cbje AS bycbje,oekhfpfxbc.mle AS bymle,oekhfpfxbc.bymll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS bymll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑œ˙ €µ•' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
+                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,bysl,byfzsl,byje,byse,bycbje,bymle,bymll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl AS bysy,oekhfpfxbc.fzsl AS byfzsl,oekhfpfxbc.je AS byje,oekhfpfxbc.se AS byse,oekhfpfxbc.cbje AS bycbje,oekhfpfxbc.mle AS bymle,oekhfpfxbc.bymll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS bymll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈîÄÂîÆÂçï' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
             Else
-                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,bysl,byfzsl,byje,byse,bycbje,bymle,bymll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl AS,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.bymll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS bymll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑œ˙ €µ•' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
+                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,bysl,byfzsl,byje,byse,bycbje,bymle,bymll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl AS,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.bymll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS bymll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈîÄÂîÆÂçï' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
             End If
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = g_Dwrq.Date
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateByBegin
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateByEnd
             rcOleDbCommand.ExecuteNonQuery()
-            Me.LblMsg.Text = "’˝‘⁄≤Â»Î…œ‘¬ ˝æ›£¨«Î…‘∫Ú......"
+            Me.LblMsg.Text = "Ê≠£Âú®ÊèíÂÖ•‰∏äÊúàÊï∞ÊçÆÔºåËØ∑Á®çÂÄô......"
             If Me.ChbLb.Checked Then
-                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,sysl,syfzsl,syje,syse,sycbje,symle,symll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.symll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS symll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑œ˙ €µ•' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
+                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,sysl,syfzsl,syje,syse,sycbje,symle,symll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.symll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS symll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈîÄÂîÆÂçï' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
             Else
-                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,sysl,syfzsl,syje,syse,sycbje,symle,symll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.symll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS symll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑œ˙ €µ•' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
+                rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,sysl,syfzsl,syje,syse,sycbje,symle,symll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.symll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS symll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈîÄÂîÆÂçï' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
             End If
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = g_Dwrq.Date
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateSyBegin
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateSyEnd
             rcOleDbCommand.ExecuteNonQuery()
-            Me.LblMsg.Text = "’˝‘⁄≤Â»Î…œƒÍ ˝æ›£¨«Î…‘∫Ú......"
+            Me.LblMsg.Text = "Ê≠£Âú®ÊèíÂÖ•‰∏äÂπ¥Êï∞ÊçÆÔºåËØ∑Á®çÂÄô......"
             If Not Me.CheckBox1.Checked Then
-                '»°œ˙ €∑¢∆±µƒ ˝æ›
+                'ÂèñÈîÄÂîÆÂèëÁ•®ÁöÑÊï∞ÊçÆ
                 If Me.ChbLb.Checked Then
-                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑œ˙ €µ•' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
+                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈîÄÂîÆÂçï' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
                 Else
-                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑œ˙ €µ•' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
+                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_fp.shkhdm AS khdm,oe_fp.shkhmc AS khmc,SUM(oe_fp.sl) AS sl,SUM(oe_fp.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_fp.je) AS je,SUM(oe_fp.se) AS se,SUM(oe_fp.cbje) AS cbje FROM oe_fp,rc_lx,rc_cpxx WHERE SUBSTR(oe_fp.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_fp.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈîÄÂîÆÂçï' AND oe_fp.cpdm = rc_cpxx.cpdm AND oe_fp.bdelete = 0 AND oe_fp.fprq >= ? AND oe_fp.fprq >= ? AND oe_fp.fprq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_fp.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_fp.shkhdm,oe_fp.shkhmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
                 End If
             Else
-                '»°œ˙ €≥ˆø‚µƒ ˝æ›
+                'ÂèñÈîÄÂîÆÂá∫Â∫ìÁöÑÊï∞ÊçÆ
                 If Me.ChbLb.Checked Then
-                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_xsd.khdm,oe_xsd.khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_xsd.je) AS je,SUM(oe_xsd.se) AS se,SUM(oe_xsd.cbje) AS cbje FROM oe_xsd,rc_lx,rc_cpxx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑ÀÕªıµ•' AND oe_xsd.cpdm = rc_cpxx.cpdm AND oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_xsd.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_xsd.khdm,oe_xsd.khmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
+                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,cplbdm,cplbmc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll) SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.cplbdm,rc_cplb.lbmc AS cplbmc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.cplbdm,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.cplbdm,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_xsd.khdm,oe_xsd.khmc,rc_cpxx.lbdm AS cplbdm,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_xsd.je) AS je,SUM(oe_xsd.se) AS se,SUM(oe_xsd.cbje) AS cbje FROM oe_xsd,rc_lx,rc_cpxx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈÄÅË¥ßÂçï' AND oe_xsd.cpdm = rc_cpxx.cpdm AND oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_xsd.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_xsd.khdm,oe_xsd.khmc,rc_cpxx.lbdm) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm LEFT JOIN rc_cplb ON oekhfpfxbc.cplbdm = rc_cplb.lbdm"
                 Else
-                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_xsd.khdm,oe_xsd.khmc,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_xsd.je) AS je,SUM(oe_xsd.se) AS se,SUM(oe_xsd.cbje) AS cbje FROM oe_xsd,rc_lx,rc_cpxx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '≤˙∆∑ÀÕªıµ•' AND oe_xsd.cpdm = rc_cpxx.cpdm AND oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_xsd.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_xsd.khdm,oe_xsd.khmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
+                    rcOleDbCommand.CommandText = "INSERT INTO t_oekhfpfxb (khlbdm,khlbmc,khdm,khmc,zydm,zymc,snsl,snfzsl,snje,snse,sncbje,snmle,snmll)SELECT oekhfpfxbc.khlbdm,rc_khlb.lbmc AS khlbmc,oekhfpfxbc.khdm,oekhfpfxbc.khmc,oekhfpfxbc.zydm,oekhfpfxbc.zymc,oekhfpfxbc.sl,oekhfpfxbc.fzsl,oekhfpfxbc.je,oekhfpfxbc.se,oekhfpfxbc.cbje,oekhfpfxbc.mle,oekhfpfxbc.snmll FROM (SELECT oekhfpfxbb.khlbdm,oekhfpfxbb.khdm,oekhfpfxbb.khmc,oekhfpfxbb.zydm,oekhfpfxbb.zymc,oekhfpfxbb.sl,oekhfpfxbb.fzsl,oekhfpfxbb.je,oekhfpfxbb.se,oekhfpfxbb.cbje,(oekhfpfxbb.je-oekhfpfxbb.cbje) AS mle,CASE WHEN oekhfpfxbb.je <> 0 THEN (oekhfpfxbb.je-oekhfpfxbb.cbje) / oekhfpfxbb.je ELSE 0 END AS snmll FROM (SELECT oekhfpfxba.khdm,oekhfpfxba.khmc,rc_khxx.zydm,rc_khxx.zymc,oekhfpfxba.sl,oekhfpfxba.fzsl,oekhfpfxba.je,oekhfpfxba.se,oekhfpfxba.cbje,rc_khxx.lbdm AS khlbdm FROM (SELECT oe_xsd.khdm,oe_xsd.khmc,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.sl * rc_cpxx.cpweight/1000) AS fzsl,SUM(oe_xsd.je) AS je,SUM(oe_xsd.se) AS se,SUM(oe_xsd.cbje) AS cbje FROM oe_xsd,rc_lx,rc_cpxx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '‰∫ßÂìÅÈÄÅË¥ßÂçï' AND oe_xsd.cpdm = rc_cpxx.cpdm AND oe_xsd.bdelete = 0 AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq <= ?" & IIf(Not String.IsNullOrEmpty(Me.TxtBmdm.Text), " AND oe_xsd.bmdm = '" & Me.TxtBmdm.Text & "'", "") & " GROUP BY oe_xsd.khdm,oe_xsd.khmc) oekhfpfxba LEFT JOIN rc_khxx ON oekhfpfxba.khdm = rc_khxx.khdm) oekhfpfxbb " & IIf(Not String.IsNullOrEmpty(Me.TxtLbdm.Text), " WHERE khlbdm = '" & Me.TxtLbdm.Text & "'", "") & ") oekhfpfxbc LEFT JOIN rc_khlb ON oekhfpfxbc.khlbdm = rc_khlb.lbdm"
                 End If
 
             End If
@@ -280,7 +280,7 @@ Public Class FrmOeKhFpFxb
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateSnBegin
             rcOleDbCommand.Parameters.Add("@fprq", OleDbType.Date, 8).Value = dateSnEnd
             rcOleDbCommand.ExecuteNonQuery()
-            Me.LblMsg.Text = "’˝‘⁄∂¡»° ˝æ›£¨«Î…‘∫Ú......"
+            Me.LblMsg.Text = "Ê≠£Âú®ËØªÂèñÊï∞ÊçÆÔºåËØ∑Á®çÂÄô......"
             If Me.CheckBox2.Checked Then
                 rcOleDbCommand.CommandText = "SELECT cplbdm,cplbmc,SUM(bysl) AS bysl,SUM(sysl) AS sysl,SUM(snsl) AS snsl,SUM(byfzsl) AS byfzsl,SUM(syfzsl) AS syfzsl,SUM(snfzsl) AS snfzsl,CASE WHEN SUM(syfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(syfzsl)*100,2) ELSE 0 END AS hbfzsl,CASE WHEN SUM(snfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(snfzsl)*100,2) ELSE 0 END AS tbfzsl,SUM(byje) AS byje,SUM(syje) AS syje,SUM(snje) AS snje,CASE WHEN SUM(syje) <> 0 THEN ROUND(SUM(byje)/SUM(syje)*100,2) ELSE 0 END AS hbje,CASE WHEN SUM(snje) <> 0 THEN ROUND(SUM(byje)/SUM(snje)*100,2) ELSE 0 END AS tbje,SUM(byse) AS byse,SUM(syse) AS syse,SUM(snse) AS snse,SUM(bycbje) AS bycbje,SUM(sycbje) AS sycbje,SUM(sncbje) AS sncbje,SUM(bymle) AS bymle,SUM(symle) AS symle,SUM(snmle) AS snmle,SUM(bymll) AS bymll,SUM(symll) AS symll,SUM(snmll) AS snmll FROM t_oekhfpfxb GROUP BY cplbdm,cplbmc"
                 rcOleDbCommand.Parameters.Clear()
@@ -289,7 +289,7 @@ Public Class FrmOeKhFpFxb
                     rcDataset.Tables("oekhfpfxb").Clear()
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "oekhfpfxb")
-                rcOleDbCommand.CommandText = "SELECT '' AS cplbdm,'∫œº∆' AS cplbmc,SUM(bysl) AS bysl,SUM(sysl) AS sysl,SUM(snsl) AS snsl,SUM(byfzsl) AS byfzsl,SUM(syfzsl) AS syfzsl,SUM(snfzsl) AS snfzsl,CASE WHEN SUM(syfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(syfzsl)*100,2) ELSE 0 END AS hbfzsl,CASE WHEN SUM(snfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(snfzsl)*100,2) ELSE 0 END AS tbfzsl,SUM(byje) AS byje,SUM(syje) AS syje,SUM(snje) AS snje,CASE WHEN SUM(syje) <> 0 THEN ROUND(SUM(byje)/SUM(syje)*100,2) ELSE 0 END AS hbje,CASE WHEN SUM(snje) <> 0 THEN ROUND(SUM(byje)/SUM(snje)*100,2) ELSE 0 END AS tbje,SUM(byse) AS byse,SUM(syse) AS syse,SUM(snse) AS snse,SUM(bycbje) AS bycbje,SUM(sycbje) AS sycbje,SUM(sncbje) AS sncbje,SUM(bymle) AS bymle,SUM(symle) AS symle,SUM(snmle) AS snmle,SUM(bymll) AS bymll,SUM(symll) AS symll,SUM(snmll) AS snmll FROM t_oekhfpfxb"
+                rcOleDbCommand.CommandText = "SELECT '' AS cplbdm,'ÂêàËÆ°' AS cplbmc,SUM(bysl) AS bysl,SUM(sysl) AS sysl,SUM(snsl) AS snsl,SUM(byfzsl) AS byfzsl,SUM(syfzsl) AS syfzsl,SUM(snfzsl) AS snfzsl,CASE WHEN SUM(syfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(syfzsl)*100,2) ELSE 0 END AS hbfzsl,CASE WHEN SUM(snfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(snfzsl)*100,2) ELSE 0 END AS tbfzsl,SUM(byje) AS byje,SUM(syje) AS syje,SUM(snje) AS snje,CASE WHEN SUM(syje) <> 0 THEN ROUND(SUM(byje)/SUM(syje)*100,2) ELSE 0 END AS hbje,CASE WHEN SUM(snje) <> 0 THEN ROUND(SUM(byje)/SUM(snje)*100,2) ELSE 0 END AS tbje,SUM(byse) AS byse,SUM(syse) AS syse,SUM(snse) AS snse,SUM(bycbje) AS bycbje,SUM(sycbje) AS sycbje,SUM(sncbje) AS sncbje,SUM(bymle) AS bymle,SUM(symle) AS symle,SUM(snmle) AS snmle,SUM(bymll) AS bymll,SUM(symll) AS symll,SUM(snmll) AS snmll FROM t_oekhfpfxb"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 rcOleDbDataAdpt.Fill(rcDataset, "oekhfpfxb")
@@ -301,21 +301,21 @@ Public Class FrmOeKhFpFxb
                     rcDataset.Tables("oekhfpfxb").Clear()
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "oekhfpfxb")
-                rcOleDbCommand.CommandText = "SELECT '' AS khdm,'∫œº∆' AS khmc,'' AS zydm,'' AS zymc,'' AS cplbdm,'' AS cplbmc,SUM(bysl) AS bysl,SUM(sysl) AS sysl,SUM(snsl) AS snsl,SUM(byfzsl) AS byfzsl,SUM(syfzsl) AS syfzsl,SUM(snfzsl) AS snfzsl,CASE WHEN SUM(syfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(syfzsl)*100,2) ELSE 0 END AS hbfzsl,CASE WHEN SUM(snfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(snfzsl)*100,2) ELSE 0 END AS tbfzsl,SUM(byje) AS byje,SUM(syje) AS syje,SUM(snje) AS snje,CASE WHEN SUM(syje) <> 0 THEN ROUND(SUM(byje)/SUM(syje)*100,2) ELSE 0 END AS hbje,CASE WHEN SUM(snje) <> 0 THEN ROUND(SUM(byje)/SUM(snje)*100,2) ELSE 0 END AS tbje,SUM(byse) AS byse,SUM(syse) AS syse,SUM(snse) AS snse,SUM(bycbje) AS bycbje,SUM(sycbje) AS sycbje,SUM(sncbje) AS sncbje,SUM(bymle) AS bymle,SUM(symle) AS symle,SUM(snmle) AS snmle,SUM(bymll) AS bymll,SUM(symll) AS symll,SUM(snmll) AS snmll FROM t_oekhfpfxb"
+                rcOleDbCommand.CommandText = "SELECT '' AS khdm,'ÂêàËÆ°' AS khmc,'' AS zydm,'' AS zymc,'' AS cplbdm,'' AS cplbmc,SUM(bysl) AS bysl,SUM(sysl) AS sysl,SUM(snsl) AS snsl,SUM(byfzsl) AS byfzsl,SUM(syfzsl) AS syfzsl,SUM(snfzsl) AS snfzsl,CASE WHEN SUM(syfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(syfzsl)*100,2) ELSE 0 END AS hbfzsl,CASE WHEN SUM(snfzsl) <> 0 THEN ROUND(SUM(byfzsl)/SUM(snfzsl)*100,2) ELSE 0 END AS tbfzsl,SUM(byje) AS byje,SUM(syje) AS syje,SUM(snje) AS snje,CASE WHEN SUM(syje) <> 0 THEN ROUND(SUM(byje)/SUM(syje)*100,2) ELSE 0 END AS hbje,CASE WHEN SUM(snje) <> 0 THEN ROUND(SUM(byje)/SUM(snje)*100,2) ELSE 0 END AS tbje,SUM(byse) AS byse,SUM(syse) AS syse,SUM(snse) AS snse,SUM(bycbje) AS bycbje,SUM(sycbje) AS sycbje,SUM(sncbje) AS sncbje,SUM(bymle) AS bymle,SUM(symle) AS symle,SUM(snmle) AS snmle,SUM(bymll) AS bymll,SUM(symll) AS symll,SUM(snmll) AS snmll FROM t_oekhfpfxb"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 rcOleDbDataAdpt.Fill(rcDataset, "oekhfpfxb")
             End If
             rcOleDbTrans.Commit()
         Catch ex As Exception
-            MsgBox("≥Ã–Ú¥ÌŒÛ°£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "Ã· æ–≈œ¢")
+            MsgBox("Á®ãÂ∫èÈîôËØØ„ÄÇ" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÊèêÁ§∫‰ø°ÊÅØ")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         'Dim rcDataRow As DataRow
         'rcDataRow = rcDataset.Tables("oekhfpfxb").NewRow
-        'rcDataRow.Item("khdm") = "∫œº∆"
+        'rcDataRow.Item("khdm") = "ÂêàËÆ°"
         'rcDataRow.Item("sl") = dtOeKhFpFxb.Compute("Sum(sl)", "")
         'rcDataRow.Item("fzsl") = dtOeKhFpFxb.Compute("Sum(fzsl)", "")
         'rcDataRow.Item("je") = dtOeKhFpFxb.Compute("Sum(je)", "")
@@ -324,7 +324,7 @@ Public Class FrmOeKhFpFxb
         'rcDataRow.Item("mle") = dtOeKhFpFxb.Compute("Sum(mll)", "")
         'rcDataset.Tables("oekhfpfxb").Rows.Add(rcDataRow)
 
-        'µ˜”√±Ìµ•
+        'Ë∞ÉÁî®Ë°®Âçï
         Dim rcFrm As New FrmOeKhFpFxbz
         With rcFrm
             .ParaDataSet = rcDataset
@@ -333,7 +333,7 @@ Public Class FrmOeKhFpFxb
             Else
                 .ParaDataView = New DataView(rcDataset.Tables("oekhfpfxb"), "TRUE", "khdm,zydm", DataViewRowState.CurrentRows)
             End If
-            .Label2.Text = Me.NudYear.Value & "ƒÍ" & Me.NudMonth.Value & "‘¬"
+            .Label2.Text = Me.NudYear.Value & "Âπ¥" & Me.NudMonth.Value & "Êúà"
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()

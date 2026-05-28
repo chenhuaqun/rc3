@@ -1,20 +1,20 @@
 Imports System.Data.OleDb
 
 Public Class FrmKhYszkHxMx
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable
+    'å»ºç«‹Datatable
     ReadOnly dtKhYszkHxMx As New DataTable("khyszkhxmx")
 
     Private Sub FrmKhYszkHxMx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         NudYear.Value = Mid(g_Kjqj, 1, 4)
         NudMonthBegin.Value = 1
         NudMonthEnd.Value = Mid(g_Kjqj, 5, 2)
-        '´´½¨datatable
+        'åˆ›å»ºdatatable
         dtKhYszkHxMx.Columns.Add("khdm", Type.GetType("System.String"))
         dtKhYszkHxMx.Columns.Add("khmc", Type.GetType("System.String"))
         dtKhYszkHxMx.Columns.Add("fprq", Type.GetType("System.DateTime"))
@@ -31,9 +31,9 @@ Public Class FrmKhYszkHxMx
         dtKhYszkHxMx.Columns.Add("skje", Type.GetType("System.Double"))
         dtKhYszkHxMx.Columns.Add("hxje", Type.GetType("System.Double"))
         dtKhYszkHxMx.Columns.Add("bzcb", Type.GetType("System.Double"))
-        dtKhYszkHxMx.Columns.Add("xstcbl", Type.GetType("System.Double")) 'ÏúÊÛÌá³É±ÈÀı
-        dtKhYszkHxMx.Columns.Add("skts", Type.GetType("System.Double")) 'ÊÕ¿îÌìÊı
-        dtKhYszkHxMx.Columns.Add("skqx", Type.GetType("System.Double")) 'ÊÕ¿îÆÚÏŞ
+        dtKhYszkHxMx.Columns.Add("xstcbl", Type.GetType("System.Double")) 'é”€å”®ææˆæ¯”ä¾‹
+        dtKhYszkHxMx.Columns.Add("skts", Type.GetType("System.Double")) 'æ”¶æ¬¾å¤©æ•°
+        dtKhYszkHxMx.Columns.Add("skqx", Type.GetType("System.Double")) 'æ”¶æ¬¾æœŸé™
         rcDataset.Tables.Add(dtKhYszkHxMx)
         With rcDataset.Tables("khyszkhxmx")
             .Columns("khdm").DefaultValue = ""
@@ -51,20 +51,20 @@ Public Class FrmKhYszkHxMx
     End Sub
 
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles NudYear.KeyPress, NudMonthBegin.KeyPress, NudMonthEnd.KeyPress, TxtKhdm.KeyPress, TxtZydm.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼şÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼Œå»æ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "¿Í»§±àÂëÊÂ¼ş"
+#Region "å®¢æˆ·ç¼–ç äº‹ä»¶"
 
     Private Sub TxtKhdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtKhdm.KeyDown
         Select Case e.KeyCode
@@ -78,7 +78,7 @@ Public Class FrmKhYszkHxMx
                     .paraField3 = "khsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "khmc"
-                    .paraTitle = "¿Í»§"
+                    .paraTitle = "å®¢æˆ·"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -109,7 +109,7 @@ Public Class FrmKhYszkHxMx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -125,7 +125,7 @@ Public Class FrmKhYszkHxMx
 
 #End Region
 
-#Region "Ö°Ô±±àÂëÊÂ¼ş"
+#Region "èŒå‘˜ç¼–ç äº‹ä»¶"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
@@ -138,7 +138,7 @@ Public Class FrmKhYszkHxMx
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
                     .paraOrderField = "zydm"
-                    .paraTitle = "Ö°Ô±"
+                    .paraTitle = "èŒå‘˜"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -158,7 +158,7 @@ Public Class FrmKhYszkHxMx
         If String.IsNullOrEmpty(Me.TxtKhdm.Text) And String.IsNullOrEmpty(Me.TxtZydm.Text) Then
             Return
         End If
-        'Çå¿ÕÊı¾İ
+        'æ¸…ç©ºæ•°æ®
         rcDataset.Tables("khyszkhxmx").Clear()
         'Dim i As Integer
         Dim rqBegin As Date
@@ -166,7 +166,7 @@ Public Class FrmKhYszkHxMx
         Dim dblYe As Double = 0.0
         rqBegin = getInvBegin(NudYear.Value, NudMonthBegin.Value)
         rqEnd = getInvEnd(NudYear.Value, NudMonthEnd.Value)
-        '¶ÁÈ¡Êı¾İ
+        'è¯»å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -184,23 +184,23 @@ Public Class FrmKhYszkHxMx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "khyszkhxmx")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó1¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯1ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("khyszkhxmx").Rows.Count <= 0 Then
-            MsgBox("Ã»ÓĞÂú×ãÌõ¼şµÄÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmKhYszkHxMxz
         With rcFrm
             .ParaDataSet = rcDataset
             .paraDataView = New DataView(rcDataset.Tables("khyszkhxmx"), "TRUE", "fprq,xsddjh", DataViewRowState.CurrentRows)
             '.paraDataTable = rcDataset.Tables("khyszkhxmx")
-            .Label2.Text = NudYear.Value & "Äê" & NudMonthBegin.Value & "ÔÂÖÁ" & NudMonthEnd.Value & "ÔÂ"
-            '.Label3.Text = "²úÆ·£º" & Trim(TxtCpdm.Text)
+            .Label2.Text = NudYear.Value & "å¹´" & NudMonthBegin.Value & "æœˆè‡³" & NudMonthEnd.Value & "æœˆ"
+            '.Label3.Text = "äº§å“ï¼š" & Trim(TxtCpdm.Text)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()

@@ -1,23 +1,23 @@
 Imports System.Data.OleDb
 
 Public Class FrmOption
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    'Êı¾İ¸üĞÂ´«µİ
+    'æ•°æ®æ›´æ–°ä¼ é€’
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbCommand
+    'å»ºç«‹OleDbCommand
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
     Private Sub FrmOption_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            'È¡µ¥¾İÀàĞÍÊı¾İ
+            'å–å•æ®ç±»å‹æ•°æ®
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx Where lxgs = '¼ÇÕËÆ¾Ö¤' AND kjnd = ? ORDER BY pzlxdm"
+            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx Where lxgs = 'è®°è´¦å‡­è¯' AND kjnd = ? ORDER BY pzlxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@year", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -26,18 +26,18 @@ Public Class FrmOption
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_lx")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_lx").Rows.Count = 0 Then
-            MsgBox("ÇëÔÚµ¥¾İÀàĞÍ¶¨ÒåÖĞµÄÉèÖÃ¼ÇÕËÆ¾Ö¤µÄµ¥¾İÀàĞÍ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("è¯·åœ¨å•æ®ç±»å‹å®šä¹‰ä¸­çš„è®¾ç½®è®°è´¦å‡­è¯çš„å•æ®ç±»å‹ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
-        '°ó¶¨Æ¾Ö¤ÀàĞÍ¼ò³Æ
+        'ç»‘å®šå‡­è¯ç±»å‹ç®€ç§°
         BindDropDownList(CmbPzlxjc, rcDataset.Tables("rc_lx"), "pzlxdm", "pzlxjc")
-        'È¡»á¼ÆÆÚ¼äÊı¾İ
+        'å–ä¼šè®¡æœŸé—´æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -52,23 +52,23 @@ Public Class FrmOption
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_yj")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_yj").Rows.Count = 0 Then
-            MsgBox("ÇëÏÈ¶¨Òå»á¼ÆÆÚ¼ä¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("è¯·å…ˆå®šä¹‰ä¼šè®¡æœŸé—´ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
-        '°ó¶¨Æ¾Ö¤ÀàĞÍ¼ò³Æ
+        'ç»‘å®šå‡­è¯ç±»å‹ç®€ç§°
         BindDropDownList(CmbFcsp, rcDataset.Tables("rc_yj"), "ny", "ny")
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'ÔöÖµË°Ä¬ÈÏË°ÂÊ' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'å¢å€¼ç¨é»˜è®¤ç¨ç‡' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -81,7 +81,7 @@ Public Class FrmOption
                     Me.TxtDefaultShlv.Text = rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'µ¥¾İ´òÓ¡ÖĞÌ§Í·Ê¹ÓÃµÄµ¥Î»Ãû³Æ' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'å•æ®æ‰“å°ä¸­æŠ¬å¤´ä½¿ç”¨çš„å•ä½åç§°' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -94,7 +94,7 @@ Public Class FrmOption
                     Me.TextBox3.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÓ¦ÊÕÕË¿î¿ÆÄ¿±àÂë' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åº”æ”¶è´¦æ¬¾ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -107,7 +107,7 @@ Public Class FrmOption
                     Me.TxtYszk.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÓ¦¸¶ÕË¿î¿ÆÄ¿±àÂë' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åº”ä»˜è´¦æ¬¾ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -120,7 +120,7 @@ Public Class FrmOption
                     Me.TxtYfzk.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÖ÷ÓªÒµÎñÊÕÈë¿ÆÄ¿±àÂë' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦ä¸»è¥ä¸šåŠ¡æ”¶å…¥ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -133,7 +133,7 @@ Public Class FrmOption
                     Me.TxtZyywsr.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÖ÷ÓªÒµÎñ³É±¾¿ÆÄ¿±àÂë' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦ä¸»è¥ä¸šåŠ¡æˆæœ¬ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -146,7 +146,7 @@ Public Class FrmOption
                     Me.TxtZyywcb.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÔ­²ÄÁÏ¿ÆÄ¿±àÂë' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åŸææ–™ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -159,8 +159,8 @@ Public Class FrmOption
                     Me.TxtYcl.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            '×ÜÕË¿â´æÉÌÆ·¿ÆÄ¿
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕË¿â´æÉÌÆ·¿ÆÄ¿±àÂë' ORDER BY paraid"
+            'æ€»è´¦åº“å­˜å•†å“ç§‘ç›®
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åº“å­˜å•†å“ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -173,8 +173,8 @@ Public Class FrmOption
                     Me.TxtKcspKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            '×ÜÕË·¢³öÉÌÆ·¿ÆÄ¿
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕË·¢³öÉÌÆ·¿ÆÄ¿±àÂë' ORDER BY paraid"
+            'æ€»è´¦å‘å‡ºå•†å“ç§‘ç›®
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦å‘å‡ºå•†å“ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -187,8 +187,8 @@ Public Class FrmOption
                     Me.TxtFcspKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            '×ÜÕË×ÔÖÆ°ë³ÉÆ·¿ÆÄ¿
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕË×ÔÖÆ°ë³ÉÆ·¿ÆÄ¿±àÂë' ORDER BY paraid"
+            'æ€»è´¦è‡ªåˆ¶åŠæˆå“ç§‘ç›®
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦è‡ªåˆ¶åŠæˆå“ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -201,7 +201,7 @@ Public Class FrmOption
                     Me.TxtZzbcpKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÉú²ú³É±¾¿ÆÄ¿±àÂë' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦ç”Ÿäº§æˆæœ¬ç§‘ç›®ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -214,7 +214,7 @@ Public Class FrmOption
                     Me.TxtSccbKm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'Æ¾Ö¤Éú³ÉÖĞÊ¹ÓÃµÄÆ¾Ö¤ÀàĞÍ' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'å‡­è¯ç”Ÿæˆä¸­ä½¿ç”¨çš„å‡­è¯ç±»å‹' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -227,7 +227,7 @@ Public Class FrmOption
                     Me.CmbPzlxjc.SelectedValue = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'Ì×´ò¸ñÊ½´òÓ¡ÏúÊÛµ¥' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'å¥—æ‰“æ ¼å¼æ‰“å°é”€å”®å•' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -240,7 +240,7 @@ Public Class FrmOption
                     Me.ChbXsdDy.Checked = rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'Anyi311ÕËÎñÏµÍ³Â·¾¶' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'Anyi311è´¦åŠ¡ç³»ç»Ÿè·¯å¾„' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -253,7 +253,7 @@ Public Class FrmOption
                     Me.TxtGlPath.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '±¾Î»±Ò±ÒÖÖ±àÂë' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æœ¬ä½å¸å¸ç§ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -266,8 +266,8 @@ Public Class FrmOption
                     Me.TxtWbdm.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            '·¢³öÉÌÆ·ÆôÓÃ»á¼ÆÆÚ¼ä
-            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = '·¢³öÉÌÆ·ÆôÓÃ»á¼ÆÆÚ¼ä' ORDER BY paraid"
+            'å‘å‡ºå•†å“å¯ç”¨ä¼šè®¡æœŸé—´
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE dwdm = ? AND paraid = 'å‘å‡ºå•†å“å¯ç”¨ä¼šè®¡æœŸé—´' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -306,8 +306,8 @@ Public Class FrmOption
                     Me.TxtNCUser_ID.Text = rcDataset.Tables("rc_para").Rows(4).Item("parastrvalue")
                 End If
             End If
-            'NC·şÎñÆ÷µÄServletµÄURLµØÖ·
-            rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? AND paraid = 'NC·şÎñÆ÷µÄServletµÄURLµØÖ·' ORDER BY paraid"
+            'NCæœåŠ¡å™¨çš„Servletçš„URLåœ°å€
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? AND paraid = 'NCæœåŠ¡å™¨çš„Servletçš„URLåœ°å€' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -320,8 +320,8 @@ Public Class FrmOption
                     Me.TxtNcServletUrl.Text = rcDataset.Tables("rc_para").Rows(0).Item("parastrvalue")
                 End If
             End If
-            'NCÓÃ»§±àÂë
-            rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? AND paraid = 'NCÓÃ»§±àÂë' ORDER BY paraid"
+            'NCç”¨æˆ·ç¼–ç 
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_para Where dwdm = ? AND paraid = 'NCç”¨æˆ·ç¼–ç ' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -356,7 +356,7 @@ Public Class FrmOption
                     Me.TxtU8User_ID.Text = rcDataset.Tables("rc_para").Rows(4).Item("parastrvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'ÊÇ·ñ°´³É±¾Óò¼ÆËã³É±¾' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æ˜¯å¦æŒ‰æˆæœ¬åŸŸè®¡ç®—æˆæœ¬' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -369,7 +369,7 @@ Public Class FrmOption
                     Me.ChbCostRegion.Checked = rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue")
                 End If
             End If
-            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = '°´³É±¾ÒªËØ¶ÀÁ¢·ÖÅä³É±¾' ORDER BY paraid"
+            rcOleDbCommand.CommandText = "SELECT paradblvalue FROM rc_para WHERE dwdm = ? AND paraid = 'æŒ‰æˆæœ¬è¦ç´ ç‹¬ç«‹åˆ†é…æˆæœ¬' ORDER BY paraid"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -383,14 +383,14 @@ Public Class FrmOption
                 End If
             End If
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Return
         Finally
             rcOleDbConn.Close()
         End Try
     End Sub
 
-#Region "Ó¦ÊÕÕË¿î¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "åº”æ”¶è´¦æ¬¾ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtYszk_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtYszk.KeyDown
         Select Case e.KeyCode
@@ -404,7 +404,7 @@ Public Class FrmOption
                     .paraField3 = "kmsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "kmdm"
-                    .paraTitle = "¿ÆÄ¿"
+                    .paraTitle = "ç§‘ç›®"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -430,7 +430,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -438,7 +438,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtYszk.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -447,7 +447,7 @@ Public Class FrmOption
 
 #End Region
 
-#Region "Ó¦¸¶ÕË¿î¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "åº”ä»˜è´¦æ¬¾ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtYfzk_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtYfzk.KeyDown
         Select Case e.KeyCode
@@ -461,7 +461,7 @@ Public Class FrmOption
                     .paraField3 = "kmsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "kmdm"
-                    .paraTitle = "¿ÆÄ¿"
+                    .paraTitle = "ç§‘ç›®"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -487,7 +487,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -495,7 +495,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtYfzk.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -504,7 +504,7 @@ Public Class FrmOption
 
 #End Region
 
-#Region "Ö÷ÓªÒµÎñÊÕÈë¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "ä¸»è¥ä¸šåŠ¡æ”¶å…¥ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtZyywsr_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZyywsr.KeyDown
         Select Case e.KeyCode
@@ -518,7 +518,7 @@ Public Class FrmOption
                     .paraField3 = "kmsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "kmdm"
-                    .paraTitle = "¿ÆÄ¿"
+                    .paraTitle = "ç§‘ç›®"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -544,7 +544,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -552,7 +552,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtZyywsr.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -561,7 +561,7 @@ Public Class FrmOption
 
 #End Region
 
-#Region "Ö÷ÓªÒµÎñ³É±¾¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "ä¸»è¥ä¸šåŠ¡æˆæœ¬ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtZyywcb_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZyywcb.KeyDown
         Select Case e.KeyCode
@@ -575,7 +575,7 @@ Public Class FrmOption
                     .paraField3 = "kmsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "kmdm"
-                    .paraTitle = "¿ÆÄ¿"
+                    .paraTitle = "ç§‘ç›®"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -601,7 +601,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -609,7 +609,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtZyywcb.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -618,7 +618,7 @@ Public Class FrmOption
 
 #End Region
 
-#Region "Ô­²ÄÁÏ¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "åŸææ–™ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtYcl_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtYcl.KeyDown
         Select Case e.KeyCode
@@ -632,7 +632,7 @@ Public Class FrmOption
                     .paraField3 = "kmsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "kmdm"
-                    .paraTitle = "¿ÆÄ¿"
+                    .paraTitle = "ç§‘ç›®"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -658,7 +658,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -666,7 +666,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtYcl.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -675,7 +675,7 @@ Public Class FrmOption
 
 #End Region
 
-#Region "¿â´æÉÌÆ·¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "åº“å­˜å•†å“ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtKcsp_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtKcspKm.KeyDown
         Select Case e.KeyCode
@@ -689,7 +689,7 @@ Public Class FrmOption
                     .ParaField3 = "kmsm"
                     .ParaCondition = "0=0"
                     .ParaOrderField = "kmdm"
-                    .ParaTitle = "¿ÆÄ¿"
+                    .ParaTitle = "ç§‘ç›®"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -715,7 +715,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -723,7 +723,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtKcspKm.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -732,7 +732,7 @@ Public Class FrmOption
 
 #End Region
 
-#Region "·¢³öÉÌÆ·¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "å‘å‡ºå•†å“ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtFcspKm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtFcspKm.KeyDown
         Select Case e.KeyCode
@@ -746,7 +746,7 @@ Public Class FrmOption
                     .ParaField3 = "kmsm"
                     .ParaCondition = "0=0"
                     .ParaOrderField = "kmdm"
-                    .ParaTitle = "¿ÆÄ¿"
+                    .ParaTitle = "ç§‘ç›®"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -772,7 +772,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -780,7 +780,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtFcspKm.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -789,7 +789,7 @@ Public Class FrmOption
 
 #End Region
 
-#Region "Éú²ú³É±¾¿ÆÄ¿±àÂëµÄÊÂ¼ş"
+#Region "ç”Ÿäº§æˆæœ¬ç§‘ç›®ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtSccb_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtSccbKm.KeyDown
         Select Case e.KeyCode
@@ -803,7 +803,7 @@ Public Class FrmOption
                     .paraField3 = "kmsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "kmdm"
-                    .paraTitle = "¿ÆÄ¿"
+                    .paraTitle = "ç§‘ç›®"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -829,7 +829,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "gl_kmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -837,7 +837,7 @@ Public Class FrmOption
             If rcDataset.Tables("gl_kmxx").Rows.Count > 0 Then
                 TxtSccbKm.Text = Trim(rcDataset.Tables("gl_kmxx").Rows(0).Item("kmdm"))
             Else
-                MsgBox("¿ÆÄ¿±àÂë²»´æÔÚ»ò·ÇÃ÷Ï¸¿ÆÄ¿¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç§‘ç›®ç¼–ç ä¸å­˜åœ¨æˆ–éæ˜ç»†ç§‘ç›®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -852,7 +852,7 @@ Public Class FrmOption
         End If
     End Sub
 
-#Region "±¾Î»±Ò±ÒÖÖµÄÊÂ¼ş"
+#Region "æœ¬ä½å¸å¸ç§çš„äº‹ä»¶"
 
     Private Sub TxtWbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtWbdm.KeyDown
         Select Case e.KeyCode
@@ -866,7 +866,7 @@ Public Class FrmOption
                     .ParaField3 = "wbsm"
                     .ParaCondition = "kjnd = '" & Mid(g_Kjqj, 1, 4) & "'"
                     .ParaOrderField = "wbdm"
-                    .ParaTitle = "±ÒÖÖ"
+                    .ParaTitle = "å¸ç§"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -892,7 +892,7 @@ Public Class FrmOption
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_wbxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -900,7 +900,7 @@ Public Class FrmOption
             If rcDataset.Tables("rc_wbxx").Rows.Count > 0 Then
                 TxtWbdm.Text = Trim(rcDataset.Tables("rc_wbxx").Rows(0).Item("wbdm"))
             Else
-                MsgBox("±ÒÖÖ±àÂë²»´æÔÚ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("å¸ç§ç¼–ç ä¸å­˜åœ¨ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
                 Return
             End If
@@ -910,7 +910,7 @@ Public Class FrmOption
 #End Region
 
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSave.Click
-        'Ğ´ÏµÍ³²ÎÊı
+        'å†™ç³»ç»Ÿå‚æ•°
         Try
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
@@ -919,26 +919,26 @@ Public Class FrmOption
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
             If Not String.IsNullOrEmpty(Me.TxtDefaultShlv.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'ÔöÖµË°Ä¬ÈÏË°ÂÊ'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'å¢å€¼ç¨é»˜è®¤ç¨ç‡'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'ÔöÖµË°Ä¬ÈÏË°ÂÊ','',?)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'å¢å€¼ç¨é»˜è®¤ç¨ç‡','',?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarNumeric, 14).Value = Trim(Me.TxtDefaultShlv.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TextBox3.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'µ¥¾İ´òÓ¡ÖĞÌ§Í·Ê¹ÓÃµÄµ¥Î»Ãû³Æ'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'å•æ®æ‰“å°ä¸­æŠ¬å¤´ä½¿ç”¨çš„å•ä½åç§°'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'µ¥¾İ´òÓ¡ÖĞÌ§Í·Ê¹ÓÃµÄµ¥Î»Ãû³Æ',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'å•æ®æ‰“å°ä¸­æŠ¬å¤´ä½¿ç”¨çš„å•ä½åç§°',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TextBox3.Text)
@@ -946,182 +946,182 @@ Public Class FrmOption
                 g_PrnDwmc = Me.TextBox3.Text
             End If
             If Not String.IsNullOrEmpty(Me.TxtYszk.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÓ¦ÊÕÕË¿î¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åº”æ”¶è´¦æ¬¾ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕËÓ¦ÊÕÕË¿î¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦åº”æ”¶è´¦æ¬¾ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtYszk.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtYfzk.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÓ¦¸¶ÕË¿î¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åº”ä»˜è´¦æ¬¾ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕËÓ¦¸¶ÕË¿î¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦åº”ä»˜è´¦æ¬¾ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtYfzk.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtZyywsr.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÖ÷ÓªÒµÎñÊÕÈë¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦ä¸»è¥ä¸šåŠ¡æ”¶å…¥ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕËÖ÷ÓªÒµÎñÊÕÈë¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦ä¸»è¥ä¸šåŠ¡æ”¶å…¥ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtZyywsr.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtZyywcb.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÖ÷ÓªÒµÎñ³É±¾¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦ä¸»è¥ä¸šåŠ¡æˆæœ¬ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕËÖ÷ÓªÒµÎñ³É±¾¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦ä¸»è¥ä¸šåŠ¡æˆæœ¬ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtZyywcb.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtYcl.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÔ­²ÄÁÏ¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åŸææ–™ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕËÔ­²ÄÁÏ¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦åŸææ–™ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtYcl.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtKcspKm.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕË¿â´æÉÌÆ·¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦åº“å­˜å•†å“ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕË¿â´æÉÌÆ·¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦åº“å­˜å•†å“ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtKcspKm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtFcspKm.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕË·¢³öÉÌÆ·¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦å‘å‡ºå•†å“ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕË·¢³öÉÌÆ·¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦å‘å‡ºå•†å“ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtFcspKm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtZzbcpKm.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕË×ÔÖÆ°ë³ÉÆ·¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦è‡ªåˆ¶åŠæˆå“ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕË×ÔÖÆ°ë³ÉÆ·¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦è‡ªåˆ¶åŠæˆå“ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtZzbcpKm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtSccbKm.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '×ÜÕËÉú²ú³É±¾¿ÆÄ¿±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æ€»è´¦ç”Ÿäº§æˆæœ¬ç§‘ç›®ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'×ÜÕËÉú²ú³É±¾¿ÆÄ¿±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æ€»è´¦ç”Ÿäº§æˆæœ¬ç§‘ç›®ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtSccbKm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.CmbPzlxjc.SelectedValue) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'Æ¾Ö¤Éú³ÉÖĞÊ¹ÓÃµÄÆ¾Ö¤ÀàĞÍ'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'å‡­è¯ç”Ÿæˆä¸­ä½¿ç”¨çš„å‡­è¯ç±»å‹'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'Æ¾Ö¤Éú³ÉÖĞÊ¹ÓÃµÄÆ¾Ö¤ÀàĞÍ',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'å‡­è¯ç”Ÿæˆä¸­ä½¿ç”¨çš„å‡­è¯ç±»å‹',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Me.CmbPzlxjc.SelectedValue
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.CmbPzlxjc.SelectedValue) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'Ì×´ò¸ñÊ½´òÓ¡ÏúÊÛµ¥'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'å¥—æ‰“æ ¼å¼æ‰“å°é”€å”®å•'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'Ì×´ò¸ñÊ½´òÓ¡ÏúÊÛµ¥','',?)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'å¥—æ‰“æ ¼å¼æ‰“å°é”€å”®å•','',?)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraDblValue", OleDbType.Numeric, 1).Value = Me.ChbXsdDy.Checked
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtGlPath.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'Anyi311ÕËÎñÏµÍ³Â·¾¶'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'Anyi311è´¦åŠ¡ç³»ç»Ÿè·¯å¾„'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'Anyi311ÕËÎñÏµÍ³Â·¾¶',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'Anyi311è´¦åŠ¡ç³»ç»Ÿè·¯å¾„',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtGlPath.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.TxtWbdm.Text) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '±¾Î»±Ò±ÒÖÖ±àÂë'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'æœ¬ä½å¸å¸ç§ç¼–ç '"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'±¾Î»±Ò±ÒÖÖ±àÂë',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'æœ¬ä½å¸å¸ç§ç¼–ç ',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Trim(Me.TxtWbdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
             If Not String.IsNullOrEmpty(Me.CmbPzlxjc.SelectedValue) Then
-                'É¾³ıÊı¾İ
-                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '·¢³öÉÌÆ·ÆôÓÃ»á¼ÆÆÚ¼ä'"
+                'åˆ é™¤æ•°æ®
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'å‘å‡ºå•†å“å¯ç”¨ä¼šè®¡æœŸé—´'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.ExecuteNonQuery()
-                '²åÈëÊı¾İ
-                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'·¢³öÉÌÆ·ÆôÓÃ»á¼ÆÆÚ¼ä',?,0.0)"
+                'æ’å…¥æ•°æ®
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'å‘å‡ºå•†å“å¯ç”¨ä¼šè®¡æœŸé—´',?,0.0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 30).Value = Me.CmbFcsp.SelectedValue
@@ -1131,9 +1131,9 @@ Public Class FrmOption
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message)
             End Try
             Return
         Finally
@@ -1150,12 +1150,12 @@ Public Class FrmOption
         rcOleDbCommand.CommandTimeout = 300
         rcOleDbCommand.CommandType = CommandType.Text
         Try
-            'É¾³ıÊı¾İ
-            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And (paraid = 'NCACCOUNTINGBOOK' OR paraid = 'NCHOST' OR paraid = 'NCSERVICE_NAME' OR paraid = 'NCUser_ID' OR paraid = 'NCPASSWORD' or paraid ='NC·şÎñÆ÷µÄServletµÄURLµØÖ·' or paraid ='NCÓÃ»§±àÂë')"
+            'åˆ é™¤æ•°æ®
+            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And (paraid = 'NCACCOUNTINGBOOK' OR paraid = 'NCHOST' OR paraid = 'NCSERVICE_NAME' OR paraid = 'NCUser_ID' OR paraid = 'NCPASSWORD' or paraid ='NCæœåŠ¡å™¨çš„Servletçš„URLåœ°å€' or paraid ='NCç”¨æˆ·ç¼–ç ')"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
-            '²åÈëÊı¾İ
+            'æ’å…¥æ•°æ®
             rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NCACCOUNTINGBOOK',?,0.0,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 20).Value = Trim(Me.TxtNCAccountingBook.Text)
@@ -1181,12 +1181,12 @@ Public Class FrmOption
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 20).Value = Trim(Me.TxtNCPwd.Text)
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
-            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NC·şÎñÆ÷µÄServletµÄURLµØÖ·',?,0.0,?)"
+            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NCæœåŠ¡å™¨çš„Servletçš„URLåœ°å€',?,0.0,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 200).Value = Trim(Me.TxtNcServletUrl.Text)
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
-            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NCÓÃ»§±àÂë',?,0.0,?)"
+            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('NCç”¨æˆ·ç¼–ç ',?,0.0,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 200).Value = Trim(Me.TxtNCUserAccount.Text)
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
@@ -1195,16 +1195,16 @@ Public Class FrmOption
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message)
             End Try
         Finally
             rcOleDbConn.Close()
         End Try
     End Sub
 
-#Region "U8ºËËãµ¥Î»ÉèÖÃ"
+#Region "U8æ ¸ç®—å•ä½è®¾ç½®"
 
     Private Sub BtnU8Save_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnU8Save.Click
         rcOleDbConn.Open()
@@ -1214,12 +1214,12 @@ Public Class FrmOption
         rcOleDbCommand.CommandTimeout = 300
         rcOleDbCommand.CommandType = CommandType.Text
         Try
-            'É¾³ıÊı¾İ
+            'åˆ é™¤æ•°æ®
             rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And (paraid = 'U8Acc_ID' OR paraid = 'U8HOST' OR paraid = 'U8User_ID' OR paraid = 'U8PASSWORD')"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
-            '²åÈëÊı¾İ
+            'æ’å…¥æ•°æ®
             rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('U8Acc_ID',?,0.0,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarChar, 20).Value = Trim(Me.TxtU8Acc_ID.Text)
@@ -1244,9 +1244,9 @@ Public Class FrmOption
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message)
             End Try
         Finally
             rcOleDbConn.Close()
@@ -1262,24 +1262,24 @@ Public Class FrmOption
         rcOleDbCommand.CommandTimeout = 300
         rcOleDbCommand.CommandType = CommandType.Text
         Try
-            'É¾³ıÊı¾İ
-            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And paraid = 'ÊÇ·ñ°´³É±¾Óò¼ÆËã³É±¾'"
+            'åˆ é™¤æ•°æ®
+            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And paraid = 'æ˜¯å¦æŒ‰æˆæœ¬åŸŸè®¡ç®—æˆæœ¬'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
-            'É¾³ıÊı¾İ
-            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And paraid = '°´³É±¾ÒªËØ¶ÀÁ¢·ÖÅä³É±¾'"
+            'åˆ é™¤æ•°æ®
+            rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? And paraid = 'æŒ‰æˆæœ¬è¦ç´ ç‹¬ç«‹åˆ†é…æˆæœ¬'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
-            '²åÈëÊı¾İ
-            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('ÊÇ·ñ°´³É±¾Óò¼ÆËã³É±¾','',?,?)"
+            'æ’å…¥æ•°æ®
+            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('æ˜¯å¦æŒ‰æˆæœ¬åŸŸè®¡ç®—æˆæœ¬','',?,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.Numeric, 1).Value = IIf(Me.ChbCostRegion.Checked, 1, 0)
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
             rcOleDbCommand.ExecuteNonQuery()
-            '²åÈëÊı¾İ
-            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('°´³É±¾ÒªËØ¶ÀÁ¢·ÖÅä³É±¾','',?,?)"
+            'æ’å…¥æ•°æ®
+            rcOleDbCommand.CommandText = "INSERT INTO rc_para (paraid,parastrvalue,paradblvalue,dwdm) VALUES ('æŒ‰æˆæœ¬è¦ç´ ç‹¬ç«‹åˆ†é…æˆæœ¬','',?,?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.Numeric, 1).Value = IIf(Me.ChbCostElements.Checked, 1, 0)
             rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
@@ -1288,9 +1288,9 @@ Public Class FrmOption
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message)
             End Try
         Finally
             rcOleDbConn.Close()

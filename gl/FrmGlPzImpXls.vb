@@ -1,19 +1,19 @@
 Imports System.Data.OleDb
 Public Class FrmGlPzImpXls
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     Dim rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     Dim rcDataset As New DataSet
-    'Êı¾İ¸üĞÂ´«µİ
+    'æ•°æ®æ›´æ–°ä¼ é€’
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     Dim rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '»á¼ÆÆÚ¼ä
+    'ä¼šè®¡æœŸé—´
     Dim strKjqj As String = g_Kjqj
-    'µ¥¾İÀàĞÍ
+    'å•æ®ç±»å‹
     Dim strPzlxdm As String = ""
 
-#Region "³õÊ¼»¯"
+#Region "åˆå§‹åŒ–"
 
     Public Property ParaStrKjqj() As String
         Get
@@ -35,7 +35,7 @@ Public Class FrmGlPzImpXls
 
 #End Region
 
-#Region "¶ÁÈëÊı¾İ"
+#Region "è¯»å…¥æ•°æ®"
 
     Private Sub BtnXzwj_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnXzwj.Click
         If Me.OfdSourceExcelFileName.ShowDialog = DialogResult.OK Then
@@ -55,7 +55,7 @@ Public Class FrmGlPzImpXls
             End If
             oleAdper.Fill(rcDataset, "result")
         Catch ex As Exception
-            MsgBox("ÄãÑ¡ÔñµÄÎÄ¼ş²»ÊÇExcelÎÄ¼ş¸ñÊ½£¬ÇëÖØĞÂÑ¡Ôñ" & Chr(13) & ex.ToString(), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ä½ é€‰æ‹©çš„æ–‡ä»¶ä¸æ˜¯Excelæ–‡ä»¶æ ¼å¼ï¼Œè¯·é‡æ–°é€‰æ‹©" & Chr(13) & ex.ToString(), MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return False
         Finally
             oleConnection.Close()
@@ -75,61 +75,61 @@ Public Class FrmGlPzImpXls
 
 #End Region
 
-#Region "±£´æÊÂ¼ş"
+#Region "ä¿å­˜äº‹ä»¶"
 
     Private Sub TsbSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TsbSave.Click
         Dim i As Integer
         'For i = 0 To rcDataset.Tables("result").Rows.Count - 1
-        '    If rcDataset.Tables("result").Rows(i).Item("Ö°Ô±±àÂë").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("Ö°Ô±±àÂë") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("èŒå‘˜ç¼–ç ").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("èŒå‘˜ç¼–ç ") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("Ö°Ô±ĞÕÃû").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("Ö°Ô±ĞÕÃû") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("èŒå‘˜å§“å").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("èŒå‘˜å§“å") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("²¿ÃÅ±àÂë").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("²¿ÃÅ±àÂë") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("éƒ¨é—¨ç¼–ç ").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("éƒ¨é—¨ç¼–ç ") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("²¿ÃÅÃû³Æ").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("²¿ÃÅÃû³Æ") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("éƒ¨é—¨åç§°").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("éƒ¨é—¨åç§°") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("²Ö¿â±àÂë").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("²Ö¿â±àÂë") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("ä»“åº“ç¼–ç ").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("ä»“åº“ç¼–ç ") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("²Ö¿âÃû³Æ").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("²Ö¿âÃû³Æ") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("ä»“åº“åç§°").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("ä»“åº“åç§°") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("ÎïÁÏ±àÂë").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("ÎïÁÏ±àÂë") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("ç‰©æ–™ç¼–ç ").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("ç‰©æ–™ç¼–ç ") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("ÎïÁÏÃèÊö").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("ÎïÁÏÃèÊö") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("ç‰©æ–™æè¿°").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("ç‰©æ–™æè¿°") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("¶©µ¥ºÅ").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("¶©µ¥ºÅ") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("è®¢å•å·").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("è®¢å•å·") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("ÊıÁ¿").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("ÊıÁ¿") = 0.0
+        '    If rcDataset.Tables("result").Rows(i).Item("æ•°é‡").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("æ•°é‡") = 0.0
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("µ¥Î»").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("µ¥Î»") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("å•ä½").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("å•ä½") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("»»ËãÏµÊı").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("»»ËãÏµÊı") = 0.0
+        '    If rcDataset.Tables("result").Rows(i).Item("æ¢ç®—ç³»æ•°").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("æ¢ç®—ç³»æ•°") = 0.0
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("¸¨ÊıÁ¿").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("¸¨ÊıÁ¿") = 0.0
+        '    If rcDataset.Tables("result").Rows(i).Item("è¾…æ•°é‡").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("è¾…æ•°é‡") = 0.0
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("¸¨µ¥Î»").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("¸¨µ¥Î»") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("è¾…å•ä½").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("è¾…å•ä½") = ""
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("µ¥¼Û").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("µ¥¼Û") = 0.0
+        '    If rcDataset.Tables("result").Rows(i).Item("å•ä»·").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("å•ä»·") = 0.0
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("½ğ¶î").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("½ğ¶î") = 0.0
+        '    If rcDataset.Tables("result").Rows(i).Item("é‡‘é¢").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("é‡‘é¢") = 0.0
         '    End If
-        '    If rcDataset.Tables("result").Rows(i).Item("±¸×¢").GetType.ToString = "System.DBNull" Then
-        '        rcDataset.Tables("result").Rows(i).Item("±¸×¢") = ""
+        '    If rcDataset.Tables("result").Rows(i).Item("å¤‡æ³¨").GetType.ToString = "System.DBNull" Then
+        '        rcDataset.Tables("result").Rows(i).Item("å¤‡æ³¨") = ""
         '    End If
         'Next
         Try
@@ -147,9 +147,9 @@ Public Class FrmGlPzImpXls
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message)
             End Try
             Return
         Finally
@@ -166,38 +166,38 @@ Public Class FrmGlPzImpXls
                 'Me.ProgressBar1.Value = i + 1
                 rcOleDbCommand.CommandText = "INSERT INTO gl_pz (djh,cperiod,pzlxdm,pzh,xh,bdelete,pzrq,fjzs,jd,zy,kmdm,kmmc,bmdm,bmmc,zydm,zymc,xmdm,xmmc,khdm,khmc,csdm,csmc,jxzh,yhzh,dfkm,dw,sl,dj,bz,wb,hl,je,yspz,jsr,wldqr,srr,srrq,shr,shrq,jzr,jzrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
                 rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("Æ¾Ö¤Àà±ğ").ToString.PadRight(4, "0") & strKjqj & Trim(rcDataset.Tables("result").Rows(i).Item("Æ¾Ö¤±àºÅ").ToString).PadLeft(5, "0")
+                rcOleDbCommand.Parameters.Add("@djh", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("å‡­è¯ç±»åˆ«").ToString.PadRight(4, "0") & strKjqj & Trim(rcDataset.Tables("result").Rows(i).Item("å‡­è¯ç¼–å·").ToString).PadLeft(5, "0")
                 rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.Char, 6).Value = strKjqj
-                rcOleDbCommand.Parameters.Add("@pzlxdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("result").Rows(i).Item("Æ¾Ö¤Àà±ğ").ToString.PadRight(4, "0")
-                rcOleDbCommand.Parameters.Add("@pzh", OleDbType.Numeric, 5).Value = rcDataset.Tables("result").Rows(i).Item("Æ¾Ö¤±àºÅ")
+                rcOleDbCommand.Parameters.Add("@pzlxdm", OleDbType.VarChar, 4).Value = rcDataset.Tables("result").Rows(i).Item("å‡­è¯ç±»åˆ«").ToString.PadRight(4, "0")
+                rcOleDbCommand.Parameters.Add("@pzh", OleDbType.Numeric, 5).Value = rcDataset.Tables("result").Rows(i).Item("å‡­è¯ç¼–å·")
                 rcOleDbCommand.Parameters.Add("@xh", OleDbType.Numeric, 6).Value = i
                 rcOleDbCommand.Parameters.Add("@bdelete", OleDbType.Numeric, 1).Value = 0
-                rcOleDbCommand.Parameters.Add("@pzrq", OleDbType.Date, 8).Value = rcDataset.Tables("result").Rows(i).Item("ÖÆµ¥ÈÕÆÚ")
-                rcOleDbCommand.Parameters.Add("@fjzs", OleDbType.Numeric, 4).Value = rcDataset.Tables("result").Rows(i).Item("¸½µ¥¾İÊı")
-                rcOleDbCommand.Parameters.Add("@jd", OleDbType.Char, 2).Value = IIf(rcDataset.Tables("result").Rows(i).Item("½è´û·½Ïò") = "½è·½", "½è", "´û")
-                rcOleDbCommand.Parameters.Add("@zy", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("ÕªÒª")
-                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë")
-                rcOleDbCommand.Parameters.Add("@kmmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿")
-                rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("²¿ÃÅ±àÂë")
-                rcOleDbCommand.Parameters.Add("@bmmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("²¿ÃÅ")
+                rcOleDbCommand.Parameters.Add("@pzrq", OleDbType.Date, 8).Value = rcDataset.Tables("result").Rows(i).Item("åˆ¶å•æ—¥æœŸ")
+                rcOleDbCommand.Parameters.Add("@fjzs", OleDbType.Numeric, 4).Value = rcDataset.Tables("result").Rows(i).Item("é™„å•æ®æ•°")
+                rcOleDbCommand.Parameters.Add("@jd", OleDbType.Char, 2).Value = IIf(rcDataset.Tables("result").Rows(i).Item("å€Ÿè´·æ–¹å‘") = "å€Ÿæ–¹", "å€Ÿ", "è´·")
+                rcOleDbCommand.Parameters.Add("@zy", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("æ‘˜è¦")
+                rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç ")
+                rcOleDbCommand.Parameters.Add("@kmmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®")
+                rcOleDbCommand.Parameters.Add("@bmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("éƒ¨é—¨ç¼–ç ")
+                rcOleDbCommand.Parameters.Add("@bmmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("éƒ¨é—¨")
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = "~"
                 rcOleDbCommand.Parameters.Add("@zymc", OleDbType.VarChar, 200).Value = "~"
                 rcOleDbCommand.Parameters.Add("@xmdm", OleDbType.VarChar, 12).Value = "~"
                 rcOleDbCommand.Parameters.Add("@xmmc", OleDbType.VarChar, 200).Value = "~"
-                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë"), 1, 4) <> "2202", rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»±àÂë"), "~")
-                rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 100).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë"), 1, 4) <> "2202", rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»"), "~")
-                rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë"), 1, 4) = "2202", rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»±àÂë"), "~")
-                rcOleDbCommand.Parameters.Add("@csmc", OleDbType.VarChar, 100).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë"), 1, 4) = "2202", rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»"), "~")
+                rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç "), 1, 4) <> "2202", rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½ç¼–ç "), "~")
+                rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 100).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç "), 1, 4) <> "2202", rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½"), "~")
+                rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç "), 1, 4) = "2202", rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½ç¼–ç "), "~")
+                rcOleDbCommand.Parameters.Add("@csmc", OleDbType.VarChar, 100).Value = IIf(Mid(rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç "), 1, 4) = "2202", rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½"), "~")
                 rcOleDbCommand.Parameters.Add("@jxzh", OleDbType.VarChar, 12).Value = "~"
                 rcOleDbCommand.Parameters.Add("@yhzh", OleDbType.VarChar, 12).Value = "~"
                 rcOleDbCommand.Parameters.Add("@dfkm", OleDbType.VarChar, 50).Value = "~"
                 rcOleDbCommand.Parameters.Add("@dw", OleDbType.VarChar, 50).Value = "~"
-                rcOleDbCommand.Parameters.Add("@sl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("ÊıÁ¿")
-                rcOleDbCommand.Parameters.Add("@dj", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("µ¥¼Û")
-                rcOleDbCommand.Parameters.Add("@bz", OleDbType.VarChar, 12).Value = IIf(rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ") = "ÈËÃñ±Ò", "CNY", rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ"))
-                rcOleDbCommand.Parameters.Add("@wb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("Ô­±Ò")
+                rcOleDbCommand.Parameters.Add("@sl", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("æ•°é‡")
+                rcOleDbCommand.Parameters.Add("@dj", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("å•ä»·")
+                rcOleDbCommand.Parameters.Add("@bz", OleDbType.VarChar, 12).Value = IIf(rcDataset.Tables("result").Rows(i).Item("å¸ç§") = "äººæ°‘å¸", "CNY", rcDataset.Tables("result").Rows(i).Item("å¸ç§"))
+                rcOleDbCommand.Parameters.Add("@wb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("åŸå¸")
                 rcOleDbCommand.Parameters.Add("@hl", OleDbType.Numeric, 18).Value = 0.0
-                rcOleDbCommand.Parameters.Add("@je", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("±¾±Ò")
+                rcOleDbCommand.Parameters.Add("@je", OleDbType.Numeric, 14).Value = rcDataset.Tables("result").Rows(i).Item("æœ¬å¸")
                 rcOleDbCommand.Parameters.Add("@yspz", OleDbType.VarChar, 16).Value = "~"
                 rcOleDbCommand.Parameters.Add("@jsr", OleDbType.VarChar, 30).Value = "~"
                 rcOleDbCommand.Parameters.Add("@wldqr", OleDbType.Date, 8).Value = Now.Date
@@ -208,11 +208,11 @@ Public Class FrmGlPzImpXls
                 rcOleDbCommand.Parameters.Add("@jzr", OleDbType.VarChar, 30).Value = "~"
                 rcOleDbCommand.Parameters.Add("@jzrq", OleDbType.Date, 8).Value = Now.Date
                 rcOleDbCommand.ExecuteNonQuery()
-                '¼ì²â¿ÆÄ¿±àÂë
-                If rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë").GetType.ToString <> "System.DBNull" Then
+                'æ£€æµ‹ç§‘ç›®ç¼–ç 
+                If rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç ").GetType.ToString <> "System.DBNull" Then
                     rcOleDbCommand.CommandText = "SELECT kmdm FROM gl_kmxx WHERE kmdm = ?"
                     rcOleDbCommand.Parameters.Clear()
-                    rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë")
+                    rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç ")
                     rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                     If rcDataset.Tables("gl_kmxx") IsNot Nothing Then
                         rcDataset.Tables("gl_kmxx").Clear()
@@ -221,17 +221,17 @@ Public Class FrmGlPzImpXls
                     If rcDataset.Tables("gl_kmxx").Rows.Count = 0 Then
                         rcOleDbCommand.CommandText = "INSERT INTO gl_kmxx (kmdm,kmmc) VALUES (?,?)"
                         rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë")
-                        rcOleDbCommand.Parameters.Add("@kmmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿")
+                        rcOleDbCommand.Parameters.Add("@kmdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç ")
+                        rcOleDbCommand.Parameters.Add("@kmmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®")
                         rcOleDbCommand.ExecuteNonQuery()
                     End If
                 End If
-                '¼ì²âÍâ±Ò±àÂë
-                If rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ").ToString <> "System.DBNull" Then
+                'æ£€æµ‹å¤–å¸ç¼–ç 
+                If rcDataset.Tables("result").Rows(i).Item("å¸ç§").ToString <> "System.DBNull" Then
                     rcOleDbCommand.CommandText = "SELECT wbdm FROM rc_wbxx WHERE kjnd = ? AND wbdm = ?"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(strKjqj, 1, 4)
-                    rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ") = "ÈËÃñ±Ò", "CNY", rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ"))
+                    rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(rcDataset.Tables("result").Rows(i).Item("å¸ç§") = "äººæ°‘å¸", "CNY", rcDataset.Tables("result").Rows(i).Item("å¸ç§"))
                     rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                     If rcDataset.Tables("rc_wbxx") IsNot Nothing Then
                         rcDataset.Tables("rc_wbxx").Clear()
@@ -241,17 +241,17 @@ Public Class FrmGlPzImpXls
                         rcOleDbCommand.CommandText = "INSERT INTO rc_wbxx (kjnd,wbdm,wbmc) VALUES (?,?,?)"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(strKjqj, 1, 4)
-                        rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ") = "ÈËÃñ±Ò", "CNY", rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ"))
-                        rcOleDbCommand.Parameters.Add("@wbmc", OleDbType.VarChar, 8).Value = rcDataset.Tables("result").Rows(i).Item("±ÒÖÖ")
+                        rcOleDbCommand.Parameters.Add("@wbdm", OleDbType.VarChar, 4).Value = IIf(rcDataset.Tables("result").Rows(i).Item("å¸ç§") = "äººæ°‘å¸", "CNY", rcDataset.Tables("result").Rows(i).Item("å¸ç§"))
+                        rcOleDbCommand.Parameters.Add("@wbmc", OleDbType.VarChar, 8).Value = rcDataset.Tables("result").Rows(i).Item("å¸ç§")
                         rcOleDbCommand.ExecuteNonQuery()
                     End If
                 End If
-                If rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»±àÂë").ToString <> "System.DBNull" Then
-                    '¼ì²â¿Í»§±àÂë
-                    If Mid(rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë"), 1, 4) = "1122" Then
+                If rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½ç¼–ç ").ToString <> "System.DBNull" Then
+                    'æ£€æµ‹å®¢æˆ·ç¼–ç 
+                    If Mid(rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç "), 1, 4) = "1122" Then
                         rcOleDbCommand.CommandText = "SELECT khdm FROM rc_khxx WHERE khdm = ?"
                         rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»±àÂë")
+                        rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½ç¼–ç ")
                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                         If rcDataset.Tables("rc_khxx") IsNot Nothing Then
                             rcDataset.Tables("rc_khxx").Clear()
@@ -260,26 +260,26 @@ Public Class FrmGlPzImpXls
                         If rcDataset.Tables("rc_khxx").Rows.Count = 0 Then
                             rcOleDbCommand.CommandText = "INSERT INTO rc_khxx (khdm,khmc) VALUES (?,?)"
                             rcOleDbCommand.Parameters.Clear()
-                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»±àÂë")
-                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»")
+                            rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½ç¼–ç ")
+                            rcOleDbCommand.Parameters.Add("@khmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½")
                             rcOleDbCommand.ExecuteNonQuery()
                         End If
                     End If
-                    If Mid(rcDataset.Tables("result").Rows(i).Item("¿ÆÄ¿±àÂë"), 1, 4) = "2202" Then
-                        '¼ì²â¹©Ó¦ÉÌ±àÂë
+                    If Mid(rcDataset.Tables("result").Rows(i).Item("ç§‘ç›®ç¼–ç "), 1, 4) = "2202" Then
+                        'æ£€æµ‹ä¾›åº”å•†ç¼–ç 
                         rcOleDbCommand.CommandText = "SELECT csdm FROM rc_csxx WHERE csdm = ?"
                         rcOleDbCommand.Parameters.Clear()
-                        rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»±àÂë")
+                        rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½ç¼–ç ")
                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                         If rcDataset.Tables("rc_csxx") IsNot Nothing Then
                             rcDataset.Tables("rc_csxx").Clear()
                         End If
                         rcOleDbDataAdpt.Fill(rcDataset, "rc_csxx")
                         If rcDataset.Tables("rc_csxx").Rows.Count = 0 Then
-                            rcOleDbCommand.CommandText = "INSERT INTO rc_csxx (csdm,csmc,zczb,fktj,fkts) VALUES (?,?,0,'ÔÂ½á',0)"
+                            rcOleDbCommand.CommandText = "INSERT INTO rc_csxx (csdm,csmc,zczb,fktj,fkts) VALUES (?,?,0,'æœˆç»“',0)"
                             rcOleDbCommand.Parameters.Clear()
-                            rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»±àÂë")
-                            rcOleDbCommand.Parameters.Add("@csmc", OleDbType.VarChar, 100).Value = rcDataset.Tables("result").Rows(i).Item("ÍùÀ´µ¥Î»")
+                            rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½ç¼–ç ")
+                            rcOleDbCommand.Parameters.Add("@csmc", OleDbType.VarChar, 100).Value = rcDataset.Tables("result").Rows(i).Item("å¾€æ¥å•ä½")
                             rcOleDbCommand.ExecuteNonQuery()
                         End If
                     End If
@@ -290,9 +290,9 @@ Public Class FrmGlPzImpXls
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message)
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message)
                 End Try
                 Return
             Finally
@@ -305,7 +305,7 @@ Public Class FrmGlPzImpXls
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.Transaction = rcOleDbTrans
             rcOleDbCommand.CommandTimeout = 300
-            'ÖØĞÂ»ã×Ü×ÜÕÊ
+            'é‡æ–°æ±‡æ€»æ€»å¸
             rcOleDbCommand.CommandType = CommandType.StoredProcedure
             rcOleDbCommand.CommandText = "USP3_REDO_KMYEHZ"
             rcOleDbCommand.Parameters.Clear()
@@ -316,21 +316,21 @@ Public Class FrmGlPzImpXls
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message)
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        MsgBox("¼ÇÕËÆ¾Ö¤¶ÁÈëÍê³É,Çë¼ì²éÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+        MsgBox("è®°è´¦å‡­è¯è¯»å…¥å®Œæˆ,è¯·æ£€æŸ¥æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
         Me.Close()
     End Sub
 
 #End Region
 
-#Region "ÍË³öÊÂ¼ş"
+#Region "é€€å‡ºäº‹ä»¶"
 
     Private Sub TsbExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TsbExit.Click, MnuiExit.Click
         Me.Close()

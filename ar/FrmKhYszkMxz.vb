@@ -10,10 +10,10 @@ Public Class FrmKhYszkMxz
         'For i = 0 To ParaDataView.Table.Rows.Count - 1
         '    If ParaDataView.Table.Rows(i).Item("zy").GetType.ToString <> "System.DBNull" Then
         '        Select Case ParaDataView.Table.Rows(i).Item("zy")
-        '            Case "期初结存"
+        '            Case "鏈熷垵缁撳瓨"
         '                dblYe = ParaDataView.Table.Rows(i).Item("ye")
-        '            Case "本月合计"
-        '            Case "本年累计"
+        '            Case "鏈湀鍚堣"
+        '            Case "鏈勾绱"
         '            Case Else
         '                dblYe = dblYe + ParaDataView.Table.Rows(i).Item("ysje") - ParaDataView.Table.Rows(i).Item("skje")
         '                ParaDataView.Table.Rows(i).Item("ye") = dblYe

@@ -2,27 +2,27 @@ Imports System.Data.OleDb
 
 Public Class FrmRoles
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢OLEDBÊı¾İÊÊÅäÆ÷¶ÔÏó
+    'å»ºç«‹OLEDBæ•°æ®é€‚é…å™¨å¯¹è±¡
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDb´«µİ¶ÔÏó
+    'å»ºç«‹OleDbä¼ é€’å¯¹è±¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbÃüÁî
+    'å»ºç«‹OleDbå‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = sysOleDbConn.CreateCommand()
-    '½¨Á¢DataViewÊı¾İÊÓÍ¼
+    'å»ºç«‹DataViewæ•°æ®è§†å›¾
     Dim rcDataView As DataView
-    '½¨Á¢DataTableÊı¾İ±í
+    'å»ºç«‹DataTableæ•°æ®è¡¨
     ReadOnly dtRoles As New DataTable("rc_roles")
 
 #End Region
 
-#Region "´°Ìå³õÊ¼»¯"
+#Region "çª—ä½“åˆå§‹åŒ–"
 
     Private Sub FrmRoles_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        '´´½¨ÁĞ
+        'åˆ›å»ºåˆ—
         dtRoles.Columns.Add("roleid", Type.GetType("System.String"))
         dtRoles.Columns.Add("rolename", Type.GetType("System.String"))
         dtRoles.Columns.Add("rolesm", Type.GetType("System.String"))
@@ -47,9 +47,9 @@ Public Class FrmRoles
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
         Finally
             sysOleDbConn.Close()
@@ -60,10 +60,10 @@ Public Class FrmRoles
 
 #End Region
 
-#Region "ĞÂÔö"
+#Region "æ–°å¢"
 
     Private Sub BtnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnNew.Click
-        'ĞÂÔö
+        'æ–°å¢
         Dim rcFrm As New FrmRoleEdit
         With rcFrm
             .ParaAdding = True
@@ -77,10 +77,10 @@ Public Class FrmRoles
 
 #End Region
 
-#Region "ĞŞ¸Ä"
+#Region "ä¿®æ”¹"
 
     Private Sub BtnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEdit.Click
-        'ĞŞ¸Ä
+        'ä¿®æ”¹
         Dim rcFrm As New FrmRoleEdit
         With rcFrm
             .ParaAdding = False
@@ -94,18 +94,18 @@ Public Class FrmRoles
 
 #End Region
 
-#Region "É¾³ı"
+#Region "åˆ é™¤"
 
     Private Sub BtnDel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnDel.Click
         Dim currentPos As Integer
-        'É¾³ıÊı¾İ
-        If MessageBox.Show("ÄúÕæµØÒªÉ¾³ıÂğ£¿" & BindingContext(rcDataView, "").Current("roleid"), "ÌáÊ¾ĞÅÏ¢", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.OK Then
+        'åˆ é™¤æ•°æ®
+        If MessageBox.Show("æ‚¨çœŸåœ°è¦åˆ é™¤å—ï¼Ÿ" & BindingContext(rcDataView, "").Current("roleid"), "æç¤ºä¿¡æ¯", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.OK Then
             currentPos = BindingContext(rcDataView, "").Position
             If Trim(BindingContext(rcDataView, "").Current("roleid")) = "" Then
-                MessageBox.Show("±àÂë²»ÄÜÎª¿Õ¡£")
+                MessageBox.Show("ç¼–ç ä¸èƒ½ä¸ºç©ºã€‚")
                 Return
             End If
-            '¼ì²éÊı¾İÊÇ·ñ´æÔÚ£¿
+            'æ£€æŸ¥æ•°æ®æ˜¯å¦å­˜åœ¨ï¼Ÿ
             'rc_roleqx
             sysOleDbConn.Open()
             rcOleDbCommand.Connection = sysOleDbConn
@@ -121,13 +121,13 @@ Public Class FrmRoles
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_roleqx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 sysOleDbConn.Close()
             End Try
             If rcDataSet.Tables("rc_roleqx").Rows.Count > 0 Then
-                MsgBox("¸Ã½ÇÉ«Õı±»Ê¹ÓÃ£¬²»ÄÜÉ¾³ı£¬ÇëÏÈÈ¡Ïû¸Ã½ÇÉ«µÄÊÚÈ¨¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("è¯¥è§’è‰²æ­£è¢«ä½¿ç”¨ï¼Œä¸èƒ½åˆ é™¤ï¼Œè¯·å…ˆå–æ¶ˆè¯¥è§’è‰²çš„æˆæƒã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             End If
             'rc_userinrole
@@ -145,13 +145,13 @@ Public Class FrmRoles
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_userinrole")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 sysOleDbConn.Close()
             End Try
             If rcDataSet.Tables("rc_userinrole").Rows.Count > 0 Then
-                MsgBox("ÓĞÓÃ»§ÕıÔÚÊ¹ÓÃ¸Ã½ÇÉ«£¬²»ÄÜÉ¾³ı£¬ÇëÏÈÈ¡Ïû¶Ô¸Ã½ÇÉ«µÄÊÚÈ¨¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("æœ‰ç”¨æˆ·æ­£åœ¨ä½¿ç”¨è¯¥è§’è‰²ï¼Œä¸èƒ½åˆ é™¤ï¼Œè¯·å…ˆå–æ¶ˆå¯¹è¯¥è§’è‰²çš„æˆæƒã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             End If
             sysOleDbConn.Open()
@@ -176,9 +176,9 @@ Public Class FrmRoles
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -190,14 +190,14 @@ Public Class FrmRoles
 
 #End Region
 
-#Region "È¨ÏŞ"
+#Region "æƒé™"
 
     Private Sub BtnQx_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnQx.Click
-        'ĞŞ¸Ä
+        'ä¿®æ”¹
         Dim rcFrm As New FrmRoleQx
         With rcFrm
             .paraStrAccount = BindingContext(rcDataView, "").Current("roleid")
-            .Label1.Text = "½ÇÉ«£º(" & BindingContext(rcDataView, "").Current("roleid") & ")" & BindingContext(rcDataView, "").Current("rolename")
+            .Label1.Text = "è§’è‰²ï¼š(" & BindingContext(rcDataView, "").Current("roleid") & ")" & BindingContext(rcDataView, "").Current("rolename")
             .ShowDialog()
         End With
         Me.rcDataGridView.Refresh()
@@ -205,7 +205,7 @@ Public Class FrmRoles
 
 #End Region
 
-#Region "ÍË³ö"
+#Region "é€€å‡º"
 
     Private Sub BtnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExit.Click
         Me.Close()
@@ -213,10 +213,10 @@ Public Class FrmRoles
 
 #End Region
 
-#Region "Êä³öµ½excel"
+#Region "è¾“å‡ºåˆ°excel"
 
     Private Sub MnuiExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExport.Click
-        'µ¼³öÊı¾İ
+        'å¯¼å‡ºæ•°æ®
         Exports2Excel(rcDataSet.Tables("rc_roles").DefaultView)
     End Sub
 
@@ -232,7 +232,7 @@ Public Class FrmRoles
                 rcExcelWorkbook = rcExcelApp.Workbooks().Add
                 rcExcelWorksheet = rcExcelWorkbook.Worksheets("sheet1")
 
-                '½«ËùµÃµ½µÄ±íµÄÁĞÃû,¸³Öµ¸øµ¥Ôª¸ñ
+                'å°†æ‰€å¾—åˆ°çš„è¡¨çš„åˆ—å,èµ‹å€¼ç»™å•å…ƒæ ¼
                 Dim i As Integer
                 Dim rcDataColumn As DataColumn
                 Dim rcDataRowView As DataRowView
@@ -243,7 +243,7 @@ Public Class FrmRoles
                     colIndex += 1
                     rcExcelApp.Cells(1, colIndex) = rcDataColumn.ColumnName
                 Next
-                'µÃµ½µÄ±íËùÓĞĞĞ,¸³Öµ¸øµ¥Ôª¸ñ
+                'å¾—åˆ°çš„è¡¨æ‰€æœ‰è¡Œ,èµ‹å€¼ç»™å•å…ƒæ ¼
                 For i = 0 To ParaDataView.Count - 1
                     rcDataRowView = ParaDataView.Item(i)
                     If rcDataRowView.Row.RowState <> DataRowState.Deleted Then
@@ -260,13 +260,13 @@ Public Class FrmRoles
                     End If
                 Next
             Catch ex As Exception
-                MessageBox.Show("Êı¾İµ¼³öÊ§°Ü£¡Çë²é¿´ÊÇ·ñÒÑ¾­°²×°ÁËExcel2003ÒÔÉÏµÄ°æ±¾¡£", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("æ•°æ®å¯¼å‡ºå¤±è´¥ï¼è¯·æŸ¥çœ‹æ˜¯å¦å·²ç»å®‰è£…äº†Excel2003ä»¥ä¸Šçš„ç‰ˆæœ¬ã€‚", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             Finally
                 Me.Cursor = Cursors.Default
             End Try
         Else
-            MessageBox.Show("Ã»ÓĞÊı¾İ£¡", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("æ²¡æœ‰æ•°æ®ï¼", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 

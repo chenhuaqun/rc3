@@ -2,19 +2,19 @@ Imports System.Data.OleDb
 
 Public Class FrmGlKmyeb
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As New OleDbCommand
 
 #End Region
 
     Private Sub FrmZzyeb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         Me.NudYear.Value = Mid(g_Kjqj, 1, 4)
         Me.NudMonthBegin.Value = Mid(g_Kjqj, 5, 2)
         Me.NudMonthEnd.Value = Mid(g_Kjqj, 5, 2)
@@ -22,7 +22,7 @@ Public Class FrmGlKmyeb
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         Dim i As Integer
-        'È¡Êı¾İ
+        'å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -32,7 +32,7 @@ Public Class FrmGlKmyeb
             'For i = 0 To rcDataSet.Tables("rc_dgtbc").Rows.Count - 1
             '    rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & ",NVL(SUM(" & rcDataSet.Tables("rc_dgtbc").Rows(i).Item("fieldname") & "),0) AS " & rcDataSet.Tables("rc_dgtbc").Rows(i).Item("fieldname")
             'Next
-            rcOleDbCommand.CommandText &= " FROM (SELECT kmdm, parentid, connect_by_root(kmdm) root FROM (SELECT gl_kmxx.kmdm, gl_kmxx.parentid from gl_kmxx start with gl_kmxx.parentid Is null connect by prior gl_kmxx.kmdm = gl_kmxx.parentid) connect by prior kmdm = parentid) a  Left Join (SELECT kmdm,COUNT(1) AS cnt_hs,NVL(SUM(CASE WHEN jd = '½è' THEN ncje ELSE 0 - ncje END"
+            rcOleDbCommand.CommandText &= " FROM (SELECT kmdm, parentid, connect_by_root(kmdm) root FROM (SELECT gl_kmxx.kmdm, gl_kmxx.parentid from gl_kmxx start with gl_kmxx.parentid Is null connect by prior gl_kmxx.kmdm = gl_kmxx.parentid) connect by prior kmdm = parentid) a  Left Join (SELECT kmdm,COUNT(1) AS cnt_hs,NVL(SUM(CASE WHEN jd = 'å€Ÿ' THEN ncje ELSE 0 - ncje END"
             For i = 1 To Me.NudMonthBegin.Value - 1
                 rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & "+jfje" & i.ToString.PadLeft(2, "0") & " - dfje" & i.ToString.PadLeft(2, "0")
             Next
@@ -64,7 +64,7 @@ Public Class FrmGlKmyeb
 
 
             'rcOleDbCommand.CommandText = "Select zzyeba.kmdm,gl_kmxx.kmmc,Case When zzyeba.qcye > 0 Then zzyeba.qcye Else 0 End As qcjf,Case When zzyeba.qcye < 0 Then 0- zzyeba.qcye Else 0 End As qcdf,zzyeba.bqjf,zzyeba.bqdf,Case When zzyeba.qmye > 0 Then zzyeba.qmye Else 0 End As qmjf,Case When zzyeba.qmye < 0 Then 0 - zzyeba.qmye Else 0 End As qmdf,zzyeba.ljjf,zzyeba.ljdf"
-            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " From (Select kmdm,Case When jd = '½è' Then ncje Else 0 - ncje End"
+            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " From (Select kmdm,Case When jd = 'å€Ÿ' Then ncje Else 0 - ncje End"
             'For i = 1 To Me.NudMonthBegin.Value - 1
             '    rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " + jfje" & i.ToString.PadLeft(2, "0") & " - dfje" & i.ToString.PadLeft(2, "0")
             'Next
@@ -77,7 +77,7 @@ Public Class FrmGlKmyeb
             '    rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & IIf(i = Me.NudMonthBegin.Value, "", " + ") & "dfje" & i.ToString.PadLeft(2, "0")
             'Next
             'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " As bqdf,"
-            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & "Case When jd = '½è' Then ncje Else 0- ncje End"
+            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & "Case When jd = 'å€Ÿ' Then ncje Else 0- ncje End"
             'For i = 1 To Me.NudMonthEnd.Value
             '    rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " + jfje" & i.ToString.PadLeft(2, "0") & " - dfje" & i.ToString.PadLeft(2, "0")
             'Next
@@ -98,7 +98,7 @@ Public Class FrmGlKmyeb
             'rcOleDbDataAdpt.Fill(rcDataSet, "zzyeb")
             'rcOleDbCommand.CommandText = "SELECT zzyebb.kmdm,gl_kmxx.kmmc,SUM(zzyebb.qcjf) AS qcjf,SUM(zzyebb.qcdf) AS qcdf,SUM(zzyebb.bqjf) AS bqjf,SUM(zzyebb.bqdf) AS bqdf,SUM(zzyebb.qmjf) AS qmjf,SUM(zzyebb.qmdf) AS qmdf,SUM(zzyebb.ljjf) AS ljjf,SUM(zzyebb.ljdf) AS ljdf FROM" & _
             '    " (SELECT gl_kmxx.parentid AS kmdm,Case When zzyeba.qcye > 0 Then zzyeba.qcye Else 0 End As qcjf,Case When zzyeba.qcye < 0 Then 0- zzyeba.qcye Else 0 End As qcdf,zzyeba.bqjf,zzyeba.bqdf,Case When zzyeba.qmye > 0 Then zzyeba.qmye Else 0 End As qmjf,Case When zzyeba.qmye < 0 Then 0 - zzyeba.qmye Else 0 End As qmdf,zzyeba.ljjf,zzyeba.ljdf"
-            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " From (Select kmdm,Case When jd = '½è' Then ncje Else 0 - ncje End"
+            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " From (Select kmdm,Case When jd = 'å€Ÿ' Then ncje Else 0 - ncje End"
             'For i = 1 To Me.NudMonthBegin.Value - 1
             '    rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " + jfje" & i.ToString.PadLeft(2, "0") & " - dfje" & i.ToString.PadLeft(2, "0")
             'Next
@@ -111,7 +111,7 @@ Public Class FrmGlKmyeb
             '    rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & IIf(i = Me.NudMonthBegin.Value, "", " + ") & "dfje" & i.ToString.PadLeft(2, "0")
             'Next
             'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " As bqdf,"
-            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & "Case When jd = '½è' Then ncje Else 0- ncje End"
+            'rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & "Case When jd = 'å€Ÿ' Then ncje Else 0- ncje End"
             'For i = 1 To Me.NudMonthEnd.Value
             '    rcOleDbCommand.CommandText = rcOleDbCommand.CommandText & " + jfje" & i.ToString.PadLeft(2, "0") & " - dfje" & i.ToString.PadLeft(2, "0")
             'Next
@@ -128,7 +128,7 @@ Public Class FrmGlKmyeb
             'rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             'rcOleDbDataAdpt.Fill(rcDataSet, "zzyeb")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()

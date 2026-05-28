@@ -1,15 +1,15 @@
 Imports System.Data.OleDb
 
 Public Class FrmKcZlxx
-    '½¨Á¢OLEDBÊı¾İÊÊÅäÆ÷¶ÔÏó
+    'å»ºç«‹OLEDBæ•°æ®é€‚é…å™¨å¯¹è±¡
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDb´«µİ¶ÔÏó
+    'å»ºç«‹OleDbä¼ é€’å¯¹è±¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbÃüÁî
+    'å»ºç«‹OleDbå‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Êı¾İÊÓÍ¼
+    'æ•°æ®è§†å›¾
     Dim rcDataView As DataView
 
     Private Sub BtnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExit.Click
@@ -31,9 +31,9 @@ Public Class FrmKcZlxx
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_kczlfa")
         Catch ex As Exception
             Try
-                MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
         Finally
             rcOleDbConn.Close()
@@ -79,7 +79,7 @@ Public Class FrmKcZlxx
     End Sub
 
     Private Sub BtnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnDel.Click
-        If MsgBox("ÄúÊÇ·ñÒªÉ¾³ı¿â´æÕËÁä·½°¸±àÂë£º" & rcDataView.Item(rcDataGrid.CurrentRowIndex).Row.Item("fadm") & "·½°¸Ãû³Æ£º" & rcDataView.Item(rcDataGrid.CurrentRowIndex).Row.Item("famc"), MsgBoxStyle.YesNo + MsgBoxStyle.Question + MsgBoxStyle.DefaultButton2, "ÌáÊ¾ĞÅÏ¢") = MsgBoxResult.Yes Then
+        If MsgBox("æ‚¨æ˜¯å¦è¦åˆ é™¤åº“å­˜è´¦é¾„æ–¹æ¡ˆç¼–ç ï¼š" & rcDataView.Item(rcDataGrid.CurrentRowIndex).Row.Item("fadm") & "æ–¹æ¡ˆåç§°ï¼š" & rcDataView.Item(rcDataGrid.CurrentRowIndex).Row.Item("famc"), MsgBoxStyle.YesNo + MsgBoxStyle.Question + MsgBoxStyle.DefaultButton2, "æç¤ºä¿¡æ¯") = MsgBoxResult.Yes Then
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -106,9 +106,9 @@ Public Class FrmKcZlxx
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -131,10 +131,10 @@ Public Class FrmKcZlxx
         End With
     End Sub
 
-#Region "Êä³öµ½excel"
+#Region "è¾“å‡ºåˆ°excel"
 
     Private Sub MnuiExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExport.Click
-        'µ¼³öÊı¾İ
+        'å¯¼å‡ºæ•°æ®
         Exports2Excel(rcDataSet.Tables("rc_kczlfa").DefaultView)
     End Sub
 
@@ -150,7 +150,7 @@ Public Class FrmKcZlxx
                 rcExcelWorkbook = rcExcelApp.Workbooks().Add
                 rcExcelWorksheet = rcExcelWorkbook.Worksheets("sheet1")
 
-                '½«ËùµÃµ½µÄ±íµÄÁĞÃû,¸³Öµ¸øµ¥Ôª¸ñ
+                'å°†æ‰€å¾—åˆ°çš„è¡¨çš„åˆ—å,èµ‹å€¼ç»™å•å…ƒæ ¼
                 Dim i As Integer
                 Dim rcDataColumn As DataColumn
                 Dim rcDataRowView As DataRowView
@@ -161,7 +161,7 @@ Public Class FrmKcZlxx
                     colIndex += 1
                     rcExcelApp.Cells(1, colIndex) = rcDataColumn.ColumnName
                 Next
-                'µÃµ½µÄ±íËùÓĞĞĞ,¸³Öµ¸øµ¥Ôª¸ñ
+                'å¾—åˆ°çš„è¡¨æ‰€æœ‰è¡Œ,èµ‹å€¼ç»™å•å…ƒæ ¼
                 For i = 0 To ParaDataView.Count - 1
                     rcDataRowView = ParaDataView.Item(i)
                     If rcDataRowView.Row.RowState <> DataRowState.Deleted Then
@@ -178,13 +178,13 @@ Public Class FrmKcZlxx
                     End If
                 Next
             Catch ex As Exception
-                MessageBox.Show("Êı¾İµ¼³öÊ§°Ü£¡Çë²é¿´ÊÇ·ñÒÑ¾­°²×°ÁËExcel2003ÒÔÉÏµÄ°æ±¾¡£", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("æ•°æ®å¯¼å‡ºå¤±è´¥ï¼è¯·æŸ¥çœ‹æ˜¯å¦å·²ç»å®‰è£…äº†Excel2003ä»¥ä¸Šçš„ç‰ˆæœ¬ã€‚", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             Finally
                 Me.Cursor = Cursors.Default
             End Try
         Else
-            MessageBox.Show("Ã»ÓĞÊı¾İ£¡", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("æ²¡æœ‰æ•°æ®ï¼", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 

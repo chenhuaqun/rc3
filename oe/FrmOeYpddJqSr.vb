@@ -1,33 +1,33 @@
 Imports System.Data.OleDb
 Public Class FrmOeYpddJqSr
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    'Êı¾İ¸üĞÂ´«µİ
+    'æ•°æ®æ›´æ–°ä¼ é€’
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
 #End Region
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtBmdm.KeyPress, TxtDjh.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼şÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼Œå»æ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "µ¥¾İºÅÊÂ¼ş"
+#Region "å•æ®å·äº‹ä»¶"
 
     Private Sub TxtDjh_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtDjh.KeyDown
         Select Case e.KeyCode
@@ -40,7 +40,7 @@ Public Class FrmOeYpddJqSr
 
 #End Region
 
-#Region "²¿ÃÅ±àÂëÊÂ¼ş"
+#Region "éƒ¨é—¨ç¼–ç äº‹ä»¶"
 
     Private Sub TxtBmdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtBmdm.KeyDown
         Select Case e.KeyCode
@@ -53,7 +53,7 @@ Public Class FrmOeYpddJqSr
                     .paraField2 = "bmmc"
                     .paraField3 = "bmsm"
                     .paraOrderField = "bmdm"
-                    .paraTitle = "²¿ÃÅ"
+                    .paraTitle = "éƒ¨é—¨"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -69,14 +69,14 @@ Public Class FrmOeYpddJqSr
 
 #End Region
 
-#Region "È·¶¨ÊÂ¼ş "
+#Region "ç¡®å®šäº‹ä»¶ "
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         'If Me.TxtBmdm.TextLength = 0 Then
-        '    MsgBox("ÇëÊäÈë²¿ÃÅ±àÂë", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+        '    MsgBox("è¯·è¾“å…¥éƒ¨é—¨ç¼–ç ", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
         '    Return
         'End If
-        'È¨ÏŞ¿ØÖÆ
+        'æƒé™æ§åˆ¶
         rcOleDbConn.Open()
         rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
         rcOleDbCommand.Connection = rcOleDbConn
@@ -96,16 +96,16 @@ Public Class FrmOeYpddJqSr
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_bmxx").Rows.Count <= 0 Then
-            MsgBox("ÄãÎŞÈ¨²é¿´¸Ã±¨±í¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ä½ æ— æƒæŸ¥çœ‹è¯¥æŠ¥è¡¨ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "æç¤ºä¿¡æ¯")
             Return
         End If
         Dim strExpBmdm As String = " oe_ypdd.bmdm = ''"
@@ -127,7 +127,7 @@ Public Class FrmOeYpddJqSr
             End If
         End If
 
-        'È¡Êı¾İ
+        'å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -146,19 +146,19 @@ Public Class FrmOeYpddJqSr
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_ddnr").Rows.Count <= 0 Then
-            MsgBox("Ã»ÓĞÂú×ãÌõ¼şµÄÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeYpddJqSrz
         With rcFrm
             .ParaDataSet = rcDataset

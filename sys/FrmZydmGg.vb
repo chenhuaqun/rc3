@@ -2,11 +2,11 @@ Imports System.Data.OleDb
 
 Public Class FrmZydmGg
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '±íÊ¾ÒªÔÚÊı¾İÔ´Ö´ĞĞµÄ SQL ÊÂÎñ
+    'è¡¨ç¤ºè¦åœ¨æ•°æ®æºæ‰§è¡Œçš„ SQL äº‹åŠ¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
     Private Sub FrmZydmGg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -25,7 +25,7 @@ Public Class FrmZydmGg
                     .paraField3 = "zysm"
                     .paraCondition = "0=0"
                     .paraOrderField = "zymc"
-                    .paraTitle = "Ö°Ô±"
+                    .paraTitle = "èŒå‘˜"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -51,7 +51,7 @@ Public Class FrmZydmGg
                     .paraField3 = "zysm"
                     .paraCondition = "0=0"
                     .paraOrderField = "zymc"
-                    .paraTitle = "Ö°Ô±"
+                    .paraTitle = "èŒå‘˜"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -67,7 +67,7 @@ Public Class FrmZydmGg
 
     Private Sub TxtOldZydm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtOldZydm.Validating
         If Not String.IsNullOrEmpty(Me.TxtOldZydm.Text) Then
-            '¶ÁÈ¡Êı¾İ
+            'è¯»å–æ•°æ®
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -82,7 +82,7 @@ Public Class FrmZydmGg
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "oldcsxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó1¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯1ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -92,7 +92,7 @@ Public Class FrmZydmGg
                     TxtOldZymc.Text = rcDataSet.Tables("oldcsxx").Rows(0).Item("zymc")
                 End If
             Else
-                MsgBox("¸ÃÖ°Ô±±àÂë²»´æÔÚ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("è¯¥èŒå‘˜ç¼–ç ä¸å­˜åœ¨ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 TxtOldZydm.Focus()
             End If
         End If
@@ -100,7 +100,7 @@ Public Class FrmZydmGg
 
     Private Sub TxtNewZydm_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtNewZydm.Validating
         If Not String.IsNullOrEmpty(Me.TxtNewZydm.Text) Then
-            '¶ÁÈ¡Êı¾İ
+            'è¯»å–æ•°æ®
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
@@ -115,7 +115,7 @@ Public Class FrmZydmGg
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "newcsxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó2¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯2ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -138,27 +138,27 @@ Public Class FrmZydmGg
         If rcDataSet.Tables("oldcsxx") Is Nothing Then
             Return
         End If
-        'Í¬Ò»±àÂëÔò·µ»Ø
+        'åŒä¸€ç¼–ç åˆ™è¿”å›
         If Me.TxtOldZydm.Text = Me.TxtNewZydm.Text Then
-            MsgBox("Ö°Ô±±àÂëÏàÍ¬£¬²»ĞèÒª¸ü¸Ä¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("èŒå‘˜ç¼–ç ç›¸åŒï¼Œä¸éœ€è¦æ›´æ”¹ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
             Return
         End If
         If rcDataSet.Tables("newcsxx").Rows.Count > 0 Then
-            If Not MsgBox("ĞÂÖ°Ô±±àÂëÒÑ¾­´æÔÚ¡£ÄúÊÇ·ñÒªºÏ²¢Ö°Ô±±àÂë£¿", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "ÌáÊ¾ĞÅÏ¢") = MsgBoxResult.Yes Then
+            If Not MsgBox("æ–°èŒå‘˜ç¼–ç å·²ç»å­˜åœ¨ã€‚æ‚¨æ˜¯å¦è¦åˆå¹¶èŒå‘˜ç¼–ç ï¼Ÿ", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "æç¤ºä¿¡æ¯") = MsgBoxResult.Yes Then
                 TxtNewZydm.Text = ""
                 TxtNewZymc.Text = ""
                 TxtNewZydm.Focus()
                 Return
             End If
         End If
-        'ÏÂÃæ¿ªÊ¼¸ü¸Ä±àÂë
-        '¶ÁÈ¡Êı¾İ
+        'ä¸‹é¢å¼€å§‹æ›´æ”¹ç¼–ç 
+        'è¯»å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            'È¡´øzydm×Ö¶ÎµÄ±í
+            'å–å¸¦zydmå­—æ®µçš„è¡¨
             rcOleDbCommand.CommandText = "SELECT table_name,column_name FROM user_tab_columns WHERE column_name = 'ZYDM' AND table_name <> 'RC_ZYXX'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -167,7 +167,7 @@ Public Class FrmZydmGg
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "user_tab_columns")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó10¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯10ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -190,9 +190,9 @@ Public Class FrmZydmGg
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó15¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯15ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó16¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯16ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
@@ -204,7 +204,7 @@ Public Class FrmZydmGg
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            'È¡´øzydm×Ö¶ÎµÄ±í
+            'å–å¸¦zydmå­—æ®µçš„è¡¨
             rcOleDbCommand.CommandText = "SELECT table_name,column_name FROM user_tab_columns WHERE column_name = 'ZYDM1' AND table_name <> 'RC_ZYXX'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -213,7 +213,7 @@ Public Class FrmZydmGg
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "user_tab_columns")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó10¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯10ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -236,9 +236,9 @@ Public Class FrmZydmGg
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó15¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯15ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó16¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯16ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
@@ -250,7 +250,7 @@ Public Class FrmZydmGg
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            'È¡´øzydm×Ö¶ÎµÄ±í
+            'å–å¸¦zydmå­—æ®µçš„è¡¨
             rcOleDbCommand.CommandText = "SELECT table_name,column_name FROM user_tab_columns WHERE column_name = 'ZYDM2' AND table_name <> 'RC_ZYXX'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -259,7 +259,7 @@ Public Class FrmZydmGg
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "user_tab_columns")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó10¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯10ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -282,18 +282,18 @@ Public Class FrmZydmGg
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó15¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯15ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó16¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯16ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
 
-        '(12)rc_zyxx(ĞèÒªÉ¾³ı/»ò¸ü¸Ä)
+        '(12)rc_zyxx(éœ€è¦åˆ é™¤/æˆ–æ›´æ”¹)
         If rcDataSet.Tables("newcsxx").Rows.Count > 0 Then
-            'É¾³ı¾É±àÂë
+            'åˆ é™¤æ—§ç¼–ç 
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -309,16 +309,16 @@ Public Class FrmZydmGg
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó17¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯17ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó18¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯18ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
         Else
-            '¸ü¸Ä¾É±àÂë
+            'æ›´æ”¹æ—§ç¼–ç 
             rcOleDbConn.Open()
             rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
             rcOleDbCommand.Connection = rcOleDbConn
@@ -335,16 +335,16 @@ Public Class FrmZydmGg
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó19¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯19ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó20¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯20ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
         End If
-        '(13)¼ÇÂ¼¸ü¸Ä»òºÏ²¢¼ÇÂ¼
+        '(13)è®°å½•æ›´æ”¹æˆ–åˆå¹¶è®°å½•
         rcOleDbConn.Open()
         rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
         rcOleDbCommand.Connection = rcOleDbConn
@@ -370,15 +370,15 @@ Public Class FrmZydmGg
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó21¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯21ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó22¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯22ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        MsgBox("¸ü¸ÄÓëºÏ²¢Ö°Ô±±àÂëÍê³É¡£" & Chr(13) & "Çë¼ì²é¿â´æÊıÁ¿¼°½ğ¶î¡¢Ó¦ÊÕ¡¢Ó¦¸¶µÈµÄÊı¾İÕıÈ·ĞÔ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+        MsgBox("æ›´æ”¹ä¸åˆå¹¶èŒå‘˜ç¼–ç å®Œæˆã€‚" & Chr(13) & "è¯·æ£€æŸ¥åº“å­˜æ•°é‡åŠé‡‘é¢ã€åº”æ”¶ã€åº”ä»˜ç­‰çš„æ•°æ®æ­£ç¡®æ€§ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
         Me.TxtOldZydm.Text = ""
         Me.TxtNewZydm.Text = ""
         Me.TxtOldZymc.Text = ""

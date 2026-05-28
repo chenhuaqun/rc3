@@ -1,17 +1,17 @@
 Imports System.Data.OleDb
 
 Public Class FrmPhSfcMx
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable
+    'å»ºç«‹Datatable
     ReadOnly dtCpsfcMx As New DataTable("cpsfcmx")
 
     Private Sub FrmPhSfcMx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        '´´½¨datatable
+        'åˆ›å»ºdatatable
         dtCpsfcMx.Columns.Add("rq", Type.GetType("System.DateTime"))
         dtCpsfcMx.Columns.Add("djh", Type.GetType("System.String"))
         dtCpsfcMx.Columns.Add("zy", Type.GetType("System.String"))
@@ -40,20 +40,20 @@ Public Class FrmPhSfcMx
         End With
     End Sub
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtPiHao.KeyPress, TxtCpdm.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼şÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼Œå»æ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "ÎïÁÏ±àÂëÊÂ¼ş"
+#Region "ç‰©æ–™ç¼–ç äº‹ä»¶"
 
     Private Sub TxtCpdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCpdm.KeyDown
         Select Case e.KeyCode
@@ -67,7 +67,7 @@ Public Class FrmPhSfcMx
                     .paraField3 = "dw"
                     .paraField4 = "cpsm"
                     .paraOrderField = "cpmc"
-                    .paraTitle = "ÎïÁÏ"
+                    .paraTitle = "ç‰©æ–™"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -93,7 +93,7 @@ Public Class FrmPhSfcMx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_cpxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -108,26 +108,26 @@ Public Class FrmPhSfcMx
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         If String.IsNullOrEmpty(Me.TxtCpdm.Text) Then
-            MsgBox("ÎïÁÏ±àÂë²»ÄÜÎª¿Õ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç‰©æ–™ç¼–ç ä¸èƒ½ä¸ºç©ºã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
-        'Çå¿ÕÊı¾İ
+        'æ¸…ç©ºæ•°æ®
         rcDataset.Tables("cpsfcmx").Clear()
         Dim dblJcsl As Double = 0.0
         Dim dblJcfzsl As Double = 0.0
         Dim dblJcje As Double = 0.0
-        '¶ÁÈ¡Êı¾İ
+        'è¯»å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "(SELECT inv_rkd.rkrq As rq,inv_rkd.djh,inv_rkd.rkmemo || '¿Í»§:' || inv_rkd.khdm || 'µÚ' || inv_rkd.xh || 'ĞĞ' As zy,inv_rkd.sl As rksl,inv_rkd.fzsl as rkfzsl,inv_rkd.je As rkje,0.0 As cksl,0.0 AS ckfzsl,0.0 As ckje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND cpdm = ? AND scph = ?)" &
-                " UNION ALL (SELECT po_rkd.rkrq As rq,po_rkd.djh,po_rkd.rkmemo || '¹©Ó¦ÉÌ:' || po_rkd.csdm || 'µÚ' || po_rkd.xh || 'ĞĞ' As zy,po_rkd.sl As rksl,po_rkd.fzsl AS rkfzsl,po_rkd.je As rkje,0.0 As cksl,0.0 AS ckfzsl,0.0 As ckje FROM po_rkd WHERE po_rkd.bdelete = 0 AND cpdm = ? AND pihao = ?)" &
-                " UNION ALL (SELECT TRUNC(inv_dbd.dbrq,'mi') As rq,inv_dbd.djh,inv_dbd.dbmemo || 'µ÷³ö²Ö¿â' || inv_dbd.cckdm || 'µÚ' || inv_dbd.xh || 'ĞĞ' As zy,inv_dbd.sl As rksl,inv_dbd.fzsl AS rkfzsl,inv_dbd.je As rkje,0.0 As cksl,0.0 AS ckfzsl,0.0 As ckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND cpdm = ? AND scph = ?)" &
-                " UNION ALL (SELECT oe_xsd.xsrq As rq,oe_xsd.djh,oe_xsd.xsmemo || 'µÚ' || oe_xsd.xh || 'ĞĞ' AS zy,0.0 As rksl,0.0 AS rkfzsl,0.0 As rkje,oe_xsd.sl As cksl,oe_xsd.fzsl AS ckfzsl,oe_xsd.cbje As ckje FROM oe_xsd WHERE oe_xsd.bdelete = 0 AND cpdm = ? AND pihao = ?)" &
-                " UNION ALL (SELECT inv_ckd.ckrq As rq,inv_ckd.djh,inv_ckd.ckmemo || 'µÚ' || inv_ckd.xh || 'ĞĞ' || '¹©Ó¦ÉÌ:' || inv_ckd.csdm AS zy,0.0 As rksl,0.0 AS rkfzsl,0.0 As rkje,inv_ckd.sl As cksl,inv_ckd.fzsl AS ckfzsl,inv_ckd.je As ckje FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND cpdm = ? AND scph = ?)" &
-                " UNION ALL (SELECT TRUNC(inv_dbd.dbrq,'mi') As rq,inv_dbd.djh,inv_dbd.dbmemo || 'µ÷Èë²Ö¿â' || inv_dbd.rckdm || 'µÚ' || inv_dbd.xh || 'ĞĞ' AS zy,0.0 As rksl,0.0 AS rkfzsl,0.0 As rkje,inv_dbd.sl As cksl,inv_dbd.fzsl AS ckfzsl,inv_dbd.je As ckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND cpdm = ? AND pihao = ?)"
+            rcOleDbCommand.CommandText = "(SELECT inv_rkd.rkrq As rq,inv_rkd.djh,inv_rkd.rkmemo || 'å®¢æˆ·:' || inv_rkd.khdm || 'ç¬¬' || inv_rkd.xh || 'è¡Œ' As zy,inv_rkd.sl As rksl,inv_rkd.fzsl as rkfzsl,inv_rkd.je As rkje,0.0 As cksl,0.0 AS ckfzsl,0.0 As ckje FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND cpdm = ? AND scph = ?)" &
+                " UNION ALL (SELECT po_rkd.rkrq As rq,po_rkd.djh,po_rkd.rkmemo || 'ä¾›åº”å•†:' || po_rkd.csdm || 'ç¬¬' || po_rkd.xh || 'è¡Œ' As zy,po_rkd.sl As rksl,po_rkd.fzsl AS rkfzsl,po_rkd.je As rkje,0.0 As cksl,0.0 AS ckfzsl,0.0 As ckje FROM po_rkd WHERE po_rkd.bdelete = 0 AND cpdm = ? AND pihao = ?)" &
+                " UNION ALL (SELECT TRUNC(inv_dbd.dbrq,'mi') As rq,inv_dbd.djh,inv_dbd.dbmemo || 'è°ƒå‡ºä»“åº“' || inv_dbd.cckdm || 'ç¬¬' || inv_dbd.xh || 'è¡Œ' As zy,inv_dbd.sl As rksl,inv_dbd.fzsl AS rkfzsl,inv_dbd.je As rkje,0.0 As cksl,0.0 AS ckfzsl,0.0 As ckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND cpdm = ? AND scph = ?)" &
+                " UNION ALL (SELECT oe_xsd.xsrq As rq,oe_xsd.djh,oe_xsd.xsmemo || 'ç¬¬' || oe_xsd.xh || 'è¡Œ' AS zy,0.0 As rksl,0.0 AS rkfzsl,0.0 As rkje,oe_xsd.sl As cksl,oe_xsd.fzsl AS ckfzsl,oe_xsd.cbje As ckje FROM oe_xsd WHERE oe_xsd.bdelete = 0 AND cpdm = ? AND pihao = ?)" &
+                " UNION ALL (SELECT inv_ckd.ckrq As rq,inv_ckd.djh,inv_ckd.ckmemo || 'ç¬¬' || inv_ckd.xh || 'è¡Œ' || 'ä¾›åº”å•†:' || inv_ckd.csdm AS zy,0.0 As rksl,0.0 AS rkfzsl,0.0 As rkje,inv_ckd.sl As cksl,inv_ckd.fzsl AS ckfzsl,inv_ckd.je As ckje FROM inv_ckd WHERE inv_ckd.bdelete = 0 AND cpdm = ? AND scph = ?)" &
+                " UNION ALL (SELECT TRUNC(inv_dbd.dbrq,'mi') As rq,inv_dbd.djh,inv_dbd.dbmemo || 'è°ƒå…¥ä»“åº“' || inv_dbd.rckdm || 'ç¬¬' || inv_dbd.xh || 'è¡Œ' AS zy,0.0 As rksl,0.0 AS rkfzsl,0.0 As rkje,inv_dbd.sl As cksl,inv_dbd.fzsl AS ckfzsl,inv_dbd.je As ckje FROM inv_dbd WHERE inv_dbd.bdelete = 0 AND cpdm = ? AND pihao = ?)"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Me.TxtCpdm.Text
             rcOleDbCommand.Parameters.Add("@pihao", OleDbType.VarChar, 20).Value = Me.TxtPiHao.Text
@@ -147,19 +147,19 @@ Public Class FrmPhSfcMx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "cpsfcmx")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó1¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯1ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
 
         If rcDataset.Tables("cpsfcmx").Rows.Count <= 0 Then
-            MsgBox("Ã»ÓĞÂú×ãÌõ¼şµÄÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         Dim i As Integer
         Dim rcDataView As New DataView(rcDataset.Tables("cpsfcmx"), "TRUE", "rq", DataViewRowState.CurrentRows)
-        '¼ÆËãÆÚÄ©¿â´æ
+        'è®¡ç®—æœŸæœ«åº“å­˜
         For i = 0 To rcDataView.Count - 1
             dblJcsl += rcDataView.Table.Rows(i).Item("rksl") - rcDataView.Table.Rows(i).Item("cksl")
             rcDataView.Table.Rows(i).Item("jcsl") = dblJcsl
@@ -168,15 +168,15 @@ Public Class FrmPhSfcMx
             dblJcje += rcDataView.Table.Rows(i).Item("rkje") - rcDataView.Table.Rows(i).Item("ckje")
             rcDataView.Table.Rows(i).Item("jcje") = dblJcje
         Next
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmPhSfcMxz
         With rcFrm
             .ParaDataSet = rcDataset
             .paraDataView = New DataView(rcDataset.Tables("cpsfcmx"), "TRUE", "rq", DataViewRowState.CurrentRows)
             '.paraDataTable = rcDataset.Tables("cpsfcmx")
-            .Label3.Text = "Åú´ÎºÅ£º" & Me.TxtPiHao.Text
+            .Label3.Text = "æ‰¹æ¬¡å·ï¼š" & Me.TxtPiHao.Text
             If rcDataset.Tables("rc_cpxx").Rows.Count > 0 Then
-                .Label2.Text = "ÎïÁÏ£º(" & Me.TxtCpdm.Text & ")" & rcDataset.Tables("rc_cpxx").Rows(0).Item("cpmc") & " " & rcDataset.Tables("rc_cpxx").Rows(0).Item("dw")
+                .Label2.Text = "ç‰©æ–™ï¼š(" & Me.TxtCpdm.Text & ")" & rcDataset.Tables("rc_cpxx").Rows(0).Item("cpmc") & " " & rcDataset.Tables("rc_cpxx").Rows(0).Item("dw")
             End If
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent

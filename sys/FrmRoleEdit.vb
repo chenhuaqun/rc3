@@ -2,21 +2,21 @@ Imports System.Data.OleDb
 
 Public Class FrmRoleEdit
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢OLEDBÊý¾ÝÊÊÅäÆ÷¶ÔÏó
+    'å»ºç«‹OLEDBæ•°æ®é€‚é…å™¨å¯¹è±¡
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     Dim rcDataset As New DataSet
-    '½¨Á¢OleDb´«µÝ¶ÔÏó
+    'å»ºç«‹OleDbä¼ é€’å¯¹è±¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbÃüÁî
+    'å»ºç«‹OleDbå‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = sysOleDbConn.CreateCommand()
-    '½¨Á¢DataViewÊý¾ÝÊÓÍ¼
+    'å»ºç«‹DataViewæ•°æ®è§†å›¾
     Dim rcDataView As DataView
-    '±äÁ¿ÊÇ·ñÔö¼Ó
+    'å˜é‡æ˜¯å¦å¢žåŠ 
     Dim isAdding As Boolean = False
-    '±äÁ¿µ±Ç°Î»ÖÃ
+    'å˜é‡å½“å‰ä½ç½®
     Dim currentPos As Integer
 
 #End Region
@@ -116,7 +116,7 @@ Public Class FrmRoleEdit
             isAdding = True
             Try
                 currentPos = BindingContext(rcDataView, "").Position
-                'Çå³ýµ±Ç°±à¼­ÄÚÈÝ
+                'æ¸…é™¤å½“å‰ç¼–è¾‘å†…å®¹
                 BindingContext(rcDataView, "").EndCurrentEdit()
                 BindingContext(rcDataView, "").AddNew()
             Catch eEndEdit As System.Exception
@@ -131,7 +131,7 @@ Public Class FrmRoleEdit
     End Sub
 
     Private Sub CancelEvent()
-        'È¡Ïû
+        'å–æ¶ˆ
         BindingContext(rcDataView, "").CancelCurrentEdit()
         BindingContext(rcDataView, "").Position = currentPos
         isAdding = False
@@ -150,10 +150,10 @@ Public Class FrmRoleEdit
     Private Sub SaveEvent()
         If isAdding Then
             If Trim(TxtRoleId.Text).Length = 0 Then
-                MsgBox("½ÇÉ«±àÂë²»ÄÜÎª¿Õ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("è§’è‰²ç¼–ç ä¸èƒ½ä¸ºç©ºã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             End If
-            '¼ì²éÖØ¸´Ãû³Æ¹æ¸ñ
+            'æ£€æŸ¥é‡å¤åç§°è§„æ ¼
             sysOleDbConn.Open()
             rcOleDbCommand.Connection = sysOleDbConn
             rcOleDbCommand.CommandTimeout = 300
@@ -168,13 +168,13 @@ Public Class FrmRoleEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "recpxx")
             Catch ex As Exception
-                MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 sysOleDbConn.Close()
             End Try
             If rcDataSet.Tables("recpxx").Rows.Count > 0 Then
-                If MsgBox("ÒÑ¾­´æÔÚÏàÍ¬Ãû³Æ¹æ¸ñµÄ½ÇÉ«£¬±àÂëÊÇ" & rcDataSet.Tables("recpxx").Rows(0).Item("RoleId") & "£¬ÄúÊÇ·ñÒª±£´æ£¿", MsgBoxStyle.YesNo + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢") = MsgBoxResult.No Then
+                If MsgBox("å·²ç»å­˜åœ¨ç›¸åŒåç§°è§„æ ¼çš„è§’è‰²ï¼Œç¼–ç æ˜¯" & rcDataSet.Tables("recpxx").Rows(0).Item("RoleId") & "ï¼Œæ‚¨æ˜¯å¦è¦ä¿å­˜ï¼Ÿ", MsgBoxStyle.YesNo + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯") = MsgBoxResult.No Then
                     sysOleDbConn.Open()
                     rcOleDbCommand.Connection = sysOleDbConn
                     rcOleDbCommand.CommandTimeout = 300
@@ -191,9 +191,9 @@ Public Class FrmRoleEdit
                     Catch ex As Exception
                         Try
                             rcOleDbTrans.Rollback()
-                            MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         Catch ey As OleDbException
-                            MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         End Try
                     Finally
                         sysOleDbConn.Close()
@@ -203,7 +203,7 @@ Public Class FrmRoleEdit
                     Return
                 End If
             End If
-            'REM Ôö¼Ó±£´æ
+            'REM å¢žåŠ ä¿å­˜
             sysOleDbConn.Open()
             rcOleDbTrans = sysOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
             rcOleDbCommand.Connection = sysOleDbConn
@@ -228,9 +228,9 @@ Public Class FrmRoleEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -239,7 +239,7 @@ Public Class FrmRoleEdit
             BindingContext(rcDataView, "").Position = currentPos
             isAdding = False
         Else
-            REM ÐÞ¸ÄÕËºÅ
+            REM ä¿®æ”¹è´¦å·
             sysOleDbConn.Open()
             rcOleDbTrans = sysOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
             rcOleDbCommand.Connection = sysOleDbConn
@@ -253,7 +253,7 @@ Public Class FrmRoleEdit
                 rcOleDbCommand.Parameters.Add("@RoleSm", OleDbType.VarChar, 12).Value = Trim(TxtRoleSm.Text).ToUpper
                 rcOleDbCommand.Parameters.Add("@RoleId", OleDbType.VarChar, 12).Value = Trim(TxtRoleId.Text)
                 rcOleDbCommand.ExecuteNonQuery()
-                'Ìî³äÊý¾Ý
+                'å¡«å……æ•°æ®
                 rcOleDbCommand.CommandText = "SELECT  * FROM rc_roles ORDER BY RoleId"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -265,9 +265,9 @@ Public Class FrmRoleEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -314,7 +314,7 @@ Public Class FrmRoleEdit
         Me.TxtRoleSm.Text = Mid(rcGetChineseSpell.GetChineseSpell(Me.TxtRoleName.Text), 1, Me.TxtRoleSm.MaxLength)
     End Sub
 
-#Region "Ê×ÉÏÏÂÄ©"
+#Region "é¦–ä¸Šä¸‹æœ«"
 
     Private Sub BtnTop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnTop.Click
         If BindingContext(rcDataView, "").Count > 0 Then

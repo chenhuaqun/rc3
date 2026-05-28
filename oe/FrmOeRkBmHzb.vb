@@ -1,20 +1,20 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeRkBmHzb
-    '½¨Á¢Êý¾ÝÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable
+    'å»ºç«‹Datatable
     ReadOnly dtOeRkCpHzb As New DataTable("oerkcphzb")
 
     Private Sub FrmOeRkBmHzb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         DtpHzrqBegin.Value = getInvBegin(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
         DtpHzrqEnd.Value = getInvEnd(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
-        '´´½¨datatable
+        'åˆ›å»ºdatatable
         dtOeRkCpHzb.Columns.Add("bmdm", Type.GetType("System.String"))
         dtOeRkCpHzb.Columns.Add("bmmc", Type.GetType("System.String"))
         dtOeRkCpHzb.Columns.Add("ckdm", Type.GetType("System.String"))
@@ -36,13 +36,13 @@ Public Class FrmOeRkBmHzb
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         dtOeRkCpHzb.Clear()
-        'È¡Êý¾Ý
+        'å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT inv_rkd.bmdm,rc_bmxx.bmmc,inv_rkd.ckdm,rc_ckxx.ckmc,SUM(inv_rkd.sl) AS sl,SUM(inv_rkd.sl * rc_cpxx.xsdj) AS je,SUM(inv_rkd.sl * rc_cpxx.cpweight) / 1000000 AS zl FROM inv_rkd,rc_lx,rc_bmxx,rc_ckxx,rc_cpxx WHERE inv_rkd.bdelete = 0 AND rc_bmxx.bmdm = inv_rkd.bmdm AND rc_ckxx.ckdm = inv_rkd.ckdm AND inv_rkd.cpdm = rc_cpxx.cpdm AND SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND lxgs = '²úÆ·Èë¿âµ¥' AND inv_rkd.bdelete = 0 AND rkrq >= ? AND rkrq >= ? AND rkrq <= ? GROUP BY inv_rkd.bmdm,rc_bmxx.bmmc,inv_rkd.ckdm,rc_ckxx.ckmc"
+            rcOleDbCommand.CommandText = "SELECT inv_rkd.bmdm,rc_bmxx.bmmc,inv_rkd.ckdm,rc_ckxx.ckmc,SUM(inv_rkd.sl) AS sl,SUM(inv_rkd.sl * rc_cpxx.xsdj) AS je,SUM(inv_rkd.sl * rc_cpxx.cpweight) / 1000000 AS zl FROM inv_rkd,rc_lx,rc_bmxx,rc_ckxx,rc_cpxx WHERE inv_rkd.bdelete = 0 AND rc_bmxx.bmdm = inv_rkd.bmdm AND rc_ckxx.ckdm = inv_rkd.ckdm AND inv_rkd.cpdm = rc_cpxx.cpdm AND SUBSTR(inv_rkd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(inv_rkd.djh,5,4) = rc_lx.kjnd AND lxgs = 'äº§å“å…¥åº“å•' AND inv_rkd.bdelete = 0 AND rkrq >= ? AND rkrq >= ? AND rkrq <= ? GROUP BY inv_rkd.bmdm,rc_bmxx.bmmc,inv_rkd.ckdm,rc_ckxx.ckmc"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = g_Dwrq.Date
             rcOleDbCommand.Parameters.Add("@rkrq", OleDbType.Date, 8).Value = Me.DtpHzrqBegin.Value
@@ -53,26 +53,26 @@ Public Class FrmOeRkBmHzb
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "oerkcphzb")
         Catch ex As Exception
-            MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         Dim rcDataRow As DataRow
         rcDataRow = rcDataset.Tables("oerkcphzb").NewRow
-        rcDataRow.Item("bmdm") = "ºÏ¼Æ"
+        rcDataRow.Item("bmdm") = "åˆè®¡"
         rcDataRow.Item("sl") = dtOeRkCpHzb.Compute("Sum(sl)", "")
         rcDataRow.Item("je") = dtOeRkCpHzb.Compute("Sum(je)", "")
         rcDataRow.Item("zl") = dtOeRkCpHzb.Compute("Sum(zl)", "")
         rcDataset.Tables("oerkcphzb").Rows.Add(rcDataRow)
 
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeRkBmHzbz
         With rcFrm
             .ParaDataSet = rcDataset
             .ParaDataView = New DataView(rcDataset.Tables("oerkcphzb"), "TRUE", "bmdm,ckdm", DataViewRowState.CurrentRows)
-            .Label2.Text = DtpHzrqBegin.Value & "ÖÁ" & DtpHzrqEnd.Value
-            '.Label3.Text = "²Ö¿â£º" & Trim(Me.TxtCkdm.Text)
+            .Label2.Text = DtpHzrqBegin.Value & "è‡³" & DtpHzrqEnd.Value
+            '.Label3.Text = "ä»“åº“ï¼š" & Trim(Me.TxtCkdm.Text)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()

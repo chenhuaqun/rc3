@@ -1,15 +1,15 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeDddjShz
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     Dim rcDataset As New DataSet
-    '½¨Á¢dataview¶ÔÏó
+    'å»ºç«‹dataviewå¯¹è±¡
     Dim rcDataView As New DataView
-    '±íÊ¾ÒªÔÚÊı¾İÔ´Ö´ĞĞµÄ SQL ÊÂÎñ
+    'è¡¨ç¤ºè¦åœ¨æ•°æ®æºæ‰§è¡Œçš„ SQL äº‹åŠ¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
     '
     ReadOnly EditingControl As DataGridViewTextBoxEditingControl
@@ -24,7 +24,7 @@ Public Class FrmOeDddjShz
     End Property
 
     Private Sub FrmOeDddjShz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'ÉèÖÃDataGridView
+        'è®¾ç½®DataGridView
         Me.rcDataGridView.AutoGenerateColumns = False
         Me.rcDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Me.rcDataGridView.Columns("ColSl").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -56,7 +56,7 @@ Public Class FrmOeDddjShz
         rcDataView.AllowNew = False
     End Sub
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
         If (Me.ActiveControl.GetType.Name = "DataGridViewTextBoxEditingControl" Or Me.rcDataGridView.Focused) Then
@@ -74,7 +74,7 @@ Public Class FrmOeDddjShz
 
 #End Region
 
-#Region "DataGridViewµÄÊÂ¼ş"
+#Region "DataGridViewçš„äº‹ä»¶"
 
     Private Sub RcDataGridView_CellFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles rcDataGridView.CellFormatting
         If Me.rcDataGridView.Columns(e.ColumnIndex).Name = "ColBzcb" Then
@@ -111,10 +111,10 @@ Public Class FrmOeDddjShz
     Private Sub RcDataGridView_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles rcDataGridView.KeyDown
         Select Case e.KeyCode
             Case Keys.C And e.Control
-                '¸´ÖÆ
+                'å¤åˆ¶
                 Clipboard.SetDataObject(Me.rcDataGridView.GetClipboardContent())
             Case Keys.V And e.Control
-                'Õ³Ìù
+                'ç²˜è´´
                 Me.rcDataGridView.CurrentCell.Value = Clipboard.GetText()
                 Me.rcDataGridView.EndEdit()
                 Me.rcBindingSource.EndEdit()
@@ -141,7 +141,7 @@ Public Class FrmOeDddjShz
 
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSave.Click
         Dim i As Integer
-        '±£´æ
+        'ä¿å­˜
         For i = 0 To rcDataSet.Tables("rc_ddnr").Rows.Count - 1
             If rcDataSet.Tables("rc_ddnr").Rows(i).Item("bzcb") <> 0 Or rcDataSet.Tables("rc_ddnr").Rows(i).Item("clcb") <> 0 Or rcDataSet.Tables("rc_ddnr").Rows(i).Item("rgcb") <> 0 Or rcDataSet.Tables("rc_ddnr").Rows(i).Item("glcb") <> 0 Then
                 Try
@@ -173,7 +173,7 @@ Public Class FrmOeDddjShz
                             'If rcDataSet.Tables("rc_cpxx").Rows.Count = 1 Then
                             '    If rcDataSet.Tables("rc_cpxx").Rows(0).Item("bzcb").GetType.ToString <> "System.DBNull" Then
                             '        If rcDataSet.Tables("rc_cpxx").Rows(0).Item("bzcb") <> rcDataSet.Tables("rc_ddnr").Rows(i).Item("bzcb") And rcDataSet.Tables("rc_cpxx").Rows(0).Item("bzcb") <> 0.0 Then
-                            '            If MsgBox("²úÆ·±àÂë" & rcDataSet.Tables("rc_ddnr").Rows(i).Item("cpdm") & "ÒÑ´æÔÚ±ê×¼³É±¾£º" & rcDataSet.Tables("rc_cpxx").Rows(0).Item("bzcb") & Chr(13) & "ÊÇ·ñ¸üĞÂ³ÉĞÂµÄ", MsgBoxStyle.YesNo + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢") = MsgBoxResult.No Then
+                            '            If MsgBox("äº§å“ç¼–ç " & rcDataSet.Tables("rc_ddnr").Rows(i).Item("cpdm") & "å·²å­˜åœ¨æ ‡å‡†æˆæœ¬ï¼š" & rcDataSet.Tables("rc_cpxx").Rows(0).Item("bzcb") & Chr(13) & "æ˜¯å¦æ›´æ–°æˆæ–°çš„", MsgBoxStyle.YesNo + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯") = MsgBoxResult.No Then
                             '                blnUpdBzcb = False
                             '            End If
                             '        End If
@@ -219,16 +219,16 @@ Public Class FrmOeDddjShz
                 Catch ex As Exception
                     Try
                         rcOleDbTrans.Rollback()
-                        MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                     Catch ey As OleDbException
-                        MsgBox("³ÌĞò´íÎó¡£" + ey.Message)
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message)
                     End Try
                 Finally
                     rcOleDbConn.Close()
                 End Try
             End If
         Next
-        MsgBox("±£´æÍê±Ï¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+        MsgBox("ä¿å­˜å®Œæ¯•ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
         Me.Close()
     End Sub
 

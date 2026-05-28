@@ -1,6 +1,6 @@
 Imports System.Data.OleDb
 Public Class FrmKhshdzFilter
-    'Êı¾İÊÓÍ¼
+    'æ•°æ®è§†å›¾
     Dim rcDataView As DataView
 
     Public Property ParaDataView() As DataView

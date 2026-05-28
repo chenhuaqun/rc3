@@ -2,40 +2,40 @@ Imports System.Data.OleDb
 
 Public Class FrmPmDdGxlzCx
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢Êý¾ÝÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
 #End Region
 
-#Region "³õÊ¼»¯ÊÂ¼þ"
+#Region "åˆå§‹åŒ–äº‹ä»¶"
     Private Sub FrmPmDdGxlzCx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         Me.DtpQdrqBegin.Value = getInvBegin(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
         Me.DtpQdrqEnd.Value = getInvEnd(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
     End Sub
 
 #End Region
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æŽ§é”®å›žè½¦é”®çš„å¤„ç†"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles DtpQdrqBegin.KeyPress, DtpQdrqEnd.KeyPress, NudDjhBegin.KeyPress, NudDjhEnd.KeyPress, TxtCpdm.KeyPress, TxtCpmc.KeyPress, TxtSczydm.KeyPress, TxtHth.KeyPress, TxtKhdm.KeyPress, TxtZydm.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼þÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼ŒåŽ»æŽ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "ÎïÁÏ±àÂëÊÂ¼þ"
+#Region "ç‰©æ–™ç¼–ç äº‹ä»¶"
 
     Private Sub TxtCpdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCpdm.KeyDown
         Select Case e.KeyCode
@@ -49,7 +49,7 @@ Public Class FrmPmDdGxlzCx
                     .paraField3 = "dw"
                     .paraField4 = "cpsm"
                     .paraOrderField = "cpmc"
-                    .paraTitle = "ÎïÁÏ"
+                    .paraTitle = "ç‰©æ–™"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -65,7 +65,7 @@ Public Class FrmPmDdGxlzCx
 
 #End Region
 
-#Region "ÎïÁÏÃèÊöÊÂ¼þ"
+#Region "ç‰©æ–™æè¿°äº‹ä»¶"
 
     Private Sub TxtCpmc_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCpmc.KeyDown
         Select Case e.KeyCode
@@ -78,7 +78,7 @@ Public Class FrmPmDdGxlzCx
 
 #End Region
 
-#Region "³Ð½ÓÈËÊÂ¼þ"
+#Region "æ‰¿æŽ¥äººäº‹ä»¶"
 
     Private Sub TxtSczydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtSczydm.KeyDown
         Select Case e.KeyCode
@@ -91,7 +91,7 @@ Public Class FrmPmDdGxlzCx
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
                     .paraOrderField = "zydm"
-                    .paraTitle = "Ö°Ô±"
+                    .paraTitle = "èŒå‘˜"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -107,7 +107,7 @@ Public Class FrmPmDdGxlzCx
 
 #End Region
 
-#Region "¶©µ¥±àÂëÊÂ¼þ"
+#Region "è®¢å•ç¼–ç äº‹ä»¶"
 
     Private Sub TxtHth_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtHth.KeyDown
         Select Case e.KeyCode
@@ -120,7 +120,7 @@ Public Class FrmPmDdGxlzCx
 
 #End Region
 
-#Region "¿Í»§±àÂëÊÂ¼þ"
+#Region "å®¢æˆ·ç¼–ç äº‹ä»¶"
 
     Private Sub TxtKhdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtKhdm.KeyDown
         Select Case e.KeyCode
@@ -134,7 +134,7 @@ Public Class FrmPmDdGxlzCx
                     .paraField3 = "khsm"
                     .paraCondition = "0=0"
                     .paraOrderField = "khmc"
-                    .paraTitle = "¿Í»§"
+                    .paraTitle = "å®¢æˆ·"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -150,7 +150,7 @@ Public Class FrmPmDdGxlzCx
 
 #End Region
 
-#Region "ÒµÎñÔ±ÊÂ¼þ"
+#Region "ä¸šåŠ¡å‘˜äº‹ä»¶"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
@@ -163,7 +163,7 @@ Public Class FrmPmDdGxlzCx
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
                     .paraOrderField = "zydm"
-                    .paraTitle = "Ö°Ô±"
+                    .paraTitle = "èŒå‘˜"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -179,19 +179,19 @@ Public Class FrmPmDdGxlzCx
 
 #End Region
 
-#Region "È·¶¨ÊÂ¼þ"
+#Region "ç¡®å®šäº‹ä»¶"
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
-        ''È¡Êý¾Ý
+        ''å–æ•°æ®
         rcOleDbConn.Open()
         rcOleDbCommand.Connection = rcOleDbConn
         rcOleDbCommand.CommandTimeout = 300
         rcOleDbCommand.CommandType = CommandType.Text
         Try
             If Me.RadioBtnQdrq.Checked Then
-                rcOleDbCommand.CommandText = "SELECT oe_dd.djh,oe_dd.xh,oe_dd.qdrq,oe_dd.hth,oe_dd.khdm,oe_dd.khmc,oe_dd.zydm,oe_dd.zymc,oe_dd.ddtk,oe_dd.cpdm,oe_dd.cpmc,oe_dd.dw,oe_dd.sl,oe_dd.dj,oe_dd.je,oe_dd.bzcb,oe_dd.khjhrq,oe_dd.zxgg,oe_dd.ddmemo,oe_dd.scjhrq,oe_dd.fhrq,oe_dd.sczydm,oe_dd.sczymc,oe_dd.srr,oe_dd.shr,(CASE WHEN oe_dd.zt = 3 THEN 'ÒÑÉóºË' ELSE CASE WHEN oe_dd.zt = 4 THEN '³ö¿âÖÐ' ELSE CASE WHEN oe_dd.zt = 5 THEN 'ÒÑ³ö¿â' ELSE CASE WHEN oe_dd.zt = 6 THEN 'ÒÑ¿ªÆ±' ELSE 'Î´ÉóºË' END END END END) AS zt,oe_dd.hxsl,oe_dd.rksl,oe_dd.cerk,oe_dd.cksl,oe_dd.ceck,oe_dd.fpsl,oe_dd.srr,oe_dd.shr FROM oe_dd,rc_cpxx WHERE oe_dd.cpdm = rc_cpxx.cpdm" & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_dd.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_dd.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_dd.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_dd.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(Me.TxtKhmc.Text).Length > 0, " and oe_dd.khmc LIKE '%" & Trim(Me.TxtKhmc.Text) & "%'", "") & IIf(Trim(TxtSczydm.Text).Length > 0, " and oe_dd.sczydm LIKE '" & TxtSczydm.Text & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_dd.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & " and qdrq >= ? AND qdrq <= ? AND SUBSTR(oe_dd.djh,11,5) >= ? AND SUBSTR(oe_dd.djh,11,5) <= ? ORDER BY oe_dd.djh,oe_dd.xh"
+                rcOleDbCommand.CommandText = "SELECT oe_dd.djh,oe_dd.xh,oe_dd.qdrq,oe_dd.hth,oe_dd.khdm,oe_dd.khmc,oe_dd.zydm,oe_dd.zymc,oe_dd.ddtk,oe_dd.cpdm,oe_dd.cpmc,oe_dd.dw,oe_dd.sl,oe_dd.dj,oe_dd.je,oe_dd.bzcb,oe_dd.khjhrq,oe_dd.zxgg,oe_dd.ddmemo,oe_dd.scjhrq,oe_dd.fhrq,oe_dd.sczydm,oe_dd.sczymc,oe_dd.srr,oe_dd.shr,(CASE WHEN oe_dd.zt = 3 THEN 'å·²å®¡æ ¸' ELSE CASE WHEN oe_dd.zt = 4 THEN 'å‡ºåº“ä¸­' ELSE CASE WHEN oe_dd.zt = 5 THEN 'å·²å‡ºåº“' ELSE CASE WHEN oe_dd.zt = 6 THEN 'å·²å¼€ç¥¨' ELSE 'æœªå®¡æ ¸' END END END END) AS zt,oe_dd.hxsl,oe_dd.rksl,oe_dd.cerk,oe_dd.cksl,oe_dd.ceck,oe_dd.fpsl,oe_dd.srr,oe_dd.shr FROM oe_dd,rc_cpxx WHERE oe_dd.cpdm = rc_cpxx.cpdm" & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_dd.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_dd.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_dd.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_dd.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(Me.TxtKhmc.Text).Length > 0, " and oe_dd.khmc LIKE '%" & Trim(Me.TxtKhmc.Text) & "%'", "") & IIf(Trim(TxtSczydm.Text).Length > 0, " and oe_dd.sczydm LIKE '" & TxtSczydm.Text & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_dd.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & " and qdrq >= ? AND qdrq <= ? AND SUBSTR(oe_dd.djh,11,5) >= ? AND SUBSTR(oe_dd.djh,11,5) <= ? ORDER BY oe_dd.djh,oe_dd.xh"
             Else
-                rcOleDbCommand.CommandText = "SELECT oe_dd.djh,oe_dd.xh,oe_dd.qdrq,oe_dd.hth,oe_dd.khdm,oe_dd.khmc,oe_dd.zydm,oe_dd.zymc,oe_dd.ddtk,oe_dd.cpdm,oe_dd.cpmc,oe_dd.dw,oe_dd.sl,oe_dd.dj,oe_dd.je,oe_dd.bzcb,oe_dd.khjhrq,oe_dd.zxgg,oe_dd.ddmemo,oe_dd.scjhrq,oe_dd.fhrq,oe_dd.sczydm,oe_dd.sczymc,oe_dd.srr,oe_dd.shr,(CASE WHEN oe_dd.zt = 3 THEN 'ÒÑÉóºË' ELSE CASE WHEN oe_dd.zt = 4 THEN '³ö¿âÖÐ' ELSE CASE WHEN oe_dd.zt = 5 THEN 'ÒÑ³ö¿â' ELSE CASE WHEN oe_dd.zt = 6 THEN 'ÒÑ¿ªÆ±' ELSE 'Î´ÉóºË' END END END END) AS zt,oe_dd.hxsl,oe_dd.rksl,oe_dd.cerk,oe_dd.cksl,oe_dd.ceck,oe_dd.fpsl,oe_dd.srr,oe_dd.shr FROM oe_dd,rc_cpxx WHERE oe_dd.cpdm = rc_cpxx.cpdm" & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_dd.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_dd.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_dd.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_dd.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(Me.TxtKhmc.Text).Length > 0, " and oe_dd.khmc LIKE '%" & Trim(Me.TxtKhmc.Text) & "%'", "") & IIf(Trim(TxtSczydm.Text).Length > 0, " and oe_dd.sczydm LIKE '" & TxtSczydm.Text & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_dd.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & " and (scjhrq >= ? AND scjhrq <= ? OR scjhrq IS NULL) AND SUBSTR(oe_dd.djh,11,5) >= ?  AND SUBSTR(oe_dd.djh,11,5) <= ? ORDER BY oe_dd.djh,oe_dd.xh"
+                rcOleDbCommand.CommandText = "SELECT oe_dd.djh,oe_dd.xh,oe_dd.qdrq,oe_dd.hth,oe_dd.khdm,oe_dd.khmc,oe_dd.zydm,oe_dd.zymc,oe_dd.ddtk,oe_dd.cpdm,oe_dd.cpmc,oe_dd.dw,oe_dd.sl,oe_dd.dj,oe_dd.je,oe_dd.bzcb,oe_dd.khjhrq,oe_dd.zxgg,oe_dd.ddmemo,oe_dd.scjhrq,oe_dd.fhrq,oe_dd.sczydm,oe_dd.sczymc,oe_dd.srr,oe_dd.shr,(CASE WHEN oe_dd.zt = 3 THEN 'å·²å®¡æ ¸' ELSE CASE WHEN oe_dd.zt = 4 THEN 'å‡ºåº“ä¸­' ELSE CASE WHEN oe_dd.zt = 5 THEN 'å·²å‡ºåº“' ELSE CASE WHEN oe_dd.zt = 6 THEN 'å·²å¼€ç¥¨' ELSE 'æœªå®¡æ ¸' END END END END) AS zt,oe_dd.hxsl,oe_dd.rksl,oe_dd.cerk,oe_dd.cksl,oe_dd.ceck,oe_dd.fpsl,oe_dd.srr,oe_dd.shr FROM oe_dd,rc_cpxx WHERE oe_dd.cpdm = rc_cpxx.cpdm" & IIf(Not String.IsNullOrEmpty(Me.TxtCpdm.Text), " and oe_dd.cpdm LIKE '" & Trim(TxtCpdm.Text) & "%'", "") & IIf(TxtZydm.TextLength > 0, " and oe_dd.zydm LIKE '" & TxtZydm.Text & "%'", "") & IIf(TxtHth.TextLength > 0, " and oe_dd.hth LIKE '" & TxtHth.Text & "%'", "") & IIf(Trim(TxtKhdm.Text).Length > 0, " and oe_dd.khdm LIKE '" & LTrim(TxtKhdm.Text) & "%'", "") & IIf(Trim(Me.TxtKhmc.Text).Length > 0, " and oe_dd.khmc LIKE '%" & Trim(Me.TxtKhmc.Text) & "%'", "") & IIf(Trim(TxtSczydm.Text).Length > 0, " and oe_dd.sczydm LIKE '" & TxtSczydm.Text & "%'", "") & IIf(Trim(TxtCpmc.Text).Length > 0, " AND oe_dd.cpmc Like '%" & Trim(Me.TxtCpmc.Text) & "%'", "") & " and (scjhrq >= ? AND scjhrq <= ? OR scjhrq IS NULL) AND SUBSTR(oe_dd.djh,11,5) >= ?  AND SUBSTR(oe_dd.djh,11,5) <= ? ORDER BY oe_dd.djh,oe_dd.xh"
             End If
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@qdrq1", OleDbType.Date, 8).Value = DtpQdrqBegin.Value
@@ -204,22 +204,22 @@ Public Class FrmPmDdGxlzCx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "ddlb")
         Catch ex As Exception
-            MsgBox("³ÌÐò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("ddlb").Rows.Count <= 0 Then
-            MsgBox("Ã»ÓÐÂú×ãÌõ¼þµÄÊý¾Ý¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         Dim rcDataRow As DataRow
         rcDataRow = rcDataset.Tables("ddlb").NewRow
-        rcDataRow.Item("djh") = "ºÏ¼Æ"
+        rcDataRow.Item("djh") = "åˆè®¡"
         rcDataRow.Item("sl") = rcDataset.Tables("ddlb").Compute("Sum(sl)", "")
         rcDataRow.Item("je") = rcDataset.Tables("ddlb").Compute("Sum(je)", "")
         rcDataset.Tables("ddlb").Rows.Add(rcDataRow)
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeDdCxLb
         With rcFrm
             .ParaDataSet = rcDataset

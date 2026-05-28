@@ -1,26 +1,26 @@
 Imports System.Data.OleDb
 
 Public Class FrmPoLlsqCx
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable 'ÎÒÃÇÒªÀûÓÃ¸Ãdatatable½øĞĞ½ğ¶î¼ÆËã
+    'å»ºç«‹Datatable 'æˆ‘ä»¬è¦åˆ©ç”¨è¯¥datatableè¿›è¡Œé‡‘é¢è®¡ç®—
     ReadOnly dtLlsqLb As New DataTable("llsqlb")
 
     Private Sub FrmCgdCx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         DtpBegin.Value = getInvBegin(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
         DtpEnd.Value = getInvEnd(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
-        'È¡µ¥¾İÀàĞÍÊı¾İ
+        'å–å•æ®ç±»å‹æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx WHERE kjnd = ? AND lxgs = 'ÎïÁÏÁìÁÏÉêÇëµ¥' ORDER BY pzlxdm"
+            rcOleDbCommand.CommandText = "SELECT pzlxdm,pzlxjc FROM rc_lx WHERE kjnd = ? AND lxgs = 'ç‰©æ–™é¢†æ–™ç”³è¯·å•' ORDER BY pzlxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Mid(g_Kjqj, 1, 4)
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -29,7 +29,7 @@ Public Class FrmPoLlsqCx
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "rc_lx")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£¶ÁÈ¡µ¥¾İÀàĞÍ¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚è¯»å–å•æ®ç±»å‹ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -37,15 +37,15 @@ Public Class FrmPoLlsqCx
         Dim rcDataRow As DataRow
         rcDataRow = rcDataSet.Tables("rc_lx").NewRow
         rcDataRow.Item("pzlxdm") = "0000"
-        rcDataRow.Item("pzlxjc") = "È«²¿µ¥¾İ"
+        rcDataRow.Item("pzlxjc") = "å…¨éƒ¨å•æ®"
         rcDataSet.Tables("rc_lx").Rows.Add(rcDataRow)
         If rcDataSet.Tables("rc_lx").Rows.Count = 0 Then
-            MsgBox("Çë¶¨Òåµ¥¾İÀàĞÍ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("è¯·å®šä¹‰å•æ®ç±»å‹ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         BindDropDownList(CmbPzlxjc, rcDataSet.Tables("rc_lx"), "pzlxdm", "pzlxjc")
         CmbPzlxjc.SelectedValue = "0000"
-        'Êı¾İ°ó¶¨
+        'æ•°æ®ç»‘å®š
         dtLlsqLb.Columns.Add("djh", Type.GetType("System.String"))
         dtLlsqLb.Columns.Add("xh", Type.GetType("System.Int32"))
         dtLlsqLb.Columns.Add("sqrq", Type.GetType("System.DateTime"))
@@ -84,7 +84,7 @@ Public Class FrmPoLlsqCx
 
     End Sub
 
-#Region "²¿ÃÅ±àÂëµÄÊÂ¼ş"
+#Region "éƒ¨é—¨ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtBmdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtBmdm.KeyDown
         Select Case e.KeyCode
@@ -96,7 +96,7 @@ Public Class FrmPoLlsqCx
                     .paraField1 = "bmdm"
                     .paraField2 = "bmmc"
                     .paraField3 = "bmsm"
-                    .paraTitle = "²¿ÃÅ"
+                    .paraTitle = "éƒ¨é—¨"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -122,13 +122,13 @@ Public Class FrmPoLlsqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_bmxx")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
             If rcDataSet.Tables("rc_bmxx").Rows.Count <= 0 Then
-                MsgBox("²¿ÃÅ±àÂë²»´æÔÚ£¬Çë°´F3¼üÑ¡Ôñ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("éƒ¨é—¨ç¼–ç ä¸å­˜åœ¨ï¼Œè¯·æŒ‰F3é”®é€‰æ‹©ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 e.Cancel = True
             End If
         End If
@@ -138,7 +138,7 @@ Public Class FrmPoLlsqCx
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         If Me.ChbLbfs.Checked Then
-            'È¡Êı¾İ
+            'å–æ•°æ®
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -158,23 +158,23 @@ Public Class FrmPoLlsqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "llsqlb")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
             If rcDataSet.Tables("llsqlb").Rows.Count <= 0 Then
-                MsgBox("Ã»ÓĞÂú×ãÌõ¼şµÄÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             End If
             Dim rcDataRow As DataRow
             rcDataRow = rcDataSet.Tables("llsqlb").NewRow
-            rcDataRow.Item("djh") = "ºÏ¼Æ"
+            rcDataRow.Item("djh") = "åˆè®¡"
             rcDataRow.Item("sl") = rcDataSet.Tables("llsqlb").Compute("Sum(sl)", "")
             rcDataRow.Item("fzsl") = rcDataSet.Tables("llsqlb").Compute("Sum(fzsl)", "")
             rcDataRow.Item("cksl") = rcDataSet.Tables("llsqlb").Compute("Sum(cksl)", "")
             rcDataSet.Tables("llsqlb").Rows.Add(rcDataRow)
-            'µ÷ÓÃ±íµ¥
+            'è°ƒç”¨è¡¨å•
             Dim rcFrm As New FrmPoLlsqCxLb
             With rcFrm
                 .ParaDataSet = rcDataSet
@@ -184,7 +184,7 @@ Public Class FrmPoLlsqCx
                 .Show()
             End With
         Else
-            'È¡Êı¾İ
+            'å–æ•°æ®
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -202,16 +202,16 @@ Public Class FrmPoLlsqCx
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "ckdml")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
             If rcDataSet.Tables("ckdml").Rows.Count <= 0 Then
-                MsgBox("Ã»ÓĞÂú×ãÌõ¼şµÄÊı¾İ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Return
             End If
-            'µ÷ÓÃ±íµ¥
+            'è°ƒç”¨è¡¨å•
             Dim rcFrm As New FrmPoLlsqCxz
             With rcFrm
                 .ParaDataSet = rcDataSet

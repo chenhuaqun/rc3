@@ -1,17 +1,17 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeXsRb
-    '½¨Á¢Êý¾ÝÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable 'ÎÒÃÇÒªÀûÓÃ¸Ãdatatable½øÐÐ½ð¶î¼ÆËã
+    'å»ºç«‹Datatable 'æˆ‘ä»¬è¦åˆ©ç”¨è¯¥datatableè¿›è¡Œé‡‘é¢è®¡ç®—
     ReadOnly dtXsd As New DataTable("xsrb")
 
     Private Sub FrmXsRb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Êý¾Ý°ó¶¨
+        'æ•°æ®ç»‘å®š
         dtXsd.Columns.Add("bsign", Type.GetType("System.Boolean"))
         dtXsd.Columns.Add("djh", Type.GetType("System.String"))
         dtXsd.Columns.Add("xsrq", Type.GetType("System.DateTime"))
@@ -31,13 +31,13 @@ Public Class FrmOeXsRb
     End Sub
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
-        'È¡Êý¾Ý
+        'å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT oe_xsd.djh,oe_xsd.xsrq,oe_xsd.khdm,oe_xsd.khmc,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.je) AS je FROM oe_xsd,rc_lx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = '²úÆ·ËÍ»õµ¥' AND bdelete = 0 AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq <= ? GROUP BY oe_xsd.bsign,oe_xsd.djh,oe_xsd.xsrq,oe_xsd.khdm,oe_xsd.khmc ORDER BY oe_xsd.djh"
+            rcOleDbCommand.CommandText = "SELECT oe_xsd.djh,oe_xsd.xsrq,oe_xsd.khdm,oe_xsd.khmc,SUM(oe_xsd.sl) AS sl,SUM(oe_xsd.je) AS je FROM oe_xsd,rc_lx WHERE SUBSTR(oe_xsd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(oe_xsd.djh,5,4) = rc_lx.kjnd AND lxgs = 'äº§å“é€è´§å•' AND bdelete = 0 AND oe_xsd.xsrq >= ? AND oe_xsd.xsrq <= ? GROUP BY oe_xsd.bsign,oe_xsd.djh,oe_xsd.xsrq,oe_xsd.khdm,oe_xsd.khmc ORDER BY oe_xsd.djh"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = Me.DtpBegin.Value
             rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = Me.DtpEnd.Value
@@ -47,27 +47,27 @@ Public Class FrmOeXsRb
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "xsrb")
         Catch ex As Exception
-            MsgBox("³ÌÐò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataSet.Tables("xsrb").Rows.Count <= 0 Then
-            MsgBox("Ã»ÓÐÂú×ãÌõ¼þµÄÊý¾Ý¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("æ²¡æœ‰æ»¡è¶³æ¡ä»¶çš„æ•°æ®ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         Dim rcDataRow As DataRow
         rcDataRow = rcDataSet.Tables("xsrb").NewRow
-        rcDataRow.Item("djh") = "ºÏ¼Æ"
+        rcDataRow.Item("djh") = "åˆè®¡"
         rcDataRow.Item("sl") = rcDataSet.Tables("xsrb").Compute("Sum(sl)", "")
         rcDataRow.Item("je") = rcDataSet.Tables("xsrb").Compute("Sum(je)", "")
         rcDataSet.Tables("xsrb").Rows.Add(rcDataRow)
 
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmOeXsRbz
         With rcFrm
             .ParaDataSet = rcDataSet
-            .Label2.Text = "ÈÕÆÚ£º´Ó" & Me.DtpBegin.Value.ToLongDateString & "µ½" & Me.DtpEnd.Value.ToLongDateString
+            .Label2.Text = "æ—¥æœŸï¼šä»Ž" & Me.DtpBegin.Value.ToLongDateString & "åˆ°" & Me.DtpEnd.Value.ToLongDateString
             .ParaDataView = New DataView(rcDataSet.Tables("xsrb"), "TRUE", "djh", DataViewRowState.CurrentRows)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent

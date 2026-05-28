@@ -2,33 +2,33 @@ Imports System.Data.OleDb
 
 Public Class FrmPzlxxx
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    'Êı¾İ¸üĞÂ´«µİ
+    'æ•°æ®æ›´æ–°ä¼ é€’
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable 'ÎÒÃÇÒªÀûÓÃ¸Ãdatatable½øĞĞ½ğ¶î¼ÆËã
+    'å»ºç«‹Datatable 'æˆ‘ä»¬è¦åˆ©ç”¨è¯¥datatableè¿›è¡Œé‡‘é¢è®¡ç®—
     ReadOnly dtCplb As New DataTable("rc_lx")
-    'Êı¾İÊÓÍ¼
+    'æ•°æ®è§†å›¾
     Dim rcDataView As DataView
-    '´òÓ¡ÎÄµµ
+    'æ‰“å°æ–‡æ¡£
     Dim rcRps As RPS.Document = Nothing
-    '¹ÜÀí°ó¶¨µ½ÏàÍ¬Êı¾İÔ´ºÍÊı¾İ³ÉÔ±µÄËùÓĞBinding¶ÔÏó
+    'ç®¡ç†ç»‘å®šåˆ°ç›¸åŒæ•°æ®æºå’Œæ•°æ®æˆå‘˜çš„æ‰€æœ‰Bindingå¯¹è±¡
     Dim rcBmb As BindingManagerBase
-    'µ±Ç°¼ÇÂ¼ºÅ
+    'å½“å‰è®°å½•å·
     Dim currentPos As Integer
 
 #End Region
 
-#Region "³õÊ¼»¯"
+#Region "åˆå§‹åŒ–"
 
     Private Sub FrmPzlxxx_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'Êı¾İ°ó¶¨
+        'æ•°æ®ç»‘å®š
         dtCplb.Columns.Add("pzlxdm", Type.GetType("System.String"))
         dtCplb.Columns.Add("pzlxjc", Type.GetType("System.String"))
         dtCplb.Columns.Add("pzlxmc", Type.GetType("System.String"))
@@ -68,14 +68,14 @@ Public Class FrmPzlxxx
             .Columns("pzno12").DefaultValue = 0
             .Columns("pzno13").DefaultValue = 0
         End With
-        'ÏÔÊ¾µÈ´ıÑùÊ½Êó±ê
+        'æ˜¾ç¤ºç­‰å¾…æ ·å¼é¼ æ ‡
         'Cursor.Current = New Cursor(Application.StartupPath & "\" & "Wait.cur")
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT * FROM rc_lx WHERE (lxgs = 'ÎïÁÏ²É¹º¶©µ¥' OR  lxgs = 'ÎïÁÏĞèÇóµ¥' OR lxgs = 'ÎïÁÏÊÕ»õµ¥' OR lxgs = 'ÎïÁÏÈë¿âµ¥' OR lxgs = 'ÎïÁÏÁìÁÏÉêÇëµ¥' OR lxgs = 'ÎïÁÏ³ö¿âµ¥' OR lxgs = 'ÎïÁÏµ÷²¦µ¥' OR lxgs = 'ÑùÆ·¶©µ¥' OR lxgs = '²úÆ·±¨¼Ûµ¥' OR lxgs = '²úÆ·ÏúÊÛ¶©µ¥' OR lxgs = '²úÆ·Éú²ú¶©µ¥' or lxgs = '²úÆ·Èë¿âµ¥'or lxgs = '¹¤ĞòÈë¿âµ¥'or lxgs = '¹¤Ğò³ö¿âµ¥' OR lxgs = '·¢»õÍ¨ÖªÊé' OR lxgs = '²úÆ·ËÍ»õµ¥' OR lxgs = '²úÆ·ÏúÊÛµ¥' Or lxgs = 'ÆäËûÓ¦ÊÕµ¥' OR lxgs = 'ÆäËûÓ¦¸¶µ¥' OR lxgs = 'ÊÕ¿îµ¥' OR lxgs = '¸¶¿îÉêÇëµ¥' OR lxgs = '¸¶¿îµ¥' OR lxgs = '¼ÇÕËÆ¾Ö¤') and kjnd = '" & g_Kjrq.Year & "' order by pzlxdm"
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_lx WHERE (lxgs = 'ç‰©æ–™é‡‡è´­è®¢å•' OR  lxgs = 'ç‰©æ–™éœ€æ±‚å•' OR lxgs = 'ç‰©æ–™æ”¶è´§å•' OR lxgs = 'ç‰©æ–™å…¥åº“å•' OR lxgs = 'ç‰©æ–™é¢†æ–™ç”³è¯·å•' OR lxgs = 'ç‰©æ–™å‡ºåº“å•' OR lxgs = 'ç‰©æ–™è°ƒæ‹¨å•' OR lxgs = 'æ ·å“è®¢å•' OR lxgs = 'äº§å“æŠ¥ä»·å•' OR lxgs = 'äº§å“é”€å”®è®¢å•' OR lxgs = 'äº§å“ç”Ÿäº§è®¢å•' or lxgs = 'äº§å“å…¥åº“å•'or lxgs = 'å·¥åºå…¥åº“å•'or lxgs = 'å·¥åºå‡ºåº“å•' OR lxgs = 'å‘è´§é€šçŸ¥ä¹¦' OR lxgs = 'äº§å“é€è´§å•' OR lxgs = 'äº§å“é”€å”®å•' Or lxgs = 'å…¶ä»–åº”æ”¶å•' OR lxgs = 'å…¶ä»–åº”ä»˜å•' OR lxgs = 'æ”¶æ¬¾å•' OR lxgs = 'ä»˜æ¬¾ç”³è¯·å•' OR lxgs = 'ä»˜æ¬¾å•' OR lxgs = 'è®°è´¦å‡­è¯') and kjnd = '" & g_Kjrq.Year & "' order by pzlxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_lx") IsNot Nothing Then
@@ -83,7 +83,7 @@ Public Class FrmPzlxxx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_lx")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -95,7 +95,7 @@ Public Class FrmPzlxxx
 
 #End Region
 
-#Region "Ò³ÃæÉèÖÃ"
+#Region "é¡µé¢è®¾ç½®"
 
     Private Sub BtnPageSetup_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnPageSetup.Click, MnuiPageSetup.Click
         PageSetupEvent()
@@ -106,14 +106,14 @@ Public Class FrmPzlxxx
         With rcFrm
             .paraOleDbConn = rcOleDbConn
             .paraRpsId = "PZLX"
-            .paraRpsName = "µ¥¾İÀàĞÍ"
+            .paraRpsName = "å•æ®ç±»å‹"
             .ShowDialog()
         End With
     End Sub
 
 #End Region
 
-#Region "´òÓ¡¡¢´òÓ¡Ô¤ÀÀ"
+#Region "æ‰“å°ã€æ‰“å°é¢„è§ˆ"
 
     Private Sub BtnPrint_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnPrint.Click, MnuiPrint.Click
         PrintEvent()
@@ -121,7 +121,7 @@ Public Class FrmPzlxxx
 
     Private Sub PrintEvent()
         If g_Demo = 1 Then
-            MsgBox("¶Ô²»Æğ£¬ÊÔÓÃÈí¼ş²»ÄÜ´òÓ¡¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("å¯¹ä¸èµ·ï¼Œè¯•ç”¨è½¯ä»¶ä¸èƒ½æ‰“å°ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         End If
         PreparePrintData()
@@ -150,8 +150,8 @@ Public Class FrmPzlxxx
         'rcRps.LoadCsvTemplate(rft1)
         'rcRps.SaveTemplate(rft)
         rcRps.LoadTemplate(rft)
-        rcRps.Text(-1, 2) = "µ¥Î»£º" + g_Dwmc
-        rcRps.Text(-1, 4) = "´òÓ¡ÈË£º" + g_User_DspName
+        rcRps.Text(-1, 2) = "å•ä½ï¼š" + g_Dwmc
+        rcRps.Text(-1, 4) = "æ‰“å°äººï¼š" + g_User_DspName
         Dim i As Integer
         For i = 0 To rcDataset.Tables("rc_lx").Rows.Count - 1
             rcRps.Text(i + 1, 1) = Trim(rcDataset.Tables("rc_lx").Rows(i).Item("pzlxdm"))
@@ -159,7 +159,7 @@ Public Class FrmPzlxxx
             rcRps.Text(i + 1, 3) = Trim(rcDataset.Tables("rc_lx").Rows(i).Item("pzlxmc"))
             rcRps.Text(i + 1, 4) = Trim(rcDataset.Tables("rc_lx").Rows(i).Item("lxgs"))
         Next
-        'È¡RPSÊı¾İ
+        'å–RPSæ•°æ®
         rcOleDbConn.Open()
         rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
         rcOleDbCommand.Connection = rcOleDbConn
@@ -178,15 +178,15 @@ Public Class FrmPzlxxx
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
         Finally
             rcOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_rps").Rows.Count > 0 Then
-            'Éè¶¨Öµ
+            'è®¾å®šå€¼
             rcRps.Scale = rcDataset.Tables("rc_rps").Rows(0).Item("scale")
             rcRps.Orientation = rcDataset.Tables("rc_rps").Rows(0).Item("orientation")
             rcRps.PaperWidth = rcDataset.Tables("rc_rps").Rows(0).Item("paperwidth")
@@ -194,7 +194,7 @@ Public Class FrmPzlxxx
             rcRps.PrinterLeft = rcDataset.Tables("rc_rps").Rows(0).Item("printerleft")
             rcRps.PrinterTop = rcDataset.Tables("rc_rps").Rows(0).Item("printertop")
         Else
-            'Ä¬ÈÏÖµ
+            'é»˜è®¤å€¼
             rcRps.Scale = 100
             rcRps.Orientation = 1
         End If
@@ -202,10 +202,10 @@ Public Class FrmPzlxxx
 
 #End Region
 
-#Region "Êä³ö"
+#Region "è¾“å‡º"
 
     Private Sub BtnExport_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExport.Click, MnuiExport.Click
-        'µ¼³öÊı¾İ
+        'å¯¼å‡ºæ•°æ®
         Exports2Excel(rcDataset.Tables("rc_lx"))
     End Sub
 
@@ -232,21 +232,21 @@ Public Class FrmPzlxxx
                 Next
                 myExcel.Range("A2").Resize(paraDataTable.Rows.Count, paraDataTable.Columns.Count).Value = DataArray
             Catch exp As Exception
-                MessageBox.Show("Êı¾İµ¼³öÊ§°Ü£¡Çë²é¿´ÊÇ·ñÒÑ¾­°²×°ÁËExcel¡£", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("æ•°æ®å¯¼å‡ºå¤±è´¥ï¼è¯·æŸ¥çœ‹æ˜¯å¦å·²ç»å®‰è£…äº†Excelã€‚", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Finally
                 Me.Cursor = Cursors.Default
             End Try
         Else
-            MessageBox.Show("Ã»ÓĞÊı¾İ£¡", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("æ²¡æœ‰æ•°æ®ï¼", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
 #End Region
 
-#Region "ĞÂÔö"
+#Region "æ–°å¢"
 
     Private Sub BtnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNew.Click, MnuiNew.Click
-        'ĞÂÔö
+        'æ–°å¢
         Dim rcFrm As New FrmPzlxEdit
         With rcFrm
             .ParaAdding = True
@@ -260,10 +260,10 @@ Public Class FrmPzlxxx
 
 #End Region
 
-#Region "ĞŞ¸Ä"
+#Region "ä¿®æ”¹"
 
     Private Sub BtnEdit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnEdit.Click, MnuiEdit.Click
-        'ĞŞ¸Ä
+        'ä¿®æ”¹
         Dim rcFrm As New FrmPzlxEdit
         With rcFrm
             .ParaAdding = False
@@ -277,15 +277,15 @@ Public Class FrmPzlxxx
 
 #End Region
 
-#Region "É¾³ı"
+#Region "åˆ é™¤"
 
     Private Sub BtnDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnDelete.Click, MnuiDelete.Click
-        'É¾³ı
-        'É¾³ıÊı¾İ
-        If MessageBox.Show("ÄúÕæµØÒªÉ¾³ıÂğ£¿", "ÌáÊ¾ĞÅÏ¢", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.OK Then
+        'åˆ é™¤
+        'åˆ é™¤æ•°æ®
+        If MessageBox.Show("æ‚¨çœŸåœ°è¦åˆ é™¤å—ï¼Ÿ", "æç¤ºä¿¡æ¯", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.OK Then
             currentPos = BindingContext(rcDataView, "").Position
             If Trim(rcBmb.Current("pzlxdm")) = "" Then
-                MessageBox.Show("±àÂë²»ÄÜÎª¿Õ¡£")
+                MessageBox.Show("ç¼–ç ä¸èƒ½ä¸ºç©ºã€‚")
                 Return
             End If
             Try
@@ -295,7 +295,7 @@ Public Class FrmPzlxxx
                 rcOleDbCommand.Transaction = rcOleDbTrans
                 rcOleDbCommand.CommandTimeout = 300
                 rcOleDbCommand.CommandType = CommandType.Text
-                'Ìí¼ÓĞòÁĞ
+                'æ·»åŠ åºåˆ—
                 Dim i As Integer
                 For i = 1 To 12
                     rcOleDbCommand.CommandText = "SELECT  COUNT(0) AS cnt_gs FROM user_sequences WHERE sequence_name = '" & Trim(rcBmb.Current("pzlxdm")) & Mid(g_Kjqj, 1, 4) & i.ToString.PadLeft(2, "0") & "'"
@@ -311,11 +311,11 @@ Public Class FrmPzlxxx
                         rcOleDbCommand.ExecuteNonQuery()
                     End If
                 Next
-                rcOleDbCommand.CommandText = "DELETE FROM rc_lx WHERE  (lxgs = 'ÎïÁÏ²É¹º¶©µ¥' OR  lxgs = 'ÎïÁÏĞèÇóµ¥' OR lxgs = 'ÎïÁÏÊÕ»õµ¥' OR lxgs = 'ÎïÁÏÈë¿âµ¥' OR lxgs = 'ÎïÁÏÁìÁÏÉêÇëµ¥' OR lxgs = 'ÎïÁÏ³ö¿âµ¥' OR lxgs = 'ÎïÁÏµ÷²¦µ¥' OR lxgs = 'ÑùÆ·¶©µ¥' OR lxgs = '²úÆ·±¨¼Ûµ¥' OR lxgs = '²úÆ·ÏúÊÛ¶©µ¥' OR lxgs = '²úÆ·Éú²ú¶©µ¥' or lxgs = '²úÆ·Èë¿âµ¥'or lxgs = '¹¤ĞòÈë¿âµ¥'or lxgs = '¹¤Ğò³ö¿âµ¥' OR lxgs = '·¢»õÍ¨ÖªÊé' OR lxgs = '²úÆ·ËÍ»õµ¥' OR lxgs = '²úÆ·ÏúÊÛµ¥' Or lxgs = 'ÆäËûÓ¦ÊÕµ¥' OR lxgs = 'ÆäËûÓ¦¸¶µ¥' OR lxgs = 'ÊÕ¿îµ¥'  OR lxgs = '¸¶¿îÉêÇëµ¥' OR lxgs = '¸¶¿îµ¥' OR lxgs = '¼ÇÕËÆ¾Ö¤') and pzlxdm = ? and kjnd = '" & g_Kjrq.Year & "'"
+                rcOleDbCommand.CommandText = "DELETE FROM rc_lx WHERE  (lxgs = 'ç‰©æ–™é‡‡è´­è®¢å•' OR  lxgs = 'ç‰©æ–™éœ€æ±‚å•' OR lxgs = 'ç‰©æ–™æ”¶è´§å•' OR lxgs = 'ç‰©æ–™å…¥åº“å•' OR lxgs = 'ç‰©æ–™é¢†æ–™ç”³è¯·å•' OR lxgs = 'ç‰©æ–™å‡ºåº“å•' OR lxgs = 'ç‰©æ–™è°ƒæ‹¨å•' OR lxgs = 'æ ·å“è®¢å•' OR lxgs = 'äº§å“æŠ¥ä»·å•' OR lxgs = 'äº§å“é”€å”®è®¢å•' OR lxgs = 'äº§å“ç”Ÿäº§è®¢å•' or lxgs = 'äº§å“å…¥åº“å•'or lxgs = 'å·¥åºå…¥åº“å•'or lxgs = 'å·¥åºå‡ºåº“å•' OR lxgs = 'å‘è´§é€šçŸ¥ä¹¦' OR lxgs = 'äº§å“é€è´§å•' OR lxgs = 'äº§å“é”€å”®å•' Or lxgs = 'å…¶ä»–åº”æ”¶å•' OR lxgs = 'å…¶ä»–åº”ä»˜å•' OR lxgs = 'æ”¶æ¬¾å•'  OR lxgs = 'ä»˜æ¬¾ç”³è¯·å•' OR lxgs = 'ä»˜æ¬¾å•' OR lxgs = 'è®°è´¦å‡­è¯') and pzlxdm = ? and kjnd = '" & g_Kjrq.Year & "'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@pzlxdm", OleDbType.VarChar, 4).Value = Trim(rcBmb.Current("pzlxdm"))
                 rcOleDbCommand.ExecuteNonQuery()
-                rcOleDbCommand.CommandText = "SELECT * FROM rc_lx WHERE (lxgs = 'ÎïÁÏ²É¹º¶©µ¥' OR  lxgs = 'ÎïÁÏĞèÇóµ¥' OR lxgs = 'ÎïÁÏÊÕ»õµ¥' OR lxgs = 'ÎïÁÏÈë¿âµ¥' OR lxgs = 'ÎïÁÏÁìÁÏÉêÇëµ¥' OR lxgs = 'ÎïÁÏ³ö¿âµ¥' OR lxgs = 'ÎïÁÏµ÷²¦µ¥' OR lxgs = 'ÑùÆ·¶©µ¥' OR lxgs = '²úÆ·±¨¼Ûµ¥' OR lxgs = '²úÆ·ÏúÊÛ¶©µ¥' OR lxgs = '²úÆ·Éú²ú¶©µ¥' or lxgs = '²úÆ·Èë¿âµ¥'or lxgs = '¹¤ĞòÈë¿âµ¥'or lxgs = '¹¤Ğò³ö¿âµ¥' OR lxgs = '·¢»õÍ¨ÖªÊé' OR lxgs = '²úÆ·ËÍ»õµ¥' OR lxgs = '²úÆ·ÏúÊÛµ¥' Or lxgs = 'ÆäËûÓ¦ÊÕµ¥' OR lxgs = 'ÆäËûÓ¦¸¶µ¥' OR lxgs = 'ÊÕ¿îµ¥'  OR lxgs = '¸¶¿îÉêÇëµ¥' OR lxgs = '¸¶¿îµ¥' OR lxgs = '¼ÇÕËÆ¾Ö¤') and kjnd = '" & g_Kjrq.Year & "' order by pzlxdm"
+                rcOleDbCommand.CommandText = "SELECT * FROM rc_lx WHERE (lxgs = 'ç‰©æ–™é‡‡è´­è®¢å•' OR  lxgs = 'ç‰©æ–™éœ€æ±‚å•' OR lxgs = 'ç‰©æ–™æ”¶è´§å•' OR lxgs = 'ç‰©æ–™å…¥åº“å•' OR lxgs = 'ç‰©æ–™é¢†æ–™ç”³è¯·å•' OR lxgs = 'ç‰©æ–™å‡ºåº“å•' OR lxgs = 'ç‰©æ–™è°ƒæ‹¨å•' OR lxgs = 'æ ·å“è®¢å•' OR lxgs = 'äº§å“æŠ¥ä»·å•' OR lxgs = 'äº§å“é”€å”®è®¢å•' OR lxgs = 'äº§å“ç”Ÿäº§è®¢å•' or lxgs = 'äº§å“å…¥åº“å•'or lxgs = 'å·¥åºå…¥åº“å•'or lxgs = 'å·¥åºå‡ºåº“å•' OR lxgs = 'å‘è´§é€šçŸ¥ä¹¦' OR lxgs = 'äº§å“é€è´§å•' OR lxgs = 'äº§å“é”€å”®å•' Or lxgs = 'å…¶ä»–åº”æ”¶å•' OR lxgs = 'å…¶ä»–åº”ä»˜å•' OR lxgs = 'æ”¶æ¬¾å•'  OR lxgs = 'ä»˜æ¬¾ç”³è¯·å•' OR lxgs = 'ä»˜æ¬¾å•' OR lxgs = 'è®°è´¦å‡­è¯') and kjnd = '" & g_Kjrq.Year & "' order by pzlxdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("rc_lx") IsNot Nothing Then
@@ -326,9 +326,9 @@ Public Class FrmPzlxxx
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally
@@ -341,7 +341,7 @@ Public Class FrmPzlxxx
 
 #End Region
 
-#Region "Ë¢ĞÂ"
+#Region "åˆ·æ–°"
 
     Private Sub BtnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnRefresh.Click, MnuiRefresh.Click
         Try
@@ -349,7 +349,7 @@ Public Class FrmPzlxxx
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT * FROM rc_lx WHERE (lxgs = 'ÎïÁÏ²É¹º¶©µ¥' OR  lxgs = 'ÎïÁÏĞèÇóµ¥' OR lxgs = 'ÎïÁÏÊÕ»õµ¥' OR lxgs = 'ÎïÁÏÈë¿âµ¥' OR lxgs = 'ÎïÁÏÁìÁÏÉêÇëµ¥' OR lxgs = 'ÎïÁÏ³ö¿âµ¥' OR lxgs = 'ÎïÁÏµ÷²¦µ¥' OR lxgs = 'ÑùÆ·¶©µ¥' OR lxgs = '²úÆ·±¨¼Ûµ¥' OR lxgs = '²úÆ·ÏúÊÛ¶©µ¥' OR lxgs = '²úÆ·Éú²ú¶©µ¥' or lxgs = '²úÆ·Èë¿âµ¥'or lxgs = '¹¤ĞòÈë¿âµ¥'or lxgs = '¹¤Ğò³ö¿âµ¥' OR lxgs = '·¢»õÍ¨ÖªÊé' OR lxgs = '²úÆ·ËÍ»õµ¥' OR lxgs = '²úÆ·ÏúÊÛµ¥' Or lxgs = 'ÆäËûÓ¦ÊÕµ¥' OR lxgs = 'ÆäËûÓ¦¸¶µ¥' OR lxgs = 'ÊÕ¿îµ¥'  OR lxgs = '¸¶¿îÉêÇëµ¥' OR lxgs = '¸¶¿îµ¥' OR lxgs = '¼ÇÕËÆ¾Ö¤') and kjnd = '" & g_Kjrq.Year & "' order by pzlxdm"
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_lx WHERE (lxgs = 'ç‰©æ–™é‡‡è´­è®¢å•' OR  lxgs = 'ç‰©æ–™éœ€æ±‚å•' OR lxgs = 'ç‰©æ–™æ”¶è´§å•' OR lxgs = 'ç‰©æ–™å…¥åº“å•' OR lxgs = 'ç‰©æ–™é¢†æ–™ç”³è¯·å•' OR lxgs = 'ç‰©æ–™å‡ºåº“å•' OR lxgs = 'ç‰©æ–™è°ƒæ‹¨å•' OR lxgs = 'æ ·å“è®¢å•' OR lxgs = 'äº§å“æŠ¥ä»·å•' OR lxgs = 'äº§å“é”€å”®è®¢å•' OR lxgs = 'äº§å“ç”Ÿäº§è®¢å•' or lxgs = 'äº§å“å…¥åº“å•'or lxgs = 'å·¥åºå…¥åº“å•'or lxgs = 'å·¥åºå‡ºåº“å•' OR lxgs = 'å‘è´§é€šçŸ¥ä¹¦' OR lxgs = 'äº§å“é€è´§å•' OR lxgs = 'äº§å“é”€å”®å•' Or lxgs = 'å…¶ä»–åº”æ”¶å•' OR lxgs = 'å…¶ä»–åº”ä»˜å•' OR lxgs = 'æ”¶æ¬¾å•'  OR lxgs = 'ä»˜æ¬¾ç”³è¯·å•' OR lxgs = 'ä»˜æ¬¾å•' OR lxgs = 'è®°è´¦å‡­è¯') and kjnd = '" & g_Kjrq.Year & "' order by pzlxdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             If rcDataset.Tables("rc_lx") IsNot Nothing Then
@@ -357,7 +357,7 @@ Public Class FrmPzlxxx
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_lx")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -366,16 +366,16 @@ Public Class FrmPzlxxx
 
 #End Region
 
-#Region "¹Ø±Õ"
+#Region "å…³é—­"
 
     Private Sub BtnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
-        '¹Ø±Õ
+        'å…³é—­
         Me.Close()
     End Sub
 
 #End Region
 
-#Region "¹ØÓÚ"
+#Region "å…³äº"
 
     Private Sub MnuiAbout_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuiAbout.Click
         Dim rcFrm As New FrmAbout

@@ -1,20 +1,20 @@
 Imports System.Data.OleDb
 
 Public Class FrmArKhHzb
-    '½¨Á¢Êý¾ÝÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '½¨Á¢Datatable
+    'å»ºç«‹Datatable
     ReadOnly dtArKhHzb As New DataTable("arkhhzb")
 
     Private Sub FrmArKhHzb_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Ä¬ÈÏÖµ
+        'é»˜è®¤å€¼
         DtpHzrqBegin.Value = getInvBegin(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
         DtpHzrqEnd.Value = getInvEnd(Mid(g_Kjqj, 1, 4), Mid(g_Kjqj, 5, 2))
-        '´´½¨datatable
+        'åˆ›å»ºdatatable
         dtArKhHzb.Columns.Add("khdm", Type.GetType("System.String"))
         dtArKhHzb.Columns.Add("khmc", Type.GetType("System.String"))
         dtArKhHzb.Columns.Add("zydm", Type.GetType("System.String"))
@@ -29,13 +29,13 @@ Public Class FrmArKhHzb
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         dtArKhHzb.Clear()
-        'È¡Êý¾Ý
+        'å–æ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT arkhhzba.khdm,arkhhzba.khmc,rc_khxx.zydm,rc_khxx.zymc,arkhhzba.je FROM(SELECT ar_skd.khdm,ar_skd.khmc,SUM(ar_skd.je) AS je FROM ar_skd,rc_lx WHERE SUBSTR(ar_skd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(ar_skd.djh,5,4) = rc_lx.kjnd AND lxgs = 'ÊÕ¿îµ¥' AND skrq >= ? AND skrq >= ? AND skrq <= ? GROUP BY ar_skd.khdm,ar_skd.khmc) arkhhzba LEFT JOIN rc_khxx ON arkhhzba.khdm = rc_khxx.khdm"
+            rcOleDbCommand.CommandText = "SELECT arkhhzba.khdm,arkhhzba.khmc,rc_khxx.zydm,rc_khxx.zymc,arkhhzba.je FROM(SELECT ar_skd.khdm,ar_skd.khmc,SUM(ar_skd.je) AS je FROM ar_skd,rc_lx WHERE SUBSTR(ar_skd.djh,1,4) = rc_lx.pzlxdm AND SUBSTR(ar_skd.djh,5,4) = rc_lx.kjnd AND lxgs = 'æ”¶æ¬¾å•' AND skrq >= ? AND skrq >= ? AND skrq <= ? GROUP BY ar_skd.khdm,ar_skd.khmc) arkhhzba LEFT JOIN rc_khxx ON arkhhzba.khdm = rc_khxx.khdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@skrq", OleDbType.Date, 8).Value = g_Dwrq.Date
             rcOleDbCommand.Parameters.Add("@skrq", OleDbType.Date, 8).Value = Me.DtpHzrqBegin.Value
@@ -46,24 +46,24 @@ Public Class FrmArKhHzb
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "arkhhzb")
         Catch ex As Exception
-            MsgBox("³ÌÐò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ÐÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
         Dim rcDataRow As DataRow
         rcDataRow = rcDataset.Tables("arkhhzb").NewRow
-        rcDataRow.Item("khdm") = "ºÏ¼Æ"
+        rcDataRow.Item("khdm") = "åˆè®¡"
         rcDataRow.Item("je") = dtArKhHzb.Compute("Sum(je)", "")
         rcDataset.Tables("arkhhzb").Rows.Add(rcDataRow)
 
-        'µ÷ÓÃ±íµ¥
+        'è°ƒç”¨è¡¨å•
         Dim rcFrm As New FrmArKhHzbz
         With rcFrm
             .ParaDataSet = rcDataset
             .ParaDataView = New DataView(rcDataset.Tables("arkhhzb"), "TRUE", "khdm", DataViewRowState.CurrentRows)
-            .Label2.Text = DtpHzrqBegin.Value & "ÖÁ" & DtpHzrqEnd.Value
-            '.Label3.Text = "²Ö¿â£º" & Trim(Me.TxtCkdm.Text)
+            .Label2.Text = DtpHzrqBegin.Value & "è‡³" & DtpHzrqEnd.Value
+            '.Label3.Text = "ä»“åº“ï¼š" & Trim(Me.TxtCkdm.Text)
             .WindowState = FormWindowState.Maximized
             .MdiParent = Me.MdiParent
             .Show()

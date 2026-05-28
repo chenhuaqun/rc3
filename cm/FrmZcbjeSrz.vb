@@ -1,26 +1,26 @@
 Imports System.Data.OleDb
 
 Public Class FrmZcbjeSrz
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '±íÊ¾ÒªÔÚÊı¾İÔ´Ö´ĞĞµÄ SQL ÊÂÎñ
+    'è¡¨ç¤ºè¦åœ¨æ•°æ®æºæ‰§è¡Œçš„ SQL äº‹åŠ¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbCommand¶ÔÏó
+    'å»ºç«‹OleDbCommandå¯¹è±¡
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '»á¼ÆÆÚ¼ä
+    'ä¼šè®¡æœŸé—´
     Dim strKjqj As String = g_Kjqj
-    'Äê
+    'å¹´
     Dim strYear As String = ""
-    'ÔÂ
+    'æœˆ
     Dim strMonth As String = ""
-    '¼ÆËãÉú²úÈë¿â³É±¾·½Ê½
+    'è®¡ç®—ç”Ÿäº§å…¥åº“æˆæœ¬æ–¹å¼
     Dim intJsfs As Int16 = 0
-    '°´³É±¾ÒªËØ¶ÀÁ¢·ÖÅä³É±¾
+    'æŒ‰æˆæœ¬è¦ç´ ç‹¬ç«‹åˆ†é…æˆæœ¬
     Dim intCostElements As Int16 = 0
 
-#Region "³õÊ¼»¯ÊÂ¼ş"
+#Region "åˆå§‹åŒ–äº‹ä»¶"
 
     Public Property ParaStrYear() As String
         Get
@@ -41,14 +41,14 @@ Public Class FrmZcbjeSrz
     End Property
 
     Private Sub FrmZcbjeSrz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        '¼ÆËãÉú²úÈë¿â³É±¾·½Ê½
-        intJsfs = GetParaValue("ÊÇ·ñ°´³É±¾Óò¼ÆËã³É±¾", False)
-        intCostElements = GetParaValue("°´³É±¾ÒªËØ¶ÀÁ¢·ÖÅä³É±¾", False)
+        'è®¡ç®—ç”Ÿäº§å…¥åº“æˆæœ¬æ–¹å¼
+        intJsfs = GetParaValue("æ˜¯å¦æŒ‰æˆæœ¬åŸŸè®¡ç®—æˆæœ¬", False)
+        intCostElements = GetParaValue("æŒ‰æˆæœ¬è¦ç´ ç‹¬ç«‹åˆ†é…æˆæœ¬", False)
         Select Case intJsfs
             Case 1
-                Me.LblBmdm.Text = "³É±¾Óò±àÂë£º"
+                Me.LblBmdm.Text = "æˆæœ¬åŸŸç¼–ç ï¼š"
             Case Else
-                Me.LblBmdm.Text = "²¿ÃÅ±àÂë£º"
+                Me.LblBmdm.Text = "éƒ¨é—¨ç¼–ç ï¼š"
         End Select
         strKjqj = strYear & strMonth.PadLeft(2, "0")
         If intCostElements = 1 Then
@@ -84,20 +84,20 @@ Public Class FrmZcbjeSrz
 
 #End Region
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Private Sub Control_KeyPress(ByVal sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TxtKjqj.KeyPress, TxtBmdm.KeyPress, TxtQczcpje.KeyPress, TxtQczcpje_clcb.KeyPress, TxtQczcpje_rgcb.KeyPress, TxtQczcpje_nycb.KeyPress, TxtQczcpje_zjcb.KeyPress, TxtQczcpje_glcb.KeyPress, TxtZcbje.KeyPress, TxtZcbje_clcb.KeyPress, TxtZcbje_rgcb.KeyPress, TxtZcbje_nycb.KeyPress, TxtZcbje_zjcb.KeyPress, TxtZcbje_glcb.KeyPress, TxtCcpje.KeyPress, TxtCcpje_clcb.KeyPress, TxtCcpje_rgcb.KeyPress, TxtCcpje_nycb.KeyPress, TxtCcpje_zjcb.KeyPress, TxtCcpje_glcb.KeyPress, TxtQmzcclje.KeyPress, TxtQmzcclje_clcb.KeyPress, TxtQmzcclje_rgcb.KeyPress, TxtQmzcclje_nycb.KeyPress, TxtQmzcclje_zjcb.KeyPress, TxtQmzcclje_glcb.KeyPress, TxtQmzcpje.KeyPress, TxtQmzcpje_clcb.KeyPress, TxtQmzcpje_rgcb.KeyPress, TxtQmzcpje_nycb.KeyPress, TxtQmzcpje_zjcb.KeyPress, TxtQmzcpje_glcb.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'Ö¸Ê¾ KeyPress ÊÂ¼şÒÑ´¦Àí£¬È¥µô Windows È±Ê¡µÄ¶£µ±Éù¡£
+                'æŒ‡ç¤º KeyPress äº‹ä»¶å·²å¤„ç†ï¼Œå»æ‰ Windows ç¼ºçœçš„å®å½“å£°ã€‚
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "²¿ÃÅ±àÂëµÄÊÂ¼ş"
+#Region "éƒ¨é—¨ç¼–ç çš„äº‹ä»¶"
 
     Private Sub TxtBmdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtBmdm.KeyDown
         Select Case e.KeyCode
@@ -111,7 +111,7 @@ Public Class FrmZcbjeSrz
                             .ParaField1 = "crdm"
                             .ParaField2 = "crmc"
                             .ParaField3 = "crsm"
-                            .ParaTitle = "³É±¾Óò"
+                            .ParaTitle = "æˆæœ¬åŸŸ"
                             .ParaOldValue = ""
                             .ParaAddName = ""
                             If .ShowDialog = DialogResult.OK Then
@@ -126,7 +126,7 @@ Public Class FrmZcbjeSrz
                             .ParaField1 = "gxdm"
                             .ParaField2 = "gxmc"
                             .ParaField3 = "gxsm"
-                            .ParaTitle = "Éú²ú¹¤Ğò"
+                            .ParaTitle = "ç”Ÿäº§å·¥åº"
                             .ParaOldValue = ""
                             .ParaAddName = ""
                             If .ShowDialog = DialogResult.OK Then
@@ -141,7 +141,7 @@ Public Class FrmZcbjeSrz
                             .ParaField1 = "bmdm"
                             .ParaField2 = "bmmc"
                             .ParaField3 = "bmsm"
-                            .ParaTitle = "²¿ÃÅ"
+                            .ParaTitle = "éƒ¨é—¨"
                             .ParaOldValue = ""
                             .ParaAddName = ""
                             If .ShowDialog = DialogResult.OK Then
@@ -174,7 +174,7 @@ Public Class FrmZcbjeSrz
                         End If
                         rcOleDbDataAdpt.Fill(rcDataset, "rc_costregion")
                     Catch ex As Exception
-                        MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         Return
                     Finally
                         rcOleDbConn.Close()
@@ -183,7 +183,7 @@ Public Class FrmZcbjeSrz
                         TxtBmdm.Text = Trim(rcDataset.Tables("rc_costregion").Rows(0).Item("crdm"))
                         LblBmmc.Text = Trim(rcDataset.Tables("rc_costregion").Rows(0).Item("crmc"))
                     Else
-                        MsgBox("³É±¾Óò±àÂë²»´æÔÚ£¬Çë°´F3¼üÑ¡Ôñ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("æˆæœ¬åŸŸç¼–ç ä¸å­˜åœ¨ï¼Œè¯·æŒ‰F3é”®é€‰æ‹©ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         e.Cancel = True
                     End If
                 Case 2
@@ -201,7 +201,7 @@ Public Class FrmZcbjeSrz
                         End If
                         rcOleDbDataAdpt.Fill(rcDataset, "rc_gxxx")
                     Catch ex As Exception
-                        MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         Return
                     Finally
                         rcOleDbConn.Close()
@@ -210,7 +210,7 @@ Public Class FrmZcbjeSrz
                         Me.TxtBmdm.Text = Trim(rcDataset.Tables("rc_gxxx").Rows(0).Item("gxdm"))
                         Me.LblBmmc.Text = Trim(rcDataset.Tables("rc_gxxx").Rows(0).Item("gxmc"))
                     Else
-                        MsgBox("Éú²ú¹¤Ğò±àÂë²»´æÔÚ£¬Çë°´F3¼üÑ¡Ôñ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç”Ÿäº§å·¥åºç¼–ç ä¸å­˜åœ¨ï¼Œè¯·æŒ‰F3é”®é€‰æ‹©ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         e.Cancel = True
                     End If
                 Case Else
@@ -228,7 +228,7 @@ Public Class FrmZcbjeSrz
                         End If
                         rcOleDbDataAdpt.Fill(rcDataset, "rc_bmxx")
                     Catch ex As Exception
-                        MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         Return
                     Finally
                         rcOleDbConn.Close()
@@ -237,10 +237,10 @@ Public Class FrmZcbjeSrz
                         TxtBmdm.Text = Trim(rcDataset.Tables("rc_bmxx").Rows(0).Item("bmdm"))
                         LblBmmc.Text = Trim(rcDataset.Tables("rc_bmxx").Rows(0).Item("bmmc"))
                     Else
-                        MsgBox("²¿ÃÅ±àÂë²»´æÔÚ£¬Çë°´F3¼üÑ¡Ôñ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("éƒ¨é—¨ç¼–ç ä¸å­˜åœ¨ï¼Œè¯·æŒ‰F3é”®é€‰æ‹©ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         e.Cancel = True
                     End If
-                    '¼ì²âÊÇ·ñ×îÃ÷Ï¸¼ÇÂ¼
+                    'æ£€æµ‹æ˜¯å¦æœ€æ˜ç»†è®°å½•
                     Try
                         rcOleDbConn.Open()
                         rcOleDbCommand.Connection = rcOleDbConn
@@ -255,17 +255,17 @@ Public Class FrmZcbjeSrz
                         End If
                         rcOleDbDataAdpt.Fill(rcDataset, "reccnt")
                     Catch ex As Exception
-                        MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         Return
                     Finally
                         rcOleDbConn.Close()
                     End Try
                     If rcDataset.Tables("reccnt").Rows(0).Item("gs") > 0 Then
-                        MsgBox("ÇëÊäÈë×îÃ÷Ï¸²¿ÃÅ±àÂë¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("è¯·è¾“å…¥æœ€æ˜ç»†éƒ¨é—¨ç¼–ç ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                         e.Cancel = True
                     End If
             End Select
-            'È¡ÒÑ±£´æµÄÊı¾İ
+            'å–å·²ä¿å­˜çš„æ•°æ®
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -281,7 +281,7 @@ Public Class FrmZcbjeSrz
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "pm_zcbje")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -350,7 +350,7 @@ Public Class FrmZcbjeSrz
                 Me.TxtQmzcpje_glcb.Text = 0.0
             End If
 
-            'È¡ÉÏÔÂµÄÆÚÄ©ÔÚÖÆÆ·¿â´æ,½¨Á¢Âß¼­¹ØÏµ
+            'å–ä¸Šæœˆçš„æœŸæœ«åœ¨åˆ¶å“åº“å­˜,å»ºç«‹é€»è¾‘å…³ç³»
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -366,7 +366,7 @@ Public Class FrmZcbjeSrz
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "pm_zcbje")
             Catch ex As Exception
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message)
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message)
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -392,10 +392,10 @@ Public Class FrmZcbjeSrz
         SumSlJe()
     End Sub
 
-#Region "¼ÆËãºÏ¼ÆÊı"
+#Region "è®¡ç®—åˆè®¡æ•°"
 
     Private Sub SumSlJe()
-        '¼ÆËãºÏ¼ÆÊı
+        'è®¡ç®—åˆè®¡æ•°
         Dim dblQmzcpje As Double
         Dim dblQmzcpje_clcb As Double
         Dim dblQmzcpje_rgcb As Double
@@ -418,11 +418,11 @@ Public Class FrmZcbjeSrz
 
 #End Region
 
-#Region "±£´æÊı¾İÊÂ¼ş"
+#Region "ä¿å­˜æ•°æ®äº‹ä»¶"
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         If String.IsNullOrEmpty(Me.TxtBmdm.Text) Then
-            MsgBox(Me.LblBmdm.Text & "²»ÄÜÎª¿Õ¡£")
+            MsgBox(Me.LblBmdm.Text & "ä¸èƒ½ä¸ºç©ºã€‚")
             Return
         End If
         Try
@@ -476,9 +476,9 @@ Public Class FrmZcbjeSrz
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally

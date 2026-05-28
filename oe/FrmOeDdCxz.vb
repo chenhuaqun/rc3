@@ -1,17 +1,17 @@
 Imports System.Data.OleDb
 
 Public Class FrmOeDdCxz
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     Dim rcDataset As New DataSet
-    '½¨Á¢ÃüÁî
+    'å»ºç«‹å‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    'Êı¾İ°ó¶¨
+    'æ•°æ®ç»‘å®š
     Dim rcBmb As BindingManagerBase
-    '½¨Á¢´òÓ¡ÎÄµµ
+    'å»ºç«‹æ‰“å°æ–‡æ¡£
     ReadOnly rcRps As RPS.Document
-    'ºÏ¼Æ±äÁ¿
+    'åˆè®¡å˜é‡
     Dim dblTotSl As Double = 0.0
     Dim dblTotFzsl As Double = 0.0
     Dim dblTotJe As Double = 0.0
@@ -27,7 +27,7 @@ Public Class FrmOeDdCxz
     End Property
 
     Private Sub FrmOeDdCxz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'ÉèÖÃDataGridView
+        'è®¾ç½®DataGridView
         Me.rcDataGridView.AutoGenerateColumns = False
         Me.rcDataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Me.rcDataGridView.Columns("ColSl").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -55,8 +55,8 @@ Public Class FrmOeDdCxz
     End Sub
 
     Private Sub ShowDd(ByVal ddDjh As String)
-        'ÅĞ¶ÏddDjh
-        'È¡oe_ddÊı¾İ
+        'åˆ¤æ–­ddDjh
+        'å–oe_ddæ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -71,12 +71,12 @@ Public Class FrmOeDdCxz
             End If
             rcOleDbDataAdpt.Fill(rcDataset, "rc_ddml")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
         End Try
-        '¸³Öµ
+        'èµ‹å€¼
         Me.TxtDjh.Text = rcDataset.Tables("rc_ddml").Rows(0).Item("djh")
         Me.DtpQdrq.Value = rcDataset.Tables("rc_ddml").Rows(0).Item("qdrq")
         Me.TxtSgddh.Text = Trim(rcDataset.Tables("rc_ddml").Rows(0).Item("hth"))
@@ -92,17 +92,17 @@ Public Class FrmOeDdCxz
         If rcDataset.Tables("rc_ddml").Rows(0).Item("sktj").GetType.ToString <> "System.DBNull" Then
             Me.CmbSktj.SelectedItem = rcDataset.Tables("rc_ddml").Rows(0).Item("sktj")
         Else
-            Me.CmbSktj.SelectedItem = "ÔÂ½á"
+            Me.CmbSktj.SelectedItem = "æœˆç»“"
         End If
         If rcDataset.Tables("rc_ddml").Rows(0).Item("skqx").GetType.ToString <> "System.DBNull" Then
             Me.TxtSkqx.Text = rcDataset.Tables("rc_ddml").Rows(0).Item("skqx")
         Else
             Me.TxtSkqx.Text = 0
         End If
-        Me.LblSrr.Text = "ÊäÈë£º" + rcDataset.Tables("rc_ddml").Rows(0).Item("srr")
-        Me.LblShr.Text = "ÉóºË£º" + rcDataset.Tables("rc_ddml").Rows(0).Item("shr")
-        Me.LblJzr.Text = "¼ÇÕË£º" + rcDataset.Tables("rc_ddml").Rows(0).Item("jzr")
-        'È¡oe_ddÊı¾İ
+        Me.LblSrr.Text = "è¾“å…¥ï¼š" + rcDataset.Tables("rc_ddml").Rows(0).Item("srr")
+        Me.LblShr.Text = "å®¡æ ¸ï¼š" + rcDataset.Tables("rc_ddml").Rows(0).Item("shr")
+        Me.LblJzr.Text = "è®°è´¦ï¼š" + rcDataset.Tables("rc_ddml").Rows(0).Item("jzr")
+        'å–oe_ddæ•°æ®
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -118,7 +118,7 @@ Public Class FrmOeDdCxz
             rcOleDbDataAdpt.Fill(rcDataset, "rc_ddnr")
             rcDataGridView.DataSource = rcDataset.Tables("rc_ddnr")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             rcOleDbConn.Close()
@@ -126,10 +126,10 @@ Public Class FrmOeDdCxz
         SumSlJe()
     End Sub
 
-#Region "¼ÆËãºÏ¼ÆÊı"
+#Region "è®¡ç®—åˆè®¡æ•°"
 
     Private Sub SumSlJe()
-        '¼ÆËãºÏ¼ÆÊı
+        'è®¡ç®—åˆè®¡æ•°
         dblTotSl = 0.0
         dblTotFzsl = 0.0
         dblTotJe = 0.0
@@ -140,11 +140,11 @@ Public Class FrmOeDdCxz
             dblTotJe = rcDataset.Tables("rc_ddnr").Compute("Sum(je)", "")
             dblTotSe = rcDataset.Tables("rc_ddnr").Compute("Sum(se)", "")
         End If
-        Me.LblSl.Text = "ÊıÁ¿ºÏ¼Æ£º" + Format(dblTotSl, g_FormatSl)
-        Me.LblFzsl.Text = "¸¨ÊıÁ¿ºÏ¼Æ£º" + Format(dblTotFzsl, g_FormatSl)
-        Me.LblJe.Text = "½ğ¶îºÏ¼Æ£º" + Format(dblTotJe, g_FormatJe)
-        Me.LblSe.Text = "Ë°¶îºÏ¼Æ£º" + Format(dblTotSe, g_FormatJe)
-        Me.LblJese.Text = "¼ÛË°ºÏ¼Æ£º" + Format(dblTotJe + dblTotSe, g_FormatJe)
+        Me.LblSl.Text = "æ•°é‡åˆè®¡ï¼š" + Format(dblTotSl, g_FormatSl)
+        Me.LblFzsl.Text = "è¾…æ•°é‡åˆè®¡ï¼š" + Format(dblTotFzsl, g_FormatSl)
+        Me.LblJe.Text = "é‡‘é¢åˆè®¡ï¼š" + Format(dblTotJe, g_FormatJe)
+        Me.LblSe.Text = "ç¨é¢åˆè®¡ï¼š" + Format(dblTotSe, g_FormatJe)
+        Me.LblJese.Text = "ä»·ç¨åˆè®¡ï¼š" + Format(dblTotJe + dblTotSe, g_FormatJe)
     End Sub
 
 #End Region

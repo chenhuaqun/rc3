@@ -1,16 +1,16 @@
 Imports System.Data.OleDb
 Public Class FrmOeYpddJqSrz
 
-#Region "¶¨Òå±äÁ¿"
-    '½¨Á¢Êı¾İÊÊÅäÆ÷
+#Region "å®šä¹‰å˜é‡"
+    'å»ºç«‹æ•°æ®é€‚é…å™¨
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     Dim rcDataset As New DataSet
-    '±íÊ¾ÒªÔÚÊı¾İÔ´Ö´ĞĞµÄ SQL ÊÂÎñ
+    'è¡¨ç¤ºè¦åœ¨æ•°æ®æºæ‰§è¡Œçš„ SQL äº‹åŠ¡
     Dim rcOleDbTrans As OleDbTransaction
 #End Region
 
-#Region "³õÊ¼»¯"
+#Region "åˆå§‹åŒ–"
 
     Public Property ParaDataSet() As DataSet
         Get
@@ -22,16 +22,16 @@ Public Class FrmOeYpddJqSrz
     End Property
 
     Private Sub FrmOeYpddJqSrz_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'ÉèÖÃDataGridView
+        'è®¾ç½®DataGridView
         Me.rcDataGridView.AutoGenerateColumns = False
-        '°ó¶¨Êı¾İthe DataGridview to the DataTable.
+        'ç»‘å®šæ•°æ®the DataGridview to the DataTable.
         rcBindingSource.DataSource = rcDataset.Tables("rc_ddnr")
         Me.rcDataGridView.DataSource = rcBindingSource
     End Sub
 
 #End Region
 
-#Region "¿Ø¼ü»Ø³µ¼üµÄ´¦Àí"
+#Region "æ§é”®å›è½¦é”®çš„å¤„ç†"
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
         If (Me.ActiveControl.GetType.Name = "DataGridViewTextBoxEditingControl" Or Me.rcDataGridView.Focused) Then
@@ -49,7 +49,7 @@ Public Class FrmOeYpddJqSrz
 
 #End Region
 
-#Region "DataGridViewµÄÊÂ¼ş"
+#Region "DataGridViewçš„äº‹ä»¶"
 
     Private Sub RcDataGridView_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles rcDataGridView.CellValidating
         If Me.rcDataGridView.CurrentRow.IsNewRow = False Then
@@ -62,10 +62,10 @@ Public Class FrmOeYpddJqSrz
     Private Sub RcDataGridView_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles rcDataGridView.KeyDown
         Select Case e.KeyCode
             Case Keys.C And e.Control
-                '¸´ÖÆ
+                'å¤åˆ¶
                 Clipboard.SetDataObject(Me.rcDataGridView.GetClipboardContent())
             Case Keys.V And e.Control
-                'Õ³Ìù
+                'ç²˜è´´
                 Me.rcDataGridView.CurrentCell.Value = Clipboard.GetText()
                 Me.rcDataGridView.EndEdit()
                 Me.rcBindingSource.EndEdit()
@@ -85,12 +85,12 @@ Public Class FrmOeYpddJqSrz
 
 #End Region
 
-#Region "±£´æÊÂ¼ş"
+#Region "ä¿å­˜äº‹ä»¶"
 
     Private Sub BtnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSave.Click
         Dim i As Integer
         Dim rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-        '¼ì²é·Ç¹¤×÷ÈÕµÄÈÕÆÚ
+        'æ£€æŸ¥éå·¥ä½œæ—¥çš„æ—¥æœŸ
         For i = 0 To rcDataSet.Tables("rc_ddnr").Rows.Count - 1
             If rcDataSet.Tables("rc_ddnr").Rows(i).Item("scjhrq").GetType.ToString <> "System.DBNull" Then
                 Try
@@ -108,20 +108,20 @@ Public Class FrmOeYpddJqSrz
                     rcOleDbDataAdpt.Fill(rcDataSet, "rc_fgzrxx")
                 Catch ex As Exception
                     Try
-                        MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                     Catch ey As OleDbException
-                        MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                     End Try
                 Finally
                     rcOleDbConn.Close()
                 End Try
                 If rcDataSet.Tables("rc_fgzrxx").Rows.Count > 0 Then
-                    MsgBox(rcDataSet.Tables("rc_ddnr").Rows(i).Item("scjhrq") & "¸ÃÈÕÆÚÎª·Ç¹¤×÷ÈÕ¡£" & Chr(13) & "ÇëÏÈĞŞ¸ÄÉú²ú½»ÆÚÔÙ±£´æ¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox(rcDataSet.Tables("rc_ddnr").Rows(i).Item("scjhrq") & "è¯¥æ—¥æœŸä¸ºéå·¥ä½œæ—¥ã€‚" & Chr(13) & "è¯·å…ˆä¿®æ”¹ç”Ÿäº§äº¤æœŸå†ä¿å­˜ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                     Return
                 End If
             End If
         Next
-        '±£´æ
+        'ä¿å­˜
         For i = 0 To rcDataSet.Tables("rc_ddnr").Rows.Count - 1
             If rcDataSet.Tables("rc_ddnr").Rows(i).Item("scjhrq").GetType.ToString <> "System.DBNull" And rcDataSet.Tables("rc_ddnr").Rows(i).Item("bmdm").GetType.ToString <> "System.DBNull" Then
                 Try
@@ -139,22 +139,22 @@ Public Class FrmOeYpddJqSrz
                 Catch ex As Exception
                     Try
                         rcOleDbTrans.Rollback()
-                        MsgBox("³ÌĞò´íÎó¡£" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                     Catch ey As OleDbException
-                        MsgBox("³ÌĞò´íÎó¡£" + ey.Message)
+                        MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message)
                     End Try
                 Finally
                     rcOleDbConn.Close()
                 End Try
             End If
         Next
-        MsgBox("±£´æÍê±Ï¡£", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "ÌáÊ¾ĞÅÏ¢")
+        MsgBox("ä¿å­˜å®Œæ¯•ã€‚", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "æç¤ºä¿¡æ¯")
         Me.Close()
     End Sub
 
 #End Region
 
-#Region "ÍË³öÊÂ¼ş"
+#Region "é€€å‡ºäº‹ä»¶"
 
     Private Sub BtnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
         Me.Close()

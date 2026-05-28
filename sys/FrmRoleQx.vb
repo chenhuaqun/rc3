@@ -2,17 +2,17 @@ Imports System.Data.OleDb
 
 Public Class FrmRoleQx
 
-#Region "¶¨Òå±äÁ¿"
+#Region "å®šä¹‰å˜é‡"
 
-    '½¨Á¢OLEDBÊı¾İÊÊÅäÆ÷¶ÔÏó
+    'å»ºç«‹OLEDBæ•°æ®é€‚é…å™¨å¯¹è±¡
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '½¨Á¢DataSet¶ÔÏó
+    'å»ºç«‹DataSetå¯¹è±¡
     ReadOnly rcDataset As New DataSet
-    '½¨Á¢OleDb´«µİ¶ÔÏó
+    'å»ºç«‹OleDbä¼ é€’å¯¹è±¡
     Dim rcOleDbTrans As OleDbTransaction
-    '½¨Á¢OleDbÃüÁî
+    'å»ºç«‹OleDbå‘½ä»¤
     ReadOnly rcOleDbCommand As OleDbCommand = sysOleDbConn.CreateCommand()
-    '²Ù×÷Ô±ĞÕÃû
+    'æ“ä½œå‘˜å§“å
     Dim strAccount As String = ""
 
 #End Region
@@ -30,7 +30,7 @@ Public Class FrmRoleQx
         Dim i As Integer
 
         Try
-            'È¡RC3µÄrc_menuÊı¾İ()
+            'å–RC3çš„rc_menuæ•°æ®()
             sysOleDbConn.Open()
             rcOleDbCommand.Connection = sysOleDbConn
             rcOleDbCommand.CommandTimeout = 300
@@ -44,7 +44,7 @@ Public Class FrmRoleQx
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "oe_menu")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             sysOleDbConn.Close()
@@ -66,7 +66,7 @@ Public Class FrmRoleQx
             End If
             rcOleDbDataAdpt.Fill(rcDataSet, "oe_menu")
         Catch ex As Exception
-            MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+            MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Return
         Finally
             sysOleDbConn.Close()
@@ -122,7 +122,7 @@ Public Class FrmRoleQx
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         Dim i As Integer
-        'É¾³ıÊı¾İ
+        'åˆ é™¤æ•°æ®
         sysOleDbConn.Open()
         rcOleDbTrans = sysOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
         rcOleDbCommand.Connection = sysOleDbConn
@@ -138,15 +138,15 @@ Public Class FrmRoleQx
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             Catch ey As OleDbException
-                MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
             End Try
             Return
         Finally
             sysOleDbConn.Close()
         End Try
-        'Ìí¼Ó¿â´æ¹ÜÀí¹¦ÄÜÈ¨ÏŞ
+        'æ·»åŠ åº“å­˜ç®¡ç†åŠŸèƒ½æƒé™
         For i = 0 To Me.ListBoxYixuanRC3.Items.Count - 1
             sysOleDbConn.Open()
             rcOleDbTrans = sysOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -164,9 +164,9 @@ Public Class FrmRoleQx
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("³ÌĞò´íÎó¡£" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 Catch ey As OleDbException
-                    MsgBox("³ÌĞò´íÎó¡£" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "ÌáÊ¾ĞÅÏ¢")
+                    MsgBox("ç¨‹åºé”™è¯¯ã€‚" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "æç¤ºä¿¡æ¯")
                 End Try
                 Return
             Finally

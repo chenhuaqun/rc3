@@ -187,7 +187,7 @@ Public Class MenuHelper
             CreateStaticMenuItem("_MnuiAbout", "关于", AddressOf MnuiAbout_Click)
         }
 
-        For Each mnu In staticMenus
+        For Each mnu As ToolStripMenuItem In staticMenus
             If menuStrip.Items.Count > 0 Then
                 CType(menuStrip.Items(menuStrip.Items.Count - 1), ToolStripMenuItem).DropDownItems.Add(mnu)
             Else

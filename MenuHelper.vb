@@ -217,7 +217,7 @@ Public Class MenuHelper
 
     Private Shared Sub DynamicMenuItem_Click(sender As Object, e As EventArgs)
         Dim menuItem = CType(sender, ToolStripMenuItem)
-        Dim parentForm As Form = menuItem.OwnerItem?.Owner?.GetCurrentParentControl()
+        Dim parentForm As Form = TryCast(menuItem.OwnerItem?.Owner?.Parent, Form)
 
         If parentForm Is Nothing Then
             For Each frm As Form In Application.OpenForms

@@ -32,6 +32,12 @@ Partial Class FrmMain
     Friend WithEvents MnuiModPwd As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiZtdl As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiAbout As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents StatusStripMain As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel2 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel3 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel4 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents BackgroundWorkerMain As System.ComponentModel.BackgroundWorker
 
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
@@ -54,6 +60,12 @@ Partial Class FrmMain
         Me.MnuiModPwd = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiZtdl = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStripMain = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.BackgroundWorkerMain = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
         '
         'MenuStripMain
@@ -63,11 +75,44 @@ Partial Class FrmMain
         Me.MenuStripMain.Size = New System.Drawing.Size(1028, 24)
         Me.MenuStripMain.TabIndex = 0
         '
+        'StatusStripMain
+        '
+        Me.StatusStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4})
+        Me.StatusStripMain.Location = New System.Drawing.Point(0, 615)
+        Me.StatusStripMain.Name = "StatusStripMain"
+        Me.StatusStripMain.Size = New System.Drawing.Size(1028, 22)
+        Me.StatusStripMain.TabIndex = 1
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(68, 17)
+        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(68, 17)
+        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
+        '
+        'ToolStripStatusLabel3
+        '
+        Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(68, 17)
+        Me.ToolStripStatusLabel3.Text = "ToolStripStatusLabel3"
+        '
+        'ToolStripStatusLabel4
+        '
+        Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
+        Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(68, 17)
+        Me.ToolStripStatusLabel4.Text = "ToolStripStatusLabel4"
+        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.ClientSize = New System.Drawing.Size(1028, 637)
         Me.Controls.Add(Me.MenuStripMain)
+        Me.Controls.Add(Me.StatusStripMain)
         Me.MainMenuStrip = Me.MenuStripMain
         Me.Name = "FrmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

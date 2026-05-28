@@ -178,6 +178,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NcServiceClient.vb" />
+    <Compile Include="MenuHelper.vb" />
+    <Compile Include="DynamicFormFactory.vb" />
     <Compile Include="oe\FrmOeBmFpHzb.Designer.vb">
       <DependentUpon>FrmOeBmFpHzb.vb</DependentUpon>
     </Compile>

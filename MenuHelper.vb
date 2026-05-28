@@ -187,11 +187,11 @@ Public Class MenuHelper
             CreateStaticMenuItem("_MnuiAbout", "关于", AddressOf MnuiAbout_Click)
         }
 
-        For Each menu In staticMenus
+        For Each mnu In staticMenus
             If menuStrip.Items.Count > 0 Then
-                CType(menuStrip.Items(menuStrip.Items.Count - 1), ToolStripMenuItem).DropDownItems.Add(menu)
+                CType(menuStrip.Items(menuStrip.Items.Count - 1), ToolStripMenuItem).DropDownItems.Add(mnu)
             Else
-                menuStrip.Items.Add(menu)
+                menuStrip.Items.Add(mnu)
             End If
         Next
 
@@ -243,11 +243,11 @@ Public Class MenuHelper
             Return
         End If
 
-        Dim frm As Form = DynamicFormFactory.CreateForm(formName)
-        If frm IsNot Nothing Then
-            frm.MdiParent = parentForm
-            frm.WindowState = FormWindowState.Maximized
-            frm.Show()
+        Dim childForm As Form = DynamicFormFactory.CreateForm(formName)
+        If childForm IsNot Nothing Then
+            childForm.MdiParent = parentForm
+            childForm.WindowState = FormWindowState.Maximized
+            childForm.Show()
         Else
             MessageBox.Show("无法创建表单：" & formName, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If

@@ -46,9 +46,9 @@ Module MdlMenuMigration
     End Function
 
     Private Function ExecuteSqlScript(cmd As OleDbCommand, sqlContent As String) As Boolean
-        Dim statements = sqlContent.Split({";"c}, StringSplitOptions.RemoveEmptyEntries)
-        For Each stmt In statements
-            Dim sql = stmt.Trim()
+        Dim statements As String() = sqlContent.Split({";"c}, StringSplitOptions.RemoveEmptyEntries)
+        For Each stmt As String In statements
+            Dim sql As String = stmt.Trim()
             If String.IsNullOrEmpty(sql) Then Continue For
             If sql.StartsWith("--") Then Continue For
             If sql.ToUpperInvariant() = "COMMIT" Then Continue For

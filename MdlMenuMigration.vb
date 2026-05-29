@@ -424,7 +424,7 @@ Module MdlMenuMigration
         sb.AppendLine("UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 20, mnuiformname = 'FrmYdjz' WHERE mnuiid = '9020' AND mnuiown = 'RC3';")
         sb.AppendLine("UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 21, mnuiformname = 'FrmNewYear' WHERE mnuiid = '9021' AND mnuiown = 'RC3';")
         sb.AppendLine("DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9022';")
-        sb.AppendLine("INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9022','90','结转上年期末库存','结转上年期末库存ToolStripMenuItem','RC3',22,NULL);")
+        sb.AppendLine("INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9022','90','结转上年期末库存','MnuiJzsnkc','RC3',22,NULL);")
         sb.AppendLine("DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9901';")
         sb.AppendLine("INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9901','99','修改密码','MnuiModPwd','RC3',4,'FrmModPwd');")
         sb.AppendLine("DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9902';")

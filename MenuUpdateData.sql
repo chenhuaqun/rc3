@@ -339,7 +339,7 @@ UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 20, mnuiformname = 'FrmY
 UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 21, mnuiformname = 'FrmNewYear' WHERE mnuiid = '9021' AND mnuiown = 'RC3';
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9022';
-INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9022','90','结转上年期末库存','结转上年期末库存ToolStripMenuItem','RC3',22,NULL);
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9022','90','结转上年期末库存','MnuiJzsnkc','RC3',22,NULL);
 
 -- ============================================
 -- 系统服务 (9901-9918) -> 父ID: 99

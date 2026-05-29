@@ -69,6 +69,7 @@ Partial Class FrmOeFpCxLb
         Me.DgtbcShrq = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcJzr = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcCbje = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcKhddh = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,13 +84,13 @@ Partial Class FrmOeFpCxLb
         '
         Me.Label1.Location = New System.Drawing.Point(396, 8)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Size = New System.Drawing.Size(188, 26)
+        Me.Label1.Size = New System.Drawing.Size(186, 23)
         Me.Label1.Text = "产品销售发票列表"
         '
         'DataGridTableStyle1
         '
         Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDjh, Me.DgtbcXh, Me.DgtbcFprq, Me.DgtbcBdelete, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcShkhdm, Me.DgtbcShkhmc, Me.DgtbcYspz, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcCpdm, Me.DgtbcCpmc, Me.DgtbcHth, Me.DgtbcBmdm, Me.DgtbcBmmc, Me.DgtbcSl, Me.DgtbcDw, Me.DgtbcMjsl, Me.DgtbcFzsl, Me.DgtbcFzdw, Me.DgtbcDj, Me.DgtbcHsdj, Me.DgtbcJe, Me.DgtbcShlv, Me.DgtbcSe, Me.DgtbcJese, Me.DgtbcSkje, Me.DgtbcFpmemo, Me.DgtbcDddjh, Me.DgtbcDdxh, Me.DgtbcXsddjh, Me.DgtbcXsdxh, Me.DgtbcXsdDj, Me.DgtbcXsdHsdj, Me.DgtbcXsdJe, Me.DgtbcXsdShlv, Me.DgtbcXsdSe, Me.DgtbcXsdJece, Me.DgtbcXsdSece, Me.DgtbcSrr, Me.DgtbcSrrq, Me.DgtbcShr, Me.DgtbcShrq, Me.DgtbcJzr, Me.DgtbcCbje})
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDjh, Me.DgtbcXh, Me.DgtbcFprq, Me.DgtbcBdelete, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcShkhdm, Me.DgtbcShkhmc, Me.DgtbcYspz, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcCpdm, Me.DgtbcCpmc, Me.DgtbcHth, Me.DgtbcKhddh, Me.DgtbcBmdm, Me.DgtbcBmmc, Me.DgtbcSl, Me.DgtbcDw, Me.DgtbcMjsl, Me.DgtbcFzsl, Me.DgtbcFzdw, Me.DgtbcDj, Me.DgtbcHsdj, Me.DgtbcJe, Me.DgtbcShlv, Me.DgtbcSe, Me.DgtbcJese, Me.DgtbcSkje, Me.DgtbcFpmemo, Me.DgtbcDddjh, Me.DgtbcDdxh, Me.DgtbcXsddjh, Me.DgtbcXsdxh, Me.DgtbcXsdDj, Me.DgtbcXsdHsdj, Me.DgtbcXsdJe, Me.DgtbcXsdShlv, Me.DgtbcXsdSe, Me.DgtbcXsdJece, Me.DgtbcXsdSece, Me.DgtbcSrr, Me.DgtbcSrrq, Me.DgtbcShr, Me.DgtbcShrq, Me.DgtbcJzr, Me.DgtbcCbje})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "fplb"
         '
@@ -217,7 +218,7 @@ Partial Class FrmOeFpCxLb
         Me.DgtbcHth.HeaderText = "订单编码"
         Me.DgtbcHth.MappingName = "hth"
         Me.DgtbcHth.NullText = ""
-        Me.DgtbcHth.Width = 75
+        Me.DgtbcHth.Width = 90
         '
         'DgtbcBmdm
         '
@@ -525,6 +526,15 @@ Partial Class FrmOeFpCxLb
         Me.DgtbcCbje.NullText = ""
         Me.DgtbcCbje.Width = 90
         '
+        'DgtbcKhddh
+        '
+        Me.DgtbcKhddh.Format = ""
+        Me.DgtbcKhddh.FormatInfo = Nothing
+        Me.DgtbcKhddh.HeaderText = "客户订单号"
+        Me.DgtbcKhddh.MappingName = "khddh"
+        Me.DgtbcKhddh.NullText = ""
+        Me.DgtbcKhddh.Width = 90
+        '
         'FrmOeFpCxLb
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -589,4 +599,5 @@ Partial Class FrmOeFpCxLb
     Friend WithEvents DgtbcBmmc As DataGridTextBoxColumn
     Friend WithEvents DgtbcShkhdm As DataGridTextBoxColumn
     Friend WithEvents DgtbcShkhmc As DataGridTextBoxColumn
+    Friend WithEvents DgtbcKhddh As DataGridTextBoxColumn
 End Class

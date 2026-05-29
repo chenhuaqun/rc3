@@ -83,6 +83,7 @@ Partial Class FrmOeFpShz
         Me.ColCpdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColCpmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColHth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColKhddh = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColSl = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColBmdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColBmmc = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -123,17 +124,16 @@ Partial Class FrmOeFpShz
         Me.ToolStripPanel1.Name = "ToolStripPanel1"
         Me.ToolStripPanel1.Orientation = System.Windows.Forms.Orientation.Horizontal
         Me.ToolStripPanel1.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.ToolStripPanel1.Size = New System.Drawing.Size(1476, 32)
+        Me.ToolStripPanel1.Size = New System.Drawing.Size(984, 25)
         '
         'MnuMain
         '
         Me.MnuMain.Dock = System.Windows.Forms.DockStyle.None
-        Me.MnuMain.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.MnuMain.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.MnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiFile, Me.MnuiEdit, Me.MnuiHelp})
         Me.MnuMain.Location = New System.Drawing.Point(0, 0)
         Me.MnuMain.Name = "MnuMain"
-        Me.MnuMain.Size = New System.Drawing.Size(1476, 32)
+        Me.MnuMain.Size = New System.Drawing.Size(984, 25)
         Me.MnuMain.TabIndex = 2
         '
         'MnuiFile
@@ -141,82 +141,82 @@ Partial Class FrmOeFpShz
         Me.MnuiFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiSh, Me.MnuiXs, Me.MnuiQs, Me.MnuiQx, Me.ToolStripSeparator1, Me.MnuiPrevious, Me.MnuiNext, Me.Mnui12, Me.MnuiPageSetup, Me.MnuiPrintView, Me.MnuiPrint, Me.Mnui13, Me.MnuiExit})
         Me.MnuiFile.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiFile.Name = "MnuiFile"
-        Me.MnuiFile.Size = New System.Drawing.Size(84, 28)
+        Me.MnuiFile.Size = New System.Drawing.Size(58, 21)
         Me.MnuiFile.Text = "文件(&F)"
         '
         'MnuiSh
         '
         Me.MnuiSh.Name = "MnuiSh"
-        Me.MnuiSh.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiSh.Size = New System.Drawing.Size(141, 22)
         Me.MnuiSh.Text = "审核(&S)"
         '
         'MnuiXs
         '
         Me.MnuiXs.Name = "MnuiXs"
-        Me.MnuiXs.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiXs.Size = New System.Drawing.Size(141, 22)
         Me.MnuiXs.Text = "消审(&C)"
         '
         'MnuiQs
         '
         Me.MnuiQs.Name = "MnuiQs"
-        Me.MnuiQs.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiQs.Size = New System.Drawing.Size(141, 22)
         Me.MnuiQs.Text = "全审(&Q)"
         '
         'MnuiQx
         '
         Me.MnuiQx.Name = "MnuiQx"
-        Me.MnuiQx.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiQx.Size = New System.Drawing.Size(141, 22)
         Me.MnuiQx.Text = "全消(&Y)"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(204, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(138, 6)
         '
         'MnuiPrevious
         '
         Me.MnuiPrevious.Name = "MnuiPrevious"
-        Me.MnuiPrevious.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiPrevious.Size = New System.Drawing.Size(141, 22)
         Me.MnuiPrevious.Text = "上张(&F)"
         '
         'MnuiNext
         '
         Me.MnuiNext.Name = "MnuiNext"
-        Me.MnuiNext.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiNext.Size = New System.Drawing.Size(141, 22)
         Me.MnuiNext.Text = "下张(&B)"
         '
         'Mnui12
         '
         Me.Mnui12.Name = "Mnui12"
-        Me.Mnui12.Size = New System.Drawing.Size(204, 6)
+        Me.Mnui12.Size = New System.Drawing.Size(138, 6)
         '
         'MnuiPageSetup
         '
         Me.MnuiPageSetup.Name = "MnuiPageSetup"
-        Me.MnuiPageSetup.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiPageSetup.Size = New System.Drawing.Size(141, 22)
         Me.MnuiPageSetup.Text = "页面设置(&U)"
         '
         'MnuiPrintView
         '
         Me.MnuiPrintView.Name = "MnuiPrintView"
-        Me.MnuiPrintView.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiPrintView.Size = New System.Drawing.Size(141, 22)
         Me.MnuiPrintView.Text = "打印预览(&V)"
         '
         'MnuiPrint
         '
         Me.MnuiPrint.Name = "MnuiPrint"
-        Me.MnuiPrint.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiPrint.Size = New System.Drawing.Size(141, 22)
         Me.MnuiPrint.Text = "打印(&P)"
         '
         'Mnui13
         '
         Me.Mnui13.Name = "Mnui13"
-        Me.Mnui13.Size = New System.Drawing.Size(204, 6)
+        Me.Mnui13.Size = New System.Drawing.Size(138, 6)
         '
         'MnuiExit
         '
         Me.MnuiExit.Name = "MnuiExit"
-        Me.MnuiExit.Size = New System.Drawing.Size(207, 34)
+        Me.MnuiExit.Size = New System.Drawing.Size(141, 22)
         Me.MnuiExit.Text = "退出(&X)"
         '
         'MnuiEdit
@@ -224,25 +224,25 @@ Partial Class FrmOeFpShz
         Me.MnuiEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiCut, Me.MnuiCopy, Me.MnuiPaste})
         Me.MnuiEdit.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiEdit.Name = "MnuiEdit"
-        Me.MnuiEdit.Size = New System.Drawing.Size(84, 28)
+        Me.MnuiEdit.Size = New System.Drawing.Size(59, 21)
         Me.MnuiEdit.Text = "编辑(&E)"
         '
         'MnuiCut
         '
         Me.MnuiCut.Name = "MnuiCut"
-        Me.MnuiCut.Size = New System.Drawing.Size(170, 34)
+        Me.MnuiCut.Size = New System.Drawing.Size(116, 22)
         Me.MnuiCut.Text = "剪切(&T)"
         '
         'MnuiCopy
         '
         Me.MnuiCopy.Name = "MnuiCopy"
-        Me.MnuiCopy.Size = New System.Drawing.Size(170, 34)
+        Me.MnuiCopy.Size = New System.Drawing.Size(116, 22)
         Me.MnuiCopy.Text = "复制(&C)"
         '
         'MnuiPaste
         '
         Me.MnuiPaste.Name = "MnuiPaste"
-        Me.MnuiPaste.Size = New System.Drawing.Size(170, 34)
+        Me.MnuiPaste.Size = New System.Drawing.Size(116, 22)
         Me.MnuiPaste.Text = "粘贴(&P)"
         '
         'MnuiHelp
@@ -250,13 +250,13 @@ Partial Class FrmOeFpShz
         Me.MnuiHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiAbout})
         Me.MnuiHelp.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.MnuiHelp.Name = "MnuiHelp"
-        Me.MnuiHelp.Size = New System.Drawing.Size(88, 28)
+        Me.MnuiHelp.Size = New System.Drawing.Size(61, 21)
         Me.MnuiHelp.Text = "帮助(&H)"
         '
         'MnuiAbout
         '
         Me.MnuiAbout.Name = "MnuiAbout"
-        Me.MnuiAbout.Size = New System.Drawing.Size(171, 34)
+        Me.MnuiAbout.Size = New System.Drawing.Size(116, 22)
         Me.MnuiAbout.Text = "关于(&A)"
         '
         'Panel1
@@ -276,61 +276,55 @@ Partial Class FrmOeFpShz
         Me.Panel1.Controls.Add(Me.TxtZydm)
         Me.Panel1.Controls.Add(Me.LblZydm)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 32)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel1.Location = New System.Drawing.Point(0, 25)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1476, 177)
+        Me.Panel1.Size = New System.Drawing.Size(984, 118)
         Me.Panel1.TabIndex = 1
         '
         'TxtYspz
         '
         Me.TxtYspz.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.TxtYspz.Enabled = False
-        Me.TxtYspz.Location = New System.Drawing.Point(680, 134)
-        Me.TxtYspz.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtYspz.Location = New System.Drawing.Point(453, 89)
         Me.TxtYspz.MaxLength = 15
         Me.TxtYspz.Name = "TxtYspz"
-        Me.TxtYspz.Size = New System.Drawing.Size(224, 28)
+        Me.TxtYspz.Size = New System.Drawing.Size(151, 21)
         Me.TxtYspz.TabIndex = 15
         '
         'LblYspz
         '
         Me.LblYspz.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LblYspz.AutoSize = True
-        Me.LblYspz.Location = New System.Drawing.Point(572, 140)
-        Me.LblYspz.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblYspz.Location = New System.Drawing.Point(381, 93)
         Me.LblYspz.Name = "LblYspz"
-        Me.LblYspz.Size = New System.Drawing.Size(98, 18)
+        Me.LblYspz.Size = New System.Drawing.Size(65, 12)
         Me.LblYspz.TabIndex = 14
         Me.LblYspz.Text = "发 票 号："
         '
         'LblKhmc
         '
         Me.LblKhmc.AutoSize = True
-        Me.LblKhmc.Location = New System.Drawing.Point(276, 134)
-        Me.LblKhmc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblKhmc.Location = New System.Drawing.Point(184, 89)
         Me.LblKhmc.Name = "LblKhmc"
-        Me.LblKhmc.Size = New System.Drawing.Size(0, 18)
+        Me.LblKhmc.Size = New System.Drawing.Size(0, 12)
         Me.LblKhmc.TabIndex = 10
         '
         'TxtKhdm
         '
         Me.TxtKhdm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtKhdm.Enabled = False
-        Me.TxtKhdm.Location = New System.Drawing.Point(132, 128)
-        Me.TxtKhdm.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtKhdm.Location = New System.Drawing.Point(88, 85)
         Me.TxtKhdm.MaxLength = 12
         Me.TxtKhdm.Name = "TxtKhdm"
-        Me.TxtKhdm.Size = New System.Drawing.Size(128, 28)
+        Me.TxtKhdm.Size = New System.Drawing.Size(87, 21)
         Me.TxtKhdm.TabIndex = 9
         '
         'LblKhdm
         '
         Me.LblKhdm.AutoSize = True
-        Me.LblKhdm.Location = New System.Drawing.Point(24, 134)
-        Me.LblKhdm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblKhdm.Location = New System.Drawing.Point(16, 89)
         Me.LblKhdm.Name = "LblKhdm"
-        Me.LblKhdm.Size = New System.Drawing.Size(98, 18)
+        Me.LblKhdm.Size = New System.Drawing.Size(65, 12)
         Me.LblKhdm.TabIndex = 8
         Me.LblKhdm.Text = "客户编码："
         '
@@ -338,20 +332,18 @@ Partial Class FrmOeFpShz
         '
         Me.LblZymc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblZymc.AutoSize = True
-        Me.LblZymc.Location = New System.Drawing.Point(1348, 90)
-        Me.LblZymc.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblZymc.Location = New System.Drawing.Point(899, 60)
         Me.LblZymc.Name = "LblZymc"
-        Me.LblZymc.Size = New System.Drawing.Size(0, 18)
+        Me.LblZymc.Size = New System.Drawing.Size(0, 12)
         Me.LblZymc.TabIndex = 13
         '
         'LblFprq
         '
         Me.LblFprq.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LblFprq.AutoSize = True
-        Me.LblFprq.Location = New System.Drawing.Point(572, 90)
-        Me.LblFprq.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblFprq.Location = New System.Drawing.Point(381, 60)
         Me.LblFprq.Name = "LblFprq"
-        Me.LblFprq.Size = New System.Drawing.Size(98, 18)
+        Me.LblFprq.Size = New System.Drawing.Size(65, 12)
         Me.LblFprq.TabIndex = 4
         Me.LblFprq.Text = "发票日期："
         '
@@ -359,30 +351,27 @@ Partial Class FrmOeFpShz
         '
         Me.DtpFprq.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.DtpFprq.Enabled = False
-        Me.DtpFprq.Location = New System.Drawing.Point(680, 84)
-        Me.DtpFprq.Margin = New System.Windows.Forms.Padding(4)
+        Me.DtpFprq.Location = New System.Drawing.Point(453, 56)
         Me.DtpFprq.Name = "DtpFprq"
-        Me.DtpFprq.Size = New System.Drawing.Size(224, 28)
+        Me.DtpFprq.Size = New System.Drawing.Size(151, 21)
         Me.DtpFprq.TabIndex = 5
         '
         'TxtDjh
         '
         Me.TxtDjh.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtDjh.Enabled = False
-        Me.TxtDjh.Location = New System.Drawing.Point(132, 84)
-        Me.TxtDjh.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtDjh.Location = New System.Drawing.Point(88, 56)
         Me.TxtDjh.MaxLength = 15
         Me.TxtDjh.Name = "TxtDjh"
-        Me.TxtDjh.Size = New System.Drawing.Size(154, 28)
+        Me.TxtDjh.Size = New System.Drawing.Size(104, 21)
         Me.TxtDjh.TabIndex = 3
         '
         'LblDjh
         '
         Me.LblDjh.AutoSize = True
-        Me.LblDjh.Location = New System.Drawing.Point(24, 90)
-        Me.LblDjh.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblDjh.Location = New System.Drawing.Point(16, 60)
         Me.LblDjh.Name = "LblDjh"
-        Me.LblDjh.Size = New System.Drawing.Size(98, 18)
+        Me.LblDjh.Size = New System.Drawing.Size(65, 12)
         Me.LblDjh.TabIndex = 1
         Me.LblDjh.Text = "单 据 号："
         '
@@ -392,9 +381,8 @@ Partial Class FrmOeFpShz
         Me.Panel3.Controls.Add(Me.LblDd)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1476, 72)
+        Me.Panel3.Size = New System.Drawing.Size(984, 48)
         Me.Panel3.TabIndex = 0
         '
         'LblBdelete
@@ -403,10 +391,9 @@ Partial Class FrmOeFpShz
         Me.LblBdelete.AutoSize = True
         Me.LblBdelete.Font = New System.Drawing.Font("黑体", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblBdelete.ForeColor = System.Drawing.Color.Red
-        Me.LblBdelete.Location = New System.Drawing.Point(1257, 14)
-        Me.LblBdelete.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblBdelete.Location = New System.Drawing.Point(838, 9)
         Me.LblBdelete.Name = "LblBdelete"
-        Me.LblBdelete.Size = New System.Drawing.Size(89, 36)
+        Me.LblBdelete.Size = New System.Drawing.Size(60, 24)
         Me.LblBdelete.TabIndex = 3
         Me.LblBdelete.Text = "作废"
         '
@@ -416,10 +403,9 @@ Partial Class FrmOeFpShz
         Me.LblDd.AutoSize = True
         Me.LblDd.Font = New System.Drawing.Font("楷体", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblDd.ForeColor = System.Drawing.Color.SteelBlue
-        Me.LblDd.Location = New System.Drawing.Point(620, 14)
-        Me.LblDd.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblDd.Location = New System.Drawing.Point(413, 9)
         Me.LblDd.Name = "LblDd"
-        Me.LblDd.Size = New System.Drawing.Size(237, 36)
+        Me.LblDd.Size = New System.Drawing.Size(160, 24)
         Me.LblDd.TabIndex = 0
         Me.LblDd.Text = "产品销售发票"
         '
@@ -427,21 +413,19 @@ Partial Class FrmOeFpShz
         '
         Me.TxtZydm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtZydm.Enabled = False
-        Me.TxtZydm.Location = New System.Drawing.Point(1206, 84)
-        Me.TxtZydm.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtZydm.Location = New System.Drawing.Point(804, 56)
         Me.TxtZydm.MaxLength = 15
         Me.TxtZydm.Name = "TxtZydm"
-        Me.TxtZydm.Size = New System.Drawing.Size(128, 28)
+        Me.TxtZydm.Size = New System.Drawing.Size(87, 21)
         Me.TxtZydm.TabIndex = 12
         '
         'LblZydm
         '
         Me.LblZydm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblZydm.AutoSize = True
-        Me.LblZydm.Location = New System.Drawing.Point(1098, 90)
-        Me.LblZydm.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblZydm.Location = New System.Drawing.Point(732, 60)
         Me.LblZydm.Name = "LblZydm"
-        Me.LblZydm.Size = New System.Drawing.Size(98, 18)
+        Me.LblZydm.Size = New System.Drawing.Size(65, 12)
         Me.LblZydm.TabIndex = 11
         Me.LblZydm.Text = "业 务 员："
         '
@@ -461,10 +445,9 @@ Partial Class FrmOeFpShz
         Me.Panel2.Controls.Add(Me.BtnQx)
         Me.Panel2.Controls.Add(Me.BtnXs)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 694)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel2.Location = New System.Drawing.Point(0, 462)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1476, 148)
+        Me.Panel2.Size = New System.Drawing.Size(984, 99)
         Me.Panel2.TabIndex = 5
         '
         'Panel4
@@ -476,19 +459,17 @@ Partial Class FrmOeFpShz
         Me.Panel4.Controls.Add(Me.LblSl)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1476, 60)
+        Me.Panel4.Size = New System.Drawing.Size(984, 40)
         Me.Panel4.TabIndex = 39
         '
         'LblJese
         '
         Me.LblJese.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblJese.AutoSize = True
-        Me.LblJese.Location = New System.Drawing.Point(1197, 16)
-        Me.LblJese.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblJese.Location = New System.Drawing.Point(798, 11)
         Me.LblJese.Name = "LblJese"
-        Me.LblJese.Size = New System.Drawing.Size(98, 18)
+        Me.LblJese.Size = New System.Drawing.Size(65, 12)
         Me.LblJese.TabIndex = 15
         Me.LblJese.Text = "价税合计："
         '
@@ -496,10 +477,9 @@ Partial Class FrmOeFpShz
         '
         Me.LblSe.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblSe.AutoSize = True
-        Me.LblSe.Location = New System.Drawing.Point(927, 16)
-        Me.LblSe.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblSe.Location = New System.Drawing.Point(618, 11)
         Me.LblSe.Name = "LblSe"
-        Me.LblSe.Size = New System.Drawing.Size(98, 18)
+        Me.LblSe.Size = New System.Drawing.Size(65, 12)
         Me.LblSe.TabIndex = 14
         Me.LblSe.Text = "税额合计："
         '
@@ -507,10 +487,9 @@ Partial Class FrmOeFpShz
         '
         Me.LblFzsl.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblFzsl.AutoSize = True
-        Me.LblFzsl.Location = New System.Drawing.Point(369, 16)
-        Me.LblFzsl.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblFzsl.Location = New System.Drawing.Point(246, 11)
         Me.LblFzsl.Name = "LblFzsl"
-        Me.LblFzsl.Size = New System.Drawing.Size(116, 18)
+        Me.LblFzsl.Size = New System.Drawing.Size(77, 12)
         Me.LblFzsl.TabIndex = 13
         Me.LblFzsl.Text = "辅数量合计："
         '
@@ -518,10 +497,9 @@ Partial Class FrmOeFpShz
         '
         Me.LblJe.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblJe.AutoSize = True
-        Me.LblJe.Location = New System.Drawing.Point(657, 16)
-        Me.LblJe.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblJe.Location = New System.Drawing.Point(438, 11)
         Me.LblJe.Name = "LblJe"
-        Me.LblJe.Size = New System.Drawing.Size(98, 18)
+        Me.LblJe.Size = New System.Drawing.Size(65, 12)
         Me.LblJe.TabIndex = 11
         Me.LblJe.Text = "金额合计："
         '
@@ -529,10 +507,9 @@ Partial Class FrmOeFpShz
         '
         Me.LblSl.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblSl.AutoSize = True
-        Me.LblSl.Location = New System.Drawing.Point(99, 16)
-        Me.LblSl.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblSl.Location = New System.Drawing.Point(66, 11)
         Me.LblSl.Name = "LblSl"
-        Me.LblSl.Size = New System.Drawing.Size(98, 18)
+        Me.LblSl.Size = New System.Drawing.Size(65, 12)
         Me.LblSl.TabIndex = 10
         Me.LblSl.Text = "数量合计："
         '
@@ -540,10 +517,9 @@ Partial Class FrmOeFpShz
         '
         Me.LblJzr.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LblJzr.AutoSize = True
-        Me.LblJzr.Location = New System.Drawing.Point(984, 64)
-        Me.LblJzr.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblJzr.Location = New System.Drawing.Point(656, 43)
         Me.LblJzr.Name = "LblJzr"
-        Me.LblJzr.Size = New System.Drawing.Size(62, 18)
+        Me.LblJzr.Size = New System.Drawing.Size(41, 12)
         Me.LblJzr.TabIndex = 38
         Me.LblJzr.Text = "记账："
         '
@@ -551,10 +527,9 @@ Partial Class FrmOeFpShz
         '
         Me.LblShr.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LblShr.AutoSize = True
-        Me.LblShr.Location = New System.Drawing.Point(666, 64)
-        Me.LblShr.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblShr.Location = New System.Drawing.Point(444, 43)
         Me.LblShr.Name = "LblShr"
-        Me.LblShr.Size = New System.Drawing.Size(62, 18)
+        Me.LblShr.Size = New System.Drawing.Size(41, 12)
         Me.LblShr.TabIndex = 37
         Me.LblShr.Text = "审核："
         '
@@ -562,100 +537,90 @@ Partial Class FrmOeFpShz
         '
         Me.LblSrr.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LblSrr.AutoSize = True
-        Me.LblSrr.Location = New System.Drawing.Point(348, 64)
-        Me.LblSrr.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LblSrr.Location = New System.Drawing.Point(232, 43)
         Me.LblSrr.Name = "LblSrr"
-        Me.LblSrr.Size = New System.Drawing.Size(62, 18)
+        Me.LblSrr.Size = New System.Drawing.Size(41, 12)
         Me.LblSrr.TabIndex = 36
         Me.LblSrr.Text = "输入："
         '
         'BtnPrevious
         '
         Me.BtnPrevious.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnPrevious.Location = New System.Drawing.Point(680, 96)
-        Me.BtnPrevious.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnPrevious.Location = New System.Drawing.Point(453, 64)
         Me.BtnPrevious.Name = "BtnPrevious"
-        Me.BtnPrevious.Size = New System.Drawing.Size(112, 34)
+        Me.BtnPrevious.Size = New System.Drawing.Size(75, 23)
         Me.BtnPrevious.TabIndex = 31
         Me.BtnPrevious.Text = "上张(&F)"
         '
         'BtnNext
         '
         Me.BtnNext.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnNext.Location = New System.Drawing.Point(800, 96)
-        Me.BtnNext.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnNext.Location = New System.Drawing.Point(533, 64)
         Me.BtnNext.Name = "BtnNext"
-        Me.BtnNext.Size = New System.Drawing.Size(112, 34)
+        Me.BtnNext.Size = New System.Drawing.Size(75, 23)
         Me.BtnNext.TabIndex = 32
         Me.BtnNext.Text = "下张(&B)"
         '
         'BtnExit
         '
         Me.BtnExit.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnExit.Location = New System.Drawing.Point(1160, 96)
-        Me.BtnExit.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnExit.Location = New System.Drawing.Point(773, 64)
         Me.BtnExit.Name = "BtnExit"
-        Me.BtnExit.Size = New System.Drawing.Size(112, 34)
+        Me.BtnExit.Size = New System.Drawing.Size(75, 23)
         Me.BtnExit.TabIndex = 35
         Me.BtnExit.Text = "退出(&X)"
         '
         'BtnSh
         '
         Me.BtnSh.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnSh.Location = New System.Drawing.Point(200, 96)
-        Me.BtnSh.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnSh.Location = New System.Drawing.Point(133, 64)
         Me.BtnSh.Name = "BtnSh"
-        Me.BtnSh.Size = New System.Drawing.Size(112, 34)
+        Me.BtnSh.Size = New System.Drawing.Size(75, 23)
         Me.BtnSh.TabIndex = 27
         Me.BtnSh.Text = "审核(&S)"
         '
         'BtnPrint
         '
         Me.BtnPrint.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnPrint.Location = New System.Drawing.Point(920, 96)
-        Me.BtnPrint.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnPrint.Location = New System.Drawing.Point(613, 64)
         Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New System.Drawing.Size(112, 34)
+        Me.BtnPrint.Size = New System.Drawing.Size(75, 23)
         Me.BtnPrint.TabIndex = 33
         Me.BtnPrint.Text = "打印(&P)"
         '
         'BtnHelp
         '
         Me.BtnHelp.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnHelp.Location = New System.Drawing.Point(1040, 96)
-        Me.BtnHelp.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnHelp.Location = New System.Drawing.Point(693, 64)
         Me.BtnHelp.Name = "BtnHelp"
-        Me.BtnHelp.Size = New System.Drawing.Size(112, 34)
+        Me.BtnHelp.Size = New System.Drawing.Size(75, 23)
         Me.BtnHelp.TabIndex = 34
         Me.BtnHelp.Text = "帮助(&H)"
         '
         'BtnQs
         '
         Me.BtnQs.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnQs.Location = New System.Drawing.Point(440, 96)
-        Me.BtnQs.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnQs.Location = New System.Drawing.Point(293, 64)
         Me.BtnQs.Name = "BtnQs"
-        Me.BtnQs.Size = New System.Drawing.Size(112, 34)
+        Me.BtnQs.Size = New System.Drawing.Size(75, 23)
         Me.BtnQs.TabIndex = 29
         Me.BtnQs.Text = "全审(&Q)"
         '
         'BtnQx
         '
         Me.BtnQx.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnQx.Location = New System.Drawing.Point(560, 96)
-        Me.BtnQx.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnQx.Location = New System.Drawing.Point(373, 64)
         Me.BtnQx.Name = "BtnQx"
-        Me.BtnQx.Size = New System.Drawing.Size(112, 34)
+        Me.BtnQx.Size = New System.Drawing.Size(75, 23)
         Me.BtnQx.TabIndex = 30
         Me.BtnQx.Text = "全消(&Y)"
         '
         'BtnXs
         '
         Me.BtnXs.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.BtnXs.Location = New System.Drawing.Point(320, 96)
-        Me.BtnXs.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnXs.Location = New System.Drawing.Point(213, 64)
         Me.BtnXs.Name = "BtnXs"
-        Me.BtnXs.Size = New System.Drawing.Size(112, 34)
+        Me.BtnXs.Size = New System.Drawing.Size(75, 23)
         Me.BtnXs.TabIndex = 28
         Me.BtnXs.Text = "消审(&C)"
         '
@@ -663,15 +628,14 @@ Partial Class FrmOeFpShz
         '
         Me.rcDataGridView.AllowUserToAddRows = False
         Me.rcDataGridView.ColumnHeadersHeight = 30
-        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColCpdm, Me.ColCpmc, Me.ColHth, Me.ColSl, Me.ColBmdm, Me.ColBmmc, Me.ColDw, Me.ColMjsl, Me.ColFzsl, Me.ColFzdw, Me.ColDj, Me.ColHsdj, Me.ColJe, Me.ColShlv, Me.ColSe, Me.ColJese, Me.ColFpmemo, Me.ColDddjh, Me.ColDdxh, Me.ColXsdDjh, Me.ColXsdXh, Me.ColXsdDj, Me.ColXsdHsdj, Me.ColXsdJe, Me.ColXsdShlv, Me.ColXsdSe})
+        Me.rcDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColCpdm, Me.ColCpmc, Me.ColHth, Me.ColKhddh, Me.ColSl, Me.ColBmdm, Me.ColBmmc, Me.ColDw, Me.ColMjsl, Me.ColFzsl, Me.ColFzdw, Me.ColDj, Me.ColHsdj, Me.ColJe, Me.ColShlv, Me.ColSe, Me.ColJese, Me.ColFpmemo, Me.ColDddjh, Me.ColDdxh, Me.ColXsdDjh, Me.ColXsdXh, Me.ColXsdDj, Me.ColXsdHsdj, Me.ColXsdJe, Me.ColXsdShlv, Me.ColXsdSe})
         Me.rcDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.rcDataGridView.Location = New System.Drawing.Point(0, 209)
-        Me.rcDataGridView.Margin = New System.Windows.Forms.Padding(4)
+        Me.rcDataGridView.Location = New System.Drawing.Point(0, 143)
         Me.rcDataGridView.Name = "rcDataGridView"
         Me.rcDataGridView.ReadOnly = True
         Me.rcDataGridView.RowHeadersWidth = 62
         Me.rcDataGridView.RowTemplate.Height = 23
-        Me.rcDataGridView.Size = New System.Drawing.Size(1476, 485)
+        Me.rcDataGridView.Size = New System.Drawing.Size(984, 319)
         Me.rcDataGridView.TabIndex = 6
         '
         'ColCpdm
@@ -703,6 +667,15 @@ Partial Class FrmOeFpShz
         Me.ColHth.ReadOnly = True
         Me.ColHth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ColHth.Width = 150
+        '
+        'ColKhddh
+        '
+        Me.ColKhddh.DataPropertyName = "khddh"
+        Me.ColKhddh.HeaderText = "客户订单号"
+        Me.ColKhddh.Name = "ColKhddh"
+        Me.ColKhddh.ReadOnly = True
+        Me.ColKhddh.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ColKhddh.Width = 150
         '
         'ColSl
         '
@@ -952,14 +925,13 @@ Partial Class FrmOeFpShz
         '
         'FrmOeFpShz
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1476, 842)
+        Me.ClientSize = New System.Drawing.Size(984, 561)
         Me.Controls.Add(Me.rcDataGridView)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStripPanel1)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "FrmOeFpShz"
         Me.Text = "产品销售发票审核"
         Me.ToolStripPanel1.ResumeLayout(False)
@@ -1040,6 +1012,7 @@ Partial Class FrmOeFpShz
     Friend WithEvents ColCpdm As DataGridViewTextBoxColumn
     Friend WithEvents ColCpmc As DataGridViewTextBoxColumn
     Friend WithEvents ColHth As DataGridViewTextBoxColumn
+    Friend WithEvents ColKhddh As DataGridViewTextBoxColumn
     Friend WithEvents ColSl As DataGridViewTextBoxColumn
     Friend WithEvents ColBmdm As DataGridViewTextBoxColumn
     Friend WithEvents ColBmmc As DataGridViewTextBoxColumn

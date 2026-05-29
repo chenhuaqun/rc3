@@ -2153,6 +2153,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MdlMain.vb" />
+    <Compile Include="MdlMenuMigration.vb" />
     <Compile Include="MdlReadPhkcsl.vb" />
     <Compile Include="MdlReadJldwXsws.vb" />
     <Compile Include="MdlReadKcsl.vb" />

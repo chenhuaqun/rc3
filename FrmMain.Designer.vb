@@ -37,6 +37,9 @@ Partial Class FrmMain
     Friend WithEvents ToolStripStatusLabel2 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel3 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel4 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripStatusSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripStatusSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents BackgroundWorkerMain As System.ComponentModel.BackgroundWorker
 
     <System.Diagnostics.DebuggerStepThrough()>
@@ -65,6 +68,9 @@ Partial Class FrmMain
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel4 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripStatusSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripStatusSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackgroundWorkerMain = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
         '
@@ -77,7 +83,10 @@ Partial Class FrmMain
         '
         'StatusStripMain
         '
-        Me.StatusStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusLabel2, Me.ToolStripStatusLabel3, Me.ToolStripStatusLabel4})
+        Me.ToolStripStatusSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripStatusSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripStatusSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.StatusStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusSeparator1, Me.ToolStripStatusLabel2, Me.ToolStripStatusSeparator2, Me.ToolStripStatusLabel3, Me.ToolStripStatusSeparator3, Me.ToolStripStatusLabel4})
         Me.StatusStripMain.Location = New System.Drawing.Point(0, 615)
         Me.StatusStripMain.Name = "StatusStripMain"
         Me.StatusStripMain.Size = New System.Drawing.Size(1028, 22)
@@ -85,37 +94,45 @@ Partial Class FrmMain
         '
         'ToolStripStatusLabel1
         '
+        Me.ToolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(68, 17)
-        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Spring = True
+        Me.ToolStripStatusLabel1.Text = "欢迎使用!"
+        Me.ToolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'ToolStripStatusLabel2
         '
+        Me.ToolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(68, 17)
-        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(48, 17)
+        Me.ToolStripStatusLabel2.Text = "单位："
         '
         'ToolStripStatusLabel3
         '
+        Me.ToolStripStatusLabel3.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.ToolStripStatusLabel3.Name = "ToolStripStatusLabel3"
-        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(68, 17)
-        Me.ToolStripStatusLabel3.Text = "ToolStripStatusLabel3"
+        Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(60, 17)
+        Me.ToolStripStatusLabel3.Text = "操作员："
         '
         'ToolStripStatusLabel4
         '
         Me.ToolStripStatusLabel4.Name = "ToolStripStatusLabel4"
         Me.ToolStripStatusLabel4.Size = New System.Drawing.Size(68, 17)
-        Me.ToolStripStatusLabel4.Text = "ToolStripStatusLabel4"
+        Me.ToolStripStatusLabel4.Text = "登陆日期："
         '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.ClientSize = New System.Drawing.Size(1028, 637)
+        Me.IsMdiContainer = True
+        Me.Text = "杭州锐创软件有限公司（RC3供应链）"
         Me.Controls.Add(Me.MenuStripMain)
         Me.Controls.Add(Me.StatusStripMain)
         Me.MainMenuStrip = Me.MenuStripMain
         Me.Name = "FrmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
         Me.PerformLayout()
     End Sub

@@ -243,6 +243,32 @@ Public Class MenuHelper
             Return
         End If
 
+        If formName = "FrmCheckData" Then
+            Dim rcFrm As New FrmCheckData
+            rcFrm.ShowDialog()
+            Return
+        End If
+
+        If formName = "FrmUserLogin" Then
+            Dim rcFrm As New FrmUserLogin
+            If rcFrm.ShowDialog() = DialogResult.OK Then
+                Dim mainForm As FrmMain = GetMainForm()
+                If mainForm IsNot Nothing Then
+                    BuildMenu(mainForm.MenuStripMain, g_User_Account)
+                End If
+            End If
+            Return
+        End If
+
+        If formName = "FrmModPwd" Then
+            Dim rcFrm As New models.FrmModPwd
+            rcFrm.paraOleDbConn = sysOleDbConn
+            rcFrm.paraUser_Account = g_User_Account
+            rcFrm.MdiParent = parentForm
+            rcFrm.Show()
+            Return
+        End If
+
         Dim childForm As Form = DynamicFormFactory.CreateForm(formName)
         If childForm IsNot Nothing Then
             childForm.MdiParent = parentForm

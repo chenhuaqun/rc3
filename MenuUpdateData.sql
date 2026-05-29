@@ -338,4 +338,49 @@ UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 19, mnuiformname = 'FrmP
 UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 20, mnuiformname = 'FrmYdjz' WHERE mnuiid = '9020' AND mnuiown = 'RC3';
 UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 21, mnuiformname = 'FrmNewYear' WHERE mnuiid = '9021' AND mnuiown = 'RC3';
 
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9022';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9022','90','结转上年期末库存','结转上年期末库存ToolStripMenuItem','RC3',22,NULL);
+
+-- ============================================
+-- 系统服务 (9901-9918) -> 父ID: 99
+-- ============================================
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9901';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9901','99','修改密码','MnuiModPwd','RC3',4,'FrmModPwd');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9902';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9902','99','重新注册','MnuiZtdl','RC3',5,'FrmUserLogin');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9903';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9903','99','在线升级','MnuiUpdate','RC3',6,'FrmUpdate');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9904';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9904','99','上传文件','MnuiUploadFile','RC3',7,'FrmUploadFile');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9905';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9905','99','升级RC3数据','MnuiUpdateDB','RC3',8,'FrmUpdateDB');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9906';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9906','99','导入用友NC数据','MnuiImpNC','RC3',9,'FrmImpNC');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9907';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9907','99','导入用友U8数据','MnuiImpU8','RC3',10,'FrmImpU8');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9908';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9908','99','物料编码更改与合并','MnuiCpdmGg','RC3',11,'FrmCpdmGg');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9909';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9909','99','客户编码更改与合并','MnuiKhdmGg','RC3',12,'FrmKhdmGg');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9910';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9910','99','供应商编码更改与合并','MnuiCsdmGg','RC3',13,'FrmCsdmGg');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9911';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9911','99','职员编码更改与合并','MnuiZydmGg','RC3',14,'FrmZydmGg');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9912';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9912','99','重新汇总库存总账','MnuiRedoCpyeHz','RC3',15,'FrmRedoCpyeHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9913';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9913','99','重新汇总发出商品总账','MnuiRedoFcspyeHz','RC3',16,'FrmRedoFcspyeHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9914';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9914','99','物料数据修复','MnuiCpRepair','RC3',17,'FrmCpRepair');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9915';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9915','99','检测与升级数据库','MnuiCheckData','RC3',18,'FrmCheckData');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9916';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9916','99','升级数据','MnuiUpgrateData','RC3',19,'FrmUpgrateData');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9917';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9917','99','注册与激活(&R)','MnuiRegister','RC3',20,'FrmRegister');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9918';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9918','99','关于(&A)','MnuiAbout','RC3',21,'FrmAbout');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9919';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9919','99','TEST','TESTToolStripMenuItem','RC3',22,'Form3');
+
 COMMIT;

@@ -168,23 +168,8 @@ Public Class MenuHelper
         End If
 
         Dim staticMenus As ToolStripMenuItem() = {
-            CreateStaticMenuItem("_MnuiRegister", "注册", AddressOf MnuiRegister_Click),
-            CreateStaticMenuItem("_MnuiCheckData", "检测系统数据库", AddressOf MnuiCheckData_Click),
-            CreateStaticMenuItem("_MnuiUpdateDB", "升级RC3数据", AddressOf MnuiUpdateDB_Click),
-            CreateStaticMenuItem("_MnuiImpNC", "导入用友NC数据", AddressOf MnuiImpNC_Click),
-            CreateStaticMenuItem("_MnuiImpU8", "导入用友U8数据", AddressOf MnuiImpU8_Click),
-            CreateStaticMenuItem("_MnuiCpdmGg", "物料编码更改与合并", AddressOf MnuiCpdmGg_Click),
-            CreateStaticMenuItem("_MnuiKhdmGg", "客户编码更改与合并", AddressOf MnuiKhdmGg_Click),
-            CreateStaticMenuItem("_MnuiCsdmGg", "供应商编码更改与合并", AddressOf MnuiCsdmGg_Click),
-            CreateStaticMenuItem("_MnuiZydmGg", "职员编码更改与合并", AddressOf MnuiZydmGg_Click),
-            CreateStaticMenuItem("_MnuiRedoCpyeHz", "重新汇总库存总帐", AddressOf MnuiRedoCpyeHz_Click),
-            CreateStaticMenuItem("_MnuiRedoFcspyeHz", "重新汇总发出商品总账", AddressOf MnuiRedoFcspyeHz_Click),
-            CreateStaticMenuItem("_MnuiCpRepair", "物料数据修复", AddressOf MnuiCpRepair_Click),
-            CreateStaticMenuItem("_MnuiUpdate", "在线升级", AddressOf MnuiUpdate_Click),
-            CreateStaticMenuItem("_MnuiUploadFile", "上传文件", AddressOf MnuiUploadFile_Click),
-            CreateStaticMenuItem("_MnuiModPwd", "修改密码", AddressOf MnuiModPwd_Click),
             CreateStaticMenuItem("_MnuiZtdl", "重新登录", AddressOf MnuiZtdl_Click),
-            CreateStaticMenuItem("_MnuiAbout", "关于", AddressOf MnuiAbout_Click)
+            CreateStaticMenuItem("_MnuiExit", "退出", AddressOf ExitMenuItem_Click)
         }
 
         For Each staticMenu As ToolStripMenuItem In staticMenus
@@ -194,17 +179,6 @@ Public Class MenuHelper
                 menuStrip.Items.Add(staticMenu)
             End If
         Next
-
-        Dim exitItem As New ToolStripMenuItem()
-        exitItem.Name = "_MnuiExit"
-        exitItem.Text = "退出系统"
-        AddHandler exitItem.Click, AddressOf ExitMenuItem_Click
-
-        If menuStrip.Items.Count > 0 Then
-            CType(menuStrip.Items(menuStrip.Items.Count - 1), ToolStripMenuItem).DropDownItems.Add(exitItem)
-        Else
-            menuStrip.Items.Add(exitItem)
-        End If
     End Sub
 
     Private Shared Function CreateStaticMenuItem(name As String, text As String, clickHandler As EventHandler) As ToolStripMenuItem
@@ -279,27 +253,6 @@ Public Class MenuHelper
         End If
     End Sub
 
-    Private Shared Sub AddExitMenuItem(menuStrip As MenuStrip)
-        If menuStrip.Items.Count > 0 Then
-            Dim lastItem = menuStrip.Items(menuStrip.Items.Count - 1)
-            If TypeOf lastItem Is ToolStripMenuItem Then
-                Dim lastMenu = CType(lastItem, ToolStripMenuItem)
-                lastMenu.DropDownItems.Add(New ToolStripSeparator())
-            End If
-        End If
-
-        Dim exitItem As New ToolStripMenuItem()
-        exitItem.Name = "_MnuiExit"
-        exitItem.Text = "退出系统"
-        AddHandler exitItem.Click, AddressOf ExitMenuItem_Click
-
-        If menuStrip.Items.Count > 0 Then
-            CType(menuStrip.Items(menuStrip.Items.Count - 1), ToolStripMenuItem).DropDownItems.Add(exitItem)
-        Else
-            menuStrip.Items.Add(exitItem)
-        End If
-    End Sub
-
     Private Shared Sub ExitMenuItem_Click(sender As Object, e As EventArgs)
         For Each frm As Form In Application.OpenForms
             If TypeOf frm Is FrmMain Then
@@ -307,97 +260,6 @@ Public Class MenuHelper
                 Exit For
             End If
         Next
-    End Sub
-
-    Public Shared Sub MnuiRegister_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmRegister
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiCheckData_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmCheckData
-        rcFrm.ShowDialog()
-    End Sub
-
-    Public Shared Sub MnuiUpdateDB_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmUpdateDB
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiImpNC_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmImpNC
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiImpU8_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmImpU8
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiCpdmGg_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmCpdmGg
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiKhdmGg_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmKhdmGg
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiCsdmGg_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmCsdmGg
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiZydmGg_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmZydmGg
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiRedoCpyeHz_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmRedoCpyeHz
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiRedoFcspyeHz_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmRedoFcspyeHz
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiCpRepair_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmCpRepair
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiUpdate_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmUpdate
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiUploadFile_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmUploadFile
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
-    End Sub
-
-    Public Shared Sub MnuiModPwd_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New models.FrmModPwd
-        rcFrm.paraOleDbConn = sysOleDbConn
-        rcFrm.paraUser_Account = g_User_Account
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
     End Sub
 
     Public Shared Sub MnuiZtdl_Click(sender As Object, e As EventArgs)
@@ -410,12 +272,6 @@ Public Class MenuHelper
         If mainForm IsNot Nothing Then
             MenuHelper.BuildMenu(mainForm.MenuStripMain, g_User_Account)
         End If
-    End Sub
-
-    Public Shared Sub MnuiAbout_Click(sender As Object, e As EventArgs)
-        Dim rcFrm As New FrmAbout
-        rcFrm.MdiParent = GetMainForm()
-        rcFrm.Show()
     End Sub
 
     Private Shared Function GetMainForm() As FrmMain

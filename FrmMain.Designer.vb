@@ -15,23 +15,7 @@ Partial Class FrmMain
 
     Private components As System.ComponentModel.IContainer
     Friend WithEvents MenuStripMain As System.Windows.Forms.MenuStrip
-    Friend WithEvents MnuiRegister As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiCheckData As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiUpdateDB As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiImpNC As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiImpU8 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiCpdmGg As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiKhdmGg As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiCsdmGg As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiZydmGg As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiRedoCpyeHz As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiRedoFcspyeHz As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiCpRepair As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiUpdate As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiUploadFile As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiModPwd As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiZtdl As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuiAbout As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StatusStripMain As System.Windows.Forms.StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel2 As System.Windows.Forms.ToolStripStatusLabel
@@ -46,23 +30,7 @@ Partial Class FrmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.MenuStripMain = New System.Windows.Forms.MenuStrip()
-        Me.MnuiRegister = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiCheckData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiUpdateDB = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiImpNC = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiImpU8 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiCpdmGg = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiKhdmGg = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiCsdmGg = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiZydmGg = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiRedoCpyeHz = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiRedoFcspyeHz = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiCpRepair = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiUpdate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiUploadFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiModPwd = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiZtdl = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStripMain = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()

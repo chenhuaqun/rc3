@@ -115,6 +115,7 @@ Module MdlMain
         Finally
             sysOleDbConn.Close()
         End Try
+        MdlMenuMigration.RunMenuMigration()
         Application.EnableVisualStyles()
         Application.SetCompatibleTextRenderingDefault(False)
         '操作员登陆

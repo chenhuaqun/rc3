@@ -7,43 +7,43 @@
 -- ============================================
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '10';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('10','0','基础数据','MnuiBase','RC3',10,NULL);
+VALUES ('10','0','系统设置(&B)','MnuiBase','RC3',10,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '20';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('20','0','销售管理','MnuiOe','RC3',20,NULL);
+VALUES ('20','0','销售(&OE)','MnuiOe','RC3',20,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '30';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('30','0','生产管理','MnuiPm','RC3',30,NULL);
+VALUES ('30','0','生产(P&M)','MnuiPm','RC3',30,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '40';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('40','0','物料采购','MnuiPo','RC3',40,NULL);
+VALUES ('40','0','采购(&PO)','MnuiPo','RC3',40,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '50';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('50','0','仓库管理','MnuiInv','RC3',50,NULL);
+VALUES ('50','0','库存(&INV)','MnuiInv','RC3',50,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '60';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('60','0','应收应付','MnuiArAp','RC3',60,NULL);
+VALUES ('60','0','财务(&F)','MnuiArAp','RC3',60,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '70';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('70','0','成本管理','MnuiCb','RC3',70,NULL);
+VALUES ('70','0','成本(&CM)','MnuiCb','RC3',70,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '80';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('80','0','账务处理','MnuiGl','RC3',80,NULL);
+VALUES ('80','0','总账(&GL)','MnuiGl','RC3',80,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '90';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('90','0','业务费','MnuiYwf','RC3',90,NULL);
+VALUES ('90','0','期末(&T)','MnuiYwf','RC3',90,NULL);
 
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '99';
 INSERT INTO rc_menu (mnuiid,mnuparentid,mnucaption,mnuiname,mnuiown,mnusortorder,mnuformname) 
-VALUES ('99','0','系统管理','MnuiSys','RC3',99,NULL);
+VALUES ('99','0','系统服务(&S)','MnuiSys','RC3',99,NULL);
 
 -- ============================================
 -- 基础数据子菜单（10xx）

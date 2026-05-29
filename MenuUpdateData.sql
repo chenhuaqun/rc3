@@ -203,4 +203,68 @@ UPDATE rc_menu SET mnuiparentid = '50', mnuisortorder = 18, mnuiformname = 'FrmF
 UPDATE rc_menu SET mnuiparentid = '50', mnuisortorder = 19, mnuiformname = 'FrmFcspBmSfcHz' WHERE mnuiid = '5019' AND mnuiown = 'RC3';
 UPDATE rc_menu SET mnuiparentid = '50', mnuisortorder = 20, mnuiformname = 'FrmFcspCx' WHERE mnuiid = '5020' AND mnuiown = 'RC3';
 
+-- ============================================
+-- 财务 (6023-6025) -> 父ID: 60
+-- ============================================
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 1, mnuiformname = 'FrmApFksqSr' WHERE mnuiid = '6023' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 2, mnuiformname = 'FrmApFksqSh' WHERE mnuiid = '6024' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 3, mnuiformname = 'FrmApFksqCx' WHERE mnuiid = '6025' AND mnuiown = 'RC3';
+
+-- ============================================
+-- 成本 (7001-7013) -> 父ID: 70
+-- ============================================
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 1, mnuiformname = 'FrmZcclslSr' WHERE mnuiid = '7001' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 2, mnuiformname = 'FrmZcpslSr' WHERE mnuiid = '7002' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 3, mnuiformname = 'FrmZcbjeSr' WHERE mnuiid = '7003' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 4, mnuiformname = 'FrmCbjz_Cl' WHERE mnuiid = '7004' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 5, mnuiformname = 'FrmCbjz_Sccb' WHERE mnuiid = '7005' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 6, mnuiformname = 'FrmCbjz_Xscb' WHERE mnuiid = '7006' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 7, mnuiformname = 'FrmCbjz_Fcsp' WHERE mnuiid = '7007' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 8, mnuiformname = 'FrmZcclMx' WHERE mnuiid = '7008' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 9, mnuiformname = 'FrmZcpMx' WHERE mnuiid = '7009' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 10, mnuiformname = 'FrmZcpBmGxHz' WHERE mnuiid = '7010' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 11, mnuiformname = 'FrmCcpZcpHz' WHERE mnuiid = '7011' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 12, mnuiformname = 'FrmCcpZcpBmHz' WHERE mnuiid = '7012' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 13, mnuiformname = 'FrmBomCx' WHERE mnuiid = '7013' AND mnuiown = 'RC3';
+
+-- ============================================
+-- 总账 (8001-8011) -> 父ID: 80
+-- ============================================
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 1, mnuiformname = 'FrmGlPzSr' WHERE mnuiid = '8001' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 2, mnuiformname = 'FrmGlPzSh' WHERE mnuiid = '8002' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 3, mnuiformname = 'FrmGlPzJz' WHERE mnuiid = '8003' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 4, mnuiformname = 'FrmGlPzCx' WHERE mnuiid = '8004' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 5, mnuiformname = 'FrmGlKmRjz' WHERE mnuiid = '8005' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 6, mnuiformname = 'FrmGlKmMxz' WHERE mnuiid = '8006' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 7, mnuiformname = 'FrmGlKmyeb' WHERE mnuiid = '8007' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 8, mnuiformname = 'FrmGlKmkhYeb' WHERE mnuiid = '8008' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 9, mnuiformname = 'FrmGlKmcsYeb' WHERE mnuiid = '8009' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 10, mnuiformname = 'FrmGlZlfx' WHERE mnuiid = '8010' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 11, mnuiformname = 'FrmGlZlfxHz' WHERE mnuiid = '8011' AND mnuiown = 'RC3';
+
+-- ============================================
+-- 期末 (9001-9021) -> 父ID: 90
+-- ============================================
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 1, mnuiformname = 'FrmKhXslbxx' WHERE mnuiid = '9001' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 2, mnuiformname = 'FrmYwfDklxx' WHERE mnuiid = '9002' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 3, mnuiformname = 'FrmYwfZyrw' WHERE mnuiid = '9003' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 4, mnuiformname = 'FrmYwfDkgsxx' WHERE mnuiid = '9004' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 5, mnuiformname = 'FrmYwfDkywSr' WHERE mnuiid = '9005' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 6, mnuiformname = 'FrmYwfDkywCx' WHERE mnuiid = '9006' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 7, mnuiformname = 'FrmYwfJs' WHERE mnuiid = '9007' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 8, mnuiformname = 'FrmYwfCx' WHERE mnuiid = '9008' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 9, mnuiformname = 'FrmYwfKhHz' WHERE mnuiid = '9009' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 10, mnuiformname = 'FrmYwfZyHz' WHERE mnuiid = '9010' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 11, mnuiformname = 'FrmYwfZyMx' WHERE mnuiid = '9011' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 12, mnuiformname = 'FrmYwfZyzzHz' WHERE mnuiid = '9012' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 13, mnuiformname = 'FrmYwfKhHzHz' WHERE mnuiid = '9013' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 14, mnuiformname = 'FrmDjjz' WHERE mnuiid = '9014' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 15, mnuiformname = 'FrmFcspJz' WHERE mnuiid = '9015' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 16, mnuiformname = 'FrmJtchdjzb' WHERE mnuiid = '9016' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 17, mnuiformname = 'FrmMrpJs' WHERE mnuiid = '9017' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 18, mnuiformname = 'FrmPzsc' WHERE mnuiid = '9018' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 19, mnuiformname = 'FrmPzcd' WHERE mnuiid = '9019' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 20, mnuiformname = 'FrmYdjz' WHERE mnuiid = '9020' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 21, mnuiformname = 'FrmNewYear' WHERE mnuiid = '9021' AND mnuiown = 'RC3';
+
 COMMIT;

@@ -2246,7 +2246,9 @@ Public Class FrmImpNC
        list.pk_marbasclass,
        list.lbdm,
        list.cmaterialvid,
-         list.zkcpdm,
+       list.zkcpdm,
+       list.sgddh,
+       list.khddh,
        list.cpdm,
        list.cpmc,
        list.pk_measdoc,
@@ -2278,6 +2280,8 @@ Public Class FrmImpNC
                bd_marbasclass.pk_marbasclass AS lbdm,
                b.cmaterialvid,
                so_saleorder_b.vbdef" & strZkCpdm & " AS zkcpdm,
+               so_saleorder_b.vbdef38 AS sgddh,
+               so_saleorder_b.vbdef6 AS khddh,
                bd_material.code AS cpdm,
                bd_material.name || ',' || bd_material.materialtype || ',' ||
                bd_material.materialspec AS cpmc,
@@ -2417,7 +2421,8 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@ParaStrYspz", OleDbType.VarChar, 30).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("vbillcode")
                     rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = IIf(rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm") = "888888888", Trim(rcDataset.Tables("so_saleinvoice").Rows(i).Item("zkcpdm")), rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm"))
                     rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpmc")
-                    rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 30).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("sgddh")
+                    rcOleDbCommand.Parameters.Add("@paraStrKhddh", OleDbType.VarChar, 30).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("khddh")
                     rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("bmdm")
                     rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("so_saleinvoice").Rows(i).Item("bmmc")
                     rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("so_saleinvoice").Rows(i).Item("cpdm") = "888888888", 0, rcDataset.Tables("so_saleinvoice").Rows(i).Item("sl"))
@@ -2617,6 +2622,8 @@ list.dw,
                b.pk_deptid,
                b.material AS pk_material,
                 so_saleorder_b.vbdef" & strZkCpdm & " AS zkcpdm,
+                so_saleorder_b.vbdef38 AS sgddh,
+               so_saleorder_b.vbdef6 AS khddh,
                bd_material.code AS cpdm,
                bd_material.name || ',' || bd_material.materialtype || ',' ||
                bd_material.materialspec AS cpmc,
@@ -2746,7 +2753,8 @@ list.dw,
                     rcOleDbCommand.Parameters.Add("@ParaStrYspz", OleDbType.VarChar, 30).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("vbillcode")
                     rcOleDbCommand.Parameters.Add("@ParaStrCpdm", OleDbType.VarChar, 15).Value = IIf(rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm") = "888888888", Trim(rcDataset.Tables("ar_estirec").Rows(i).Item("zkcpdm")), rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm"))
                     rcOleDbCommand.Parameters.Add("@paraStrCpmc", OleDbType.VarChar, 200).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("cpmc")
-                    rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 30).Value = "~"
+                    rcOleDbCommand.Parameters.Add("@paraStrSgddh", OleDbType.VarChar, 30).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("sgddh")
+                    rcOleDbCommand.Parameters.Add("@paraStrKhddh", OleDbType.VarChar, 30).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("khddh")
                     rcOleDbCommand.Parameters.Add("@ParaStrBmdm", OleDbType.VarChar, 12).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("bmdm")
                     rcOleDbCommand.Parameters.Add("@paraStrBmmc", OleDbType.VarChar, 50).Value = rcDataset.Tables("ar_estirec").Rows(i).Item("bmmc")
                     rcOleDbCommand.Parameters.Add("@paraDblSl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("ar_estirec").Rows(i).Item("cpdm") = "888888888", 0, rcDataset.Tables("ar_estirec").Rows(i).Item("sl"))

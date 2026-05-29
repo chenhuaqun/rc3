@@ -5382,6 +5382,29 @@ Public Class FrmCheckData
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
 
+                '客户订单号
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KHDDH' AND table_name ='OE_FP'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp ADD khddh VARCHAR2(30)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.khddh is '客户订单号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                Else
+                    rcOleDbCommand.CommandText = "ALTER TABLE oe_fp MODIFY khddh VARCHAR2(30)"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.CommandText = "comment on column OE_FP.khddh is '客户订单号'"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
                 '客户编码
                 rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'KHDM' AND table_name ='OE_FP'"
                 rcOleDbCommand.Parameters.Clear()
@@ -5801,7 +5824,7 @@ Public Class FrmCheckData
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
                 'cpdm
-                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE index_name = 'IDX_OE_FP_CPDM' AND table_name = 'OE_FP'"
+                rcOleDbCommand.CommandText = "SELECT * FROM user_indexes WHERE (index_name = 'IDX_OE_FP_CPDM' OR index_name ='IDXOE_FPCPDM') AND table_name = 'OE_FP'"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                 If rcDataset.Tables("user_indexes") IsNot Nothing Then

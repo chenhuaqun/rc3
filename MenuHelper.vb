@@ -66,8 +66,8 @@ Public Class MenuHelper
             Dim cmd As OleDbCommand = sysOleDbConn.CreateCommand()
             cmd.CommandTimeout = 300
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = "SELECT mnuiid,mnuparentid,mnucaption,mnuiname,mnusortorder,mnuformname " &
-                              "FROM rc_menu WHERE mnuiown = 'RC3' ORDER BY mnusortorder,mnuiid"
+            cmd.CommandText = "SELECT mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuisortorder,mnuiformname " &
+                              "FROM rc_menu WHERE mnuiown = 'RC3' ORDER BY mnuisortorder,mnuiid"
 
             da.SelectCommand = cmd
             da.Fill(_menuData)
@@ -102,7 +102,7 @@ Public Class MenuHelper
         menuStrip.Items.Clear()
 
         Dim isAdmin As Boolean = (userAccount = "ADMIN")
-        Dim topMenus = menuData.Select("mnuparentid = '0' OR mnuparentid IS NULL", "mnusortorder,mnuiid")
+        Dim topMenus = menuData.Select("mnuiparentid = '0' OR mnuiparentid IS NULL", "mnuisortorder,mnuiid")
         For Each topMenu As DataRow In topMenus
             Dim menuId As String = topMenu("mnuiid").ToString()
             If isAdmin OrElse _authorizedMenuIds.Contains(menuId) Then
@@ -119,17 +119,17 @@ Public Class MenuHelper
     Private Shared Function CreateMenuItem(menuRow As DataRow, menuData As DataTable, isAdmin As Boolean) As ToolStripMenuItem
         Dim menuItem As New ToolStripMenuItem()
         menuItem.Name = "_" & menuRow("mnuiname").ToString()
-        menuItem.Text = menuRow("mnucaption").ToString()
+        menuItem.Text = menuRow("mnuicaption").ToString()
         menuItem.Tag = menuRow("mnuiid").ToString()
 
         Dim formName As String = ""
-        If menuRow.Table.Columns.Contains("mnuformname") AndAlso menuRow("mnuformname") IsNot DBNull.Value Then
-            formName = menuRow("mnuformname").ToString()
+        If menuRow.Table.Columns.Contains("mnuiformname") AndAlso menuRow("mnuiformname") IsNot DBNull.Value Then
+            formName = menuRow("mnuiformname").ToString()
         End If
         menuItem.ToolTipText = formName
 
         Dim menuId As String = menuRow("mnuiid").ToString()
-        Dim childMenus = menuData.Select("mnuparentid = '" & menuId & "'", "mnusortorder,mnuiid")
+        Dim childMenus = menuData.Select("mnuiparentid = '" & menuId & "'", "mnuisortorder,mnuiid")
 
         If childMenus.Length > 0 Then
             For Each childRow As DataRow In childMenus

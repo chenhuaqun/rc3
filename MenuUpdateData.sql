@@ -204,11 +204,78 @@ UPDATE rc_menu SET mnuiparentid = '50', mnuisortorder = 19, mnuiformname = 'FrmF
 UPDATE rc_menu SET mnuiparentid = '50', mnuisortorder = 20, mnuiformname = 'FrmFcspCx' WHERE mnuiid = '5020' AND mnuiown = 'RC3';
 
 -- ============================================
--- 财务 (6023-6025) -> 父ID: 60
+-- 财务 (6001-6025) -> 父ID: 60
 -- ============================================
-UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 1, mnuiformname = 'FrmApFksqSr' WHERE mnuiid = '6023' AND mnuiown = 'RC3';
-UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 2, mnuiformname = 'FrmApFksqSh' WHERE mnuiid = '6024' AND mnuiown = 'RC3';
-UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 3, mnuiformname = 'FrmApFksqCx' WHERE mnuiid = '6025' AND mnuiown = 'RC3';
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6001';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6001','60','其他应收单录入与修改','MnuiQtysSr','RC3',1,'FrmQtysSr');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6002';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6002','60','其他应收单审核','MnuiQtysSh','RC3',2,'FrmQtysSh');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6003';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6003','60','收款单录入与修改','MnuiSkdSr','RC3',3,'FrmSkdSr');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6004';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6004','60','收款单审核','MnuiSkdSh','RC3',4,'FrmSkdSh');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6005';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6005','60','应收账款核销','MnuiSkdHx','RC3',5,'FrmSkdHx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6006';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6006','60','其他应付单录入与修改','MnuiQtyfSr','RC3',6,'FrmQtyfSr');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6007';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6007','60','其他应付单审核','MnuiQtyfSh','RC3',7,'FrmQtyfSh');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6008';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6008','60','付款单录入与修改','MnuiFkdSr','RC3',10,'FrmFkdSr');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6009';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6009','60','付款单审核','MnuiFkdSh','RC3',11,'FrmFkdSh');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6010';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6010','60','应付账款核销','MnuiFkdHx','RC3',12,'FrmFkdHx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6011';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6011','60','其他应收单查询','MnuiQtysCx','RC3',13,'FrmQtysCx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6012';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6012','60','收款单查询','MnuiSkdCx','RC3',14,'FrmSkdCx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6013';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6013','60','其他应付单查询','MnuiQtyfCx','RC3',15,'FrmQtyfCx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6014';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6014','60','付款单查询','MnuiFkdCx','RC3',17,'FrmFkdCx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6015';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6015','60','客户应收账款明细账','MnuiKhYszkMx','RC3',18,'FrmKhYszkMx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6016';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6016','60','客户应收账款核销明细账','MnuiKhYszkHxMx','RC3',19,'FrmKhYszkHxMx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6017';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6017','60','客户应收账款汇总表','MnuiKhYszkHz','RC3',20,'FrmKhYszkHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6018';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6018','60','客户类别应收账款汇总表','MnuiKhLbYszkHz','RC3',21,'FrmKhLbYszkHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6019';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6019','60','供应商应付账款明细账','MnuiCsYfzkMx','RC3',22,'FrmCsYfzkMx');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6020';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6020','60','供应商应付账款汇总表','MnuiCsYfzkHz','RC3',23,'FrmCsYfzkHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6021';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6021','60','供应商类别应付账款汇总表','MnuiCsLbYfzkHz','RC3',24,'FrmCsLbYfzkHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '6022';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('6022','60','客户收款汇总表','MnuiArKhHzb','RC3',25,'FrmArKhHzb');
+
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 1, mnuiformname = 'FrmQtysSr' WHERE mnuiid = '6001' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 2, mnuiformname = 'FrmQtysSh' WHERE mnuiid = '6002' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 3, mnuiformname = 'FrmSkdSr' WHERE mnuiid = '6003' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 4, mnuiformname = 'FrmSkdSh' WHERE mnuiid = '6004' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 5, mnuiformname = 'FrmSkdHx' WHERE mnuiid = '6005' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 6, mnuiformname = 'FrmQtyfSr' WHERE mnuiid = '6006' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 7, mnuiformname = 'FrmQtyfSh' WHERE mnuiid = '6007' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 8, mnuiformname = 'FrmApFksqSr' WHERE mnuiid = '6023' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 9, mnuiformname = 'FrmApFksqSh' WHERE mnuiid = '6024' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 10, mnuiformname = 'FrmFkdSr' WHERE mnuiid = '6008' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 11, mnuiformname = 'FrmFkdSh' WHERE mnuiid = '6009' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 12, mnuiformname = 'FrmFkdHx' WHERE mnuiid = '6010' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 13, mnuiformname = 'FrmQtysCx' WHERE mnuiid = '6011' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 14, mnuiformname = 'FrmSkdCx' WHERE mnuiid = '6012' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 15, mnuiformname = 'FrmQtyfCx' WHERE mnuiid = '6013' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 16, mnuiformname = 'FrmApFksqCx' WHERE mnuiid = '6025' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 17, mnuiformname = 'FrmFkdCx' WHERE mnuiid = '6014' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 18, mnuiformname = 'FrmKhYszkMx' WHERE mnuiid = '6015' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 19, mnuiformname = 'FrmKhYszkHxMx' WHERE mnuiid = '6016' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 20, mnuiformname = 'FrmKhYszkHz' WHERE mnuiid = '6017' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 21, mnuiformname = 'FrmKhLbYszkHz' WHERE mnuiid = '6018' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 22, mnuiformname = 'FrmCsYfzkMx' WHERE mnuiid = '6019' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 23, mnuiformname = 'FrmCsYfzkHz' WHERE mnuiid = '6020' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 24, mnuiformname = 'FrmCsLbYfzkHz' WHERE mnuiid = '6021' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '60', mnuisortorder = 25, mnuiformname = 'FrmArKhHzb' WHERE mnuiid = '6022' AND mnuiown = 'RC3';
 
 -- ============================================
 -- 成本 (7001-7013) -> 父ID: 70
@@ -228,8 +295,11 @@ UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 12, mnuiformname = 'FrmC
 UPDATE rc_menu SET mnuiparentid = '70', mnuisortorder = 13, mnuiformname = 'FrmBomCx' WHERE mnuiid = '7013' AND mnuiown = 'RC3';
 
 -- ============================================
--- 总账 (8001-8011) -> 父ID: 80
+-- 总账 (8001-8012) -> 父ID: 80
 -- ============================================
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '8012';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('8012','80','汇总账龄分析表(按账套)','MnuiGlZlfxHz2','RC3',12,'FrmGlZlfxHz2');
+
 UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 1, mnuiformname = 'FrmGlPzSr' WHERE mnuiid = '8001' AND mnuiown = 'RC3';
 UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 2, mnuiformname = 'FrmGlPzSh' WHERE mnuiid = '8002' AND mnuiown = 'RC3';
 UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 3, mnuiformname = 'FrmGlPzJz' WHERE mnuiid = '8003' AND mnuiown = 'RC3';
@@ -241,6 +311,7 @@ UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 8, mnuiformname = 'FrmGl
 UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 9, mnuiformname = 'FrmGlKmcsYeb' WHERE mnuiid = '8009' AND mnuiown = 'RC3';
 UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 10, mnuiformname = 'FrmGlZlfx' WHERE mnuiid = '8010' AND mnuiown = 'RC3';
 UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 11, mnuiformname = 'FrmGlZlfxHz' WHERE mnuiid = '8011' AND mnuiown = 'RC3';
+UPDATE rc_menu SET mnuiparentid = '80', mnuisortorder = 12, mnuiformname = 'FrmGlZlfxHz2' WHERE mnuiid = '8012' AND mnuiown = 'RC3';
 
 -- ============================================
 -- 期末 (9001-9021) -> 父ID: 90

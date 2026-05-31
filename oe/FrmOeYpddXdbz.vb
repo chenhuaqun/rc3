@@ -45,7 +45,7 @@ Public Class FrmOeYpddXdbz
     End Sub
 
     Private Sub PreparePrintData()
-        Dim rft As String = CurDir() + "\reports\ypddxdb.rft"
+        Dim rft As String =Application.StartupPath + "\reports\ypddxdb.rft"
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If

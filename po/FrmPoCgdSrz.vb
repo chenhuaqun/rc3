@@ -1217,9 +1217,9 @@ Public Class FrmPoCgdSrz
         End If
         Dim rft As String
         If blnhs Then
-            rft = CurDir() + "\reports\cgdbz1.rft"
+            rft =Application.StartupPath + "\reports\cgdbz1.rft"
         Else
-            rft = CurDir() + "\reports\cgdbz2.rft"
+            rft =Application.StartupPath + "\reports\cgdbz2.rft"
         End If
         rcRps.LoadTemplate(rft)
         '取RPS数据

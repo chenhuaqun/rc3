@@ -466,7 +466,7 @@ Public Class FrmYwfZyMx
             '读取数据
             ReadYwfZyMx(rcDataset.Tables("rc_zyxx").Rows(i).Item("zydm"))
             ''选择输出文件
-            'Dim rcFileName As String = CurDir() + "\report.xls"
+            'Dim rcFileName As String =Application.StartupPath + "\report.xls"
             'If Me.OpenFileDialogExcel.ShowDialog = DialogResult.OK Then
             '    rcFileName = Me.OpenFileDialogExcel.FileName
             'Else

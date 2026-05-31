@@ -348,7 +348,7 @@ Public Class FrmPoCkdShz
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If
-        Dim rft As String = CurDir() + "\reports\pockdbz.rft"
+        Dim rft As String =Application.StartupPath + "\reports\pockdbz.rft"
         rcRps.LoadTemplate(rft)
         '取RPS数据
         Try

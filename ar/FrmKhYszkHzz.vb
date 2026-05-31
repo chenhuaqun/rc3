@@ -41,8 +41,8 @@ Public Class FrmKhYszkHzz
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If
-        'Dim rft1 As String = CurDir() + "\reports\yszkhz.csv"
-        Dim rft As String = CurDir() + "\reports\yszkhz.rft"
+        'Dim rft1 As String =Application.StartupPath + "\reports\yszkhz.csv"
+        Dim rft As String =Application.StartupPath + "\reports\yszkhz.rft"
         'rcRps.LoadCsvTemplate(rft1)
         'rcRps.SaveTemplate(rft)
         rcRps.LoadTemplate(rft)

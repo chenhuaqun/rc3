@@ -128,8 +128,8 @@ Public Class FrmGxxx
     End Sub
 
     Private Sub PreparePrintData()
-        'Dim rft1 As String = CurDir() + "\reports\gxxx.csv"
-        Dim rft As String = CurDir() + "\reports\gxxx.rft"
+        'Dim rft1 As String =Application.StartupPath + "\reports\gxxx.csv"
+        Dim rft As String =Application.StartupPath + "\reports\gxxx.rft"
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If

@@ -114,8 +114,8 @@ Public Class FrmBmxx
     End Sub
 
     Private Sub PreparePrintData()
-        'Dim rft1 As String = CurDir() + "\reports\bmxx.csv"
-        Dim rft As String = CurDir() + "\reports\bmxx.rft"
+        'Dim rft1 As String =Application.StartupPath + "\reports\bmxx.csv"
+        Dim rft As String =Application.StartupPath + "\reports\bmxx.rft"
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If

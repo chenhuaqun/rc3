@@ -139,7 +139,7 @@ Public Class FrmKmxx
     End Sub
 
     Private Sub PreparePrintData()
-        Dim rft As String = CurDir() + "\reports\kmxx.rft"
+        Dim rft As String =Application.StartupPath + "\reports\kmxx.rft"
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If

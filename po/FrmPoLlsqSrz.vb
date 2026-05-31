@@ -1368,7 +1368,7 @@ Public Class FrmPoLlsqSrz
         If rcRps Is Nothing Then
             rcRps = New RPS.Document
         End If
-        Dim rft As String = CurDir() + "\reports\ckdbz.rft"
+        Dim rft As String =Application.StartupPath + "\reports\ckdbz.rft"
         rcRps.LoadTemplate(rft)
         '取RPS数据
         Try

@@ -1188,7 +1188,7 @@ Public Class FrmOeRkdSrz
 
     Private Sub BtnImpXls_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiImpXls.Click
         '调用表单
-        Dim rcFrm As New FrmGlPzImpXls
+        Dim rcFrm As New FrmOeRkdImpXls
         With rcFrm
             .ParaStrPzlxdm = Me.CmbPzlxjc.SelectedValue
             .ParaStrKjqj = strKjqj

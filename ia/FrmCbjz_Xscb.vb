@@ -877,7 +877,7 @@ Public Class FrmCbjz_Xscb
                 rcOleDbCommand.Parameters.Add("@dwrq", OleDbType.Date, 8).Value = g_Dwrq
                 rcOleDbCommand.Parameters.Add("@paraStrMsg", OleDbType.VarChar, 200).Direction = ParameterDirection.Output
                 rcOleDbCommand.ExecuteNonQuery()
-                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" Then
+                If rcOleDbCommand.Parameters("@paraStrMsg").Value.GetType.ToString <> "System.DBNull" And rcOleDbCommand.Parameters("@paraStrMsg").Value <> "执行成功" Then
                     If rcOleDbCommand.Parameters("@paraStrMsg").Value <> "" Then
                         MsgBox(rcOleDbCommand.Parameters("@paraStrMsg").Value, MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
                         Return

@@ -2,6 +2,8 @@ Imports System.IO
 Imports System.Net
 Imports System.Xml
 Imports System.Security.Cryptography
+Imports System.Reflection
+Imports System.Diagnostics
 Imports Newtonsoft.Json
 
 Public Class UpdateManifest
@@ -157,21 +159,35 @@ Module MdlUpdate
     End Function
 
     Public Sub ExtractToUpdateDir(ByVal zipPath As String)
-        If Not Directory.Exists(_updateDir) Then
-            Directory.CreateDirectory(_updateDir)
+        ' 解压到临时目录
+        Dim tempExtractDir = Path.Combine(Path.GetTempPath(), "rc3_update_extract")
+        If Directory.Exists(tempExtractDir) Then
+            Try : Directory.Delete(tempExtractDir, True) : Catch : End Try
         End If
+        Directory.CreateDirectory(tempExtractDir)
 
-        ' 删除旧的 update 目录内容
-        For Each f As String In Directory.GetFiles(_updateDir)
+        System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, tempExtractDir)
+        File.Delete(zipPath)
+
+        ' 确保 RC3Updater.exe 在启动目录
+        Dim updaterSrc = Path.Combine(tempExtractDir, "RC3Updater.exe")
+        Dim updaterDst = Path.Combine(Application.StartupPath, "RC3Updater.exe")
+        If File.Exists(updaterSrc) Then
+            If File.Exists(updaterDst) Then
+                Try : File.Delete(updaterDst) : Catch : End Try
+            End If
+            File.Copy(updaterSrc, updaterDst)
+
+            ' 启动 RC3Updater，然后退出主程序
+            Dim currentVersion = Application.ProductVersion
+            Dim pid = Process.GetCurrentProcess().Id
             Try
-                File.Delete(f)
+                Process.Start(updaterDst,
+                    """" & Application.StartupPath & """ """ & tempExtractDir & """ " & pid.ToString() & " " & currentVersion)
+                Application.Exit()
             Catch
             End Try
-        Next
-
-        ' 解压 ZIP 到 update 目录
-        System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, _updateDir)
-        File.Delete(zipPath)
+        End If
     End Sub
 
     Private Sub RecordCheckTime()

@@ -162,7 +162,7 @@ Module MdlUpdate
         End If
 
         ' 删除旧的 update 目录内容
-        For Each f In Directory.GetFiles(_updateDir)
+        For Each f As String In Directory.GetFiles(_updateDir)
             Try
                 File.Delete(f)
             Catch

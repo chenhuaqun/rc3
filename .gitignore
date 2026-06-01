@@ -361,6 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-
-# 自动生成的版本号文件（由 GenerateVersion.ps1 生成）
-My Project/AutoVersion.vb

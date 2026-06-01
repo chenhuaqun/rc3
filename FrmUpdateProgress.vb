@@ -3,6 +3,7 @@ Imports System.Net
 Imports System.ComponentModel
 
 Public Class FrmUpdateProgress
+    Inherits System.Windows.Forms.Form
     Private _manifest As UpdateManifest
     Private _downloadPath As String
     Private _cancelled As Boolean = False

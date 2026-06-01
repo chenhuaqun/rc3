@@ -2143,6 +2143,8 @@ Public Class FrmImpNC
                 rcOleDbConn.Close()
             End Try
         End If
+
+
         '产品销售发票
         If Me.ChbOeXsfp.Checked Then
             '写系统参数
@@ -2597,6 +2599,8 @@ Public Class FrmImpNC
        org_dept.name as bmmc,
        list.pk_material,
         list.zkcpdm,
+        list.sgddh,
+        list.khddh,
        list.cpdm,
        list.cpmc,
 list.pk_measdoc,

@@ -14,6 +14,16 @@ Public Class FrmUpdate
     End Sub
 
     Private Sub UpdateEvent()
+        ' 先尝试 HTTP 升级
+        Dim httpSuccess As Boolean = False
+        MdlUpdate.HttpUpdate(httpSuccess)
+        If httpSuccess Then
+            MsgBox("应用程序下载完成，请退出所有应用程序后，再登陆。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Me.Close()
+            Return
+        End If
+
+        ' HTTP 失败，走 DB BLOB 兜底
         Try
             sysOleDbConn.Open()
             rcOleDbCommand.Connection = sysOleDbConn
@@ -33,13 +43,9 @@ Public Class FrmUpdate
             sysOleDbConn.Close()
         End Try
         If rcDataSet.Tables("rc_file").Rows.Count > 0 Then
-            '分析升级文件
-            '存储更新XML文件
-            '保存设置
             Dim rcStreamWriter As System.IO.StreamWriter
             Dim oldXml As New System.Xml.XmlDocument
             If Not System.IO.File.Exists(Application.StartupPath & "\UpdateVersion.XML") Then
-                '写xml文件
                 rcStreamWriter = System.IO.File.CreateText(Application.StartupPath & "\UpdateVersion.XML")
                 rcStreamWriter.WriteLine("<?xml version=""1.0"" encoding=""utf-8"" ?> ")
                 rcStreamWriter.WriteLine("<product>")
@@ -48,7 +54,6 @@ Public Class FrmUpdate
                 rcStreamWriter.Close()
             End If
             oldXml.Load(CurDir() & "\" & "UpdateVersion.XML")
-            'If oldXml.SelectSingleNode("product").SelectSingleNode("version").InnerText <> rcDataSet.Tables("rc_file").Rows(0).Item("filever") Then
             Try
                 sysOleDbConn.Open()
                 rcOleDbCommand.Connection = sysOleDbConn
@@ -77,14 +82,9 @@ Public Class FrmUpdate
             fs = New IO.FileStream(s, IO.FileMode.CreateNew)
             fs.Write(size, 0, size.Length - 0)
             fs.Close()
-            'End If
-            '存储更新XML文件
-            '保存设置
             If System.IO.File.Exists(Application.StartupPath & "\UpdateVersion.XML") Then
                 System.IO.File.Delete(Application.StartupPath & "\UpdateVersion.XML")
             End If
-            '写xml文件
-            'Dim rcStreamWriter As System.IO.StreamWriter
             rcStreamWriter = System.IO.File.CreateText(Application.StartupPath & "\UpdateVersion.XML")
             rcStreamWriter.WriteLine("<?xml version=""1.0"" encoding=""utf-8"" ?> ")
             rcStreamWriter.WriteLine("<product>")

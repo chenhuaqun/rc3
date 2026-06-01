@@ -58,10 +58,13 @@ Module MdlMain
         End If
         If File.Exists(sourceFileName) Then
             File.Move(sourceFileName, destFileName)
-            '升级
             System.Diagnostics.Process.Start(destFileName)
             Application.Exit()
         End If
+
+        'HTTP 更新检查（每周一次，后台静默执行）
+        MdlUpdate.StartupCheck()
+
         '读取数据源配置文件并解密
         Dim c As New models.rcCryptography
         Dim rcFileName As String = Path.Combine(Application.StartupPath, "richen.config")

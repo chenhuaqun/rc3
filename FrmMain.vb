@@ -154,6 +154,14 @@ Public Class FrmMain
     End Sub
 
     Private Sub UpdateEvent(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs)
+        ' 先尝试 HTTP 更新，失败走 DB BLOB 兜底
+        Dim httpSuccess As Boolean = False
+        MdlUpdate.HttpUpdate(httpSuccess)
+        If httpSuccess Then
+            Return
+        End If
+
+        ' DB BLOB 兜底（保留原有逻辑）
         Try
             sysOleDbConn.Open()
             rcOleDbCommand.Connection = sysOleDbConn
@@ -173,13 +181,9 @@ Public Class FrmMain
             sysOleDbConn.Close()
         End Try
         If rcDataset.Tables("rc_file").Rows.Count > 0 Then
-            '分析升级文件
-            '存储更新XML文件
-            '保存设置
             Dim rcStreamWriter As System.IO.StreamWriter
             Dim oldXml As New System.Xml.XmlDocument
             If Not System.IO.File.Exists(Application.StartupPath & "\UpdateVersion.XML") Then
-                '写xml文件
                 rcStreamWriter = System.IO.File.CreateText(Application.StartupPath & "\UpdateVersion.XML")
                 rcStreamWriter.WriteLine("<?xml version=""1.0"" encoding=""utf-8"" ?> ")
                 rcStreamWriter.WriteLine("<product>")
@@ -218,13 +222,9 @@ Public Class FrmMain
                 fs.Write(size, 0, size.Length - 0)
                 fs.Close()
             End If
-            '存储更新XML文件
-            '保存设置
             If System.IO.File.Exists(Application.StartupPath & "\UpdateVersion.XML") Then
                 System.IO.File.Delete(Application.StartupPath & "\UpdateVersion.XML")
             End If
-            '写xml文件
-            'Dim rcStreamWriter As System.IO.StreamWriter
             rcStreamWriter = System.IO.File.CreateText(Application.StartupPath & "\UpdateVersion.XML")
             rcStreamWriter.WriteLine("<?xml version=""1.0"" encoding=""utf-8"" ?> ")
             rcStreamWriter.WriteLine("<product>")

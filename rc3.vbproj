@@ -82,6 +82,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net.Http" />
@@ -1368,6 +1369,12 @@
     <Compile Include="FrmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmUpdateProgress.Designer.vb">
+      <DependentUpon>FrmUpdateProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateProgress.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmMrpJs.Designer.vb">
       <DependentUpon>FrmMrpJs.vb</DependentUpon>
     </Compile>
@@ -2153,6 +2160,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MdlMain.vb" />
+    <Compile Include="MdlUpdate.vb" />
     <Compile Include="MdlMenuMigration.vb" />
     <Compile Include="MdlReadPhkcsl.vb" />
     <Compile Include="MdlReadJldwXsws.vb" />
@@ -2162,6 +2170,7 @@
     <Compile Include="MdlReadPoWfpsl.vb" />
     <Compile Include="MdlReadPoWrksl.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\AutoVersion.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>

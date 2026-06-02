@@ -184,7 +184,7 @@ Public Class FrmRegister
                                 parts.Add(QueryWmiFirst("SELECT SerialNumber FROM Win32_BaseBoard", "SerialNumber"))
 
                                 ' 3. 所有物理磁盘序列号
-                                For Each sn In QueryWmiAll("SELECT SerialNumber FROM Win32_DiskDrive WHERE MediaType IS NOT NULL", "SerialNumber")
+                                For Each sn As String In QueryWmiAll("SELECT SerialNumber FROM Win32_DiskDrive WHERE MediaType IS NOT NULL", "SerialNumber")
                                     parts.Add(sn)
                                 Next
 
@@ -192,7 +192,7 @@ Public Class FrmRegister
                                 parts.Add(QueryWmiFirst("SELECT SerialNumber FROM Win32_BIOS", "SerialNumber"))
 
                                 ' 5. 所有启用网卡 MAC（排序后）
-                                Dim macs = QueryWmiAll("SELECT MACAddress FROM Win32_NetworkAdapter WHERE NetEnabled = True", "MACAddress")
+                                Dim macs As List(Of String) = QueryWmiAll("SELECT MACAddress FROM Win32_NetworkAdapter WHERE NetEnabled = True", "MACAddress")
                                 macs = macs.Select(Function(m) m.Replace(":", "").ToUpper()).ToList()
                                 macs.Sort()
                                 parts.AddRange(macs)
@@ -203,7 +203,7 @@ Public Class FrmRegister
                                 ' 过滤空值和占位符
                                 Dim placeholders As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase) From
                                     {"", "TO BE FILLED BY O.E.M.", "DEFAULT STRING", "NONE", "00000000", "NA", "NULL"}
-                                Dim valid = parts.Where(Function(p) Not placeholders.Contains(p?.Trim())).ToList()
+                                Dim valid As List(Of String) = parts.Where(Function(p) Not placeholders.Contains(p?.Trim())).ToList()
 
                                 If valid.Count >= 2 Then
                                     Return ComputeHash(String.Join("|", valid))

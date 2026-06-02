@@ -5,6 +5,7 @@ Imports System.Management
 Imports System.Security.Cryptography
 Imports System.Threading.Tasks
 Imports System.Text
+Imports System.Linq
 
 Module MdlMain
     Declare Function DogRead_Str Lib "Win32dll" Alias "DogRead" (ByVal DogBytes As Integer, ByVal DogAddr As Integer, ByVal DogData As String) As Integer
@@ -527,50 +528,76 @@ Module MdlMain
     Public Function GetDeviceCodeAsync() As Task(Of String)
         Return Task.Run(Function()
                             Try
-                                Dim sb As New StringBuilder()
-                                Using searcher As New ManagementObjectSearcher("SELECT ProcessorId FROM Win32_Processor")
-                                    For Each obj As ManagementObject In searcher.Get()
-                                        sb.Append(obj("ProcessorId")?.ToString())
-                                        Exit For
-                                    Next
-                                End Using
-                                Using searcher As New ManagementObjectSearcher("SELECT SerialNumber FROM Win32_BaseBoard")
-                                    For Each obj As ManagementObject In searcher.Get()
-                                        sb.Append(obj("SerialNumber")?.ToString())
-                                        Exit For
-                                    Next
-                                End Using
-                                If sb.Length = 0 Then
-                                    Dim mac = GetMacAddress()
-                                    If Not String.IsNullOrEmpty(mac) Then
-                                        sb.Append(mac)
-                                    Else
-                                        sb.Append(GetFallbackDeviceId())
-                                    End If
+                                Dim parts As New List(Of String)
+
+                                ' 1. CPU ProcessorId
+                                parts.Add(QueryWmiFirst("SELECT ProcessorId FROM Win32_Processor", "ProcessorId"))
+
+                                ' 2. 主板序列号
+                                parts.Add(QueryWmiFirst("SELECT SerialNumber FROM Win32_BaseBoard", "SerialNumber"))
+
+                                ' 3. 所有物理磁盘序列号
+                                For Each sn In QueryWmiAll("SELECT SerialNumber FROM Win32_DiskDrive WHERE MediaType IS NOT NULL", "SerialNumber")
+                                    parts.Add(sn)
+                                Next
+
+                                ' 4. BIOS 序列号
+                                parts.Add(QueryWmiFirst("SELECT SerialNumber FROM Win32_BIOS", "SerialNumber"))
+
+                                ' 5. 所有启用网卡 MAC（排序后）
+                                Dim macs = QueryWmiAll("SELECT MACAddress FROM Win32_NetworkAdapter WHERE NetEnabled = True", "MACAddress")
+                                macs = macs.Select(Function(m) m.Replace(":", "").ToUpper()).ToList()
+                                macs.Sort()
+                                parts.AddRange(macs)
+
+                                ' 6. 计算机名
+                                parts.Add(Environment.MachineName.ToUpper())
+
+                                ' 过滤空值和占位符
+                                Dim placeholders As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase) From
+                                    {"", "TO BE FILLED BY O.E.M.", "DEFAULT STRING", "NONE", "00000000", "NA", "NULL"}
+                                Dim valid = parts.Where(Function(p) Not placeholders.Contains(p?.Trim())).ToList()
+
+                                If valid.Count >= 2 Then
+                                    Return ComputeHash(String.Join("|", valid))
+                                Else
+                                    Return ComputeHash(GetPersistentDeviceId())
                                 End If
-                                Return ComputeHash(sb.ToString())
+
                             Catch ex As Exception
-                                Return "DEVICE_UNKNOWN"
+                                Return ComputeHash(GetPersistentDeviceId())
                             End Try
                         End Function)
     End Function
 
-    Private Function GetMacAddress() As String
+    Private Function QueryWmiFirst(query As String, field As String) As String
         Try
-            Using searcher As New ManagementObjectSearcher("SELECT MACAddress, NetEnabled FROM Win32_NetworkAdapter WHERE NetEnabled = True")
+            Using searcher As New ManagementObjectSearcher(query)
                 For Each obj As ManagementObject In searcher.Get()
-                    Dim mac = obj("MACAddress")?.ToString()
-                    If Not String.IsNullOrEmpty(mac) Then
-                        Return mac.Replace(":", "").ToUpper()
-                    End If
+                    Dim val = obj(field)?.ToString()
+                    If Not String.IsNullOrEmpty(val) Then Return val
                 Next
             End Using
         Catch
         End Try
-        Return String.Empty
+        Return ""
     End Function
 
-    Private Function GetFallbackDeviceId() As String
+    Private Function QueryWmiAll(query As String, field As String) As List(Of String)
+        Dim result As New List(Of String)
+        Try
+            Using searcher As New ManagementObjectSearcher(query)
+                For Each obj As ManagementObject In searcher.Get()
+                    Dim val = obj(field)?.ToString()
+                    If Not String.IsNullOrEmpty(val) Then result.Add(val)
+                Next
+            End Using
+        Catch
+        End Try
+        Return result
+    End Function
+
+    Private Function GetPersistentDeviceId() As String
         Dim path = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RC3", "device.id")
         Dim dir = IO.Path.GetDirectoryName(path)
         If Not IO.Directory.Exists(dir) Then IO.Directory.CreateDirectory(dir)

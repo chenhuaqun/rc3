@@ -1,29 +1,29 @@
 Imports System.Data.OleDb
 
 Public Class FrmKczlFaEdit
-    '����OLEDB��������������
+    '建立OLEDB数据适配器
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '����DataSet����
+    '建立DataSet对象
     ReadOnly rcDataset As New DataSet
-    '����OleDb���ݶ���
+    '建立OleDb数据对象
     Dim rcOleDbTrans As OleDbTransaction
-    '����OleDb����
+    '建立OleDb命令
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
 
-#Region "�ؼ��س����Ĵ���"
+#Region "控件回车键的处理"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtFadm.KeyPress, TxtFamc.KeyPress, TxtFasm.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'ָʾ KeyPress �¼��Ѵ�����ȥ�� Windows ȱʡ�Ķ�������
+                '指示 KeyPress 事件已处理，去掉 Windows 默认的对应功能
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "���������¼�"
+#Region "方案名称输入事件"
 
     Private Sub TxtFamc_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtFamc.Validating
         Dim spell As New ClsGetChineseSpell
@@ -50,9 +50,9 @@ Public Class FrmKczlFaEdit
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("�������" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Catch ey As OleDbException
-                MsgBox("�������" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" + ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             End Try
             Return
         Finally

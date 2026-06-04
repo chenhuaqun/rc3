@@ -2,26 +2,26 @@ Imports System.Data.OleDb
 
 Public Class FrmKhEdit
 
-#Region "�������"
+#Region "定义变量"
 
-    '��������������
+    '建立数据适配器
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '����DataSet����
+    '建立DataSet对象
     Dim rcDataset As New DataSet
-    '���ݸ��´���
+    '数据更新传递
     Dim rcOleDbTrans As OleDbTransaction
-    '����OleDbCommand����
+    '建立OleDbCommand对象
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '������ͼ
+    '数据视图
     Dim rcDataView As DataView
-    '������־
+    '新增标志
     Dim isAdding As Boolean = False
-    '��ǰ��¼��
+    '当前记录号
     Dim currentPos As Integer
 
 #End Region
 
-#Region "��ʼ��"
+#Region "初始化"
 
     Overloads Property ParaDataSet() As DataSet
         Get
@@ -97,9 +97,9 @@ Public Class FrmKhEdit
         BindingContext(rcDataView, "").Position = currentPos
         SetAll(True)
         If isAdding Then
-            '�����ǰ�༭����
+            '清除当前编辑内容
             BindingContext(rcDataView, "").EndCurrentEdit()
-            '����һ��
+            '增加一行
             BindingContext(rcDataView, "").AddNew()
         Else
             Me.TxtKhdm.Enabled = False
@@ -108,20 +108,20 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "�ؼ��س����Ĵ���"
+#Region "控件回车键的处理"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtLbdm.KeyPress, TxtKhdm.KeyPress, TxtKhmc.KeyPress, TxtKhsm.KeyPress, TxtAddress.KeyPress, TxtPostCode.KeyPress, TxtWaddress.KeyPress, TxtKhyh.KeyPress, TxtYhzh.KeyPress, TxtSwdjh.KeyPress, TxtFddbr.KeyPress, TxtGsdjh.KeyPress, TxtZczb.KeyPress, TxtJyfw.KeyPress, TxtLxr.KeyPress, TxtMobile.KeyPress, TxtTel.KeyPress, TxtFax.KeyPress, TxtEmail.KeyPress, TxtZydm.KeyPress, TxtZydm2.KeyPress, CmbSktj.KeyPress, TxtSkqx.KeyPress, TxtAbc.KeyPress, TxtDengJi.KeyPress, TxtZtts.KeyPress, TxtBjtk.KeyPress, TxtXslbdm.KeyPress, TxtDjYear.KeyPress, ChbBJsywf.KeyPress, ChbBYwfjszz.KeyPress, ChbBGuaKao.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'ָʾ KeyPress �¼��Ѵ�����ȥ�� Windows ȱʡ�Ķ�������
+                '指示 KeyPress 事件已经处理，忽略 Windows 默认的后续处理
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "���ÿؼ�"
+#Region "设置控件"
 
     Private Sub SetAll(ByVal medit As Boolean)
         If Not medit Then
@@ -224,7 +224,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "�ͻ���������¼�"
+#Region "客户类别输入事件"
 
     Private Sub Txtlbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtLbdm.KeyDown
         Select Case e.KeyCode
@@ -236,7 +236,7 @@ Public Class FrmKhEdit
                     .ParaField1 = "lbdm"
                     .ParaField2 = "lbmc"
                     .ParaField3 = "lbsm"
-                    .ParaTitle = "�ͻ����"
+                    .ParaTitle = "客户类别"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -262,7 +262,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_khlb")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -278,7 +278,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "�ͻ�������������¼�"
+#Region "客户销售类别输入事件"
 
     Private Sub TxtXslbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtXslbdm.KeyDown
         Select Case e.KeyCode
@@ -290,7 +290,7 @@ Public Class FrmKhEdit
                     .ParaField1 = "xslbdm"
                     .ParaField2 = "xslbmc"
                     .ParaField3 = "xslbsm"
-                    .ParaTitle = "�ͻ��������"
+                    .ParaTitle = "客户销售类别"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -316,7 +316,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_khxslb")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -331,7 +331,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "�Զ�����"
+#Region "自动编号"
 
     Private Sub BtnAutoKhdm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAutoKhdm.Click
         If Not String.IsNullOrEmpty(Me.TxtLbdm.Text) And Me.TxtLbdm.Text.Length = 2 And Me.TxtKhdm.Enabled Then
@@ -349,7 +349,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "autokhdm")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -369,7 +369,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "�ͻ������¼�"
+#Region "客户名称事件"
 
     Private Sub TxtKhmc_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtKhmc.Validating
         Dim spell As New ClsGetChineseSpell
@@ -378,7 +378,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "ְԱ������¼�"
+#Region "职员输入事件"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown, TxtZydm2.KeyDown
         Select Case e.KeyCode
@@ -390,7 +390,7 @@ Public Class FrmKhEdit
                     .ParaField1 = "zydm"
                     .ParaField2 = "zymc"
                     .ParaField3 = "zysm"
-                    .ParaTitle = "ְԱ"
+                    .ParaTitle = "职员"
                     .ParaOldValue = ""
                     .ParaAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -416,7 +416,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -446,7 +446,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -462,7 +462,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "������ĩ��¼"
+#Region "首上下末记录"
 
     Private Sub BtnTop_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnTop.Click
         If BindingContext(rcDataView, "").Count > 0 Then
@@ -494,19 +494,19 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "����"
+#Region "新增"
 
     Private Sub BtnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNew.Click, MnuiNew.Click
         NewEvent()
     End Sub
 
     Private Sub NewEvent()
-        '����
+        '新增
         If Not isAdding Then
             isAdding = True
             Try
                 currentPos = BindingContext(rcDataView, "").Position
-                '�����ǰ�༭����
+                '结束当前编辑状态
                 BindingContext(rcDataView, "").EndCurrentEdit()
                 BindingContext(rcDataView, "").AddNew()
             Catch eEndEdit As System.Exception
@@ -518,20 +518,20 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "�޸�"
+#Region "修改"
 
     Private Sub BtnEdit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnEdit.Click, MnuiEdit.Click
         EditEvent()
     End Sub
 
     Private Sub EditEvent()
-        '�޸�
+        '修改
         If isAdding Then
             isAdding = False
         End If
         Try
             currentPos = BindingContext(rcDataView, "").Position
-            '�����ǰ�༭����
+            '结束当前编辑状态
             BindingContext(rcDataView, "").EndCurrentEdit()
         Catch eEndEdit As System.Exception
             System.Windows.Forms.MessageBox.Show(eEndEdit.Message)
@@ -542,7 +542,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "����"
+#Region "保存"
 
     Private Sub TsSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnSave.Click, MnuiSave.Click
         SaveEvent()
@@ -551,7 +551,7 @@ Public Class FrmKhEdit
     Private Sub SaveEvent()
         Me.TabControl1.SelectedIndex = 1
         Me.TabControl1.SelectedIndex = 0
-        '��֤����
+        '验证数据
         If Not String.IsNullOrEmpty(Me.TxtZydm.Text) Then
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -567,7 +567,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -576,11 +576,11 @@ Public Class FrmKhEdit
                 Me.TxtZydm.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zydm")
                 Me.LblZymc.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zymc")
             Else
-                MsgBox("ְԱ��Ϣ����ȷ��", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+                MsgBox("职员信息不正确，", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
                 Return
             End If
         Else
-            MsgBox("������ְԱ��Ϣ��", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+            MsgBox("请输入职员信息。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
             Return
         End If
         If Not String.IsNullOrEmpty(Me.TxtZydm2.Text) Then
@@ -598,7 +598,7 @@ Public Class FrmKhEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -607,16 +607,16 @@ Public Class FrmKhEdit
                 Me.TxtZydm2.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zydm")
                 Me.LblZymc2.Text = rcDataset.Tables("rc_zyxx").Rows(0).Item("zymc")
             Else
-                MsgBox("ְԱ��Ϣ����ȷ��", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+                MsgBox("职员信息不正确，", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
                 Return
             End If
         End If
-        '����
+        '保存
         If isAdding Then
             If Trim(TxtKhdm.Text).Length = 0 Then
                 Return
             End If
-            'REM ���ӱ���
+            'REM 添加记录
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -673,9 +673,9 @@ Public Class FrmKhEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Catch ey As OleDbException
-                    MsgBox("�������" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 End Try
                 Return
             Finally
@@ -683,7 +683,7 @@ Public Class FrmKhEdit
             End Try
             isAdding = False
         Else
-            REM �޸��˺�
+            REM 修改记录
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -728,7 +728,7 @@ Public Class FrmKhEdit
                 rcOleDbCommand.Parameters.Add("@bguakao", OleDbType.Integer, 1).Value = IIf(Me.ChbBGuaKao.Checked, 1, 0)
                 rcOleDbCommand.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = Trim(TxtKhdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
-                '�������
+                '刷新数据
                 rcOleDbCommand.CommandText = "SELECT lbdm,lbmc,khdm,khmc,khsm,address,postcode,waddress,khyh,yhzh,swdjh,fddbr,gsdjh,NVL(zczb,0) AS zczb,jyfw,lxr,mobile,tel,fax,email,zydm,zymc,zydm2,zymc2,dengji,sktj,NVL(skqx,0) AS skqx,abc,NVL(ztts,0) AS ztts,bjtk,xslbdm,NVL(djyear,0) AS djyear,NVL(bjsywf,1) AS bjsywf,NVL(bywfjszz,0) AS bywfjszz,NVL(bguakao,0) AS bguakao,djrq FROM rc_khxx ORDER BY khdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -741,9 +741,9 @@ Public Class FrmKhEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Catch ey As OleDbException
-                    MsgBox("�������" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 End Try
                 Return
             Finally
@@ -755,14 +755,14 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "ȡ��"
+#Region "取消"
 
     Private Sub TsCancel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCancel.Click, MnuiCancel.Click
         CancelEvent()
     End Sub
 
     Private Sub CancelEvent()
-        'ȡ��
+        '取消
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -777,7 +777,7 @@ Public Class FrmKhEdit
             rcOleDbDataAdpt.Fill(rcDataset, "rc_khxx")
             BindingContext(rcDataView, "").Position = currentPos
         Catch ex As Exception
-            MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+            MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Return
         Finally
             rcOleDbConn.Close()
@@ -788,7 +788,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "�ر�"
+#Region "关闭"
 
     Private Sub BtnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
         Me.Close()
@@ -796,7 +796,7 @@ Public Class FrmKhEdit
 
 #End Region
 
-#Region "����"
+#Region "关于"
 
     Private Sub MnuiAbout_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuiAbout.Click
         Dim rcFrm As New FrmAbout

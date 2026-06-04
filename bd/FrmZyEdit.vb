@@ -3,30 +3,30 @@ Imports System.Data.OleDb
 
 Public Class FrmZyEdit
 
-#Region "�������"
+#Region "定义变量"
 
-    '��������������
+    '建立数据适配器
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '����DataSet����
+    '建立DataSet对象
     Dim rcDataset As New DataSet
-    '���ݸ��´���
+    '数据更新传递
     Dim rcOleDbTrans As OleDbTransaction
-    '����OleDbCommand����
+    '建立OleDbCommand对象
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '������ͼ
+    '数据视图
     Dim rcDataView As DataView
-    '������־
+    '新增标志
     Dim isAdding As Boolean = False
-    '��ǰ��¼��
+    '当前记录号
     Dim currentPos As Integer
-    'shCommPortΪ���ںŴ�0��ʼ��dwBaudrateΪ������ͨ��9600
-    '���Ѱ�����ɹ������ؿ�Ƭϵ�к�dwSerialNo��������shManu
+    'shCommPort为串口号从0开始，dwBaudrate为波特率通常9600
+    '读卡成功，返回卡片序列号dwSerialNo，制造商shManu
     'Phillips 0	Siemens 1
     Public Declare Function GetCSN Lib "READCARD.DLL" (ByVal shCommPort As Short, ByVal dwBaudrate As Integer, ByRef dwSerialNo As Integer, ByRef shManu As Short) As Short
 
 #End Region
 
-#Region "��ʼ��"
+#Region "初始化"
 
     Overloads Property ParaDataSet() As DataSet
         Get
@@ -75,14 +75,14 @@ Public Class FrmZyEdit
         BindingContext(rcDataView, "").Position = currentPos
         SetAll(True)
         If isAdding Then
-            '�����ǰ�༭����
+            '清除当前编辑内容
             BindingContext(rcDataView, "").EndCurrentEdit()
-            '����һ��
+            '增加一行
             BindingContext(rcDataView, "").AddNew()
         Else
             Me.TxtZydm.Enabled = False
         End If
-        'ȡ�˿�����
+        '读取COM口配置
         Try
             If System.IO.File.Exists(Application.StartupPath & "\" & "COMport.xml") Then
                 Dim xmlCom As New System.Xml.XmlDocument
@@ -93,27 +93,27 @@ Public Class FrmZyEdit
                 Me.MnuiCom2.Checked = Not Me.MnuiCom1.Checked
             End If
         Catch ex As Exception
-            MsgBox("�����ö���������Ʒ�������������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+            MsgBox("读取COM口配置文件失败，" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Return
         End Try
     End Sub
 
 #End Region
 
-#Region "�ؼ��س����Ĵ���"
+#Region "控件回车键的处理"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtZydm.KeyPress, TxtZysm.KeyPress, TxtZymc.KeyPress, TxtBmdm.KeyPress, TxtIcno.KeyPress, TxtEmail.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'ָʾ KeyPress �¼��Ѵ�����ȥ�� Windows ȱʡ�Ķ�������
+                '指示 KeyPress 事件已处理，去掉 Windows 默认的对应功能
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "���ÿؼ�"
+#Region "设置控件"
 
     Private Sub SetAll(ByVal medit As Boolean)
         If Not medit Then
@@ -164,7 +164,7 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "ְԱ�����¼�"
+#Region "职员输入事件"
 
     Private Sub TxtZymc_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtZymc.Validating
         Dim spell As New ClsGetChineseSpell
@@ -173,7 +173,7 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "���ű�����¼�"
+#Region "部门编码事件"
 
     Private Sub TxtBmdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtBmdm.KeyDown
         Select Case e.KeyCode
@@ -185,7 +185,7 @@ Public Class FrmZyEdit
                     .paraField1 = "bmdm"
                     .paraField2 = "bmmc"
                     .paraField3 = "bmsm"
-                    .paraTitle = "����"
+                    .paraTitle = "部门"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -215,7 +215,7 @@ Public Class FrmZyEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "rc_bmxx")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -224,10 +224,10 @@ Public Class FrmZyEdit
                 TxtBmdm.Text = Trim(rcDataSet.Tables("rc_bmxx").Rows(0).Item("bmdm"))
                 LblBmmc.Text = Trim(rcDataSet.Tables("rc_bmxx").Rows(0).Item("bmmc"))
             Else
-                MsgBox("���ű��벻���ڣ��밴F3��ѡ��", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("部门编码不存在，请按F3选择。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 e.Cancel = True
             End If
-            '����Ƿ�����ϸ��¼
+            '检查是否存在明细记录
             Try
                 rcOleDbConn.Open()
                 rcOleDbCommand.Connection = rcOleDbConn
@@ -242,13 +242,13 @@ Public Class FrmZyEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataSet, "reccnt")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
             End Try
             If rcDataSet.Tables("reccnt").Rows(0).Item("gs") > 0 Then
-                MsgBox("����������ϸ���ű��롣", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("该部门存在明细部门编码。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 e.Cancel = True
             End If
         End If
@@ -292,11 +292,11 @@ Public Class FrmZyEdit
         If Not Me.MnuiCom1.Checked Then
             Me.MnuiCom1.Checked = True
             Me.MnuiCom2.Checked = False
-            '��������
+            '删除配置
             If System.IO.File.Exists(Application.StartupPath & "\COMport.xml") Then
                 System.IO.File.Delete(Application.StartupPath & "\COMport.xml")
             End If
-            'дxml�ļ�
+            '写xml文件
             Dim rcStreamWriter As StreamWriter
             rcStreamWriter = File.CreateText(Application.StartupPath & "\COMport.xml")
             rcStreamWriter.WriteLine("<?xml version=""1.0"" encoding=""utf-8"" ?> ")
@@ -309,11 +309,11 @@ Public Class FrmZyEdit
         If Not MnuiCom2.Checked Then
             Me.MnuiCom1.Checked = False
             Me.MnuiCom2.Checked = True
-            '��������
+            '删除配置
             If System.IO.File.Exists(Application.StartupPath & "\COMport.xml") Then
                 System.IO.File.Delete(Application.StartupPath & "\COMport.xml")
             End If
-            'дxml�ļ�
+            '写xml文件
             Dim rcStreamWriter As StreamWriter
             rcStreamWriter = File.CreateText(Application.StartupPath & "\COMport.xml")
             rcStreamWriter.WriteLine("<?xml version=""1.0"" encoding=""utf-8"" ?> ")
@@ -322,7 +322,7 @@ Public Class FrmZyEdit
         End If
     End Sub
 
-#Region "������ĩ��¼"
+#Region "首上下末记录"
 
     Private Sub BtnTop_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnTop.Click
         If BindingContext(rcDataView, "").Count > 0 Then
@@ -354,19 +354,19 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "����"
+#Region "新增"
 
     Private Sub BtnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNew.Click, MnuiNew.Click
         NewEvent()
     End Sub
 
     Private Sub NewEvent()
-        '����
+        '新增
         If Not isAdding Then
             isAdding = True
             Try
                 currentPos = BindingContext(rcDataView, "").Position
-                '�����ǰ�༭����
+                '清除当前编辑内容
                 BindingContext(rcDataView, "").EndCurrentEdit()
                 BindingContext(rcDataView, "").AddNew()
             Catch eEndEdit As System.Exception
@@ -378,20 +378,20 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "�޸�"
+#Region "修改"
 
     Private Sub BtnEdit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnEdit.Click, MnuiEdit.Click
         EditEvent()
     End Sub
 
     Private Sub EditEvent()
-        '�޸�
+        '修改
         If isAdding Then
             isAdding = False
         End If
         Try
             currentPos = BindingContext(rcDataView, "").Position
-            '�����ǰ�༭����
+            '清除当前编辑内容
             BindingContext(rcDataView, "").EndCurrentEdit()
         Catch eEndEdit As System.Exception
             System.Windows.Forms.MessageBox.Show(eEndEdit.Message)
@@ -402,14 +402,14 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "����"
+#Region "保存"
 
     Private Sub TsSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnSave.Click, MnuiSave.Click
         SaveEvent()
     End Sub
 
     Private Sub SaveEvent()
-        '��֤����
+        '验证数据
         If Not String.IsNullOrEmpty(Me.TxtBmdm.Text) Then
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -425,7 +425,7 @@ Public Class FrmZyEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_bmxx")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -434,19 +434,19 @@ Public Class FrmZyEdit
                 Me.TxtBmdm.Text = rcDataset.Tables("rc_bmxx").Rows(0).Item("bmdm")
                 Me.LblBmmc.Text = rcDataset.Tables("rc_bmxx").Rows(0).Item("bmmc")
             Else
-                MsgBox("������Ϣ����ȷ��", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+                MsgBox("职员信息不正确，", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
                 Return
             End If
         Else
-            MsgBox("�����벿����Ϣ��", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+            MsgBox("请输入职员信息。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
             Return
         End If
-        '����
+        '新增
         If isAdding Then
             If String.IsNullOrEmpty(Me.TxtZydm.Text) Then
                 Return
             End If
-            'REM ���ӱ���
+            'REM 添加记录
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -475,9 +475,9 @@ Public Class FrmZyEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Catch ey As OleDbException
-                    MsgBox("�������" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 End Try
                 Return
             Finally
@@ -485,7 +485,7 @@ Public Class FrmZyEdit
             End Try
             isAdding = False
         Else
-            REM �޸��˺�
+            REM 修改记录
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -502,7 +502,7 @@ Public Class FrmZyEdit
                 rcOleDbCommand.Parameters.Add("@email", OleDbType.VarChar, 50).Value = Trim(TxtEmail.Text)
                 rcOleDbCommand.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = Trim(Me.TxtZydm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
-                '�������
+                '刷新数据
                 rcOleDbCommand.CommandText = "SELECT rc_zyxx.zydm,rc_zyxx.zymc,rc_zyxx.zysm,rc_zyxx.bmdm,rc_bmxx.bmmc,rc_zyxx.icno,rc_zyxx.email FROM rc_zyxx Left Join rc_bmxx On rc_zyxx.bmdm = rc_bmxx.bmdm ORDER BY zydm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -515,9 +515,9 @@ Public Class FrmZyEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Catch ey As OleDbException
-                    MsgBox("�������" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 End Try
                 Return
             Finally
@@ -529,14 +529,14 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "ȡ��"
+#Region "取消"
 
     Private Sub TsCancel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCancel.Click, MnuiCancel.Click
         CancelEvent()
     End Sub
 
     Private Sub CancelEvent()
-        'ȡ��
+        '取消
         rcOleDbConn.Open()
         rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
         rcOleDbCommand.Connection = rcOleDbConn
@@ -556,9 +556,9 @@ Public Class FrmZyEdit
         Catch ex As Exception
             Try
                 rcOleDbTrans.Rollback()
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Catch ey As OleDbException
-                MsgBox("�������" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             End Try
             Return
         Finally
@@ -570,7 +570,7 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "�ر�"
+#Region "关闭"
 
     Private Sub BtnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
         Me.Close()
@@ -578,7 +578,7 @@ Public Class FrmZyEdit
 
 #End Region
 
-#Region "����"
+#Region "关于"
 
     Private Sub MnuiAbout_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuiAbout.Click
         Dim rcFrm As New FrmAbout

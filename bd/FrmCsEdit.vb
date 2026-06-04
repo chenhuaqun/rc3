@@ -2,26 +2,26 @@ Imports System.Data.OleDb
 
 Public Class FrmCsEdit
 
-#Region "�������"
+#Region "定义变量"
 
-    '��������������
+    '建立数据适配器
     ReadOnly rcOleDbDataAdpt As New OleDbDataAdapter
-    '����DataSet����
+    '建立DataSet对象
     Dim rcDataset As New DataSet
-    '���ݸ��´���
+    '数据更新传递
     Dim rcOleDbTrans As OleDbTransaction
-    '����OleDbCommand����
+    '建立OleDbCommand对象
     ReadOnly rcOleDbCommand As OleDbCommand = rcOleDbConn.CreateCommand()
-    '������ͼ
+    '数据视图
     Dim rcDataView As DataView
-    '������־
+    '新增标志
     Dim isAdding As Boolean = False
-    '��ǰ��¼��
+    '当前记录号
     Dim currentPos As Integer
 
 #End Region
 
-#Region "��ʼ��"
+#Region "初始化"
 
     Overloads Property ParaDataSet() As DataSet
         Get
@@ -86,9 +86,9 @@ Public Class FrmCsEdit
         BindingContext(rcDataView, "").Position = currentPos
         SetAll(True)
         If isAdding Then
-            '�����ǰ�༭����
+            '清除当前编辑内容
             BindingContext(rcDataView, "").EndCurrentEdit()
-            '����һ��
+            '增加一行
             BindingContext(rcDataView, "").AddNew()
         Else
             Me.TxtCsdm.Enabled = False
@@ -97,20 +97,20 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "�ؼ��س����Ĵ���"
+#Region "控件回车键的处理"
 
     Private Sub Control_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtLbdm.KeyPress, TxtCsdm.KeyPress, TxtCsmc.KeyPress, TxtKhsm.KeyPress, TxtAddress.KeyPress, TxtPostCode.KeyPress, TxtWaddress.KeyPress, TxtKhyh.KeyPress, TxtYhzh.KeyPress, TxtSwdjh.KeyPress, TxtFddbr.KeyPress, TxtGsdjh.KeyPress, TxtZczb.KeyPress, TxtJyfw.KeyPress, TxtLxr.KeyPress, TxtMobile.KeyPress, TxtTel.KeyPress, TxtFax.KeyPress, TxtEmail.KeyPress, TxtZydm.KeyPress, CmbFktj.KeyPress, NudFkts.KeyPress
         Select Case e.KeyChar
             Case Chr(Keys.Return)
                 SendKeys.Send("{TAB}")
-                'ָʾ KeyPress �¼��Ѵ�����ȥ�� Windows ȱʡ�Ķ�������
+                '指示 KeyPress 事件已处理，... Windows 缺省的处理
                 e.Handled = True
         End Select
     End Sub
 
 #End Region
 
-#Region "���ÿؼ�"
+#Region "设置控件"
 
     Private Sub SetAll(ByVal medit As Boolean)
         If Not medit Then
@@ -193,7 +193,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "��Ӧ����������¼�"
+#Region "供应商类别输入事件"
 
     Private Sub Txtlbdm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtLbdm.KeyDown
         Select Case e.KeyCode
@@ -205,7 +205,7 @@ Public Class FrmCsEdit
                     .paraField1 = "lbdm"
                     .paraField2 = "lbmc"
                     .paraField3 = "lbsm"
-                    .paraTitle = "��Ӧ�����"
+                    .paraTitle = "供应商类别"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -231,7 +231,7 @@ Public Class FrmCsEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_cslb")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -247,7 +247,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "�Զ�����"
+#Region "自动编号"
 
     Private Sub BtnAutoKhdm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnAutoKhdm.Click
         If Not String.IsNullOrEmpty(Me.TxtLbdm.Text) And Me.TxtLbdm.Text.Length = 2 And Me.TxtCsdm.Enabled Then
@@ -265,7 +265,7 @@ Public Class FrmCsEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "autocsdm")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -285,7 +285,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "��Ӧ�������¼�"
+#Region "供应商名称输入事件"
 
     Private Sub TxtKhmc_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles TxtCsmc.Validating
         Dim spell As New ClsGetChineseSpell
@@ -294,7 +294,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "ְԱ������¼�"
+#Region "职员输入事件"
 
     Private Sub TxtZydm_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtZydm.KeyDown
         Select Case e.KeyCode
@@ -306,7 +306,7 @@ Public Class FrmCsEdit
                     .paraField1 = "zydm"
                     .paraField2 = "zymc"
                     .paraField3 = "zysm"
-                    .paraTitle = "ְԱ"
+                    .paraTitle = "职员"
                     .paraOldValue = ""
                     .paraAddName = ""
                     If .ShowDialog = DialogResult.OK Then
@@ -332,7 +332,7 @@ Public Class FrmCsEdit
                 End If
                 rcOleDbDataAdpt.Fill(rcDataset, "rc_zyxx")
             Catch ex As Exception
-                MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Return
             Finally
                 rcOleDbConn.Close()
@@ -348,7 +348,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "������ĩ��¼"
+#Region "首上下末记录"
 
     Private Sub BtnTop_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnTop.Click
         If BindingContext(rcDataView, "").Count > 0 Then
@@ -380,19 +380,19 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "����"
+#Region "新增"
 
     Private Sub BtnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnNew.Click, MnuiNew.Click
         NewEvent()
     End Sub
 
     Private Sub NewEvent()
-        '����
+        '新增
         If Not isAdding Then
             isAdding = True
             Try
                 currentPos = BindingContext(rcDataView, "").Position
-                '�����ǰ�༭����
+                '清除当前编辑内容
                 BindingContext(rcDataView, "").EndCurrentEdit()
                 BindingContext(rcDataView, "").AddNew()
             Catch eEndEdit As System.Exception
@@ -404,20 +404,20 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "�޸�"
+#Region "修改"
 
     Private Sub BtnEdit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnEdit.Click, MnuiEdit.Click
         EditEvent()
     End Sub
 
     Private Sub EditEvent()
-        '�޸�
+        '修改
         If isAdding Then
             isAdding = False
         End If
         Try
             currentPos = BindingContext(rcDataView, "").Position
-            '�����ǰ�༭����
+            '清除当前编辑内容
             BindingContext(rcDataView, "").EndCurrentEdit()
         Catch eEndEdit As System.Exception
             System.Windows.Forms.MessageBox.Show(eEndEdit.Message)
@@ -428,7 +428,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "����"
+#Region "保存"
 
     Private Sub TsSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnSave.Click, MnuiSave.Click
         SaveEvent()
@@ -436,23 +436,23 @@ Public Class FrmCsEdit
 
     Private Sub SaveEvent()
         If String.IsNullOrEmpty(Me.TxtCsdm.Text) Then
-            MsgBox("��Ӧ�̱��벻��Ϊ�ա�", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+            MsgBox("供应商编码不能为空。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
             Return
         End If
         If String.IsNullOrEmpty(Me.CmbFktj.Text) Then
-            MsgBox("������������Ϊ�ա�", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+            MsgBox("付款条件不能为空。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
             Return
         End If
-        If Me.CmbFktj.SelectedItem = "�����" Or Me.CmbFktj.SelectedItem = "��������" Then
+        If Me.CmbFktj.SelectedItem = "款到发货" Or Me.CmbFktj.SelectedItem = "全额预付" Then
             Me.NudFkts.Value = 0
         End If
-        If Me.CmbFktj.SelectedItem = "�½�" And Me.NudFkts.Value = 0 Then
-            MsgBox("�����������½�ʱ��������������Ϊ0��", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "��ʾ��Ϣ")
+        If Me.CmbFktj.SelectedItem = "月结" And Me.NudFkts.Value = 0 Then
+            MsgBox("付款条件为月结时，结算天数不能为0。", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, "提示信息")
             Return
         End If
-        '����
+        '验证数据
         If isAdding Then
-            'REM ���ӱ���
+            'REM 添加记录
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -498,9 +498,9 @@ Public Class FrmCsEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Catch ey As OleDbException
-                    MsgBox("�������" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 End Try
                 Return
             Finally
@@ -508,7 +508,7 @@ Public Class FrmCsEdit
             End Try
             isAdding = False
         Else
-            REM �޸��˺�
+            REM 修改记录
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -542,7 +542,7 @@ Public Class FrmCsEdit
                 rcOleDbCommand.Parameters.Add("@fkts", OleDbType.Integer, 4).Value = Me.NudFkts.Text
                 rcOleDbCommand.Parameters.Add("@csdm", OleDbType.VarChar, 12).Value = Trim(TxtCsdm.Text)
                 rcOleDbCommand.ExecuteNonQuery()
-                '�������
+                '刷新数据
                 rcOleDbCommand.CommandText = "SELECT * FROM rc_csxx ORDER BY csdm"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -555,9 +555,9 @@ Public Class FrmCsEdit
             Catch ex As Exception
                 Try
                     rcOleDbTrans.Rollback()
-                    MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 Catch ey As OleDbException
-                    MsgBox("�������" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+                    MsgBox("数据保存失败" & Chr(13) & ey.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
                 End Try
                 Return
             Finally
@@ -569,14 +569,14 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "ȡ��"
+#Region "取消"
 
     Private Sub TsCancel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnCancel.Click, MnuiCancel.Click
         CancelEvent()
     End Sub
 
     Private Sub CancelEvent()
-        'ȡ��
+        '取消
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -591,7 +591,7 @@ Public Class FrmCsEdit
             rcOleDbDataAdpt.Fill(rcDataset, "rc_csxx")
             BindingContext(rcDataView, "").Position = currentPos
         Catch ex As Exception
-            MsgBox("�������" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "��ʾ��Ϣ")
+            MsgBox("数据保存失败" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
             Return
         Finally
             rcOleDbConn.Close()
@@ -602,7 +602,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "�ر�"
+#Region "关闭"
 
     Private Sub BtnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnExit.Click, MnuiExit.Click
         Me.Close()
@@ -610,7 +610,7 @@ Public Class FrmCsEdit
 
 #End Region
 
-#Region "����"
+#Region "关于"
 
     Private Sub MnuiAbout_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MnuiAbout.Click
         Dim rcFrm As New FrmAbout
@@ -622,7 +622,7 @@ Public Class FrmCsEdit
 #End Region
 
     Private Sub CmbFktj_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CmbFktj.SelectedValueChanged
-        If Me.CmbFktj.Text = "�����" Or Me.CmbFktj.Text = "��������" Then
+        If Me.CmbFktj.Text = "款到发货" Or Me.CmbFktj.Text = "全额预付" Then
             Me.NudFkts.Value = 0
         End If
     End Sub

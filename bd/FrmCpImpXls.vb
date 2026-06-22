@@ -309,6 +309,16 @@ Public Class FrmCpImpXls
                                     rcOleDbCommand.ExecuteNonQuery()
                                 End If
                             End If
+                            '更新销售单价
+                            If rcDataset.Tables("result").Rows(i).Item("销售单价").GetType.ToString <> "System.DBNull" Then
+                                If rcDataset.Tables("result").Rows(i).Item("销售单价") <> 0 Then
+                                    rcOleDbCommand.CommandText = "UPDATE rc_cpxx SET xsdj = ? WHERE cpdm = ?"
+                                    rcOleDbCommand.Parameters.Clear()
+                                    rcOleDbCommand.Parameters.Add("@cpweight", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("销售单价")
+                                    rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料编码")).ToUpper
+                                    rcOleDbCommand.ExecuteNonQuery()
+                                End If
+                            End If
                         End If
                     Else
                         '不存在,则追加

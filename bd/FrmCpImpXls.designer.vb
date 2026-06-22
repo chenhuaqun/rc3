@@ -210,7 +210,7 @@ Partial Class FrmCpImpXls
         'RadioButton5
         '
         Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(760, 72)
+        Me.RadioButton5.Location = New System.Drawing.Point(880, 72)
         Me.RadioButton5.Name = "RadioButton5"
         Me.RadioButton5.Size = New System.Drawing.Size(107, 16)
         Me.RadioButton5.TabIndex = 19
@@ -220,11 +220,11 @@ Partial Class FrmCpImpXls
         'RadioButton4
         '
         Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(569, 72)
+        Me.RadioButton4.Location = New System.Drawing.Point(629, 72)
         Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(191, 16)
+        Me.RadioButton4.Size = New System.Drawing.Size(251, 16)
         Me.RadioButton4.TabIndex = 18
-        Me.RadioButton4.Text = "全部追加不更新标准成本、克重"
+        Me.RadioButton4.Text = "全部追加不更新标准成本、克重、销售单价"
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
         'RadioButton3
@@ -232,9 +232,9 @@ Partial Class FrmCpImpXls
         Me.RadioButton3.AutoSize = True
         Me.RadioButton3.Location = New System.Drawing.Point(354, 72)
         Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(215, 16)
+        Me.RadioButton3.Size = New System.Drawing.Size(275, 16)
         Me.RadioButton3.TabIndex = 17
-        Me.RadioButton3.Text = "全部追加并更新全部标准成本、克重"
+        Me.RadioButton3.Text = "全部追加并更新全部标准成本、克重、销售单价"
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
         'RadioButton2

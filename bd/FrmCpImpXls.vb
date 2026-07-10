@@ -322,7 +322,7 @@ Public Class FrmCpImpXls
                         End If
                     Else
                         '不存在,则追加
-                        rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,mjsl,fzdw,bzcb,clcb,rgcb,nycb,zjcb,glcb,beishu,cpweight,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
+                        rcOleDbCommand.CommandText = "INSERT INTO rc_cpxx (lbdm,cpdm,cpmc,dw,ckdm,mjsl,fzdw,bzcb,clcb,rgcb,nycb,zjcb,glcb,beishu,cpweight,xsdj,srr,srrq) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE)"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@lbdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料类别编码")).ToUpper
                         rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("result").Rows(i).Item("物料编码")).ToUpper
@@ -339,6 +339,7 @@ Public Class FrmCpImpXls
                         rcOleDbCommand.Parameters.Add("@glcb", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("管理成本")
                         rcOleDbCommand.Parameters.Add("@beishu", OleDbType.Numeric, 12).Value = rcDataset.Tables("result").Rows(i).Item("倍数")
                         rcOleDbCommand.Parameters.Add("@cpweight", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("克重")
+                        rcOleDbCommand.Parameters.Add("@xsdj", OleDbType.Numeric, 18).Value = rcDataset.Tables("result").Rows(i).Item("销售单价")
                         rcOleDbCommand.Parameters.Add("@srr", OleDbType.VarChar, 30).Value = g_User_DspName
                         rcOleDbCommand.ExecuteNonQuery()
                     End If

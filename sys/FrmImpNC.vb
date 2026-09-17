@@ -142,6 +142,74 @@ Public Class FrmImpNC
             Me.CmbFph.SelectedItem = 1
         End If
 
+        '取NC本位币币种设置
+        Dim strNcWbdm As String = "CNY"
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT parastrvalue FROM rc_para WHERE paraid = 'NC本位币币种' AND parastrvalue IS NOT NULL"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcDataset.Tables("rc_para_ncwb")?.Clear()
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para_ncwb")
+            If rcDataset.Tables("rc_para_ncwb").Rows.Count > 0 Then
+                strNcWbdm = Trim(rcDataset.Tables("rc_para_ncwb").Rows(0).Item("parastrvalue").ToString)
+            End If
+        Catch ex As Exception
+            MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        '从汇率设置中读取币种
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT wbdm,MAX(wbmc) AS wbmc FROM rc_wbxx GROUP BY wbdm ORDER BY wbdm"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcDataset.Tables("rc_wb1")?.Clear()
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_wb1")
+        Catch ex As Exception
+            MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        With Me.CmbNcWbdm
+            .Items.Clear()
+            Dim i As Integer
+            If rcDataset.Tables("rc_wb1") IsNot Nothing Then
+                For i = 0 To rcDataset.Tables("rc_wb1").Rows.Count - 1
+                    .Items.Add(Trim(rcDataset.Tables("rc_wb1").Rows(i).Item("wbdm").ToString) & " " & Trim(rcDataset.Tables("rc_wb1").Rows(i).Item("wbmc").ToString))
+                Next
+            End If
+            '确保下拉框始终包含人民币(本位币)
+            Dim blnHasCny As Boolean = False
+            For i = 0 To .Items.Count - 1
+                If .Items(i).ToString.StartsWith("CNY") Then
+                    blnHasCny = True
+                    Exit For
+                End If
+            Next
+            If Not blnHasCny Then
+                .Items.Insert(0, "CNY 人民币")
+            End If
+            '选中保存的NC本位币币种
+            .SelectedIndex = -1
+            For i = 0 To .Items.Count - 1
+                If Trim(Mid(.Items(i).ToString & " ", 1, InStr(.Items(i).ToString & " ", " ") - 1)) = strNcWbdm Then
+                    .SelectedIndex = i
+                    Exit For
+                End If
+            Next
+            If .SelectedIndex < 0 And .Items.Count > 0 Then
+                .SelectedIndex = 0
+            End If
+        End With
+
     End Sub
 
 #Region "仓库编码的事件"
@@ -259,6 +327,35 @@ Public Class FrmImpNC
         Dim dateEnd As DateTime
         dateBegin = GetInvBegin(Me.NudYear.Value, Me.NudMonth.Value)
         dateEnd = GetInvEnd(Me.NudYear.Value, Me.NudMonth.Value)
+        '取并保存NC本位币币种设置
+        Dim strNcWbdm As String = ""
+        If Me.CmbNcWbdm.SelectedIndex >= 0 Then
+            strNcWbdm = Trim(Me.CmbNcWbdm.Items(Me.CmbNcWbdm.SelectedIndex).ToString)
+            If InStr(strNcWbdm, " ") > 0 Then
+                strNcWbdm = Trim(Mid(strNcWbdm, 1, InStr(strNcWbdm, " ") - 1))
+            End If
+        End If
+        If Not String.IsNullOrEmpty(strNcWbdm) Then
+            Try
+                rcOleDbConn.Open()
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = 'NC本位币币种'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.ExecuteNonQuery()
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'NC本位币币种',?,0.0)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.Parameters.Add("@parastrvalue", OleDbType.VarChar, 12).Value = strNcWbdm
+                rcOleDbCommand.ExecuteNonQuery()
+            Catch ex As Exception
+                MsgBox("保存NC本位币币种设置失败。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Finally
+                rcOleDbConn.Close()
+            End Try
+        End If
         Try
             rcOleDbConn.Open()
             rcOleDbCommand.Connection = rcOleDbConn
@@ -456,6 +553,36 @@ Public Class FrmImpNC
             Finally
                 NCOleDbConn.Close()
             End Try
+            '预载当年当月各币种汇率(rc_wbxx.wbhl{月份})，用于外币换算人民币
+            Dim dictWbhl As New Dictionary(Of String, Double)
+            Try
+                rcOleDbConn.Open()
+                rcOleDbCommand.Connection = rcOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT wbdm,wbhl" & Me.NudMonth.Value.ToString.PadLeft(2, "0") & " FROM rc_wbxx WHERE kjnd = ?"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@kjnd", OleDbType.VarChar, 4).Value = Me.NudYear.Value
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                rcDataset.Tables("rc_wbhl")?.Clear()
+                rcOleDbDataAdpt.Fill(rcDataset, "rc_wbhl")
+                dictWbhl.Clear()
+                For Each rcDr As DataRow In rcDataset.Tables("rc_wbhl").Rows
+                    If Not DBNull.Value.Equals(rcDr.Item("wbdm")) Then
+                        Dim dblRate As Double = 0.0
+                        If Not DBNull.Value.Equals(rcDr.Item(1)) Then
+                            Double.TryParse(rcDr.Item(1).ToString, dblRate)
+                        End If
+                        dictWbhl(Trim(rcDr.Item("wbdm").ToString)) = dblRate
+                    End If
+                Next
+            Catch ex As Exception
+                MsgBox("读取汇率设置失败，本次导入将不进行外币换算。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Finally
+                rcOleDbConn.Close()
+            End Try
+            '记录未维护汇率的NC本位币币种
+            Dim missedWbhl As New List(Of String)
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
@@ -527,10 +654,37 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@dw", OleDbType.VarChar, 50).Value = "~"
                     rcOleDbCommand.Parameters.Add("@sl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, rcDataset.Tables("gl_pz").Rows(i).Item("jfsl"), rcDataset.Tables("gl_pz").Rows(i).Item("dfsl"))
                     rcOleDbCommand.Parameters.Add("@dj", OleDbType.Numeric, 18).Value = 0.0
+                    '外币换算：NC凭证以外币为本位币，按设定的月度汇率换算为人民币
+                    Dim strBz As String = Trim(rcDataset.Tables("gl_pz").Rows(i).Item("wbdm").ToString)
+                    If String.IsNullOrEmpty(strBz) OrElse strBz = "~" Then
+                        strBz = g_Wbdm
+                    End If
+                    Dim dblWb As Double = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, Val(rcDataset.Tables("gl_pz").Rows(i).Item("jfwb").ToString), Val(rcDataset.Tables("gl_pz").Rows(i).Item("dfwb").ToString))
+                    Dim dblHl As Double = 0.0
+                    Dim dblJe As Double = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, Val(rcDataset.Tables("gl_pz").Rows(i).Item("jfje").ToString), Val(rcDataset.Tables("gl_pz").Rows(i).Item("dfje").ToString))
+                    If strBz = g_Wbdm Then
+                        '本位币(人民币)：原币即本币，不换算
+                        dblHl = 1.0
+                        dblJe = dblWb
+                    ElseIf strBz = strNcWbdm Then
+                        'NC本位币(外币)：按当年当月汇率换算为人民币
+                        Dim dblRate As Double = 0.0
+                        If dictWbhl.ContainsKey(strBz) Then
+                            dblRate = dictWbhl(strBz)
+                        End If
+                        If dblRate > 0 Then
+                            dblHl = dblRate
+                            dblJe = System.Math.Round(dblWb * dblHl, 2, MidpointRounding.AwayFromZero)
+                        Else
+                            If Not missedWbhl.Contains(strBz) Then
+                                missedWbhl.Add(strBz)
+                            End If
+                        End If
+                    End If
                     rcOleDbCommand.Parameters.Add("@bz", OleDbType.VarChar, 12).Value = rcDataset.Tables("gl_pz").Rows(i).Item("wbdm")
-                    rcOleDbCommand.Parameters.Add("@wb", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, rcDataset.Tables("gl_pz").Rows(i).Item("jfwb"), rcDataset.Tables("gl_pz").Rows(i).Item("dfwb"))
-                    rcOleDbCommand.Parameters.Add("@hl", OleDbType.Numeric, 18).Value = 0.0
-                    rcOleDbCommand.Parameters.Add("@je", OleDbType.Numeric, 14).Value = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, rcDataset.Tables("gl_pz").Rows(i).Item("jfje"), rcDataset.Tables("gl_pz").Rows(i).Item("dfje"))
+                    rcOleDbCommand.Parameters.Add("@wb", OleDbType.Numeric, 18).Value = dblWb
+                    rcOleDbCommand.Parameters.Add("@hl", OleDbType.Numeric, 18).Value = System.Math.Round(dblHl, 6, MidpointRounding.AwayFromZero)
+                    rcOleDbCommand.Parameters.Add("@je", OleDbType.Numeric, 14).Value = dblJe
                     rcOleDbCommand.Parameters.Add("@yspz", OleDbType.VarChar, 16).Value = "~"
                     rcOleDbCommand.Parameters.Add("@jsr", OleDbType.VarChar, 30).Value = "~"
                     rcOleDbCommand.Parameters.Add("@wldqr", OleDbType.Date, 8).Value = Now.Date
@@ -640,6 +794,9 @@ Public Class FrmImpNC
                     rcOleDbConn.Close()
                 End Try
             Next
+            If missedWbhl.Count > 0 Then
+                MsgBox("以下NC本位币币种未设置" & Me.NudYear.Value.ToString & "年" & Me.NudMonth.Value.ToString & "月的汇率，相关凭证未进行人民币换算：" & Join(missedWbhl.ToArray, "、") & Chr(13) & "请在'币种信息设置'中维护汇率后重新导入。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+            End If
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)

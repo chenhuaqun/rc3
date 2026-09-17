@@ -27,6 +27,8 @@ Partial Class FrmImpNC
         Me.Label2 = New System.Windows.Forms.Label()
         Me.NudYear = New System.Windows.Forms.NumericUpDown()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.CmbNcWbdm = New System.Windows.Forms.ComboBox()
+        Me.LblNcWbdm = New System.Windows.Forms.Label()
         Me.ChbPz = New System.Windows.Forms.CheckBox()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.ChbQc = New System.Windows.Forms.CheckBox()
@@ -138,6 +140,24 @@ Partial Class FrmImpNC
         Me.Label1.Size = New System.Drawing.Size(87, 16)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "会计期间："
+        '
+        'LblNcWbdm
+        '
+        Me.LblNcWbdm.AutoSize = True
+        Me.LblNcWbdm.Location = New System.Drawing.Point(93, 49)
+        Me.LblNcWbdm.Name = "LblNcWbdm"
+        Me.LblNcWbdm.Size = New System.Drawing.Size(89, 12)
+        Me.LblNcWbdm.TabIndex = 38
+        Me.LblNcWbdm.Text = "NC本位币币种："
+        '
+        'CmbNcWbdm
+        '
+        Me.CmbNcWbdm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbNcWbdm.FormattingEnabled = True
+        Me.CmbNcWbdm.Location = New System.Drawing.Point(188, 45)
+        Me.CmbNcWbdm.Name = "CmbNcWbdm"
+        Me.CmbNcWbdm.Size = New System.Drawing.Size(160, 20)
+        Me.CmbNcWbdm.TabIndex = 39
         '
         'ChbPz
         '
@@ -485,6 +505,8 @@ Partial Class FrmImpNC
         Me.Controls.Add(Me.ChbQc)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.ChbPz)
+        Me.Controls.Add(Me.LblNcWbdm)
+        Me.Controls.Add(Me.CmbNcWbdm)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.NudMonth)
         Me.Controls.Add(Me.Label2)
@@ -493,6 +515,8 @@ Partial Class FrmImpNC
         Me.Name = "FrmImpNC"
         Me.Text = "导入用友NC数据"
         Me.Controls.SetChildIndex(Me.Label1, 0)
+        Me.Controls.SetChildIndex(Me.LblNcWbdm, 0)
+        Me.Controls.SetChildIndex(Me.CmbNcWbdm, 0)
         Me.Controls.SetChildIndex(Me.NudYear, 0)
         Me.Controls.SetChildIndex(Me.Label2, 0)
         Me.Controls.SetChildIndex(Me.NudMonth, 0)
@@ -542,6 +566,8 @@ Partial Class FrmImpNC
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents NudYear As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents CmbNcWbdm As System.Windows.Forms.ComboBox
+    Friend WithEvents LblNcWbdm As System.Windows.Forms.Label
     Friend WithEvents ChbPz As System.Windows.Forms.CheckBox
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents ChbQc As System.Windows.Forms.CheckBox

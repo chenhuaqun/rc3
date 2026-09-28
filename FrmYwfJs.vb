@@ -252,7 +252,6 @@ Public Class FrmYwfJs
 
     Private Sub BtnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnOk.Click
         Dim i As Integer
-        Dim j As Integer
         Dim dateBegin As Date = GetInvBegin(Me.NudYear.Value, Me.NudMonth.Value)
         Dim dateEnd As Date = GetInvEnd(Me.NudYear.Value, Me.NudMonth.Value)
         '查询科目权限

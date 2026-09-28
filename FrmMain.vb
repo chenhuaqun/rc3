@@ -27,100 +27,9 @@ Public Class FrmMain
         Me.ToolStripStatusLabel3.Text = "操作员：" + g_User_DspName
         Me.ToolStripStatusLabel4.Text = "登陆日期：" & g_Kjrq.ToLongDateString
         '取操作员的角色
-        Try
-            sysOleDbConn.Open()
-            rcOleDbCommand.Connection = sysOleDbConn
-            rcOleDbCommand.CommandTimeout = 300
-            rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_users.user_dwdm,rc_users.user_account,rc_userinrole.roleid FROM rc_users,rc_userinrole WHERE rc_users.user_account = rc_userinrole.user_account AND rc_users.user_account = ?"
-            rcOleDbCommand.Parameters.Clear()
-            rcOleDbCommand.Parameters.Add("@USER_Account", OleDbType.VarChar, 30).Value = g_User_Account
-            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            rcDataset.Tables("rc_userinrole")?.Clear()
-            rcOleDbDataAdpt.Fill(rcDataset, "rc_userinrole")
-        Catch ex As Exception
-            MsgBox("程序错误1。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-            End
-        Finally
-            sysOleDbConn.Close()
-        End Try
-        If rcDataSet.Tables("rc_userinrole").Rows.Count <= 0 Then
-            MsgBox("您没有操作权限，请与系统管理员联系。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-            End
-        End If
-        Dim i As Integer
-        For i = 0 To rcDataSet.Tables("rc_userinrole").Rows.Count - 1
-            '取角色权限(角色权限为并且的关系)
-            Try
-                sysOleDbConn.Open()
-                rcOleDbCommand.Connection = sysOleDbConn
-                rcOleDbCommand.CommandTimeout = 300
-                rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_roleqx,rc_menu WHERE rc_roleqx.roleid = ? AND rc_menu.mnuiown = 'RC3' AND rc_roleqx.righttype = 'RC3' AND rc_roleqx.code = rc_menu.mnuiid ORDER BY rc_menu.mnuiid"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@roleid", OleDbType.VarChar, 12).Value = rcDataSet.Tables("rc_userinrole").Rows(i).Item("roleid")
-                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                rcDataset.Tables("rc_roleqx")?.Clear()
-                rcOleDbDataAdpt.Fill(rcDataset, "rc_roleqx")
-            Catch ex As Exception
-                MsgBox("程序错误2。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-                End
-            Finally
-                sysOleDbConn.Close()
-            End Try
-            Dim j As Integer
-            For j = 0 To rcDataSet.Tables("rc_roleqx").Rows.Count - 1
-                Dim t As Type = Me.GetType
-                Dim f As System.Reflection.FieldInfo = t.GetField("_" & Trim(rcDataSet.Tables("rc_roleqx").Rows(j).Item("mnuiname")), System.Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Public)
-                If f IsNot Nothing Then
-                    Dim itemMenu As ToolStripMenuItem = CType(f.GetValue(Me), ToolStripMenuItem)
-                    itemMenu.Visible = True
-                End If
-            Next
-        Next
-        If g_User_Account = "ADMIN" Then
-            '系统管理员
-            '取所有菜单
-            Try
-                sysOleDbConn.Open()
-                rcOleDbCommand.Connection = sysOleDbConn
-                rcOleDbCommand.CommandTimeout = 300
-                rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_menu WHERE rc_menu.mnuiown = 'RC3' ORDER BY rc_menu.mnuiid"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataSet.Tables("rc_roleqx") IsNot Nothing Then
-                    rcDataSet.Tables("rc_roleqx").Clear()
-                End If
-                rcOleDbDataAdpt.Fill(rcDataSet, "rc_roleqx")
-            Catch ex As Exception
-                MsgBox("程序错误5。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-                End
-            Finally
-                sysOleDbConn.Close()
-            End Try
-            Dim j As Integer
-            For j = 0 To rcDataSet.Tables("rc_roleqx").Rows.Count - 1
-                Dim t As Type = Me.GetType
-                Dim f As System.Reflection.FieldInfo = t.GetField("_" & Trim(rcDataSet.Tables("rc_roleqx").Rows(j).Item("mnuiname")), System.Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Public)
-                If f IsNot Nothing Then
-                    Dim itemMenu As ToolStripMenuItem = CType(f.GetValue(Me), ToolStripMenuItem)
-                    itemMenu.Visible = True
-                End If
-            Next
-        End If
-
+        LoadUserInRole(1)
+        ApplyMenuPermission(2)
         Me.ToolStripStatusLabel1.Text = "欢迎使用。"
-
-        For i = 0 To Me.MenuStripMain.Items.Count - 1
-            Dim dc As ToolStripMenuItem = Me.MenuStripMain.Items(i)
-            If Not SetSubItemVisible(dc) Then
-                dc.Visible = False
-            End If
-        Next
-
-
-        'sysoledbconn.ConnectionString = strSysConnectionString
 
         BackgroundWorkerMain.RunWorkerAsync()
     End Sub
@@ -2287,20 +2196,20 @@ Public Class FrmMain
         End With
     End Sub
 
-    '汇总业务费客户汇总查询
-    Private Sub MnuiYwfKhHzHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfKhHzHz.Click
-        AddLog(Me.MnuiYwfKhHzHz.Text)
-        Dim rcFrm As New FrmYwfKhHzHz
+    '业务费计算明细查询(按账套)
+    Private Sub MnuiYwfCxHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfCxHz.Click
+        AddLog(Me.MnuiYwfCxHz.Text)
+        Dim rcFrm As New FrmYwfCxHz
         With rcFrm
             .MdiParent = Me
             .Show()
         End With
     End Sub
 
-    '业务费计算明细表(按账套)
-    Private Sub MnuiYwfCxHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfCxHz.Click
-        AddLog(Me.MnuiYwfCxHz.Text)
-        Dim rcFrm As New FrmYwfCxHz
+    '业务费客户汇总表(按账套)
+    Private Sub MnuiYwfKhHzHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfKhHzHz.Click
+        AddLog(Me.MnuiYwfKhHzHz.Text)
+        Dim rcFrm As New FrmYwfKhHzHz
         With rcFrm
             .MdiParent = Me
             .Show()
@@ -2441,88 +2350,8 @@ Public Class FrmMain
             End If
         End With
         '取操作员的角色
-        Try
-            sysOleDbConn.Open()
-            rcOleDbCommand.Connection = sysOleDbConn
-            rcOleDbCommand.CommandTimeout = 300
-            rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT rc_users.user_dwdm,rc_users.user_account,rc_userinrole.roleid FROM rc_users,rc_userinrole WHERE rc_users.user_account = rc_userinrole.user_account AND rc_users.user_account = ?"
-            rcOleDbCommand.Parameters.Clear()
-            rcOleDbCommand.Parameters.Add("@USER_Account", OleDbType.VarChar, 30).Value = g_User_Account
-            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataset.Tables("rc_userinrole") IsNot Nothing Then
-                rcDataset.Tables("rc_userinrole").Clear()
-            End If
-            rcOleDbDataAdpt.Fill(rcDataset, "rc_userinrole")
-        Catch ex As Exception
-            MsgBox("程序错误4。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-            End
-        Finally
-            sysOleDbConn.Close()
-        End Try
-        If rcDataset.Tables("rc_userinrole").Rows.Count <= 0 Then
-            MsgBox("您没有操作权限，请与系统管理员联系。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-            End
-        End If
-        Dim i As Integer
-        For i = 0 To rcDataset.Tables("rc_userinrole").Rows.Count - 1
-            '取角色权限(角色权限为并且的关系)
-            Try
-                sysOleDbConn.Open()
-                rcOleDbCommand.Connection = sysOleDbConn
-                rcOleDbCommand.CommandTimeout = 300
-                rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_roleqx,rc_menu WHERE rc_roleqx.roleid = ? AND rc_menu.mnuiown = 'RC3' AND rc_roleqx.righttype = 'RC3' AND rc_roleqx.code = rc_menu.mnuiid ORDER BY rc_menu.mnuiid"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbCommand.Parameters.Add("@roleid", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_userinrole").Rows(i).Item("roleid")
-                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataset.Tables("rc_roleqx") IsNot Nothing Then
-                    rcDataset.Tables("rc_roleqx").Clear()
-                End If
-                rcOleDbDataAdpt.Fill(rcDataset, "rc_roleqx")
-            Catch ex As Exception
-                MsgBox("程序错误5。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-                End
-            Finally
-                sysOleDbConn.Close()
-            End Try
-            Dim j As Integer
-            For j = 0 To rcDataset.Tables("rc_roleqx").Rows.Count - 1
-                Dim t As Type = Me.GetType
-                Dim f As System.Reflection.FieldInfo = t.GetField("_" & Trim(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname")), System.Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Public)
-                Dim itemMenu As ToolStripMenuItem = CType(f.GetValue(Me), ToolStripMenuItem)
-                itemMenu.Visible = True
-            Next
-        Next
-        If g_User_Account = "ADMIN" Then
-            '系统管理员
-            '取所有菜单
-            Try
-                sysOleDbConn.Open()
-                rcOleDbCommand.Connection = sysOleDbConn
-                rcOleDbCommand.CommandTimeout = 300
-                rcOleDbCommand.CommandType = CommandType.Text
-                rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_menu WHERE rc_menu.mnuiown = 'RC3' ORDER BY rc_menu.mnuiid"
-                rcOleDbCommand.Parameters.Clear()
-                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-                If rcDataset.Tables("rc_roleqx") IsNot Nothing Then
-                    rcDataset.Tables("rc_roleqx").Clear()
-                End If
-                rcOleDbDataAdpt.Fill(rcDataset, "rc_roleqx")
-            Catch ex As Exception
-                MsgBox("程序错误5。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
-                End
-            Finally
-                sysOleDbConn.Close()
-            End Try
-            Dim j As Integer
-            For j = 0 To rcDataset.Tables("rc_roleqx").Rows.Count - 1
-                Dim t As Type = Me.GetType
-                Dim f As System.Reflection.FieldInfo = t.GetField("_" & Trim(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname")), System.Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Public)
-                Dim itemMenu As ToolStripMenuItem = CType(f.GetValue(Me), ToolStripMenuItem)
-                itemMenu.Visible = True
-            Next
-        End If
+        LoadUserInRole(4)
+        ApplyMenuPermission(5)
         Me.ToolStripStatusLabel2.Text = "单位：" + g_Dwmc
         Me.ToolStripStatusLabel3.Text = "操作员：" + g_User_DspName
         Me.ToolStripStatusLabel4.Text = "登陆日期：" & g_Kjrq.ToLongDateString
@@ -2684,22 +2513,142 @@ Public Class FrmMain
         End With
     End Sub
 
-    Private Function SetSubItemVisible(ByVal dc As ToolStripMenuItem) As Boolean
-        Dim i As Integer
-        'dc.Visible = False
-        'Dim blnVisible As Boolean
-        If dc.DropDownItems.Count > 0 Then
-            For i = 0 To dc.DropDownItems.Count - 1
-                If dc.DropDownItems.Item(i).GetType.ToString = "System.Windows.Forms.ToolStripMenuItem" Then
-                    Dim sdc As ToolStripMenuItem = dc.DropDownItems.Item(i)
-                    If sdc.Visible = True Then
-                        'blnVisible = True
+    '按角色权限控制菜单显隐
+    Private Sub ApplyMenuPermission(ByVal intStep As Integer)
+        '先全部隐藏，避免更换操作员后残留上一次登录所显示的菜单
+        SetAllMenuItemVisible(False)
+        If g_User_Account <> "ADMIN" Then
+            '取角色权限(角色权限为并且的关系)
+            Dim i As Integer
+            For i = 0 To rcDataset.Tables("rc_userinrole").Rows.Count - 1
+                Try
+                    sysOleDbConn.Open()
+                    rcOleDbCommand.Connection = sysOleDbConn
+                    rcOleDbCommand.CommandTimeout = 300
+                    rcOleDbCommand.CommandType = CommandType.Text
+                    rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_roleqx,rc_menu WHERE rc_roleqx.roleid = ? AND rc_menu.mnuiown = 'RC3' AND rc_roleqx.righttype = 'RC3' AND rc_roleqx.code = rc_menu.mnuiid ORDER BY rc_menu.mnuiid"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.Parameters.Add("@roleid", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_userinrole").Rows(i).Item("roleid")
+                    rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                    If rcDataset.Tables("rc_roleqx") IsNot Nothing Then
+                        rcDataset.Tables("rc_roleqx").Clear()
                     End If
-                    SetSubItemVisible(sdc)
+                    rcOleDbDataAdpt.Fill(rcDataset, "rc_roleqx")
+                Catch ex As Exception
+                    MsgBox("程序错误" & intStep & "。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                    End
+                Finally
+                    sysOleDbConn.Close()
+                End Try
+                Dim j As Integer
+                For j = 0 To rcDataset.Tables("rc_roleqx").Rows.Count - 1
+                    ShowMenuItem(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname"))
+                Next
+            Next
+        Else
+            '系统管理员，取所有菜单
+            Try
+                sysOleDbConn.Open()
+                rcOleDbCommand.Connection = sysOleDbConn
+                rcOleDbCommand.CommandTimeout = 300
+                rcOleDbCommand.CommandType = CommandType.Text
+                rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_menu WHERE rc_menu.mnuiown = 'RC3' ORDER BY rc_menu.mnuiid"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("rc_roleqx") IsNot Nothing Then
+                    rcDataset.Tables("rc_roleqx").Clear()
                 End If
+                rcOleDbDataAdpt.Fill(rcDataset, "rc_roleqx")
+            Catch ex As Exception
+                MsgBox("程序错误" & intStep & "。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+                End
+            Finally
+                sysOleDbConn.Close()
+            End Try
+            Dim j As Integer
+            For j = 0 To rcDataset.Tables("rc_roleqx").Rows.Count - 1
+                ShowMenuItem(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname"))
             Next
         End If
-        Return True
+        '上级菜单在有可见下级时才显示
+        Dim k As Integer
+        For k = 0 To Me.MenuStripMain.Items.Count - 1
+            SetSubItemVisible(Me.MenuStripMain.Items(k))
+        Next
+    End Sub
+
+    '取操作员的角色
+    Private Sub LoadUserInRole(ByVal intStep As Integer)
+        Try
+            sysOleDbConn.Open()
+            rcOleDbCommand.Connection = sysOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT rc_users.user_dwdm,rc_users.user_account,rc_userinrole.roleid FROM rc_users,rc_userinrole WHERE rc_users.user_account = rc_userinrole.user_account AND rc_users.user_account = ?"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@USER_Account", OleDbType.VarChar, 30).Value = g_User_Account
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_userinrole") IsNot Nothing Then
+                rcDataset.Tables("rc_userinrole").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_userinrole")
+        Catch ex As Exception
+            MsgBox("程序错误" & intStep & "。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            End
+        Finally
+            sysOleDbConn.Close()
+        End Try
+        If rcDataset.Tables("rc_userinrole") Is Nothing OrElse rcDataset.Tables("rc_userinrole").Rows.Count <= 0 Then
+            MsgBox("您没有操作权限，请与系统管理员联系。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            End
+        End If
+    End Sub
+
+    '按 mnuiname 显示菜单，mnuiname 即 FrmMain 中的控件字段名
+    Private Sub ShowMenuItem(ByVal objMenuName As Object)
+        Dim strMenuName As String = Trim(Convert.ToString(objMenuName))
+        If strMenuName = "" Then Return
+        Dim f As System.Reflection.FieldInfo = Me.GetType().GetField(strMenuName, System.Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Public)
+        If f Is Nothing Then Return
+        If Not f.FieldType.IsSubclassOf(GetType(ToolStripMenuItem)) Then Return
+        Dim itemMenu As ToolStripMenuItem = TryCast(f.GetValue(Me), ToolStripMenuItem)
+        If itemMenu Is Nothing Then Return
+        itemMenu.Visible = True
+    End Sub
+
+    '隐藏或显示菜单栏全部菜单
+    Private Sub SetAllMenuItemVisible(ByVal blnVisible As Boolean)
+        Dim i As Integer
+        For i = 0 To Me.MenuStripMain.Items.Count - 1
+            SetMenuItemVisible(Me.MenuStripMain.Items(i), blnVisible)
+        Next
+    End Sub
+
+    Private Sub SetMenuItemVisible(ByVal dc As ToolStripMenuItem, ByVal blnVisible As Boolean)
+        Dim i As Integer
+        dc.Visible = blnVisible
+        For i = 0 To dc.DropDownItems.Count - 1
+            If dc.DropDownItems.Item(i).GetType.ToString = "System.Windows.Forms.ToolStripMenuItem" Then
+                SetMenuItemVisible(CType(dc.DropDownItems.Item(i), ToolStripMenuItem), blnVisible)
+            End If
+        Next
+    End Sub
+
+    '含有下级菜单的项在有可见下级时才显示，返回该项是否可见
+    Private Function SetSubItemVisible(ByVal dc As ToolStripMenuItem) As Boolean
+        Dim i As Integer
+        Dim blnChildVisible As Boolean = False
+        For i = 0 To dc.DropDownItems.Count - 1
+            If dc.DropDownItems.Item(i).GetType.ToString = "System.Windows.Forms.ToolStripMenuItem" Then
+                If SetSubItemVisible(CType(dc.DropDownItems.Item(i), ToolStripMenuItem)) Then
+                    blnChildVisible = True
+                End If
+            End If
+        Next
+        If dc.DropDownItems.Count > 0 Then
+            dc.Visible = blnChildVisible
+        End If
+        Return dc.Visible
     End Function
 
     Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click

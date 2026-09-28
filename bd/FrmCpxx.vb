@@ -152,9 +152,7 @@ Public Class FrmCpxx
             rcOleDbCommand.CommandText = "SELECT rc_cpxx.lbdm,rc_cplb.lbmc,rc_cpxx.cpdm,rc_cpxx.cpmc,rc_cpxx.dw,rc_cpxx.ckdm,rc_ckxx.ckmc,rc_cpxx.hsfl,rc_cpxx.mjsl,rc_cpxx.fzdw,rc_cpxx.cpsm,rc_cpxx.kuwei,rc_cpxx.oldcpdm,rc_cpxx.khdm,rc_khxx.khmc,rc_cpxx.xsdj,rc_cpxx.cgdj,rc_cpxx.beishu,rc_cpxx.bzcb,rc_cpxx.clcb,rc_cpxx.rgcb,rc_cpxx.nycb,rc_cpxx.zjcb,rc_cpxx.glcb,rc_cpxx.xstcbl,rc_cpxx.zdcb,rc_cpxx.zgcb,rc_cpxx.cgts,rc_cpxx.cpweight,rc_cpxx.length,rc_cpxx.width,rc_cpxx.height,rc_cpxx.brecycling,rc_cpxx.bfadm,rc_cpxx.bbatch,rc_cpxx.srr,rc_cpxx.srrq FROM rc_cpxx Left Join rc_cplb On rc_cpxx.lbdm = rc_cplb.lbdm Left Join rc_khxx On rc_cpxx.khdm = rc_khxx.khdm LEFT JOIN rc_ckxx ON rc_cpxx.ckdm = rc_ckxx.ckdm ORDER BY cpdm"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataset.Tables("rc_cpxx") IsNot Nothing Then
-                rcDataset.Tables("rc_cpxx").Clear()
-            End If
+            rcDataset.Tables("rc_cpxx")?.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "rc_cpxx")
         Catch ex As Exception
             MsgBox("程序错误。" & Chr(13) & ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
@@ -260,9 +258,7 @@ Public Class FrmCpxx
             rcOleDbCommand.CommandText = "SELECT * FROM rc_rps WHERE rpsid = 'CPXX'"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
-            If rcDataset.Tables("rc_rps") IsNot Nothing Then
-                rcDataset.Tables("rc_rps").Clear()
-            End If
+            rcDataset.Tables("rc_rps")?.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "rc_rps")
         Catch ex As Exception
             MsgBox("程序错误。" + ex.Message, MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")

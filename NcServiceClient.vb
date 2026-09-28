@@ -12,7 +12,7 @@ Public Class NcServiceClient
     ''' <param name="password">可选：认证密码</param>
     ''' <returns>服务器返回的响应内容</returns>
     Public Shared Function PostXmlToNc(xmlContent As String, url As String, Optional username As String = Nothing, Optional password As String = Nothing) As String
-        Dim request As HttpWebRequest = Nothing
+        Dim request As HttpWebRequest
         Dim response As HttpWebResponse = Nothing
         Dim reader As StreamReader = Nothing
 

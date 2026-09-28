@@ -232,10 +232,10 @@ Public Module MdlYwfHzHelper
                 Next
             End If
         Next
-        '首行加粗并自适应列宽
-        If intCol > 0 Then
-            rcExcelWorksheet.Cells(1, 1, 1, intCol).Font.Bold = True
-        End If
+        ''首行加粗并自适应列宽
+        'If intCol > 0 Then
+        '    rcExcelWorksheet.Cells(1, intCol).Font.Bold = True
+        'End If
         rcExcelWorksheet.Columns.AutoFit()
     End Sub
 

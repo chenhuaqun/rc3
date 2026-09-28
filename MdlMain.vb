@@ -119,6 +119,11 @@ Module MdlMain
         Finally
             sysOleDbConn.Close()
         End Try
+        '同步预置菜单数据，失败不阻断启动
+        Dim strMenuErrMsg As String = ""
+        If Not MdlMenuSeed.EnsureMenu(strMenuErrMsg) Then
+            System.Diagnostics.Debug.WriteLine("预置菜单数据同步失败。" & strMenuErrMsg)
+        End If
         Application.EnableVisualStyles()
         Application.SetCompatibleTextRenderingDefault(False)
         '操作员登陆

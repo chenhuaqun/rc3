@@ -9262,7 +9262,7 @@ BEGIN
     VALUES (paraStrYear, x.cpdm, x.ckdm, 0, 0, 0, -x.sum_sl, -x.sum_fzsl, -x.sum_cbje);
 
   COMMIT;
-  paraStrMsg := '执行成功';
+  --paraStrMsg := '执行成功';
 EXCEPTION
   WHEN OTHERS THEN
     ROLLBACK;

@@ -23,6 +23,8 @@ Partial Class FrmYwfJsz
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.DataGridTableStyle1 = New System.Windows.Forms.DataGridTableStyle()
+        Me.DgtbcDwdm = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcDwmc = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcKhdm = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcKhmc = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcZydm = New System.Windows.Forms.DataGridTextBoxColumn()
@@ -99,9 +101,27 @@ Partial Class FrmYwfJsz
         'DataGridTableStyle1
         '
         Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcXslbdm, Me.DgtbcYwfbl, Me.DgtbcNewkhBl, Me.DgtbcSkqx, Me.DgtbcByjf, Me.DgtbcBydf, Me.DgtbcQmye, Me.DgtbcJf00, Me.DgtbcJf01, Me.DgtbcJf02, Me.DgtbcJf03, Me.DgtbcJf04, Me.DgtbcJf05, Me.DgtbcJf06, Me.DgtbcJf07, Me.DgtbcJf08, Me.DgtbcJf09, Me.DgtbcJf10, Me.DgtbcJf11, Me.DgtbcJf12, Me.DgtbcJf13, Me.DgtbcJf14, Me.DgtbcDf01, Me.DgtbcDf02, Me.DgtbcDf03, Me.DgtbcDf04, Me.DgtbcDf05, Me.DgtbcDf06, Me.DgtbcDf07, Me.DgtbcDf08, Me.DgtbcDf09, Me.DgtbcDf10, Me.DgtbcDf11, Me.DgtbcDf12, Me.DgtbcDf13, Me.DgtbcDf14, Me.DgtbcYwf_Bz, Me.DgtbcYwf_Newkh, Me.DgtbcYwf_Zl, Me.DgtbcCdhpje, Me.DgtbcYwf_cdhp, Me.DgtbcGylpjje, Me.DgtbcYwf_gylpj, Me.DgtbcTieXiJe, Me.DgtbcYwf_Tx, Me.DgtbcSkje_yj, Me.DgtbcYongJinJe, Me.DgtbcYwf_Yj, Me.DgtbcDaiZhang, Me.DgtbcYwf_Dz, Me.DgtbcSuSong, Me.DgtbcYwf_Ss, Me.DgtbcYwf_Hlc, Me.DgtbcYwf_Hj})
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDwdm, Me.DgtbcDwmc, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcXslbdm, Me.DgtbcYwfbl, Me.DgtbcNewkhBl, Me.DgtbcSkqx, Me.DgtbcByjf, Me.DgtbcBydf, Me.DgtbcQmye, Me.DgtbcJf00, Me.DgtbcJf01, Me.DgtbcJf02, Me.DgtbcJf03, Me.DgtbcJf04, Me.DgtbcJf05, Me.DgtbcJf06, Me.DgtbcJf07, Me.DgtbcJf08, Me.DgtbcJf09, Me.DgtbcJf10, Me.DgtbcJf11, Me.DgtbcJf12, Me.DgtbcJf13, Me.DgtbcJf14, Me.DgtbcDf01, Me.DgtbcDf02, Me.DgtbcDf03, Me.DgtbcDf04, Me.DgtbcDf05, Me.DgtbcDf06, Me.DgtbcDf07, Me.DgtbcDf08, Me.DgtbcDf09, Me.DgtbcDf10, Me.DgtbcDf11, Me.DgtbcDf12, Me.DgtbcDf13, Me.DgtbcDf14, Me.DgtbcYwf_Bz, Me.DgtbcYwf_Newkh, Me.DgtbcYwf_Zl, Me.DgtbcCdhpje, Me.DgtbcYwf_cdhp, Me.DgtbcGylpjje, Me.DgtbcYwf_gylpj, Me.DgtbcTieXiJe, Me.DgtbcYwf_Tx, Me.DgtbcSkje_yj, Me.DgtbcYongJinJe, Me.DgtbcYwf_Yj, Me.DgtbcDaiZhang, Me.DgtbcYwf_Dz, Me.DgtbcSuSong, Me.DgtbcYwf_Ss, Me.DgtbcYwf_Hlc, Me.DgtbcYwf_Hj})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "gl_ywfjsb"
+        '
+        'DgtbcDwdm
+        '
+        Me.DgtbcDwdm.Format = ""
+        Me.DgtbcDwdm.FormatInfo = Nothing
+        Me.DgtbcDwdm.HeaderText = "单位编码"
+        Me.DgtbcDwdm.MappingName = "dwdm"
+        Me.DgtbcDwdm.NullText = ""
+        Me.DgtbcDwdm.Width = 55
+        '
+        'DgtbcDwmc
+        '
+        Me.DgtbcDwmc.Format = ""
+        Me.DgtbcDwmc.FormatInfo = Nothing
+        Me.DgtbcDwmc.HeaderText = "单位名称"
+        Me.DgtbcDwmc.MappingName = "dwmc"
+        Me.DgtbcDwmc.NullText = ""
+        Me.DgtbcDwmc.Width = 120
         '
         'DgtbcKhdm
         '
@@ -695,6 +715,8 @@ Partial Class FrmYwfJsz
 
     End Sub
     Friend WithEvents DataGridTableStyle1 As System.Windows.Forms.DataGridTableStyle
+    Friend WithEvents DgtbcDwdm As System.Windows.Forms.DataGridTextBoxColumn
+    Friend WithEvents DgtbcDwmc As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcKhdm As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcKhmc As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcSkqx As System.Windows.Forms.DataGridTextBoxColumn

@@ -341,6 +341,15 @@ UPDATE rc_menu SET mnuiparentid = '90', mnuisortorder = 21, mnuiformname = 'FrmN
 DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9022';
 INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9022','90','结转上年期末库存','MnuiJzsnkc','RC3',22,NULL);
 
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9023';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9023','90','业务费计算明细表(按账套)','MnuiYwfCxHz','RC3',23,'FrmYwfCxHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9024';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9024','90','业务费业务员汇总表(按账套)','MnuiYwfZyHzHz','RC3',24,'FrmYwfZyHzHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9025';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9025','90','业务费业务员计算明细表(按账套)','MnuiYwfZyMxHz','RC3',25,'FrmYwfZyMxHz');
+DELETE FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid = '9026';
+INSERT INTO rc_menu (mnuiid,mnuiparentid,mnuicaption,mnuiname,mnuiown,mnuisortorder,mnuiformname) VALUES ('9026','90','业务费业务员增长汇总表(按账套)','MnuiYwfZyzzHzHz','RC3',26,'FrmYwfZyzzHzHz');
+
 -- ============================================
 -- 系统服务 (9901-9918) -> 父ID: 99
 -- ============================================

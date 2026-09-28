@@ -481,6 +481,54 @@
     <Compile Include="FrmYwfKhHzHzz.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmYwfCxHz.Designer.vb">
+      <DependentUpon>FrmYwfCxHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfCxHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYwfZyHzHz.Designer.vb">
+      <DependentUpon>FrmYwfZyHzHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfZyHzHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYwfZyMxHz.Designer.vb">
+      <DependentUpon>FrmYwfZyMxHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfZyMxHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYwfZyzzHzHz.Designer.vb">
+      <DependentUpon>FrmYwfZyzzHzHz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfZyzzHzHz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYwfCxHzz.Designer.vb">
+      <DependentUpon>FrmYwfCxHzz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfCxHzz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYwfZyHzHzz.Designer.vb">
+      <DependentUpon>FrmYwfZyHzHzz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfZyHzHzz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYwfZyMxHzz.Designer.vb">
+      <DependentUpon>FrmYwfZyMxHzz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfZyMxHzz.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmYwfZyzzHzHzz.Designer.vb">
+      <DependentUpon>FrmYwfZyzzHzHzz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmYwfZyzzHzHzz.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmYwfZyMx.Designer.vb">
       <DependentUpon>FrmYwfZyMx.vb</DependentUpon>
     </Compile>
@@ -2162,6 +2210,7 @@
     <Compile Include="MdlMain.vb" />
     <Compile Include="MdlUpdate.vb" />
     <Compile Include="MdlMenuMigration.vb" />
+    <Compile Include="MdlYwfHzHelper.vb" />
     <Compile Include="MdlReadPhkcsl.vb" />
     <Compile Include="MdlReadJldwXsws.vb" />
     <Compile Include="MdlReadKcsl.vb" />
@@ -3396,6 +3445,38 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmYwfKhHzHzz.resx">
       <DependentUpon>FrmYwfKhHzHzz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfCxHz.resx">
+      <DependentUpon>FrmYwfCxHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfZyHzHz.resx">
+      <DependentUpon>FrmYwfZyHzHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfZyMxHz.resx">
+      <DependentUpon>FrmYwfZyMxHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfZyzzHzHz.resx">
+      <DependentUpon>FrmYwfZyzzHzHz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfCxHzz.resx">
+      <DependentUpon>FrmYwfCxHzz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfZyHzHzz.resx">
+      <DependentUpon>FrmYwfZyHzHzz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfZyMxHzz.resx">
+      <DependentUpon>FrmYwfZyMxHzz.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmYwfZyzzHzHzz.resx">
+      <DependentUpon>FrmYwfZyzzHzHzz.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmYwfZyMx.resx">

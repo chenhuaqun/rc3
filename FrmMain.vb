@@ -2297,6 +2297,46 @@ Public Class FrmMain
         End With
     End Sub
 
+    '业务费计算明细表(按账套)
+    Private Sub MnuiYwfCxHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfCxHz.Click
+        AddLog(Me.MnuiYwfCxHz.Text)
+        Dim rcFrm As New FrmYwfCxHz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '业务费业务员汇总表(按账套)
+    Private Sub MnuiYwfZyHzHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfZyHzHz.Click
+        AddLog(Me.MnuiYwfZyHzHz.Text)
+        Dim rcFrm As New FrmYwfZyHzHz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '业务费业务员计算明细表(按账套)
+    Private Sub MnuiYwfZyMxHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfZyMxHz.Click
+        AddLog(Me.MnuiYwfZyMxHz.Text)
+        Dim rcFrm As New FrmYwfZyMxHz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
+    '业务费业务员增长汇总表(按账套)
+    Private Sub MnuiYwfZyzzHzHz_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiYwfZyzzHzHz.Click
+        AddLog(Me.MnuiYwfZyzzHzHz.Text)
+        Dim rcFrm As New FrmYwfZyzzHzHz
+        With rcFrm
+            .MdiParent = Me
+            .Show()
+        End With
+    End Sub
+
     '物料消耗计算
     Private Sub MnuiMrpJs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MnuiMrpJs.Click
         AddLog(Me.MnuiMrpJs.Text)

@@ -253,6 +253,10 @@ Partial Class FrmMain
         Me.MnuiYdjz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiNewYear = New System.Windows.Forms.ToolStripMenuItem()
         Me.结转上年期末库存ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiYwfCxHz = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiYwfZyHzHz = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiYwfZyMxHz = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiYwfZyzzHzHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiSys = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiModPwd = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiZtdl = New System.Windows.Forms.ToolStripMenuItem()
@@ -1716,7 +1720,7 @@ Partial Class FrmMain
         '
         'MnuiEnding
         '
-        Me.MnuiEnding.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiYwfGl, Me.MnuiDjjz, Me.MnuiFcspJz, Me.MnuiJtchdjzb, Me.MnuiMrpJs, Me.MnuiPzsc, Me.MnuiPzcd, Me.MnuiYdjz, Me.MnuiNewYear, Me.结转上年期末库存ToolStripMenuItem})
+        Me.MnuiEnding.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiYwfGl, Me.MnuiDjjz, Me.MnuiFcspJz, Me.MnuiJtchdjzb, Me.MnuiMrpJs, Me.MnuiPzsc, Me.MnuiPzcd, Me.MnuiYdjz, Me.MnuiNewYear, Me.结转上年期末库存ToolStripMenuItem, Me.MnuiYwfCxHz, Me.MnuiYwfZyHzHz, Me.MnuiYwfZyMxHz, Me.MnuiYwfZyzzHzHz})
         Me.MnuiEnding.Name = "MnuiEnding"
         Me.MnuiEnding.Size = New System.Drawing.Size(59, 21)
         Me.MnuiEnding.Text = "期末(&T)"
@@ -1880,6 +1884,34 @@ Partial Class FrmMain
         Me.结转上年期末库存ToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
         Me.结转上年期末库存ToolStripMenuItem.Text = "结转上年期末库存"
         Me.结转上年期末库存ToolStripMenuItem.Visible = False
+        '
+        'MnuiYwfCxHz
+        '
+        Me.MnuiYwfCxHz.Name = "MnuiYwfCxHz"
+        Me.MnuiYwfCxHz.Size = New System.Drawing.Size(172, 22)
+        Me.MnuiYwfCxHz.Text = "业务费计算明细表(按账套)"
+        Me.MnuiYwfCxHz.Visible = False
+        '
+        'MnuiYwfZyHzHz
+        '
+        Me.MnuiYwfZyHzHz.Name = "MnuiYwfZyHzHz"
+        Me.MnuiYwfZyHzHz.Size = New System.Drawing.Size(172, 22)
+        Me.MnuiYwfZyHzHz.Text = "业务费业务员汇总表(按账套)"
+        Me.MnuiYwfZyHzHz.Visible = False
+        '
+        'MnuiYwfZyMxHz
+        '
+        Me.MnuiYwfZyMxHz.Name = "MnuiYwfZyMxHz"
+        Me.MnuiYwfZyMxHz.Size = New System.Drawing.Size(172, 22)
+        Me.MnuiYwfZyMxHz.Text = "业务费业务员计算明细表(按账套)"
+        Me.MnuiYwfZyMxHz.Visible = False
+        '
+        'MnuiYwfZyzzHzHz
+        '
+        Me.MnuiYwfZyzzHzHz.Name = "MnuiYwfZyzzHzHz"
+        Me.MnuiYwfZyzzHzHz.Size = New System.Drawing.Size(172, 22)
+        Me.MnuiYwfZyzzHzHz.Text = "业务费业务员增长汇总表(按账套)"
+        Me.MnuiYwfZyzzHzHz.Visible = False
         '
         'MnuiSys
         '
@@ -2240,6 +2272,10 @@ Partial Class FrmMain
     Friend WithEvents MnuiYdjz As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiNewYear As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents 结转上年期末库存ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuiYwfCxHz As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuiYwfZyHzHz As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuiYwfZyMxHz As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuiYwfZyzzHzHz As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiGl As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiGlPzSr As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiGlPzSh As System.Windows.Forms.ToolStripMenuItem

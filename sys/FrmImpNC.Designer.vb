@@ -141,28 +141,28 @@ Partial Class FrmImpNC
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "会计期间："
         '
+        'CmbNcWbdm
+        '
+        Me.CmbNcWbdm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbNcWbdm.FormattingEnabled = True
+        Me.CmbNcWbdm.Location = New System.Drawing.Point(130, 49)
+        Me.CmbNcWbdm.Name = "CmbNcWbdm"
+        Me.CmbNcWbdm.Size = New System.Drawing.Size(118, 20)
+        Me.CmbNcWbdm.TabIndex = 39
+        '
         'LblNcWbdm
         '
         Me.LblNcWbdm.AutoSize = True
-        Me.LblNcWbdm.Location = New System.Drawing.Point(93, 49)
+        Me.LblNcWbdm.Location = New System.Drawing.Point(41, 53)
         Me.LblNcWbdm.Name = "LblNcWbdm"
         Me.LblNcWbdm.Size = New System.Drawing.Size(89, 12)
         Me.LblNcWbdm.TabIndex = 38
         Me.LblNcWbdm.Text = "NC本位币币种："
         '
-        'CmbNcWbdm
-        '
-        Me.CmbNcWbdm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbNcWbdm.FormattingEnabled = True
-        Me.CmbNcWbdm.Location = New System.Drawing.Point(188, 45)
-        Me.CmbNcWbdm.Name = "CmbNcWbdm"
-        Me.CmbNcWbdm.Size = New System.Drawing.Size(160, 20)
-        Me.CmbNcWbdm.TabIndex = 39
-        '
         'ChbPz
         '
         Me.ChbPz.AutoSize = True
-        Me.ChbPz.Location = New System.Drawing.Point(41, 62)
+        Me.ChbPz.Location = New System.Drawing.Point(41, 77)
         Me.ChbPz.Name = "ChbPz"
         Me.ChbPz.Size = New System.Drawing.Size(72, 16)
         Me.ChbPz.TabIndex = 5
@@ -179,7 +179,7 @@ Partial Class FrmImpNC
         'ChbQc
         '
         Me.ChbQc.AutoSize = True
-        Me.ChbQc.Location = New System.Drawing.Point(138, 62)
+        Me.ChbQc.Location = New System.Drawing.Point(138, 77)
         Me.ChbQc.Name = "ChbQc"
         Me.ChbQc.Size = New System.Drawing.Size(72, 16)
         Me.ChbQc.TabIndex = 6
@@ -189,7 +189,7 @@ Partial Class FrmImpNC
         'ChbSkd
         '
         Me.ChbSkd.AutoSize = True
-        Me.ChbSkd.Location = New System.Drawing.Point(41, 86)
+        Me.ChbSkd.Location = New System.Drawing.Point(41, 101)
         Me.ChbSkd.Name = "ChbSkd"
         Me.ChbSkd.Size = New System.Drawing.Size(96, 16)
         Me.ChbSkd.TabIndex = 7
@@ -201,7 +201,7 @@ Partial Class FrmImpNC
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})
-        Me.ComboBox1.Location = New System.Drawing.Point(413, 84)
+        Me.ComboBox1.Location = New System.Drawing.Point(413, 99)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(60, 20)
         Me.ComboBox1.TabIndex = 9
@@ -209,7 +209,7 @@ Partial Class FrmImpNC
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(196, 88)
+        Me.Label4.Location = New System.Drawing.Point(196, 103)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(209, 12)
         Me.Label4.TabIndex = 8
@@ -218,7 +218,7 @@ Partial Class FrmImpNC
         'ChbKh
         '
         Me.ChbKh.AutoSize = True
-        Me.ChbKh.Location = New System.Drawing.Point(41, 110)
+        Me.ChbKh.Location = New System.Drawing.Point(41, 125)
         Me.ChbKh.Name = "ChbKh"
         Me.ChbKh.Size = New System.Drawing.Size(132, 16)
         Me.ChbKh.TabIndex = 10
@@ -228,7 +228,7 @@ Partial Class FrmImpNC
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(268, 112)
+        Me.Label5.Location = New System.Drawing.Point(268, 127)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(137, 12)
         Me.Label5.TabIndex = 11
@@ -239,7 +239,7 @@ Partial Class FrmImpNC
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})
-        Me.ComboBox2.Location = New System.Drawing.Point(413, 108)
+        Me.ComboBox2.Location = New System.Drawing.Point(413, 123)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(60, 20)
         Me.ComboBox2.TabIndex = 12
@@ -248,7 +248,7 @@ Partial Class FrmImpNC
         '
         Me.GroupBox1.Controls.Add(Me.RadioButton2)
         Me.GroupBox1.Controls.Add(Me.RadioButton1)
-        Me.GroupBox1.Location = New System.Drawing.Point(41, 134)
+        Me.GroupBox1.Location = New System.Drawing.Point(41, 149)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(465, 48)
         Me.GroupBox1.TabIndex = 13
@@ -279,7 +279,7 @@ Partial Class FrmImpNC
         'ChbInvRkd1
         '
         Me.ChbInvRkd1.AutoSize = True
-        Me.ChbInvRkd1.Location = New System.Drawing.Point(153, 231)
+        Me.ChbInvRkd1.Location = New System.Drawing.Point(153, 246)
         Me.ChbInvRkd1.Name = "ChbInvRkd1"
         Me.ChbInvRkd1.Size = New System.Drawing.Size(120, 16)
         Me.ChbInvRkd1.TabIndex = 17
@@ -289,7 +289,7 @@ Partial Class FrmImpNC
         'ChbOeXsck
         '
         Me.ChbOeXsck.AutoSize = True
-        Me.ChbOeXsck.Location = New System.Drawing.Point(41, 271)
+        Me.ChbOeXsck.Location = New System.Drawing.Point(41, 286)
         Me.ChbOeXsck.Name = "ChbOeXsck"
         Me.ChbOeXsck.Size = New System.Drawing.Size(108, 16)
         Me.ChbOeXsck.TabIndex = 21
@@ -299,7 +299,7 @@ Partial Class FrmImpNC
         'ChbInvDbd
         '
         Me.ChbInvDbd.AutoSize = True
-        Me.ChbInvDbd.Location = New System.Drawing.Point(277, 251)
+        Me.ChbInvDbd.Location = New System.Drawing.Point(277, 266)
         Me.ChbInvDbd.Name = "ChbInvDbd"
         Me.ChbInvDbd.Size = New System.Drawing.Size(108, 16)
         Me.ChbInvDbd.TabIndex = 22
@@ -309,7 +309,7 @@ Partial Class FrmImpNC
         'ChbPoRkd
         '
         Me.ChbPoRkd.AutoSize = True
-        Me.ChbPoRkd.Location = New System.Drawing.Point(41, 231)
+        Me.ChbPoRkd.Location = New System.Drawing.Point(41, 246)
         Me.ChbPoRkd.Name = "ChbPoRkd"
         Me.ChbPoRkd.Size = New System.Drawing.Size(108, 16)
         Me.ChbPoRkd.TabIndex = 16
@@ -319,7 +319,7 @@ Partial Class FrmImpNC
         'ChbInvCkd
         '
         Me.ChbInvCkd.AutoSize = True
-        Me.ChbInvCkd.Location = New System.Drawing.Point(41, 251)
+        Me.ChbInvCkd.Location = New System.Drawing.Point(41, 266)
         Me.ChbInvCkd.Name = "ChbInvCkd"
         Me.ChbInvCkd.Size = New System.Drawing.Size(108, 16)
         Me.ChbInvCkd.TabIndex = 20
@@ -328,7 +328,7 @@ Partial Class FrmImpNC
         '
         'TxtCkdm
         '
-        Me.TxtCkdm.Location = New System.Drawing.Point(115, 207)
+        Me.TxtCkdm.Location = New System.Drawing.Point(115, 222)
         Me.TxtCkdm.MaxLength = 30
         Me.TxtCkdm.Name = "TxtCkdm"
         Me.TxtCkdm.Size = New System.Drawing.Size(391, 21)
@@ -337,7 +337,7 @@ Partial Class FrmImpNC
         'LblCkdm
         '
         Me.LblCkdm.AutoSize = True
-        Me.LblCkdm.Location = New System.Drawing.Point(42, 211)
+        Me.LblCkdm.Location = New System.Drawing.Point(42, 226)
         Me.LblCkdm.Name = "LblCkdm"
         Me.LblCkdm.Size = New System.Drawing.Size(65, 12)
         Me.LblCkdm.TabIndex = 14
@@ -377,7 +377,7 @@ Partial Class FrmImpNC
         'ChbQtck
         '
         Me.ChbQtck.AutoSize = True
-        Me.ChbQtck.Location = New System.Drawing.Point(413, 251)
+        Me.ChbQtck.Location = New System.Drawing.Point(413, 266)
         Me.ChbQtck.Name = "ChbQtck"
         Me.ChbQtck.Size = New System.Drawing.Size(108, 16)
         Me.ChbQtck.TabIndex = 23
@@ -387,7 +387,7 @@ Partial Class FrmImpNC
         'ChbQtrk
         '
         Me.ChbQtrk.AutoSize = True
-        Me.ChbQtrk.Location = New System.Drawing.Point(413, 231)
+        Me.ChbQtrk.Location = New System.Drawing.Point(413, 246)
         Me.ChbQtrk.Name = "ChbQtrk"
         Me.ChbQtrk.Size = New System.Drawing.Size(108, 16)
         Me.ChbQtrk.TabIndex = 19
@@ -397,7 +397,7 @@ Partial Class FrmImpNC
         'ChbInvRkd2
         '
         Me.ChbInvRkd2.AutoSize = True
-        Me.ChbInvRkd2.Location = New System.Drawing.Point(277, 231)
+        Me.ChbInvRkd2.Location = New System.Drawing.Point(277, 246)
         Me.ChbInvRkd2.Name = "ChbInvRkd2"
         Me.ChbInvRkd2.Size = New System.Drawing.Size(132, 16)
         Me.ChbInvRkd2.TabIndex = 18
@@ -407,7 +407,7 @@ Partial Class FrmImpNC
         'ChbOeXsfp
         '
         Me.ChbOeXsfp.AutoSize = True
-        Me.ChbOeXsfp.Location = New System.Drawing.Point(41, 293)
+        Me.ChbOeXsfp.Location = New System.Drawing.Point(41, 308)
         Me.ChbOeXsfp.Name = "ChbOeXsfp"
         Me.ChbOeXsfp.Size = New System.Drawing.Size(108, 16)
         Me.ChbOeXsfp.TabIndex = 29
@@ -417,7 +417,7 @@ Partial Class FrmImpNC
         'LblFph
         '
         Me.LblFph.AutoSize = True
-        Me.LblFph.Location = New System.Drawing.Point(196, 295)
+        Me.LblFph.Location = New System.Drawing.Point(196, 310)
         Me.LblFph.Name = "LblFph"
         Me.LblFph.Size = New System.Drawing.Size(209, 12)
         Me.LblFph.TabIndex = 32
@@ -428,7 +428,7 @@ Partial Class FrmImpNC
         Me.CmbFph.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbFph.FormattingEnabled = True
         Me.CmbFph.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})
-        Me.CmbFph.Location = New System.Drawing.Point(413, 291)
+        Me.CmbFph.Location = New System.Drawing.Point(413, 306)
         Me.CmbFph.Name = "CmbFph"
         Me.CmbFph.Size = New System.Drawing.Size(60, 20)
         Me.CmbFph.TabIndex = 33
@@ -436,7 +436,7 @@ Partial Class FrmImpNC
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(148, 273)
+        Me.Label6.Location = New System.Drawing.Point(148, 288)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(257, 12)
         Me.Label6.TabIndex = 34
@@ -447,7 +447,7 @@ Partial Class FrmImpNC
         Me.CmbZkCpdm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbZkCpdm.FormattingEnabled = True
         Me.CmbZkCpdm.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})
-        Me.CmbZkCpdm.Location = New System.Drawing.Point(413, 269)
+        Me.CmbZkCpdm.Location = New System.Drawing.Point(413, 284)
         Me.CmbZkCpdm.Name = "CmbZkCpdm"
         Me.CmbZkCpdm.Size = New System.Drawing.Size(60, 20)
         Me.CmbZkCpdm.TabIndex = 35
@@ -455,7 +455,7 @@ Partial Class FrmImpNC
         'ChbOeZgys
         '
         Me.ChbOeZgys.AutoSize = True
-        Me.ChbOeZgys.Location = New System.Drawing.Point(41, 315)
+        Me.ChbOeZgys.Location = New System.Drawing.Point(41, 330)
         Me.ChbOeZgys.Name = "ChbOeZgys"
         Me.ChbOeZgys.Size = New System.Drawing.Size(108, 16)
         Me.ChbOeZgys.TabIndex = 36
@@ -464,7 +464,7 @@ Partial Class FrmImpNC
         '
         'TxtNCCkdm
         '
-        Me.TxtNCCkdm.Location = New System.Drawing.Point(115, 188)
+        Me.TxtNCCkdm.Location = New System.Drawing.Point(115, 203)
         Me.TxtNCCkdm.MaxLength = 30
         Me.TxtNCCkdm.Name = "TxtNCCkdm"
         Me.TxtNCCkdm.Size = New System.Drawing.Size(391, 21)
@@ -505,12 +505,12 @@ Partial Class FrmImpNC
         Me.Controls.Add(Me.ChbQc)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.ChbPz)
-        Me.Controls.Add(Me.LblNcWbdm)
-        Me.Controls.Add(Me.CmbNcWbdm)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.NudMonth)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.NudYear)
+        Me.Controls.Add(Me.CmbNcWbdm)
+        Me.Controls.Add(Me.LblNcWbdm)
         Me.Controls.Add(Me.Label1)
         Me.Name = "FrmImpNC"
         Me.Text = "导入用友NC数据"

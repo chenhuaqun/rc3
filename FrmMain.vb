@@ -32,7 +32,38 @@ Public Class FrmMain
         Me.ToolStripStatusLabel1.Text = "欢迎使用。"
 
         BackgroundWorkerMain.RunWorkerAsync()
+        SyncToolStripWidth()
     End Sub
+
+    'ToolStripPanel 内部使用 FlowLayout 布局，会忽略子 ToolStrip 的 Dock，
+    '且对 AutoSize=True 的 ToolStrip 强制取 PreferredSize 而收缩到内容宽度。
+    '因此这里关闭 AutoSize，并在窗体缩放时手动把工具条宽度对齐到面板宽度，
+    '使右对齐的 BtnWebSite 始终贴在窗口最右端。
+    Private Sub FrmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        SyncToolStripWidth()
+    End Sub
+
+    Private Sub SyncToolStripWidth()
+        Me.ToolStrip1.Width = Me.ToolStripPanel2.ClientSize.Width - Me.ToolStrip1.Left
+    End Sub
+
+#Region "打开公司官网"
+
+    Private Sub BtnWebSite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnWebSite.Click
+        OpenWebSite()
+    End Sub
+
+    Private Sub OpenWebSite()
+        Try
+            Dim rcPci As New System.Diagnostics.ProcessStartInfo(g_WebSite)
+            rcPci.UseShellExecute = True
+            System.Diagnostics.Process.Start(rcPci)
+        Catch ex As Exception
+            MessageBox.Show("无法打开公司官网：" & g_WebSite & vbCrLf & ex.Message, "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+    End Sub
+
+#End Region
 
     Private Sub FrmMain_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
         If Me.MdiChildren.Length > 0 Then

@@ -282,6 +282,7 @@ Partial Class FrmMain
         Me.BtnModPwd = New System.Windows.Forms.ToolStripButton()
         Me.BtnHelp = New System.Windows.Forms.ToolStripButton()
         Me.BtnExit = New System.Windows.Forms.ToolStripButton()
+        Me.BtnWebSite = New System.Windows.Forms.ToolStripButton()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -2052,12 +2053,13 @@ Partial Class FrmMain
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.AutoSize = False
         Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BtnModPwd, Me.BtnHelp, Me.BtnExit})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BtnModPwd, Me.BtnHelp, Me.BtnExit, Me.BtnWebSite})
         Me.ToolStrip1.Location = New System.Drawing.Point(3, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(184, 39)
+        Me.ToolStrip1.Size = New System.Drawing.Size(981, 39)
         Me.ToolStrip1.TabIndex = 1
         '
         'BtnModPwd
@@ -2084,6 +2086,15 @@ Partial Class FrmMain
         Me.BtnExit.Name = "BtnExit"
         Me.BtnExit.Size = New System.Drawing.Size(68, 36)
         Me.BtnExit.Text = "退出"
+        '
+        'BtnWebSite
+        '
+        Me.BtnWebSite.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.BtnWebSite.Image = CType(resources.GetObject("BtnWebSite.Image"), System.Drawing.Image)
+        Me.BtnWebSite.Name = "BtnWebSite"
+        Me.BtnWebSite.Size = New System.Drawing.Size(68, 36)
+        Me.BtnWebSite.Text = "官网"
+        Me.BtnWebSite.ToolTipText = "访问公司官网 https://richen.dpdns.org/"
         '
         'StatusStrip1
         '
@@ -2188,6 +2199,7 @@ Partial Class FrmMain
     Friend WithEvents BtnModPwd As System.Windows.Forms.ToolStripButton
     Friend WithEvents BtnHelp As System.Windows.Forms.ToolStripButton
     Friend WithEvents BtnExit As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BtnWebSite As System.Windows.Forms.ToolStripButton
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents MnuiCplbxx As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuiCpxx As System.Windows.Forms.ToolStripMenuItem

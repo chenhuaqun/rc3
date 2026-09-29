@@ -424,7 +424,7 @@ Public Class FrmYwfJs
         Dim rcConnYwf As New OleDbConnection
         Dim rcCmdYwf As OleDbCommand
         Dim rcAdptYwf As New OleDbDataAdapter
-        Dim rcTransYwf As OleDbTransaction
+        Dim rcTransYwf As OleDbTransaction = Nothing
         Try
             Dim i As Integer
             Dim j As Integer

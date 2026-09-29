@@ -10,6 +10,9 @@ Imports System.Linq
 Module MdlMain
     Declare Function DogRead_Str Lib "Win32dll" Alias "DogRead" (ByVal DogBytes As Integer, ByVal DogAddr As Integer, ByVal DogData As String) As Integer
 
+    '全局常量声明
+    Public Const g_WebSite As String = "https://richen.dpdns.org/"
+
     '全局变量声明
     Public g_Module As String = ""
     Public g_Kjrq As Date = Now()

@@ -15,10 +15,12 @@ Public Class FrmAbout
 
     Private Sub LblHomePage_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LblHomePage.LinkClicked
         Try
-            System.Diagnostics.Process.Start("http://www.richen.net")
+            Dim rcPci As New System.Diagnostics.ProcessStartInfo(g_WebSite)
+            rcPci.UseShellExecute = True
+            System.Diagnostics.Process.Start(rcPci)
         Catch ex As Exception
             ' The error message
-            MessageBox.Show("Unable to open link that was clicked.")
+            MessageBox.Show("无法打开公司官网：" & g_WebSite & vbCrLf & ex.Message, "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
     End Sub
 

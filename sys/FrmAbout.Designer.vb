@@ -77,13 +77,13 @@ Partial Class FrmAbout
         'LblHomePage
         '
         Me.LblHomePage.AutoSize = True
-        Me.LblHomePage.LinkArea = New System.Windows.Forms.LinkArea(3, 21)
+        Me.LblHomePage.LinkArea = New System.Windows.Forms.LinkArea(3, 25)
         Me.LblHomePage.Location = New System.Drawing.Point(33, 188)
         Me.LblHomePage.Name = "LblHomePage"
-        Me.LblHomePage.Size = New System.Drawing.Size(165, 19)
+        Me.LblHomePage.Size = New System.Drawing.Size(169, 19)
         Me.LblHomePage.TabIndex = 19
         Me.LblHomePage.TabStop = True
-        Me.LblHomePage.Text = "网址:http://www.richen.net"
+        Me.LblHomePage.Text = "网址:https://richen.dpdns.org/"
         Me.LblHomePage.UseCompatibleTextRendering = True
         '
         'LblEmail

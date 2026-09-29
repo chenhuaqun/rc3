@@ -16,8 +16,8 @@ Public Class FrmYwfZyzzHzHz
 
     '全局临时表名称
     Private Const StrTempTable As String = "t_ywfzyzzhhz"
-    '临时表字段
-    Private Const StrColAll As String = "dwdm varchar2(4),dwmc varchar2(200),_px number(2,0),zydm varchar2(12),zymc varchar2(30),bngjdf number(14,2),bngjywf number(14,2),bnfgjdf number(14,2),bnfgjbjs number(14,2),bnfgjywf number(14,2),sngjdf number(14,2),sngjywf number(14,2),snfgjdf number(14,2),snfgjbjs number(14,2),snfgjywf number(14,2)"
+    '临时表字段，px 为内部排序列，必须与 MdlYwfHzHelper.StrSortCol 同名
+    Private Const StrColAll As String = "dwdm varchar2(4),dwmc varchar2(200),px number(2,0),zydm varchar2(12),zymc varchar2(30),bngjdf number(14,2),bngjywf number(14,2),bnfgjdf number(14,2),bnfgjbjs number(14,2),bnfgjywf number(14,2),sngjdf number(14,2),sngjywf number(14,2),snfgjdf number(14,2),snfgjbjs number(14,2),snfgjywf number(14,2)"
     '汇总金额字段
     Private Const StrSumCol As String = "bngjdf,bngjywf,bnfgjdf,bnfgjbjs,bnfgjywf,sngjdf,sngjywf,snfgjdf,snfgjbjs,snfgjywf"
 
@@ -223,7 +223,7 @@ Public Class FrmYwfZyzzHzHz
             Dim strU6 As String = "(SELECT gl_ywfjsb.t_zydm AS zydm,0 AS bngjdf,0 AS bnfgjdf,0 AS bnfgjbjs,0 AS sngjdf,0 AS snfgjdf,SUM(COALESCE(gl_ywfjsb.bydf,0.0) - COALESCE(gl_ywfjsb.tiexije,0.0) - COALESCE(gl_ywfjsb.yongjinje,0.0)) AS snfgjbjs,0 AS bngjywf,0 AS bnfgjywf,0 AS sngjywf,SUM(gl_ywfjsb.ywf_bz) AS snfgjywf FROM " & strTbl & " WHERE gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.cperiod <= ? AND EXISTS (SELECT 1 FROM " & strKh & " WHERE " & strKh & ".khdm = gl_ywfjsb.khdm AND " & strKh & ".bywfjszz <> 1) AND EXISTS (SELECT 1 FROM " & strXsl & " WHERE " & strXsl & ".gjxslb <> 1 AND " & strXsl & ".xslbdm = gl_ywfjsb.t_xslbdm) GROUP BY gl_ywfjsb.t_zydm)"
             strSql = strU1 & " UNION ALL " & strU2 & " UNION ALL " & strU3 & " UNION ALL " & strU4 & " UNION ALL " & strU5 & " UNION ALL " & strU6
         End If
-        Return "SELECT '" & strDwdm & "' AS dwdm,'" & strDwmc & "' AS dwmc,1 AS _px,ywfzyzzhzb.zydm,(SELECT NVL(" & strZy & ".zymc,'') FROM " & strZy & " WHERE " & strZy & ".zydm = ywfzyzzhzb.zydm) AS zymc," & BaseField(True) & " FROM (SELECT zydm," & SumField() & " FROM (" & strSql & ") ywfzyzzhza GROUP BY zydm) ywfzyzzhzb"
+        Return "SELECT '" & strDwdm & "' AS dwdm,'" & strDwmc & "' AS dwmc,1 AS px,ywfzyzzhzb.zydm,(SELECT NVL(" & strZy & ".zymc,'') FROM " & strZy & " WHERE " & strZy & ".zydm = ywfzyzzhzb.zydm) AS zymc," & BaseField(True) & " FROM (SELECT zydm," & SumField() & " FROM (" & strSql & ") ywfzyzzhza GROUP BY zydm) ywfzyzzhzb"
     End Function
 
     '插入参数
@@ -254,7 +254,7 @@ Public Class FrmYwfZyzzHzHz
 
     '插入各账套明细
     Private Sub ReadDetail(ByVal strDwdm As String, ByVal strDwmc As String)
-        rcOleDbCommand.CommandText = "INSERT INTO " & StrTempTable & " (dwdm,dwmc,_px,zydm,zymc,bngjdf,bngjywf,bnfgjdf,bnfgjbjs,bnfgjywf,sngjdf,sngjywf,snfgjdf,snfgjbjs,snfgjywf) " & DetailSql(strDwdm, strDwmc)
+        rcOleDbCommand.CommandText = "INSERT INTO " & StrTempTable & " (dwdm,dwmc,px,zydm,zymc,bngjdf,bngjywf,bnfgjdf,bnfgjbjs,bnfgjywf,sngjdf,sngjywf,snfgjdf,snfgjbjs,snfgjywf) " & DetailSql(strDwdm, strDwmc)
         rcOleDbCommand.Parameters.Clear()
         AddDetailParameter()
         rcOleDbCommand.ExecuteNonQuery()
@@ -262,7 +262,7 @@ Public Class FrmYwfZyzzHzHz
 
     '从临时表生成报表
     Private Sub FillReport(ByVal strDataTable As String)
-        Dim strSel As String = "dwdm,dwmc,_px,zydm,zymc," & BaseField(False) & "," & ZyzzBlField(False) & " AS zyzzbl," & ZyzzBlField(False) & " * CASE WHEN " & ZyzzBase(False) & " > 0 THEN " & ZyzzBase(False) & " / 100 ELSE 0 END AS zyzzje"
+        Dim strSel As String = "dwdm,dwmc,px,zydm,zymc," & BaseField(False) & "," & ZyzzBlField(False) & " AS zyzzbl," & ZyzzBlField(False) & " * CASE WHEN " & ZyzzBase(False) & " > 0 THEN " & ZyzzBase(False) & " / 100 ELSE 0 END AS zyzzje"
         If rcDataset.Tables(strDataTable) IsNot Nothing Then
             rcDataset.Tables(strDataTable).Clear()
         End If
@@ -272,11 +272,11 @@ Public Class FrmYwfZyzzHzHz
         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
         '各账套小计
-        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,2 AS _px,'' AS zydm,'' AS zymc," & BaseField(True) & "," & ZyzzBlField(True) & " AS zyzzbl," & ZyzzBlField(True) & " * CASE WHEN " & ZyzzBase(True) & " > 0 THEN " & ZyzzBase(True) & " / 100 ELSE 0 END AS zyzzje FROM " & StrTempTable & " GROUP BY dwdm,dwmc"
+        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,2 AS px,'' AS zydm,'' AS zymc," & BaseField(True) & "," & ZyzzBlField(True) & " AS zyzzbl," & ZyzzBlField(True) & " * CASE WHEN " & ZyzzBase(True) & " > 0 THEN " & ZyzzBase(True) & " / 100 ELSE 0 END AS zyzzje FROM " & StrTempTable & " GROUP BY dwdm,dwmc"
         rcOleDbCommand.Parameters.Clear()
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
         '合计
-        rcOleDbCommand.CommandText = "SELECT '" & MdlYwfHzHelper.StrTotalDwdm & "' AS dwdm,'合计' AS dwmc,3 AS _px,'' AS zydm,'合计' AS zymc," & BaseField(True) & "," & ZyzzBlField(True) & " AS zyzzbl," & ZyzzBlField(True) & " * CASE WHEN " & ZyzzBase(True) & " > 0 THEN " & ZyzzBase(True) & " / 100 ELSE 0 END AS zyzzje FROM " & StrTempTable
+        rcOleDbCommand.CommandText = "SELECT '" & MdlYwfHzHelper.StrTotalDwdm & "' AS dwdm,'合计' AS dwmc,3 AS px,'' AS zydm,'合计' AS zymc," & BaseField(True) & "," & ZyzzBlField(True) & " AS zyzzbl," & ZyzzBlField(True) & " * CASE WHEN " & ZyzzBase(True) & " > 0 THEN " & ZyzzBase(True) & " / 100 ELSE 0 END AS zyzzje FROM " & StrTempTable
         rcOleDbCommand.Parameters.Clear()
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
     End Sub
@@ -316,7 +316,7 @@ Public Class FrmYwfZyzzHzHz
         End Try
         If Me.CheckBox1.Checked Then
             For i = 0 To rcDataset.Tables("ywfzyzzhz").Rows.Count - 1
-                If Val(rcDataset.Tables("ywfzyzzhz").Rows(i).Item("_px")) = 1 Then
+                If Val(rcDataset.Tables("ywfzyzzhz").Rows(i).Item("px")) = 1 Then
                     If Val(rcDataset.Tables("ywfzyzzhz").Rows(i).Item("bngjdf")) = 0 And Val(rcDataset.Tables("ywfzyzzhz").Rows(i).Item("bnfgjdf")) = 0 And Val(rcDataset.Tables("ywfzyzzhz").Rows(i).Item("sngjdf")) = 0 And Val(rcDataset.Tables("ywfzyzzhz").Rows(i).Item("snfgjdf")) = 0 Then
                         rcDataset.Tables("ywfzyzzhz").Rows(i).Delete()
                     End If
@@ -324,7 +324,7 @@ Public Class FrmYwfZyzzHzHz
             Next
         End If
         '调用表单
-        rcDataViewReport = New DataView(rcDataset.Tables("ywfzyzzhz"), "TRUE", "dwdm,_px,zydm", DataViewRowState.CurrentRows)
+        rcDataViewReport = New DataView(rcDataset.Tables("ywfzyzzhz"), "TRUE", "dwdm,px,zydm", DataViewRowState.CurrentRows)
         Dim rcFrm As New FrmYwfZyzzHzHzz
         With rcFrm
             .ParaDataSet = rcDataset

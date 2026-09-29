@@ -9,6 +9,11 @@ Public Module MdlYwfHzHelper
     '总计行占用的账套编码，保证排序时排在最后
     Public Const StrTotalDwdm As String = "ZZZZ"
 
+    '内部排序列名：报表用它把明细、小计、合计行排到正确位置，Excel 导出时必须剔除
+    '4 个按账套报表的建表列、查询列、DataView 排序串必须与此名保持一致
+    '注意：Oracle 非引号标识符必须以字母开头，此名不能以下划线开头
+    Public Const StrSortCol As String = "px"
+
     '账套列表项格式为 "dwdm dwmc"
     Public Function DwdmOf(ByVal item As String) As String
         Dim nPos As Integer = item.IndexOf(" ")
@@ -179,9 +184,9 @@ Public Module MdlYwfHzHelper
         Return strTry
     End Function
 
-    '是否输出列：以“_”开头的列(如 _px)为内部排序用，不输出
+    '是否输出列：内部排序列(见 StrSortCol)不输出
     Private Function IsOutputColumn(ByVal rcDataColumn As DataColumn) As Boolean
-        Return Not rcDataColumn.ColumnName.StartsWith("_")
+        Return Not String.Equals(rcDataColumn.ColumnName, StrSortCol, StringComparison.OrdinalIgnoreCase)
     End Function
 
     '把 DataView 输出到 Excel 指定工作表，首行为列名

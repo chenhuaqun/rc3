@@ -15,8 +15,8 @@ Public Class FrmYwfZyMxHz
 
     '全局临时表名称
     Private Const StrTempTable As String = "t_ywfzymxhz"
-    '临时表字段
-    Private Const StrColAll As String = "dwdm varchar2(4),dwmc varchar2(200),_px number(2,0),khdm varchar2(15),khmc varchar2(200),xslbdm varchar2(60),gjxslb number(1,0),bywfjszz number(1,0),ywfbl number(10,3),bnqc number(14,2),bnjf number(14,2),bndf number(14,2),bndj number(14,2),bnhl number(14,2),ywf_bz number(14,2),snhl number(14,2)"
+    '临时表字段，px 为内部排序列，必须与 MdlYwfHzHelper.StrSortCol 同名
+    Private Const StrColAll As String = "dwdm varchar2(4),dwmc varchar2(200),px number(2,0),khdm varchar2(15),khmc varchar2(200),xslbdm varchar2(60),gjxslb number(1,0),bywfjszz number(1,0),ywfbl number(10,3),bnqc number(14,2),bnjf number(14,2),bndf number(14,2),bndj number(14,2),bnhl number(14,2),ywf_bz number(14,2),snhl number(14,2)"
     '汇总金额字段
     Private Const StrSumCol As String = "bnqc,bnjf,bndf,bndj,bnhl,ywf_bz,snhl"
 
@@ -197,7 +197,7 @@ Public Class FrmYwfZyMxHz
         Dim strQcy As String = "(SELECT gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl,SUM(COALESCE(gl_ywfjsb.qmye,0.0) + COALESCE(gl_ywfjsb.bydf,0.0) - COALESCE(gl_ywfjsb.byjf,0.0)) AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,0 AS snhl FROM " & strTbl & " WHERE EXISTS (SELECT 1 FROM (SELECT MIN(gl_ywfjsba.cperiod) AS cperiod,gl_ywfjsba.khdm FROM " & strTbl & " gl_ywfjsba WHERE gl_ywfjsba.cperiod >= ? AND gl_ywfjsba.zydm = ? GROUP BY gl_ywfjsba.khdm) gl_ywfjsbb WHERE gl_ywfjsbb.cperiod = gl_ywfjsb.cperiod AND gl_ywfjsbb.khdm = gl_ywfjsb.khdm) AND gl_ywfjsb.zydm = ? GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl)"
         '上年数
         Dim strPre As String = "(SELECT gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.t_xslbdm AS xslbdm," & strXsl & ".ywfbl,0 AS bnqc,0 AS bnjf,0 AS bndf,0 AS bndj,0 AS bnhl,0 AS ywf_bz,SUM(COALESCE(gl_ywfjsb.bydf,0.0) - COALESCE(gl_ywfjsb.tiexije,0.0) - COALESCE(gl_ywfjsb.yongjinje,0.0)) AS snhl FROM " & strTbl & "," & strXsl & " WHERE gl_ywfjsb.t_xslbdm = " & strXsl & ".xslbdm AND gl_ywfjsb.cperiod <= ? AND gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.t_zydm = ? GROUP BY gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.t_xslbdm," & strXsl & ".ywfbl)"
-        rcOleDbCommand.CommandText = "INSERT INTO " & StrTempTable & " (dwdm,dwmc,_px,khdm,khmc,xslbdm,gjxslb,bywfjszz,ywfbl,bnqc,bnjf,bndf,bndj,bnhl,ywf_bz,snhl) SELECT '" & strDwdm & "','" & strDwmc & "',1 AS _px,ywfzymxb.khdm,ywfzymxb.khmc,ywfzymxb.xslbdm,ywfzymxb.gjxslb,ywfzymxb.bywfjszz,ywfzymxb.ywfbl,SUM(ywfzymxb.bnqc) AS bnqc,SUM(ywfzymxb.bnjf) AS bnjf,SUM(ywfzymxb.bndf) AS bndf,SUM(ywfzymxb.bndj) AS bndj,SUM(ywfzymxb.bnhl) AS bnhl,SUM(ywfzymxb.ywf_bz) AS ywf_bz,SUM(ywfzymxb.snhl) AS snhl FROM (SELECT ywfzymxa.khdm,ywfzymxa.khmc,ywfzymxa.xslbdm || CASE WHEN " & strKh & ".djyear >= " & strBnz & " THEN '新' ELSE '' END AS xslbdm," & strXsl & ".gjxslb," & strKh & ".bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl FROM (" & strCur & " UNION ALL " & strQcy & " UNION ALL " & strPre & ") ywfzymxa LEFT JOIN " & strXsl & " ON " & strXsl & ".xslbdm = ywfzymxa.xslbdm LEFT JOIN " & strKh & " ON ywfzymxa.khdm = " & strKh & ".khdm) ywfzymxb GROUP BY ywfzymxb.khdm,ywfzymxb.khmc,ywfzymxb.xslbdm,ywfzymxb.gjxslb,ywfzymxb.bywfjszz,ywfzymxb.ywfbl"
+        rcOleDbCommand.CommandText = "INSERT INTO " & StrTempTable & " (dwdm,dwmc,px,khdm,khmc,xslbdm,gjxslb,bywfjszz,ywfbl,bnqc,bnjf,bndf,bndj,bnhl,ywf_bz,snhl) SELECT '" & strDwdm & "','" & strDwmc & "',1 AS px,ywfzymxb.khdm,ywfzymxb.khmc,ywfzymxb.xslbdm,ywfzymxb.gjxslb,ywfzymxb.bywfjszz,ywfzymxb.ywfbl,SUM(ywfzymxb.bnqc) AS bnqc,SUM(ywfzymxb.bnjf) AS bnjf,SUM(ywfzymxb.bndf) AS bndf,SUM(ywfzymxb.bndj) AS bndj,SUM(ywfzymxb.bnhl) AS bnhl,SUM(ywfzymxb.ywf_bz) AS ywf_bz,SUM(ywfzymxb.snhl) AS snhl FROM (SELECT ywfzymxa.khdm,ywfzymxa.khmc,ywfzymxa.xslbdm || CASE WHEN " & strKh & ".djyear >= " & strBnz & " THEN '新' ELSE '' END AS xslbdm," & strXsl & ".gjxslb," & strKh & ".bywfjszz,ywfzymxa.ywfbl,ywfzymxa.bnqc,ywfzymxa.bnjf,ywfzymxa.bndf,ywfzymxa.bndj,ywfzymxa.bnhl,ywfzymxa.ywf_bz,ywfzymxa.snhl FROM (" & strCur & " UNION ALL " & strQcy & " UNION ALL " & strPre & ") ywfzymxa LEFT JOIN " & strXsl & " ON " & strXsl & ".xslbdm = ywfzymxa.xslbdm LEFT JOIN " & strKh & " ON ywfzymxa.khdm = " & strKh & ".khdm) ywfzymxb GROUP BY ywfzymxb.khdm,ywfzymxb.khmc,ywfzymxb.xslbdm,ywfzymxb.gjxslb,ywfzymxb.bywfjszz,ywfzymxb.ywfbl"
         rcOleDbCommand.Parameters.Clear()
         '本年数
         rcOleDbCommand.Parameters.Add("@cperiod", OleDbType.VarChar, 6).Value = strNe
@@ -216,7 +216,7 @@ Public Class FrmYwfZyMxHz
 
     '从临时表生成明细、分类小计、关键非关小计、账套合计与总计
     Private Sub FillReport(ByVal strDataTable As String)
-        Dim strSel As String = "dwdm,dwmc,_px,khdm,khmc,xslbdm,gjxslb,bywfjszz,TO_CHAR(ywfbl,'0.000') || '%' AS ywfbl,bnqc,bnjf,bndf,bndj,bnhl,ywf_bz,snhl"
+        Dim strSel As String = "dwdm,dwmc,px,khdm,khmc,xslbdm,gjxslb,bywfjszz,TO_CHAR(ywfbl,'0.000') || '%' AS ywfbl,bnqc,bnjf,bndf,bndj,bnhl,ywf_bz,snhl"
         If rcDataset.Tables(strDataTable) IsNot Nothing Then
             rcDataset.Tables(strDataTable).Clear()
         End If
@@ -226,19 +226,19 @@ Public Class FrmYwfZyMxHz
         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
         '各账套内分类小计
-        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,2 AS _px,'' AS khdm,'小计' AS khmc,xslbdm,gjxslb,bywfjszz,TO_CHAR(ywfbl,'0.000') || '%' AS ywfbl," & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc,xslbdm,gjxslb,bywfjszz,ywfbl"
+        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,2 AS px,'' AS khdm,'小计' AS khmc,xslbdm,gjxslb,bywfjszz,TO_CHAR(ywfbl,'0.000') || '%' AS ywfbl," & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc,xslbdm,gjxslb,bywfjszz,ywfbl"
         rcOleDbCommand.Parameters.Clear()
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
         '关键、非关小计
-        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,3 AS _px,'' AS khdm,CASE WHEN gjxslb = 0 AND bywfjszz = 0 THEN '非关不计算增长小计' ELSE CASE WHEN gjxslb = 0 AND bywfjszz = 1 THEN '非关计算增长小计' ELSE CASE WHEN gjxslb = 1 AND bywfjszz = 0 THEN '关键不计算增长小计' ELSE '关键计算增长小计' END END END AS khmc,CAST(NULL AS varchar2(60)) AS xslbdm,gjxslb,bywfjszz,'%' AS ywfbl," & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc,gjxslb,bywfjszz"
+        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,3 AS px,'' AS khdm,CASE WHEN gjxslb = 0 AND bywfjszz = 0 THEN '非关不计算增长小计' ELSE CASE WHEN gjxslb = 0 AND bywfjszz = 1 THEN '非关计算增长小计' ELSE CASE WHEN gjxslb = 1 AND bywfjszz = 0 THEN '关键不计算增长小计' ELSE '关键计算增长小计' END END END AS khmc,CAST(NULL AS varchar2(60)) AS xslbdm,gjxslb,bywfjszz,'%' AS ywfbl," & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc,gjxslb,bywfjszz"
         rcOleDbCommand.Parameters.Clear()
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
         '各账套合计
-        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,4 AS _px,'' AS khdm,'合计' AS khmc,'合计' AS xslbdm,CAST(NULL AS number(1,0)) AS gjxslb,1 AS bywfjszz,'%' AS ywfbl," & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc"
+        rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,4 AS px,'' AS khdm,'合计' AS khmc,'合计' AS xslbdm,CAST(NULL AS number(1,0)) AS gjxslb,1 AS bywfjszz,'%' AS ywfbl," & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc"
         rcOleDbCommand.Parameters.Clear()
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
         '总计
-        rcOleDbCommand.CommandText = "SELECT '" & MdlYwfHzHelper.StrTotalDwdm & "' AS dwdm,'合计' AS dwmc,5 AS _px,'' AS khdm,'合计' AS khmc,'合计' AS xslbdm,CAST(NULL AS number(1,0)) AS gjxslb,1 AS bywfjszz,'%' AS ywfbl," & SumField() & " FROM " & StrTempTable
+        rcOleDbCommand.CommandText = "SELECT '" & MdlYwfHzHelper.StrTotalDwdm & "' AS dwdm,'合计' AS dwmc,5 AS px,'' AS khdm,'合计' AS khmc,'合计' AS xslbdm,CAST(NULL AS number(1,0)) AS gjxslb,1 AS bywfjszz,'%' AS ywfbl," & SumField() & " FROM " & StrTempTable
         rcOleDbCommand.Parameters.Clear()
         rcOleDbDataAdpt.Fill(rcDataset, strDataTable)
     End Sub
@@ -285,7 +285,7 @@ Public Class FrmYwfZyMxHz
             rcOleDbConn.Close()
         End Try
         '调用表单
-        rcDataViewReport = New DataView(rcDataset.Tables("ywfzymx"), "TRUE", "dwdm,_px,khdm,xslbdm", DataViewRowState.CurrentRows)
+        rcDataViewReport = New DataView(rcDataset.Tables("ywfzymx"), "TRUE", "dwdm,px,khdm,xslbdm", DataViewRowState.CurrentRows)
         Dim rcFrm As New FrmYwfZyMxHzz
         With rcFrm
             .ParaDataSet = rcDataset
@@ -343,7 +343,7 @@ Public Class FrmYwfZyMxHz
                     rcOleDbCommand.ExecuteNonQuery()
                     ReadDetail(strDwdm, strDwmc.Replace("'", "''"), Trim(rcDataset.Tables("rc_zyxx").Rows(j).Item("zydm")))
                     FillReport("ywfzymxt")
-                    Dim dvYwfZyMx As New DataView(rcDataset.Tables("ywfzymxt"), "TRUE", "dwdm,_px,khdm,xslbdm", DataViewRowState.CurrentRows)
+                    Dim dvYwfZyMx As New DataView(rcDataset.Tables("ywfzymxt"), "TRUE", "dwdm,px,khdm,xslbdm", DataViewRowState.CurrentRows)
                     If dvYwfZyMx.Count > 0 Then
                         If Me.CheckBox1.Checked Then
                             Dim rcExcelWorksheet As Excel.Worksheet = rcExcelWorkbook.Worksheets.Add()

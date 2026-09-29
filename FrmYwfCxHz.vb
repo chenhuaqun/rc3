@@ -16,9 +16,9 @@ Public Class FrmYwfCxHz
     '全局临时表名称
     Private Const StrTempTable As String = "t_ywfcxhz"
     '报表输出字段
-    Private Const StrSelAll As String = "dwdm,dwmc,_px,cperiod,khdm,khmc,zydm,zymc,xslbdm,ywfbl,newkhbl,skqx,byjf,bydf,qmye,jf01,jf02,jf03,jf04,jf05,jf06,jf07,jf08,jf09,jf10,jf11,jf12,jf13,jf14,df01,df02,df03,df04,df05,df06,df07,df08,df09,df10,df11,df12,df13,df14,ywf_bz,ywf_newkh,ywf_zl,cdhpje,ywf_cdhp,gylpjje,ywf_gylpj,tiexije,ywf_tx,skje_yj,yongjinje,ywf_yj,daizhang,ywf_dz,susong,ywf_ss,ywf_hlc,ywf_hj"
-    '临时表字段
-    Private Const StrColAll As String = "dwdm varchar2(4),dwmc varchar2(200),_px number(2,0),cperiod varchar2(6),khdm varchar2(15),khmc varchar2(200),zydm varchar2(12),zymc varchar2(30),xslbdm varchar2(60),ywfbl number(10,3),newkhbl number(10,3),skqx number(4,0),byjf number(14,2),bydf number(14,2),qmye number(14,2),jf01 number(14,2),jf02 number(14,2),jf03 number(14,2),jf04 number(14,2),jf05 number(14,2),jf06 number(14,2),jf07 number(14,2),jf08 number(14,2),jf09 number(14,2),jf10 number(14,2),jf11 number(14,2),jf12 number(14,2),jf13 number(14,2),jf14 number(14,2),df01 number(14,2),df02 number(14,2),df03 number(14,2),df04 number(14,2),df05 number(14,2),df06 number(14,2),df07 number(14,2),df08 number(14,2),df09 number(14,2),df10 number(14,2),df11 number(14,2),df12 number(14,2),df13 number(14,2),df14 number(14,2),ywf_bz number(14,2),ywf_newkh number(14,2),ywf_zl number(14,2),cdhpje number(14,2),ywf_cdhp number(14,2),gylpjje number(14,2),ywf_gylpj number(14,2),tiexije number(14,2),ywf_tx number(14,2),skje_yj number(14,2),yongjinje number(14,2),ywf_yj number(14,2),daizhang number(14,2),ywf_dz number(14,2),susong number(14,2),ywf_ss number(14,2),ywf_hlc number(14,2),ywf_hj number(14,2)"
+    Private Const StrSelAll As String = "dwdm,dwmc,px,cperiod,khdm,khmc,zydm,zymc,xslbdm,ywfbl,newkhbl,skqx,byjf,bydf,qmye,jf01,jf02,jf03,jf04,jf05,jf06,jf07,jf08,jf09,jf10,jf11,jf12,jf13,jf14,df01,df02,df03,df04,df05,df06,df07,df08,df09,df10,df11,df12,df13,df14,ywf_bz,ywf_newkh,ywf_zl,cdhpje,ywf_cdhp,gylpjje,ywf_gylpj,tiexije,ywf_tx,skje_yj,yongjinje,ywf_yj,daizhang,ywf_dz,susong,ywf_ss,ywf_hlc,ywf_hj"
+    '临时表字段，px 为内部排序列，必须与 MdlYwfHzHelper.StrSortCol 同名
+    Private Const StrColAll As String = "dwdm varchar2(4),dwmc varchar2(200),px number(2,0),cperiod varchar2(6),khdm varchar2(15),khmc varchar2(200),zydm varchar2(12),zymc varchar2(30),xslbdm varchar2(60),ywfbl number(10,3),newkhbl number(10,3),skqx number(4,0),byjf number(14,2),bydf number(14,2),qmye number(14,2),jf01 number(14,2),jf02 number(14,2),jf03 number(14,2),jf04 number(14,2),jf05 number(14,2),jf06 number(14,2),jf07 number(14,2),jf08 number(14,2),jf09 number(14,2),jf10 number(14,2),jf11 number(14,2),jf12 number(14,2),jf13 number(14,2),jf14 number(14,2),df01 number(14,2),df02 number(14,2),df03 number(14,2),df04 number(14,2),df05 number(14,2),df06 number(14,2),df07 number(14,2),df08 number(14,2),df09 number(14,2),df10 number(14,2),df11 number(14,2),df12 number(14,2),df13 number(14,2),df14 number(14,2),ywf_bz number(14,2),ywf_newkh number(14,2),ywf_zl number(14,2),cdhpje number(14,2),ywf_cdhp number(14,2),gylpjje number(14,2),ywf_gylpj number(14,2),tiexije number(14,2),ywf_tx number(14,2),skje_yj number(14,2),yongjinje number(14,2),ywf_yj number(14,2),daizhang number(14,2),ywf_dz number(14,2),susong number(14,2),ywf_ss number(14,2),ywf_hlc number(14,2),ywf_hj number(14,2)"
     '汇总金额字段
     Private Const StrSumCol As String = "byjf,bydf,qmye,jf01,jf02,jf03,jf04,jf05,jf06,jf07,jf08,jf09,jf10,jf11,jf12,jf13,jf14,df01,df02,df03,df04,df05,df06,df07,df08,df09,df10,df11,df12,df13,df14,ywf_bz,ywf_newkh,ywf_zl,cdhpje,ywf_cdhp,gylpjje,ywf_gylpj,tiexije,ywf_tx,skje_yj,yongjinje,ywf_yj,daizhang,ywf_dz,susong,ywf_ss,ywf_hlc,ywf_hj"
 
@@ -185,7 +185,7 @@ Public Class FrmYwfCxHz
                     Continue For
                 End If
                 Dim strDwmc As String = MdlYwfHzHelper.DwmcOf(Me.ListBoxYixuanDwdm.Items(i).ToString).Replace("'", "''")
-                rcOleDbCommand.CommandText = "INSERT INTO " & StrTempTable & " (dwdm,dwmc,_px,cperiod,khdm,khmc,zydm,zymc,xslbdm,ywfbl,newkhbl,skqx,byjf,bydf,qmye,jf01,jf02,jf03,jf04,jf05,jf06,jf07,jf08,jf09,jf10,jf11,jf12,jf13,jf14,df01,df02,df03,df04,df05,df06,df07,df08,df09,df10,df11,df12,df13,df14,ywf_bz,ywf_newkh,ywf_zl,cdhpje,ywf_cdhp,gylpjje,ywf_gylpj,tiexije,ywf_tx,skje_yj,yongjinje,ywf_yj,daizhang,ywf_dz,susong,ywf_ss,ywf_hlc,ywf_hj) SELECT '" & strDwdm & "','" & strDwmc & "',1 AS _px,gl_ywfjsb.cperiod,gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.zydm,gl_ywfjsb.zymc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl,gl_ywfjsb.newkhbl,gl_ywfjsb.skqx,gl_ywfjsb.byjf,gl_ywfjsb.bydf,gl_ywfjsb.qmye,gl_ywfjsb.jf01,gl_ywfjsb.jf02,gl_ywfjsb.jf03,gl_ywfjsb.jf04,gl_ywfjsb.jf05,gl_ywfjsb.jf06,gl_ywfjsb.jf07,gl_ywfjsb.jf08,gl_ywfjsb.jf09,gl_ywfjsb.jf10,gl_ywfjsb.jf11,gl_ywfjsb.jf12,gl_ywfjsb.jf13,gl_ywfjsb.jf14,gl_ywfjsb.df01,gl_ywfjsb.df02,gl_ywfjsb.df03,gl_ywfjsb.df04,gl_ywfjsb.df05,gl_ywfjsb.df06,gl_ywfjsb.df07,gl_ywfjsb.df08,gl_ywfjsb.df09,gl_ywfjsb.df10,gl_ywfjsb.df11,gl_ywfjsb.df12,gl_ywfjsb.df13,gl_ywfjsb.df14,gl_ywfjsb.ywf_bz,gl_ywfjsb.ywf_newkh,0 - gl_ywfjsb.ywf_zl AS ywf_zl,gl_ywfjsb.cdhpje,0 - gl_ywfjsb.ywf_cdhp AS ywf_cdhp,gl_ywfjsb.gylpjje,0 - gl_ywfjsb.ywf_gylpj AS ywf_gylpj,gl_ywfjsb.tiexije,0 - gl_ywfjsb.ywf_tx AS ywf_tx,gl_ywfjsb.skje_yj,gl_ywfjsb.yongjinje,0 - gl_ywfjsb.ywf_yj AS ywf_yj,gl_ywfjsb.daizhang,0 - gl_ywfjsb.ywf_dz AS ywf_dz,gl_ywfjsb.susong,0 - gl_ywfjsb.ywf_ss AS ywf_ss,gl_ywfjsb.ywf_hlc,NVL(gl_ywfjsb.ywf_bz,0) + NVL(gl_ywfjsb.ywf_newkh,0) - NVL(gl_ywfjsb.ywf_zl,0) - NVL(gl_ywfjsb.ywf_cdhp,0) - NVL(gl_ywfjsb.ywf_gylpj,0) - NVL(gl_ywfjsb.ywf_tx,0) - NVL(gl_ywfjsb.ywf_yj,0) - NVL(gl_ywfjsb.ywf_dz,0) - NVL(gl_ywfjsb.ywf_ss,0) + NVL(gl_ywfjsb.ywf_hlc,0) AS ywf_hj FROM rcdata_" & strDwdm & ".gl_ywfjsb WHERE gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.cperiod <= ? AND NVL(gl_ywfjsb.zydm,'~') = NVL(?, gl_ywfjsb.zydm) AND NVL(gl_ywfjsb.khdm,'~') = NVL(?, gl_ywfjsb.khdm)"
+                rcOleDbCommand.CommandText = "INSERT INTO " & StrTempTable & " (dwdm,dwmc,px,cperiod,khdm,khmc,zydm,zymc,xslbdm,ywfbl,newkhbl,skqx,byjf,bydf,qmye,jf01,jf02,jf03,jf04,jf05,jf06,jf07,jf08,jf09,jf10,jf11,jf12,jf13,jf14,df01,df02,df03,df04,df05,df06,df07,df08,df09,df10,df11,df12,df13,df14,ywf_bz,ywf_newkh,ywf_zl,cdhpje,ywf_cdhp,gylpjje,ywf_gylpj,tiexije,ywf_tx,skje_yj,yongjinje,ywf_yj,daizhang,ywf_dz,susong,ywf_ss,ywf_hlc,ywf_hj) SELECT '" & strDwdm & "','" & strDwmc & "',1 AS px,gl_ywfjsb.cperiod,gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.zydm,gl_ywfjsb.zymc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl,gl_ywfjsb.newkhbl,gl_ywfjsb.skqx,gl_ywfjsb.byjf,gl_ywfjsb.bydf,gl_ywfjsb.qmye,gl_ywfjsb.jf01,gl_ywfjsb.jf02,gl_ywfjsb.jf03,gl_ywfjsb.jf04,gl_ywfjsb.jf05,gl_ywfjsb.jf06,gl_ywfjsb.jf07,gl_ywfjsb.jf08,gl_ywfjsb.jf09,gl_ywfjsb.jf10,gl_ywfjsb.jf11,gl_ywfjsb.jf12,gl_ywfjsb.jf13,gl_ywfjsb.jf14,gl_ywfjsb.df01,gl_ywfjsb.df02,gl_ywfjsb.df03,gl_ywfjsb.df04,gl_ywfjsb.df05,gl_ywfjsb.df06,gl_ywfjsb.df07,gl_ywfjsb.df08,gl_ywfjsb.df09,gl_ywfjsb.df10,gl_ywfjsb.df11,gl_ywfjsb.df12,gl_ywfjsb.df13,gl_ywfjsb.df14,gl_ywfjsb.ywf_bz,gl_ywfjsb.ywf_newkh,0 - gl_ywfjsb.ywf_zl AS ywf_zl,gl_ywfjsb.cdhpje,0 - gl_ywfjsb.ywf_cdhp AS ywf_cdhp,gl_ywfjsb.gylpjje,0 - gl_ywfjsb.ywf_gylpj AS ywf_gylpj,gl_ywfjsb.tiexije,0 - gl_ywfjsb.ywf_tx AS ywf_tx,gl_ywfjsb.skje_yj,gl_ywfjsb.yongjinje,0 - gl_ywfjsb.ywf_yj AS ywf_yj,gl_ywfjsb.daizhang,0 - gl_ywfjsb.ywf_dz AS ywf_dz,gl_ywfjsb.susong,0 - gl_ywfjsb.ywf_ss AS ywf_ss,gl_ywfjsb.ywf_hlc,NVL(gl_ywfjsb.ywf_bz,0) + NVL(gl_ywfjsb.ywf_newkh,0) - NVL(gl_ywfjsb.ywf_zl,0) - NVL(gl_ywfjsb.ywf_cdhp,0) - NVL(gl_ywfjsb.ywf_gylpj,0) - NVL(gl_ywfjsb.ywf_tx,0) - NVL(gl_ywfjsb.ywf_yj,0) - NVL(gl_ywfjsb.ywf_dz,0) - NVL(gl_ywfjsb.ywf_ss,0) + NVL(gl_ywfjsb.ywf_hlc,0) AS ywf_hj FROM rcdata_" & strDwdm & ".gl_ywfjsb WHERE gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.cperiod <= ? AND NVL(gl_ywfjsb.zydm,'~') = NVL(?, gl_ywfjsb.zydm) AND NVL(gl_ywfjsb.khdm,'~') = NVL(?, gl_ywfjsb.khdm)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonthBegin.Value.ToString.PadLeft(2, "0")
                 rcOleDbCommand.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonthEnd.Value.ToString.PadLeft(2, "0")
@@ -202,11 +202,11 @@ Public Class FrmYwfCxHz
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             rcOleDbDataAdpt.Fill(rcDataset, "gl_ywfjsb")
             '各账套小计
-            rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,2 AS _px," & BlankField("小计") & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc"
+            rcOleDbCommand.CommandText = "SELECT dwdm,dwmc,2 AS px," & BlankField("小计") & SumField() & " FROM " & StrTempTable & " GROUP BY dwdm,dwmc"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "gl_ywfjsb")
             '合计
-            rcOleDbCommand.CommandText = "SELECT '" & MdlYwfHzHelper.StrTotalDwdm & "' AS dwdm,'合计' AS dwmc,3 AS _px," & BlankField("合计") & SumField() & " FROM " & StrTempTable
+            rcOleDbCommand.CommandText = "SELECT '" & MdlYwfHzHelper.StrTotalDwdm & "' AS dwdm,'合计' AS dwmc,3 AS px," & BlankField("合计") & SumField() & " FROM " & StrTempTable
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.Fill(rcDataset, "gl_ywfjsb")
             rcOleDbTrans.Commit()
@@ -222,7 +222,7 @@ Public Class FrmYwfCxHz
         End Try
         If Me.CheckBox1.Checked Then
             For i = 0 To rcDataset.Tables("gl_ywfjsb").Rows.Count - 1
-                If Val(rcDataset.Tables("gl_ywfjsb").Rows(i).Item("_px")) = 1 Then
+                If Val(rcDataset.Tables("gl_ywfjsb").Rows(i).Item("px")) = 1 Then
                     If Val(rcDataset.Tables("gl_ywfjsb").Rows(i).Item("byjf")) = 0 And Val(rcDataset.Tables("gl_ywfjsb").Rows(i).Item("bydf")) = 0 And Val(rcDataset.Tables("gl_ywfjsb").Rows(i).Item("qmye")) = 0 And Val(rcDataset.Tables("gl_ywfjsb").Rows(i).Item("ywf_hj")) = 0 Then
                         rcDataset.Tables("gl_ywfjsb").Rows(i).Delete()
                     End If
@@ -230,7 +230,7 @@ Public Class FrmYwfCxHz
             Next
         End If
         '调用表单
-        rcDataViewReport = New DataView(rcDataset.Tables("gl_ywfjsb"), "TRUE", "dwdm,_px,cperiod,zydm,khdm", DataViewRowState.CurrentRows)
+        rcDataViewReport = New DataView(rcDataset.Tables("gl_ywfjsb"), "TRUE", "dwdm,px,cperiod,zydm,khdm", DataViewRowState.CurrentRows)
         Dim rcFrm As New FrmYwfCxHzz
         With rcFrm
             .ParaDataSet = rcDataset

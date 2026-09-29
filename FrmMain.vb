@@ -2514,6 +2514,13 @@ Public Class FrmMain
     End Sub
 
     '按角色权限控制菜单显隐
+    '注意：mnuiid 是空白填充的定长列，顶级菜单的 2 位 id（10/20/…/99）在库里带尾随空格。
+    '显示路径只用 mnuiname、ShowMenuItem 也只按字段名查找，都不依赖 id，故此处不做任何
+    'mnuiid 归位或脏行过滤——一旦过滤，会把这 10 条顶级菜单整条剔掉，导致只剩「窗口」。
+
+    '记录已成功显示的菜单名，供 SetMenuVisibleByShown 决定一级菜单是否显示
+    Private g_setMenuShown As New System.Collections.Generic.HashSet(Of String)()
+
     Private Sub ApplyMenuPermission(ByVal intStep As Integer)
         '先全部隐藏，避免更换操作员后残留上一次登录所显示的菜单
         SetAllMenuItemVisible(False)
@@ -2526,7 +2533,8 @@ Public Class FrmMain
                     rcOleDbCommand.Connection = sysOleDbConn
                     rcOleDbCommand.CommandTimeout = 300
                     rcOleDbCommand.CommandType = CommandType.Text
-                    rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_roleqx,rc_menu WHERE rc_roleqx.roleid = ? AND rc_menu.mnuiown = 'RC3' AND rc_roleqx.righttype = 'RC3' AND rc_roleqx.code = rc_menu.mnuiid ORDER BY rc_menu.mnuiid"
+                    'code 用 TRIM 与 mnuiid 归位，历史带空格的权限不会匹配到脏行、也不会丢菜单
+                    rcOleDbCommand.CommandText = "SELECT rc_menu.mnuiname FROM rc_roleqx,rc_menu WHERE rc_roleqx.roleid = ? AND rc_menu.mnuiown = 'RC3' AND rc_roleqx.righttype = 'RC3' AND TRIM(rc_roleqx.code) = TRIM(rc_menu.mnuiid) ORDER BY rc_menu.mnuiid"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@roleid", OleDbType.VarChar, 12).Value = rcDataset.Tables("rc_userinrole").Rows(i).Item("roleid")
                     rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -2542,7 +2550,10 @@ Public Class FrmMain
                 End Try
                 Dim j As Integer
                 For j = 0 To rcDataset.Tables("rc_roleqx").Rows.Count - 1
-                    ShowMenuItem(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname"))
+                    Dim strShown As String = Trim(Convert.ToString(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname")))
+                    If ShowMenuItem(strShown) Then
+                        g_setMenuShown.Add(strShown)
+                    End If
                 Next
             Next
         Else
@@ -2567,14 +2578,23 @@ Public Class FrmMain
             End Try
             Dim j As Integer
             For j = 0 To rcDataset.Tables("rc_roleqx").Rows.Count - 1
-                ShowMenuItem(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname"))
+                Dim strShown As String = Trim(Convert.ToString(rcDataset.Tables("rc_roleqx").Rows(j).Item("mnuiname")))
+                If ShowMenuItem(strShown) Then
+                    g_setMenuShown.Add(strShown)
+                End If
             Next
         End If
         '上级菜单在有可见下级时才显示
         Dim k As Integer
         For k = 0 To Me.MenuStripMain.Items.Count - 1
-            SetSubItemVisible(Me.MenuStripMain.Items(k))
+            If TypeOf Me.MenuStripMain.Items(k) Is ToolStripMenuItem Then
+                Dim itemTop As ToolStripMenuItem = CType(Me.MenuStripMain.Items(k), ToolStripMenuItem)
+                itemTop.Visible = SetMenuVisibleByShown(itemTop)
+            End If
         Next
+        '窗口是顶级项，恒可见；退出是系统设置的子项，此处赋值不会使上级显示，实际仍不可见
+        Me.MnuiExit.Visible = True
+        Me.MnuiWindows.Visible = True
     End Sub
 
     '取操作员的角色
@@ -2605,16 +2625,28 @@ Public Class FrmMain
     End Sub
 
     '按 mnuiname 显示菜单，mnuiname 即 FrmMain 中的控件字段名
-    Private Sub ShowMenuItem(ByVal objMenuName As Object)
+    Private Function ShowMenuItem(ByVal objMenuName As Object) As Boolean
         Dim strMenuName As String = Trim(Convert.ToString(objMenuName))
-        If strMenuName = "" Then Return
+        If strMenuName = "" Then
+            Return False
+        End If
         Dim f As System.Reflection.FieldInfo = Me.GetType().GetField(strMenuName, System.Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Public)
-        If f Is Nothing Then Return
-        If Not f.FieldType.IsSubclassOf(GetType(ToolStripMenuItem)) Then Return
+        If f Is Nothing AndAlso Not strMenuName.StartsWith("_") Then
+            f = Me.GetType().GetField("_" & strMenuName, System.Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Public)
+        End If
+        If f Is Nothing Then
+            Return False
+        End If
+        If Not GetType(ToolStripMenuItem).IsAssignableFrom(f.FieldType) Then
+            Return False
+        End If
         Dim itemMenu As ToolStripMenuItem = TryCast(f.GetValue(Me), ToolStripMenuItem)
-        If itemMenu Is Nothing Then Return
+        If itemMenu Is Nothing Then
+            Return False
+        End If
         itemMenu.Visible = True
-    End Sub
+        Return True
+    End Function
 
     '隐藏或显示菜单栏全部菜单
     Private Sub SetAllMenuItemVisible(ByVal blnVisible As Boolean)
@@ -2628,7 +2660,7 @@ Public Class FrmMain
         Dim i As Integer
         dc.Visible = blnVisible
         For i = 0 To dc.DropDownItems.Count - 1
-            If dc.DropDownItems.Item(i).GetType.ToString = "System.Windows.Forms.ToolStripMenuItem" Then
+            If TypeOf dc.DropDownItems.Item(i) Is ToolStripMenuItem Then
                 SetMenuItemVisible(CType(dc.DropDownItems.Item(i), ToolStripMenuItem), blnVisible)
             End If
         Next
@@ -2639,7 +2671,7 @@ Public Class FrmMain
         Dim i As Integer
         Dim blnChildVisible As Boolean = False
         For i = 0 To dc.DropDownItems.Count - 1
-            If dc.DropDownItems.Item(i).GetType.ToString = "System.Windows.Forms.ToolStripMenuItem" Then
+            If TypeOf dc.DropDownItems.Item(i) Is ToolStripMenuItem Then
                 If SetSubItemVisible(CType(dc.DropDownItems.Item(i), ToolStripMenuItem)) Then
                     blnChildVisible = True
                 End If
@@ -2649,6 +2681,25 @@ Public Class FrmMain
             dc.Visible = blnChildVisible
         End If
         Return dc.Visible
+    End Function
+
+    '按成功名单（名字）驱动真实菜单树：自身在名单内 → 直接可见；
+    '否则仅在有可见下级时显示，返回该项是否可见
+    Private Function SetMenuVisibleByShown(ByVal dc As ToolStripMenuItem) As Boolean
+        If g_setMenuShown.Contains(dc.Name) Then
+            dc.Visible = True
+            Return True
+        End If
+        Dim blnChild As Boolean = False
+        Dim i As Integer
+        For i = 0 To dc.DropDownItems.Count - 1
+            Dim child As ToolStripMenuItem = TryCast(dc.DropDownItems.Item(i), ToolStripMenuItem)
+            If child IsNot Nothing AndAlso SetMenuVisibleByShown(child) Then
+                blnChild = True
+            End If
+        Next
+        dc.Visible = blnChild
+        Return blnChild
     End Function
 
     Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click

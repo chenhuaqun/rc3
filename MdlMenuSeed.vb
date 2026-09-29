@@ -280,9 +280,9 @@ Module MdlMenuSeed
         New MenuItem("A012", "99", 13, "重新汇总发出商品总账", "MnuiRedoFcspyeHz", "FrmRedoFcspyeHz"),
         New MenuItem("A013", "99", 14, "物料数据修复", "MnuiCpRepair", "FrmCpRepair"),
         New MenuItem("A014", "99", 15, "检测与升级数据库", "MnuiCheckData", "FrmCheckData"),
-        New MenuItem("9902", "99", 16, "升级数据", "MnuiUpgrateData", "FrmUpgrateData"),
-        New MenuItem("9903", "99", 17, "注册与激活(&R)", "MnuiRegister", "FrmRegister"),
-        New MenuItem("9904", "99", 18, "关于(&A)", "MnuiAbout", "FrmAbout"),
+        New MenuItem("A015", "99", 16, "升级数据", "MnuiUpgrateData", "FrmUpgrateData"),
+        New MenuItem("A016", "99", 17, "注册与激活(&R)", "MnuiRegister", "FrmRegister"),
+        New MenuItem("A017", "99", 18, "关于(&A)", "MnuiAbout", "FrmAbout")
     }
 
     '建立 rc_menu 表及所需字段，已存在则跳过
@@ -299,8 +299,10 @@ Module MdlMenuSeed
                     EnsureColumn(rcOleDbCommand, "MNUISORTORDER", "mnuisortorder NUMBER(10) DEFAULT 0")
                     EnsureColumn(rcOleDbCommand, "MNUIFORMNAME", "mnuiformname VARCHAR2(100)")
                 Else
+                    rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.CommandText = "CREATE TABLE rc_menu (mnuiid VARCHAR2(4),mnuiparentid VARCHAR2(4) DEFAULT '0',mnuicaption VARCHAR2(50),mnuiname VARCHAR2(30),mnuiown VARCHAR2(4),mnuisortorder NUMBER(10) DEFAULT 0,mnuiformname VARCHAR2(100))"
                     rcOleDbCommand.ExecuteNonQuery()
+                    rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.CommandText = "ALTER TABLE rc_menu ADD CONSTRAINT PK_RC_MENU primary key (mnuiown,mnuiid)"
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -357,7 +359,7 @@ Module MdlMenuSeed
         Catch ex As Exception
             erroMsg = ex.Message
             Try
-                If Not rcOleDbTrans Is Nothing Then rcOleDbTrans.Rollback()
+                If rcOleDbTrans IsNot Nothing Then rcOleDbTrans.Rollback()
             Catch
             End Try
             Return False
@@ -368,8 +370,13 @@ Module MdlMenuSeed
 
     '建表并写入预置菜单数据
     Public Function EnsureMenu(ByRef erroMsg As String) As Boolean
-        If Not EnsureMenuTable(erroMsg) Then Return False
-        Return EnsureMenuData(erroMsg)
+        If Not EnsureMenuTable(erroMsg) Then
+            Return False
+        End If
+        If Not EnsureMenuData(erroMsg) Then
+            Return False
+        End If
+        Return True
     End Function
 
     '预置菜单项总数
@@ -393,7 +400,10 @@ Module MdlMenuSeed
         rcOleDbCommand.CommandText = "SELECT COUNT(*) FROM user_tab_columns WHERE table_name = 'RC_MENU' AND column_name = ?"
         rcOleDbCommand.Parameters.Clear()
         rcOleDbCommand.Parameters.Add("@column_name", OleDbType.VarChar, 30).Value = strColumnName
-        If Convert.ToInt32(rcOleDbCommand.ExecuteScalar()) > 0 Then Return
+        If Convert.ToInt32(rcOleDbCommand.ExecuteScalar()) > 0 Then
+            Return
+        End If
+        rcOleDbCommand.Parameters.Clear()
         rcOleDbCommand.CommandText = "ALTER TABLE rc_menu ADD " & strColumnDef
         rcOleDbCommand.ExecuteNonQuery()
     End Sub

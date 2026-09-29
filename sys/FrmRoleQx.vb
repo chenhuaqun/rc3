@@ -35,7 +35,7 @@ Public Class FrmRoleQx
             rcOleDbCommand.Connection = sysOleDbConn
             rcOleDbCommand.CommandTimeout = 300
             rcOleDbCommand.CommandType = CommandType.Text
-            rcOleDbCommand.CommandText = "SELECT * FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid in (SELECT code AS mnuiid FROM rc_roleqx WHERE righttype = 'RC3' and roleid = ?) ORDER BY mnuiId"
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_menu WHERE mnuiown = 'RC3' AND TRIM(mnuiid) in (SELECT TRIM(code) FROM rc_roleqx WHERE righttype = 'RC3' and roleid = ?) ORDER BY mnuiId"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@roleid", OleDbType.VarChar, 30).Value = strAccount
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
@@ -57,7 +57,7 @@ Public Class FrmRoleQx
         rcOleDbCommand.CommandTimeout = 300
         rcOleDbCommand.CommandType = CommandType.Text
         Try
-            rcOleDbCommand.CommandText = "SELECT * FROM rc_menu WHERE mnuiown = 'RC3' AND mnuiid not in (SELECT code AS mnuiid FROM rc_roleqx WHERE righttype = 'RC3' and roleid = ?) ORDER BY mnuiId"
+            rcOleDbCommand.CommandText = "SELECT * FROM rc_menu WHERE mnuiown = 'RC3' AND TRIM(mnuiid) not in (SELECT TRIM(code) FROM rc_roleqx WHERE righttype = 'RC3' and roleid = ?) ORDER BY mnuiId"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbCommand.Parameters.Add("@roleid", OleDbType.VarChar, 30).Value = strAccount
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand

@@ -243,8 +243,8 @@ Partial Class FrmMain
         Me.MnuiYwfZyHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiYwfZyMx = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiYwfZyzzHz = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuiYwfKhHzHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiYwfCxHz = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuiYwfKhHzHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiYwfZyHzHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiYwfZyMxHz = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuiYwfZyzzHzHz = New System.Windows.Forms.ToolStripMenuItem()
@@ -1729,7 +1729,7 @@ Partial Class FrmMain
         '
         Me.MnuiYwfGl.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuiKhXslb, Me.MnuiYwfDkl, Me.MnuiYwfZyrw, Me.MnuiYwfDkgsxx, Me.MnuiYwfDkywSr, Me.MnuiYwfDkywCx, Me.MnuiYwfJs, Me.MnuiYwfCx, Me.MnuiYwfKhHz, Me.MnuiYwfZyHz, Me.MnuiYwfZyMx, Me.MnuiYwfZyzzHz, Me.MnuiYwfCxHz, Me.MnuiYwfKhHzHz, Me.MnuiYwfZyHzHz, Me.MnuiYwfZyMxHz, Me.MnuiYwfZyzzHzHz})
         Me.MnuiYwfGl.Name = "MnuiYwfGl"
-        Me.MnuiYwfGl.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiYwfGl.Size = New System.Drawing.Size(172, 22)
         Me.MnuiYwfGl.Text = "业务费管理"
         '
         'MnuiKhXslb
@@ -1816,19 +1816,19 @@ Partial Class FrmMain
         Me.MnuiYwfZyzzHz.Text = "业务费业务员增长汇总表"
         Me.MnuiYwfZyzzHz.Visible = False
         '
-        'MnuiYwfKhHzHz
-        '
-        Me.MnuiYwfKhHzHz.Name = "MnuiYwfKhHzHz"
-        Me.MnuiYwfKhHzHz.Size = New System.Drawing.Size(252, 22)
-        Me.MnuiYwfKhHzHz.Text = "业务费客户汇总表(按账套)"
-        Me.MnuiYwfKhHzHz.Visible = False
-        '
         'MnuiYwfCxHz
         '
         Me.MnuiYwfCxHz.Name = "MnuiYwfCxHz"
         Me.MnuiYwfCxHz.Size = New System.Drawing.Size(252, 22)
         Me.MnuiYwfCxHz.Text = "业务费计算明细查询(按账套)"
         Me.MnuiYwfCxHz.Visible = False
+        '
+        'MnuiYwfKhHzHz
+        '
+        Me.MnuiYwfKhHzHz.Name = "MnuiYwfKhHzHz"
+        Me.MnuiYwfKhHzHz.Size = New System.Drawing.Size(252, 22)
+        Me.MnuiYwfKhHzHz.Text = "业务费客户汇总表(按账套)"
+        Me.MnuiYwfKhHzHz.Visible = False
         '
         'MnuiYwfZyHzHz
         '
@@ -1854,62 +1854,62 @@ Partial Class FrmMain
         'MnuiDjjz
         '
         Me.MnuiDjjz.Name = "MnuiDjjz"
-        Me.MnuiDjjz.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiDjjz.Size = New System.Drawing.Size(172, 22)
         Me.MnuiDjjz.Text = "单据记账"
         Me.MnuiDjjz.Visible = False
         '
         'MnuiFcspJz
         '
         Me.MnuiFcspJz.Name = "MnuiFcspJz"
-        Me.MnuiFcspJz.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiFcspJz.Size = New System.Drawing.Size(172, 22)
         Me.MnuiFcspJz.Text = "发出商品处理"
         '
         'MnuiJtchdjzb
         '
         Me.MnuiJtchdjzb.Name = "MnuiJtchdjzb"
-        Me.MnuiJtchdjzb.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiJtchdjzb.Size = New System.Drawing.Size(172, 22)
         Me.MnuiJtchdjzb.Text = "计提存货跌价准备"
         Me.MnuiJtchdjzb.Visible = False
         '
         'MnuiMrpJs
         '
         Me.MnuiMrpJs.Name = "MnuiMrpJs"
-        Me.MnuiMrpJs.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiMrpJs.Size = New System.Drawing.Size(172, 22)
         Me.MnuiMrpJs.Text = "MRP运算"
         Me.MnuiMrpJs.Visible = False
         '
         'MnuiPzsc
         '
         Me.MnuiPzsc.Name = "MnuiPzsc"
-        Me.MnuiPzsc.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiPzsc.Size = New System.Drawing.Size(172, 22)
         Me.MnuiPzsc.Text = "凭证生成"
         Me.MnuiPzsc.Visible = False
         '
         'MnuiPzcd
         '
         Me.MnuiPzcd.Name = "MnuiPzcd"
-        Me.MnuiPzcd.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiPzcd.Size = New System.Drawing.Size(172, 22)
         Me.MnuiPzcd.Text = "凭证传递"
         Me.MnuiPzcd.Visible = False
         '
         'MnuiYdjz
         '
         Me.MnuiYdjz.Name = "MnuiYdjz"
-        Me.MnuiYdjz.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiYdjz.Size = New System.Drawing.Size(172, 22)
         Me.MnuiYdjz.Text = "期末结账"
         Me.MnuiYdjz.Visible = False
         '
         'MnuiNewYear
         '
         Me.MnuiNewYear.Name = "MnuiNewYear"
-        Me.MnuiNewYear.Size = New System.Drawing.Size(180, 22)
+        Me.MnuiNewYear.Size = New System.Drawing.Size(172, 22)
         Me.MnuiNewYear.Text = "建立新年度账"
         Me.MnuiNewYear.Visible = False
         '
         '结转上年期末库存ToolStripMenuItem
         '
         Me.结转上年期末库存ToolStripMenuItem.Name = "结转上年期末库存ToolStripMenuItem"
-        Me.结转上年期末库存ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.结转上年期末库存ToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
         Me.结转上年期末库存ToolStripMenuItem.Text = "结转上年期末库存"
         Me.结转上年期末库存ToolStripMenuItem.Visible = False
         '

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>常见问题 - RC3 帮助</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hd">
+    <h1>RC3 企业管理系统 · 帮助</h1>
+    <div class="sub">软件版本：V3.0 &nbsp;|&nbsp; 公司官网：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a></div>
+</div>
+
+<div class="wrap">
+
+    <div class="nav">
+        <div class="cap">帮助目录</div>
+        <a href="index.html">帮助首页</a>
+        <a href="start.html">开始使用</a>
+        <a href="login.html">登录与账套</a>
+        <a href="activate.html">注册与激活</a>
+        <a href="menus.html">主界面与菜单</a>
+        <a href="users.html">用户与权限</a>
+        <a href="faq.html" class="on">常见问题</a>
+    </div>
+
+    <div class="main">
+
+        <h2>常见问题</h2>
+
+        <h3>一、提示信息速查表</h3>
+        <p>下表列出软件实际弹出的提示文字及其处理办法，可按关键字快速查找。</p>
+
+        <h4>启动、数据库与登录</h4>
+        <table>
+            <tr>
+                <th style="width:44%">提示信息</th>
+                <th>处理办法</th>
+            </tr>
+            <tr>
+                <td><span class="msg">运行系统，必须配置系统数据库信息！</span></td>
+                <td>数据源配置未完成。删除程序目录下的 <code>richen.config</code> 后重新启动程序，在弹出的配置窗口中重新填写数据库服务器、数据库名称、用户名与口令。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">对不起，数据库服务器连接不上。请稍后再试或与系统管理员联系。</span></td>
+                <td>确认 Oracle 服务器已启动、监听正常，本机能访问该服务器且端口为 1521，配置中的服务器地址与服务名无误。程序会直接退出，处理后重新启动。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">登录帐号不存在。</span></td>
+                <td>核对登录账号拼写（不区分大小写）；确认该账号未被停用或删除，必要时联系系统管理员。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">密码错误，请重新输入。</span></td>
+                <td>重新输入口令。<b>连续 3 次</b>密码错误后系统会自动退出，需重新启动程序。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">您没有操作权限，请与系统管理员联系。</span></td>
+                <td>该操作员没有被分配任何角色。请系统管理员在<a href="users.html">用户角色</a>中为其分配角色，并分配账套权限。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">没有符合条件的会计期间。请检查会计期间设置。</span></td>
+                <td>所选业务日期在系统中没有对应的会计期间。请改选已建立会计期间的日期，或请管理员在<b>系统设置</b>中检查会计期间设置、必要时执行<a href="menus.html">建立新年度账</a>。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">主程序异常：…</span></td>
+                <td>程序启动过程中发生未预期的错误。请记下完整提示内容并联系技术支持。</td>
+            </tr>
+        </table>
+
+        <h4>注册与激活</h4>
+        <table>
+            <tr>
+                <th style="width:44%">提示信息</th>
+                <th>处理办法</th>
+            </tr>
+            <tr>
+                <td><span class="msg">未检测到许可证文件，请先注册和激活。</span></td>
+                <td>本机尚未激活。点「确定」进入注册流程，按<a href="activate.html">注册与激活</a>操作；若选择「取消」，程序会提示「未激活程序，将退出系统。」并退出。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">未激活程序，将退出系统。</span></td>
+                <td>没有完成激活。重新启动程序，在提示时选择「确定」进入注册流程。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">检测到硬件变更，设备ID不匹配，请重新激活。</span></td>
+                <td>硬件变化导致设备码改变。在新机器上用原账号重新注册、获取新密钥并激活。详见<a href="activate.html">注册与激活</a>。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">读取许可证文件失败，请重新激活。</span></td>
+                <td>许可证文件损坏或无读取权限。检查程序目录是否可写，必要时删除程序目录下的 <code>license</code> 文件夹后重新激活。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">本设备已激活，无需再次注册或激活。</span></td>
+                <td>正常状态，本机已获得授权。关闭窗口即可继续使用。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">检测到硬件变更，请重新激活。</span></td>
+                <td>打开注册窗口时发现设备码与许可证记录不一致，请重新注册并激活。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">读取激活信息失败，请重新激活。</span></td>
+                <td>同上，检查目录权限并重新激活。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">无法获取设备码，请检查硬件或手动输入。</span></td>
+                <td>未取到设备码。设备码为只读不可手工输入，请关闭重开窗体、重启计算机、以管理员身份运行，并确认未被安全软件拦截。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">请输入邮箱地址。 / 请输入密码。</span></td>
+                <td>「产品注册」区的登录邮箱或登录密码为空，请补齐后点击「注册」。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">注册成功！注册码已发送至您的邮箱，请查收。</span></td>
+                <td>注册提交成功。到注册邮箱查收许可证密钥，再回到窗口的「产品激活」区完成激活。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">注册失败！HTTP …</span></td>
+                <td>检查网络、邮箱格式与密码；确认能访问 <code>https://richen.dpdns.org/</code>；邮件未收到请查垃圾邮件。仍失败请记下 HTTP 状态码并联系技术支持。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">请输入从邮箱收到的许可证密钥。</span></td>
+                <td>「许可证密钥」为空，请从注册邮件中复制后粘贴。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">产品激活成功！本设备已获得授权。</span></td>
+                <td>激活完成，注册窗口自动关闭，可正常使用系统。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">激活失败！HTTP …</span></td>
+                <td>确认密钥完整、无多余空格与换行；确认设备码与注册时一致；确认该密钥未被用于其他设备。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">注册时发生错误：… / 激活时发生错误：…</span></td>
+                <td>过程发生异常，通常与网络有关。请检查网络后重试，仍失败请记下错误内容并联系技术支持。</td>
+            </tr>
+        </table>
+
+        <h4>菜单与权限</h4>
+        <table>
+            <tr>
+                <th style="width:44%">现象或提示</th>
+                <th>处理办法</th>
+            </tr>
+            <tr>
+                <td>登录后菜单栏少了很多项</td>
+                <td>菜单按角色权限显示。请联系系统管理员在<a href="users.html">角色权限设置</a>中为你的角色补勾相应菜单，然后<b>重新登录</b>。登录账号 <code>ADMIN</code> 始终拥有全部菜单。</td>
+            </tr>
+            <tr>
+                <td>整个顶级菜单都不见了</td>
+                <td>顶级菜单仅在<b>至少有一个下级菜单可见</b>时才显示。该模块整组无权限时顶级菜单会整条隐藏。</td>
+            </tr>
+            <tr>
+                <td>登录时「核算单位」下拉框是空的</td>
+                <td>该操作员没有被授权任何账套。请在<a href="users.html">操作员权限</a>中为其分配账套权限。</td>
+            </tr>
+        </table>
+
+        <h4>帮助与其他</h4>
+        <table>
+            <tr>
+                <th style="width:44%">现象或提示</th>
+                <th>处理办法</th>
+            </tr>
+            <tr>
+                <td>点击「帮助」没有反应，或提示找不到帮助文件</td>
+                <td>程序目录下的 <code>help\</code> 文件夹可能缺失。系统会自动改为打开公司官网上的在线帮助；如需离线使用，请将完整帮助文件复制到程序目录下的 <code>help\</code> 文件夹（含 <code>index.html</code> 与 <code>style.css</code>）。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">无法打开公司官网：…</span></td>
+                <td>系统未能调用默认浏览器。请按提示中的网址手动在浏览器中打开，并检查本机是否关联了默认浏览器。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">程序错误…</span></td>
+                <td>操作过程中出现异常。请记下完整提示内容，必要时截图后联系技术支持。</td>
+            </tr>
+        </table>
+
+        <h3>二、功能使用疑问</h3>
+
+        <h4>如何切换当前账套或业务日期？</h4>
+        <p>使用 <strong>系统服务(&amp;S)</strong> → <strong>重新注册</strong>，在登录窗口重新选择核算单位与业务日期后登录。操作前请先保存当前正在录入的单据。</p>
+
+        <h4>为什么登录后看不到某个我熟悉的菜单？</h4>
+        <p>先确认是否更换过角色或角色权限被调整过。权限在登录时加载，<b>重新登录</b>才会生效。若确认无误，请联系系统管理员查看该角色在<a href="users.html">角色权限设置</a>中的授权情况。</p>
+
+        <h4>能否修改登录密码？</h4>
+        <p>可以。使用 <strong>系统服务(&amp;S)</strong> → <strong>修改密码</strong>。管理员为他人重置密码时，需通过「修改操作员」窗口以外的途径按本单位规定处理——该窗口不提供密码字段。</p>
+
+        <h4>软件如何升级？</h4>
+        <p>程序每 7 天在后台静默检查一次新版本并下载，下次启动时生效；也可手动执行 <strong>系统服务(&amp;S)</strong> → <strong>在线升级</strong>。若涉及数据库结构变更，需再执行「升级RC3数据」或「检测与升级数据库」，建议由系统管理员操作并事先备份数据库。</p>
+
+        <h4>升级后需要重新激活吗？</h4>
+        <p>一般不需要。许可证保存在程序目录下的 <code>license\license.dat</code>。若升级后提示未激活，请按<a href="activate.html">注册与激活</a>重新激活一次。</p>
+
+        <h4>换了一台电脑要怎么用？</h4>
+        <p>软件授权与硬件绑定，换机后需在新电脑上用原账号重新注册并激活。详见<a href="activate.html">注册与激活</a>中的「检测到硬件变更」一节。</p>
+
+        <h4>一台电脑可以安装多套吗？</h4>
+        <p>一个许可证对应一台设备（一个设备码）。多台电脑需各自注册并激活。</p>
+
+        <h4>程序装在哪个目录比较好？</h4>
+        <p>建议装在有写入权限的本地目录（例如 <code>D:\RC3\</code>），不要装在 <code>Program Files</code> 等受保护目录下，否则保存许可证、升级文件与日志时会失败。</p>
+
+        <h3>三、联系技术支持</h3>
+        <p>联系前请准备好以下信息，可以显著加快处理速度：</p>
+        <table>
+            <tr>
+                <th style="width:150px">信息项</th>
+                <th>获取方式</th>
+            </tr>
+            <tr>
+                <td>软件版本号</td>
+                <td>登录窗口左下角，或<b>系统服务(&amp;S)</b> → <b>关于(&amp;A)</b></td>
+            </tr>
+            <tr>
+                <td>本机设备码</td>
+                <td><b>系统服务(&amp;S)</b> → <b>注册与激活(&amp;R)</b>，窗口中的「本机设备码」</td>
+            </tr>
+            <tr>
+                <td>完整提示信息</td>
+                <td>直接复制弹窗中的全部文字，包括 HTTP 状态码</td>
+            </tr>
+            <tr>
+                <td>发生位置</td>
+                <td>在哪个菜单下、哪个窗体、点哪个按钮时发生</td>
+            </tr>
+            <tr>
+                <td>截图</td>
+                <td>有截图时一并提供</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th style="width:150px">联系方式</th>
+                <th>内容</th>
+            </tr>
+            <tr>
+                <td>技术支持邮箱</td>
+                <td><a href="mailto:chenhuaqun@qq.com">chenhuaqun@qq.com</a></td>
+            </tr>
+            <tr>
+                <td>公司官网</td>
+                <td><a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a>（主界面工具栏「官网」按钮亦可直达）</td>
+            </tr>
+        </table>
+
+        <div class="pager">
+            <a href="users.html">← 上一页：用户与权限</a>
+            <a href="index.html">返回：帮助首页</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="ft">
+    技术支持邮箱：<a href="mailto:chenhuaqun@qq.com">chenhuaqun@qq.com</a> &nbsp;|&nbsp; 官方网站：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a>
+</div>
+
+</body>
+</html>

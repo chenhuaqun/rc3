@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>用户与权限 - RC3 帮助</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hd">
+    <h1>RC3 企业管理系统 · 帮助</h1>
+    <div class="sub">软件版本：V3.0 &nbsp;|&nbsp; 公司官网：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a></div>
+</div>
+
+<div class="wrap">
+
+    <div class="nav">
+        <div class="cap">帮助目录</div>
+        <a href="index.html">帮助首页</a>
+        <a href="start.html">开始使用</a>
+        <a href="login.html">登录与账套</a>
+        <a href="activate.html">注册与激活</a>
+        <a href="menus.html">主界面与菜单</a>
+        <a href="users.html" class="on">用户与权限</a>
+        <a href="faq.html">常见问题</a>
+    </div>
+
+    <div class="main">
+
+        <h2>用户与权限</h2>
+
+        <div class="box warn">
+            <span class="bt">本章读者</span>
+            本章内容仅供<b>系统管理员</b>使用。系统采用「操作员 → 角色 → 菜单/数据权限」的三层授权结构：先给操作员分配角色，再给角色勾选可用的功能菜单与数据范围，操作员登录后即拥有其所有角色的权限之和。
+        </div>
+
+        <h3>一、权限模型</h3>
+        <table>
+            <tr>
+                <th style="width:130px">层次</th>
+                <th>作用</th>
+                <th>维护入口</th>
+            </tr>
+            <tr>
+                <td>操作员</td>
+                <td>系统的实际使用者，一个操作员可以属于多个角色。</td>
+                <td><strong>系统设置(&amp;B)</strong> → <strong>操作员和操作员角色设置</strong></td>
+            </tr>
+            <tr>
+                <td>角色</td>
+                <td>权限的载体，把一批菜单权限与数据权限打包，便于批量授权。</td>
+                <td><strong>系统设置(&amp;B)</strong> → <strong>角色和角色操作权限设置</strong></td>
+            </tr>
+            <tr>
+                <td>菜单权限</td>
+                <td>决定登录后能看到哪些菜单、打开哪些功能窗体。</td>
+                <td>用户角色窗口 → <strong>权限(&amp;V)</strong></td>
+            </tr>
+            <tr>
+                <td>数据权限</td>
+                <td>决定可见的<b>账套</b>、<b>类别</b>、<b>部门</b>、<b>单据类型</b>。</td>
+                <td>操作员管理窗口 → <strong>权限(&amp;V)</strong></td>
+            </tr>
+        </table>
+
+        <h3>二、操作员管理</h3>
+        <p>入口：<strong>系统设置(&amp;B)</strong> → <strong>操作员和操作员角色设置</strong>，窗口标题为「操作员管理」。</p>
+        <p>列表显示三列：<b>登录账号</b>、<b>全名</b>、<b>所属单位</b>。窗口上方的按钮为：</p>
+        <table>
+            <tr>
+                <th style="width:120px">按钮</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>增加(&amp;A)</td>
+                <td>新增一个操作员，详见下节。</td>
+            </tr>
+            <tr>
+                <td>修改(&amp;E)</td>
+                <td>修改选中操作员的登录账号、全名与所属单位。</td>
+            </tr>
+            <tr>
+                <td>权限(&amp;V)</td>
+                <td>打开所选操作员的权限设置，分配角色与数据权限。</td>
+            </tr>
+            <tr>
+                <td>删除(&amp;D)</td>
+                <td>删除所选操作员，同时清除其<b>全部数据权限</b>记录。</td>
+            </tr>
+            <tr>
+                <td>输出</td>
+                <td>把操作员列表导出为 Excel 文件。</td>
+            </tr>
+            <tr>
+                <td>帮助(&amp;H)</td>
+                <td>打开本帮助。</td>
+            </tr>
+        </table>
+
+        <div class="box warn">
+            <span class="bt">注意</span>
+            删除操作员会一并删除其数据权限记录。若该操作员已离职，建议改为<b>取消其所有角色</b>，保留账号记录以便追溯历史单据的操作人。
+        </div>
+
+        <h3>三、增加操作员</h3>
+        <table>
+            <tr>
+                <th style="width:130px">字段</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>登陆账号</td>
+                <td>登录名，保存时自动转为<b>大写</b>，长度不超过 30 个字符。</td>
+            </tr>
+            <tr>
+                <td>全名</td>
+                <td>操作员姓名，会显示在主界面状态栏与单据的制单人处，长度不超过 30 个字符。</td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td>登录口令，<b>加密后存储</b>，界面上不显示明文。</td>
+            </tr>
+            <tr>
+                <td>密码确认</td>
+                <td>再次输入密码以确认。</td>
+            </tr>
+            <tr>
+                <td>所属单位</td>
+                <td>该操作员所属的核算单位编码。</td>
+            </tr>
+        </table>
+
+        <div class="box warn">
+            <span class="bt">易错点</span>
+            「密码」与「密码确认」必须<b>完全一致</b>（区分前后空格）。若两次输入不一致，窗口会直接关闭且不保存，请重新打开「增加操作员」窗口，仔细核对后再保存。
+        </div>
+
+        <h3>四、修改操作员与修改密码</h3>
+        <ul>
+            <li>「修改操作员」窗口可改 <b>登陆账号</b>、<b>全名</b>、<b>所属单位</b>，<b>不含密码</b>。</li>
+            <li>修改自己的密码请使用主界面菜单 <strong>系统服务(&amp;S)</strong> → <strong>修改密码</strong>。</li>
+            <li>操作员登录时<b>连续 3 次</b>密码错误会触发程序自动退出，需重新启动。</li>
+        </ul>
+
+        <h3>五、用户的角色与数据权限</h3>
+        <p>在「操作员管理」中选中一个操作员，点击 <strong>权限(&amp;V)</strong>，可为其分配：</p>
+        <table>
+            <tr>
+                <th style="width:130px">权限类型</th>
+                <th>作用</th>
+            </tr>
+            <tr>
+                <td>角色</td>
+                <td>从系统已有的角色中挑选分配给该操作员，可分配多个。一个操作员拥有其所有角色授予的菜单权限。</td>
+            </tr>
+            <tr>
+                <td>账套</td>
+                <td>分配该操作员可使用的核算单位。直接决定<a href="login.html">登录窗口</a>中「核算单位」下拉框里能看到哪些账套。</td>
+            </tr>
+            <tr>
+                <td>类别</td>
+                <td>限制该操作员可操作的物料、客户、供应商等类别范围。</td>
+            </tr>
+            <tr>
+                <td>部门</td>
+                <td>限制该操作员可涉及的部门范围。</td>
+            </tr>
+            <tr>
+                <td>单据类型</td>
+                <td>限制该操作员可使用的单据类型范围。</td>
+            </tr>
+        </table>
+
+        <div class="box tip">
+            <span class="bt">提示</span>
+            分配账套权限是让操作员能登录某个账套的前提。若登录时「核算单位」下拉框为空，请先回到这里为其分配账套。
+        </div>
+
+        <h3>六、用户角色（角色维护）</h3>
+        <p>入口：<strong>系统设置(&amp;B)</strong> → <strong>角色和角色操作权限设置</strong>，窗口标题为「用户角色」。</p>
+        <p>窗口按钮：<b>增加(&amp;A)</b>、<b>修改(&amp;E)</b>、<b>权限(&amp;V)</b>、<b>删除(&amp;D)</b>、<b>输出</b>、<b>帮助(&amp;H)</b>、<b>退出(&amp;X)</b>。</p>
+
+        <h4>角色编辑窗口</h4>
+        <table>
+            <tr>
+                <th style="width:130px">字段</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>角色编码</td>
+                <td>角色的唯一标识，保存时自动转为<b>大写</b>并去除首尾空格。<br>输入框最多可输入 19 个字符，但数据表字段长度为 12，故请<b>控制在 12 个字符以内</b>。编码重复时无法保存，请换一个。</td>
+            </tr>
+            <tr>
+                <td>角色名称</td>
+                <td>角色的显示名称，最多 30 个字符，例如「财务主管」「仓库管理员」。该名称会参与下方「记忆码」的自动生成。</td>
+            </tr>
+            <tr>
+                <td>记忆码</td>
+                <td>便于检索与识别的简码，最多 12 个字符，保存时转为大写。新增角色时系统会依据<b>角色名称</b>的拼音首字母自动生成，可自行修改。</td>
+            </tr>
+        </table>
+        <p>窗口按钮为 <b>新增</b>、<b>编辑</b>、<b>保存</b>、<b>取消</b>、<b>返回</b>。</p>
+
+        <div class="box warn">
+            <span class="bt">注意</span>
+            角色编码一旦被操作员引用或已设置过权限，便<b>不宜再修改</b>，以免权限失效。若角色下仍有操作员或仍配置了菜单权限，系统会阻止删除，请先解除关联。
+        </div>
+
+        <h3>七、角色权限设置</h3>
+        <p>在「用户角色」窗口中选中一个角色，点击 <strong>权限(&amp;V)</strong>，打开「角色权限设置」窗口。窗口左侧为<b>预选功能权限</b>列表，右侧为<b>已选功能权限</b>列表（即该角色当前已拥有的菜单）。两个列表之间有四个箭头按钮。</p>
+        <table>
+            <tr>
+                <th style="width:130px">按钮</th>
+                <th>作用</th>
+            </tr>
+            <tr><td><code>--&gt;&gt;</code></td><td>把左侧选中的菜单<b>全部</b>加入已选功能权限</td></tr>
+            <tr><td><code>--&gt;</code></td><td>把左侧选中的菜单加入已选功能权限</td></tr>
+            <tr><td><code>&lt;--</code></td><td>把右侧选中的菜单移出已选功能权限</td></tr>
+            <tr><td><code>&lt;&lt;--</code></td><td>把右侧选中的菜单<b>全部</b>移出已选功能权限</td></tr>
+        </table>
+        <p>除箭头按钮外，<b>直接双击</b>列表中的菜单项也可完成添加或移出，操作更快捷。</p>
+        <ol class="steps">
+            <li>在左侧「预选功能权限」中选中需要的菜单（可按住 <kbd>Ctrl</kbd> 多选），点击 <code>--&gt;</code> 移到右侧；</li>
+            <li>若要把左侧某类菜单全部加入，点击 <code>--&gt;&gt;</code>；</li>
+            <li>在右侧「已选功能权限」中选中不再需要的菜单，点击 <code>&lt;--</code> 移回左侧；</li>
+            <li>核对左右两侧的最终结果后，点击窗口右下角的<b>确定</b>按钮保存。</li>
+        </ol>
+
+        <div class="box warn">
+            <span class="bt">重要</span>
+            确定保存时，系统会以该角色当前右侧的列表<b>整体覆盖</b>原有的菜单权限。因此请先核对两侧的最终结果再保存，避免误删既有权限。
+        </div>
+
+        <h3>八、让权限立即生效</h3>
+        <p>菜单权限在<b>登录时</b>根据操作员的角色一次性加载，因此调整角色权限后：</p>
+        <ol class="steps">
+            <li>请让相关操作员使用 <strong>系统服务(&amp;S)</strong> → <strong>重新注册</strong>，或退出后重新登录；</li>
+            <li>若调整的是自己的角色权限，也需重新登录才能看到变化；</li>
+            <li>登录账号为 <code>ADMIN</code> 时始终拥有全部菜单，不受角色权限影响。</li>
+        </ol>
+
+        <h3>九、推荐的授权步骤</h3>
+        <ol class="steps">
+            <li>先在「用户角色」中建立角色，例如「仓管员」「采购员」「财务主管」。</li>
+            <li>为每个角色设置<b>菜单权限</b>，只勾选该岗位真正需要的菜单。</li>
+            <li>在「操作员管理」中新增操作员，填写账号、全名、初始密码、所属单位。</li>
+            <li>为每个操作员<b>分配角色</b>。</li>
+            <li>为每个操作员<b>分配账套权限</b>，否则登录时看不到任何核算单位。</li>
+            <li>按需要进一步细分<b>类别、部门、单据类型</b>权限。</li>
+            <li>通知操作员重新登录，并确认菜单显示符合预期。</li>
+        </ol>
+
+        <div class="pager">
+            <a href="menus.html">← 上一页：主界面与菜单</a>
+            <a href="faq.html">下一页：常见问题 →</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="ft">
+    技术支持邮箱：<a href="mailto:chenhuaqun@qq.com">chenhuaqun@qq.com</a> &nbsp;|&nbsp; 官方网站：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a>
+</div>
+
+</body>
+</html>

@@ -124,6 +124,9 @@ Module MdlMain
         End Try
         Application.EnableVisualStyles()
         Application.SetCompatibleTextRenderingDefault(False)
+        '所有「帮助」按钮与「帮助(&H)」菜单的挂接统一在此启动，
+        '须早于登录窗体创建，登录窗口上的帮助按钮才会生效
+        MdlHelp.StartAutoAttach()
         '操作员登陆
         Try
             '等待一秒

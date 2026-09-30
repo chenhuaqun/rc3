@@ -1,0 +1,345 @@
+/* RC3 企业管理系统 — 帮助站点共享样式
+   纯静态、无外部依赖，可直接以 file:// 方式从程序目录打开 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "微软雅黑", "Segoe UI", SimSun, "宋体", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #24292f;
+    background: #f6f7f9;
+}
+
+/* ---------- 页头 ---------- */
+.hd {
+    background: #1f4e79;
+    color: #fff;
+    padding: 18px 28px;
+}
+
+.hd h1 {
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.hd .sub {
+    font-size: 13px;
+    color: #bcd3e8;
+    margin-top: 4px;
+}
+
+.hd .sub a {
+    color: #bcd3e8;
+}
+
+/* ---------- 版面 ---------- */
+.wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 28px 40px;
+    max-width: 1400px;
+}
+
+.nav {
+    flex: 0 0 210px;
+    background: #fff;
+    border: 1px solid #d8dee4;
+    border-radius: 4px;
+    padding: 12px 0;
+    position: sticky;
+    top: 20px;
+}
+
+.nav .cap {
+    font-size: 12px;
+    color: #6b7785;
+    padding: 0 16px 8px;
+    border-bottom: 1px solid #eceff2;
+    margin-bottom: 6px;
+}
+
+.nav a {
+    display: block;
+    padding: 7px 16px;
+    color: #36454f;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    font-size: 13px;
+}
+
+.nav a:hover {
+    background: #f0f4f8;
+    color: #1f4e79;
+}
+
+.nav a.on {
+    background: #e8f0f8;
+    color: #1f4e79;
+    font-weight: 600;
+    border-left-color: #1f4e79;
+}
+
+.main {
+    flex: 1 1 auto;
+    min-width: 0;
+    background: #fff;
+    border: 1px solid #d8dee4;
+    border-radius: 4px;
+    padding: 24px 30px 32px;
+}
+
+/* ---------- 标题 ---------- */
+h2 {
+    font-size: 18px;
+    color: #1f4e79;
+    border-bottom: 2px solid #e3eaf1;
+    padding-bottom: 8px;
+    margin: 26px 0 14px;
+}
+
+h2:first-child {
+    margin-top: 0;
+}
+
+h3 {
+    font-size: 15px;
+    color: #2c3e50;
+    margin: 18px 0 8px;
+}
+
+h4 {
+    font-size: 14px;
+    color: #445;
+    margin: 14px 0 6px;
+}
+
+p {
+    margin: 8px 0;
+}
+
+ul, ol {
+    margin: 8px 0 8px 26px;
+}
+
+li {
+    margin: 3px 0;
+}
+
+/* ---------- 表格 ---------- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0 14px;
+    font-size: 13px;
+}
+
+th, td {
+    border: 1px solid #d8dee4;
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #f0f4f8;
+    color: #1f4e79;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+td.c {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ---------- 提示框 ---------- */
+.box {
+    border-left: 4px solid #1f4e79;
+    background: #f2f7fb;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.box.warn {
+    border-left-color: #d08700;
+    background: #fdf6e8;
+}
+
+.box.tip {
+    border-left-color: #1a7f5a;
+    background: #eff8f4;
+}
+
+.box .bt {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* ---------- 引用原界面文案 ---------- */
+.msg {
+    display: block;
+    background: #fff8e6;
+    border: 1px solid #f0dca8;
+    border-radius: 3px;
+    padding: 6px 10px;
+    margin: 6px 0;
+    font-size: 13px;
+    color: #7a5b12;
+}
+
+/* ---------- 代码 / 路径 ---------- */
+code, .path {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+    background: #f2f4f6;
+    border: 1px solid #e3e7ea;
+    border-radius: 3px;
+    padding: 1px 5px;
+}
+
+kbd {
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    background: #f2f4f6;
+    border: 1px solid #ccd2d8;
+    border-bottom-width: 2px;
+    border-radius: 3px;
+    padding: 1px 6px;
+}
+
+/* ---------- 步骤条 ---------- */
+ol.steps {
+    list-style: none;
+    margin-left: 0;
+    counter-reset: st;
+}
+
+ol.steps > li {
+    counter-increment: st;
+    position: relative;
+    padding-left: 32px;
+    margin: 10px 0;
+}
+
+ol.steps > li::before {
+    content: counter(st);
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 21px;
+    height: 21px;
+    line-height: 21px;
+    text-align: center;
+    background: #1f4e79;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ---------- 页脚 ---------- */
+.ft {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 28px 30px;
+    color: #6b7785;
+    font-size: 12.5px;
+}
+
+.ft a {
+    color: #1f4e79;
+}
+
+.pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 14px;
+    border-top: 1px solid #e3eaf1;
+    font-size: 13px;
+}
+
+.pager a {
+    color: #1f4e79;
+    text-decoration: none;
+}
+
+.pager a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- 首页卡片 ---------- */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.card {
+    flex: 1 1 300px;
+    border: 1px solid #d8dee4;
+    border-radius: 4px;
+    padding: 14px 16px;
+    background: #fbfcfd;
+}
+
+.card a {
+    color: #1f4e79;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.card p {
+    font-size: 13px;
+    color: #58636e;
+    margin-top: 4px;
+}
+
+/* ---------- 打印 ---------- */
+@media print {
+    body {
+        background: #fff;
+        font-size: 11pt;
+    }
+
+    .nav, .pager, .hd .sub {
+        display: none;
+    }
+
+    .wrap {
+        display: block;
+        padding: 0;
+    }
+
+    .main {
+        border: none;
+        padding: 0;
+    }
+
+    h2 {
+        page-break-after: avoid;
+    }
+
+    table, .box {
+        page-break-inside: avoid;
+    }
+}

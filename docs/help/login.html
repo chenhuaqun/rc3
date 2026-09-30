@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>登录与账套 - RC3 帮助</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hd">
+    <h1>RC3 企业管理系统 · 帮助</h1>
+    <div class="sub">软件版本：V3.0 &nbsp;|&nbsp; 公司官网：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a></div>
+</div>
+
+<div class="wrap">
+
+    <div class="nav">
+        <div class="cap">帮助目录</div>
+        <a href="index.html">帮助首页</a>
+        <a href="start.html">开始使用</a>
+        <a href="login.html" class="on">登录与账套</a>
+        <a href="activate.html">注册与激活</a>
+        <a href="menus.html">主界面与菜单</a>
+        <a href="users.html">用户与权限</a>
+        <a href="faq.html">常见问题</a>
+    </div>
+
+    <div class="main">
+
+        <h2>登录与账套</h2>
+
+        <h3>一、登录窗口</h3>
+        <p>程序启动并连接数据库成功后，会弹出登录窗口。窗口左下角显示当前软件版本号。</p>
+        <table>
+            <tr>
+                <th style="width:120px">字段</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>登录账号</td>
+                <td>由系统管理员分配的登录名，<b>不区分大小写</b>（自动转为大写）。</td>
+            </tr>
+            <tr>
+                <td>口令</td>
+                <td>该账号的登录密码，在数据库中为加密存储。</td>
+            </tr>
+            <tr>
+                <td>核算单位</td>
+                <td>可选择的账套范围<b>由账号权限决定</b>。若该下拉框为空，说明该账号没有被授权任何账套，请联系系统管理员。</td>
+            </tr>
+            <tr>
+                <td>业务日期</td>
+                <td>本次登录所处理的会计期间所属日期。系统据此确定当前会计期，并影响期间校验、期初与结账相关操作。</td>
+            </tr>
+        </table>
+        <p>窗口右下方有三个按钮：<strong>确定(&amp;O)</strong> 登录、<strong>帮助(&amp;H)</strong> 打开本帮助、<strong>退出(&amp;X)</strong> 退出系统。</p>
+
+        <div class="box tip">
+            <span class="bt">提示</span>
+            输入时按 <kbd>Enter</kbd> 键等同于按「Tab」键，可以直接在几个输入框之间快速跳转。
+        </div>
+
+        <h3>二、登录时可能出现的提示</h3>
+        <table>
+            <tr>
+                <th style="width:44%">提示信息</th>
+                <th>处理办法</th>
+            </tr>
+            <tr>
+                <td><span class="msg">登录帐号不存在。</span></td>
+                <td>核对登录账号拼写；确认该账号未被停用或删除。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">密码错误，请重新输入。</span></td>
+                <td>重新输入口令。<b>连续 3 次</b>密码错误后系统会自动退出，需重新启动程序。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">您没有操作权限，请与系统管理员联系。</span></td>
+                <td>该账号没有分配任何角色，请联系系统管理员在<a href="users.html">用户角色</a>中为其分配角色。</td>
+            </tr>
+            <tr>
+                <td><span class="msg">没有符合条件的会计期间。请检查会计期间设置。</span></td>
+                <td>所选业务日期在系统中没有对应的会计期间，请改选已建立会计期间的日期，或先由管理员<a href="menus.html">建立新年度账</a>。</td>
+            </tr>
+        </table>
+
+        <h3>三、账套（核算单位）说明</h3>
+        <ul>
+            <li>一个账套对应一个核算单位（如某某公司、某某工厂），各自拥有独立的业务数据与会计期间。</li>
+            <li>登录后可在下拉框中切换选择，能选到哪些账套由系统管理员为该账号授权决定。</li>
+            <li>登录窗口中的<b>业务日期</b>与账套共同确定本次工作的会计期，请按实际业务需要选择。</li>
+            <li>进入系统后，主界面右下角状态栏会显示当前<b>单位</b>与<b>登陆日期</b>，可随时确认是否选错。</li>
+        </ul>
+
+        <h3>四、重新登录</h3>
+        <p>已登录后如需更换账号或账套，使用主界面菜单 <strong>系统服务(&amp;S)</strong> → <strong>重新注册</strong>，将重新回到本登录窗口。</p>
+
+        <div class="box warn">
+            <span class="bt">注意</span>
+            重新登录前请确认当前已录入的单据均已保存，否则未保存的内容会丢失。
+        </div>
+
+        <div class="pager">
+            <a href="start.html">← 上一页：开始使用</a>
+            <a href="activate.html">下一页：注册与激活 →</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="ft">
+    技术支持邮箱：<a href="mailto:chenhuaqun@qq.com">chenhuaqun@qq.com</a> &nbsp;|&nbsp; 官方网站：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a>
+</div>
+
+</body>
+</html>

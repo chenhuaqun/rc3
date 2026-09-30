@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>开始使用 - RC3 帮助</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hd">
+    <h1>RC3 企业管理系统 · 帮助</h1>
+    <div class="sub">软件版本：V3.0 &nbsp;|&nbsp; 公司官网：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a></div>
+</div>
+
+<div class="wrap">
+
+    <div class="nav">
+        <div class="cap">帮助目录</div>
+        <a href="index.html">帮助首页</a>
+        <a href="start.html" class="on">开始使用</a>
+        <a href="login.html">登录与账套</a>
+        <a href="activate.html">注册与激活</a>
+        <a href="menus.html">主界面与菜单</a>
+        <a href="users.html">用户与权限</a>
+        <a href="faq.html">常见问题</a>
+    </div>
+
+    <div class="main">
+
+        <h2>开始使用</h2>
+
+        <h3>一、启动前需要准备什么</h3>
+        <p>RC3 是基于 Oracle 数据库的客户端系统，服务器与客户端必须都就绪才能使用。</p>
+        <table>
+            <tr>
+                <th style="width:130px">项目</th>
+                <th>要求</th>
+            </tr>
+            <tr>
+                <td>数据库服务器</td>
+                <td>Oracle 数据库已安装并处于启动状态，监听服务可用，端口为 <code>1521</code>。</td>
+            </tr>
+            <tr>
+                <td>数据库账号</td>
+                <td>一个可连接该数据库的用户名与口令，需已具备该账套各业务表的操作权限。</td>
+            </tr>
+            <tr>
+                <td>客户端</td>
+                <td>Windows 电脑，已安装 .NET Framework 4.8，能访问数据库服务器所在网络。</td>
+            </tr>
+            <tr>
+                <td>网络</td>
+                <td>能访问公司官网 <code>https://richen.dpdns.org/</code>，用于在线升级与软件注册激活。</td>
+            </tr>
+        </table>
+
+        <div class="box warn">
+            <span class="bt">注意</span>
+            如果客户端连不上数据库服务器，登录时会出现<span class="msg">对不起，数据库服务器连接不上。请稍后再试或与系统管理员联系。</span>此时程序会直接退出，请先确认服务器与网络正常。
+        </div>
+
+        <h3>二、首次运行：配置数据源</h3>
+        <p>RC3 第一次在一台电脑上运行时，会自动弹出<b>数据源配置</b>窗口，按提示填写以下内容：</p>
+        <table>
+            <tr>
+                <th style="width:170px">配置项</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>数据库服务器</td>
+                <td>Oracle 服务器的地址或主机名。</td>
+            </tr>
+            <tr>
+                <td>数据库名称</td>
+                <td>Oracle 的服务名（Service Name），不是 SID。</td>
+            </tr>
+            <tr>
+                <td>用户名 / 口令</td>
+                <td>连接该数据库所用的账号与密码。</td>
+            </tr>
+        </table>
+        <p>配置完成后会保存为程序目录下的配置文件 <code>richen.config</code>，其中的内容是<b>加密存储</b>的，请勿手工编辑或删除。</p>
+        <div class="box tip">
+            <span class="bt">提示</span>
+            需要更换数据库或服务器时，直接删除程序目录下的 <code>richen.config</code> 后重新启动程序，即可再次弹出配置窗口。
+        </div>
+
+        <h3>三、启动流程</h3>
+        <ol class="steps">
+            <li>双击运行 RC3。</li>
+            <li>程序自动检查是否有新版本（每 7 天检查一次，在后台静默执行，不影响使用）。</li>
+            <li>读取数据源配置。若尚未配置，弹出<b>数据源配置</b>窗口；配置成功则继续。</li>
+            <li>连接数据库服务器。连接失败会提示并退出。</li>
+            <li>弹出<a href="login.html">登录窗口</a>，请输入登录账号与口令。</li>
+            <li>若本机尚未授权，会弹出<b>注册与激活</b>窗口，请按<a href="activate.html">注册与激活</a>完成授权后进入系统。</li>
+            <li>登录成功后进入<a href="menus.html">主界面</a>。</li>
+        </ol>
+
+        <h3>四、程序目录中常见的文件夹</h3>
+        <table>
+            <tr>
+                <th style="width:150px">名称</th>
+                <th>用途</th>
+            </tr>
+            <tr>
+                <td><code>help\</code></td>
+                <td>本帮助文件所在目录。</td>
+            </tr>
+            <tr>
+                <td><code>license\</code></td>
+                <td>软件激活后生成的许可证文件，请勿删除或改动。</td>
+            </tr>
+            <tr>
+                <td><code>richen.config</code></td>
+                <td>数据库数据源配置（加密存储）。</td>
+            </tr>
+            <tr>
+                <td><code>update.config</code></td>
+                <td>在线升级检查的配置与上次检查时间。</td>
+            </tr>
+            <tr>
+                <td><code>reports\</code></td>
+                <td>报表模板文件。</td>
+            </tr>
+            <tr>
+                <td><code>images\</code></td>
+                <td>主界面背景图片等资源。</td>
+            </tr>
+        </table>
+
+        <div class="box warn">
+            <span class="bt">注意</span>
+            请把程序安装在<b>有写入权限</b>的目录（例如 <code>D:\RC3\</code>），不要装在 <code>Program Files</code> 等受系统保护的目录下，否则保存许可证与升级文件时会失败。
+        </div>
+
+        <div class="pager">
+            <a href="index.html">← 上一页：帮助首页</a>
+            <a href="login.html">下一页：登录与账套 →</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="ft">
+    技术支持邮箱：<a href="mailto:chenhuaqun@qq.com">chenhuaqun@qq.com</a> &nbsp;|&nbsp; 官方网站：<a href="https://richen.dpdns.org/">https://richen.dpdns.org/</a>
+</div>
+
+</body>
+</html>

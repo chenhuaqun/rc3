@@ -2206,6 +2206,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MdlMain.vb" />
+    <Compile Include="MdlHelp.vb" />
     <Compile Include="MdlUpdate.vb" />
     <Compile Include="MdlMenuSeed.vb">
       <SubType>Code</SubType>
@@ -5290,6 +5291,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="docs\help\activate.html" />
+    <Content Include="docs\help\faq.html" />
+    <Content Include="docs\help\index.html" />
+    <Content Include="docs\help\login.html" />
+    <Content Include="docs\help\menus.html" />
+    <Content Include="docs\help\start.html" />
+    <Content Include="docs\help\style.css" />
+    <Content Include="docs\help\users.html" />
     <Content Include="rc.ico" />
     <Content Include="Resources\copy_row.png" />
     <Content Include="Resources\delete_row.png" />
@@ -5324,6 +5333,38 @@
     <Content Include="Resources\insert_row.png" />
     <Content Include="Resources\new_row.png" />
     <Content Include="Resources\paste_row.png" />
+    <Content Include="docs\help\index.html">
+      <Link>help\index.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\help\start.html">
+      <Link>help\start.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\help\login.html">
+      <Link>help\login.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\help\activate.html">
+      <Link>help\activate.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\help\menus.html">
+      <Link>help\menus.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\help\users.html">
+      <Link>help\users.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\help\faq.html">
+      <Link>help\faq.html</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\help\style.css">
+      <Link>help\style.css</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -5347,7 +5388,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="help\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>powershell -ExecutionPolicy Bypass -File "$(ProjectDir)GenerateVersion.ps1" "$(ProjectDir)"</PreBuildEvent>

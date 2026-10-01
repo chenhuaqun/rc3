@@ -2207,9 +2207,6 @@
     </Compile>
     <Compile Include="MdlMain.vb" />
     <Compile Include="MdlHelp.vb" />
-    <Compile Include="ClsGridPrintColumn.vb" />
-    <Compile Include="ClsGridPrintOption.vb" />
-    <Compile Include="MdlGridPrint.vb" />
     <Compile Include="MdlUpdate.vb" />
     <Compile Include="MdlMenuSeed.vb">
       <SubType>Code</SubType>

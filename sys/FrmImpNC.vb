@@ -581,8 +581,10 @@ Public Class FrmImpNC
             Finally
                 rcOleDbConn.Close()
             End Try
-            '记录未维护汇率的NC本位币币种
+            '记录未维护汇率的币种
             Dim missedWbhl As New List(Of String)
+            'NC本位币是否为人民币（等于系统本位币，或CNY/RMB）
+            Dim blnNcIsRmb As Boolean = (strNcWbdm = g_Wbdm) OrElse strNcWbdm = "CNY" OrElse strNcWbdm = "RMB"
             Try
                 rcOleDbConn.Open()
                 rcOleDbTrans = rcOleDbConn.BeginTransaction(IsolationLevel.Serializable)
@@ -654,7 +656,7 @@ Public Class FrmImpNC
                     rcOleDbCommand.Parameters.Add("@dw", OleDbType.VarChar, 50).Value = "~"
                     rcOleDbCommand.Parameters.Add("@sl", OleDbType.Numeric, 18).Value = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, rcDataset.Tables("gl_pz").Rows(i).Item("jfsl"), rcDataset.Tables("gl_pz").Rows(i).Item("dfsl"))
                     rcOleDbCommand.Parameters.Add("@dj", OleDbType.Numeric, 18).Value = 0.0
-                    '外币换算：NC凭证以外币为本位币，按设定的月度汇率换算为人民币
+                    '人民币换算：仅当NC本位币不是人民币时，按凭证原币与人民币的汇率换算；币种、原币按NC原始数据
                     Dim strBz As String = Trim(rcDataset.Tables("gl_pz").Rows(i).Item("wbdm").ToString)
                     If String.IsNullOrEmpty(strBz) OrElse strBz = "~" Then
                         strBz = g_Wbdm
@@ -662,22 +664,37 @@ Public Class FrmImpNC
                     Dim dblWb As Double = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, Val(rcDataset.Tables("gl_pz").Rows(i).Item("jfwb").ToString), Val(rcDataset.Tables("gl_pz").Rows(i).Item("dfwb").ToString))
                     Dim dblHl As Double = 0.0
                     Dim dblJe As Double = IIf(rcDataset.Tables("gl_pz").Rows(i).Item("jfje") <> 0, Val(rcDataset.Tables("gl_pz").Rows(i).Item("jfje").ToString), Val(rcDataset.Tables("gl_pz").Rows(i).Item("dfje").ToString))
-                    If strBz = g_Wbdm Then
-                        '本位币(人民币)：原币即本币，不换算
-                        dblHl = 1.0
-                        dblJe = dblWb
-                    ElseIf strBz = strNcWbdm Then
-                        'NC本位币(外币)：按当年当月汇率换算为人民币
-                        Dim dblRate As Double = 0.0
-                        If dictWbhl.ContainsKey(strBz) Then
-                            dblRate = dictWbhl(strBz)
-                        End If
-                        If dblRate > 0 Then
-                            dblHl = dblRate
-                            dblJe = System.Math.Round(dblWb * dblHl, 2, MidpointRounding.AwayFromZero)
+                    If blnNcIsRmb Then
+                        'NC本位币是人民币：不换算，按NC原始数据（币种、原币、本币）
+                        If dblWb <> 0 Then
+                            dblHl = System.Math.Round(dblJe / dblWb, 6, MidpointRounding.AwayFromZero)
                         Else
-                            If Not missedWbhl.Contains(strBz) Then
-                                missedWbhl.Add(strBz)
+                            dblHl = 1.0
+                        End If
+                    Else
+                        'NC本位币非人民币：本币金额 = 原币金额 × 汇率(原币→人民币)
+                        If dblWb <> 0 OrElse dblJe <> 0 Then
+                            Dim dblRate As Double = 0.0
+                            Dim strMiss As String = strBz
+                            If dblWb <> 0 Then
+                                '有原币：按本行币种对人民币汇率换算原币金额
+                                If dictWbhl.ContainsKey(strBz) Then
+                                    dblRate = dictWbhl(strBz)
+                                End If
+                            Else
+                                '原币为0、本币有金额（如汇兑损益）：按NC本位币币种对人民币汇率换算本币金额
+                                If dictWbhl.ContainsKey(strNcWbdm) Then
+                                    dblRate = dictWbhl(strNcWbdm)
+                                End If
+                                strMiss = strNcWbdm
+                            End If
+                            If dblRate > 0 Then
+                                dblHl = dblRate
+                                dblJe = System.Math.Round(IIf(dblWb <> 0, dblWb, dblJe) * dblRate, 2, MidpointRounding.AwayFromZero)
+                            Else
+                                If Not String.IsNullOrEmpty(strMiss) AndAlso Not missedWbhl.Contains(strMiss) Then
+                                    missedWbhl.Add(strMiss)
+                                End If
                             End If
                         End If
                     End If
@@ -795,7 +812,7 @@ Public Class FrmImpNC
                 End Try
             Next
             If missedWbhl.Count > 0 Then
-                MsgBox("以下NC本位币币种未设置" & Me.NudYear.Value.ToString & "年" & Me.NudMonth.Value.ToString & "月的汇率，相关凭证未进行人民币换算：" & Join(missedWbhl.ToArray, "、") & Chr(13) & "请在'币种信息设置'中维护汇率后重新导入。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
+                MsgBox("以下币种未设置" & Me.NudYear.Value.ToString & "年" & Me.NudMonth.Value.ToString & "月的汇率，相关凭证未进行人民币换算：" & Join(missedWbhl.ToArray, "、") & Chr(13) & "请在'币种信息设置'中维护汇率后重新导入。", MsgBoxStyle.OkOnly + MsgBoxStyle.Exclamation, "提示信息")
             End If
             Try
                 rcOleDbConn.Open()

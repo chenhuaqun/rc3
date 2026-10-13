@@ -46,6 +46,7 @@ Partial Class FrmJsfsEdit
         Me.Tss2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BtnExit = New System.Windows.Forms.ToolStripButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ChbBgylk = New System.Windows.Forms.CheckBox()
         Me.ChbBkywf = New System.Windows.Forms.CheckBox()
         Me.LblJsfsmc = New System.Windows.Forms.Label()
         Me.TxtJsfsmc = New System.Windows.Forms.TextBox()
@@ -53,7 +54,6 @@ Partial Class FrmJsfsEdit
         Me.LblJsfssm = New System.Windows.Forms.Label()
         Me.TxtJsfsdm = New System.Windows.Forms.TextBox()
         Me.TxtJsfssm = New System.Windows.Forms.TextBox()
-        Me.ChbBgylk = New System.Windows.Forms.CheckBox()
         Me.ToolStripPanel1.SuspendLayout()
         Me.MnuMain.SuspendLayout()
         Me.ToolStripMain.SuspendLayout()
@@ -258,14 +258,24 @@ Partial Class FrmJsfsEdit
         Me.Panel1.Size = New System.Drawing.Size(376, 181)
         Me.Panel1.TabIndex = 0
         '
+        'ChbBgylk
+        '
+        Me.ChbBgylk.AutoSize = True
+        Me.ChbBgylk.Location = New System.Drawing.Point(143, 140)
+        Me.ChbBgylk.Name = "ChbBgylk"
+        Me.ChbBgylk.Size = New System.Drawing.Size(108, 16)
+        Me.ChbBgylk.TabIndex = 17
+        Me.ChbBgylk.Text = "是否供应链票据"
+        Me.ChbBgylk.UseVisualStyleBackColor = True
+        '
         'ChbBkywf
         '
         Me.ChbBkywf.AutoSize = True
         Me.ChbBkywf.Location = New System.Drawing.Point(143, 118)
         Me.ChbBkywf.Name = "ChbBkywf"
-        Me.ChbBkywf.Size = New System.Drawing.Size(132, 16)
+        Me.ChbBkywf.Size = New System.Drawing.Size(96, 16)
         Me.ChbBkywf.TabIndex = 16
-        Me.ChbBkywf.Text = "是否承兑倒扣业务费"
+        Me.ChbBkywf.Text = "是否承兑汇票"
         Me.ChbBkywf.UseVisualStyleBackColor = True
         '
         'LblJsfsmc
@@ -319,16 +329,6 @@ Partial Class FrmJsfsEdit
         Me.TxtJsfssm.Name = "TxtJsfssm"
         Me.TxtJsfssm.Size = New System.Drawing.Size(96, 21)
         Me.TxtJsfssm.TabIndex = 5
-        '
-        'ChbBgylk
-        '
-        Me.ChbBgylk.AutoSize = True
-        Me.ChbBgylk.Location = New System.Drawing.Point(143, 140)
-        Me.ChbBgylk.Name = "ChbBgylk"
-        Me.ChbBgylk.Size = New System.Drawing.Size(144, 16)
-        Me.ChbBgylk.TabIndex = 17
-        Me.ChbBgylk.Text = "是否供应链倒扣业务费"
-        Me.ChbBgylk.UseVisualStyleBackColor = True
         '
         'FrmJsfsEdit
         '

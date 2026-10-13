@@ -13,12 +13,16 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("杭州锐创软件有限公司")>
 <Assembly: AssemblyProduct("供应链")>
 <Assembly: AssemblyCopyright("")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(False)> 
+<Assembly: ComVisible(False)>
 
 '如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
 <Assembly: Guid("9a93bf94-f406-4bbb-87df-62b25ac5ace6")>
+<Assembly: AssemblyVersion("2026.10.13.*")>
+<Assembly: AssemblyFileVersion("2026.10.13")>
+
+
 
 ' 程序集的版本信息由下面四个值组成:
 '

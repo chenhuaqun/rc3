@@ -96,6 +96,33 @@ Public Class FrmYwfJs
         Else
             Me.TxtCdhp.Text = 0
         End If
+        '取现金电汇回笼上升比例
+        Try
+            rcOleDbConn.Open()
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            rcOleDbCommand.CommandText = "SELECT paraid,parastrvalue,paradblvalue FROM rc_para WHERE paraId = '现金电汇回笼上升比例'"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            If rcDataset.Tables("rc_para") IsNot Nothing Then
+                rcDataset.Tables("rc_para").Clear()
+            End If
+            rcOleDbDataAdpt.Fill(rcDataset, "rc_para")
+        Catch ex As Exception
+            MsgBox("程序错误。" & Chr(13) & ex.Message)
+        Finally
+            rcOleDbConn.Close()
+        End Try
+        If rcDataset.Tables("rc_para").Rows.Count > 0 Then
+            If rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue").GetType.ToString <> "System.DBNull" Then
+                Me.TxtXjdh.Text = rcDataset.Tables("rc_para").Rows(0).Item("paradblvalue")
+            Else
+                Me.TxtXjdh.Text = 0
+            End If
+        Else
+            Me.TxtXjdh.Text = 0
+        End If
 
         '预选单位编码数据
         Try
@@ -256,13 +283,14 @@ Public Class FrmYwfJs
         If Me.ListBoxYixuanDwdm.Items.Count = 0 Then
             Return
         End If
+        If Me.ListBoxYixuanKmdm.Items.Count = 0 Then
+            MsgBox("已选核算单位，请先选择业务费科目。", MsgBoxStyle.OkOnly + MsgBoxStyle.Question, "提示信息")
+            Return
+        End If
         Dim strKmdm As String = ""
         For i = 0 To Me.ListBoxYixuanKmdm.Items.Count - 1
             strKmdm += IIf(i = 0, "", " OR") & " kmdm = '" & Mid(Me.ListBoxYixuanKmdm.Items(i), 1, InStr(Me.ListBoxYixuanKmdm.Items(i), " ") - 1) & "'"
         Next
-        If String.IsNullOrEmpty(strKmdm) Then
-            strKmdm = "0=0"
-        End If
         Me.LblMsg.Text = "写系统参数。"
         '写系统参数
         Try
@@ -311,6 +339,19 @@ Public Class FrmYwfJs
                 rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarNumeric, 14).Value = Trim(Me.TxtCdhp.Text)
                 rcOleDbCommand.ExecuteNonQuery()
             End If
+            If Not String.IsNullOrEmpty(Me.TxtXjdh.Text) Then
+                '删除数据
+                rcOleDbCommand.CommandText = "DELETE FROM rc_para WHERE dwdm = ? AND paraid = '现金电汇回笼上升比例'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.ExecuteNonQuery()
+                '插入数据
+                rcOleDbCommand.CommandText = "INSERT INTO rc_para (dwdm,paraid,parastrvalue,paradblvalue) VALUES (?,'现金电汇回笼上升比例','',?)"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+                rcOleDbCommand.Parameters.Add("@paraStrValue", OleDbType.VarNumeric, 14).Value = Trim(Me.TxtXjdh.Text)
+                rcOleDbCommand.ExecuteNonQuery()
+            End If
             rcOleDbTrans.Commit()
         Catch ex As Exception
             Try
@@ -324,9 +365,7 @@ Public Class FrmYwfJs
             rcOleDbConn.Close()
         End Try
 
-        '读取所选账套的连接信息
-        'strMainConnString 为登录时的连接串，仅供同步主账套业务费规则时读数据用
-        Dim strMainConnString As String = rcOleDbConn.ConnectionString
+        '读取所选账套（不含当前账套）的连接信息，供各账套计算与规则同步用
         Dim dtCalcDwdm As New DataTable
         Dim strIN As String = ""
         For i = 0 To Me.ListBoxYixuanDwdm.Items.Count - 1
@@ -383,7 +422,7 @@ Public Class FrmYwfJs
             Dim strDwdm As String = SafeText(dtCalcDwdm.Rows(i).Item("dwdm"))
             Dim strDwmc As String = SafeText(dtCalcDwdm.Rows(i).Item("dwmc"))
             Me.LblMsg.Text = "计算" & strDwdm & "账套业务费（" & (i + 1).ToString & "/" & dtCalcDwdm.Rows.Count.ToString & "）"
-            CalcOneYwf(strDwdm, strDwmc, strKmdm, dicConnString(strDwdm), strMainConnString)
+            CalcOneYwf(strDwdm, strDwmc, strKmdm, dicConnString(strDwdm))
         Next
         '调用表单
         If rcDataset.Tables("gl_ywfjsb") IsNot Nothing AndAlso rcDataset.Tables("gl_ywfjsb").Rows.Count > 0 Then
@@ -419,7 +458,7 @@ Public Class FrmYwfJs
     End Function
 
     '计算单个账套业务费，连接串取自系统库 rc_dwdm，不改写全局 rcOleDbConn
-    Private Sub CalcOneYwf(ByVal strDwdm As String, ByVal strDwmc As String, ByVal strKmdm As String, ByVal strConnString As String, ByVal strMainConnString As String)
+    Private Sub CalcOneYwf(ByVal strDwdm As String, ByVal strDwmc As String, ByVal strKmdm As String, ByVal strConnString As String)
         '本账套专用连接
         Dim rcConnYwf As New OleDbConnection
         Dim rcCmdYwf As OleDbCommand
@@ -435,7 +474,7 @@ Public Class FrmYwfJs
             rcCmdYwf.CommandType = CommandType.Text
             '规则同步不参与业务费事务，故在开事务前执行
             If Trim(strDwdm) <> Trim(g_Dwdm) Then
-                SyncYwfRuleFromMain(strDwdm, strMainConnString, rcCmdYwf)
+                SyncYwfRuleFromMain(strDwdm, rcCmdYwf)
             End If
             rcTransYwf = rcConnYwf.BeginTransaction(IsolationLevel.ReadCommitted)
             rcCmdYwf.Transaction = rcTransYwf
@@ -826,14 +865,28 @@ Public Class FrmYwfJs
             rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcCmdYwf.ExecuteNonQuery()
+            Me.LblMsg.Text = "提取收款方式为现金电汇的金额"
+            '提取收款方式为现金电汇的金额
+            rcCmdYwf.CommandText = "UPDATE gl_ywfjsb SET xjdhje = NVL(xjdhje,0) + (SELECT NVL(SUM(JE),0) FROM ar_skd WHERE SUBSTR(djh,5,6)=  ? AND EXISTS (SELECT 1 FROM rc_jsfs WHERE rc_jsfs.bkywf <> 1 AND rc_jsfs.bgylk <> 1 AND rc_jsfs.jsfsdm = ar_skd.jsfsdm) AND ar_skd.khdm = gl_ywfjsb.khdm) WHERE cperiod = ?"
+            rcCmdYwf.Parameters.Clear()
+            rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+            rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+            rcCmdYwf.ExecuteNonQuery()
             Me.LblMsg.Text = "计算承兑汇票倒扣金额"
             '计算承兑汇票倒扣金额
             rcCmdYwf.CommandText = "UPDATE gl_ywfjsb SET ywf_cdhp = ROUND(NVL(gl_ywfjsb.cdhpje,0) * NVL(gl_ywfjsb.ywfbl,0) / 10000 * " & Me.TxtCdhp.Text & ",2) WHERE cperiod = ?"
             rcCmdYwf.Parameters.Clear()
             rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcCmdYwf.ExecuteNonQuery()
+            Me.LblMsg.Text = "计算供应链票据倒扣金额"
             '计算供应链票据倒扣金额
             rcCmdYwf.CommandText = "UPDATE gl_ywfjsb SET ywf_gylpj = ROUND(NVL(gl_ywfjsb.gylpjje,0) * NVL(gl_ywfjsb.ywfbl,0) / 10000 * " & Me.TxtCdhp.Text & ",2) WHERE cperiod = ?"
+            rcCmdYwf.Parameters.Clear()
+            rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
+            rcCmdYwf.ExecuteNonQuery()
+            Me.LblMsg.Text = "计算现金电汇倒扣金额"
+            '计算现金电汇倒扣金额
+            rcCmdYwf.CommandText = "UPDATE gl_ywfjsb SET ywf_xjdh = ROUND(NVL(gl_ywfjsb.xjdhje,0) * NVL(gl_ywfjsb.ywfbl,0) / 10000 * " & Me.TxtXjdh.Text & ",2) WHERE cperiod = ?"
             rcCmdYwf.Parameters.Clear()
             rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcCmdYwf.ExecuteNonQuery()
@@ -953,7 +1006,7 @@ Public Class FrmYwfJs
 
             Me.LblMsg.Text = "读取数据"
             '读取数据
-            rcCmdYwf.CommandText = "SELECT '" & strDwdm & "' AS dwdm,'" & strDwmc & "' AS dwmc,gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.zydm,gl_ywfjsb.zymc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl,gl_ywfjsb.newkhbl,gl_ywfjsb.skqx,gl_ywfjsb.byjf,gl_ywfjsb.bydf,gl_ywfjsb.qmye,gl_ywfjsb.jf00,gl_ywfjsb.jf01,gl_ywfjsb.jf02,gl_ywfjsb.jf03,gl_ywfjsb.jf04,gl_ywfjsb.jf05,gl_ywfjsb.jf06,gl_ywfjsb.jf07,gl_ywfjsb.jf08,gl_ywfjsb.jf09,gl_ywfjsb.jf10,gl_ywfjsb.jf11,gl_ywfjsb.jf12,gl_ywfjsb.jf13,gl_ywfjsb.jf14,gl_ywfjsb.df01,gl_ywfjsb.df02,gl_ywfjsb.df03,gl_ywfjsb.df04,gl_ywfjsb.df05,gl_ywfjsb.df06,gl_ywfjsb.df07,gl_ywfjsb.df08,gl_ywfjsb.df09,gl_ywfjsb.df10,gl_ywfjsb.df11,gl_ywfjsb.df12,gl_ywfjsb.df13,gl_ywfjsb.df14,gl_ywfjsb.ywf_bz,gl_ywfjsb.ywf_newkh,0 - gl_ywfjsb.ywf_zl AS ywf_zl,gl_ywfjsb.cdhpje,0 - gl_ywfjsb.ywf_cdhp AS ywf_cdhp,gl_ywfjsb.gylpjje,0 - gl_ywfjsb.ywf_gylpj AS ywf_gylpj,gl_ywfjsb.tiexije, 0 - gl_ywfjsb.ywf_tx AS ywf_tx,gl_ywfjsb.skje_yj,gl_ywfjsb.yongjinje,0 - gl_ywfjsb.ywf_yj AS ywf_yj,gl_ywfjsb.daizhang,0 - gl_ywfjsb.ywf_dz AS ywf_dz,gl_ywfjsb.susong,0 - gl_ywfjsb.ywf_ss AS ywf_ss,gl_ywfjsb.ywf_hlc,NVL(gl_ywfjsb.ywf_bz,0) + NVL(gl_ywfjsb.ywf_newkh,0) - NVL(gl_ywfjsb.ywf_zl,0) - NVL(gl_ywfjsb.ywf_cdhp,0) - NVL(gl_ywfjsb.ywf_gylpj , 0) - NVL(gl_ywfjsb.ywf_tx,0) - NVL(gl_ywfjsb.ywf_yj,0) - NVL(gl_ywfjsb.ywf_dz,0) - NVL(gl_ywfjsb.ywf_ss,0) + NVL(gl_ywfjsb.ywf_hlc,0) AS ywf_hj FROM gl_ywfjsb WHERE cperiod = ? ORDER BY dwdm,gl_ywfjsb.khdm"
+            rcCmdYwf.CommandText = "SELECT '" & strDwdm & "' AS dwdm,'" & strDwmc & "' AS dwmc,gl_ywfjsb.khdm,gl_ywfjsb.khmc,gl_ywfjsb.zydm,gl_ywfjsb.zymc,gl_ywfjsb.xslbdm,gl_ywfjsb.ywfbl,gl_ywfjsb.newkhbl,gl_ywfjsb.skqx,gl_ywfjsb.byjf,gl_ywfjsb.bydf,gl_ywfjsb.qmye,gl_ywfjsb.jf00,gl_ywfjsb.jf01,gl_ywfjsb.jf02,gl_ywfjsb.jf03,gl_ywfjsb.jf04,gl_ywfjsb.jf05,gl_ywfjsb.jf06,gl_ywfjsb.jf07,gl_ywfjsb.jf08,gl_ywfjsb.jf09,gl_ywfjsb.jf10,gl_ywfjsb.jf11,gl_ywfjsb.jf12,gl_ywfjsb.jf13,gl_ywfjsb.jf14,gl_ywfjsb.df01,gl_ywfjsb.df02,gl_ywfjsb.df03,gl_ywfjsb.df04,gl_ywfjsb.df05,gl_ywfjsb.df06,gl_ywfjsb.df07,gl_ywfjsb.df08,gl_ywfjsb.df09,gl_ywfjsb.df10,gl_ywfjsb.df11,gl_ywfjsb.df12,gl_ywfjsb.df13,gl_ywfjsb.df14,gl_ywfjsb.ywf_bz,gl_ywfjsb.ywf_newkh,0 - gl_ywfjsb.ywf_zl AS ywf_zl,gl_ywfjsb.cdhpje,0 - gl_ywfjsb.ywf_cdhp AS ywf_cdhp,gl_ywfjsb.gylpjje,0 - gl_ywfjsb.ywf_gylpj AS ywf_gylpj,gl_ywfjsb.xjdhje,gl_ywfjsb.ywf_xjdh,gl_ywfjsb.tiexije, 0 - gl_ywfjsb.ywf_tx AS ywf_tx,gl_ywfjsb.skje_yj,gl_ywfjsb.yongjinje,0 - gl_ywfjsb.ywf_yj AS ywf_yj,gl_ywfjsb.daizhang,0 - gl_ywfjsb.ywf_dz AS ywf_dz,gl_ywfjsb.susong,0 - gl_ywfjsb.ywf_ss AS ywf_ss,gl_ywfjsb.ywf_hlc,NVL(gl_ywfjsb.ywf_bz,0) + NVL(gl_ywfjsb.ywf_newkh,0) - NVL(gl_ywfjsb.ywf_zl,0) - NVL(gl_ywfjsb.ywf_cdhp,0) - NVL(gl_ywfjsb.ywf_gylpj , 0) +  NVL(gl_ywfjsb.ywf_xjdh,0) - NVL(gl_ywfjsb.ywf_tx,0) - NVL(gl_ywfjsb.ywf_yj,0) - NVL(gl_ywfjsb.ywf_dz,0) - NVL(gl_ywfjsb.ywf_ss,0) + NVL(gl_ywfjsb.ywf_hlc,0) AS ywf_hj FROM gl_ywfjsb WHERE cperiod = ? ORDER BY dwdm,gl_ywfjsb.khdm"
             rcCmdYwf.Parameters.Clear()
             rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcAdptYwf.SelectCommand = rcCmdYwf
@@ -986,38 +1039,39 @@ Public Class FrmYwfJs
 
     End Sub
 
-    '把主账套的业务费规则同步到目标账套，源用主账套连接串，目标命令由调用方传入
-    Private Sub SyncYwfRuleFromMain(ByVal strTargetDwdm As String, ByVal strMainConnString As String, ByVal rcCmdTarget As OleDbCommand)
-        Dim rcConnMain As New OleDbConnection
-        Dim rcCmdMain As OleDbCommand
-        Dim rcDataAdptMain As New OleDbDataAdapter
+    '把当前账套（rcOleDbConn）的业务费规则同步到目标账套，目标命令由调用方传入
+    Private Sub SyncYwfRuleFromMain(ByVal strTargetDwdm As String, ByVal rcCmdTarget As OleDbCommand)
         Dim dtPara As New DataTable
         Dim dtDkgs As New DataTable
         Dim dtDkl As New DataTable
         Dim i As Integer
         Try
-            rcConnMain.ConnectionString = strMainConnString
-            rcConnMain.Open()
-            rcCmdMain = rcConnMain.CreateCommand()
-            rcCmdMain.CommandTimeout = 300
-            rcCmdMain.CommandType = CommandType.Text
+            rcOleDbCommand.Transaction = Nothing
+            rcOleDbCommand.Connection = rcOleDbConn
+            rcOleDbCommand.CommandTimeout = 300
+            rcOleDbCommand.CommandType = CommandType.Text
+            If rcOleDbConn.State <> ConnectionState.Open Then
+                rcOleDbConn.Open()
+            End If
             '业务费比例参数
-            rcCmdMain.CommandText = "SELECT paraid,parastrvalue,paradblvalue FROM rc_para WHERE dwdm = ? AND paraid IN ('业务费新客户上升比例','业务费老客户下降比例','承兑汇票回笼下降比例')"
-            rcCmdMain.Parameters.Clear()
-            rcCmdMain.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
-            rcDataAdptMain.SelectCommand = rcCmdMain
-            rcDataAdptMain.Fill(dtPara)
+            rcOleDbCommand.CommandText = "SELECT paraid,parastrvalue,paradblvalue FROM rc_para WHERE dwdm = ? AND paraid IN ('业务费新客户上升比例','业务费老客户下降比例','承兑汇票回笼下降比例','现金电汇回笼上升比例')"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbCommand.Parameters.Add("@dwdm", OleDbType.VarChar, 4).Value = g_Dwdm
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcOleDbDataAdpt.Fill(dtPara)
             '垫扣结算公司规则
-            rcCmdMain.CommandText = "SELECT dkgsdm,dkgsmc,dkgssm,jsgs FROM gl_ywfdkgs"
-            rcCmdMain.Parameters.Clear()
-            rcDataAdptMain.SelectCommand = rcCmdMain
-            rcDataAdptMain.Fill(dtDkgs)
+            rcOleDbCommand.CommandText = "SELECT dkgsdm,dkgsmc,dkgssm,jsgs FROM gl_ywfdkgs"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcOleDbDataAdpt.Fill(dtDkgs)
             '垫扣率规则
-            rcCmdMain.CommandText = "SELECT xh,mc,dkbl FROM gl_ywfdkl ORDER BY xh"
-            rcCmdMain.Parameters.Clear()
-            rcDataAdptMain.SelectCommand = rcCmdMain
-            rcDataAdptMain.Fill(dtDkl)
-            rcConnMain.Close()
+            rcOleDbCommand.CommandText = "SELECT xh,mc,dkbl FROM gl_ywfdkl ORDER BY xh"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcOleDbDataAdpt.Fill(dtDkl)
+            If rcOleDbConn.State = ConnectionState.Open Then
+                rcOleDbConn.Close()
+            End If
             '写规则到目标账套，目标连接已由调用方打开
             rcCmdTarget.Transaction = Nothing
             rcCmdTarget.CommandTimeout = 300
@@ -1068,8 +1122,8 @@ Public Class FrmYwfJs
             MsgBox("同步业务费规则到账套" & strTargetDwdm & "失败。" & Chr(13) & ex.Message)
         Finally
             Try
-                If rcConnMain.State = ConnectionState.Open Then
-                    rcConnMain.Close()
+                If rcOleDbConn.State = ConnectionState.Open Then
+                    rcOleDbConn.Close()
                 End If
             Catch ex As Exception
             End Try

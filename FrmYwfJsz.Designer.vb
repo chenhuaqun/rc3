@@ -70,6 +70,10 @@ Partial Class FrmYwfJsz
         Me.DgtbcYwf_Zl = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcCdhpje = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcYwf_cdhp = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcGylpjje = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcYwf_gylpj = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcXjdhje = New System.Windows.Forms.DataGridTextBoxColumn()
+        Me.DgtbcYwf_xjdh = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcTieXiJe = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcYwf_Tx = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcSkje_yj = New System.Windows.Forms.DataGridTextBoxColumn()
@@ -81,8 +85,6 @@ Partial Class FrmYwfJsz
         Me.DgtbcYwf_Ss = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcYwf_Hlc = New System.Windows.Forms.DataGridTextBoxColumn()
         Me.DgtbcYwf_Hj = New System.Windows.Forms.DataGridTextBoxColumn()
-        Me.DgtbcGylpjje = New System.Windows.Forms.DataGridTextBoxColumn()
-        Me.DgtbcYwf_gylpj = New System.Windows.Forms.DataGridTextBoxColumn()
         CType(Me.rcDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rcDataView, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RcDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,13 +97,13 @@ Partial Class FrmYwfJsz
         '
         'Label1
         '
-        Me.Label1.Size = New System.Drawing.Size(122, 26)
+        Me.Label1.Size = New System.Drawing.Size(120, 23)
         Me.Label1.Text = "业务费计算"
         '
         'DataGridTableStyle1
         '
         Me.DataGridTableStyle1.DataGrid = Me.RcDataGrid
-        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDwdm, Me.DgtbcDwmc, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcXslbdm, Me.DgtbcYwfbl, Me.DgtbcNewkhBl, Me.DgtbcSkqx, Me.DgtbcByjf, Me.DgtbcBydf, Me.DgtbcQmye, Me.DgtbcJf00, Me.DgtbcJf01, Me.DgtbcJf02, Me.DgtbcJf03, Me.DgtbcJf04, Me.DgtbcJf05, Me.DgtbcJf06, Me.DgtbcJf07, Me.DgtbcJf08, Me.DgtbcJf09, Me.DgtbcJf10, Me.DgtbcJf11, Me.DgtbcJf12, Me.DgtbcJf13, Me.DgtbcJf14, Me.DgtbcDf01, Me.DgtbcDf02, Me.DgtbcDf03, Me.DgtbcDf04, Me.DgtbcDf05, Me.DgtbcDf06, Me.DgtbcDf07, Me.DgtbcDf08, Me.DgtbcDf09, Me.DgtbcDf10, Me.DgtbcDf11, Me.DgtbcDf12, Me.DgtbcDf13, Me.DgtbcDf14, Me.DgtbcYwf_Bz, Me.DgtbcYwf_Newkh, Me.DgtbcYwf_Zl, Me.DgtbcCdhpje, Me.DgtbcYwf_cdhp, Me.DgtbcGylpjje, Me.DgtbcYwf_gylpj, Me.DgtbcTieXiJe, Me.DgtbcYwf_Tx, Me.DgtbcSkje_yj, Me.DgtbcYongJinJe, Me.DgtbcYwf_Yj, Me.DgtbcDaiZhang, Me.DgtbcYwf_Dz, Me.DgtbcSuSong, Me.DgtbcYwf_Ss, Me.DgtbcYwf_Hlc, Me.DgtbcYwf_Hj})
+        Me.DataGridTableStyle1.GridColumnStyles.AddRange(New System.Windows.Forms.DataGridColumnStyle() {Me.DgtbcDwdm, Me.DgtbcDwmc, Me.DgtbcKhdm, Me.DgtbcKhmc, Me.DgtbcZydm, Me.DgtbcZymc, Me.DgtbcXslbdm, Me.DgtbcYwfbl, Me.DgtbcNewkhBl, Me.DgtbcSkqx, Me.DgtbcByjf, Me.DgtbcBydf, Me.DgtbcQmye, Me.DgtbcJf00, Me.DgtbcJf01, Me.DgtbcJf02, Me.DgtbcJf03, Me.DgtbcJf04, Me.DgtbcJf05, Me.DgtbcJf06, Me.DgtbcJf07, Me.DgtbcJf08, Me.DgtbcJf09, Me.DgtbcJf10, Me.DgtbcJf11, Me.DgtbcJf12, Me.DgtbcJf13, Me.DgtbcJf14, Me.DgtbcDf01, Me.DgtbcDf02, Me.DgtbcDf03, Me.DgtbcDf04, Me.DgtbcDf05, Me.DgtbcDf06, Me.DgtbcDf07, Me.DgtbcDf08, Me.DgtbcDf09, Me.DgtbcDf10, Me.DgtbcDf11, Me.DgtbcDf12, Me.DgtbcDf13, Me.DgtbcDf14, Me.DgtbcYwf_Bz, Me.DgtbcYwf_Newkh, Me.DgtbcYwf_Zl, Me.DgtbcCdhpje, Me.DgtbcYwf_cdhp, Me.DgtbcGylpjje, Me.DgtbcYwf_gylpj, Me.DgtbcXjdhje, Me.DgtbcYwf_xjdh, Me.DgtbcTieXiJe, Me.DgtbcYwf_Tx, Me.DgtbcSkje_yj, Me.DgtbcYongJinJe, Me.DgtbcYwf_Yj, Me.DgtbcDaiZhang, Me.DgtbcYwf_Dz, Me.DgtbcSuSong, Me.DgtbcYwf_Ss, Me.DgtbcYwf_Hlc, Me.DgtbcYwf_Hj})
         Me.DataGridTableStyle1.HeaderForeColor = System.Drawing.SystemColors.ControlText
         Me.DataGridTableStyle1.MappingName = "gl_ywfjsb"
         '
@@ -568,6 +570,46 @@ Partial Class FrmYwfJsz
         Me.DgtbcYwf_cdhp.NullText = ""
         Me.DgtbcYwf_cdhp.Width = 75
         '
+        'DgtbcGylpjje
+        '
+        Me.DgtbcGylpjje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcGylpjje.Format = ""
+        Me.DgtbcGylpjje.FormatInfo = Nothing
+        Me.DgtbcGylpjje.HeaderText = "供应链票据金额"
+        Me.DgtbcGylpjje.MappingName = "gylpjje"
+        Me.DgtbcGylpjje.NullText = ""
+        Me.DgtbcGylpjje.Width = 75
+        '
+        'DgtbcYwf_gylpj
+        '
+        Me.DgtbcYwf_gylpj.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcYwf_gylpj.Format = ""
+        Me.DgtbcYwf_gylpj.FormatInfo = Nothing
+        Me.DgtbcYwf_gylpj.HeaderText = "供应链票据下降金额"
+        Me.DgtbcYwf_gylpj.MappingName = "ywf_gylpj"
+        Me.DgtbcYwf_gylpj.NullText = ""
+        Me.DgtbcYwf_gylpj.Width = 75
+        '
+        'DgtbcXjdhje
+        '
+        Me.DgtbcXjdhje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcXjdhje.Format = ""
+        Me.DgtbcXjdhje.FormatInfo = Nothing
+        Me.DgtbcXjdhje.HeaderText = "现金电汇金额"
+        Me.DgtbcXjdhje.MappingName = "xjdhje"
+        Me.DgtbcXjdhje.NullText = ""
+        Me.DgtbcXjdhje.Width = 75
+        '
+        'DgtbcYwf_xjdh
+        '
+        Me.DgtbcYwf_xjdh.Alignment = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DgtbcYwf_xjdh.Format = ""
+        Me.DgtbcYwf_xjdh.FormatInfo = Nothing
+        Me.DgtbcYwf_xjdh.HeaderText = "现金电汇上升金额"
+        Me.DgtbcYwf_xjdh.MappingName = "ywf_xjdh"
+        Me.DgtbcYwf_xjdh.NullText = ""
+        Me.DgtbcYwf_xjdh.Width = 75
+        '
         'DgtbcTieXiJe
         '
         Me.DgtbcTieXiJe.Alignment = System.Windows.Forms.HorizontalAlignment.Right
@@ -678,26 +720,6 @@ Partial Class FrmYwfJsz
         Me.DgtbcYwf_Hj.NullText = ""
         Me.DgtbcYwf_Hj.Width = 75
         '
-        'DgtbcGylpjje
-        '
-        Me.DgtbcGylpjje.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcGylpjje.Format = ""
-        Me.DgtbcGylpjje.FormatInfo = Nothing
-        Me.DgtbcGylpjje.HeaderText = "供应链票据金额"
-        Me.DgtbcGylpjje.MappingName = "gylpjje"
-        Me.DgtbcGylpjje.NullText = ""
-        Me.DgtbcGylpjje.Width = 75
-        '
-        'DgtbcYwf_gylpj
-        '
-        Me.DgtbcYwf_gylpj.Alignment = System.Windows.Forms.HorizontalAlignment.Right
-        Me.DgtbcYwf_gylpj.Format = ""
-        Me.DgtbcYwf_gylpj.FormatInfo = Nothing
-        Me.DgtbcYwf_gylpj.HeaderText = "供应链票据下降金额"
-        Me.DgtbcYwf_gylpj.MappingName = "ywf_gylpj"
-        Me.DgtbcYwf_gylpj.NullText = ""
-        Me.DgtbcYwf_gylpj.Width = 75
-        '
         'FrmYwfJsz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -758,6 +780,8 @@ Partial Class FrmYwfJsz
     Friend WithEvents DgtbcYwf_Bz As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcCdhpje As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcYwf_cdhp As System.Windows.Forms.DataGridTextBoxColumn
+    Friend WithEvents DgtbcXjdhje As System.Windows.Forms.DataGridTextBoxColumn
+    Friend WithEvents DgtbcYwf_xjdh As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcYwf_Tx As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcYwf_Hj As System.Windows.Forms.DataGridTextBoxColumn
     Friend WithEvents DgtbcYwf_Zl As System.Windows.Forms.DataGridTextBoxColumn

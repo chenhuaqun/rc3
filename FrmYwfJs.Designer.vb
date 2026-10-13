@@ -54,8 +54,10 @@ Partial Class FrmYwfJs
         Me.BtnUnSelectAllKmdm = New System.Windows.Forms.Button()
         Me.BtnUnSelectOneKmdm = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.LblMsg = New System.Windows.Forms.Label()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.LblMsg = New System.Windows.Forms.Label()
+        Me.TxtXjdh = New System.Windows.Forms.TextBox()
+        Me.LblXjdh = New System.Windows.Forms.Label()
         Me.DlgPanel.SuspendLayout()
         CType(Me.NudMonth, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,7 +73,7 @@ Partial Class FrmYwfJs
         '
         'DlgPanel
         '
-        Me.DlgPanel.Location = New System.Drawing.Point(411, 404)
+        Me.DlgPanel.Location = New System.Drawing.Point(411, 450)
         Me.DlgPanel.TabIndex = 12
         '
         'LblPeriod
@@ -189,7 +191,7 @@ Partial Class FrmYwfJs
         '
         Me.GroupBox1.Controls.Add(Me.TabControl1)
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 144)
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 177)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(664, 257)
         Me.GroupBox1.TabIndex = 122
@@ -380,6 +382,8 @@ Partial Class FrmYwfJs
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.TxtXjdh)
+        Me.GroupBox2.Controls.Add(Me.LblXjdh)
         Me.GroupBox2.Controls.Add(Me.CheckBox3)
         Me.GroupBox2.Controls.Add(Me.LblNewKh)
         Me.GroupBox2.Controls.Add(Me.NudYear)
@@ -395,20 +399,9 @@ Partial Class FrmYwfJs
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(664, 144)
+        Me.GroupBox2.Size = New System.Drawing.Size(664, 177)
         Me.GroupBox2.TabIndex = 123
         Me.GroupBox2.TabStop = False
-        '
-        'LblMsg
-        '
-        Me.LblMsg.AutoSize = True
-        Me.LblMsg.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.LblMsg.ForeColor = System.Drawing.Color.Blue
-        Me.LblMsg.Location = New System.Drawing.Point(10, 414)
-        Me.LblMsg.Name = "LblMsg"
-        Me.LblMsg.Size = New System.Drawing.Size(87, 16)
-        Me.LblMsg.TabIndex = 124
-        Me.LblMsg.Text = "提示信息。"
         '
         'CheckBox3
         '
@@ -422,11 +415,41 @@ Partial Class FrmYwfJs
         Me.CheckBox3.Text = "含发出商品(按收货客户)"
         Me.CheckBox3.UseVisualStyleBackColor = True
         '
+        'LblMsg
+        '
+        Me.LblMsg.AutoSize = True
+        Me.LblMsg.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblMsg.ForeColor = System.Drawing.Color.Blue
+        Me.LblMsg.Location = New System.Drawing.Point(10, 454)
+        Me.LblMsg.Name = "LblMsg"
+        Me.LblMsg.Size = New System.Drawing.Size(87, 16)
+        Me.LblMsg.TabIndex = 124
+        Me.LblMsg.Text = "提示信息。"
+        '
+        'TxtXjdh
+        '
+        Me.TxtXjdh.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.TxtXjdh.Location = New System.Drawing.Point(234, 128)
+        Me.TxtXjdh.MaxLength = 6
+        Me.TxtXjdh.Name = "TxtXjdh"
+        Me.TxtXjdh.Size = New System.Drawing.Size(112, 26)
+        Me.TxtXjdh.TabIndex = 127
+        '
+        'LblXjdh
+        '
+        Me.LblXjdh.AutoSize = True
+        Me.LblXjdh.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.LblXjdh.Location = New System.Drawing.Point(18, 133)
+        Me.LblXjdh.Name = "LblXjdh"
+        Me.LblXjdh.Size = New System.Drawing.Size(207, 16)
+        Me.LblXjdh.TabIndex = 126
+        Me.LblXjdh.Text = "现金电汇回笼上升比率(%)："
+        '
         'FrmYwfJs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(664, 447)
+        Me.ClientSize = New System.Drawing.Size(664, 493)
         Me.Controls.Add(Me.LblMsg)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
@@ -485,4 +508,6 @@ Partial Class FrmYwfJs
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents LblMsg As Label
     Friend WithEvents CheckBox3 As CheckBox
+    Public WithEvents TxtXjdh As TextBox
+    Public WithEvents LblXjdh As Label
 End Class

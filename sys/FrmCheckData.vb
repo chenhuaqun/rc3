@@ -2017,7 +2017,7 @@ Public Class FrmCheckData
             rcOleDbDataAdpt.Fill(rcDataset, "user_tables")
             If rcDataset.Tables("user_tables").Rows.Count <= 0 Then
                 'table不存在,则新建
-                rcOleDbCommand.CommandText = "CREATE TABLE gl_ywfjsb (cperiod VARCHAR2(6) NOT NULL,khdm VARCHAR2(15) NOT NULL,khmc VARCHAR2(200),zydm VARCHAR2(12),zymc VARCHAR2(30),t_zydm VARCHAR2(12),t_zymc VARCHAR2(30),xslbdm VARCHAR2(12),t_xslbdm VARCHAR2(12),ywfbl NUMBER(7,3) DEFAULT 0,newkhbl NUMBER(6,2) DEFAULT 0,skqx NUMBER(4,0) DEFAULT 0,byjf NUMBER(14,2) DEFAULT 0,bydf NUMBER(14,2) DEFAULT 0,qmye NUMBER(14,2) DEFAULT 0,jf00 NUMBER(14,2) DEFAULT 0,jf01 NUMBER(14,2) DEFAULT 0,jf02 NUMBER(14,2) DEFAULT 0,jf03 NUMBER(14,2) DEFAULT 0,jf04 NUMBER(14,2) DEFAULT 0,jf05 NUMBER(14,2) DEFAULT 0,jf06 NUMBER(14,2) DEFAULT 0,jf07 NUMBER(14,2) DEFAULT 0,jf08 NUMBER(14,2) DEFAULT 0,jf09 NUMBER(14,2) DEFAULT 0,jf10 NUMBER(14,2) DEFAULT 0,jf11 NUMBER(14,2) DEFAULT 0,jf12 NUMBER(14,2) DEFAULT 0,jf13 NUMBER(14,2) DEFAULT 0,jf14 NUMBER(14,2) DEFAULT 0,df01 NUMBER(14,2) DEFAULT 0,df02 NUMBER(14,2) DEFAULT 0,df03 NUMBER(14,2) DEFAULT 0,df04 NUMBER(14,2) DEFAULT 0,df05 NUMBER(14,2) DEFAULT 0,df06 NUMBER(14,2) DEFAULT 0,df07 NUMBER(14,2) DEFAULT 0,df08 NUMBER(14,2) DEFAULT 0,df09 NUMBER(14,2) DEFAULT 0,df10 NUMBER(14,2) DEFAULT 0,df11 NUMBER(14,2) DEFAULT 0,df12 NUMBER(14,2) DEFAULT 0,df13 NUMBER(14,2) DEFAULT 0,df14 NUMBER(14,2) DEFAULT 0,dkl07 NUMBER(6,2) DEFAULT 0,dkl08 NUMBER(6,2) DEFAULT 0,dkl09 NUMBER(6,2) DEFAULT 0,dkl10 NUMBER(6,2) DEFAULT 0,dkl11 NUMBER(6,2) DEFAULT 0,dkl12 NUMBER(6,2) DEFAULT 0,dkl13 NUMBER(6,2) DEFAULT 0,dkl14 NUMBER(6,2) DEFAULT 0,ywf_bz NUMBER(14,2) DEFAULT 0,ywf_newkh NUMBER(14,2) DEFAULT 0,ywf_zl NUMBER(14,2) DEFAULT 0,cdhpje NUMBER(14,2) DEFAULT 0,ywf_cdhp NUMBER(14,2) DEFAULT 0,gylpjje NUMBER(14,2) DEFAULT 0,ywf_gylpj NUMBER(14,2) DEFAULT 0,tiexije NUMBER(14,2) DEFAULT 0,ywf_tx NUMBER(14,2) DEFAULT 0,skje_yj NUMBER(14,2) DEFAULT 0,yongjinje NUMBER(14,2) DEFAULT 0,ywf_yj NUMBER(14,2) DEFAULT 0,daizhang NUMBER(14,2) DEFAULT 0,ywf_dz NUMBER(14,2) DEFAULT 0,susong NUMBER(14,2) DEFAULT 0,ywf_ss NUMBER(14,2) DEFAULT 0,ywf_hlc NUMBER(14,2) DEFAULT 0,ywfhj NUMBER(14,2) DEFAULT 0)"
+                rcOleDbCommand.CommandText = "CREATE TABLE gl_ywfjsb (cperiod VARCHAR2(6) NOT NULL,khdm VARCHAR2(15) NOT NULL,khmc VARCHAR2(200),zydm VARCHAR2(12),zymc VARCHAR2(30),t_zydm VARCHAR2(12),t_zymc VARCHAR2(30),xslbdm VARCHAR2(12),t_xslbdm VARCHAR2(12),ywfbl NUMBER(7,3) DEFAULT 0,newkhbl NUMBER(6,2) DEFAULT 0,skqx NUMBER(4,0) DEFAULT 0,byjf NUMBER(14,2) DEFAULT 0,bydf NUMBER(14,2) DEFAULT 0,qmye NUMBER(14,2) DEFAULT 0,jf00 NUMBER(14,2) DEFAULT 0,jf01 NUMBER(14,2) DEFAULT 0,jf02 NUMBER(14,2) DEFAULT 0,jf03 NUMBER(14,2) DEFAULT 0,jf04 NUMBER(14,2) DEFAULT 0,jf05 NUMBER(14,2) DEFAULT 0,jf06 NUMBER(14,2) DEFAULT 0,jf07 NUMBER(14,2) DEFAULT 0,jf08 NUMBER(14,2) DEFAULT 0,jf09 NUMBER(14,2) DEFAULT 0,jf10 NUMBER(14,2) DEFAULT 0,jf11 NUMBER(14,2) DEFAULT 0,jf12 NUMBER(14,2) DEFAULT 0,jf13 NUMBER(14,2) DEFAULT 0,jf14 NUMBER(14,2) DEFAULT 0,df01 NUMBER(14,2) DEFAULT 0,df02 NUMBER(14,2) DEFAULT 0,df03 NUMBER(14,2) DEFAULT 0,df04 NUMBER(14,2) DEFAULT 0,df05 NUMBER(14,2) DEFAULT 0,df06 NUMBER(14,2) DEFAULT 0,df07 NUMBER(14,2) DEFAULT 0,df08 NUMBER(14,2) DEFAULT 0,df09 NUMBER(14,2) DEFAULT 0,df10 NUMBER(14,2) DEFAULT 0,df11 NUMBER(14,2) DEFAULT 0,df12 NUMBER(14,2) DEFAULT 0,df13 NUMBER(14,2) DEFAULT 0,df14 NUMBER(14,2) DEFAULT 0,dkl07 NUMBER(6,2) DEFAULT 0,dkl08 NUMBER(6,2) DEFAULT 0,dkl09 NUMBER(6,2) DEFAULT 0,dkl10 NUMBER(6,2) DEFAULT 0,dkl11 NUMBER(6,2) DEFAULT 0,dkl12 NUMBER(6,2) DEFAULT 0,dkl13 NUMBER(6,2) DEFAULT 0,dkl14 NUMBER(6,2) DEFAULT 0,ywf_bz NUMBER(14,2) DEFAULT 0,ywf_newkh NUMBER(14,2) DEFAULT 0,ywf_zl NUMBER(14,2) DEFAULT 0,cdhpje NUMBER(14,2) DEFAULT 0,ywf_cdhp NUMBER(14,2) DEFAULT 0,gylpjje NUMBER(14,2) DEFAULT 0,ywf_gylpj NUMBER(14,2) DEFAULT 0,xjdhje NUMBER(14,2) DEFAULT 0,ywf_xjdh NUMBER(14,2) DEFAULT 0,tiexije NUMBER(14,2) DEFAULT 0,ywf_tx NUMBER(14,2) DEFAULT 0,skje_yj NUMBER(14,2) DEFAULT 0,yongjinje NUMBER(14,2) DEFAULT 0,ywf_yj NUMBER(14,2) DEFAULT 0,daizhang NUMBER(14,2) DEFAULT 0,ywf_dz NUMBER(14,2) DEFAULT 0,susong NUMBER(14,2) DEFAULT 0,ywf_ss NUMBER(14,2) DEFAULT 0,ywf_hlc NUMBER(14,2) DEFAULT 0,ywfhj NUMBER(14,2) DEFAULT 0)"
                 rcOleDbCommand.Parameters.Clear()
                 rcOleDbCommand.ExecuteNonQuery()
                 rcOleDbCommand.CommandText = "ALTER TABLE gl_ywfjsb ADD CONSTRAINT PK_GL_YWFJSB primary key (cperiod,khdm)"
@@ -2743,6 +2743,32 @@ Public Class FrmCheckData
                 rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
                 If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
                     rcOleDbCommand.CommandText = "ALTER TABLE gl_ywfjsb ADD ywf_gylpj NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '现金电汇金额
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'XJDHJE' AND table_name ='GL_YWFJSB'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE gl_ywfjsb ADD xjdhje NUMBER(14,2) DEFAULT 0"
+                    rcOleDbCommand.Parameters.Clear()
+                    rcOleDbCommand.ExecuteNonQuery()
+                End If
+                '现金电汇业务费
+                rcOleDbCommand.CommandText = "SELECT * FROM user_tab_columns WHERE column_name = 'YWF_XJDH' AND table_name ='GL_YWFJSB'"
+                rcOleDbCommand.Parameters.Clear()
+                rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+                If rcDataset.Tables("user_tab_columns") IsNot Nothing Then
+                    rcDataset.Tables("user_tab_columns").Clear()
+                End If
+                rcOleDbDataAdpt.Fill(rcDataset, "user_tab_columns")
+                If rcDataset.Tables("user_tab_columns").Rows.Count <= 0 Then
+                    rcOleDbCommand.CommandText = "ALTER TABLE gl_ywfjsb ADD ywf_xjdh NUMBER(14,2) DEFAULT 0"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.ExecuteNonQuery()
                 End If
@@ -7861,6 +7887,16 @@ BEGIN
      SET idsl = 0, idfzsl = 0, idje = 0
    WHERE kjnd = paraStrYear;
 
+  -- 4. 删除期初和发生额全部为零的冗余记录
+  DELETE FROM inv_fcspyeb
+   WHERE kjnd = paraStrYear
+     AND qcsl = 0
+     AND qcfzsl = 0
+     AND qcje = 0
+     AND idsl = 0
+     AND idfzsl = 0
+     AND idje = 0;
+
   -- 2. 处理销售出库单（oe_xsd）：累加发生额，并补全缺失的产品-部门-客户组合
   MERGE INTO inv_fcspyeb i
   USING (SELECT cpdm,
@@ -7930,16 +7966,6 @@ BEGIN
        -o.sum_fzsl,
        -o.sum_cbje);
 
-  -- 4. 删除期初和发生额全部为零的冗余记录
-  DELETE FROM inv_fcspyeb
-   WHERE kjnd = paraStrYear
-     AND qcsl = 0
-     AND qcfzsl = 0
-     AND qcje = 0
-     AND idsl = 0
-     AND idfzsl = 0
-     AND idje = 0;
-
   COMMIT;
   --paraStrMsg := '执行成功';
 EXCEPTION
@@ -7979,27 +8005,31 @@ END USP3_REDO_FCSPYEHZ;"
                 "  ParaStrYear        IN VARCHAR2" &
                 "  , paraStrMsg       OUT VARCHAR2" &
                 "  )AS " &
-                "vStrStatement VARCHAR(1000):='';" &
+                "vStrZero VARCHAR2(32767):='';" &
+                "vStrAgrJf VARCHAR2(32767):='';" &
+                "vStrAgrDf VARCHAR2(32767):='';" &
+                "vStrSetJf VARCHAR2(32767):='';" &
+                "vStrSetDf VARCHAR2(32767):='';" &
                 "vStrPeriod CHAR(6):='';" &
+                "vStrMM CHAR(2):='';" &
                 "CURSOR vCursorRc_yj IS SELECT ny FROM rc_yj WHERE substr(ny,1,4) = ParaStrYear;" &
                 "BEGIN" &
                 "     DELETE FROM gl_kmyeb WHERE kjnd = ParaStrYear AND ncsl = 0 ANd ncwb = 0 AND ncje = 0;" &
                 "     INSERT INTO gl_kmyeb (kjnd,kmdm,wbdm,bmdm,zydm,xmdm,khdm,csdm,jxzh,yhzh) SELECT SUBSTR(cperiod,1,4) AS kjnd,NVL(kmdm,'~'),NVL(bz,'~') AS wbdm,NVL(bmdm,'~'),NVL(zydm,'~'),NVL(xmdm,'~'),NVL(khdm,'~'),NVL(csdm,'~'),NVL(jxzh,'~'),NVL(yhzh,'~') FROM gl_pz WHERE SUBSTR(cperiod,1,4) = ParaStrYear AND NOT EXISTS (SELECT 1 FROM gl_kmyeb aa WHERE aa.kjnd = ParaStrYear AND aa.kmdm = NVL(gl_pz.kmdm,'~') AND aa.wbdm = NVL(gl_pz.bz,'~') AND aa.bmdm = NVL(gl_pz.bmdm,'~') AND aa.zydm = NVL(gl_pz.zydm,'~') AND aa.xmdm = NVL(gl_pz.xmdm,'~') AND aa.khdm = NVL(gl_pz.khdm,'~') AND aa.csdm = NVL(gl_pz.csdm,'~') AND aa.jxzh = NVL(gl_pz.jxzh,'~') AND aa.yhzh = NVL(gl_pz.yhzh,'~')) GROUP BY SUBSTR(cperiod,1,4),kmdm,bz,bmdm,zydm,xmdm,khdm,csdm,jxzh,yhzh;" &
                 "     FOR vRc_yj IN vCursorRc_yj LOOP" &
                 "         vStrPeriod := vRc_yj.ny;" &
-                "         vStrStatement := 'UPDATE gl_kmyeb SET jfsl' || SUBSTR(vStrPeriod,5,2) || ' = 0, jfwb' ||  SUBSTR(vStrPeriod,5,2) || ' = 0, jfje' || SUBSTR(vStrPeriod,5,2)|| ' = 0,dfsl' || SUBSTR(vStrPeriod,5,2) || ' = 0, dfwb' ||  SUBSTR(vStrPeriod,5,2) || ' = 0, dfje' || SUBSTR(vStrPeriod,5,2)|| ' = 0 WHERE kjnd =''' || SUBSTR(vStrPeriod,1,4) || '''';" &
-                "         EXECUTE IMMEDIATE vStrStatement;" &
-                "         vStrStatement := 'MERGE INTO gl_kmyeb " &
-                "             USING (SELECT A.kmdm, A.bz AS wbdm, A.bmdm, A.zydm, A.xmdm,A.khdm,A.csdm,A.yhzh,A.jxzh,NVL(SUM(sl),0.0) AS jfsl,NVL(SUM(wb),0.0) AS jfwb,NVL(SUM(je),0.0) AS jfje FROM gl_pz A WHERE jd = ' || chr(39) || '借' || chr(39) || ' AND cperiod =''' || vStrPeriod || ''' GROUP BY A.jxzh, A.yhzh, A.csdm, A.khdm, A.xmdm, A.zydm, A.bmdm, A.bz, A.kmdm) S " &
-                "             ON (gl_kmyeb.jxzh = S.jxzh AND gl_kmyeb.yhzh = S.yhzh AND gl_kmyeb.csdm = S.csdm AND gl_kmyeb.khdm = S.khdm AND gl_kmyeb.xmdm = S.xmdm AND gl_kmyeb.zydm = S.zydm AND gl_kmyeb.bmdm = S.bmdm AND gl_kmyeb.wbdm = S.wbdm AND gl_kmyeb.kmdm = S.kmdm AND gl_kmyeb.kjnd = ''' || ParaStrYear || ''') " &
-                "             WHEN MATCHED THEN UPDATE SET gl_kmyeb.jfsl' || SUBSTR(vStrPeriod,5,2) || '= S.jfsl,gl_kmyeb.jfwb' || SUBSTR(vStrPeriod,5,2) || '= S.jfwb,gl_kmyeb.jfje' || SUBSTR(vStrPeriod,5,2) || '= S.jfje';" &
-                "         EXECUTE IMMEDIATE vStrStatement;" &
-                "         vStrStatement := 'MERGE INTO gl_kmyeb " &
-                "             USING (SELECT A.kmdm, A.bz AS wbdm, A.bmdm, A.zydm, A.xmdm,A.khdm,A.csdm,A.yhzh,A.jxzh,NVL(SUM(sl),0.0) AS dfsl,NVL(SUM(wb),0.0) AS dfwb,NVL(SUM(je),0.0) AS dfje FROM gl_pz A WHERE jd = ' || chr(39) || '贷' || chr(39) || ' AND cperiod =''' || vStrPeriod || ''' GROUP BY A.jxzh, A.yhzh, A.csdm, A.khdm, A.xmdm, A.zydm, A.bmdm, A.bz, A.kmdm) S " &
-                "             ON (gl_kmyeb.jxzh = S.jxzh AND gl_kmyeb.yhzh = S.yhzh AND gl_kmyeb.csdm = S.csdm AND gl_kmyeb.khdm = S.khdm AND gl_kmyeb.xmdm = S.xmdm AND gl_kmyeb.zydm = S.zydm AND gl_kmyeb.bmdm = S.bmdm AND gl_kmyeb.wbdm = S.wbdm AND gl_kmyeb.kmdm = S.kmdm AND gl_kmyeb.kjnd = ''' ||  ParaStrYear || ''') " &
-                "             WHEN MATCHED THEN UPDATE SET gl_kmyeb.dfsl' || SUBSTR(vStrPeriod,5,2) || '= S.dfsl,gl_kmyeb.dfwb' || SUBSTR(vStrPeriod,5,2) || '= S.dfwb,gl_kmyeb.dfje' || SUBSTR(vStrPeriod,5,2) || '= S.dfje';" &
-                "         EXECUTE IMMEDIATE vStrStatement;" &
+                "         vStrMM := SUBSTR(vStrPeriod,5,2);" &
+                "         vStrZero := vStrZero || 'jfsl' || vStrMM || ' = 0,jfwb' || vStrMM || ' = 0,jfje' || vStrMM || ' = 0,dfsl' || vStrMM || ' = 0,dfwb' || vStrMM || ' = 0,dfje' || vStrMM || ' = 0,';" &
+                "         vStrAgrJf := vStrAgrJf || 'NVL(SUM(CASE WHEN cperiod = ''' || vStrPeriod || ''' THEN sl END),0.0) AS jfsl' || vStrMM || ',NVL(SUM(CASE WHEN cperiod = ''' || vStrPeriod || ''' THEN wb END),0.0) AS jfwb' || vStrMM || ',NVL(SUM(CASE WHEN cperiod = ''' || vStrPeriod || ''' THEN je END),0.0) AS jfje' || vStrMM || ',';" &
+                "         vStrAgrDf := vStrAgrDf || 'NVL(SUM(CASE WHEN cperiod = ''' || vStrPeriod || ''' THEN sl END),0.0) AS dfsl' || vStrMM || ',NVL(SUM(CASE WHEN cperiod = ''' || vStrPeriod || ''' THEN wb END),0.0) AS dfwb' || vStrMM || ',NVL(SUM(CASE WHEN cperiod = ''' || vStrPeriod || ''' THEN je END),0.0) AS dfje' || vStrMM || ',';" &
+                "         vStrSetJf := vStrSetJf || 'gl_kmyeb.jfsl' || vStrMM || ' = S.jfsl' || vStrMM || ',gl_kmyeb.jfwb' || vStrMM || ' = S.jfwb' || vStrMM || ',gl_kmyeb.jfje' || vStrMM || ' = S.jfje' || vStrMM || ',';" &
+                "         vStrSetDf := vStrSetDf || 'gl_kmyeb.dfsl' || vStrMM || ' = S.dfsl' || vStrMM || ',gl_kmyeb.dfwb' || vStrMM || ' = S.dfwb' || vStrMM || ',gl_kmyeb.dfje' || vStrMM || ' = S.dfje' || vStrMM || ',';" &
                 "     END LOOP;" &
+                "     IF vStrZero IS NOT NULL THEN" &
+                "         EXECUTE IMMEDIATE 'UPDATE gl_kmyeb SET ' || RTRIM(vStrZero,',') || ' WHERE kjnd = ''' || ParaStrYear || '''';" &
+                "         EXECUTE IMMEDIATE 'MERGE INTO gl_kmyeb USING (SELECT NVL(A.kmdm,''~'') AS kmdm,NVL(A.bz,''~'') AS wbdm,NVL(A.bmdm,''~'') AS bmdm,NVL(A.zydm,''~'') AS zydm,NVL(A.xmdm,''~'') AS xmdm,NVL(A.khdm,''~'') AS khdm,NVL(A.csdm,''~'') AS csdm,NVL(A.yhzh,''~'') AS yhzh,NVL(A.jxzh,''~'') AS jxzh,' || RTRIM(vStrAgrJf,',') || ' FROM gl_pz A WHERE A.jd = ''借'' AND SUBSTR(A.cperiod,1,4) = ''' || ParaStrYear || ''' GROUP BY NVL(A.jxzh,''~''),NVL(A.yhzh,''~''),NVL(A.csdm,''~''),NVL(A.khdm,''~''),NVL(A.xmdm,''~''),NVL(A.zydm,''~''),NVL(A.bmdm,''~''),NVL(A.bz,''~''),NVL(A.kmdm,''~'')) S ON (gl_kmyeb.jxzh = S.jxzh AND gl_kmyeb.yhzh = S.yhzh AND gl_kmyeb.csdm = S.csdm AND gl_kmyeb.khdm = S.khdm AND gl_kmyeb.xmdm = S.xmdm AND gl_kmyeb.zydm = S.zydm AND gl_kmyeb.bmdm = S.bmdm AND gl_kmyeb.wbdm = S.wbdm AND gl_kmyeb.kmdm = S.kmdm AND gl_kmyeb.kjnd = ''' || ParaStrYear || ''') WHEN MATCHED THEN UPDATE SET ' || RTRIM(vStrSetJf,',');" &
+                "         EXECUTE IMMEDIATE 'MERGE INTO gl_kmyeb USING (SELECT NVL(A.kmdm,''~'') AS kmdm,NVL(A.bz,''~'') AS wbdm,NVL(A.bmdm,''~'') AS bmdm,NVL(A.zydm,''~'') AS zydm,NVL(A.xmdm,''~'') AS xmdm,NVL(A.khdm,''~'') AS khdm,NVL(A.csdm,''~'') AS csdm,NVL(A.yhzh,''~'') AS yhzh,NVL(A.jxzh,''~'') AS jxzh,' || RTRIM(vStrAgrDf,',') || ' FROM gl_pz A WHERE A.jd = ''贷'' AND SUBSTR(A.cperiod,1,4) = ''' || ParaStrYear || ''' GROUP BY NVL(A.jxzh,''~''),NVL(A.yhzh,''~''),NVL(A.csdm,''~''),NVL(A.khdm,''~''),NVL(A.xmdm,''~''),NVL(A.zydm,''~''),NVL(A.bmdm,''~''),NVL(A.bz,''~''),NVL(A.kmdm,''~'')) S ON (gl_kmyeb.jxzh = S.jxzh AND gl_kmyeb.yhzh = S.yhzh AND gl_kmyeb.csdm = S.csdm AND gl_kmyeb.khdm = S.khdm AND gl_kmyeb.xmdm = S.xmdm AND gl_kmyeb.zydm = S.zydm AND gl_kmyeb.bmdm = S.bmdm AND gl_kmyeb.wbdm = S.wbdm AND gl_kmyeb.kmdm = S.kmdm AND gl_kmyeb.kjnd = ''' || ParaStrYear || ''') WHEN MATCHED THEN UPDATE SET ' || RTRIM(vStrSetDf,',');" &
+                "     END IF;" &
                 "     COMMIT;" &
                 "     EXCEPTION" &
                 "         WHEN OTHERS THEN" &

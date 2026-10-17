@@ -1044,6 +1044,7 @@ Public Class FrmYwfJs
         Dim dtPara As New DataTable
         Dim dtDkgs As New DataTable
         Dim dtDkl As New DataTable
+        Dim dtKh As New DataTable
         Dim i As Integer
         Try
             rcOleDbCommand.Transaction = Nothing
@@ -1069,6 +1070,11 @@ Public Class FrmYwfJs
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             rcOleDbDataAdpt.Fill(dtDkl)
+            '客户信息业务员
+            rcOleDbCommand.CommandText = "SELECT khdm,zydm,zymc,zydm2,zymc2 FROM rc_khxx"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcOleDbDataAdpt.Fill(dtKh)
             If rcOleDbConn.State = ConnectionState.Open Then
                 rcOleDbConn.Close()
             End If
@@ -1115,6 +1121,22 @@ Public Class FrmYwfJs
                 rcCmdTarget.Parameters.Add("@xh", OleDbType.VarNumeric, 14).Value = IIf(dtDkl.Rows(i).Item("xh") Is DBNull.Value, 0, dtDkl.Rows(i).Item("xh"))
                 rcCmdTarget.Parameters.Add("@mc", OleDbType.VarChar, 60).Value = IIf(dtDkl.Rows(i).Item("mc") Is DBNull.Value, "", dtDkl.Rows(i).Item("mc"))
                 rcCmdTarget.Parameters.Add("@dkbl", OleDbType.VarNumeric, 14).Value = IIf(dtDkl.Rows(i).Item("dkbl") Is DBNull.Value, 0, dtDkl.Rows(i).Item("dkbl"))
+                rcCmdTarget.ExecuteNonQuery()
+            Next
+            '同步客户信息业务员，只填目标客户中为空的业务员，不覆盖非空数据
+            For i = 0 To dtKh.Rows.Count - 1
+                rcCmdTarget.CommandText = "UPDATE rc_khxx SET " &
+                    "zydm = CASE WHEN zydm IS NULL OR zydm = '' THEN ? ELSE zydm END," &
+                    "zymc = CASE WHEN zymc IS NULL OR zymc = '' THEN ? ELSE zymc END," &
+                    "zydm2 = CASE WHEN zydm2 IS NULL OR zydm2 = '' THEN ? ELSE zydm2 END," &
+                    "zymc2 = CASE WHEN zymc2 IS NULL OR zymc2 = '' THEN ? ELSE zymc2 END " &
+                    "WHERE khdm = ?"
+                rcCmdTarget.Parameters.Clear()
+                rcCmdTarget.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(dtKh.Rows(i).Item("zydm") Is DBNull.Value, "", dtKh.Rows(i).Item("zydm"))
+                rcCmdTarget.Parameters.Add("@zymc", OleDbType.VarChar, 30).Value = IIf(dtKh.Rows(i).Item("zymc") Is DBNull.Value, "", dtKh.Rows(i).Item("zymc"))
+                rcCmdTarget.Parameters.Add("@zydm2", OleDbType.VarChar, 12).Value = IIf(dtKh.Rows(i).Item("zydm2") Is DBNull.Value, "", dtKh.Rows(i).Item("zydm2"))
+                rcCmdTarget.Parameters.Add("@zymc2", OleDbType.VarChar, 30).Value = IIf(dtKh.Rows(i).Item("zymc2") Is DBNull.Value, "", dtKh.Rows(i).Item("zymc2"))
+                rcCmdTarget.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(dtKh.Rows(i).Item("khdm") Is DBNull.Value, "", dtKh.Rows(i).Item("khdm"))
                 rcCmdTarget.ExecuteNonQuery()
             Next
         Catch ex As Exception

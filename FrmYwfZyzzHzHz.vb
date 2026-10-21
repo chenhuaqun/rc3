@@ -223,7 +223,7 @@ Public Class FrmYwfZyzzHzHz
             Dim strU6 As String = "(SELECT gl_ywfjsb.t_zydm AS zydm,0 AS bngjdf,0 AS bnfgjdf,0 AS bnfgjbjs,0 AS sngjdf,0 AS snfgjdf,SUM(COALESCE(gl_ywfjsb.bydf,0.0) - COALESCE(gl_ywfjsb.tiexije,0.0) - COALESCE(gl_ywfjsb.yongjinje,0.0)) AS snfgjbjs,0 AS bngjywf,0 AS bnfgjywf,0 AS sngjywf,SUM(gl_ywfjsb.ywf_bz) AS snfgjywf FROM " & strTbl & " WHERE gl_ywfjsb.cperiod >= ? AND gl_ywfjsb.cperiod <= ? AND EXISTS (SELECT 1 FROM " & strKh & " WHERE " & strKh & ".khdm = gl_ywfjsb.khdm AND " & strKh & ".bywfjszz <> 1) AND EXISTS (SELECT 1 FROM " & strXsl & " WHERE " & strXsl & ".gjxslb <> 1 AND " & strXsl & ".xslbdm = gl_ywfjsb.t_xslbdm) GROUP BY gl_ywfjsb.t_zydm)"
             strSql = strU1 & " UNION ALL " & strU2 & " UNION ALL " & strU3 & " UNION ALL " & strU4 & " UNION ALL " & strU5 & " UNION ALL " & strU6
         End If
-        Return "SELECT '" & strDwdm & "' AS dwdm,'" & strDwmc & "' AS dwmc,1 AS px,ywfzyzzhzb.zydm,(SELECT NVL(" & strZy & ".zymc,'') FROM " & strZy & " WHERE " & strZy & ".zydm = ywfzyzzhzb.zydm) AS zymc," & BaseField(True) & " FROM (SELECT zydm," & SumField() & " FROM (" & strSql & ") ywfzyzzhza GROUP BY zydm) ywfzyzzhzb"
+        Return "SELECT '" & strDwdm & "' AS dwdm,'" & strDwmc & "' AS dwmc,1 AS px,ywfzyzzhzb.zydm,(SELECT NVL(" & strZy & ".zymc,'') FROM " & strZy & " WHERE " & strZy & ".zydm = ywfzyzzhzb.zydm) AS zymc," & BaseField(False) & " FROM (SELECT zydm," & SumField() & " FROM (" & strSql & ") ywfzyzzhza GROUP BY zydm) ywfzyzzhzb"
     End Function
 
     '插入参数

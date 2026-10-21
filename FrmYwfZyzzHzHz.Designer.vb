@@ -66,7 +66,7 @@ Partial Class FrmYwfZyzzHzHz
         '
         'DlgPanel
         '
-        Me.DlgPanel.Location = New System.Drawing.Point(275, 420)
+        Me.DlgPanel.Location = New System.Drawing.Point(275, 458)
         Me.DlgPanel.TabIndex = 5
         '
         'Label1
@@ -75,7 +75,7 @@ Partial Class FrmYwfZyzzHzHz
         Me.Label1.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label1.Location = New System.Drawing.Point(79, 26)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(88, 16)
+        Me.Label1.Size = New System.Drawing.Size(87, 16)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "会计期间："
         '
@@ -85,7 +85,7 @@ Partial Class FrmYwfZyzzHzHz
         Me.Label3.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label3.Location = New System.Drawing.Point(327, 26)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(40, 16)
+        Me.Label3.Size = New System.Drawing.Size(39, 16)
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "月至"
         '
@@ -95,7 +95,7 @@ Partial Class FrmYwfZyzzHzHz
         Me.Label2.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.Label2.Location = New System.Drawing.Point(247, 26)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(24, 16)
+        Me.Label2.Size = New System.Drawing.Size(23, 16)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "年"
         '
@@ -138,31 +138,9 @@ Partial Class FrmYwfZyzzHzHz
         Me.LblZydm.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblZydm.Location = New System.Drawing.Point(79, 59)
         Me.LblZydm.Name = "LblZydm"
-        Me.LblZydm.Size = New System.Drawing.Size(88, 16)
+        Me.LblZydm.Size = New System.Drawing.Size(87, 16)
         Me.LblZydm.TabIndex = 7
         Me.LblZydm.Text = "职员编码："
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.Label4.Location = New System.Drawing.Point(417, 26)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(24, 16)
-        Me.Label4.TabIndex = 6
-        Me.Label4.Text = "月"
-        '
-        'NudMonthEnd
-        '
-        Me.NudMonthEnd.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.NudMonthEnd.Location = New System.Drawing.Point(369, 21)
-        Me.NudMonthEnd.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
-        Me.NudMonthEnd.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.NudMonthEnd.Name = "NudMonthEnd"
-        Me.NudMonthEnd.Size = New System.Drawing.Size(40, 26)
-        Me.NudMonthEnd.TabIndex = 5
-        Me.NudMonthEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.NudMonthEnd.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'TxtZyzz
         '
@@ -179,7 +157,7 @@ Partial Class FrmYwfZyzzHzHz
         Me.LblZyzz.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblZyzz.Location = New System.Drawing.Point(45, 93)
         Me.LblZyzz.Name = "LblZyzz"
-        Me.LblZyzz.Size = New System.Drawing.Size(88, 16)
+        Me.LblZyzz.Size = New System.Drawing.Size(287, 16)
         Me.LblZyzz.TabIndex = 9
         Me.LblZyzz.Text = "非关键客户回笼增长部分提升比例(%)："
         '
@@ -198,9 +176,31 @@ Partial Class FrmYwfZyzzHzHz
         Me.LblGdjcbl.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LblGdjcbl.Location = New System.Drawing.Point(13, 127)
         Me.LblGdjcbl.Name = "LblGdjcbl"
-        Me.LblGdjcbl.Size = New System.Drawing.Size(88, 16)
+        Me.LblGdjcbl.Size = New System.Drawing.Size(319, 16)
         Me.LblGdjcbl.TabIndex = 11
         Me.LblGdjcbl.Text = "非关键客户回笼增长部分固定奖罚比例(%)："
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.Label4.Location = New System.Drawing.Point(417, 26)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(23, 16)
+        Me.Label4.TabIndex = 6
+        Me.Label4.Text = "月"
+        '
+        'NudMonthEnd
+        '
+        Me.NudMonthEnd.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.NudMonthEnd.Location = New System.Drawing.Point(369, 21)
+        Me.NudMonthEnd.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
+        Me.NudMonthEnd.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NudMonthEnd.Name = "NudMonthEnd"
+        Me.NudMonthEnd.Size = New System.Drawing.Size(40, 26)
+        Me.NudMonthEnd.TabIndex = 5
+        Me.NudMonthEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NudMonthEnd.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'GroupBox1
         '
@@ -220,7 +220,7 @@ Partial Class FrmYwfZyzzHzHz
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(528, 131)
+        Me.GroupBox1.Size = New System.Drawing.Size(528, 164)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
@@ -228,7 +228,7 @@ Partial Class FrmYwfZyzzHzHz
         '
         Me.GroupBox2.Controls.Add(Me.TabControl1)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox2.Location = New System.Drawing.Point(0, 131)
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 164)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(528, 257)
         Me.GroupBox2.TabIndex = 1
@@ -334,7 +334,7 @@ Partial Class FrmYwfZyzzHzHz
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.ForeColor = System.Drawing.Color.Blue
-        Me.CheckBox1.Location = New System.Drawing.Point(35, 428)
+        Me.CheckBox1.Location = New System.Drawing.Point(16, 431)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(204, 16)
         Me.CheckBox1.TabIndex = 2
@@ -344,9 +344,8 @@ Partial Class FrmYwfZyzzHzHz
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Unchecked
         Me.CheckBox2.ForeColor = System.Drawing.Color.Blue
-        Me.CheckBox2.Location = New System.Drawing.Point(245, 428)
+        Me.CheckBox2.Location = New System.Drawing.Point(228, 431)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(168, 16)
         Me.CheckBox2.TabIndex = 3
@@ -355,7 +354,7 @@ Partial Class FrmYwfZyzzHzHz
         '
         'BtnToExcel
         '
-        Me.BtnToExcel.Location = New System.Drawing.Point(410, 392)
+        Me.BtnToExcel.Location = New System.Drawing.Point(422, 428)
         Me.BtnToExcel.Name = "BtnToExcel"
         Me.BtnToExcel.Size = New System.Drawing.Size(91, 23)
         Me.BtnToExcel.TabIndex = 4
@@ -366,14 +365,14 @@ Partial Class FrmYwfZyzzHzHz
         '
         Me.OpenFileDialogExcel.FileName = "OpenFileDialog1"
         '
-        'FrmYwfKhHzHz
+        'FrmYwfZyzzHzHz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(528, 464)
-        Me.Controls.Add(Me.CheckBox1)
-        Me.Controls.Add(Me.CheckBox2)
+        Me.ClientSize = New System.Drawing.Size(528, 502)
         Me.Controls.Add(Me.BtnToExcel)
+        Me.Controls.Add(Me.CheckBox2)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "FrmYwfZyzzHzHz"

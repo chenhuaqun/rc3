@@ -1070,8 +1070,8 @@ Public Class FrmYwfJs
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             rcOleDbDataAdpt.Fill(dtDkl)
-            '客户信息业务员
-            rcOleDbCommand.CommandText = "SELECT khdm,zydm,zymc,zydm2,zymc2 FROM rc_khxx"
+            '客户信息业务员、销售分类
+            rcOleDbCommand.CommandText = "SELECT khdm,zydm,zymc,zydm2,zymc2,xslbdm FROM rc_khxx"
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             rcOleDbDataAdpt.Fill(dtKh)
@@ -1137,6 +1137,15 @@ Public Class FrmYwfJs
                 rcCmdTarget.Parameters.Add("@zydm2", OleDbType.VarChar, 12).Value = IIf(dtKh.Rows(i).Item("zydm2") Is DBNull.Value, "", dtKh.Rows(i).Item("zydm2"))
                 rcCmdTarget.Parameters.Add("@zymc2", OleDbType.VarChar, 30).Value = IIf(dtKh.Rows(i).Item("zymc2") Is DBNull.Value, "", dtKh.Rows(i).Item("zymc2"))
                 rcCmdTarget.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(dtKh.Rows(i).Item("khdm") Is DBNull.Value, "", dtKh.Rows(i).Item("khdm"))
+                rcCmdTarget.ExecuteNonQuery()
+                '同步客户信息销售分类，相同客户且主业务员、业务员2一致时无条件覆盖
+                rcCmdTarget.CommandText = "UPDATE rc_khxx SET xslbdm = ?" &
+                    " WHERE khdm = ? AND NVL(zydm,'~') = ? AND NVL(zydm2,'~') = ?"
+                rcCmdTarget.Parameters.Clear()
+                rcCmdTarget.Parameters.Add("@xslbdm", OleDbType.VarChar, 300).Value = IIf(dtKh.Rows(i).Item("xslbdm") Is DBNull.Value, "", dtKh.Rows(i).Item("xslbdm"))
+                rcCmdTarget.Parameters.Add("@khdm", OleDbType.VarChar, 15).Value = IIf(dtKh.Rows(i).Item("khdm") Is DBNull.Value, "", dtKh.Rows(i).Item("khdm"))
+                rcCmdTarget.Parameters.Add("@zydm", OleDbType.VarChar, 12).Value = IIf(dtKh.Rows(i).Item("zydm") Is DBNull.Value, "~", dtKh.Rows(i).Item("zydm"))
+                rcCmdTarget.Parameters.Add("@zydm2", OleDbType.VarChar, 12).Value = IIf(dtKh.Rows(i).Item("zydm2") Is DBNull.Value, "~", dtKh.Rows(i).Item("zydm2"))
                 rcCmdTarget.ExecuteNonQuery()
             Next
         Catch ex As Exception

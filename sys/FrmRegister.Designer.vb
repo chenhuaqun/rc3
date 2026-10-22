@@ -54,7 +54,7 @@ Partial Class FrmRegister
         Me.gbRegister.Size = New System.Drawing.Size(446, 152)
         Me.gbRegister.TabIndex = 0
         Me.gbRegister.TabStop = False
-        Me.gbRegister.Text = "产品注册"
+        Me.gbRegister.Text = "(2)通过注册邮箱获取激活许可证密钥"
         '
         'btnRegister
         '
@@ -62,12 +62,12 @@ Partial Class FrmRegister
         Me.btnRegister.Name = "btnRegister"
         Me.btnRegister.Size = New System.Drawing.Size(75, 23)
         Me.btnRegister.TabIndex = 4
-        Me.btnRegister.Text = "注册"
+        Me.btnRegister.Text = "获取密钥"
         Me.btnRegister.UseVisualStyleBackColor = True
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(117, 71)
+        Me.txtPassword.Location = New System.Drawing.Point(131, 71)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(278, 21)
@@ -78,13 +78,13 @@ Partial Class FrmRegister
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(34, 74)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 12)
+        Me.Label2.Size = New System.Drawing.Size(89, 12)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "登录密码："
+        Me.Label2.Text = "用户登录密码："
         '
         'txtEmail
         '
-        Me.txtEmail.Location = New System.Drawing.Point(117, 35)
+        Me.txtEmail.Location = New System.Drawing.Point(131, 35)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(278, 21)
         Me.txtEmail.TabIndex = 1
@@ -94,9 +94,9 @@ Partial Class FrmRegister
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(34, 38)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(65, 12)
+        Me.Label1.Size = New System.Drawing.Size(89, 12)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "登录邮箱："
+        Me.Label1.Text = "用户登录邮箱："
         '
         'gbActivate
         '
@@ -109,7 +109,7 @@ Partial Class FrmRegister
         Me.gbActivate.Size = New System.Drawing.Size(446, 91)
         Me.gbActivate.TabIndex = 1
         Me.gbActivate.TabStop = False
-        Me.gbActivate.Text = "产品激活"
+        Me.gbActivate.Text = "(3)产品激活"
         '
         'lblActivationTime
         '
@@ -147,7 +147,7 @@ Partial Class FrmRegister
         '
         'txtDeviceCodeActivate
         '
-        Me.txtDeviceCodeActivate.Location = New System.Drawing.Point(129, 73)
+        Me.txtDeviceCodeActivate.Location = New System.Drawing.Point(131, 73)
         Me.txtDeviceCodeActivate.Multiline = True
         Me.txtDeviceCodeActivate.Name = "txtDeviceCodeActivate"
         Me.txtDeviceCodeActivate.ReadOnly = True
@@ -171,17 +171,18 @@ Partial Class FrmRegister
         Me.GroupBox1.Size = New System.Drawing.Size(446, 55)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "账号注册"
+        Me.GroupBox1.Text = "(1)用户注册，注册网址是https://richen.dpdns.org，或者点击下面链接"
         '
         'LinkLabelRegister
         '
         Me.LinkLabelRegister.AutoSize = True
+        Me.LinkLabelRegister.Font = New System.Drawing.Font("宋体", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.LinkLabelRegister.Location = New System.Drawing.Point(36, 27)
         Me.LinkLabelRegister.Name = "LinkLabelRegister"
-        Me.LinkLabelRegister.Size = New System.Drawing.Size(125, 12)
+        Me.LinkLabelRegister.Size = New System.Drawing.Size(199, 16)
         Me.LinkLabelRegister.TabIndex = 0
         Me.LinkLabelRegister.TabStop = True
-        Me.LinkLabelRegister.Text = "还没有账号？立即注册"
+        Me.LinkLabelRegister.Text = "用户还没注册？立即注册。"
         '
         'FrmRegister
         '

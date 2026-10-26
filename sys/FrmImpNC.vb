@@ -675,18 +675,21 @@ Public Class FrmImpNC
                         'NC本位币非人民币：本币金额 = 原币金额 × 汇率(原币→人民币)
                         If dblWb <> 0 OrElse dblJe <> 0 Then
                             Dim dblRate As Double = 0.0
-                            Dim strMiss As String = strBz
+                            Dim strMiss As String = ""
                             If dblWb <> 0 Then
                                 '有原币：按本行币种对人民币汇率换算原币金额
                                 If dictWbhl.ContainsKey(strBz) Then
                                     dblRate = dictWbhl(strBz)
+                                Else
+                                    strMiss = strBz
                                 End If
                             Else
                                 '原币为0、本币有金额（如汇兑损益）：按NC本位币币种对人民币汇率换算本币金额
                                 If dictWbhl.ContainsKey(strNcWbdm) Then
                                     dblRate = dictWbhl(strNcWbdm)
+                                Else
+                                    strMiss = strNcWbdm
                                 End If
-                                strMiss = strNcWbdm
                             End If
                             If dblRate > 0 Then
                                 dblHl = dblRate

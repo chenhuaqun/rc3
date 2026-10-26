@@ -1045,6 +1045,7 @@ Public Class FrmYwfJs
         Dim dtDkgs As New DataTable
         Dim dtDkl As New DataTable
         Dim dtKh As New DataTable
+        Dim dtXslb As New DataTable
         Dim i As Integer
         Try
             rcOleDbCommand.Transaction = Nothing
@@ -1075,6 +1076,11 @@ Public Class FrmYwfJs
             rcOleDbCommand.Parameters.Clear()
             rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
             rcOleDbDataAdpt.Fill(dtKh)
+            '客户销售分类定义
+            rcOleDbCommand.CommandText = "SELECT xslbdm,xslbmc,xslbsm,ywfbl,gjxslb FROM rc_khxslb ORDER BY xslbdm"
+            rcOleDbCommand.Parameters.Clear()
+            rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
+            rcOleDbDataAdpt.Fill(dtXslb)
             If rcOleDbConn.State = ConnectionState.Open Then
                 rcOleDbConn.Close()
             End If
@@ -1121,6 +1127,20 @@ Public Class FrmYwfJs
                 rcCmdTarget.Parameters.Add("@xh", OleDbType.VarNumeric, 14).Value = IIf(dtDkl.Rows(i).Item("xh") Is DBNull.Value, 0, dtDkl.Rows(i).Item("xh"))
                 rcCmdTarget.Parameters.Add("@mc", OleDbType.VarChar, 60).Value = IIf(dtDkl.Rows(i).Item("mc") Is DBNull.Value, "", dtDkl.Rows(i).Item("mc"))
                 rcCmdTarget.Parameters.Add("@dkbl", OleDbType.VarNumeric, 14).Value = IIf(dtDkl.Rows(i).Item("dkbl") Is DBNull.Value, 0, dtDkl.Rows(i).Item("dkbl"))
+                rcCmdTarget.ExecuteNonQuery()
+            Next
+            '客户销售分类定义：以当前账套为准全量覆盖
+            rcCmdTarget.CommandText = "DELETE FROM rc_khxslb"
+            rcCmdTarget.Parameters.Clear()
+            rcCmdTarget.ExecuteNonQuery()
+            For i = 0 To dtXslb.Rows.Count - 1
+                rcCmdTarget.CommandText = "INSERT INTO rc_khxslb (xslbdm,xslbmc,xslbsm,ywfbl,gjxslb) VALUES (?,?,?,?,?)"
+                rcCmdTarget.Parameters.Clear()
+                rcCmdTarget.Parameters.Add("@xslbdm", OleDbType.VarChar, 12).Value = IIf(dtXslb.Rows(i).Item("xslbdm") Is DBNull.Value, "", dtXslb.Rows(i).Item("xslbdm"))
+                rcCmdTarget.Parameters.Add("@xslbmc", OleDbType.VarChar, 30).Value = IIf(dtXslb.Rows(i).Item("xslbmc") Is DBNull.Value, "", dtXslb.Rows(i).Item("xslbmc"))
+                rcCmdTarget.Parameters.Add("@xslbsm", OleDbType.VarChar, 12).Value = IIf(dtXslb.Rows(i).Item("xslbsm") Is DBNull.Value, "", dtXslb.Rows(i).Item("xslbsm"))
+                rcCmdTarget.Parameters.Add("@ywfbl", OleDbType.VarNumeric, 14).Value = IIf(dtXslb.Rows(i).Item("ywfbl") Is DBNull.Value, 0, dtXslb.Rows(i).Item("ywfbl"))
+                rcCmdTarget.Parameters.Add("@gjxslb", OleDbType.VarNumeric, 14).Value = IIf(dtXslb.Rows(i).Item("gjxslb") Is DBNull.Value, 0, dtXslb.Rows(i).Item("gjxslb"))
                 rcCmdTarget.ExecuteNonQuery()
             Next
             '同步客户信息业务员，只填目标客户中为空的业务员，不覆盖非空数据

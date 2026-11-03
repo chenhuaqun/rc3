@@ -123,9 +123,9 @@ Partial Class FrmCbjz_Xscb
         Me.CheckBox2.ForeColor = System.Drawing.Color.SteelBlue
         Me.CheckBox2.Location = New System.Drawing.Point(36, 114)
         Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(312, 16)
+        Me.CheckBox2.Size = New System.Drawing.Size(348, 16)
         Me.CheckBox2.TabIndex = 6
-        Me.CheckBox2.Text = "退货无销售成本的业务，按最新入库单价计算销售成本"
+        Me.CheckBox2.Text = "退货无销售成本的业务，按同仓库最新入库单价计算销售成本"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'CheckBox1
@@ -157,7 +157,7 @@ Partial Class FrmCbjz_Xscb
         Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox4.ForeColor = System.Drawing.Color.Blue
         Me.CheckBox4.Location = New System.Drawing.Point(36, 215)
-        Me.CheckBox4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.CheckBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.CheckBox4.Name = "CheckBox4"
         Me.CheckBox4.Size = New System.Drawing.Size(108, 16)
         Me.CheckBox4.TabIndex = 12

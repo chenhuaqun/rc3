@@ -316,7 +316,7 @@ Public Class FrmCbjz_Xscb
                 '调整出库成本
                 If Me.CheckBox2.Checked Then
                     '退货无销售成本的业务，按最新入库单价计算销售成本
-                    rcOleDbCommand.CommandText = "SELECT djh,xh,cpdm FROM oe_xsd WHERE cbje = 0 AND sl < 0 AND oe_xsd.xsrq <= ? AND oe_xsd.xsrq >= ?"
+                    rcOleDbCommand.CommandText = "SELECT djh,xh,cpdm,ckdm FROM oe_xsd WHERE cbje = 0 AND sl < 0 AND oe_xsd.xsrq <= ? AND oe_xsd.xsrq >= ?"
                     rcOleDbCommand.Parameters.Clear()
                     rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dateJsrq
                     rcOleDbCommand.Parameters.Add("@xsrq", OleDbType.Date, 8).Value = dateKsrq
@@ -327,10 +327,12 @@ Public Class FrmCbjz_Xscb
                     End If
                     rcOleDbDataAdpt.Fill(rcDataset, "oe_xsd")
                     For j = 0 To rcDataset.Tables("oe_xsd").Rows.Count - 1
-                        rcOleDbCommand.CommandText = "SELECT COALESCE(dj,0.0) AS dj FROM ((SELECT rkrq,dj FROM po_rkd WHERE dj <> 0 AND sl > 0 AND po_rkd.cpdm = ?) UNION (SELECT rkrq,dj FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND dj <> 0 AND sl >0 AND inv_rkd.cpdm = ?)) rkd ORDER BY rkd.rkrq DESC"
+                        rcOleDbCommand.CommandText = "SELECT COALESCE(dj,0.0) AS dj FROM ((SELECT rkrq,dj FROM po_rkd WHERE dj <> 0 AND sl > 0 AND po_rkd.cpdm = ? AND po_rkd.ckdm = ?) UNION (SELECT rkrq,dj FROM inv_rkd WHERE inv_rkd.bdelete = 0 AND dj <> 0 AND sl >0 AND inv_rkd.cpdm = ? AND inv_rkd.ckdm = ?)) rkd ORDER BY rkd.rkrq DESC"
                         rcOleDbCommand.Parameters.Clear()
                         rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("oe_xsd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("oe_xsd").Rows(j).Item("ckdm"))
                         rcOleDbCommand.Parameters.Add("@cpdm", OleDbType.VarChar, 15).Value = Trim(rcDataset.Tables("oe_xsd").Rows(j).Item("cpdm"))
+                        rcOleDbCommand.Parameters.Add("@ckdm", OleDbType.VarChar, 12).Value = Trim(rcDataset.Tables("oe_xsd").Rows(j).Item("ckdm"))
                         rcOleDbDataAdpt.SelectCommand = rcOleDbCommand
                         If rcDataset.Tables("rkd") IsNot Nothing Then
                             rcDataset.Tables("rkd").Clear()

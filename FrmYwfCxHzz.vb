@@ -42,6 +42,8 @@
         Me.DgtbcYwf_cdhp.Format = g_FormatJe0
         Me.DgtbcGylpjje.Format = g_FormatJe0
         Me.DgtbcYwf_gylpj.Format = g_FormatJe0
+        Me.DgtbcXjdhje.Format = g_FormatJe0
+        Me.DgtbcYwf_xjdh.Format = g_FormatJe0
         Me.DgtbcYwf_Tx.Format = g_FormatJe0
         Me.DgtbcYongJinJe.Format = g_FormatJe0
         Me.DgtbcYwf_Yj.Format = g_FormatJe0

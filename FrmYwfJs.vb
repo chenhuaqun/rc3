@@ -884,8 +884,8 @@ Public Class FrmYwfJs
             rcCmdYwf.Parameters.Clear()
             rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")
             rcCmdYwf.ExecuteNonQuery()
-            Me.LblMsg.Text = "计算现金电汇倒扣金额"
-            '计算现金电汇倒扣金额
+            Me.LblMsg.Text = "计算现金电汇上升金额"
+            '计算现金电汇上升金额
             rcCmdYwf.CommandText = "UPDATE gl_ywfjsb SET ywf_xjdh = ROUND(NVL(gl_ywfjsb.xjdhje,0) * NVL(gl_ywfjsb.ywfbl,0) / 10000 * " & Me.TxtXjdh.Text & ",2) WHERE cperiod = ?"
             rcCmdYwf.Parameters.Clear()
             rcCmdYwf.Parameters.Add("@kjqj", OleDbType.VarChar, 6).Value = Me.NudYear.Value.ToString & Me.NudMonth.Value.ToString.PadLeft(2, "0")

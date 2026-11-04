@@ -19,8 +19,8 @@ Imports System.Runtime.InteropServices
 
 '如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
 <Assembly: Guid("9a93bf94-f406-4bbb-87df-62b25ac5ace6")>
-<Assembly: AssemblyVersion("2026.11.2.*")>
-<Assembly: AssemblyFileVersion("2026.11.2")>
+<Assembly: AssemblyVersion("2026.11.4.*")>
+<Assembly: AssemblyFileVersion("2026.11.4")>
 
 
 
